@@ -21,7 +21,7 @@
       "@utils/*": ["utils*"],
       "@router/*": ["router/*"],
       "@pages/*": ["pages/*"],
-      "@services/*": ["services/*"]
+      "@helpers/*": ["helpers/*"]
     }
   },
   "include": [
