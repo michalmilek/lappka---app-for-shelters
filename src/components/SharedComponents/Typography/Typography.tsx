@@ -1,25 +1,43 @@
+import { getColor } from "@utils/styles/helpers/getColor";
+import {
+  getFontSize,
+  getFontWeight,
+  getLetterSpacing,
+} from "@utils/styles/helpers/getFontStyle";
+import {
+  Color,
+  fontSize,
+  fontWeight,
+  letterSpacing,
+  lineHeight,
+} from "@utils/styles/types/stylesTypes";
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 interface TypographyProps {
   tag?: keyof JSX.IntrinsicElements;
-  color?: string;
-  fontSize?: string;
-  fontWeight?: string;
+  color?: Color;
+  fontSize?: fontSize;
+  fontWeight?: fontWeight;
+  letterSpacing?: letterSpacing;
+  lineHeight?: lineHeight;
   children: ReactNode;
 }
 
 const Typography = ({
   tag = "p",
-  color,
-  fontSize,
-  fontWeight,
+  color = "black",
+  fontSize = 16,
+  fontWeight = 500,
+  letterSpacing = "0%",
   children,
 }: TypographyProps) => {
   const StyledTypography = styled(tag)<TypographyProps>`
-    color: ${(props) => props.color || "black"};
-    font-size: ${(props) => props.fontSize || "16px"};
-    font-weight: ${(props) => props.fontWeight || "normal"};
+    color: ${(props) => getColor(props.color as Color)};
+    font-size: ${(props) => getFontSize(props.fontSize as fontSize)};
+    font-weight: ${(props) => getFontWeight(props.fontWeight as fontWeight)};
+    letter-spacing: ${(props) =>
+      getLetterSpacing(props.letterSpacing as letterSpacing)};
   `;
 
   return (
