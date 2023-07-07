@@ -18,7 +18,8 @@
     "baseUrl": "src/",
     "paths": {
       "@components/*": ["components", "components/*"],
-      "@utils/*": ["utils","utils/*"],
+      "@utils/*": ["utils", "utils/*"],
+      "@utils/getStyle": ["utils/styles/getStyle", "utils/styles/getStyle/*"],
       "@router/*": ["router", "router/*"],
       "@pages/*": ["pages", "pages/*"],
       "@services/*": ["services", "services/*"]

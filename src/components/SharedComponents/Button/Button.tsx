@@ -1,12 +1,12 @@
-import { getColor } from "../../../utils/styles/helpers/getColor";
+import { getColor } from "../../../utils/styles/getStyle/getColor";
 import {
   getFontSize,
   getFontWeight,
   getLetterSpacing,
   getLineHeight,
-} from "@utils/styles/helpers/getFontStyle";
-import { getPaddingMarginSize } from "@utils/styles/helpers/getPaddingMarginSize";
-import { getShadow } from "@utils/styles/helpers/getShadow";
+} from "../../../utils/styles/getStyle/getFontStyle";
+import { getPaddingMarginSize } from "../../../utils/styles/getStyle/getPaddingMarginSize";
+import { getShadow } from "../../../utils/styles/getStyle/getShadow";
 import {
   ButtonSize,
   ButtonVariant,
@@ -14,8 +14,10 @@ import {
 } from "@utils/styles/types/stylesTypes";
 import React from "react";
 import styled, { css } from "styled-components";
+import { getBorderRadius } from "../../../utils/styles/getStyle/getBorderRadius";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  width?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
   pt?: PaddingMarginSize;
@@ -38,8 +40,24 @@ const ReusableButton = styled.button<ButtonProps>`
   font-weight: bold;
   cursor: pointer;
   display: flex;
+  gap: 8px;
   align-items: center;
-  justify-content: center;
+  border-radius: ${getBorderRadius("8px")};
+
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width};
+    `}
+
+  ${(props) =>
+    props.icon
+      ? css`
+          justify-content: space-between;
+        `
+      : css`
+          justify-content: center;
+        `}
 
   ${(props) =>
     props.variant === "fill" &&
@@ -83,6 +101,7 @@ const ReusableButton = styled.button<ButtonProps>`
       font-weight: ${getFontWeight(500)};
       line-height: ${getLineHeight(24)};
       letter-spacing: ${getLetterSpacing("-0.4%")};
+      padding: 12px 18px;
     `}
 
   ${(props) =>
@@ -92,6 +111,7 @@ const ReusableButton = styled.button<ButtonProps>`
       font-weight: ${getFontWeight(500)};
       line-height: ${getLineHeight(24)};
       letter-spacing: ${getLetterSpacing("-0.3%")};
+      padding: 8px 16px;
     `}
 
   ${(props) =>
@@ -101,6 +121,7 @@ const ReusableButton = styled.button<ButtonProps>`
       font-weight: ${getFontWeight(500)};
       line-height: ${getLineHeight(24)};
       letter-spacing: ${getLetterSpacing("-0.3%")};
+      padding: 4px 12px;
     `}
 
   ${(props) =>

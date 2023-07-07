@@ -140,3 +140,30 @@ export type BorderRadius =
       | 48
       | 9999}px`
   | "50%";
+
+
+  //TYPOGRAPHY TYPES
+  //TYPOGRAPHY TYPES
+  //TYPOGRAPHY TYPES
+
+  export type TypographyType =
+    | "Heading 30 Semi"
+    | "Heading 24 Semi Bold"
+    | "Heading 20 Semi Bold"
+    | "Heading 18 Semi Bold"
+    | "UI/UI Text 16 Semi Bold"
+    | "UI/UI Text 16 Semi Bold"
+    | "UI/UI Text 16 Medium Bold"
+    | "UI/UI Text 14 Reg"
+    | "UI/UI Text 14 Semi Bold"
+    | "UI/UI Text 14 Med"
+    | "UI/UI Table Numbers 14 Reg"
+    | "UI Small/UI Text 13 Med"
+    | "UI Small/UI Text 13 Reg"
+    | "UI Small/UI Text 12 Reg"
+    | "UI Small/UI Text 12 Semi Bold"
+
+
+    //INPUT TYPES
+
+    export type InputSize = "XLarge" | "Large" | "Medium";
