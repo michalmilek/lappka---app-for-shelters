@@ -27,17 +27,7 @@ interface TypographyProps {
   children: ReactNode;
 }
 
-const Typography = ({
-  tag = "p",
-  color,
-  fontSize,
-  fontWeight,
-  letterSpacing,
-  lineHeight,
-  variant,
-  children,
-}: TypographyProps) => {
-  const StyledTypography = styled(tag)<TypographyProps>`
+  const StyledTypography = styled.div<TypographyProps>`
     ${(props) =>
       props.color &&
       css`
@@ -74,7 +64,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "Heading 24 Semi Bold" &&
       css`
-        font-size: ${getFontSize(24)}
+        font-size: ${getFontSize(24)};
         font-weight: ${getFontWeight(600)};
         line-height: ${getLineHeight(32)};
         letter-spacing: ${getLetterSpacing("-1.9%")};
@@ -84,7 +74,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "Heading 20 Semi Bold" &&
       css`
-        font-size: ${getFontSize(20)} !important;
+        font-size: ${getFontSize(20)};
         font-weight: ${getFontWeight(600)};
         line-height: ${getLineHeight(26)};
         letter-spacing: ${getLetterSpacing("-1%")};
@@ -94,7 +84,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "Heading 18 Semi Bold" &&
       css`
-        font-size: ${getFontSize(18)}
+        font-size: ${getFontSize(18)};
         font-weight: ${getFontWeight(600)};
         line-height: ${getLineHeight(24)};
         letter-spacing: ${getLetterSpacing("-1.4%")};
@@ -104,7 +94,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI/UI Text 16 Semi Bold" &&
       css`
-        font-size: ${getFontSize(16)}
+        font-size: ${getFontSize(16)};
         font-weight: ${getFontWeight(600)};
         line-height: ${getLineHeight(24)};
         letter-spacing: ${getLetterSpacing("-0.4%")};
@@ -114,7 +104,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI/UI Text 16 Medium Bold" &&
       css`
-        font-size: ${getFontSize(16)}
+        font-size: ${getFontSize(16)};
         font-weight: ${getFontWeight(500)};
         line-height: ${getLineHeight(24)};
         letter-spacing: ${getLetterSpacing("-0.4%")};
@@ -123,9 +113,18 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI/UI Text 14 Reg" &&
       css`
-        font-size: ${getFontSize(14)}
+        font-size: ${getFontSize(14)};
         font-weight: ${getFontWeight(400)};
         line-height: ${getLineHeight(24)};
+        letter-spacing: ${getLetterSpacing("-0.6%")};
+      `}
+
+    ${(props) =>
+      props.variant === "Running Text / Paragraph 14 Reg" &&
+      css`
+        font-size: ${getFontSize(14)};
+        font-weight: ${getFontWeight(400)};
+        line-height: ${getLineHeight(20)};
         letter-spacing: ${getLetterSpacing("-0.6%")};
       `}
 
@@ -133,7 +132,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI/UI Text 14 Semi Bold" &&
       css`
-        font-size: ${getFontSize(14)}
+        font-size: ${getFontSize(14)};
         font-weight: ${getFontWeight(600)};
         line-height: ${getLineHeight(24)};
         letter-spacing: ${getLetterSpacing("-0.6%")};
@@ -142,7 +141,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI/UI Text 14 Med" &&
       css`
-        font-size: ${getFontSize(14)}
+        font-size: ${getFontSize(14)};
         font-weight: ${getFontWeight(500)};
         line-height: ${getLineHeight(20)};
         letter-spacing: ${getLetterSpacing("-0.3%")};
@@ -151,7 +150,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI/UI Table Numbers 14 Reg" &&
       css`
-        font-size: ${getFontSize(14)}
+        font-size: ${getFontSize(14)};
         font-weight: ${getFontWeight(400)};
         line-height: ${getLineHeight(24)};
         letter-spacing: ${getLetterSpacing("-0.6%")};
@@ -160,7 +159,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI Small/UI Text 13 Med" &&
       css`
-        font-size: ${getFontSize(13)}
+        font-size: ${getFontSize(13)};
         font-weight: ${getFontWeight(500)};
         line-height: ${getLineHeight(18)};
         letter-spacing: ${getLetterSpacing("0%")};
@@ -169,7 +168,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI Small/UI Text 13 Reg" &&
       css`
-        font-size: ${getFontSize(13)}
+        font-size: ${getFontSize(13)};
         font-weight: ${getFontWeight(400)};
         line-height: ${getLineHeight(16)};
         letter-spacing: ${getLetterSpacing("0%")};
@@ -178,7 +177,7 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI Small/UI Text 12 Reg" &&
       css`
-        font-size: ${getFontSize(12)}
+        font-size: ${getFontSize(12)};
         font-weight: ${getFontWeight(400)};
         line-height: ${getLineHeight(16)};
         letter-spacing: ${getLetterSpacing("0%")};
@@ -187,15 +186,28 @@ const Typography = ({
     ${(props) =>
       props.variant === "UI Small/UI Text 12 Semi Bold" &&
       css`
-        font-size: ${getFontSize(12)}
+        font-size: ${getFontSize(12)};
         font-weight: ${getFontWeight(600)};
         line-height: ${getLineHeight(16)};
         letter-spacing: ${getLetterSpacing("0%")};
       `}
   `;
 
+const Typography = ({
+  tag = "p",
+  color,
+  fontSize,
+  fontWeight,
+  letterSpacing,
+  lineHeight,
+  variant,
+  children,
+}: TypographyProps) => {
+
+
   return (
     <StyledTypography
+    as={tag}
       letterSpacing={letterSpacing}
       lineHeight={lineHeight}
       color={color}

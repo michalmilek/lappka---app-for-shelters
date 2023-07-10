@@ -1,10 +1,13 @@
 import { getBorderRadius } from "../../../utils/styles/getStyle/getBorderRadius";
 import { getColor } from "../../../utils/styles/getStyle/getColor";
 import { InputSize } from "@utils/styles/types/stylesTypes";
-import React, { ChangeEvent } from "react";
+import React, { CSSProperties } from "react";
 import styled, { css } from "styled-components";
 import Typography from "../Typography/Typography";
 
+interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
+  width?: CSSProperties["width"];
+}
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputSize?: InputSize;
   value?: string;
@@ -13,37 +16,45 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string | null;
 }
 
-const StyledDiv = styled.div`
+const StyledDiv = styled.div<DivProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
   gap: 4px;
+
+  ${(props) =>
+    props.width
+      ? css`
+          width: ${props.width};
+        `
+      : css`
+          width: 100%;
+        `}
 `;
 
 const StyledInput = styled.div<InputProps>`
   z-index: 5;
   position: relative;
+  width: 100%;
 
   ${(props) =>
     props.inputSize === "XLarge" &&
     css`
       height: 48px;
-      width: 271px;
     `}
 
   ${(props) =>
     props.inputSize === "Large" &&
     css`
       height: 40px;
-      width: 271px;
     `}
 
   ${(props) =>
     props.inputSize === "Medium" &&
     css`
       height: 32px;
-      width: 271px;
     `}
 `;
 
@@ -51,13 +62,21 @@ const InputField = styled.input<InputProps>`
   z-index: 5;
   background-color: ${getColor("white")};
   border-radius: ${getBorderRadius("6px")};
-  border: 1px solid ${getColor("lightGray1")};
   color: ${getColor("darkGray2")};
   padding-right: 2%;
   transition: all 300ms ease-in-out;
   outline: none;
   height: 100%;
   width: 100%;
+
+  ${(props) =>
+    props.error
+      ? css`
+          border: 1px solid ${getColor("error")};
+        `
+      : css`
+          border: 1px solid ${getColor("lightGray1")};
+        `}
 
   &::placeholder {
     color: ${getColor("midGray4")};
@@ -90,13 +109,6 @@ const InputField = styled.input<InputProps>`
     `}
 `;
 
-const Label = styled.label<InputProps>`
-  color: ${getColor("darkGray2")};
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 4px;
-`;
-
 const IconContainer = styled.div<InputProps>`
   cursor: pointer;
   z-index: 2;
@@ -117,23 +129,26 @@ const Input = ({
   icon,
   label,
   error,
+  width,
   ...rest
 }: InputProps) => {
   return (
-    <StyledDiv>
+    <StyledDiv width={width}>
       {label && (
         <Typography
           tag="span"
           variant="UI Small/UI Text 13 Med"
-          fontWeight={600}
           color="darkGray2">
           {label}
         </Typography>
       )}
-      <StyledInput inputSize={inputSize}>
+      <StyledInput
+        inputSize={inputSize}
+        {...rest}>
         <InputField
           inputSize={inputSize}
           value={value}
+          error={error}
           {...rest}
         />
         {icon && <IconContainer inputSize={inputSize}>{icon}</IconContainer>}

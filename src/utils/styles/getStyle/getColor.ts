@@ -82,6 +82,10 @@ export function getColor(color: Color): string {
     case "white":
       return "#ffffff";
 
+    //social media colors
+    case "facebook":
+      return "#1877F2";
+
     default:
       return "#000000"; // default black color;
   }

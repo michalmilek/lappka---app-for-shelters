@@ -10,7 +10,9 @@ import { getShadow } from "../../../utils/styles/getStyle/getShadow";
 import {
   ButtonSize,
   ButtonVariant,
+  Color,
   PaddingMarginSize,
+  TypographyType,
 } from "@utils/styles/types/stylesTypes";
 import React from "react";
 import styled, { css } from "styled-components";
@@ -20,6 +22,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
+  px?: PaddingMarginSize;
+  py?: PaddingMarginSize;
   pt?: PaddingMarginSize;
   pl?: PaddingMarginSize;
   pb?: PaddingMarginSize;
@@ -32,6 +36,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   mr?: PaddingMarginSize;
   icon?: JSX.Element;
   iconSpacing?: PaddingMarginSize;
+  color?: Color;
+  iconPlace?: "left" | "right";
+  textType?: TypographyType;
 }
 
 const ReusableButton = styled.button<ButtonProps>`
@@ -40,9 +47,15 @@ const ReusableButton = styled.button<ButtonProps>`
   font-weight: bold;
   cursor: pointer;
   display: flex;
-  gap: 8px;
   align-items: center;
+  justify-content: center;
   border-radius: ${getBorderRadius("8px")};
+
+  ${(props) =>
+    props.iconPlace === "left" &&
+    css`
+      flex-direction: row-reverse;
+    `}
 
   ${(props) =>
     props.width &&
@@ -51,18 +64,9 @@ const ReusableButton = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.icon
-      ? css`
-          justify-content: space-between;
-        `
-      : css`
-          justify-content: center;
-        `}
-
-  ${(props) =>
     props.variant === "fill" &&
     css`
-      background-color: ${getColor("primary600")};
+      background-color: ${getColor(props.color || "primary600")};
       color: ${getColor("lightGray5")};
       border: none;
       transition: all 400ms ease-in-out;
@@ -79,7 +83,7 @@ const ReusableButton = styled.button<ButtonProps>`
   ${(props) =>
     props.variant === "outline" &&
     css`
-      background-color: ${getColor("white")};
+      background-color: ${getColor(props.color || "white")};
       color: ${getColor("darkGray2")};
       border: 1px solid ${getColor("lightGray2")};
       box-shadow: ${getShadow("xs")};
@@ -110,7 +114,7 @@ const ReusableButton = styled.button<ButtonProps>`
       font-size: ${getFontSize(16)};
       font-weight: ${getFontWeight(500)};
       line-height: ${getLineHeight(24)};
-      letter-spacing: ${getLetterSpacing("-0.3%")};
+      letter-spacing: -0.3%;
       padding: 8px 16px;
     `}
 
@@ -122,6 +126,20 @@ const ReusableButton = styled.button<ButtonProps>`
       line-height: ${getLineHeight(24)};
       letter-spacing: ${getLetterSpacing("-0.3%")};
       padding: 4px 12px;
+    `}
+
+      ${(props) =>
+    props.px &&
+    css`
+      padding-left: ${props.px};
+      padding-right: ${props.px};
+    `}
+    
+      ${(props) =>
+    props.py &&
+    css`
+      padding-top: ${props.py};
+      padding-bottom: ${props.py};
     `}
 
   ${(props) =>
@@ -189,6 +207,7 @@ const ReusableButton = styled.button<ButtonProps>`
 
       ${(props) =>
     props.icon &&
+    props.iconSpacing &&
     css`
       gap: ${props.iconSpacing && getPaddingMarginSize(props.iconSpacing)};
     `}
@@ -206,6 +225,8 @@ const Button = ({
     <ReusableButton
       size={size}
       variant={variant}
+      iconSpacing={iconSpacing}
+      icon={icon}
       {...rest}>
       {children}
       {icon && icon}

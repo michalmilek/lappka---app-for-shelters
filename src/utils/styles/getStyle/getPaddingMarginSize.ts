@@ -9,6 +9,7 @@ export function getPaddingMarginSize(size: PaddingMarginSize): string {
     case "10px":
     case "12px":
     case "14px":
+    case "15px":
     case "16px":
     case "18px":
     case "20px":

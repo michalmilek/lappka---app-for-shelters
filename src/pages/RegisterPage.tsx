@@ -2,7 +2,7 @@ import { getColor } from "../utils/styles/getStyle/getColor";
 import React from "react";
 import styled from "styled-components";
 import LoginForm from "../components/LoginRegisterComponents/LoginForm";
-import LoginRegisterBGPhoto from "components/LoginRegisterComponents/LoginRegisterBGPhoto.png";
+import RegisterBGPhoto from "components/LoginRegisterComponents/RegisterBGPhoto.png";
 import LappkaLogo from "components/LoginRegisterComponents/LappkaLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
@@ -11,12 +11,15 @@ import { Link } from "react-router-dom";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import {
   LeftSection,
+  LeftSectionRegister,
+  RightRegisterSection,
   RightSection,
   StyledLoginRegisterPage,
   TopContent,
 } from "components/LoginRegisterComponents/styles";
+import RegisterForm from "components/LoginRegisterComponents/RegisterForm";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <StyledLoginRegisterPage>
       <TopContent>
@@ -28,11 +31,11 @@ const LoginPage = () => {
           mr="8px"
           alignItems="center"
           gap="32px">
-          <AnchorLink to={"/register"}>
+          <AnchorLink to={"/login"}>
             <Button
               size="Large"
               variant="outline">
-              Zarejestruj się
+              Zaloguj się
             </Button>
           </AnchorLink>
           <AnchorLink to={"/"}>
@@ -43,17 +46,17 @@ const LoginPage = () => {
           </AnchorLink>
         </Flex>
       </TopContent>
-      <LeftSection>
-        <LoginForm />
-      </LeftSection>
-      <RightSection>
+      <LeftSectionRegister>
+        <RegisterForm />
+      </LeftSectionRegister>
+      <RightRegisterSection>
         <img
-          src={LoginRegisterBGPhoto}
-          alt="woman with cat background"
+          src={RegisterBGPhoto}
+          alt="guy with a dog background"
         />
-      </RightSection>
+      </RightRegisterSection>
     </StyledLoginRegisterPage>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

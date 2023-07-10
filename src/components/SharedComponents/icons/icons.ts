@@ -16,6 +16,9 @@ import { ReactComponent as LinkedInIcon } from "./files/LinkedInIcon.svg";
 import { ReactComponent as MinusIcon } from "./files/MinusIcon.svg";
 import { ReactComponent as PlusIcon } from "./files/PlusIcon.svg";
 import { ReactComponent as SendIcon } from "./files/SendIcon.svg";
+import { ReactComponent as CheckboxMarkIcon } from "./files/CheckboxMarkIcon.svg";
+import { ReactComponent as GoogleLogoIcon } from "./files/GoogleLogoIcon.svg";
+import { ReactComponent as FacebookLogoIcon } from "./files/FacebookLogoIcon.svg";
 
 export {
   AlertIcon,
@@ -36,4 +39,7 @@ export {
   MinusIcon,
   PlusIcon,
   SendIcon,
+  CheckboxMarkIcon,
+  GoogleLogoIcon,
+  FacebookLogoIcon,
 };
