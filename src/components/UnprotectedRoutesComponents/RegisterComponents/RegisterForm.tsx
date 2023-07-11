@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import Typography from "../SharedComponents/Typography/Typography";
+import Typography from "components/SharedComponents/Typography/Typography";
 import Flex from "components/SharedComponents/Flex/Flex";
-import { SectionForm } from "./styles";
+import { SectionForm } from "components/UnprotectedRoutesComponents/styles";
 import StepsBar from "components/SharedComponents/StepBar/Stepbar";
 import { useState } from "react";
 import RegisterStep2Form from "./RegisterStep2Form";

@@ -22,20 +22,33 @@ interface FlexProps {
   position?: CSSProperties["position"];
   color?: CSSProperties["color"];
   gap?: PaddingMarginSize;
+  mobileGap?: PaddingMarginSize;
   children: React.ReactNode;
   ml?: PaddingMarginSize;
+  mobileMl?: PaddingMarginSize;
   mr?: PaddingMarginSize;
+  mobileMr?: PaddingMarginSize;
   mt?: PaddingMarginSize;
+  mobileMt?: PaddingMarginSize;
   mb?: PaddingMarginSize;
+  mobileMb?: PaddingMarginSize;
   mx?: PaddingMarginSize;
+  mobileMx?: PaddingMarginSize;
   my?: PaddingMarginSize;
+  mobileMy?: PaddingMarginSize;
 
   pl?: PaddingMarginSize;
+  mobilePl?: PaddingMarginSize;
   pr?: PaddingMarginSize;
+  mobilePr?: PaddingMarginSize;
   pt?: PaddingMarginSize;
+  mobilePt?: PaddingMarginSize;
   pb?: PaddingMarginSize;
+  mobilePb?: PaddingMarginSize;
   px?: PaddingMarginSize;
+  mobilePx?: PaddingMarginSize;
   py?: PaddingMarginSize;
+  mobilePy?: PaddingMarginSize;
 }
 
 const StyledFlex = styled.div<FlexProps>`
@@ -199,6 +212,97 @@ const StyledFlex = styled.div<FlexProps>`
     css`
       right: ${right};
     `}
+
+    @media screen and (max-width: 768px) {
+    ${({ mobileGap }) =>
+      mobileGap &&
+      css`
+        gap: ${mobileGap};
+      `}
+
+    ${({ mobileMl }) =>
+      mobileMl &&
+      css`
+        margin-left: ${mobileMl};
+      `}
+
+
+    ${({ mobileMr }) =>
+      mobileMr &&
+      css`
+        margin-right: ${mobileMr};
+      `}
+
+    ${({ mobileMt }) =>
+      mobileMt &&
+      css`
+        margin-top: ${mobileMt};
+      `}
+
+    ${({ mobileMb }) =>
+      mobileMb &&
+      css`
+        margin-top: ${mobileMb};
+      `}
+
+
+    ${({ mobileMx }) =>
+      mobileMx &&
+      css`
+        margin-left: ${mobileMx};
+        margin-right: ${mobileMx};
+      `}
+
+
+    ${({ mobileMy }) =>
+      mobileMy &&
+      css`
+        margin-top: ${mobileMy};
+        margin-bottom: ${mobileMy};
+      `}
+
+
+          ${({ mobilePl }) =>
+      mobilePl &&
+      css`
+        padding-left: ${mobilePl};
+      `}
+
+
+          ${({ mobilePr }) =>
+      mobilePr &&
+      css`
+        padding-right: ${mobilePr};
+      `}
+
+
+          ${({ mobilePt }) =>
+      mobilePt &&
+      css`
+        padding-top: ${mobilePt};
+      `}
+
+          ${({ mobilePb }) =>
+      mobilePb &&
+      css`
+        padding-bottom: ${mobilePb};
+      `}
+
+    ${({ mobilePx }) =>
+      mobilePx &&
+      css`
+        padding-left: ${mobilePx};
+        padding-right: ${mobilePx};
+      `}
+
+
+    ${({ mobilePy }) =>
+      mobilePy &&
+      css`
+        padding-top: ${mobilePy};
+        padding-bottom: ${mobilePy};
+      `}
+  }
 `;
 
 const Flex = ({ children, ...rest }: FlexProps) => {

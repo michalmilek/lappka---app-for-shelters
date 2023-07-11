@@ -1,23 +1,18 @@
 import { getColor } from "../utils/styles/getStyle/getColor";
 import React from "react";
-import styled from "styled-components";
-import LoginForm from "../components/LoginRegisterResetComponents/LoginForm";
-import RegisterBGPhoto from "components/LoginRegisterResetComponents/RegisterBGPhoto.png";
-import LappkaLogo from "components/LoginRegisterResetComponents/LappkaLogo.png";
+import RegisterBGPhoto from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterBGPhoto.png";
+import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import Flex from "components/SharedComponents/Flex/Flex";
-import { Link } from "react-router-dom";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import {
-  LeftSection,
   LeftSectionRegister,
   RightRegisterSection,
-  RightSection,
   StyledLoginRegisterPage,
   TopContent,
-} from "components/LoginRegisterResetComponents/styles";
-import RegisterForm from "components/LoginRegisterResetComponents/RegisterForm";
+} from "components/UnprotectedRoutesComponents/styles";
+import RegisterForm from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterForm";
 
 const RegisterPage = () => {
   return (

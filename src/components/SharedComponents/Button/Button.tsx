@@ -116,6 +116,14 @@ const ReusableButton = styled.button<ButtonProps>`
       line-height: ${getLineHeight(24)};
       letter-spacing: -0.3%;
       padding: 8px 16px;
+
+      @media screen and (max-width: 768px) {
+        font-size: ${getFontSize(14)};
+        font-weight: ${getFontWeight(500)};
+        line-height: ${getLineHeight(24)};
+        letter-spacing: ${getLetterSpacing("-0.3%")};
+        padding: 4px 12px;
+      }
     `}
 
   ${(props) =>

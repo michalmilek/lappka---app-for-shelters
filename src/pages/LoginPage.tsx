@@ -1,9 +1,9 @@
 import { getColor } from "../utils/styles/getStyle/getColor";
 import React from "react";
 import styled from "styled-components";
-import LoginForm from "../components/LoginRegisterResetComponents/LoginForm";
-import LoginRegisterBGPhoto from "components/LoginRegisterResetComponents/LoginRegisterBGPhoto.png";
-import LappkaLogo from "components/LoginRegisterResetComponents/LappkaLogo.png";
+import LoginForm from "components/UnprotectedRoutesComponents/LoginComponents/LoginForm";
+import LoginBGPhoto from "components/UnprotectedRoutesComponents/LoginComponents/LoginBGPhoto.png";
+import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import Flex from "components/SharedComponents/Flex/Flex";
@@ -14,7 +14,7 @@ import {
   RightSection,
   StyledLoginRegisterPage,
   TopContent,
-} from "components/LoginRegisterResetComponents/styles";
+} from "components/UnprotectedRoutesComponents/styles";
 
 const LoginPage = () => {
   return (
@@ -48,7 +48,7 @@ const LoginPage = () => {
       </LeftSection>
       <RightSection>
         <img
-          src={LoginRegisterBGPhoto}
+          src={LoginBGPhoto}
           alt="woman with cat background"
         />
       </RightSection>

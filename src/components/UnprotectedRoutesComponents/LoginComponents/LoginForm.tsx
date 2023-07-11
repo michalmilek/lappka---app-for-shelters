@@ -1,9 +1,9 @@
-import Typography from "../SharedComponents/Typography/Typography";
+import Typography from "../../SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Button from "../SharedComponents/Button/Button";
+import Button from "../../SharedComponents/Button/Button";
 import { styled } from "styled-components";
-import Input from "../SharedComponents/Inputs/Input";
+import Input from "../../SharedComponents/Inputs/Input";
 import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import Flex from "components/SharedComponents/Flex/Flex";
@@ -14,7 +14,8 @@ import {
 } from "components/SharedComponents/icons/icons";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { hexToRGBA } from "utils/styles/getStyle/hexToRGBA";
-import { Form } from "./styles";
+import { Form } from "../styles";
+import { useEffect, useState } from "react";
 
 const LoginForm = () => {
   const formik = useFormik({
@@ -59,6 +60,7 @@ const LoginForm = () => {
 
       <Flex
         mt="40px"
+        mobileMt="16px"
         width="100%"
         flexDirection="column"
         gap="16px">

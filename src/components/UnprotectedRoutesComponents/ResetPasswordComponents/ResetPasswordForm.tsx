@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import Flex from "components/SharedComponents/Flex/Flex";
-import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import {
   ResetPasswordStep1Form,
@@ -8,7 +6,7 @@ import {
   ResetPasswordStep3Form,
   ResetPasswordStep4Form,
 } from "./ResetPasswordStepsForm";
-import { SectionForm } from "./styles";
+import { SectionForm } from "../styles";
 
 export interface ResetPasswordFormProps {
   handleFormValues: (values: any) => void;

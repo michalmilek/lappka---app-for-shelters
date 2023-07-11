@@ -1,12 +1,5 @@
-import React, { useEffect } from "react";
-import Input from "../SharedComponents/Inputs/Input";
-import Flex from "components/SharedComponents/Flex/Flex";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { handleCompleteProps } from "./RegisterForm";
-import Typography from "components/SharedComponents/Typography/Typography";
+import React from "react";
 import Button from "components/SharedComponents/Button/Button";
-import { Form } from "./styles";
 import { useNavigate } from "react-router-dom";
 
 const RegisterStep3Form = ({ formValues: _formValues }: any) => {

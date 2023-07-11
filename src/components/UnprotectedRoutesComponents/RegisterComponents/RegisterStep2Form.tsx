@@ -1,12 +1,10 @@
-import { useEffect } from "react";
-import Input from "../SharedComponents/Inputs/Input";
+import Input from "components/SharedComponents/Inputs/Input";
 import Flex from "components/SharedComponents/Flex/Flex";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { handleCurrentStepProps } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
 import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
-import { Form } from "./styles";
 
 const RegisterStep2Form = ({
   handleCurrentStep,

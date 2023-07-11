@@ -5,14 +5,14 @@ import {
   RightSectionResetPassword,
   StyledLoginRegisterPage,
   TopContent,
-} from "components/LoginRegisterResetComponents/styles";
+} from "components/UnprotectedRoutesComponents/styles";
 import React from "react";
-import LappkaLogo from "components/LoginRegisterResetComponents/LappkaLogo.png";
+import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
 import Flex from "components/SharedComponents/Flex/Flex";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
-import ResetPasswordBGPhoto from "components/LoginRegisterResetComponents/ResetPasswordBGPhoto.png";
-import ResetPasswordForm from "components/LoginRegisterResetComponents/ResetPasswordForm";
+import ResetPasswordBGPhoto from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordBGPhoto.png";
+import ResetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordForm";
 
 const ResetPasswordPage = () => {
   return (
