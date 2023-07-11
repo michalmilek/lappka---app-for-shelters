@@ -22,6 +22,14 @@ export const Form = styled.form`
   box-shadow: 0px 1px 3px ${hexToRGBA("#1018281A", 0.2)};
 `;
 
+export const SectionForm = styled.section`
+  z-index: 5;
+  border: 1px solid ${getColor("lightGray4")};
+  padding: 32px;
+  width: 456px;
+  box-shadow: 0px 1px 3px ${hexToRGBA("#1018281A", 0.2)};
+`;
+
 export const TopContent = styled.div`
   display: flex;
   position: absolute;
@@ -66,3 +74,9 @@ export const RightRegisterSection = styled.div`
   background-color: ${getColor("primary050")};
   padding: 234.5px 156px 234.5px 96px;
 `;
+
+export interface test {
+  name: string;
+}
+
+export const emptyFn = "string";

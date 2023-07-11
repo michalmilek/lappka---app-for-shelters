@@ -5,13 +5,16 @@ import Typography from "../Typography/Typography";
 
 interface StepBarProps {
   steps: string[];
+  currentStep: number;
+  complete: boolean;
+  handleCurrentStep: (step: number) => void;
+  handleComplete: (value: boolean) => void;
 }
 
 const StepBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  border: 1px solid #000;
 `;
 
 const StepItem = styled.div<{ active: boolean; complete: boolean }>`
@@ -20,18 +23,20 @@ const StepItem = styled.div<{ active: boolean; complete: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 188px;
   white-space: nowrap;
 
   &:not(:first-of-type)::before {
     content: "";
-    background-color: ${getColor("lightGray2")};
     position: absolute;
-    width: 80%;
+    width: 162px;
     height: 2px;
     right: 105%;
-    top: 20%;
+    top: 50%;
     transform: translateY(-50%);
+    background-color: ${({ active, complete }) =>
+      active || complete
+        ? `${getColor("primary500")}`
+        : `${getColor("lightGray2")}`};
   }
 `;
 
@@ -53,23 +58,18 @@ const StepNumberInner = styled.div<{ active: boolean; complete: boolean }>`
   height: 8px;
   border-radius: 50%;
   background-color: ${({ active, complete }) =>
-    active || complete ? "#43be8d" : `${getColor("lightGray2")}`};
+    active || complete
+      ? `${getColor("primary500")}`
+      : `${getColor("lightGray2")}`};
 `;
 
-const StepBarLabel = styled(Typography)`
-  position: absolute;
-  top: 100%;
-  left: 0;
-
-  &:last-of-type {
-    display: none;
-  }
-`;
-
-const StepBar: React.FC<StepBarProps> = ({ steps }) => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [complete, setComplete] = useState(false);
-
+const StepBar: React.FC<StepBarProps> = ({
+  steps,
+  currentStep,
+  complete,
+  handleCurrentStep,
+  handleComplete,
+}) => {
   return (
     <StepBarContainer>
       {steps.map((step, index) => (
@@ -86,11 +86,14 @@ const StepBar: React.FC<StepBarProps> = ({ steps }) => {
             />
           </StepNumberContainer>
           {!(steps.length - 1 === index) && (
-            <StepBarLabel
+            <Typography
+              position="absolute"
+              top={"100%"}
+              left={"0px"}
               variant="UI Small/UI Text 12 Reg"
               tag="p">
               {step}
-            </StepBarLabel>
+            </Typography>
           )}
         </StepItem>
       ))}
