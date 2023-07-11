@@ -1,6 +1,8 @@
-import { PaddingMarginSize } from "@utils/styles/types/stylesTypes";
+import { PaddingMarginStyles } from "utils/styles/getStyle/getPaddingMarginSize";
+import { Color, PaddingMarginSize } from "@utils/styles/types/stylesTypes";
 import React, { CSSProperties } from "react";
 import styled, { css } from "styled-components";
+import { getColor } from "utils/styles/getStyle/getColor";
 
 interface FlexProps {
   flexDirection?: CSSProperties["flexDirection"];
@@ -10,17 +12,12 @@ interface FlexProps {
   flexGrow?: CSSProperties["flexGrow"];
   flexShrink?: CSSProperties["flexShrink"];
   flexBasis?: CSSProperties["flexBasis"];
-  width?: CSSProperties["width"];
-  height?: CSSProperties["height"];
-  margin?: CSSProperties["margin"];
-  padding?: CSSProperties["padding"];
-  backgroundColor?: CSSProperties["backgroundColor"];
+  backgroundColor?: Color;
   top?: CSSProperties["top"];
   bottom?: CSSProperties["bottom"];
   left?: CSSProperties["left"];
   right?: CSSProperties["right"];
   position?: CSSProperties["position"];
-  color?: CSSProperties["color"];
   gap?: PaddingMarginSize;
   mobileGap?: PaddingMarginSize;
   children: React.ReactNode;
@@ -88,110 +85,24 @@ const StyledFlex = styled.div<FlexProps>`
     css`
       flex-basis: ${flexBasis};
     `}
-  ${({ width }) =>
-    width &&
-    css`
-      width: ${width};
-    `}
-  ${({ height }) =>
-    height &&
-    css`
-      height: ${height};
-    `}
-  ${({ margin }) =>
-    margin &&
-    css`
-      margin: ${margin};
-    `}
-  ${({ padding }) =>
-    padding &&
-    css`
-      padding: ${padding};
-    `}
   ${({ backgroundColor }) =>
     backgroundColor &&
     css`
-      background-color: ${backgroundColor};
+      background-color: ${getColor(backgroundColor)};
     `}
   ${({ position }) =>
     position &&
     css`
       position: ${position};
     `}
-  ${({ color }) =>
-    color &&
-    css`
-      color: ${color};
-    `}
   ${({ gap }) =>
     gap &&
     css`
       gap: ${gap};
     `}
-  ${({ ml }) =>
-    ml &&
-    css`
-      margin-left: ${ml};
-    `}
-  ${({ mr }) =>
-    mr &&
-    css`
-      margin-right: ${mr};
-    `}
-  ${({ mt }) =>
-    mt &&
-    css`
-      margin-top: ${mt};
-    `}
-  ${({ mb }) =>
-    mb &&
-    css`
-      margin-bottom: ${mb};
-    `}
-  ${({ mx }) =>
-    mx &&
-    css`
-      margin-left: ${mx};
-      margin-right: ${mx};
-    `}
-  ${({ my }) =>
-    my &&
-    css`
-      margin-top: ${my};
-      margin-bottom: ${my};
-    `}
-  ${({ pl }) =>
-    pl &&
-    css`
-      padding-left: ${pl};
-    `}
-  ${({ pr }) =>
-    pr &&
-    css`
-      padding-right: ${pr};
-    `}
-  ${({ pt }) =>
-    pt &&
-    css`
-      padding-top: ${pt};
-    `}
-  ${({ pb }) =>
-    pb &&
-    css`
-      padding-bottom: ${pb};
-    `}
-  ${({ px }) =>
-    px &&
-    css`
-      padding-left: ${px};
-      padding-right: ${px};
-    `}
-  ${({ py }) =>
-    py &&
-    css`
-      padding-top: ${py};
-      padding-bottom: ${py};
-    `}
+  
+  ${PaddingMarginStyles}
+
   ${({ top }) =>
     top &&
     css`
@@ -218,89 +129,6 @@ const StyledFlex = styled.div<FlexProps>`
       mobileGap &&
       css`
         gap: ${mobileGap};
-      `}
-
-    ${({ mobileMl }) =>
-      mobileMl &&
-      css`
-        margin-left: ${mobileMl};
-      `}
-
-
-    ${({ mobileMr }) =>
-      mobileMr &&
-      css`
-        margin-right: ${mobileMr};
-      `}
-
-    ${({ mobileMt }) =>
-      mobileMt &&
-      css`
-        margin-top: ${mobileMt};
-      `}
-
-    ${({ mobileMb }) =>
-      mobileMb &&
-      css`
-        margin-top: ${mobileMb};
-      `}
-
-
-    ${({ mobileMx }) =>
-      mobileMx &&
-      css`
-        margin-left: ${mobileMx};
-        margin-right: ${mobileMx};
-      `}
-
-
-    ${({ mobileMy }) =>
-      mobileMy &&
-      css`
-        margin-top: ${mobileMy};
-        margin-bottom: ${mobileMy};
-      `}
-
-
-          ${({ mobilePl }) =>
-      mobilePl &&
-      css`
-        padding-left: ${mobilePl};
-      `}
-
-
-          ${({ mobilePr }) =>
-      mobilePr &&
-      css`
-        padding-right: ${mobilePr};
-      `}
-
-
-          ${({ mobilePt }) =>
-      mobilePt &&
-      css`
-        padding-top: ${mobilePt};
-      `}
-
-          ${({ mobilePb }) =>
-      mobilePb &&
-      css`
-        padding-bottom: ${mobilePb};
-      `}
-
-    ${({ mobilePx }) =>
-      mobilePx &&
-      css`
-        padding-left: ${mobilePx};
-        padding-right: ${mobilePx};
-      `}
-
-
-    ${({ mobilePy }) =>
-      mobilePy &&
-      css`
-        padding-top: ${mobilePy};
-        padding-bottom: ${mobilePy};
       `}
   }
 `;

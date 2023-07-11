@@ -5,7 +5,10 @@ import {
   getLetterSpacing,
   getLineHeight,
 } from "../../../utils/styles/getStyle/getFontStyle";
-import { getPaddingMarginSize } from "../../../utils/styles/getStyle/getPaddingMarginSize";
+import {
+  getPaddingMarginSize,
+  PaddingMarginStyles,
+} from "../../../utils/styles/getStyle/getPaddingMarginSize";
 import { getShadow } from "../../../utils/styles/getStyle/getShadow";
 import {
   ButtonSize,
@@ -22,18 +25,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  px?: PaddingMarginSize;
-  py?: PaddingMarginSize;
-  pt?: PaddingMarginSize;
-  pl?: PaddingMarginSize;
-  pb?: PaddingMarginSize;
-  pr?: PaddingMarginSize;
-  mx?: PaddingMarginSize;
-  my?: PaddingMarginSize;
-  mt?: PaddingMarginSize;
-  ml?: PaddingMarginSize;
-  mb?: PaddingMarginSize;
-  mr?: PaddingMarginSize;
+  isFullWidth?: boolean;
   icon?: JSX.Element;
   iconSpacing?: PaddingMarginSize;
   color?: Color;
@@ -50,6 +42,14 @@ const ReusableButton = styled.button<ButtonProps>`
   align-items: center;
   justify-content: center;
   border-radius: ${getBorderRadius("8px")};
+  width: ${(props) => (props.isFullWidth ? "100%" : "")};
+
+  ${(props) =>
+    props.icon &&
+    props.iconSpacing &&
+    css`
+      gap: ${props.iconSpacing};
+    `}
 
   ${(props) =>
     props.iconPlace === "left" &&
@@ -134,90 +134,6 @@ const ReusableButton = styled.button<ButtonProps>`
       line-height: ${getLineHeight(24)};
       letter-spacing: ${getLetterSpacing("-0.3%")};
       padding: 4px 12px;
-    `}
-
-      ${(props) =>
-    props.px &&
-    css`
-      padding-left: ${props.px};
-      padding-right: ${props.px};
-    `}
-    
-      ${(props) =>
-    props.py &&
-    css`
-      padding-top: ${props.py};
-      padding-bottom: ${props.py};
-    `}
-
-  ${(props) =>
-    props.pt &&
-    css`
-      padding-top: ${props.pt};
-    `}
-
-  ${(props) =>
-    props.pl &&
-    css`
-      padding-left: ${props.pl};
-    `}
-
-  ${(props) =>
-    props.pb &&
-    css`
-      padding-bottom: ${props.pb};
-    `}
-
-  ${(props) =>
-    props.pr &&
-    css`
-      padding-right: ${props.pr};
-    `}
-
-  ${(props) =>
-    props.mx &&
-    css`
-      margin-left: ${props.mx};
-      margin-right: ${props.mx};
-    `}
-
-  ${(props) =>
-    props.my &&
-    css`
-      margin-top: ${props.my};
-      margin-bottom: ${props.my};
-    `}
-
-  ${(props) =>
-    props.mt &&
-    css`
-      margin-top: ${props.mt};
-    `}
-
-  ${(props) =>
-    props.ml &&
-    css`
-      margin-left: ${props.ml};
-    `}
-
-  ${(props) =>
-    props.mb &&
-    css`
-      margin-bottom: ${props.mb};
-    `}
-
-  ${(props) =>
-    props.mr &&
-    css`
-      margin-right: ${props.mr};
-    `}
-
-
-      ${(props) =>
-    props.icon &&
-    props.iconSpacing &&
-    css`
-      gap: ${props.iconSpacing && getPaddingMarginSize(props.iconSpacing)};
     `}
 `;
 

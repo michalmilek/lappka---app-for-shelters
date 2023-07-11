@@ -6,16 +6,18 @@ import { styled } from "styled-components";
 import Input from "../../SharedComponents/Inputs/Input";
 import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
-import Flex from "components/SharedComponents/Flex/Flex";
 import Divider from "components/SharedComponents/Divider/Divider";
 import {
   GoogleLogoIcon,
   FacebookLogoIcon,
 } from "components/SharedComponents/icons/icons";
-import { getColor } from "utils/styles/getStyle/getColor";
-import { hexToRGBA } from "utils/styles/getStyle/hexToRGBA";
-import { Form } from "../styles";
-import { useEffect, useState } from "react";
+import {
+  StyledLoginButtonContainer,
+  StyledLoginForm,
+  StyledLoginInputContainer,
+  StyledLoginOptionsContainer,
+  StyledLoginTitleContent,
+} from "./styles";
 
 const LoginForm = () => {
   const formik = useFormik({
@@ -39,10 +41,8 @@ const LoginForm = () => {
   });
 
   return (
-    <Form onSubmit={formik.handleSubmit}>
-      <Flex
-        flexDirection="column"
-        gap="8px">
+    <StyledLoginForm onSubmit={formik.handleSubmit}>
+      <StyledLoginTitleContent>
         <Typography
           color="primary800"
           variant="Heading 30 Semi"
@@ -56,14 +56,9 @@ const LoginForm = () => {
           variant="Running Text / Paragraph 14 Reg">
           Witaj ponownie!
         </Typography>
-      </Flex>
+      </StyledLoginTitleContent>
 
-      <Flex
-        mt="40px"
-        mobileMt="16px"
-        width="100%"
-        flexDirection="column"
-        gap="16px">
+      <StyledLoginInputContainer>
         <Input
           inputSize="XLarge"
           value={formik.values.email}
@@ -95,10 +90,7 @@ const LoginForm = () => {
               : null
           }
         />
-        <Flex
-          justifyContent={"space-between"}
-          alignItems="center"
-          width="100%">
+        <StyledLoginOptionsContainer>
           <CustomCheckbox
             label="Pamiętaj mnie"
             name="remeberMe"
@@ -118,12 +110,11 @@ const LoginForm = () => {
             to={"/register"}>
             Zapomniałem hasła
           </AnchorLink>
-        </Flex>
-      </Flex>
+        </StyledLoginOptionsContainer>
+      </StyledLoginInputContainer>
 
       <Button
         size="XLarge"
-        mt="32px"
         width="100%"
         variant="fill"
         type="submit">
@@ -137,12 +128,12 @@ const LoginForm = () => {
         text="Lub zaloguj się przez"
       />
 
-      <Flex gap="16px">
+      <StyledLoginButtonContainer>
         <Button
           size="XLarge"
           icon={<GoogleLogoIcon />}
+          isFullWidth
           iconPlace="left"
-          width="50%"
           iconSpacing="15px"
           variant="outline">
           Google
@@ -151,14 +142,14 @@ const LoginForm = () => {
           size="XLarge"
           iconSpacing="15px"
           icon={<FacebookLogoIcon />}
+          isFullWidth
           iconPlace="left"
           color="facebook"
-          width="50%"
           variant="fill">
           Facebook
         </Button>
-      </Flex>
-    </Form>
+      </StyledLoginButtonContainer>
+    </StyledLoginForm>
   );
 };
 
