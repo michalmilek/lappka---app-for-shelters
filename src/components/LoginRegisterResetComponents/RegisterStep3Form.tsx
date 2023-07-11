@@ -9,20 +9,18 @@ import Button from "components/SharedComponents/Button/Button";
 import { Form } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-const RegisterStep3Form = ({ formValues }: any) => {
+const RegisterStep3Form = ({ formValues: _formValues }: any) => {
   const navigate = useNavigate();
 
   return (
-    <form>
-      <Button
-        onClick={() => navigate("/login")}
-        size="XLarge"
-        width="100%"
-        variant="fill"
-        type="button">
-        Zaloguj się
-      </Button>
-    </form>
+    <Button
+      onClick={() => navigate("/login")}
+      size="XLarge"
+      width="100%"
+      variant="fill"
+      type="button">
+      Zaloguj się
+    </Button>
   );
 };
 

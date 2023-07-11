@@ -1,9 +1,9 @@
 import { getColor } from "../utils/styles/getStyle/getColor";
 import React from "react";
 import styled from "styled-components";
-import LoginForm from "../components/LoginRegisterComponents/LoginForm";
-import LoginRegisterBGPhoto from "components/LoginRegisterComponents/LoginRegisterBGPhoto.png";
-import LappkaLogo from "components/LoginRegisterComponents/LappkaLogo.png";
+import LoginForm from "../components/LoginRegisterResetComponents/LoginForm";
+import LoginRegisterBGPhoto from "components/LoginRegisterResetComponents/LoginRegisterBGPhoto.png";
+import LappkaLogo from "components/LoginRegisterResetComponents/LappkaLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import Flex from "components/SharedComponents/Flex/Flex";
@@ -14,7 +14,7 @@ import {
   RightSection,
   StyledLoginRegisterPage,
   TopContent,
-} from "components/LoginRegisterComponents/styles";
+} from "components/LoginRegisterResetComponents/styles";
 
 const LoginPage = () => {
   return (

@@ -75,8 +75,20 @@ export const RightRegisterSection = styled.div`
   padding: 234.5px 156px 234.5px 96px;
 `;
 
-export interface test {
-  name: string;
-}
 
-export const emptyFn = "string";
+export const LeftSectionResetPassword = styled.div`
+  flex: 0 0 732px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 267px 120px 267px 156px;
+`;
+
+export const RightSectionResetPassword = styled.div`
+  flex: 0 0 708px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${getColor("primary050")};
+  padding: 269.33px 156px 269.33px 139px;
+`;

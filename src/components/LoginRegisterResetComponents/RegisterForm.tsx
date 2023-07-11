@@ -1,22 +1,7 @@
 import { useEffect } from "react";
 import Typography from "../SharedComponents/Typography/Typography";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import Button from "../SharedComponents/Button/Button";
-import { styled } from "styled-components";
-import Input from "../SharedComponents/Inputs/Input";
-import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
-import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import Flex from "components/SharedComponents/Flex/Flex";
-import Divider from "components/SharedComponents/Divider/Divider";
-import {
-  GoogleLogoIcon,
-  FacebookLogoIcon,
-  ArrowRightIcon,
-} from "components/SharedComponents/icons/icons";
-import { getColor } from "utils/styles/getStyle/getColor";
-import { hexToRGBA } from "utils/styles/getStyle/hexToRGBA";
-import { Form, SectionForm } from "./styles";
+import { SectionForm } from "./styles";
 import StepsBar from "components/SharedComponents/StepBar/Stepbar";
 import { useState } from "react";
 import RegisterStep2Form from "./RegisterStep2Form";
