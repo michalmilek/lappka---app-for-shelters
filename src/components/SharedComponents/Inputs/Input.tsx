@@ -1,7 +1,7 @@
 import { getBorderRadius } from "../../../utils/styles/getStyle/getBorderRadius";
 import { getColor } from "../../../utils/styles/getStyle/getColor";
 import { InputSize } from "@utils/styles/types/stylesTypes";
-import React, { CSSProperties } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import Typography from "../Typography/Typography";
 

@@ -3,10 +3,6 @@ import React from "react";
 import { Link, LinkProps } from "react-router-dom";
 import styled, { css } from "styled-components";
 import {
-  getFontSize,
-  getFontWeight,
-  getLetterSpacing,
-  getLineHeight,
   TypographyVariant,
   typographyVariants,
 } from "utils/styles/getStyle/getFontStyle";

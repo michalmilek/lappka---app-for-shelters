@@ -1,6 +1,4 @@
-import { getColor } from "utils/styles/getStyle/getColor";
 import React from "react";
-import styled from "styled-components";
 import Typography from "../Typography/Typography";
 import getStepStatus from "./getStepStatus";
 import {

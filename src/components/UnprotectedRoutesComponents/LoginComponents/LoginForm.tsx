@@ -18,9 +18,11 @@ import {
   StyledLoginTitleContent,
 } from "./styles";
 import useAbove500px from "hooks/useAbove500px";
+import { useLoginMutation } from "apiCalls/auth/authHooks";
 
 const LoginForm = () => {
   const above500px = useAbove500px();
+  const { mutateAsync: loginFn } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -38,6 +40,7 @@ const LoginForm = () => {
     }),
     onSubmit: (values) => {
       console.log(values);
+      loginFn({ email: values.email, password: values.password });
     },
   });
 

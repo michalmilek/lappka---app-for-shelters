@@ -1,6 +1,5 @@
 import { getColor } from "utils/styles/getStyle/getColor";
 import { styled } from "styled-components";
-import Input from "components/SharedComponents/Inputs/Input";
 
 interface StyledRegisterTitleContentProps
   extends React.HTMLAttributes<HTMLDivElement> {

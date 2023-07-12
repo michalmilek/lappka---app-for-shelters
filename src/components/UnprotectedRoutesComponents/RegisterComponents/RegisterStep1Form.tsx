@@ -8,7 +8,6 @@ import { ArrowRightIcon } from "components/SharedComponents/icons/icons";
 import {
   StyledRegisterHorizontalInputContainer,
   StyledRegisterHorizontalInputContainerPostalCode,
-  StyledRegisterInputContainer,
   StyledRegisterInputStep1Container,
 } from "./styles";
 
@@ -49,13 +48,10 @@ const RegisterStep1Form = ({
         .required('Pole "Numer telefonu" jest wymagane'),
     }),
     onSubmit: (values) => {
-      console.log(values);
       handleFormValuesStep1(values);
       handleCurrentStep(2);
     },
   });
-
-  console.log(formik.errors);
 
   return (
     <form onSubmit={formik.handleSubmit}>

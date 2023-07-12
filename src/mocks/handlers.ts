@@ -1,35 +1,26 @@
-import { rest, RestRequest, ResponseResolver } from "msw";
-import { setupServer } from "msw/node";
+import { LoginRequest } from "apiCalls/auth/auth";
+import { rest } from "msw";
 
-interface LoginRequestBody extends RestRequest {
-  email: string;
-  password: string;
-}
+const login = rest.post("/Auth/loginWeb", async (req, res, ctx) => {
+  const { email, password } = (await req.json()) as LoginRequest;
 
-interface LoginResponseBody {
-  accessToken: string;
-  refreshToken: string;
-}
+  if (email === "test@test.com" && password === "test123") {
+    const responseBody = {
+      accessToken: "token",
+      refreshToken: "refresh_token",
+    };
+    return res(ctx.status(200), ctx.json(responseBody));
+  } else if (email === "forbidden@example.com") {
+    return res(ctx.status(403));
+  } else if (email === "badrequest@example.com") {
+    return res(ctx.status(400));
+  } else {
+    return res(ctx.status(500));
+  }
+});
 
-export const handlers = [
-  rest.post<LoginRequestBody>(
-    "/login",
-    (req: RestRequest<LoginRequestBody>, res, ctx) => {
-      const { email, password } = req.body;
+const shelterRegister = rest.post("/Auth/shelterRegister", (req, res, ctx) => {
+  return res(ctx.status(204));
+});
 
-      if (email === "test@test.com" && password === "test123") {
-        const responseBody: LoginResponseBody = {
-          accessToken: "token",
-          refreshToken: "refresh_token",
-        };
-        return res(ctx.status(200), ctx.json(responseBody));
-      } else if (email === "forbidden@example.com") {
-        return res(ctx.status(403));
-      } else if (email === "badrequest@example.com") {
-        return res(ctx.status(400));
-      } else {
-        return res(ctx.status(500));
-      }
-    }
-  ),
-];
+export const handlers = [login, shelterRegister];

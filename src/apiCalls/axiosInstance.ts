@@ -1,7 +1,14 @@
 import axios, { AxiosError } from "axios";
 
+
+const isMockEndpointsEnabled = process.env.REACT_APP_mockEndpoints == "true";
+
+const baseURL = isMockEndpointsEnabled
+  ? "https://lappka.mobitouch.pl/identity"
+  : "http://localhost:3000";
+
 const axiosInstance = axios.create({
-  baseURL: "https://lappka.mobitouch.pl/identity",
+  baseURL: baseURL,
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",

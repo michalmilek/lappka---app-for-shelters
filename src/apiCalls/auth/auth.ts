@@ -1,8 +1,13 @@
 import axiosInstance from "../axiosInstance";
 
-//LOGIN RESPONSE
+//LOGIN
 
-interface LoginResponse {
+
+export interface LoginRequest {
+  password: string;
+  email: string;
+}
+export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
 }
@@ -34,17 +39,19 @@ export interface User {
   confirmPassword: string;
 }
 
-export const login = async (email: string, password: string) => {
+export const login = async (loginData: LoginRequest) => {
+
   try {
-    const response = await axiosInstance.post<LoginResponse>("/Auth/loginWeb", {
-      password,
-      email,
-    });
+    const response = await axiosInstance.post<LoginResponse>(
+      "/Auth/loginWeb",
+      loginData
+    );
     return response.data;
   } catch (error) {
     console.error(error);
   }
 };
+
 
 export const registerShelter = async (registerData: ShelterRegisterRequest) => {
   try {

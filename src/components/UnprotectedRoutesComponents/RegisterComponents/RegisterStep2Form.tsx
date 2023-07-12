@@ -50,9 +50,7 @@ const RegisterStep2Form = ({
         .required("Pole wymagane"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       handleFormValuesStep2(values);
-      handleCurrentStep(3);
     },
   });
 

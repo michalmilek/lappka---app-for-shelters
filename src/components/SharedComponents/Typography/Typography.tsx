@@ -1,11 +1,5 @@
 import { getColor } from "../../../utils/styles/getStyle/getColor";
-import {
-  getFontSize,
-  getFontWeight,
-  getLetterSpacing,
-  getLineHeight,
-  typographyVariants,
-} from "../../../utils/styles/getStyle/getFontStyle";
+import { typographyVariants } from "../../../utils/styles/getStyle/getFontStyle";
 import {
   Color,
   fontSize,
