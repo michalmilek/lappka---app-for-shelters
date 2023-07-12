@@ -5,10 +5,6 @@ import {
   getLetterSpacing,
   getLineHeight,
 } from "../../../utils/styles/getStyle/getFontStyle";
-import {
-  getPaddingMarginSize,
-  PaddingMarginStyles,
-} from "../../../utils/styles/getStyle/getPaddingMarginSize";
 import { getShadow } from "../../../utils/styles/getStyle/getShadow";
 import {
   ButtonSize,
@@ -30,7 +26,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   iconSpacing?: PaddingMarginSize;
   color?: Color;
   iconPlace?: "left" | "right";
-  textType?: TypographyType;
 }
 
 const ReusableButton = styled.button<ButtonProps>`
@@ -116,14 +111,6 @@ const ReusableButton = styled.button<ButtonProps>`
       line-height: ${getLineHeight(24)};
       letter-spacing: -0.3%;
       padding: 8px 16px;
-
-      @media screen and (max-width: 768px) {
-        font-size: ${getFontSize(14)};
-        font-weight: ${getFontWeight(500)};
-        line-height: ${getLineHeight(24)};
-        letter-spacing: ${getLetterSpacing("-0.3%")};
-        padding: 4px 12px;
-      }
     `}
 
   ${(props) =>

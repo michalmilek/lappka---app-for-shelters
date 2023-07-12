@@ -1,38 +1,38 @@
 import {
-  LeftSection,
-  LeftSectionResetPassword,
-  RightSection,
-  RightSectionResetPassword,
-  StyledLoginRegisterPage,
-  TopContent,
+  StyledUnathorizedPage,
+  UnathorizedTopContent,
+  UnathorizedTopContentButtonContainer,
 } from "components/UnprotectedRoutesComponents/styles";
-import React from "react";
 import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
-import Flex from "components/SharedComponents/Flex/Flex";
+import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import ResetPasswordBGPhoto from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordBGPhoto.png";
 import ResetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordForm";
+import {
+  LeftSectionResetPassword,
+  RightSectionResetPassword,
+} from "components/UnprotectedRoutesComponents/ResetPasswordComponents/styles";
+import useAbove500px from "hooks/useAbove500px";
 
 const ResetPasswordPage = () => {
+  const above500px = useAbove500px();
   return (
-    <StyledLoginRegisterPage>
-      <TopContent>
+    <StyledUnathorizedPage>
+      <UnathorizedTopContent>
         <img
-          src={LappkaLogo}
+          src={above500px ? LappkaLogo : LappkaMobileLogo}
           alt="logo"
         />
-        <Flex
-          mr="8px"
-          alignItems="center">
+        <UnathorizedTopContentButtonContainer>
           <AnchorLink to={"/"}>
             <CloseIcon
               height="24px"
               width="24px"
             />
           </AnchorLink>
-        </Flex>
-      </TopContent>
+        </UnathorizedTopContentButtonContainer>
+      </UnathorizedTopContent>
       <LeftSectionResetPassword>
         <ResetPasswordForm />
       </LeftSectionResetPassword>
@@ -42,7 +42,7 @@ const ResetPasswordPage = () => {
           alt="man with an animal in a hammock background"
         />
       </RightSectionResetPassword>
-    </StyledLoginRegisterPage>
+    </StyledUnathorizedPage>
   );
 };
 

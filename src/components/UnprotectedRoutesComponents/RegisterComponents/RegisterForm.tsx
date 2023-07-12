@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import Typography from "components/SharedComponents/Typography/Typography";
-import Flex from "components/SharedComponents/Flex/Flex";
-import { SectionForm } from "components/UnprotectedRoutesComponents/styles";
+import { StyledUnathorizedSection } from "components/UnprotectedRoutesComponents/styles";
 import StepsBar from "components/SharedComponents/StepBar/Stepbar";
 import { useState } from "react";
 import RegisterStep2Form from "./RegisterStep2Form";
 import RegisterStep1Form from "./RegisterStep1Form";
 import RegisterStep3Form from "./RegisterStep3Form";
+import { StyledRegisterTitleContent } from "./styles";
+import useAbove500px from "hooks/useAbove500px";
 
 export interface handleCurrentStepProps {
   handleCurrentStep: (step: number) => void;
@@ -26,6 +27,7 @@ export interface handleCompleteProps {
 const steps = ["Dane organizacji", "Dane użytkownika", "Podsumowanie"];
 
 const RegisterForm = () => {
+  const above500px = useAbove500px();
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const [formValues, setFormValues] = useState<any>(null);
@@ -83,15 +85,12 @@ const RegisterForm = () => {
   };
 
   return (
-    <SectionForm>
+    <StyledUnathorizedSection>
       {currentStep !== 3 ? (
-        <Flex
-          flexDirection="column"
-          gap="8px"
-          mb="32px">
+        <StyledRegisterTitleContent mb={above500px ? "32px" : "24px"}>
           <Typography
             color="primary800"
-            variant="Heading 30 Semi"
+            variant={above500px ? "Heading 30 Semi" : "Heading 24 Semi Bold"}
             tag="h1">
             Zarejestruj schronisko
           </Typography>
@@ -108,15 +107,12 @@ const RegisterForm = () => {
               Konto schroniska
             </Typography>
           </Typography>
-        </Flex>
+        </StyledRegisterTitleContent>
       ) : (
-        <Flex
-          flexDirection="column"
-          gap="8px"
-          mb="24px">
+        <StyledRegisterTitleContent mb="24px">
           <Typography
             color="primary800"
-            variant="Heading 30 Semi"
+            variant={above500px ? "Heading 30 Semi" : "Heading 24 Semi Bold"}
             tag="h1">
             Zarejestruj schronisko
           </Typography>
@@ -129,7 +125,7 @@ const RegisterForm = () => {
             wysłana wiadomość z linkiem aktywacyjnym, kliknij w link i przejdź
             do logowania.
           </Typography>
-        </Flex>
+        </StyledRegisterTitleContent>
       )}
 
       {currentStep !== 3 ? (
@@ -143,7 +139,7 @@ const RegisterForm = () => {
       ) : null}
 
       {renderFormContent()}
-    </SectionForm>
+    </StyledUnathorizedSection>
   );
 };
 

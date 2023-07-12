@@ -1,34 +1,35 @@
-import { getColor } from "../utils/styles/getStyle/getColor";
 import React from "react";
 import RegisterBGPhoto from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterBGPhoto.png";
 import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
+import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
-import Flex from "components/SharedComponents/Flex/Flex";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
+import {
+  StyledUnathorizedPage,
+  UnathorizedTopContent,
+  UnathorizedTopContentButtonContainer,
+} from "components/UnprotectedRoutesComponents/styles";
+import RegisterForm from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterForm";
 import {
   LeftSectionRegister,
   RightRegisterSection,
-  StyledLoginRegisterPage,
-  TopContent,
-} from "components/UnprotectedRoutesComponents/styles";
-import RegisterForm from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterForm";
+} from "components/UnprotectedRoutesComponents/RegisterComponents/styles";
+import useAbove500px from "hooks/useAbove500px";
 
 const RegisterPage = () => {
+  const above500px = useAbove500px();
   return (
-    <StyledLoginRegisterPage>
-      <TopContent>
+    <StyledUnathorizedPage>
+      <UnathorizedTopContent>
         <img
-          src={LappkaLogo}
+          src={above500px ? LappkaLogo : LappkaMobileLogo}
           alt="logo"
         />
-        <Flex
-          mr="8px"
-          alignItems="center"
-          gap="32px">
+        <UnathorizedTopContentButtonContainer>
           <AnchorLink to={"/login"}>
             <Button
-              size="Large"
+              size={above500px ? "Large" : "Medium"}
               variant="outline">
               Zaloguj się
             </Button>
@@ -39,8 +40,8 @@ const RegisterPage = () => {
               width="24px"
             />
           </AnchorLink>
-        </Flex>
-      </TopContent>
+        </UnathorizedTopContentButtonContainer>
+      </UnathorizedTopContent>
       <LeftSectionRegister>
         <RegisterForm />
       </LeftSectionRegister>
@@ -50,7 +51,7 @@ const RegisterPage = () => {
           alt="guy with a dog background"
         />
       </RightRegisterSection>
-    </StyledLoginRegisterPage>
+    </StyledUnathorizedPage>
   );
 };
 

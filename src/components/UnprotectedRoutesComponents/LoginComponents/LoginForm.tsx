@@ -2,7 +2,6 @@ import Typography from "../../SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../../SharedComponents/Button/Button";
-import { styled } from "styled-components";
 import Input from "../../SharedComponents/Inputs/Input";
 import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
@@ -18,8 +17,10 @@ import {
   StyledLoginOptionsContainer,
   StyledLoginTitleContent,
 } from "./styles";
+import useAbove500px from "hooks/useAbove500px";
 
 const LoginForm = () => {
+  const above500px = useAbove500px();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -43,12 +44,21 @@ const LoginForm = () => {
   return (
     <StyledLoginForm onSubmit={formik.handleSubmit}>
       <StyledLoginTitleContent>
-        <Typography
-          color="primary800"
-          variant="Heading 30 Semi"
-          tag="h1">
-          Zaloguj się
-        </Typography>
+        {above500px ? (
+          <Typography
+            color="primary800"
+            variant="Heading 30 Semi"
+            tag="h1">
+            Zaloguj się
+          </Typography>
+        ) : (
+          <Typography
+            color="primary800"
+            variant="Heading 24 Semi Bold"
+            tag="h1">
+            Zaloguj się
+          </Typography>
+        )}
 
         <Typography
           tag="p"

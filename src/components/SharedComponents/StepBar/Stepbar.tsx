@@ -1,5 +1,5 @@
 import { getColor } from "utils/styles/getStyle/getColor";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Typography from "../Typography/Typography";
 
@@ -37,6 +37,10 @@ const StepItem = styled.div<{ active: boolean; complete: boolean }>`
       active || complete
         ? `${getColor("primary500")}`
         : `${getColor("lightGray2")}`};
+
+    @media screen and (max-width: 500px) {
+      width: 140px;
+    }
   }
 `;
 

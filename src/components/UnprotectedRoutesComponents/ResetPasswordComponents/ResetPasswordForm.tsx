@@ -6,7 +6,7 @@ import {
   ResetPasswordStep3Form,
   ResetPasswordStep4Form,
 } from "./ResetPasswordStepsForm";
-import { SectionForm } from "../styles";
+import { StyledUnathorizedSection } from "../styles";
 
 export interface ResetPasswordFormProps {
   handleFormValues: (values: any) => void;
@@ -64,7 +64,9 @@ const ResetPasswordForm = () => {
     }
   };
 
-  return <SectionForm>{renderTitleContent()}</SectionForm>;
+  return (
+    <StyledUnathorizedSection>{renderTitleContent()}</StyledUnathorizedSection>
+  );
 };
 
 export default ResetPasswordForm;

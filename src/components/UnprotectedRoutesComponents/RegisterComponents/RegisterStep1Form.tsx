@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Input from "components/SharedComponents/Inputs/Input";
-import Flex from "components/SharedComponents/Flex/Flex";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { handleCurrentStepProps } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
 import { ArrowRightIcon } from "components/SharedComponents/icons/icons";
+import {
+  StyledRegisterHorizontalInputContainer,
+  StyledRegisterHorizontalInputContainerPostalCode,
+  StyledRegisterInputContainer,
+} from "./styles";
 
 const RegisterStep1Form = ({
   handleCurrentStep,
   handleFormValues,
-  formValues,
+  formValues: _formValues,
 }: handleCurrentStepProps) => {
   const formik = useFormik({
     initialValues: {
@@ -42,11 +46,7 @@ const RegisterStep1Form = ({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex
-        mt="50px"
-        width="100%"
-        flexDirection="column"
-        gap="16px">
+      <StyledRegisterInputContainer>
         <Input
           label="Pełna Nazwa Organizacji"
           type="text"
@@ -77,23 +77,24 @@ const RegisterStep1Form = ({
               : null
           }
         />
-        <Flex gap="16px">
-          <Input
-            width={"200px"}
-            label="Kod pocztowy"
-            type="text"
-            id="postalCode"
-            name="postalCode"
-            placeholder="Wpisz"
-            inputSize="Large"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={
-              formik.touched.postalCode && formik.errors.postalCode
-                ? formik.errors.postalCode
-                : null
-            }
-          />
+        <StyledRegisterHorizontalInputContainer>
+          <StyledRegisterHorizontalInputContainerPostalCode>
+            <Input
+              label="Kod pocztowy"
+              type="text"
+              id="postalCode"
+              name="postalCode"
+              placeholder="Wpisz"
+              inputSize="Large"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.postalCode && formik.errors.postalCode
+                  ? formik.errors.postalCode
+                  : null
+              }
+            />
+          </StyledRegisterHorizontalInputContainerPostalCode>
           <Input
             label="Miasto"
             type="text"
@@ -109,7 +110,7 @@ const RegisterStep1Form = ({
                 : null
             }
           />
-        </Flex>
+        </StyledRegisterHorizontalInputContainer>
         <Input
           label="Numer NIP"
           type="text"
@@ -137,14 +138,13 @@ const RegisterStep1Form = ({
             formik.touched.KRS && formik.errors.KRS ? formik.errors.KRS : null
           }
         />
-      </Flex>
+      </StyledRegisterInputContainer>
       <Button
         icon={<ArrowRightIcon fill="#fff" />}
         iconSpacing="8px"
         iconPlace="right"
         size="XLarge"
-        mt="32px"
-        width="100%"
+        isFullWidth
         variant="fill"
         type="submit">
         Następny krok

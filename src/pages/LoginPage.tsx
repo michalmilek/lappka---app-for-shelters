@@ -1,36 +1,35 @@
-import { getColor } from "../utils/styles/getStyle/getColor";
 import React from "react";
-import styled from "styled-components";
 import LoginForm from "components/UnprotectedRoutesComponents/LoginComponents/LoginForm";
 import LoginBGPhoto from "components/UnprotectedRoutesComponents/LoginComponents/LoginBGPhoto.png";
 import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
+import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
-import Flex from "components/SharedComponents/Flex/Flex";
-import { Link } from "react-router-dom";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import {
-  LeftSection,
-  RightSection,
-  StyledLoginRegisterPage,
-  TopContent,
+  StyledUnathorizedPage,
+  UnathorizedTopContent,
+  UnathorizedTopContentButtonContainer,
 } from "components/UnprotectedRoutesComponents/styles";
+import {
+  LoginPageLeftSection,
+  LoginPageRightSection,
+} from "components/UnprotectedRoutesComponents/LoginComponents/styles";
+import useAbove500px from "hooks/useAbove500px";
 
 const LoginPage = () => {
+  const above500px = useAbove500px();
   return (
-    <StyledLoginRegisterPage>
-      <TopContent>
+    <StyledUnathorizedPage>
+      <UnathorizedTopContent>
         <img
-          src={LappkaLogo}
+          src={above500px ? LappkaLogo : LappkaMobileLogo}
           alt="logo"
         />
-        <Flex
-          mr="8px"
-          alignItems="center"
-          gap="32px">
+        <UnathorizedTopContentButtonContainer>
           <AnchorLink to={"/register"}>
             <Button
-              size="Large"
+              size={above500px ? `Large` : `Medium`}
               variant="outline">
               Zarejestruj się
             </Button>
@@ -41,18 +40,18 @@ const LoginPage = () => {
               width="24px"
             />
           </AnchorLink>
-        </Flex>
-      </TopContent>
-      <LeftSection>
+        </UnathorizedTopContentButtonContainer>
+      </UnathorizedTopContent>
+      <LoginPageLeftSection>
         <LoginForm />
-      </LeftSection>
-      <RightSection>
+      </LoginPageLeftSection>
+      <LoginPageRightSection>
         <img
           src={LoginBGPhoto}
           alt="woman with cat background"
         />
-      </RightSection>
-    </StyledLoginRegisterPage>
+      </LoginPageRightSection>
+    </StyledUnathorizedPage>
   );
 };
 

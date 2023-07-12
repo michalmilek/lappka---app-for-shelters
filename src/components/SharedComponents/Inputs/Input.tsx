@@ -5,9 +5,7 @@ import React, { CSSProperties } from "react";
 import styled, { css } from "styled-components";
 import Typography from "../Typography/Typography";
 
-interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
-  width?: CSSProperties["width"];
-}
+
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputSize?: InputSize;
   value?: string;
@@ -16,22 +14,14 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string | null;
 }
 
-const StyledDiv = styled.div<DivProps>`
+const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  width: 100%;
 
   gap: 4px;
-
-  ${(props) =>
-    props.width
-      ? css`
-          width: ${props.width};
-        `
-      : css`
-          width: 100%;
-        `}
 `;
 
 const StyledInput = styled.div<InputProps>`
@@ -129,11 +119,10 @@ const Input = ({
   icon,
   label,
   error,
-  width,
   ...rest
 }: InputProps) => {
   return (
-    <StyledDiv width={width}>
+    <StyledDiv>
       {label && (
         <Typography
           tag="span"

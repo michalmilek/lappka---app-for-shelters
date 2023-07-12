@@ -1,5 +1,4 @@
 import Button from "components/SharedComponents/Button/Button";
-import Flex from "components/SharedComponents/Flex/Flex";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
 import React from "react";
@@ -7,6 +6,10 @@ import { ResetPasswordFormProps } from "./ResetPasswordForm";
 import * as Yup from "yup";
 import Input from "components/SharedComponents/Inputs/Input";
 import { useNavigate } from "react-router-dom";
+import {
+  ResetPasswordInputContainer,
+  ResetPasswordTitleContent,
+} from "./styles";
 
 export const ResetPasswordStep1Form = ({
   handleFormValues,
@@ -28,10 +31,7 @@ export const ResetPasswordStep1Form = ({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex
-        flexDirection="column"
-        gap="8px"
-        mb="40px">
+      <ResetPasswordTitleContent>
         <Typography
           color="primary800"
           variant="Heading 30 Semi"
@@ -45,26 +45,27 @@ export const ResetPasswordStep1Form = ({
           variant="Running Text / Paragraph 14 Reg">
           Podaj adres email użyty przy rejestracji.
         </Typography>
-      </Flex>
+      </ResetPasswordTitleContent>
 
-      <Input
-        label="Email"
-        type="text"
-        id="email"
-        name="email"
-        placeholder="Wpisz"
-        inputSize="Large"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        error={
-          formik.touched.email && formik.errors.email
-            ? formik.errors.email
-            : null
-        }
-      />
+      <ResetPasswordInputContainer>
+        <Input
+          label="Email"
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Wpisz"
+          inputSize="Large"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={
+            formik.touched.email && formik.errors.email
+              ? formik.errors.email
+              : null
+          }
+        />
+      </ResetPasswordInputContainer>
 
       <Button
-        mt="32px"
         width={"100%"}
         size="XLarge">
         Resetuj hasło
@@ -79,10 +80,7 @@ export const ResetPasswordStep2Form = ({
 }: ResetPasswordFormProps) => {
   return (
     <form onSubmit={() => handleCurrentStep(3)}>
-      <Flex
-        flexDirection="column"
-        gap="8px"
-        mb="40px">
+      <ResetPasswordTitleContent>
         <Typography
           color="primary800"
           variant="Heading 30 Semi"
@@ -96,10 +94,10 @@ export const ResetPasswordStep2Form = ({
           variant="Running Text / Paragraph 14 Reg">
           Wysłalismy na adres email link do stworzenia nowego hasła.
         </Typography>
-      </Flex>
+      </ResetPasswordTitleContent>
       <Button
         type="submit"
-        width={"100%"}
+        isFullWidth
         size="XLarge">
         Zamknij
       </Button>
@@ -133,10 +131,7 @@ export const ResetPasswordStep3Form = ({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex
-        flexDirection="column"
-        gap="8px"
-        mb="40px">
+      <ResetPasswordTitleContent>
         <Typography
           color="primary800"
           variant="Heading 30 Semi"
@@ -150,11 +145,9 @@ export const ResetPasswordStep3Form = ({
           variant="Running Text / Paragraph 14 Reg">
           Podaj adres email użyty przy rejestracji.
         </Typography>
-      </Flex>
+      </ResetPasswordTitleContent>
 
-      <Flex
-        flexDirection="column"
-        gap="16px">
+      <ResetPasswordInputContainer>
         <Input
           label="Hasło"
           type="password"
@@ -185,10 +178,9 @@ export const ResetPasswordStep3Form = ({
               : null
           }
         />
-      </Flex>
+      </ResetPasswordInputContainer>
 
       <Button
-        mt="32px"
         width={"100%"}
         size="XLarge">
         Utwórz hasło
@@ -204,10 +196,7 @@ export const ResetPasswordStep4Form = ({
   const navigate = useNavigate();
   return (
     <form>
-      <Flex
-        flexDirection="column"
-        gap="8px"
-        mb="40px">
+      <ResetPasswordTitleContent>
         <Typography
           color="primary800"
           variant="Heading 30 Semi"
@@ -222,11 +211,11 @@ export const ResetPasswordStep4Form = ({
           Twoje hasło zostało zresetowane. Możesz już zalogować się do swojego
           konta.
         </Typography>
-      </Flex>
+      </ResetPasswordTitleContent>
       <Button
         onClick={() => navigate("/login")}
         type="button"
-        width={"100%"}
+        isFullWidth
         size="XLarge">
         Zaloguj się
       </Button>

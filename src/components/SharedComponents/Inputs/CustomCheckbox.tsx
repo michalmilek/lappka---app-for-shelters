@@ -1,5 +1,5 @@
 import { getColor } from "utils/styles/getStyle/getColor";
-import React, { InputHTMLAttributes, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { CheckboxMarkIcon } from "../icons/icons";
 import { Color } from "@utils/styles/types/stylesTypes";
@@ -32,10 +32,6 @@ const Checkmark = styled.span<CheckboxInterface>`
     props.checked ? "" : `1px solid ${getColor("midGray1")}`};
   background-color: ${(props) =>
     props.checked ? getColor(props.color) : getColor("white")};
-`;
-
-const Label = styled.span`
-  margin-left: 8px;
 `;
 
 // Główny komponent Checkbox

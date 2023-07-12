@@ -1,10 +1,13 @@
 import Input from "components/SharedComponents/Inputs/Input";
-import Flex from "components/SharedComponents/Flex/Flex";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { handleCurrentStepProps } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
 import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
+import {
+  StyledRegisterButtonContainer,
+  StyledRegisterInputContainer,
+} from "./styles";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
@@ -44,10 +47,7 @@ const RegisterStep2Form = ({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex
-        mt="50px"
-        flexDirection="column"
-        gap="16px">
+      <StyledRegisterInputContainer>
         <Input
           inputSize={"Large"}
           label="Imię i Nazwisko"
@@ -102,12 +102,8 @@ const RegisterStep2Form = ({
               : null
           }
         />
-      </Flex>
-      <Flex
-        width="100%"
-        mt="32px"
-        gap="24px"
-        alignItems="center">
+      </StyledRegisterInputContainer>
+      <StyledRegisterButtonContainer>
         <Button
           icon={<ArrowLeftIcon fill="#fff" />}
           width="30%"
@@ -130,7 +126,7 @@ const RegisterStep2Form = ({
           type="submit">
           Zarejestruj się
         </Button>
-      </Flex>
+      </StyledRegisterButtonContainer>
     </form>
   );
 };

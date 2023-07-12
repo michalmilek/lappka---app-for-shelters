@@ -64,13 +64,6 @@ const StyledTypography = styled.div<TypographyProps>`
       font-weight: ${getFontWeight(600)};
       line-height: ${getLineHeight(40)};
       letter-spacing: ${getLetterSpacing("-0.8%")};
-
-      @media screen and (max-width: 768px) {
-        font-size: ${getFontSize(24)};
-        font-weight: ${getFontWeight(600)};
-        line-height: ${getLineHeight(32)};
-        letter-spacing: ${getLetterSpacing("-1.9%")};
-      }
     `}
 
     ${(props) =>

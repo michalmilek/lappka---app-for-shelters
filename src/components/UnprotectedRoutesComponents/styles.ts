@@ -2,11 +2,7 @@ import styled from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { hexToRGBA } from "utils/styles/getStyle/hexToRGBA";
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
-  height: string;
-}
-
-export const StyledLoginRegisterPage = styled.main`
+export const StyledUnathorizedPage = styled.main`
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -14,7 +10,7 @@ export const StyledLoginRegisterPage = styled.main`
   overflow: hidden;
 `;
 
-export const Form = styled.form`
+export const StyledUnathorizedForm = styled.form`
   z-index: 5;
   border: 1px solid ${getColor("lightGray4")};
   padding: 32px;
@@ -29,7 +25,7 @@ export const Form = styled.form`
   }
 `;
 
-export const SectionForm = styled.section`
+export const StyledUnathorizedSection = styled.section`
   background: ${getColor("white")};
   border-radius: 8px;
   z-index: 5;
@@ -44,97 +40,29 @@ export const SectionForm = styled.section`
   }
 `;
 
-export const TopContent = styled.div`
+export const UnathorizedTopContent = styled.div`
   display: flex;
   position: absolute;
   justify-content: space-between;
   align-items: center;
-  top: 33px;
-  left: 10.9%;
-  width: 78.26%;
+  top: 0px;
+  left: 0;
+  width: 100%;
   height: 40px;
-
-  @media screen and (max-width: 500px) {
-    left: 16px;
-  }
-`;
-
-export const LeftSection = styled.div`
-  flex: 0 0 50.83%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 149px 120px 150px 156px;
+  padding: 56px 10.9% 0;
 
   @media screen and (max-width: 1250px) {
-    padding: 120px 0 150px 5%;
+    padding: 20.33px 4.44% 0px;
   }
+`;
 
-  @media screen and (max-width: 1100px) {
-    padding: 120px 0 150px 2%;
-  }
-
-  @media screen and (max-width: 1000px) {
-    flex: 0 0 100%;
-    background-color: ${getColor("primary050")};
-  }
+export const UnathorizedTopContentButtonContainer = styled.div`
+  display: flex;
+  margin-right: 8px;
+  align-items: center;
+  gap: 32px;
 
   @media screen and (max-width: 500px) {
-    padding: 122px 4.44% 127px;
+    gap: 12px;
   }
-`;
-
-export const RightSection = styled.div`
-  flex: 0 0 49.17%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${getColor("primary050")};
-  padding: 259.98px 156px 240.25px 164.96px;
-
-  @media screen and (max-width: 1250px) {
-    padding: 259.98px 5% 240.25px 0%;
-  }
-
-  @media screen and (max-width: 1100px) {
-    padding: 259.98px 2% 240.25px 0;
-  }
-
-  @media screen and (max-width: 1000px) {
-    display: none;
-  }
-`;
-
-export const LeftSectionRegister = styled.div`
-  flex: 0 0 50.83%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 121px 120px 59px 156px;
-`;
-
-export const RightRegisterSection = styled.div`
-  flex: 0 0 49.17%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${getColor("primary050")};
-  padding: 234.5px 156px 234.5px 96px;
-`;
-
-export const LeftSectionResetPassword = styled.div`
-  flex: 0 0 50.83%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 267px 120px 267px 156px;
-`;
-
-export const RightSectionResetPassword = styled.div`
-  flex: 0 0 49.17%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${getColor("primary050")};
-  padding: 269.33px 156px 269.33px 139px;
 `;
