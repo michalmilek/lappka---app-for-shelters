@@ -8,15 +8,23 @@ import RegisterStep1Form from "./RegisterStep1Form";
 import RegisterStep3Form from "./RegisterStep3Form";
 import { StyledRegisterTitleContent } from "./styles";
 import useAbove500px from "hooks/useAbove500px";
+import { Shelter, ShelterRegisterRequest, User } from "apiCalls/auth/auth";
 
-export interface handleCurrentStepProps {
+export interface handleCurrentStep1Props {
   handleCurrentStep: (step: number) => void;
-  handleFormValues: (values: any) => void;
-  formValues: any;
+  clearFormValues: () => void;
+  handleFormValuesStep1: (values: Shelter) => void;
+  formValues: Partial<ShelterRegisterRequest> | null;
+}
+
+export interface handleCurrentStep2Props {
+  handleCurrentStep: (step: number) => void;
+  handleFormValuesStep2: (values: User) => void;
+  formValues: Partial<ShelterRegisterRequest> | null;
 }
 export interface handleCurrentStep3Props {
   handleFormValues: (values: any) => void;
-  formValues: any;
+  formValues: Partial<ShelterRegisterRequest> | null;
 }
 
 export interface handleCompleteProps {
@@ -30,7 +38,8 @@ const RegisterForm = () => {
   const above500px = useAbove500px();
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
-  const [formValues, setFormValues] = useState<any>(null);
+  const [formValues, setFormValues] =
+    useState<Partial<ShelterRegisterRequest> | null>(null);
 
   useEffect(() => {
     if (currentStep === 1) {
@@ -50,8 +59,26 @@ const RegisterForm = () => {
     setComplete(value);
   };
 
-  const handleFormValues = (values: any) => {
-    setFormValues({ ...formValues, ...values });
+  const clearFormValues = () => {
+    setFormValues(null);
+  };
+
+  const handleFormValuesStep1 = (values: Shelter) => {
+    setFormValues({
+      ...formValues,
+      shelter: {
+        ...values,
+      },
+    });
+  };
+
+  const handleFormValuesStep2 = (values: User) => {
+    setFormValues({
+      ...formValues,
+      user: {
+        ...values,
+      },
+    });
   };
 
   const renderFormContent = () => {
@@ -59,7 +86,8 @@ const RegisterForm = () => {
       case 1:
         return (
           <RegisterStep1Form
-            handleFormValues={handleFormValues}
+            clearFormValues={clearFormValues}
+            handleFormValuesStep1={handleFormValuesStep1}
             formValues={formValues}
             handleCurrentStep={handleCurrentStep}
           />

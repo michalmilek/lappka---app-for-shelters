@@ -2,7 +2,7 @@ import React from "react";
 import Input from "components/SharedComponents/Inputs/Input";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { handleCurrentStepProps } from "./RegisterForm";
+import { handleCurrentStep1Props } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
 import { ArrowRightIcon } from "components/SharedComponents/icons/icons";
 import {
@@ -12,34 +12,43 @@ import {
 } from "./styles";
 
 const RegisterStep1Form = ({
+  clearFormValues,
+  handleFormValuesStep1,
+  formValues,
   handleCurrentStep,
-  handleFormValues,
-  formValues: _formValues,
-}: handleCurrentStepProps) => {
+}: handleCurrentStep1Props) => {
   const formik = useFormik({
     initialValues: {
-      fullOrgName: "",
+      organizationName: "",
       street: "",
-      postalCode: "",
+      zipCode: "",
       city: "",
-      NIP: "",
-      KRS: "",
+      nip: "",
+      krs: "",
+      phoneNumber: "",
     },
     validationSchema: Yup.object().shape({
-      fullOrgName: Yup.string().required(
+      organizationName: Yup.string().required(
         'Pole "Pełna Nazwa Organizacji" jest wymagane'
       ),
       street: Yup.string().required('Pole "Ulica" jest wymagane'),
-      postalCode: Yup.string()
+      zipCode: Yup.string()
         .matches(/^\d{2}-\d{3}$/, "Kod pocztowy powinien być w formacie XX-XXX")
         .required('Pole "Kod pocztowy" jest wymagane'),
       city: Yup.string().required('Pole "Miasto" jest wymagane'),
-      NIP: Yup.string().required('Pole "Numer NIP" jest wymagane'),
-      KRS: Yup.string().required('Pole "Numer KRS" jest wymagane'),
+      nip: Yup.string().required('Pole "Numer NIP" jest wymagane'),
+      krs: Yup.string().required('Pole "Numer KRS" jest wymagane'),
+      phoneNumber: Yup.string()
+        .matches(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/, {
+          message:
+            "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze",
+          excludeEmptyString: true,
+        })
+        .required('Pole "Numer telefonu" jest wymagane'),
     }),
     onSubmit: (values) => {
       console.log(values);
-      handleFormValues(values);
+      handleFormValuesStep1({ ...values, latitude: 0, longitude: 0 });
       handleCurrentStep(2);
     },
   });
@@ -50,15 +59,15 @@ const RegisterStep1Form = ({
         <Input
           label="Pełna Nazwa Organizacji"
           type="text"
-          id="fullOrgName"
-          name="fullOrgName"
+          id="organizationName"
+          name="organizationName"
           placeholder="Wpisz"
           inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
-            formik.touched.fullOrgName && formik.errors.fullOrgName
-              ? formik.errors.fullOrgName
+            formik.touched.organizationName && formik.errors.organizationName
+              ? formik.errors.organizationName
               : null
           }
         />
@@ -82,15 +91,15 @@ const RegisterStep1Form = ({
             <Input
               label="Kod pocztowy"
               type="text"
-              id="postalCode"
-              name="postalCode"
+              id="zipCode"
+              name="zipCode"
               placeholder="Wpisz"
               inputSize="Large"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={
-                formik.touched.postalCode && formik.errors.postalCode
-                  ? formik.errors.postalCode
+                formik.touched.zipCode && formik.errors.zipCode
+                  ? formik.errors.zipCode
                   : null
               }
             />
@@ -114,28 +123,43 @@ const RegisterStep1Form = ({
         <Input
           label="Numer NIP"
           type="text"
-          id="NIP"
-          name="NIP"
+          id="nip"
+          name="nip"
           placeholder="Wpisz"
           inputSize="Large"
           maxLength={16}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
-            formik.touched.NIP && formik.errors.NIP ? formik.errors.NIP : null
+            formik.touched.nip && formik.errors.nip ? formik.errors.nip : null
           }
         />
         <Input
           label="Numer KRS"
           type="number"
-          id="KRS"
-          name="KRS"
+          id="nip"
+          name="nip"
           placeholder="Wpisz"
           inputSize="XLarge"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
-            formik.touched.KRS && formik.errors.KRS ? formik.errors.KRS : null
+            formik.touched.nip && formik.errors.nip ? formik.errors.nip : null
+          }
+        />
+        <Input
+          label="Numer telefonu"
+          type="text"
+          id="phoneNumber"
+          name="phoneNumber"
+          placeholder="Wpisz"
+          inputSize="XLarge"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={
+            formik.touched.phoneNumber && formik.errors.phoneNumber
+              ? formik.errors.phoneNumber
+              : null
           }
         />
       </StyledRegisterInputContainer>

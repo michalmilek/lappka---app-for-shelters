@@ -1,7 +1,7 @@
 import Input from "components/SharedComponents/Inputs/Input";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { handleCurrentStepProps } from "./RegisterForm";
+import { handleCurrentStep2Props } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
 import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
 import {
@@ -11,23 +11,34 @@ import {
 
 const RegisterStep2Form = ({
   handleCurrentStep,
-  handleFormValues,
+  handleFormValuesStep2,
   formValues,
-}: handleCurrentStepProps) => {
+}: handleCurrentStep2Props) => {
   const formik = useFormik({
     initialValues: {
-      fullName: "",
-      email: "",
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
       password: "",
       confirmPassword: "",
     },
     validationSchema: Yup.object().shape({
-      fullName: Yup.string()
+      firstName: Yup.string()
+        .matches(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/, {
+          message: "Imię może zawierać tylko litery",
+          excludeEmptyString: true,
+        })
+        .required('Pole "Imię" jest wymagane'),
+      lastName: Yup.string()
         .matches(
-          /^.+\s.+$/,
-          "Imię i Nazwisko muszą składać się z przynajmniej dwóch wyrazów"
+          /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+(\s+[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+)*$/,
+          {
+            message:
+              "Nazwisko może zawierać tylko litery i musi składać się z przynajmniej dwóch wyrazów oddzielonych spacją",
+            excludeEmptyString: true,
+          }
         )
-        .required("Pole wymagane"),
+        .required('Pole "Nazwisko" jest wymagane'),
       email: Yup.string()
         .email("Nieprawidłowy format emaila")
         .required("Pole wymagane"),
@@ -40,7 +51,7 @@ const RegisterStep2Form = ({
     }),
     onSubmit: (values) => {
       console.log(values);
-      handleFormValues(values);
+      handleFormValuesStep2(values);
       handleCurrentStep(3);
     },
   });
@@ -50,27 +61,40 @@ const RegisterStep2Form = ({
       <StyledRegisterInputContainer>
         <Input
           inputSize={"Large"}
-          label="Imię i Nazwisko"
-          name="fullName"
-          value={formik.values.fullName}
+          label="Imię"
+          name="firstName"
+          value={formik.values.firstName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
-            formik.touched.fullName && formik.errors.fullName
-              ? formik.errors.fullName
+            formik.touched.firstName && formik.errors.firstName
+              ? formik.errors.firstName
+              : null
+          }
+        />
+        <Input
+          inputSize={"Large"}
+          label="Nazwisko"
+          name="lastName"
+          value={formik.values.lastName}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={
+            formik.touched.lastName && formik.errors.lastName
+              ? formik.errors.lastName
               : null
           }
         />
         <Input
           inputSize={"Large"}
           label="Adres e-mail"
-          name="email"
-          value={formik.values.email}
+          name="emailAddress"
+          value={formik.values.emailAddress}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
-            formik.touched.email && formik.errors.email
-              ? formik.errors.email
+            formik.touched.emailAddress && formik.errors.emailAddress
+              ? formik.errors.emailAddress
               : null
           }
         />
