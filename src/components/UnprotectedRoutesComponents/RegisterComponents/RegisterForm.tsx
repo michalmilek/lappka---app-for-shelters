@@ -12,7 +12,6 @@ import { Shelter, ShelterRegisterRequest, User } from "apiCalls/auth/auth";
 
 export interface handleCurrentStep1Props {
   handleCurrentStep: (step: number) => void;
-  clearFormValues: () => void;
   handleFormValuesStep1: (values: Shelter) => void;
   formValues: Partial<ShelterRegisterRequest> | null;
 }
@@ -23,7 +22,6 @@ export interface handleCurrentStep2Props {
   formValues: Partial<ShelterRegisterRequest> | null;
 }
 export interface handleCurrentStep3Props {
-  handleFormValues: (values: any) => void;
   formValues: Partial<ShelterRegisterRequest> | null;
 }
 
@@ -47,20 +45,12 @@ const RegisterForm = () => {
     }
   }, [currentStep]);
 
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
-
   const handleCurrentStep = (step: number) => {
     setCurrentStep(step);
   };
 
   const handleComplete = (value: boolean) => {
     setComplete(value);
-  };
-
-  const clearFormValues = () => {
-    setFormValues(null);
   };
 
   const handleFormValuesStep1 = (values: Shelter) => {
@@ -86,7 +76,6 @@ const RegisterForm = () => {
       case 1:
         return (
           <RegisterStep1Form
-            clearFormValues={clearFormValues}
             handleFormValuesStep1={handleFormValuesStep1}
             formValues={formValues}
             handleCurrentStep={handleCurrentStep}
@@ -95,18 +84,13 @@ const RegisterForm = () => {
       case 2:
         return (
           <RegisterStep2Form
-            handleFormValues={handleFormValues}
+            handleFormValuesStep2={handleFormValuesStep2}
             formValues={formValues}
             handleCurrentStep={handleCurrentStep}
           />
         );
       case 3:
-        return (
-          <RegisterStep3Form
-            handleFormValues={handleFormValues}
-            formValues={formValues}
-          />
-        );
+        return <RegisterStep3Form formValues={formValues} />;
       default:
         return null;
     }

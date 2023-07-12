@@ -39,7 +39,7 @@ const RegisterStep2Form = ({
           }
         )
         .required('Pole "Nazwisko" jest wymagane'),
-      email: Yup.string()
+      emailAddress: Yup.string()
         .email("Nieprawidłowy format emaila")
         .required("Pole wymagane"),
       password: Yup.string()

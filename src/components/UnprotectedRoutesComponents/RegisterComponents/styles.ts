@@ -97,6 +97,19 @@ export const StyledRegisterInputContainer = styled.div`
   }
 `;
 
+export const StyledRegisterInputStep1Container = styled.div`
+  display: flex;
+  margin-top: 50px;
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 24px;
+  }
+`;
+
 export const StyledRegisterButtonContainer = styled.div`
   display: flex;
   width: 100%;
@@ -111,6 +124,8 @@ export const StyledRegisterHorizontalInputContainer = styled.div`
   gap: 16px;
   justify-content: flex-start;
 `;
+
+
 
 export const StyledRegisterHorizontalInputContainerPostalCode = styled.div`
   width: 200px;

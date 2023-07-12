@@ -9,10 +9,10 @@ import {
   StyledRegisterHorizontalInputContainer,
   StyledRegisterHorizontalInputContainerPostalCode,
   StyledRegisterInputContainer,
+  StyledRegisterInputStep1Container,
 } from "./styles";
 
 const RegisterStep1Form = ({
-  clearFormValues,
   handleFormValuesStep1,
   formValues,
   handleCurrentStep,
@@ -26,6 +26,8 @@ const RegisterStep1Form = ({
       nip: "",
       krs: "",
       phoneNumber: "",
+      longitude: 0,
+      latitude: 0,
     },
     validationSchema: Yup.object().shape({
       organizationName: Yup.string().required(
@@ -48,14 +50,16 @@ const RegisterStep1Form = ({
     }),
     onSubmit: (values) => {
       console.log(values);
-      handleFormValuesStep1({ ...values, latitude: 0, longitude: 0 });
+      handleFormValuesStep1(values);
       handleCurrentStep(2);
     },
   });
 
+  console.log(formik.errors);
+
   return (
     <form onSubmit={formik.handleSubmit}>
-      <StyledRegisterInputContainer>
+      <StyledRegisterInputStep1Container>
         <Input
           label="Pełna Nazwa Organizacji"
           type="text"
@@ -136,15 +140,15 @@ const RegisterStep1Form = ({
         />
         <Input
           label="Numer KRS"
-          type="number"
-          id="nip"
-          name="nip"
+          type="text"
+          id="krs"
+          name="krs"
           placeholder="Wpisz"
-          inputSize="XLarge"
+          inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
-            formik.touched.nip && formik.errors.nip ? formik.errors.nip : null
+            formik.touched.krs && formik.errors.krs ? formik.errors.krs : null
           }
         />
         <Input
@@ -153,7 +157,7 @@ const RegisterStep1Form = ({
           id="phoneNumber"
           name="phoneNumber"
           placeholder="Wpisz"
-          inputSize="XLarge"
+          inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
@@ -162,12 +166,12 @@ const RegisterStep1Form = ({
               : null
           }
         />
-      </StyledRegisterInputContainer>
+      </StyledRegisterInputStep1Container>
       <Button
         icon={<ArrowRightIcon fill="#fff" />}
         iconSpacing="8px"
         iconPlace="right"
-        size="XLarge"
+        size="Large"
         isFullWidth
         variant="fill"
         type="submit">
