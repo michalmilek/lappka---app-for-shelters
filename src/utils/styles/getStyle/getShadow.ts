@@ -1,4 +1,4 @@
-import { BoxShadow } from "@utils/styles/types/stylesTypes";
+import { BoxShadow } from "utils/styles/types/stylesTypes";
 
 export function getShadow(shadow: BoxShadow): string {
   switch (shadow) {

@@ -1,4 +1,4 @@
-import { PaddingMarginSize } from "@utils/styles/types/stylesTypes";
+import { PaddingMarginSize } from "utils/styles/types/stylesTypes";
 import { css } from "styled-components";
 
 export function getPaddingMarginSize(size: PaddingMarginSize): string {

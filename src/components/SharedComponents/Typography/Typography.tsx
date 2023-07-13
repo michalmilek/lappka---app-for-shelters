@@ -7,7 +7,7 @@ import {
   letterSpacing,
   lineHeight,
   TypographyType,
-} from "@utils/styles/types/stylesTypes";
+} from "utils/styles/types/stylesTypes";
 import React, { CSSProperties, ReactNode } from "react";
 import styled, { css } from "styled-components";
 

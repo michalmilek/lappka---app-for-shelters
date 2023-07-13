@@ -12,7 +12,7 @@ import {
   fontWeight,
   letterSpacing,
   lineHeight,
-} from "@utils/styles/types/stylesTypes";
+} from "utils/styles/types/stylesTypes";
 import { hexToRGBA } from "utils/styles/getStyle/hexToRGBA";
 
 interface ExtendedLinkProps extends LinkProps {

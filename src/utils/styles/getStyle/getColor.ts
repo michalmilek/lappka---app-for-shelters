@@ -1,4 +1,4 @@
-import { Color } from "@utils/styles/types/stylesTypes";
+import { Color } from "utils/styles/types/stylesTypes";
 
 export function getColor(color: Color): string {
   switch (color) {

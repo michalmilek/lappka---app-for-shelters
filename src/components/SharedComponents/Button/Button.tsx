@@ -3,7 +3,7 @@ import {
   ButtonVariant,
   Color,
   PaddingMarginSize,
-} from "@utils/styles/types/stylesTypes";
+} from "../../../utils/styles/types/stylesTypes";
 import React from "react";
 import { ReusableButton } from "./styles";
 

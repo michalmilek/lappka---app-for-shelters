@@ -2,7 +2,7 @@ import { getColor } from "utils/styles/getStyle/getColor";
 import React from "react";
 import styled from "styled-components";
 import { CheckboxMarkIcon } from "../icons/icons";
-import { Color } from "@utils/styles/types/stylesTypes";
+import { Color } from "utils/styles/types/stylesTypes";
 import Typography from "../Typography/Typography";
 
 interface CheckboxInterface

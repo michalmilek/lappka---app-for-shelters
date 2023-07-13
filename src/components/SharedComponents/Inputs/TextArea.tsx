@@ -1,6 +1,6 @@
 import { getBorderRadius } from "../../../utils/styles/getStyle/getBorderRadius";
 import { getColor } from "../../../utils/styles/getStyle/getColor";
-import { InputSize } from "@utils/styles/types/stylesTypes";
+import { InputSize } from "utils/styles/types/stylesTypes";
 import React, { ChangeEvent } from "react";
 import styled, { css } from "styled-components";
 

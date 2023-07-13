@@ -1,4 +1,4 @@
-import { BorderRadius } from "@utils/styles/types/stylesTypes";
+import { BorderRadius } from "utils/styles/types/stylesTypes";
 
 export function getBorderRadius(borderRadius: BorderRadius): string {
   switch (borderRadius) {

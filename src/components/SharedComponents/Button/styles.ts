@@ -1,14 +1,14 @@
-import { getColor } from "utils/styles/getStyle/getColor";
+import { getColor } from "../../../utils/styles/getStyle/getColor";
 import { css, styled } from "styled-components";
 import { ButtonProps } from "./Button";
-import { getBorderRadius } from "utils/styles/getStyle/getBorderRadius";
-import { getShadow } from "utils/styles/getStyle/getShadow";
+import { getBorderRadius } from "../../../utils/styles/getStyle/getBorderRadius";
+import { getShadow } from "../../../utils/styles/getStyle/getShadow";
 import {
   getFontSize,
   getFontWeight,
   getLetterSpacing,
   getLineHeight,
-} from "utils/styles/getStyle/getFontStyle";
+} from "../../../utils/styles/getStyle/getFontStyle";
 
 //TOGGLE BUTTON
 //TOGGLE BUTTON
