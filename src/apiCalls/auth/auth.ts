@@ -39,6 +39,19 @@ export interface User {
   confirmPassword: string;
 }
 
+//RESET PASSWORD
+
+
+export interface ResetPasswordSendEmailRequest {
+  email: string;
+}
+
+export interface ResetPasswordSetNewPasswordRequest {
+  password: string;
+  confirmPassword: string;
+}
+
+
 export const login = async (loginData: LoginRequest) => {
 
   try {
@@ -64,3 +77,32 @@ export const registerShelter = async (registerData: ShelterRegisterRequest) => {
     console.error(error);
   }
 };
+
+
+export const resetPasswordSendEmail = async (email: string) => {
+  try {
+    const response = await axiosInstance.post("/Auth/resetPassword", {
+      email
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const resetPasswordSetNewPassword = async (
+  resetPasswordSetNewPasswordData: ResetPasswordSetNewPasswordRequest
+) => {
+  try {
+    const response = await axiosInstance.post(
+      "/Auth/setNewPassword",
+      resetPasswordSetNewPasswordData
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+

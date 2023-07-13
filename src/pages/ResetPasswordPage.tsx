@@ -8,15 +8,18 @@ import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobil
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import ResetPasswordBGPhoto from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordBGPhoto.png";
-import ResetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordForm";
 import {
   LeftSectionResetPassword,
   RightSectionResetPassword,
 } from "components/UnprotectedRoutesComponents/ResetPasswordComponents/styles";
 import useAbove500px from "hooks/useAbove500px";
+import { useParams } from "react-router-dom";
+import ResetPasswordSendEmailForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSendEmailForm";
+import ResetPasswordSetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSetPasswordForm";
 
 const ResetPasswordPage = () => {
   const above500px = useAbove500px();
+  const { token } = useParams();
   return (
     <StyledUnathorizedPage>
       <UnathorizedTopContent>
@@ -34,7 +37,11 @@ const ResetPasswordPage = () => {
         </UnathorizedTopContentButtonContainer>
       </UnathorizedTopContent>
       <LeftSectionResetPassword>
-        <ResetPasswordForm />
+        {!token ? (
+          <ResetPasswordSendEmailForm />
+        ) : (
+          <ResetPasswordSetPasswordForm />
+        )}
       </LeftSectionResetPassword>
       <RightSectionResetPassword>
         <img

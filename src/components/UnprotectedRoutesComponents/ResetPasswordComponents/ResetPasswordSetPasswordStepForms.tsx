@@ -1,114 +1,22 @@
+import { useResetPasswordSetNewPasswordMutation } from "apiCalls/auth/authHooks";
 import Button from "components/SharedComponents/Button/Button";
+import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
-import React from "react";
-import { ResetPasswordFormProps } from "./ResetPasswordForm";
-import * as Yup from "yup";
-import Input from "components/SharedComponents/Inputs/Input";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { ResetPasswordSetPasswordFormProps } from "./ResetPasswordSetPasswordForm";
 import {
   ResetPasswordInputContainer,
   ResetPasswordTitleContent,
 } from "./styles";
+import { useEffect } from "react";
 
-export const ResetPasswordStep1Form = ({
-  handleFormValues,
+export const ResetPasswordSetPasswordStep1Form = ({
   handleCurrentStep,
-}: ResetPasswordFormProps) => {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validationSchema: Yup.object().shape({
-      email: Yup.string().email().required("Email jest wymagany"),
-    }),
-    onSubmit: (values) => {
-      console.log(values);
-      handleFormValues(values);
-      handleCurrentStep(2);
-    },
-  });
-
-  return (
-    <form onSubmit={formik.handleSubmit}>
-      <ResetPasswordTitleContent>
-        <Typography
-          color="primary800"
-          variant="Heading 30 Semi"
-          tag="h1">
-          Zapomniałeś hasła?
-        </Typography>
-
-        <Typography
-          tag="p"
-          color="midGray2"
-          variant="Running Text / Paragraph 14 Reg">
-          Podaj adres email użyty przy rejestracji.
-        </Typography>
-      </ResetPasswordTitleContent>
-
-      <ResetPasswordInputContainer>
-        <Input
-          label="Email"
-          type="text"
-          id="email"
-          name="email"
-          placeholder="Wpisz"
-          inputSize="Large"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={
-            formik.touched.email && formik.errors.email
-              ? formik.errors.email
-              : null
-          }
-        />
-      </ResetPasswordInputContainer>
-
-      <Button
-        width={"100%"}
-        size="XLarge">
-        Resetuj hasło
-      </Button>
-    </form>
-  );
-};
-
-export const ResetPasswordStep2Form = ({
-  handleFormValues,
-  handleCurrentStep,
-}: ResetPasswordFormProps) => {
-  return (
-    <form onSubmit={() => handleCurrentStep(3)}>
-      <ResetPasswordTitleContent>
-        <Typography
-          color="primary800"
-          variant="Heading 30 Semi"
-          tag="h1">
-          Dziękujemy
-        </Typography>
-
-        <Typography
-          tag="p"
-          color="midGray2"
-          variant="Running Text / Paragraph 14 Reg">
-          Wysłalismy na adres email link do stworzenia nowego hasła.
-        </Typography>
-      </ResetPasswordTitleContent>
-      <Button
-        type="submit"
-        isFullWidth
-        size="XLarge">
-        Zamknij
-      </Button>
-    </form>
-  );
-};
-
-export const ResetPasswordStep3Form = ({
-  handleFormValues,
-  handleCurrentStep,
-}: ResetPasswordFormProps) => {
+}: ResetPasswordSetPasswordFormProps) => {
+  const { mutateAsync: resetPasswordSetNewPasswordFn, isSuccess } =
+    useResetPasswordSetNewPasswordMutation();
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -124,10 +32,15 @@ export const ResetPasswordStep3Form = ({
     }),
     onSubmit: (values) => {
       console.log(values);
-      handleFormValues(values);
-      handleCurrentStep(4);
+      resetPasswordSetNewPasswordFn(values);
     },
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      handleCurrentStep(2);
+    }
+  }, [isSuccess, handleCurrentStep]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -136,14 +49,14 @@ export const ResetPasswordStep3Form = ({
           color="primary800"
           variant="Heading 30 Semi"
           tag="h1">
-          Zapomniałeś hasła?
+          Utwórz nowe hasło
         </Typography>
 
         <Typography
           tag="p"
           color="midGray2"
           variant="Running Text / Paragraph 14 Reg">
-          Podaj adres email użyty przy rejestracji.
+          Hasło powinno mieć m.in. 8 znaków.
         </Typography>
       </ResetPasswordTitleContent>
 
@@ -189,10 +102,7 @@ export const ResetPasswordStep3Form = ({
   );
 };
 
-export const ResetPasswordStep4Form = ({
-  handleFormValues,
-  handleCurrentStep,
-}: ResetPasswordFormProps) => {
+export const ResetPasswordSetPasswordStep2Form = () => {
   const navigate = useNavigate();
   return (
     <form>

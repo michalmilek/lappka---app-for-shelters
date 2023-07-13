@@ -7,5 +7,6 @@ export const unprotectedRoutes = [
   { url: "/login", component: <LoginPage /> },
   { url: "/register", component: <RegisterPage /> },
   { url: "/reset-password", component: <ResetPasswordPage /> },
+  { url: "/reset-password/:token", component: <ResetPasswordPage /> },
   { url: "/", component: <HomePage /> },
 ];
