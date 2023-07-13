@@ -8,12 +8,16 @@ import {
   StyledRegisterButtonContainer,
   StyledRegisterInputContainer,
 } from "./styles";
+import { useEffect } from "react";
+import { useRegisterShelterMutation } from "apiCalls/auth/authHooks";
+import { ShelterRegisterRequest } from "apiCalls/auth/auth";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
   handleFormValuesStep2,
   formValues,
 }: handleCurrentStep2Props) => {
+  const { mutateAsync: registerFn, isSuccess } = useRegisterShelterMutation();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -53,6 +57,19 @@ const RegisterStep2Form = ({
       handleFormValuesStep2(values);
     },
   });
+
+  useEffect(() => {
+    if (formValues?.shelter && formValues?.user) {
+      console.log(formValues);
+      registerFn(formValues as ShelterRegisterRequest);
+    }
+  }, [formValues, registerFn]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      handleCurrentStep(3);
+    }
+  }, [isSuccess, handleCurrentStep]);
 
   return (
     <form onSubmit={formik.handleSubmit}>

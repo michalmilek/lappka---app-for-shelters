@@ -39,7 +39,6 @@ const RegisterForm = () => {
   const [complete, setComplete] = useState(false);
   const [formValues, setFormValues] =
     useState<Partial<ShelterRegisterRequest> | null>(null);
-  const { mutateAsync: registerFn, isSuccess } = useRegisterShelterMutation();
 
   useEffect(() => {
     if (currentStep === 1) {
@@ -73,19 +72,7 @@ const RegisterForm = () => {
     });
   };
 
-  useEffect(() => {
-    if (formValues?.shelter && formValues?.user) {
-      console.log(formValues);
-      registerFn(formValues as ShelterRegisterRequest);
-    }
-  }, [formValues, registerFn]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      handleCurrentStep(3);
-    }
-  });
-
+  
   const renderFormContent = () => {
     switch (currentStep) {
       case 1:
