@@ -10,11 +10,11 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/styles";
+} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
 import {
   LoginPageLeftSection,
   LoginPageRightSection,
-} from "components/UnprotectedRoutesComponents/LoginComponents/styles";
+} from "components/UnprotectedRoutesComponents/LoginComponents/Login.styled";
 import useDeviceType from "hooks/useDeviceType";
 
 const LoginPage = () => {

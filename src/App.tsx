@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ProtectedPage from "components/ProtectedPageComponents/ProtectedPage";
+import ProtectedPage from "components/ProtectedRoutesComponents/ProtectedPage";
 import { GlobalStyle } from "globalStyles";
 import DashboardPage from "pages/ProtectedPages/DashboardPage";
 import React from "react";

@@ -16,7 +16,7 @@ import {
   StyledLoginInputContainer,
   StyledLoginOptionsContainer,
   StyledLoginTitleContent,
-} from "./styles";
+} from "./Login.styled";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
 import useDeviceType from "hooks/useDeviceType";
 

@@ -9,7 +9,7 @@ import {
   StyledRegisterHorizontalInputContainer,
   StyledRegisterHorizontalInputContainerPostalCode,
   StyledRegisterInputStep1Container,
-} from "./styles";
+} from "./Register.styled";
 import useDeviceType from "hooks/useDeviceType";
 import { Shelter } from "apiCalls/auth/auth";
 

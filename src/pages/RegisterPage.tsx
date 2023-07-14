@@ -9,12 +9,12 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/styles";
+} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
 import RegisterForm from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterForm";
 import {
   LeftSectionRegister,
   RightRegisterSection,
-} from "components/UnprotectedRoutesComponents/RegisterComponents/styles";
+} from "components/UnprotectedRoutesComponents/RegisterComponents/Register.styled";
 import useDeviceType from "hooks/useDeviceType";
 
 const RegisterPage = () => {

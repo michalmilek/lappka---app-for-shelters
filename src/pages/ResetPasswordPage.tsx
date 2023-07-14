@@ -2,7 +2,7 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/styles";
+} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
 import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
 import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
@@ -11,7 +11,7 @@ import ResetPasswordBGPhoto from "components/UnprotectedRoutesComponents/ResetPa
 import {
   LeftSectionResetPassword,
   RightSectionResetPassword,
-} from "components/UnprotectedRoutesComponents/ResetPasswordComponents/styles";
+} from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPassword.styled";
 import { useParams } from "react-router-dom";
 import ResetPasswordSendEmailForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSendEmailForm";
 import ResetPasswordSetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSetPasswordForm";

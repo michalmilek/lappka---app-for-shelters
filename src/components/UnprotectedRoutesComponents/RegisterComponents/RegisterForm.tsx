@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { StyledUnathorizedSection } from "components/UnprotectedRoutesComponents/styles";
+import { StyledUnathorizedSection } from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
 import StepsBar from "components/SharedComponents/StepBar/Stepbar";
 import { useState } from "react";
 import RegisterStep2Form from "./RegisterStep2Form";
 import RegisterStep1Form from "./RegisterStep1Form";
 import RegisterStep3Form from "./RegisterStep3Form";
-import { StyledRegisterTitleContent } from "./styles";
+import { StyledRegisterTitleContent } from "./Register.styled";
 import { Shelter, ShelterRegisterRequest, User } from "apiCalls/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 

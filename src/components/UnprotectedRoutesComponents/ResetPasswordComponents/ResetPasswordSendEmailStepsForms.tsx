@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import {
   ResetPasswordInputContainer,
   ResetPasswordTitleContent,
-} from "./styles";
+} from "./ResetPassword.styled";
 import Typography from "components/SharedComponents/Typography/Typography";
 import Input from "components/SharedComponents/Inputs/Input";
 import Button from "components/SharedComponents/Button/Button";

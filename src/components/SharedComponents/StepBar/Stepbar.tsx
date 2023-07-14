@@ -6,7 +6,7 @@ import {
   StepItem,
   StepNumberContainer,
   StepNumberInner,
-} from "./styles";
+} from "./Stepbar.styled";
 
 interface StepBarProps {
   steps: string[];

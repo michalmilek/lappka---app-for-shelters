@@ -7,7 +7,7 @@ import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
 import {
   StyledRegisterButtonContainer,
   StyledRegisterInputContainer,
-} from "./styles";
+} from "./Register.styled";
 import { useEffect } from "react";
 import { useRegisterShelterMutation } from "apiCalls/auth/authHooks";
 import { ShelterRegisterRequest, User } from "apiCalls/auth/auth";

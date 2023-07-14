@@ -9,7 +9,7 @@ import { ResetPasswordSetPasswordFormProps } from "./ResetPasswordSetPasswordFor
 import {
   ResetPasswordInputContainer,
   ResetPasswordTitleContent,
-} from "./styles";
+} from "./ResetPassword.styled";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
 

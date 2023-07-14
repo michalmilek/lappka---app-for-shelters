@@ -1,4 +1,4 @@
-import ProtectedSidebar from "components/ProtectedPageComponents/ProtectedSidebar";
+import ProtectedSidebar from "components/ProtectedRoutesComponents/ProtectedSidebar";
 import React from "react";
 
 const DashboardPage = () => {
