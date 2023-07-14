@@ -19,10 +19,13 @@ import {
 } from "./Login.styled";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
 import useDeviceType from "hooks/useDeviceType";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const LoginForm = () => {
   const deviceType = useDeviceType();
-  const { mutateAsync: loginFn } = useLoginMutation();
+  const navigate = useNavigate();
+  const { mutateAsync: loginFn, isSuccess } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -42,6 +45,13 @@ const LoginForm = () => {
       console.log(values);
       loginFn({ email: values.email, password: values.password });
     },
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("rememberMe", formik.values.rememberMe.toString());
+      navigate("/");
+    }
   });
 
   return (

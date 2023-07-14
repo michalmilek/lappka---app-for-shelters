@@ -42,7 +42,11 @@ axiosInstance.interceptors.response.use(
           });
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("refreshToken", response.data.refreshToken);
-        } catch (error) {
+        } catch (error: unknown) {
+          if (axios.isAxiosError(error) && error.response?.status === 400) {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+          }
           console.error(error);
         }
       }
