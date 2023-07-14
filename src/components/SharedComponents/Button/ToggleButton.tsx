@@ -1,20 +1,15 @@
-import { getColor } from "../../../utils/styles/getStyle/getColor";
 import React, { ChangeEvent } from "react";
-import styled from "styled-components";
-import { ToggleContainer, ToggleInput, ToggleSlider } from "./styles";
+import { ToggleContainer, ToggleInput, ToggleSlider } from "./Button.styled";
 
 interface CheckboxToggleProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  disabled?: boolean;
   onToggleChange?: (checked: boolean) => void;
 }
 
-
-
 const ToggleButton = ({
   label,
-  disabled = false,
+  disabled,
   onToggleChange,
   ...rest
 }: CheckboxToggleProps) => {

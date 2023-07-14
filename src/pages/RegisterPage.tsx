@@ -15,21 +15,21 @@ import {
   LeftSectionRegister,
   RightRegisterSection,
 } from "components/UnprotectedRoutesComponents/RegisterComponents/styles";
-import useAbove500px from "hooks/useAbove500px";
+import useDeviceType from "hooks/useDeviceType";
 
 const RegisterPage = () => {
-  const above500px = useAbove500px();
+  const deviceType = useDeviceType();
   return (
     <StyledUnathorizedPage>
       <UnathorizedTopContent>
         <img
-          src={above500px ? LappkaLogo : LappkaMobileLogo}
+          src={deviceType === "desktop" ? LappkaLogo : LappkaMobileLogo}
           alt="logo"
         />
         <UnathorizedTopContentButtonContainer>
           <AnchorLink to={"/login"}>
             <Button
-              size={above500px ? "Large" : "Medium"}
+              size={deviceType === "desktop" ? "Large" : "Medium"}
               variant="outline">
               Zaloguj się
             </Button>

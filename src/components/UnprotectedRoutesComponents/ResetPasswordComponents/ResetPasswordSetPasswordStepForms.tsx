@@ -11,10 +11,12 @@ import {
   ResetPasswordTitleContent,
 } from "./styles";
 import { useEffect } from "react";
+import useDeviceType from "hooks/useDeviceType";
 
 export const ResetPasswordSetPasswordStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordSetPasswordFormProps) => {
+  const deviceType = useDeviceType();
   const { mutateAsync: resetPasswordSetNewPasswordFn, isSuccess } =
     useResetPasswordSetNewPasswordMutation();
   const formik = useFormik({
@@ -47,7 +49,11 @@ export const ResetPasswordSetPasswordStep1Form = ({
       <ResetPasswordTitleContent>
         <Typography
           color="primary800"
-          variant="Heading 30 Semi"
+          variant={
+            deviceType === "desktop"
+              ? "Heading 30 Semi"
+              : "Heading 24 Semi Bold"
+          }
           tag="h1">
           Utwórz nowe hasło
         </Typography>
@@ -95,7 +101,7 @@ export const ResetPasswordSetPasswordStep1Form = ({
 
       <Button
         width={"100%"}
-        size="XLarge">
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Utwórz hasło
       </Button>
     </form>
@@ -104,12 +110,17 @@ export const ResetPasswordSetPasswordStep1Form = ({
 
 export const ResetPasswordSetPasswordStep2Form = () => {
   const navigate = useNavigate();
+  const deviceType = useDeviceType();
   return (
     <form>
       <ResetPasswordTitleContent>
         <Typography
           color="primary800"
-          variant="Heading 30 Semi"
+          variant={
+            deviceType === "desktop"
+              ? "Heading 30 Semi"
+              : "Heading 24 Semi Bold"
+          }
           tag="h1">
           Hasło zresetowane pomyślnie
         </Typography>
@@ -126,7 +137,7 @@ export const ResetPasswordSetPasswordStep2Form = () => {
         onClick={() => navigate("/login")}
         type="button"
         isFullWidth
-        size="XLarge">
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Zaloguj się
       </Button>
     </form>

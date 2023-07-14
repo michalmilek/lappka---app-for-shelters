@@ -5,7 +5,7 @@ import {
   PaddingMarginSize,
 } from "../../../utils/styles/types/stylesTypes";
 import React from "react";
-import { ReusableButton } from "./styles";
+import { ReusableButton } from "./Button.styled";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

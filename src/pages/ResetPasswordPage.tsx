@@ -12,19 +12,19 @@ import {
   LeftSectionResetPassword,
   RightSectionResetPassword,
 } from "components/UnprotectedRoutesComponents/ResetPasswordComponents/styles";
-import useAbove500px from "hooks/useAbove500px";
 import { useParams } from "react-router-dom";
 import ResetPasswordSendEmailForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSendEmailForm";
 import ResetPasswordSetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSetPasswordForm";
+import useDeviceType from "hooks/useDeviceType";
 
 const ResetPasswordPage = () => {
-  const above500px = useAbove500px();
+  const deviceType = useDeviceType();
   const { token } = useParams();
   return (
     <StyledUnathorizedPage>
       <UnathorizedTopContent>
         <img
-          src={above500px ? LappkaLogo : LappkaMobileLogo}
+          src={deviceType === "desktop" ? LappkaLogo : LappkaMobileLogo}
           alt="logo"
         />
         <UnathorizedTopContentButtonContainer>

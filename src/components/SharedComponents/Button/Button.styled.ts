@@ -1,14 +1,7 @@
 import { getColor } from "../../../utils/styles/getStyle/getColor";
 import { css, styled } from "styled-components";
 import { ButtonProps } from "./Button";
-import { getBorderRadius } from "../../../utils/styles/getStyle/getBorderRadius";
 import { getShadow } from "../../../utils/styles/getStyle/getShadow";
-import {
-  getFontSize,
-  getFontWeight,
-  getLetterSpacing,
-  getLineHeight,
-} from "../../../utils/styles/getStyle/getFontStyle";
 
 //TOGGLE BUTTON
 //TOGGLE BUTTON
@@ -77,7 +70,7 @@ export const ReusableButton = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: ${getBorderRadius("8px")};
+  border-radius: 8px;
   width: ${(props) => (props.isFullWidth ? "100%" : "")};
 
   ${(props) =>
@@ -137,19 +130,19 @@ export const ReusableButton = styled.button<ButtonProps>`
   ${(props) =>
     props.size === "XLarge" &&
     css`
-      font-size: ${getFontSize(16)};
-      font-weight: ${getFontWeight(500)};
-      line-height: ${getLineHeight(24)};
-      letter-spacing: ${getLetterSpacing("-0.4%")};
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.4%;
       padding: 12px 18px;
     `}
 
   ${(props) =>
     props.size === "Large" &&
     css`
-      font-size: ${getFontSize(16)};
-      font-weight: ${getFontWeight(500)};
-      line-height: ${getLineHeight(24)};
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
       letter-spacing: -0.3%;
       padding: 8px 16px;
     `}
@@ -157,10 +150,10 @@ export const ReusableButton = styled.button<ButtonProps>`
   ${(props) =>
     props.size === "Medium" &&
     css`
-      font-size: ${getFontSize(14)};
-      font-weight: ${getFontWeight(500)};
-      line-height: ${getLineHeight(24)};
-      letter-spacing: ${getLetterSpacing("-0.3%")};
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.3%;
       padding: 4px 12px;
     `}
 `;

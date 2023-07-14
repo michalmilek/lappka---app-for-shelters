@@ -2,7 +2,7 @@ import React from "react";
 import Input from "components/SharedComponents/Inputs/Input";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { handleCurrentStep1Props } from "./RegisterForm";
+import { HandleStepProps } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
 import { ArrowRightIcon } from "components/SharedComponents/icons/icons";
 import {
@@ -10,12 +10,15 @@ import {
   StyledRegisterHorizontalInputContainerPostalCode,
   StyledRegisterInputStep1Container,
 } from "./styles";
+import useDeviceType from "hooks/useDeviceType";
+import { Shelter } from "apiCalls/auth/auth";
 
 const RegisterStep1Form = ({
-  handleFormValuesStep1,
+  handleFormValues,
   formValues,
   handleCurrentStep,
-}: handleCurrentStep1Props) => {
+}: HandleStepProps<Shelter>) => {
+  const deviceType = useDeviceType();
   const formik = useFormik({
     initialValues: {
       organizationName: "",
@@ -48,8 +51,10 @@ const RegisterStep1Form = ({
         .required('Pole "Numer telefonu" jest wymagane'),
     }),
     onSubmit: (values) => {
-      handleFormValuesStep1(values);
-      handleCurrentStep(2);
+      if (handleFormValues && handleCurrentStep) {
+        handleFormValues(values);
+        handleCurrentStep(2);
+      }
     },
   });
 
@@ -167,7 +172,7 @@ const RegisterStep1Form = ({
         icon={<ArrowRightIcon fill="#fff" />}
         iconSpacing="8px"
         iconPlace="right"
-        size="Large"
+        size={deviceType === "desktop" ? "Large" : "Medium"}
         isFullWidth
         variant="fill"
         type="submit">

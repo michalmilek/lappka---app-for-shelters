@@ -17,11 +17,11 @@ import {
   StyledLoginOptionsContainer,
   StyledLoginTitleContent,
 } from "./styles";
-import useAbove500px from "hooks/useAbove500px";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
+import useDeviceType from "hooks/useDeviceType";
 
 const LoginForm = () => {
-  const above500px = useAbove500px();
+  const deviceType = useDeviceType();
   const { mutateAsync: loginFn } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
@@ -47,21 +47,16 @@ const LoginForm = () => {
   return (
     <StyledLoginForm onSubmit={formik.handleSubmit}>
       <StyledLoginTitleContent>
-        {above500px ? (
-          <Typography
-            color="primary800"
-            variant="Heading 30 Semi"
-            tag="h1">
-            Zaloguj się
-          </Typography>
-        ) : (
-          <Typography
-            color="primary800"
-            variant="Heading 24 Semi Bold"
-            tag="h1">
-            Zaloguj się
-          </Typography>
-        )}
+        <Typography
+          color="primary800"
+          variant={
+            deviceType === "desktop"
+              ? "Heading 30 Semi"
+              : "Heading 24 Semi Bold"
+          }
+          tag="h1">
+          Zaloguj się
+        </Typography>
 
         <Typography
           tag="p"
@@ -127,7 +122,7 @@ const LoginForm = () => {
       </StyledLoginInputContainer>
 
       <Button
-        size="XLarge"
+        size={deviceType === "desktop" ? "XLarge" : "Large"}
         width="100%"
         variant="fill"
         type="submit">
@@ -143,7 +138,7 @@ const LoginForm = () => {
 
       <StyledLoginButtonContainer>
         <Button
-          size="XLarge"
+          size={deviceType === "desktop" ? "XLarge" : "Large"}
           icon={<GoogleLogoIcon />}
           isFullWidth
           iconPlace="left"
@@ -152,7 +147,7 @@ const LoginForm = () => {
           Google
         </Button>
         <Button
-          size="XLarge"
+          size={deviceType === "desktop" ? "XLarge" : "Large"}
           iconSpacing="15px"
           icon={<FacebookLogoIcon />}
           isFullWidth
