@@ -1,11 +1,14 @@
 import {
+  AnimalsCardsIcon,
   ArrowDownIcon,
   DashboardIcon,
   EmployeesIcon,
+  MessagesIcon,
+  VoluntaryIcon,
 } from "components/SharedComponents/icons/icons";
 import StyledNavLink from "components/SharedComponents/NavLink/SidebarNavLink";
 import Typography from "components/SharedComponents/Typography/Typography";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import LappkaLogo from "./LappkaLogo.png";
@@ -23,27 +26,24 @@ import {
   StyledUserMenuNameContainer,
 } from "./ProtectedSidebar.styled";
 import DummyAvatar from "./DummyAvatar.png";
+import { useClickOutside } from "./utils";
+import { protectedRoutesFirstList } from "router/router";
 
-function useClickOutside(
-  ref: React.RefObject<HTMLUListElement>,
-  callback: () => void
-) {
-  function handleClickOutside(event: MouseEvent) {
-    if (
-      ref.current &&
-      !ref.current.contains(event.target as HTMLUListElement)
-    ) {
-      callback();
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref, callback]);
-}
+const firstMenu = [
+  { to: "/dashboard", icon: <DashboardIcon />, title: "Dashboard" },
+  {
+    to: "/dashboard/messages",
+    icon: <MessagesIcon />,
+    title: "Wiadomości",
+    messagesNumber: 56,
+  },
+  {
+    to: "/dashboard/animal-cards",
+    icon: <AnimalsCardsIcon />,
+    title: "Karty zwierząt",
+  },
+  { to: "/dashboard/voluntary", icon: <VoluntaryIcon />, title: "Wolontariat" },
+];
 
 const ProtectedSidebar = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
@@ -60,26 +60,14 @@ const ProtectedSidebar = () => {
         />
 
         <StyledSidebarList>
-          <StyledNavLink
-            to={"/dashboard"}
-            icon={<DashboardIcon />}>
-            Dashboard
-          </StyledNavLink>
-          <StyledNavLink
-            to={"/dashboard/messages"}
-            icon={<DashboardIcon />}>
-            Wiadomości
-          </StyledNavLink>
-          <StyledNavLink
-            to={"/dashboard/animal-cards"}
-            icon={<DashboardIcon />}>
-            Karty zwierząt
-          </StyledNavLink>
-          <StyledNavLink
-            to={"/dashboard/animal-cards"}
-            icon={<DashboardIcon />}>
-            Wolontariat
-          </StyledNavLink>
+          {firstMenu.map((item, index) => (
+            <StyledNavLink
+              key={item.title + index}
+              to={item.to}
+              icon={item.icon}
+              text={item.title}
+            />
+          ))}
         </StyledSidebarList>
         <StyledOrganisationListTitleContainer>
           <Typography
@@ -90,10 +78,10 @@ const ProtectedSidebar = () => {
         </StyledOrganisationListTitleContainer>
         <StyledOrganisationListContainer>
           <StyledNavLink
+            text="Pracownicy"
             to={"/dashboard/organisation/employees"}
-            icon={<EmployeesIcon />}>
-            Pracownicy
-          </StyledNavLink>
+            icon={<EmployeesIcon />}
+          />
         </StyledOrganisationListContainer>
       </StyledSidebarTopMenu>
 

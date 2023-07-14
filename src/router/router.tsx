@@ -10,3 +10,12 @@ export const unprotectedRoutes = [
   { url: "/reset-password/:token", component: <ResetPasswordPage /> },
   { url: "/", component: <HomePage /> },
 ];
+
+
+
+export const protectedRoutesFirstList = [
+  { url: "/dashboard" },
+  { url: "/dashboard/messages" },
+  { url: "/dashboard/animal-cards" },
+  { url: "/dashboard/voluntary" },
+];

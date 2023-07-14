@@ -24,6 +24,8 @@ import { ReactComponent as DashboardIcon } from "./files/DashboardIcon.svg";
 import { ReactComponent as EmployeesIcon } from "./files/EmployeesIcon.svg";
 import { ReactComponent as MessagesIcon } from "./files/MessagesIcon.svg";
 import { ReactComponent as VoluntaryIcon } from "./files/VoluntaryIcon.svg";
+import { ReactComponent as BellIcon } from "./files/BellIcon.svg";
+import { ReactComponent as IdentificationIcon } from "./files/IdentificationIcon.svg";
 
 export {
   AlertIcon,
@@ -52,4 +54,6 @@ export {
   EmployeesIcon,
   MessagesIcon,
   VoluntaryIcon,
+  BellIcon,
+  IdentificationIcon,
 };
