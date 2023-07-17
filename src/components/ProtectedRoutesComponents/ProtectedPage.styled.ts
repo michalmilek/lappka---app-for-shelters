@@ -6,6 +6,21 @@ export const StyledProtectedPageContent = styled.div`
   width: calc(100% - 256px);
   height: 100vw;
   background: ${getColor("lightGray5")};
+
+  @media screen and (max-width: 1024px) {
+    width: calc(100% - 180px);
+    margin-left: 180px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 100px);
+    margin-left: 100px;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 
 export const StyledProtectedPageNavbar = styled.nav`

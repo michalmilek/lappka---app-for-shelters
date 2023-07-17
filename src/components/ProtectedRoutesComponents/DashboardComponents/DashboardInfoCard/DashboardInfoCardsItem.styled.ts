@@ -9,14 +9,14 @@ export const StyledDashboardInfoCard = styled.li`
   justify-content: flex-start;
   gap: 12px;
   align-items: center;
-  border-bottom: 8px;
   min-width: 272px;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1439px) {
+    min-width: 200px;
   }
 `;
 

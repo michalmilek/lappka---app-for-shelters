@@ -12,6 +12,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import LappkaLogo from "./LappkaLogo.png";
+import LappkaMobileLogo from "./LappkaMobileLogo.png";
 import {
   StyledOrganisationListContainer,
   StyledOrganisationListTitleContainer,
@@ -28,6 +29,8 @@ import {
 import DummyAvatar from "./DummyAvatar.png";
 import { useClickOutside } from "./utils";
 import { protectedRoutesFirstList } from "router/router";
+import useDeviceType from "hooks/useDeviceType";
+import { AnimatePresence, motion } from "framer-motion";
 
 const firstMenu = [
   { to: "/dashboard", icon: <DashboardIcon />, title: "Dashboard" },
@@ -48,14 +51,22 @@ const firstMenu = [
 const ProtectedSidebar = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const userMenuDropdownRef = useRef<HTMLUListElement>(null);
+  const deviceType = useDeviceType();
 
   useClickOutside(userMenuDropdownRef, () => setIsDropdownActive(false));
-
   return (
-    <StyledSidebar>
+    <StyledSidebar
+      as={motion.aside}
+      initial={{ x: -200, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -200, opacity: 0 }}>
       <StyledSidebarTopMenu>
         <StyledSidebarLogo
-          src={LappkaLogo}
+          src={
+            deviceType === "tablet" || deviceType === "mobile"
+              ? LappkaMobileLogo
+              : LappkaLogo
+          }
           alt={"Lappka Logo"}
         />
 
@@ -73,7 +84,7 @@ const ProtectedSidebar = () => {
           <Typography
             color="midGray3"
             variant="UI Small/UI Text 12 Semi Bold">
-            ORGANIZACJA
+            {deviceType === "laptop" || deviceType ? "ORGANIZACJA" : "ORG"}
           </Typography>
         </StyledOrganisationListTitleContainer>
         <StyledOrganisationListContainer>
@@ -90,21 +101,23 @@ const ProtectedSidebar = () => {
           src={DummyAvatar}
           alt="user avatar"
         />
-        <div>
-          <StyledUserMenuNameContainer>
+        {(deviceType === "laptop" || deviceType) && (
+          <div>
+            <StyledUserMenuNameContainer>
+              <Typography
+                color="black"
+                variant="UI/UI Text 14 Med">
+                Jan Kowalski
+              </Typography>
+              <StyledSidebarArrowDownIcon isDropdownActive={isDropdownActive} />
+            </StyledUserMenuNameContainer>
             <Typography
-              color="black"
-              variant="UI/UI Text 14 Med">
-              Jan Kowalski
+              color="primary600"
+              variant="UI Small/UI Text 12 Reg">
+              Psiaki Adapciaki z Psiej Wioski
             </Typography>
-            <StyledSidebarArrowDownIcon isDropdownActive={isDropdownActive} />
-          </StyledUserMenuNameContainer>
-          <Typography
-            color="primary600"
-            variant="UI Small/UI Text 12 Reg">
-            Psiaki Adapciaki z Psiej Wioski
-          </Typography>
-        </div>
+          </div>
+        )}
         {isDropdownActive && (
           <StyledUserMenuDropdown ref={userMenuDropdownRef}>
             <StyledUserMenuDropdownItem>

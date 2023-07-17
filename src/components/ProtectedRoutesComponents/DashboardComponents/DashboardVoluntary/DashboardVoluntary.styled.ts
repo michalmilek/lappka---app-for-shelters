@@ -11,6 +11,20 @@ export const DashboardVoluntaryContainer = styled.div`
   height: 351px;
 
   box-shadow: 0px 2px 4px 0px #5b687114;
+
+  @media screen and (max-width: 1439px) {
+    width: auto;
+    min-width: 200px;
+  }
+
+  @media screen and (max-width: 1439px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const DashboardVoluntaryTitleContainer = styled.div`
@@ -22,4 +36,14 @@ export const DashboardVoluntaryItemsContainer = styled.div`
   flex-direction: column;
   padding: 16px;
   gap: 8px;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+  }
 `;

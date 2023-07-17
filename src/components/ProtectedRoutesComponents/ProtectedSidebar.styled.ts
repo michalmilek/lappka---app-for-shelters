@@ -1,5 +1,4 @@
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
-import Typography from "components/SharedComponents/Typography/Typography";
 import { SVGProps } from "react";
 import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
@@ -21,6 +20,15 @@ export const StyledSidebar = styled.aside`
   width: 256px;
   height: 100%;
   border-right: 1px solid ${getColor("lightGray3")};
+  z-index: 1;
+
+  @media screen and (max-width: 1024px) {
+    width: 180px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100px;
+  }
 `;
 
 export const StyledSidebarTopMenu = styled.div`

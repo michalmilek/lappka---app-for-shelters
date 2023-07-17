@@ -11,6 +11,16 @@ export const DashboardNewestAnimalCardsContainer = styled.div`
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
+
+  @media screen and (max-width: 1350px) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const DashboardNewestAnimalCardsContainerHeader = styled.header`
@@ -26,4 +36,6 @@ export const DashboardNewestAnimalCardsContainerContent = styled.div`
   gap: 18px;
   justify-content: center;
   padding: 16px;
+  flex-wrap: wrap;
+  height: 100%;
 `;

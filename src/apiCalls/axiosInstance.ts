@@ -4,8 +4,8 @@ import axios, { AxiosError } from "axios";
 const isMockEndpointsEnabled = process.env.REACT_APP_mockEndpoints == "true";
 
 const baseURL = isMockEndpointsEnabled
-  ? "https://lappka.mobitouch.pl/identity"
-  : "http://localhost:3000";
+  ? process.env.REACT_APP_mockBaseURL
+  : process.env.REACT_APP_API_BASE_URL;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,

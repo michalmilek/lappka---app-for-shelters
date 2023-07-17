@@ -5,7 +5,6 @@ export const DashboardMostPopularAnimalsItemContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
   cursor: pointer;
   transition: all 0.3s ease;
   padding: 6px 13px 10px 12px;

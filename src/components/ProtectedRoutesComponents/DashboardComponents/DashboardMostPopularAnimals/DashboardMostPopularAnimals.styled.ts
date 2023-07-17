@@ -17,6 +17,18 @@ export const DashboardMostPopularAnimalsContainer = styled.div`
   @media screen and (max-width: 1440px) {
     width: 368px;
   }
+
+  @media screen and (max-width: 1350px) {
+    width: 100%;
+    min-width: auto;
+    height: auto;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    min-width: auto;
+    height: auto;
+  }
 `;
 
 export const DashboardMostPopularAnimalsHeadingContainer = styled.header`

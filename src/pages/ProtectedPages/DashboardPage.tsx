@@ -12,14 +12,23 @@ import {
   StyledProtectedPageNavbar,
 } from "components/ProtectedRoutesComponents/ProtectedPage.styled";
 import ProtectedSidebar from "components/ProtectedRoutesComponents/ProtectedSidebar";
-import { BellIcon } from "components/SharedComponents/icons/icons";
+import {
+  BellIcon,
+  HamburgerMenuIcon,
+} from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
-import React from "react";
+import { AnimatePresence } from "framer-motion";
+import useDeviceType from "hooks/useDeviceType";
+import React, { useState } from "react";
 
 const DashboardPage = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const deviceType = useDeviceType();
+
   return (
     <StyledDashboardMain>
-      <ProtectedSidebar />
+      {deviceType === "mobile" && isMobileMenuOpen && <ProtectedSidebar />}
+      {deviceType !== "mobile" && <ProtectedSidebar />}
       <StyledProtectedPageContent>
         <StyledProtectedPageNavbar>
           <Typography
@@ -28,6 +37,11 @@ const DashboardPage = () => {
             tag="h2">
             Dashboard
           </Typography>
+          {deviceType === "mobile" && (
+            <HamburgerMenuIcon
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            />
+          )}
           <BellIcon />
         </StyledProtectedPageNavbar>
         <StyledDashboardMainContent>

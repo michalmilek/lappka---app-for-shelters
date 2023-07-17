@@ -1,17 +1,14 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProtectedPage = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const refreshToken = localStorage.getItem("refreshToken");
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
 
-    if (!accessToken || !refreshToken) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  if (!accessToken || !refreshToken) {
+    navigate("/login");
+  }
 
   return <>{children}</>;
 };
