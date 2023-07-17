@@ -1,7 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import useDeviceType from "hooks/useDeviceType";
+import { Outlet, useNavigate } from "react-router-dom";
+import { StyledDashboardMain } from "./DashboardComponents/Dashboard.styled";
+import ProtectedSidebar from "./ProtectedSidebar";
+import { useContext } from "react";
+import { MobileMenuContext } from "context/MobileMenuContextProvider";
 
-const ProtectedPage = ({ children }: { children: React.ReactNode }) => {
+const ProtectedPage = () => {
   const navigate = useNavigate();
+  const deviceType = useDeviceType();
+  const { IsMobileMenuOpen, handleMobileMenu: _handleMobileMenu } =
+    useContext(MobileMenuContext);
 
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
@@ -10,7 +18,13 @@ const ProtectedPage = ({ children }: { children: React.ReactNode }) => {
     navigate("/login");
   }
 
-  return <>{children}</>;
+  return (
+    <StyledDashboardMain>
+      {deviceType === "mobile" && IsMobileMenuOpen && <ProtectedSidebar />}
+      {deviceType !== "mobile" && <ProtectedSidebar />}
+      <Outlet />
+    </StyledDashboardMain>
+  );
 };
 
 export default ProtectedPage;

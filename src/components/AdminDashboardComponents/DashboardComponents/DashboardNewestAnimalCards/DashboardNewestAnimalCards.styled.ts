@@ -34,7 +34,7 @@ export const DashboardNewestAnimalCardsContainerContent = styled.div`
   display: flex;
   align-items: center;
   gap: 18px;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 16px;
   flex-wrap: wrap;
   height: 100%;

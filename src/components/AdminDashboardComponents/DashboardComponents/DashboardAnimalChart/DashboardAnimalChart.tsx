@@ -14,8 +14,10 @@ import {
 } from "recharts";
 import { getColor } from "utils/styles/getStyle/getColor";
 import {
+  StyledArrowUpIcon,
   StyledDashboardChartContainer,
   StyledDashboardChartDropdownContainer,
+  StyledDashboardChartDropdownContainerList,
   StyledDashboardChartTitleContainer,
 } from "./DashboardAnimalChart.styled";
 import Button from "components/SharedComponents/Button/Button";
@@ -78,7 +80,12 @@ const data = [
 
 const DashboardAnimalChart = () => {
   const [activeMonth, setActiveMonth] = useState<null | number>(null);
-  const [isDropDownActive, setIsDropDownActive] = useState(true);
+  const [isDropDownActive, setIsDropDownActive] = useState(false);
+  const [timeSelect, setTimeSelect] = useState("Month");
+
+  const handleRadioChange = (value: string) => {
+    setTimeSelect(value);
+  };
 
   const formatYAxis = (tickItem: number) => {
     if (tickItem === 0) return tickItem.toString();
@@ -94,15 +101,38 @@ const DashboardAnimalChart = () => {
           Liczba wyświetleń podopiecznych
         </Typography>
         <Button
+          onClick={() => setIsDropDownActive((prev) => !prev)}
           size="Medium"
           variant="outline">
           <CalendarIcon />
           Rok
-          <ArrowUpIcon />
+          <StyledArrowUpIcon isDropDownActive={isDropDownActive} />
         </Button>
         {isDropDownActive && (
           <StyledDashboardChartDropdownContainer>
-            <CustomRadio color="primary500" />
+            <StyledDashboardChartDropdownContainerList>
+              <CustomRadio
+                name="filterDate"
+                value={"Week"}
+                label="Tydzień"
+                checked={timeSelect === "Week"}
+                handleRadioChange={handleRadioChange}
+              />
+              <CustomRadio
+                name="filterDate"
+                value={"Month"}
+                checked={timeSelect === "Month"}
+                label="Miesiąc"
+                handleRadioChange={handleRadioChange}
+              />
+              <CustomRadio
+                name="filterDate"
+                value={"Year"}
+                label="Rok"
+                checked={timeSelect === "Year"}
+                handleRadioChange={handleRadioChange}
+              />
+            </StyledDashboardChartDropdownContainerList>
           </StyledDashboardChartDropdownContainer>
         )}
       </StyledDashboardChartTitleContainer>

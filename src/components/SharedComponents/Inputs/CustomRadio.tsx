@@ -1,67 +1,70 @@
-import React, { useState, useEffect } from "react";
-import { Color } from "utils/styles/types/stylesTypes";
+import React from "react";
 import Typography from "../Typography/Typography";
 import { styled } from "styled-components";
 import { RadioMarkIcon } from "../icons/icons";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface RadioInterface extends React.InputHTMLAttributes<HTMLInputElement> {
-  color: Color;
   label?: string;
+  handleRadioChange?: (value: string) => void;
 }
 
-interface RadiomarkProps {
-  color: Color;
-  checked: boolean;
-}
-
-export const RadioWrapper = styled.label`
+export const RadioWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 4px 0;
+  gap: 8px;
   cursor: pointer;
   width: 100%;
+  z-index: 10;
 `;
 
-export const Radiomark = styled.div<RadiomarkProps>`
+export const Radiomark = styled.div<RadioInterface>`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid ${getColor("darkGray4")};
+  border: 1px solid ${getColor("midGray5")};
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 8px;
   transition: all 0.3s ease-in-out;
-
-  ${({ checked, color }) =>
-    checked &&
-    `
-      border: 2px solid ${getColor(color)};
-    `}
 `;
 
 const CustomRadio: React.FC<RadioInterface> = ({
-  color,
-  checked = false,
+  checked,
   label,
+  handleRadioChange,
+  value,
   ...rest
 }) => {
-  const [isChecked, setChecked] = useState<boolean>(checked);
-
-  const handleCheck = () => {
-    setChecked(true);
-  };
-
   return (
-    <RadioWrapper onClick={handleCheck}>
+    <RadioWrapper
+      onClick={() => {
+        if (typeof value === "string" && handleRadioChange)
+          handleRadioChange(value);
+      }}>
       <Radiomark
-        color={color}
-        checked={isChecked}
+        checked={checked}
         {...rest}>
-        {isChecked && <RadioMarkIcon />}
+        {checked && <RadioMarkIcon />}
       </Radiomark>
+      <input
+        readOnly
+        checked={checked}
+        onClick={() => {
+          if (typeof value === "string" && handleRadioChange)
+            handleRadioChange(value);
+        }}
+        type="radio"
+        {...rest}
+        hidden
+      />
       {label && (
         <Typography
+          tag="label"
           color="darkGray2"
           variant="UI/UI Text 14 Reg">
           {label}

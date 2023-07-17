@@ -1,4 +1,5 @@
-import { styled } from "styled-components";
+import { ArrowUpIcon } from "components/SharedComponents/icons/icons";
+import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 export const StyledDashboardChartContainer = styled.div`
@@ -33,20 +34,43 @@ export const StyledDashboardChartTitleContainer = styled.div`
   position: relative;
 `;
 
-export const StyledDashboardChartDropdownContainer = styled.ul`
+export const StyledDashboardChartDropdownContainer = styled.div`
+  z-index: 5;
   position: absolute;
   top: 100%;
-  right: 0;
-  list-style-type: none;
+  right: 2%;
   padding: 8px 0;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
   border-radius: 6px;
   background: ${getColor("white")};
   border: 1px solid ${getColor("lightGray5")};
+  width: 181px;
 
   box-shadow: 0px 12px 24px 0px #5b68713d;
 
   box-shadow: 0px 0px 1px 0px #1a202452;
+`;
+
+export const StyledDashboardChartDropdownContainerList = styled.ul`
+  z-index: 6;
+  list-style-type: none;
+  width: 100%;
+  padding: 4px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+interface ArrowUpIconInterface extends React.SVGProps<SVGSVGElement> {
+  isDropDownActive: boolean;
+}
+
+export const StyledArrowUpIcon = styled(ArrowUpIcon)<ArrowUpIconInterface>`
+  transition: all 0.3s ease;
+
+  ${({ isDropDownActive }) =>
+    isDropDownActive &&
+    css`
+      transform: rotate(180deg);
+    `}
 `;
