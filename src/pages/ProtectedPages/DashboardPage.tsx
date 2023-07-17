@@ -1,12 +1,11 @@
-<<<<<<< Updated upstream
-import ProtectedSidebar from "components/ProtectedPageComponents/ProtectedSidebar";
-=======
 import {
-  StyledDashboardInfoCardsContainer,
+  StyledDashboardMain,
   StyledDashboardMainContent,
 } from "components/ProtectedRoutesComponents/DashboardComponents/Dashboard.styled";
 import DashboardAnimalChart from "components/ProtectedRoutesComponents/DashboardComponents/DashboardAnimalChart/DashboardAnimalChart";
-import DashboardInfoCard from "components/ProtectedRoutesComponents/DashboardComponents/DashboardInfoCard/DashboardInfoCard";
+import DashboardInfoCards from "components/ProtectedRoutesComponents/DashboardComponents/DashboardInfoCard/DashboardInfoCards";
+import DashboardMostPopularAnimals from "components/ProtectedRoutesComponents/DashboardComponents/DashboardMostPopularAnimals/DashboardMostPopularAnimals";
+import DashboardNewestAnimalCards from "components/ProtectedRoutesComponents/DashboardComponents/DashboardNewestAnimalCards/DashboardNewestAnimalCards";
 import DashboardVoluntary from "components/ProtectedRoutesComponents/DashboardComponents/DashboardVoluntary/DashboardVoluntary";
 import {
   StyledProtectedPageContent,
@@ -15,12 +14,11 @@ import {
 import ProtectedSidebar from "components/ProtectedRoutesComponents/ProtectedSidebar";
 import { BellIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
->>>>>>> Stashed changes
 import React from "react";
 
 const DashboardPage = () => {
   return (
-    <main>
+    <StyledDashboardMain>
       <ProtectedSidebar />
       <StyledProtectedPageContent>
         <StyledProtectedPageNavbar>
@@ -33,17 +31,14 @@ const DashboardPage = () => {
           <BellIcon />
         </StyledProtectedPageNavbar>
         <StyledDashboardMainContent>
-          <StyledDashboardInfoCardsContainer>
-            <DashboardInfoCard />
-            <DashboardInfoCard />
-            <DashboardInfoCard />
-            <DashboardInfoCard />
-          </StyledDashboardInfoCardsContainer>
+          <DashboardInfoCards />
           <DashboardAnimalChart />
           <DashboardVoluntary />
+          <DashboardNewestAnimalCards />
+          <DashboardMostPopularAnimals />
         </StyledDashboardMainContent>
       </StyledProtectedPageContent>
-    </main>
+    </StyledDashboardMain>
   );
 };
 

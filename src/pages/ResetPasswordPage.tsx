@@ -2,7 +2,7 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/styles";
+} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
 import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
 import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
@@ -11,20 +11,20 @@ import ResetPasswordBGPhoto from "components/UnprotectedRoutesComponents/ResetPa
 import {
   LeftSectionResetPassword,
   RightSectionResetPassword,
-} from "components/UnprotectedRoutesComponents/ResetPasswordComponents/styles";
-import useAbove500px from "hooks/useAbove500px";
+} from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPassword.styled";
 import { useParams } from "react-router-dom";
 import ResetPasswordSendEmailForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSendEmailForm";
 import ResetPasswordSetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSetPasswordForm";
+import useDeviceType from "hooks/useDeviceType";
 
 const ResetPasswordPage = () => {
-  const above500px = useAbove500px();
+  const deviceType = useDeviceType();
   const { token } = useParams();
   return (
     <StyledUnathorizedPage>
       <UnathorizedTopContent>
         <img
-          src={above500px ? LappkaLogo : LappkaMobileLogo}
+          src={deviceType === "desktop" ? LappkaLogo : LappkaMobileLogo}
           alt="logo"
         />
         <UnathorizedTopContentButtonContainer>

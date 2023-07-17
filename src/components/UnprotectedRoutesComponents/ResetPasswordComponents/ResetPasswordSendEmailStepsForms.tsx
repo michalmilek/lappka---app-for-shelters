@@ -4,20 +4,19 @@ import * as Yup from "yup";
 import {
   ResetPasswordInputContainer,
   ResetPasswordTitleContent,
-} from "./styles";
+} from "./ResetPassword.styled";
 import Typography from "components/SharedComponents/Typography/Typography";
 import Input from "components/SharedComponents/Inputs/Input";
 import Button from "components/SharedComponents/Button/Button";
 import { useNavigate } from "react-router-dom";
-import {
-  useRegisterShelterMutation,
-  useResetPasswordSendEmailMutation,
-} from "apiCalls/auth/authHooks";
+import { useResetPasswordSendEmailMutation } from "apiCalls/auth/authHooks";
 import { useEffect } from "react";
+import useDeviceType from "hooks/useDeviceType";
 
 export const ResetPasswordSendEmailStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordFormProps) => {
+  const deviceType = useDeviceType();
   const { mutateAsync: resetPasswordSendEmailFn, isSuccess } =
     useResetPasswordSendEmailMutation();
   const formik = useFormik({
@@ -44,7 +43,11 @@ export const ResetPasswordSendEmailStep1Form = ({
       <ResetPasswordTitleContent>
         <Typography
           color="primary800"
-          variant="Heading 30 Semi"
+          variant={
+            deviceType === "desktop"
+              ? "Heading 30 Semi"
+              : "Heading 24 Semi Bold"
+          }
           tag="h1">
           Zapomniałeś hasła?
         </Typography>
@@ -77,7 +80,7 @@ export const ResetPasswordSendEmailStep1Form = ({
 
       <Button
         width={"100%"}
-        size="XLarge">
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Resetuj hasło
       </Button>
     </form>
@@ -86,13 +89,18 @@ export const ResetPasswordSendEmailStep1Form = ({
 
 export const ResetPasswordSendEmailStep2Form = () => {
   const navigate = useNavigate();
+  const deviceType = useDeviceType();
 
   return (
     <form onSubmit={() => navigate("/login")}>
       <ResetPasswordTitleContent>
         <Typography
           color="primary800"
-          variant="Heading 30 Semi"
+          variant={
+            deviceType === "desktop"
+              ? "Heading 30 Semi"
+              : "Heading 24 Semi Bold"
+          }
           tag="h1">
           Dziękujemy
         </Typography>
@@ -107,7 +115,7 @@ export const ResetPasswordSendEmailStep2Form = () => {
       <Button
         type="submit"
         isFullWidth
-        size="XLarge">
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Zamknij
       </Button>
     </form>

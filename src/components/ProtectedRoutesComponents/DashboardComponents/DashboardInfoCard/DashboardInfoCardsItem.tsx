@@ -5,9 +5,9 @@ import {
   StyledDashboardInfoCard,
   StyledDashboardInfoCardIconContainer,
   StyledDashboardInfoCardTextContainer,
-} from "./DashboardInfoCard.styled";
+} from "./DashboardInfoCardsItem.styled";
 
-const DashboardInfoCard = () => {
+const DashboardInfoCardsItem = () => {
   return (
     <StyledDashboardInfoCard>
       <StyledDashboardInfoCardIconContainer>
@@ -24,11 +24,11 @@ const DashboardInfoCard = () => {
           tag="h3"
           variant="Heading 30 Semi"
           color="darkGray2">
-          Karty zwierząt
+          361
         </Typography>
       </StyledDashboardInfoCardTextContainer>
     </StyledDashboardInfoCard>
   );
 };
 
-export default DashboardInfoCard;
+export default DashboardInfoCardsItem;

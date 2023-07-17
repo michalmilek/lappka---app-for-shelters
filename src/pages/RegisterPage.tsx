@@ -9,27 +9,27 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/styles";
+} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
 import RegisterForm from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterForm";
 import {
   LeftSectionRegister,
   RightRegisterSection,
-} from "components/UnprotectedRoutesComponents/RegisterComponents/styles";
-import useAbove500px from "hooks/useAbove500px";
+} from "components/UnprotectedRoutesComponents/RegisterComponents/Register.styled";
+import useDeviceType from "hooks/useDeviceType";
 
 const RegisterPage = () => {
-  const above500px = useAbove500px();
+  const deviceType = useDeviceType();
   return (
     <StyledUnathorizedPage>
       <UnathorizedTopContent>
         <img
-          src={above500px ? LappkaLogo : LappkaMobileLogo}
+          src={deviceType === "desktop" ? LappkaLogo : LappkaMobileLogo}
           alt="logo"
         />
         <UnathorizedTopContentButtonContainer>
           <AnchorLink to={"/login"}>
             <Button
-              size={above500px ? "Large" : "Medium"}
+              size={deviceType === "desktop" ? "Large" : "Medium"}
               variant="outline">
               Zaloguj się
             </Button>

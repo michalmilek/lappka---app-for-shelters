@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import React from "react";
-import { StyledUnathorizedSection } from "../styles";
+import { StyledUnathorizedSection } from "../UnprotectedRoutes.styled";
 import {
   ResetPasswordSetPasswordStep1Form,
   ResetPasswordSetPasswordStep2Form,

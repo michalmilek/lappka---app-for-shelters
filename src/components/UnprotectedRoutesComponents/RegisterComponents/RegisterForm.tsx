@@ -1,42 +1,27 @@
 import { useEffect } from "react";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { StyledUnathorizedSection } from "components/UnprotectedRoutesComponents/styles";
+import { StyledUnathorizedSection } from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
 import StepsBar from "components/SharedComponents/StepBar/Stepbar";
 import { useState } from "react";
 import RegisterStep2Form from "./RegisterStep2Form";
 import RegisterStep1Form from "./RegisterStep1Form";
 import RegisterStep3Form from "./RegisterStep3Form";
-import { StyledRegisterTitleContent } from "./styles";
-import useAbove500px from "hooks/useAbove500px";
+import { StyledRegisterTitleContent } from "./Register.styled";
 import { Shelter, ShelterRegisterRequest, User } from "apiCalls/auth/auth";
-import { useRegisterShelterMutation } from "apiCalls/auth/authHooks";
+import useDeviceType from "hooks/useDeviceType";
 
-export interface handleCurrentStep1Props {
-  handleCurrentStep: (step: number) => void;
-  handleFormValuesStep1: (values: Shelter) => void;
+export interface HandleStepProps<T> {
+  handleCurrentStep?: (step: number) => void;
+  handleFormValues?: (values: T) => void;
   formValues: Partial<ShelterRegisterRequest> | null;
-}
-
-export interface handleCurrentStep2Props {
-  handleCurrentStep: (step: number) => void;
-  handleFormValuesStep2: (values: User) => void;
-  formValues: Partial<ShelterRegisterRequest> | null;
-}
-export interface handleCurrentStep3Props {
-  formValues: Partial<ShelterRegisterRequest> | null;
-}
-
-export interface handleCompleteProps {
-  handleCurrentStep: (step: number) => void;
-  handleComplete: (value: boolean) => void;
 }
 
 const steps = ["Dane organizacji", "Dane użytkownika", "Podsumowanie"];
 
 const RegisterForm = () => {
-  const above500px = useAbove500px();
+  const deviceType = useDeviceType();
   const [currentStep, setCurrentStep] = useState(1);
-  const [complete, setComplete] = useState(false);
+  const [complete, _setComplete] = useState(false);
   const [formValues, setFormValues] =
     useState<Partial<ShelterRegisterRequest> | null>(null);
 
@@ -48,10 +33,6 @@ const RegisterForm = () => {
 
   const handleCurrentStep = (step: number) => {
     setCurrentStep(step);
-  };
-
-  const handleComplete = (value: boolean) => {
-    setComplete(value);
   };
 
   const handleFormValuesStep1 = (values: Shelter) => {
@@ -72,13 +53,12 @@ const RegisterForm = () => {
     });
   };
 
-  
   const renderFormContent = () => {
     switch (currentStep) {
       case 1:
         return (
           <RegisterStep1Form
-            handleFormValuesStep1={handleFormValuesStep1}
+            handleFormValues={handleFormValuesStep1}
             formValues={formValues}
             handleCurrentStep={handleCurrentStep}
           />
@@ -86,13 +66,13 @@ const RegisterForm = () => {
       case 2:
         return (
           <RegisterStep2Form
-            handleFormValuesStep2={handleFormValuesStep2}
+            handleFormValues={handleFormValuesStep2}
             formValues={formValues}
             handleCurrentStep={handleCurrentStep}
           />
         );
       case 3:
-        return <RegisterStep3Form formValues={formValues} />;
+        return <RegisterStep3Form />;
       default:
         return null;
     }
@@ -101,10 +81,15 @@ const RegisterForm = () => {
   return (
     <StyledUnathorizedSection>
       {currentStep !== 3 ? (
-        <StyledRegisterTitleContent mb={above500px ? "32px" : "24px"}>
+        <StyledRegisterTitleContent
+          mb={deviceType === "desktop" ? "32px" : "24px"}>
           <Typography
             color="primary800"
-            variant={above500px ? "Heading 30 Semi" : "Heading 24 Semi Bold"}
+            variant={
+              deviceType === "desktop"
+                ? "Heading 30 Semi"
+                : "Heading 24 Semi Bold"
+            }
             tag="h1">
             Zarejestruj schronisko
           </Typography>
@@ -126,7 +111,11 @@ const RegisterForm = () => {
         <StyledRegisterTitleContent mb="24px">
           <Typography
             color="primary800"
-            variant={above500px ? "Heading 30 Semi" : "Heading 24 Semi Bold"}
+            variant={
+              deviceType === "desktop"
+                ? "Heading 30 Semi"
+                : "Heading 24 Semi Bold"
+            }
             tag="h1">
             Zarejestruj schronisko
           </Typography>
@@ -146,8 +135,6 @@ const RegisterForm = () => {
         <StepsBar
           complete={complete}
           currentStep={currentStep}
-          handleComplete={handleComplete}
-          handleCurrentStep={handleCurrentStep}
           steps={steps}
         />
       ) : null}

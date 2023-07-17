@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 export const StyledDashboardInfoCard = styled.li`
-  width: 25%;
   height: 82px;
   display: flex;
   background: ${getColor("white")};
@@ -11,10 +10,14 @@ export const StyledDashboardInfoCard = styled.li`
   gap: 12px;
   align-items: center;
   border-bottom: 8px;
+  min-width: 272px;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
+
+  @media screen and (max-width: 1024px) {
+  }
 `;
 
 export const StyledDashboardInfoCardIconContainer = styled.div`

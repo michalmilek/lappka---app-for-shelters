@@ -16,13 +16,16 @@ import {
   StyledLoginInputContainer,
   StyledLoginOptionsContainer,
   StyledLoginTitleContent,
-} from "./styles";
-import useAbove500px from "hooks/useAbove500px";
+} from "./Login.styled";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
+import useDeviceType from "hooks/useDeviceType";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const LoginForm = () => {
-  const above500px = useAbove500px();
-  const { mutateAsync: loginFn } = useLoginMutation();
+  const deviceType = useDeviceType();
+  const navigate = useNavigate();
+  const { mutateAsync: loginFn, isSuccess } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -44,24 +47,26 @@ const LoginForm = () => {
     },
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("rememberMe", formik.values.rememberMe.toString());
+      navigate("/");
+    }
+  });
+
   return (
     <StyledLoginForm onSubmit={formik.handleSubmit}>
       <StyledLoginTitleContent>
-        {above500px ? (
-          <Typography
-            color="primary800"
-            variant="Heading 30 Semi"
-            tag="h1">
-            Zaloguj się
-          </Typography>
-        ) : (
-          <Typography
-            color="primary800"
-            variant="Heading 24 Semi Bold"
-            tag="h1">
-            Zaloguj się
-          </Typography>
-        )}
+        <Typography
+          color="primary800"
+          variant={
+            deviceType === "desktop"
+              ? "Heading 30 Semi"
+              : "Heading 24 Semi Bold"
+          }
+          tag="h1">
+          Zaloguj się
+        </Typography>
 
         <Typography
           tag="p"
@@ -127,7 +132,7 @@ const LoginForm = () => {
       </StyledLoginInputContainer>
 
       <Button
-        size="XLarge"
+        size={deviceType === "desktop" ? "XLarge" : "Large"}
         width="100%"
         variant="fill"
         type="submit">
@@ -143,7 +148,7 @@ const LoginForm = () => {
 
       <StyledLoginButtonContainer>
         <Button
-          size="XLarge"
+          size={deviceType === "desktop" ? "XLarge" : "Large"}
           icon={<GoogleLogoIcon />}
           isFullWidth
           iconPlace="left"
@@ -152,7 +157,7 @@ const LoginForm = () => {
           Google
         </Button>
         <Button
-          size="XLarge"
+          size={deviceType === "desktop" ? "XLarge" : "Large"}
           iconSpacing="15px"
           icon={<FacebookLogoIcon />}
           isFullWidth

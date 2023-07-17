@@ -87,10 +87,10 @@ const DashboardAnimalChart = () => {
         </Typography>
       </StyledDashboardChartTitleContainer>
       <ResponsiveContainer
-        width="100%"
-        height={300}>
+        width={"100%"}
+        height={350}>
         <BarChart
-          width={500}
+          width={150}
           height={150}
           data={data}
           margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>

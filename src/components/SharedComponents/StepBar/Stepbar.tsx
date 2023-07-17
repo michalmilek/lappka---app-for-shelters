@@ -1,28 +1,20 @@
 import React from "react";
 import Typography from "../Typography/Typography";
-import getStepStatus from "./getStepStatus";
+import getStepStatus from "./utils";
 import {
   StepBarContainer,
   StepItem,
   StepNumberContainer,
   StepNumberInner,
-} from "./styles";
+} from "./Stepbar.styled";
 
 interface StepBarProps {
   steps: string[];
   currentStep: number;
   complete: boolean;
-  handleCurrentStep: (step: number) => void;
-  handleComplete: (value: boolean) => void;
 }
 
-const StepBar: React.FC<StepBarProps> = ({
-  steps,
-  currentStep,
-  complete,
-  handleCurrentStep,
-  handleComplete,
-}) => {
+const StepBar: React.FC<StepBarProps> = ({ steps, currentStep, complete }) => {
   return (
     <StepBarContainer>
       {steps.map((step, index) => {

@@ -1,22 +1,24 @@
 import Input from "components/SharedComponents/Inputs/Input";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { handleCurrentStep2Props } from "./RegisterForm";
+import { HandleStepProps } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
 import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
 import {
   StyledRegisterButtonContainer,
   StyledRegisterInputContainer,
-} from "./styles";
+} from "./Register.styled";
 import { useEffect } from "react";
 import { useRegisterShelterMutation } from "apiCalls/auth/authHooks";
-import { ShelterRegisterRequest } from "apiCalls/auth/auth";
+import { ShelterRegisterRequest, User } from "apiCalls/auth/auth";
+import useDeviceType from "hooks/useDeviceType";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
-  handleFormValuesStep2,
+  handleFormValues,
   formValues,
-}: handleCurrentStep2Props) => {
+}: HandleStepProps<User>) => {
+  const deviceType = useDeviceType();
   const { mutateAsync: registerFn, isSuccess } = useRegisterShelterMutation();
   const formik = useFormik({
     initialValues: {
@@ -54,7 +56,7 @@ const RegisterStep2Form = ({
         .required("Pole wymagane"),
     }),
     onSubmit: (values) => {
-      handleFormValuesStep2(values);
+      if (handleFormValues) handleFormValues(values);
     },
   });
 
@@ -67,7 +69,7 @@ const RegisterStep2Form = ({
 
   useEffect(() => {
     if (isSuccess) {
-      handleCurrentStep(3);
+      if (handleCurrentStep) handleCurrentStep(3);
     }
   }, [isSuccess, handleCurrentStep]);
 
@@ -152,7 +154,7 @@ const RegisterStep2Form = ({
           variant="outline"
           type="button"
           onClick={() => {
-            handleCurrentStep(1);
+            if (handleCurrentStep) handleCurrentStep(1);
           }}>
           Powrót
         </Button>
@@ -160,7 +162,7 @@ const RegisterStep2Form = ({
           width="70%"
           iconSpacing="8px"
           iconPlace="right"
-          size="XLarge"
+          size={deviceType === "desktop" ? "XLarge" : "Large"}
           variant="fill"
           type="submit">
           Zarejestruj się

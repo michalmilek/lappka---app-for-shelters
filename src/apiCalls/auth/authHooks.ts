@@ -8,8 +8,6 @@ import {
 } from "./auth";
 
 export const useLoginMutation = () => {
-  const navigate = useNavigate();
-
   const loginMutation = useMutation(login, {
     onSuccess: (data) => {
       console.log(data);
@@ -17,7 +15,6 @@ export const useLoginMutation = () => {
         const { accessToken, refreshToken } = data;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        navigate("/");
       }
     },
     onError: (error) => {
