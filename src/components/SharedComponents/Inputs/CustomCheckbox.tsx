@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CheckboxMarkIcon } from "../icons/icons";
 import { Color } from "utils/styles/types/stylesTypes";
 import Typography from "../Typography/Typography";
@@ -17,14 +17,26 @@ const CustomCheckbox: React.FC<CheckboxInterface> = ({
   name,
   ...rest
 }) => {
+  const [isChecked, setChecked] = useState<boolean>(true);
+
+  const handleCheck = () => {
+    setChecked((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("rememberMe", isChecked.toString());
+  }, [isChecked]);
+
   return (
-    <CheckboxWrapper htmlFor={name}>
+    <CheckboxWrapper
+      htmlFor={name}
+      onClick={handleCheck}>
       <Checkmark
         color={color}
-        checked={checked}
+        checked={isChecked}
         name={name}
         {...rest}>
-        {checked && <CheckboxMarkIcon />}
+        {isChecked && <CheckboxMarkIcon />}
       </Checkmark>
       {label && <Typography variant="UI/UI Text 14 Reg">{label}</Typography>}
     </CheckboxWrapper>

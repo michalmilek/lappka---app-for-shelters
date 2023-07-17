@@ -15,8 +15,15 @@ import {
 import { getColor } from "utils/styles/getStyle/getColor";
 import {
   StyledDashboardChartContainer,
+  StyledDashboardChartDropdownContainer,
   StyledDashboardChartTitleContainer,
 } from "./DashboardAnimalChart.styled";
+import Button from "components/SharedComponents/Button/Button";
+import {
+  ArrowUpIcon,
+  CalendarIcon,
+} from "components/SharedComponents/icons/icons";
+import CustomRadio from "components/SharedComponents/Inputs/CustomRadio";
 
 const data = [
   {
@@ -71,6 +78,7 @@ const data = [
 
 const DashboardAnimalChart = () => {
   const [activeMonth, setActiveMonth] = useState<null | number>(null);
+  const [isDropDownActive, setIsDropDownActive] = useState(true);
 
   const formatYAxis = (tickItem: number) => {
     if (tickItem === 0) return tickItem.toString();
@@ -85,6 +93,18 @@ const DashboardAnimalChart = () => {
         <Typography variant="UI/UI Text 16 Semi Bold">
           Liczba wyświetleń podopiecznych
         </Typography>
+        <Button
+          size="Medium"
+          variant="outline">
+          <CalendarIcon />
+          Rok
+          <ArrowUpIcon />
+        </Button>
+        {isDropDownActive && (
+          <StyledDashboardChartDropdownContainer>
+            <CustomRadio color="primary500" />
+          </StyledDashboardChartDropdownContainer>
+        )}
       </StyledDashboardChartTitleContainer>
       <ResponsiveContainer
         width={"100%"}

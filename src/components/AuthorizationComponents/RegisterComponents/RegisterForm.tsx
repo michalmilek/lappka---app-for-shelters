@@ -1,19 +1,19 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { StyledUnathorizedSection } from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
+import { StyledUnathorizedSection } from "components/AuthorizationComponents/UnprotectedRoutes.styled";
 import StepsBar from "components/SharedComponents/StepBar/Stepbar";
 import { useState } from "react";
 import RegisterStep2Form from "./RegisterStep2Form";
 import RegisterStep1Form from "./RegisterStep1Form";
 import RegisterStep3Form from "./RegisterStep3Form";
 import { StyledRegisterTitleContent } from "./Register.styled";
-import { Shelter, ShelterRegisterRequest, User } from "apiCalls/auth/auth";
+import { ShelterRegisterRequest } from "apiCalls/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 
-export interface HandleStepProps<T> {
+export interface HandleStepProps {
   handleCurrentStep?: (step: number) => void;
-  handleFormValues?: (values: T) => void;
   formValues: Partial<ShelterRegisterRequest> | null;
+  handleFormValues?: (values: Partial<ShelterRegisterRequest>) => void;
 }
 
 const steps = ["Dane organizacji", "Dane użytkownika", "Podsumowanie"];
@@ -35,30 +35,22 @@ const RegisterForm = () => {
     setCurrentStep(step);
   };
 
-  const handleFormValuesStep1 = (values: Shelter) => {
-    setFormValues({
-      ...formValues,
-      shelter: {
+  const handleFormValues = useCallback(
+    (values: Partial<ShelterRegisterRequest>) => {
+      setFormValues({
+        ...formValues,
         ...values,
-      },
-    });
-  };
-
-  const handleFormValuesStep2 = (values: User) => {
-    setFormValues({
-      ...formValues,
-      user: {
-        ...values,
-      },
-    });
-  };
+      });
+    },
+    [formValues]
+  );
 
   const renderFormContent = () => {
     switch (currentStep) {
       case 1:
         return (
           <RegisterStep1Form
-            handleFormValues={handleFormValuesStep1}
+            handleFormValues={handleFormValues}
             formValues={formValues}
             handleCurrentStep={handleCurrentStep}
           />
@@ -66,7 +58,7 @@ const RegisterForm = () => {
       case 2:
         return (
           <RegisterStep2Form
-            handleFormValues={handleFormValuesStep2}
+            handleFormValues={handleFormValues}
             formValues={formValues}
             handleCurrentStep={handleCurrentStep}
           />

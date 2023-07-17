@@ -30,4 +30,23 @@ export const StyledDashboardChartTitleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
+  position: relative;
+`;
+
+export const StyledDashboardChartDropdownContainer = styled.ul`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  list-style-type: none;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-radius: 6px;
+  background: ${getColor("white")};
+  border: 1px solid ${getColor("lightGray5")};
+
+  box-shadow: 0px 12px 24px 0px #5b68713d;
+
+  box-shadow: 0px 0px 1px 0px #1a202452;
 `;

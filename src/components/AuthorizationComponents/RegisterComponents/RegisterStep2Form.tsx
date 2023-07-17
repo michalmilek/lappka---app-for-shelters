@@ -10,14 +10,14 @@ import {
 } from "./Register.styled";
 import { useEffect } from "react";
 import { useRegisterShelterMutation } from "apiCalls/auth/authHooks";
-import { ShelterRegisterRequest, User } from "apiCalls/auth/auth";
+import { ShelterRegisterRequest } from "apiCalls/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
   handleFormValues,
   formValues,
-}: HandleStepProps<User>) => {
+}: HandleStepProps) => {
   const deviceType = useDeviceType();
   const { mutateAsync: registerFn, isSuccess } = useRegisterShelterMutation();
   const formik = useFormik({
@@ -56,7 +56,7 @@ const RegisterStep2Form = ({
         .required("Pole wymagane"),
     }),
     onSubmit: (values) => {
-      if (handleFormValues) handleFormValues(values);
+      if (handleFormValues) handleFormValues({ user: values });
     },
   });
 
@@ -119,7 +119,7 @@ const RegisterStep2Form = ({
           inputSize={"Large"}
           label="Hasło"
           name="password"
-          type="password"
+          type="text"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -133,7 +133,7 @@ const RegisterStep2Form = ({
           inputSize={"Large"}
           label="Powtórz hasło"
           name="confirmPassword"
-          type="password"
+          type="text"
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

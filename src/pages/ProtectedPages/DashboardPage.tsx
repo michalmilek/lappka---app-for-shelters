@@ -1,17 +1,17 @@
 import {
   StyledDashboardMain,
   StyledDashboardMainContent,
-} from "components/ProtectedRoutesComponents/DashboardComponents/Dashboard.styled";
-import DashboardAnimalChart from "components/ProtectedRoutesComponents/DashboardComponents/DashboardAnimalChart/DashboardAnimalChart";
-import DashboardInfoCards from "components/ProtectedRoutesComponents/DashboardComponents/DashboardInfoCard/DashboardInfoCards";
-import DashboardMostPopularAnimals from "components/ProtectedRoutesComponents/DashboardComponents/DashboardMostPopularAnimals/DashboardMostPopularAnimals";
-import DashboardNewestAnimalCards from "components/ProtectedRoutesComponents/DashboardComponents/DashboardNewestAnimalCards/DashboardNewestAnimalCards";
-import DashboardVoluntary from "components/ProtectedRoutesComponents/DashboardComponents/DashboardVoluntary/DashboardVoluntary";
+} from "components/AdminDashboardComponents/DashboardComponents/Dashboard.styled";
+import DashboardAnimalChart from "components/AdminDashboardComponents/DashboardComponents/DashboardAnimalChart/DashboardAnimalChart";
+import DashboardInfoCards from "components/AdminDashboardComponents/DashboardComponents/DashboardInfoCard/DashboardInfoCards";
+import DashboardMostPopularAnimals from "components/AdminDashboardComponents/DashboardComponents/DashboardMostPopularAnimals/DashboardMostPopularAnimals";
+import DashboardNewestAnimalCards from "components/AdminDashboardComponents/DashboardComponents/DashboardNewestAnimalCards/DashboardNewestAnimalCards";
+import DashboardVoluntary from "components/AdminDashboardComponents/DashboardComponents/DashboardVoluntary/DashboardVoluntary";
 import {
   StyledProtectedPageContent,
   StyledProtectedPageNavbar,
-} from "components/ProtectedRoutesComponents/ProtectedPage.styled";
-import ProtectedSidebar from "components/ProtectedRoutesComponents/ProtectedSidebar";
+} from "components/AdminDashboardComponents/ProtectedPage.styled";
+import ProtectedSidebar from "components/AdminDashboardComponents/ProtectedSidebar";
 import {
   BellIcon,
   HamburgerMenuIcon,

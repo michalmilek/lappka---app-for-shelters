@@ -3,7 +3,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../../SharedComponents/Button/Button";
 import Input from "../../SharedComponents/Inputs/Input";
-import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
+import CustomCheckbox, {
+  CheckboxInterface,
+} from "components/SharedComponents/Inputs/CustomCheckbox";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import Divider from "components/SharedComponents/Divider/Divider";
 import {
@@ -19,7 +21,7 @@ import {
 } from "./Login.styled";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
 import useDeviceType from "hooks/useDeviceType";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 
 const LoginForm = () => {
@@ -30,8 +32,6 @@ const LoginForm = () => {
     initialValues: {
       email: "",
       password: "",
-      rememberMe: false,
-      passwordVisible: false,
     },
     validationSchema: Yup.object().shape({
       email: Yup.string()
@@ -49,7 +49,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      localStorage.setItem("rememberMe", formik.values.rememberMe.toString());
       navigate("/");
     }
   });
@@ -95,7 +94,7 @@ const LoginForm = () => {
         />
         <Input
           label="Hasło"
-          type="password"
+          type="text"
           id="password"
           name="password"
           placeholder="Wpisz"
@@ -111,11 +110,7 @@ const LoginForm = () => {
         <StyledLoginOptionsContainer>
           <CustomCheckbox
             label="Pamiętaj mnie"
-            name="remeberMe"
-            checked={formik.values.rememberMe}
-            onClick={() =>
-              formik.setFieldValue("rememberMe", !formik.values.rememberMe)
-            }
+            name="rememberMe"
             color="primary500"
           />
 

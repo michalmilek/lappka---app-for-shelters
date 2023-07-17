@@ -7,6 +7,7 @@ import {
   StyledDiv,
   StyledInput,
 } from "./Input.styled";
+import { EyeIcon, EyeOffIcon } from "../icons/icons";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -22,8 +23,21 @@ const Input = ({
   icon,
   label,
   error,
+  name,
+  type,
   ...rest
 }: InputProps) => {
+  const [passwordVisibility, setPasswordVisibility] = React.useState(false);
+
+  let isPassword;
+  if (name) {
+    isPassword = /password/i.test(name);
+  }
+
+  const handleTogglePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility);
+  };
+
   return (
     <StyledDiv>
       {label && (
@@ -38,11 +52,20 @@ const Input = ({
         inputSize={inputSize}
         {...rest}>
         <InputField
+          name={name}
           inputSize={inputSize}
           value={value}
           error={error}
+          type={isPassword && !passwordVisibility ? "password" : type}
           {...rest}
         />
+        {isPassword && (
+          <IconContainer
+            inputSize={inputSize}
+            onClick={handleTogglePasswordVisibility}>
+            {passwordVisibility ? <EyeOffIcon /> : <EyeIcon />}
+          </IconContainer>
+        )}
         {icon && <IconContainer inputSize={inputSize}>{icon}</IconContainer>}
       </StyledInput>
       {error && (
