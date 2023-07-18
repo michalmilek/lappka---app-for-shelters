@@ -1,12 +1,15 @@
-import LoginPage from "../pages/LoginPage";
-import HomePage from "../pages/HomePage";
-import RegisterPage from "pages/RegisterPage";
-import ResetPasswordPage from "pages/ResetPasswordPage";
+export const AuthRoutes = {
+  LOGIN: "/login",
+  REGISTER: "/register",
+  RESETPASSWORD: "/reset-password",
+  RESETPASSWORDTOKEN: "/reset-password/:token",
+  LANDINGPAGE: "/",
+};
 
-export const unprotectedRoutes = [
-  { url: "/login", component: <LoginPage /> },
-  { url: "/register", component: <RegisterPage /> },
-  { url: "/reset-password", component: <ResetPasswordPage /> },
-  { url: "/reset-password/:token", component: <ResetPasswordPage /> },
-  { url: "/", component: <HomePage /> },
-];
+export const DashboardRoutes = {
+  DASHBOARD: "/dashboard",
+  MESSAGES: "/dashboard/messages",
+  ANIMALCARDS: "/dashboard/animal-cards",
+  VOLUNTARY: "/dashboard/voluntary",
+  EMPLOYEES: "/dashboard/employees",
+};
