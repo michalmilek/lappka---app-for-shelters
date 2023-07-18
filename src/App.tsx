@@ -12,6 +12,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
+import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPage";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,10 @@ function App() {
               <Route
                 path={DashboardRoutes.MESSAGES}
                 element={<MessagesPage />}
+              />
+              <Route
+                path={DashboardRoutes.ANIMALCARDS}
+                element={<AnimalCardsPage />}
               />
             </Route>
           </Routes>
