@@ -4,6 +4,8 @@ import App from "./App";
 import isPropValid from "@emotion/is-prop-valid";
 import { StyleSheetManager } from "styled-components";
 import { worker } from "./mocks/browser";
+import { Provider } from "react-redux";
+import { store } from "redux/store";
 
 worker.start();
 
@@ -13,7 +15,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <StyleSheetManager shouldForwardProp={isPropValid}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </StyleSheetManager>
   </React.StrictMode>
 );

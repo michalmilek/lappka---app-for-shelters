@@ -4,10 +4,14 @@ import ProtectedPage from "components/AdminDashboardComponents/ProtectedPage";
 import MobileMenuContextProvider from "context/MobileMenuContextProvider";
 import { GlobalStyle } from "globalStyles";
 import HomePage from "pages/HomePage";
-import DashboardPage from "pages/ProtectedPages/DashboardPage";
+import LoginPage from "pages/LoginPage";
+import DashboardPage from "pages/DashboardPages/DashboardPage";
+import RegisterPage from "pages/RegisterPage";
+import ResetPasswordPage from "pages/ResetPasswordPage";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { unprotectedRoutes } from "./router/router";
+import { AuthRoutes, DashboardRoutes } from "./router/router";
+import MessagesPage from "pages/DashboardPages/MessagesPage";
 
 const queryClient = new QueryClient();
 
@@ -18,23 +22,32 @@ function App() {
         <GlobalStyle />
         <BrowserRouter>
           <Routes>
-            {unprotectedRoutes.map((route) => (
-              <Route
-                key={route.url}
-                path={route.url}
-                element={route.component}
-              />
-            ))}
+            <Route
+              path={AuthRoutes.LOGIN}
+              element={<LoginPage />}
+            />
+            <Route
+              path={AuthRoutes.REGISTER}
+              element={<RegisterPage />}
+            />
+            <Route
+              path={AuthRoutes.RESETPASSWORD}
+              element={<ResetPasswordPage />}
+            />
+            <Route
+              path={AuthRoutes.RESETPASSWORDTOKEN}
+              element={<ResetPasswordPage />}
+            />
           </Routes>
           <Routes>
             <Route element={<ProtectedPage />}>
               <Route
-                path={"/dashboard"}
+                path={DashboardRoutes.DASHBOARD}
                 element={<DashboardPage />}
               />
               <Route
-                path={"/home"}
-                element={<HomePage />}
+                path={DashboardRoutes.MESSAGES}
+                element={<MessagesPage />}
               />
             </Route>
           </Routes>

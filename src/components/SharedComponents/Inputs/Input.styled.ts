@@ -5,6 +5,7 @@
 import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { CheckboxInterface } from "./CustomCheckbox";
+import { RadioInterface } from "./CustomRadio";
 import { InputProps } from "./Input";
 import { TextareaProps } from "./TextArea";
 
@@ -180,4 +181,32 @@ export const TextareaField = styled.textarea<TextareaProps>`
     css`
       padding: 4px 8px;
     `}
+`;
+
+//RADIO INPUT
+//RADIO INPUT
+//RADIO INPUT
+
+export const RadioWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 4px 0;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+  z-index: 10;
+`;
+
+export const Radiomark = styled.div<RadioInterface>`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid ${getColor("midGray5")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+  transition: all 0.3s ease-in-out;
 `;

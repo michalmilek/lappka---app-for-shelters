@@ -8,7 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   Label,
 } from "recharts";
@@ -21,11 +20,9 @@ import {
   StyledDashboardChartTitleContainer,
 } from "./DashboardAnimalChart.styled";
 import Button from "components/SharedComponents/Button/Button";
-import {
-  ArrowUpIcon,
-  CalendarIcon,
-} from "components/SharedComponents/icons/icons";
+import { CalendarIcon } from "components/SharedComponents/icons/icons";
 import CustomRadio from "components/SharedComponents/Inputs/CustomRadio";
+import useDeviceType from "hooks/useDeviceType";
 
 const data = [
   {
@@ -82,6 +79,7 @@ const DashboardAnimalChart = () => {
   const [activeMonth, setActiveMonth] = useState<null | number>(null);
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [timeSelect, setTimeSelect] = useState("Month");
+  const deviceType = useDeviceType();
 
   const handleRadioChange = (value: string) => {
     setTimeSelect(value);
@@ -138,7 +136,7 @@ const DashboardAnimalChart = () => {
       </StyledDashboardChartTitleContainer>
       <ResponsiveContainer
         width={"100%"}
-        height={350}>
+        height={deviceType === "mobile" ? 300 : 350}>
         <BarChart
           width={150}
           height={150}

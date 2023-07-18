@@ -9,14 +9,14 @@ import React, { useContext } from "react";
 import {
   StyledNavbarButtonContainer,
   StyledProtectedPageNavbar,
-} from "./ProtectedNavbar.styled";
+} from "./DashboardNavbar.styled";
 
 interface ProtectedNavbarProps {
   title: string;
   Button?: JSX.Element | null;
 }
 
-const ProtectedNavbar = ({ title, Button = null }: ProtectedNavbarProps) => {
+const DashboardNavbar = ({ title, Button = null }: ProtectedNavbarProps) => {
   const deviceType = useDeviceType();
   const { IsMobileMenuOpen, handleMobileMenu } = useContext(MobileMenuContext);
   return (
@@ -40,4 +40,4 @@ const ProtectedNavbar = ({ title, Button = null }: ProtectedNavbarProps) => {
   );
 };
 
-export default ProtectedNavbar;
+export default DashboardNavbar;

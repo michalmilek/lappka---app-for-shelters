@@ -1,6 +1,5 @@
 import {
   AnimalsCardsIcon,
-  ArrowDownIcon,
   DashboardIcon,
   EmployeesIcon,
   MessagesIcon,
@@ -8,9 +7,7 @@ import {
 } from "components/SharedComponents/icons/icons";
 import StyledNavLink from "components/SharedComponents/NavLink/SidebarNavLink";
 import Typography from "components/SharedComponents/Typography/Typography";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { getColor } from "utils/styles/getStyle/getColor";
+import React, { useRef, useState } from "react";
 import LappkaLogo from "./LappkaLogo.png";
 import LappkaMobileLogo from "./LappkaMobileLogo.png";
 import {
@@ -25,41 +22,44 @@ import {
   StyledUserMenuDropdown,
   StyledUserMenuDropdownItem,
   StyledUserMenuNameContainer,
-} from "./ProtectedSidebar.styled";
+} from "./DashboardSidebar.styled";
 import DummyAvatar from "./DummyAvatar.png";
 import { useClickOutside } from "./utils";
-import { protectedRoutesFirstList } from "router/router";
 import useDeviceType from "hooks/useDeviceType";
-import { AnimatePresence, motion } from "framer-motion";
+import { DashboardRoutes } from "router/router";
 
 const firstMenu = [
-  { to: "/dashboard", icon: <DashboardIcon />, title: "Dashboard" },
   {
-    to: "/dashboard/messages",
+    to: DashboardRoutes.DASHBOARD,
+    icon: <DashboardIcon />,
+    title: "Dashboard",
+  },
+  {
+    to: DashboardRoutes.MESSAGES,
     icon: <MessagesIcon />,
     title: "Wiadomości",
     messagesNumber: 56,
   },
   {
-    to: "/dashboard/animal-cards",
+    to: DashboardRoutes.ANIMALCARDS,
     icon: <AnimalsCardsIcon />,
     title: "Karty zwierząt",
   },
-  { to: "/dashboard/voluntary", icon: <VoluntaryIcon />, title: "Wolontariat" },
+  {
+    to: DashboardRoutes.VOLUNTARY,
+    icon: <VoluntaryIcon />,
+    title: "Wolontariat",
+  },
 ];
 
-const ProtectedSidebar = () => {
+const DashboardSidebar = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const userMenuDropdownRef = useRef<HTMLUListElement>(null);
   const deviceType = useDeviceType();
 
   useClickOutside(userMenuDropdownRef, () => setIsDropdownActive(false));
   return (
-    <StyledSidebar
-      as={motion.aside}
-      initial={{ x: -200, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: -200, opacity: 0 }}>
+    <StyledSidebar>
       <StyledSidebarTopMenu>
         <StyledSidebarLogo
           src={
@@ -77,6 +77,7 @@ const ProtectedSidebar = () => {
               to={item.to}
               icon={item.icon}
               text={item.title}
+              end
             />
           ))}
         </StyledSidebarList>
@@ -84,14 +85,17 @@ const ProtectedSidebar = () => {
           <Typography
             color="midGray3"
             variant="UI Small/UI Text 12 Semi Bold">
-            {deviceType === "laptop" || deviceType ? "ORGANIZACJA" : "ORG"}
+            {deviceType === "mobile" || deviceType === "tablet"
+              ? "ORG"
+              : "ORGANIZACJA"}
           </Typography>
         </StyledOrganisationListTitleContainer>
         <StyledOrganisationListContainer>
           <StyledNavLink
             text="Pracownicy"
-            to={"/dashboard/organisation/employees"}
+            to={DashboardRoutes.EMPLOYEES}
             icon={<EmployeesIcon />}
+            end
           />
         </StyledOrganisationListContainer>
       </StyledSidebarTopMenu>
@@ -101,7 +105,7 @@ const ProtectedSidebar = () => {
           src={DummyAvatar}
           alt="user avatar"
         />
-        {(deviceType === "laptop" || deviceType) && (
+        {(deviceType === "laptop" || deviceType === "desktop") && (
           <div>
             <StyledUserMenuNameContainer>
               <Typography
@@ -137,4 +141,4 @@ const ProtectedSidebar = () => {
   );
 };
 
-export default ProtectedSidebar;
+export default DashboardSidebar;

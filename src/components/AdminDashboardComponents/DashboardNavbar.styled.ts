@@ -9,6 +9,7 @@ export const StyledProtectedPageNavbar = styled.nav`
   padding: 12px 32px;
   justify-content: space-between;
   background: ${getColor("white")};
+  z-index: 10;
   box-shadow: 0px 12px 1px 0px #00000003;
 
   box-shadow: 0px 8px 4px 0px #00000005;
