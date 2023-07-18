@@ -45,7 +45,8 @@ export const StyledInput = styled.div<InputProps>`
 
 export const InputField = styled.input<InputProps>`
   z-index: 5;
-  background-color: ${getColor("white")};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? getColor(backgroundColor) : getColor("white")};
   border-radius: 6px;
   color: ${getColor("darkGray2")};
   padding-right: 2%;

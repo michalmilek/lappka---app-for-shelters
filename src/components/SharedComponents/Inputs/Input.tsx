@@ -1,4 +1,4 @@
-import { InputSize } from "utils/styles/types/stylesTypes";
+import { Color, InputSize } from "utils/styles/types/stylesTypes";
 import React from "react";
 import Typography from "../Typography/Typography";
 import {
@@ -15,6 +15,7 @@ export interface InputProps
   icon?: JSX.Element;
   label?: string;
   error?: string | null;
+  backgroundColor?: Color;
 }
 
 const Input = ({

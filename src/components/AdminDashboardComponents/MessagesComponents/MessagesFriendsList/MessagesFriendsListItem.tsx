@@ -1,12 +1,20 @@
 import Typography from "components/SharedComponents/Typography/Typography";
+import useDeviceType from "hooks/useDeviceType";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux/es/exports";
-import { selectUserToChat, setUserToChat } from "redux/chatSlice";
-import { styled } from "styled-components";
-import { getColor } from "utils/styles/getStyle/getColor";
+import { selectActiveChatData, setActiveChatData } from "redux/chatSlice";
+import { ChatMessage } from "../messagaData";
+import {
+  MessagesFriendsListItemMessageInfo,
+  MessagesFriendsListItemUserImg,
+  MessagesFriendsListItemUserInfo,
+  MessagesFriendsListItemUserInfoNameAndMessage,
+  MessasgesFriendsListItemContainer,
+  MessasgesFriendsListItemContainerBorderContainer,
+} from "./MessagesFriendListItem.styled";
 
-interface AsideFriendsListItemActive
+export interface AsideFriendsListItemActive
   extends React.HTMLAttributes<HTMLLIElement> {
   active?: boolean;
   name?: string;
@@ -14,81 +22,33 @@ interface AsideFriendsListItemActive
   time?: string;
   index?: number;
   amountOfMessages?: string;
+  chatData?: {
+    name: string;
+    message: string;
+    time: string;
+    amountOfMessages: string;
+    messages: ChatMessage[];
+  };
 }
-
-const MessasgesFriendsListItemContainer = styled.li<AsideFriendsListItemActive>`
-  width: 256px;
-  background: ${({ active }) =>
-    active ? getColor("primary050") : getColor("white")};
-
-  padding: 0 12px 0 16px;
-  z-index: 10;
-  cursor: pointer;
-
-  &:hover {
-    background: ${getColor("lightGray1")};
-  }
-
-  transition: all 0.3s ease-in-out;
-`;
-
-const MessasgesFriendsListItemContainerBorderContainer = styled.div`
-  border-bottom: 1px solid ${getColor("lightGray4")};
-  display: flex;
-  gap: 48px;
-  justify-content: space-between;
-
-  padding: 12px 0;
-
-  &:not(:last-of-type) {
-    border-bottom: 1px solid ${getColor("lightGray4")};
-  }
-`;
-
-const MessagesFriendsListItemUserInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-const MessagesFriendsListItemUserImg = styled.img`
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-`;
-
-const MessagesFriendsListItemUserInfoNameAndMessage = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
-`;
-
-const MessagesFriendsListItemMessageInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  align-content: flex-end;
-  gap: 2px;
-`;
 
 const MessagesFriendsListItem = ({
   name,
   message,
   time,
   index,
+  chatData,
   amountOfMessages,
 }: AsideFriendsListItemActive) => {
-  const userToChat = useSelector(selectUserToChat);
   const dispatch = useDispatch();
+  const activeChatData = useSelector(selectActiveChatData);
+  const deviceType = useDeviceType();
 
-  const active = name === userToChat;
+  const active = name === activeChatData?.name;
   return (
     <MessasgesFriendsListItemContainer
       active={active}
       onClick={() => {
-        if (name) dispatch(setUserToChat(name));
+        if (chatData) dispatch(setActiveChatData(chatData));
       }}>
       <MessasgesFriendsListItemContainerBorderContainer>
         <MessagesFriendsListItemUserInfo>
@@ -103,27 +63,31 @@ const MessagesFriendsListItem = ({
               variant="UI Small/UI Text 12 Semi Bold">
               {name}
             </Typography>
-            <Typography variant="UI Small/UI Text 12 Reg">
-              {message && message.length > 20
-                ? message.substring(0, 20) + "..."
-                : message}
-            </Typography>
+            {(deviceType === "desktop" || deviceType === "laptop") && (
+              <Typography variant="UI Small/UI Text 12 Reg">
+                {message && message.length > 20
+                  ? message.substring(0, 20) + "..."
+                  : message}
+              </Typography>
+            )}
           </MessagesFriendsListItemUserInfoNameAndMessage>
         </MessagesFriendsListItemUserInfo>
 
-        <MessagesFriendsListItemMessageInfo>
-          <Typography
-            tag="h5"
-            variant="UI Small/UI Text 12 Reg">
-            {time}
-          </Typography>
-          <Typography
-            tag="span"
-            color={active ? "primary700" : "primary500"}
-            variant="UI Small/UI Text 12 Semi Bold">
-            +{amountOfMessages}
-          </Typography>
-        </MessagesFriendsListItemMessageInfo>
+        {deviceType !== "mobile" && (
+          <MessagesFriendsListItemMessageInfo>
+            <Typography
+              tag="h5"
+              variant="UI Small/UI Text 12 Reg">
+              {time}
+            </Typography>
+            <Typography
+              tag="span"
+              color={active ? "primary700" : "primary500"}
+              variant="UI Small/UI Text 12 Semi Bold">
+              +{amountOfMessages}
+            </Typography>
+          </MessagesFriendsListItemMessageInfo>
+        )}
       </MessasgesFriendsListItemContainerBorderContainer>
     </MessasgesFriendsListItemContainer>
   );

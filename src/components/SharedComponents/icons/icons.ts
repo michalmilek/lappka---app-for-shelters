@@ -28,6 +28,7 @@ import { ReactComponent as BellIcon } from "./files/BellIcon.svg";
 import { ReactComponent as IdentificationIcon } from "./files/IdentificationIcon.svg";
 import { ReactComponent as CalendarIcon } from "./files/CalendarIcon.svg";
 import { ReactComponent as RadioMarkIcon } from "./files/RadioMarkIcon.svg";
+import { ReactComponent as SendMessageIcon } from "./files/SendMessageIcon.svg";
 
 export {
   AlertIcon,
@@ -60,4 +61,5 @@ export {
   IdentificationIcon,
   CalendarIcon,
   RadioMarkIcon,
+  SendMessageIcon,
 };

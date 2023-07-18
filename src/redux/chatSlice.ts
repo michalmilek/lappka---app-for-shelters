@@ -1,14 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { ChatMessage } from "components/AdminDashboardComponents/MessagesComponents/messagaData";
 
-interface CounterState {
-  userToChat: string | null;
+interface ActiveChatState {
+  activeChatData: ActiveChatData | null;
   me: string;
 }
 
-const initialState: CounterState = {
-  userToChat: null,
+interface ActiveChatData {
+  name: string;
+  message: string;
+  time: string;
+  amountOfMessages: string;
+  messages: ChatMessage[];
+}
+
+const initialState: ActiveChatState = {
+  activeChatData: null,
   me: "Michał",
 };
 
@@ -16,18 +25,18 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    setUserToChat: (state, action: PayloadAction<string>) => {
-      state.userToChat = action.payload;
+    setActiveChatData: (state, action: PayloadAction<ActiveChatData>) => {
+      state.activeChatData = action.payload;
     },
   },
 });
 
-export const { setUserToChat } = chatSlice.actions;
+export const { setActiveChatData } = chatSlice.actions;
 
 export default chatSlice.reducer;
 
-export const selectUserToChat = (state: RootState) => {
-  return state.chat.userToChat;
+export const selectActiveChatData = (state: RootState) => {
+  return state.chat.activeChatData;
 };
 
 export const selectMe = (state: RootState) => {

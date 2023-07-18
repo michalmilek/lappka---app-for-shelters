@@ -20,7 +20,7 @@ export const StyledSidebar = styled.aside`
   width: 256px;
   height: 100%;
   border-right: 1px solid ${getColor("lightGray3")};
-  z-index: 1;
+  z-index: 50;
 
   @media screen and (max-width: 1024px) {
     width: 180px;
