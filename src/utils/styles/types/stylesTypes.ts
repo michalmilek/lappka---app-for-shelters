@@ -23,7 +23,7 @@ export type letterSpacing =
 //COLORS
 //COLORS
 
-export type Color = primary | gray | red | status | blacks;
+export type Color = primary | gray | red | status | blacks | socialMedia;
 
 export type blacks = "black" | "white";
 
@@ -60,6 +60,8 @@ export type red = "red800" | "red700" | "red600" | "red500" | "red100";
 
 export type status = "success" | "error" | "focus";
 
+export type socialMedia = "facebook";
+
 // BUTTON TYPES
 // BUTTON TYPES
 // BUTTON TYPES
@@ -79,6 +81,7 @@ export type PaddingMarginSize = `${
   | 10
   | 12
   | 14
+  | 15
   | 16
   | 18
   | 20
@@ -140,3 +143,30 @@ export type BorderRadius =
       | 48
       | 9999}px`
   | "50%";
+
+//TYPOGRAPHY TYPES
+//TYPOGRAPHY TYPES
+//TYPOGRAPHY TYPES
+
+export type TypographyType =
+  | "Heading 30 Semi"
+  | "Heading 24 Semi Bold"
+  | "Heading 20 Semi Bold"
+  | "Heading 18 Semi Bold"
+  | "UI/UI Text 16 Semi Bold"
+  | "UI/UI Text 16 Semi Bold"
+  | "UI/UI Text 16 Medium Bold"
+  | "Running Text / Paragraph 14 Reg"
+  | "UI/UI Text 14 Reg"
+  | "UI/UI Text 14 Semi Bold"
+  | "UI/UI Text 14 Med"
+  | "UI/UI Table Numbers 14 Reg"
+  | "UI Small/UI Text 13 Med"
+  | "UI Small/UI Text 13 Reg"
+  | "UI Small/UI Text 12 Reg"
+  | "UI Small/UI Text 12 Semi Bold";
+
+
+    //INPUT TYPES
+
+    export type InputSize = "XLarge" | "Large" | "Medium";

@@ -16,6 +16,14 @@ import { ReactComponent as LinkedInIcon } from "./files/LinkedInIcon.svg";
 import { ReactComponent as MinusIcon } from "./files/MinusIcon.svg";
 import { ReactComponent as PlusIcon } from "./files/PlusIcon.svg";
 import { ReactComponent as SendIcon } from "./files/SendIcon.svg";
+import { ReactComponent as CheckboxMarkIcon } from "./files/CheckboxMarkIcon.svg";
+import { ReactComponent as GoogleLogoIcon } from "./files/GoogleLogoIcon.svg";
+import { ReactComponent as FacebookLogoIcon } from "./files/FacebookLogoIcon.svg";
+import { ReactComponent as AnimalsCardsIcon } from "./files/AnimalsCardsIcon.svg";
+import { ReactComponent as DashboardIcon } from "./files/DashboardIcon.svg";
+import { ReactComponent as EmployeesIcon } from "./files/EmployeesIcon.svg";
+import { ReactComponent as MessagesIcon } from "./files/MessagesIcon.svg";
+import { ReactComponent as VoluntaryIcon } from "./files/VoluntaryIcon.svg";
 
 export {
   AlertIcon,
@@ -36,4 +44,12 @@ export {
   MinusIcon,
   PlusIcon,
   SendIcon,
+  CheckboxMarkIcon,
+  GoogleLogoIcon,
+  FacebookLogoIcon,
+  AnimalsCardsIcon,
+  DashboardIcon,
+  EmployeesIcon,
+  MessagesIcon,
+  VoluntaryIcon,
 };

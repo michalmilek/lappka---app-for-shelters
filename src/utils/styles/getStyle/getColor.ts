@@ -1,4 +1,4 @@
-import { Color } from "@utils/styles/types/stylesTypes";
+import { Color } from "utils/styles/types/stylesTypes";
 
 export function getColor(color: Color): string {
   switch (color) {
@@ -81,6 +81,10 @@ export function getColor(color: Color): string {
       return "#000000";
     case "white":
       return "#ffffff";
+
+    //social media colors
+    case "facebook":
+      return "#1877F2";
 
     default:
       return "#000000"; // default black color;

@@ -1,18 +1,15 @@
-import { getColor } from "@utils/styles/helpers/getColor";
-import {
-  getFontSize,
-  getFontWeight,
-  getLetterSpacing,
-} from "@utils/styles/helpers/getFontStyle";
+import { getColor } from "../../../utils/styles/getStyle/getColor";
+import { typographyVariants } from "../../../utils/styles/getStyle/getFontStyle";
 import {
   Color,
   fontSize,
   fontWeight,
   letterSpacing,
   lineHeight,
-} from "@utils/styles/types/stylesTypes";
-import React, { ReactNode } from "react";
-import styled from "styled-components";
+  TypographyType,
+} from "utils/styles/types/stylesTypes";
+import React, { CSSProperties, ReactNode } from "react";
+import styled, { css } from "styled-components";
 
 interface TypographyProps {
   tag?: keyof JSX.IntrinsicElements;
@@ -21,30 +18,76 @@ interface TypographyProps {
   fontWeight?: fontWeight;
   letterSpacing?: letterSpacing;
   lineHeight?: lineHeight;
+  variant?: TypographyType;
+  position?: CSSProperties["position"];
+  top?: CSSProperties["top"];
+  left?: CSSProperties["left"];
+  right?: CSSProperties["right"];
+  bottom?: CSSProperties["bottom"];
   children: ReactNode;
 }
 
+const StyledTypography = styled.div<TypographyProps>`
+  ${(props) =>
+    props.color &&
+    css`
+      color: ${getColor(props.color)};
+    `}
+
+  ${({ variant }) => variant && typographyVariants[variant]}
+
+          ${(props) =>
+    props.position &&
+    css`
+      position: ${props.position};
+    `}
+
+                      ${(props) =>
+    props.top &&
+    css`
+      top: ${props.top};
+    `}
+
+              ${(props) =>
+    props.left &&
+    css`
+      left: ${props.left};
+    `}
+
+              ${(props) =>
+    props.bottom &&
+    css`
+      bottom: ${props.bottom};
+    `}
+
+              ${(props) =>
+    props.right &&
+    css`
+      right: ${props.right};
+    `}
+`;
+
 const Typography = ({
   tag = "p",
-  color = "black",
-  fontSize = 16,
-  fontWeight = 500,
-  letterSpacing = "0%",
+  color,
+  fontSize,
+  fontWeight,
+  letterSpacing,
+  lineHeight,
+  variant,
   children,
+  ...rest
 }: TypographyProps) => {
-  const StyledTypography = styled(tag)<TypographyProps>`
-    color: ${(props) => getColor(props.color as Color)};
-    font-size: ${(props) => getFontSize(props.fontSize as fontSize)};
-    font-weight: ${(props) => getFontWeight(props.fontWeight as fontWeight)};
-    letter-spacing: ${(props) =>
-      getLetterSpacing(props.letterSpacing as letterSpacing)};
-  `;
-
   return (
     <StyledTypography
+      as={tag}
+      letterSpacing={letterSpacing}
+      lineHeight={lineHeight}
       color={color}
+      variant={variant}
       fontSize={fontSize}
-      fontWeight={fontWeight}>
+      fontWeight={fontWeight}
+      {...rest}>
       {children}
     </StyledTypography>
   );

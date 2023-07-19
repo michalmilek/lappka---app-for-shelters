@@ -14,4 +14,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Inter', sans-serif;
   }
+
+  .padding {
+    padding: 149px 156px 150px;
+  }
 `;
