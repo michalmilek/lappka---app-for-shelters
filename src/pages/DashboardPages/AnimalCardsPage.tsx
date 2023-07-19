@@ -1,3 +1,4 @@
+import AnimalCardsInfo from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsInfo/AnimalCardsInfo";
 import AnimalCardsTable from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable";
 import {
   StyledDashboardAnimalCardsMain,
@@ -11,6 +12,7 @@ const AnimalCardsPage = () => {
     <StyledDashboardAnimalCardsMain>
       <DashboardNavbar title="Karty zwierząt" />
       <StyledDashboardAnimalCardsMainContent>
+        <AnimalCardsInfo />
         <AnimalCardsTable />
       </StyledDashboardAnimalCardsMainContent>
     </StyledDashboardAnimalCardsMain>

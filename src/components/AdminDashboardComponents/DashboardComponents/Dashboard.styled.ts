@@ -1,13 +1,12 @@
 import { styled } from "styled-components";
 
 export const StyledDashboardMain = styled.main`
-  height: 100vh;
   width: 100vw;
   max-width: 100%;
-  max-height: 100%;
+  height: 100vh;
 
   @media screen and (max-width: 1024px) {
-    overflow-y: scroll;
+    height: auto;
   }
 `;
 

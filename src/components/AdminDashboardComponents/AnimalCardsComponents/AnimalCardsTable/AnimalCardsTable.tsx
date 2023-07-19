@@ -8,167 +8,80 @@ import {
 import Typography from "components/SharedComponents/Typography/Typography";
 import styled from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
-
-type Animal = {
-  animalName: string;
-  additionDate: string;
-  genre: string;
-  sex: "samiec" | "samiczka";
-  colour: string;
-  weight: string;
-  sterilization: "tak" | "nie";
-  visible: "tak" | "nie";
-  action: any;
-};
-
-const defaultData: Animal[] = [
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiec",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "tak",
-    visible: "tak",
-    action: null,
-  },
-];
-
-const columnHelper = createColumnHelper<Animal>();
-
-const columns = [
-  columnHelper.accessor("animalName", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Imię zwierzaka
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("additionDate", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Data dodania
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("genre", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Gatunek
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("sex", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Płeć
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("colour", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Umaszczenie
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("weight", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Waga
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("sterilization", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Sterylizacja
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("visible", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Widoczny
-      </Typography>
-    ),
-  }),
-  columnHelper.accessor("action", {
-    header: () => (
-      <Typography
-        variant="UI Small/UI Text 13 Med"
-        color="midGray2">
-        Akcja
-      </Typography>
-    ),
-  }),
-];
-
-const StyledTableHeader = styled.thead`
-  border-top: 1px solid ${getColor("lightGray3")};
-  border-bottom: 1px solid ${getColor("lightGray3")};
-`;
+import { CheckIcon, MoreIcon } from "components/SharedComponents/icons/icons";
+import {
+  ActionHeaderContainer,
+  Dot,
+  DotFlexContainer,
+  StyledDropdownContainer,
+  StyledDropdownOption,
+  StyledSexContainer,
+  StyledTableHeader,
+  StyledTableTD,
+  StyledTableTH,
+  StyledTableTHTextContainer,
+  StyledTableTR,
+  TableComponentContainer,
+  TableComponentHeaderContainer,
+  TableContainer,
+} from "./AnimalCardsTable.styled";
+import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
+import { Animal, columns, defaultData } from "./AnimalCardsTableUtils";
 
 function AnimalCardsTable() {
   const [data, setData] = React.useState(() => [...defaultData]);
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columns,
     getCoreRowModel: getCoreRowModel<Animal>(),
   });
 
   return (
-    <div>
-      <table>
+    <TableComponentContainer>
+      <TableComponentHeaderContainer>
+        <Typography
+          variant="UI/UI Text 16 Semi Bold"
+          tag="h2"
+          color="darkGray2">
+          Karty zwierząt
+        </Typography>
+      </TableComponentHeaderContainer>
+      <TableContainer>
         <StyledTableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <StyledTableTH key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
-                </th>
+                </StyledTableTH>
               ))}
             </tr>
           ))}
         </StyledTableHeader>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <StyledTableTR key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <StyledTableTD
+                  className={cell.id === "actions" ? "actions-cell" : ""}
+                  key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                </StyledTableTD>
               ))}
-            </tr>
+            </StyledTableTR>
           ))}
         </tbody>
-      </table>
-      <div className="h-4" />
-    </div>
+      </TableContainer>
+    </TableComponentContainer>
   );
 }
 
 export default AnimalCardsTable;
+
+

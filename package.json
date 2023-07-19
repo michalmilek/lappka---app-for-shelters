@@ -64,6 +64,7 @@
     "@storybook/react": "^7.0.27",
     "@storybook/react-webpack5": "^7.0.27",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@types/react-table": "^7.7.14",
     "@types/recharts": "^1.8.24",
     "babel-plugin-named-exports-order": "^0.0.2",
     "babel-plugin-styled-components": "^2.1.4",

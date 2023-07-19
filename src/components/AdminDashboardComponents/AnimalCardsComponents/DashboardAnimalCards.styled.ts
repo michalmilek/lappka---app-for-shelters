@@ -1,14 +1,14 @@
 import styled from "styled-components";
+import { getColor } from "utils/styles/getStyle/getColor";
 
 export const StyledDashboardAnimalCardsMain = styled.main`
   height: 100vh;
   width: calc(100vw - 256px);
   margin-left: 256px;
   max-width: 100%;
-  max-height: 100%;
 
   @media screen and (max-width: 1024px) {
-    overflow-y: scroll;
+    height: auto;
   }
 `;
 
@@ -17,6 +17,7 @@ export const StyledDashboardAnimalCardsMainContent = styled.article`
   width: 100%;
   height: calc(100% - 56px);
   padding: 24px 24px 25px;
+  background: ${getColor("lightGray5")};
   grid-template-areas:
     "a a a"
     "b b b"
