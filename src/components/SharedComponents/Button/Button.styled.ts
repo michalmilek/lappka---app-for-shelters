@@ -7,6 +7,13 @@ import { getShadow } from "../../../utils/styles/getStyle/getShadow";
 //TOGGLE BUTTON
 //TOGGLE BUTTON
 
+export const ToggleButtonContainer = styled.div<{ disabled?: boolean }>`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+`;
+
 export const ToggleContainer = styled.label<{ disabled?: boolean }>`
   display: inline-block;
   position: relative;

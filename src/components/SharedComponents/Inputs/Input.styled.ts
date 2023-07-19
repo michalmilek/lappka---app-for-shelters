@@ -138,6 +138,12 @@ export const Checkmark = styled.span<CheckboxInterface>`
 //TEXTAREA
 //TEXTAREA
 
+export const StyledTextAreaContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
 export const StyledTextarea = styled.div<TextareaProps>`
   position: relative;
 `;
@@ -150,7 +156,7 @@ export const TextareaField = styled.textarea<TextareaProps>`
   padding: 8px 12px;
   transition: all 300ms ease-in-out;
   outline: none;
-  height: 100%;
+  height: 80px;
   width: 100%;
 
   &::placeholder {

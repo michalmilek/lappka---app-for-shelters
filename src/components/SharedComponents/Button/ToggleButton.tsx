@@ -1,5 +1,11 @@
 import React, { ChangeEvent } from "react";
-import { ToggleContainer, ToggleInput, ToggleSlider } from "./Button.styled";
+import Typography from "../Typography/Typography";
+import {
+  ToggleButtonContainer,
+  ToggleContainer,
+  ToggleInput,
+  ToggleSlider,
+} from "./Button.styled";
 
 interface CheckboxToggleProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,16 +27,25 @@ const ToggleButton = ({
   };
 
   return (
-    <ToggleContainer disabled={disabled}>
-      <ToggleInput
-        type="checkbox"
-        onChange={handleChange}
-        disabled={disabled}
-        {...rest}
-      />
-      <ToggleSlider />
-      {label && <span>{label}</span>}
-    </ToggleContainer>
+    <ToggleButtonContainer disabled={disabled}>
+      <ToggleContainer disabled={disabled}>
+        <ToggleInput
+          type="checkbox"
+          onChange={handleChange}
+          disabled={disabled}
+          {...rest}
+        />
+        <ToggleSlider />
+      </ToggleContainer>
+      {label && (
+        <Typography
+          tag="label"
+          variant="UI/UI Text 14 Med"
+          color={disabled ? "lightGray4" : "darkGray2"}>
+          {label}
+        </Typography>
+      )}
+    </ToggleButtonContainer>
   );
 };
 

@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
 import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPage";
+import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,10 @@ function App() {
                 path={DashboardRoutes.ANIMALCARDS}
                 element={<AnimalCardsPage />}
               />
+              <Route
+                path={DashboardRoutes.VOLUNTARY}
+                element={<VoluntaryPage />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
@@ -64,3 +69,5 @@ function App() {
 }
 
 export default App;
+
+
