@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   getPaginationRowModel,
   flexRender,
@@ -8,6 +8,7 @@ import {
   SortingState,
   getFilteredRowModel,
   PaginationState,
+  VisibilityState,
 } from "@tanstack/react-table";
 import Typography from "components/SharedComponents/Typography/Typography";
 import styled from "styled-components";
@@ -42,8 +43,11 @@ import {
 import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
 import { Animal, columns, defaultData } from "./AnimalCardsTableUtils";
 import Input from "components/SharedComponents/Inputs/Input";
+import useDeviceType from "hooks/useDeviceType";
+import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
 
 function AnimalCardsTable() {
+  const deviceType = useDeviceType();
   const data = React.useMemo(() => defaultData, []);
   const columnsMemo = React.useMemo(() => columns, []);
 
@@ -53,6 +57,11 @@ function AnimalCardsTable() {
   });
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+
+  const handleFiltering = (value: string) => {
+    setFiltering(value);
+  };
 
   const table = useReactTable({
     data,
@@ -65,12 +74,29 @@ function AnimalCardsTable() {
       sorting: sorting,
       globalFilter: filtering,
       pagination: pagination,
+      columnVisibility,
     },
+    onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     onGlobalFilterChange: setFiltering,
-    debugTable: true,
     onPaginationChange: setPagination,
   });
+
+  useEffect(() => {
+    table.getAllLeafColumns().forEach((header) => {
+      if (
+        deviceType !== "desktop" &&
+        (header.id === "colour" || header.id === "visible")
+      ) {
+        header.toggleVisibility(false);
+      } else if (deviceType === "mobile" && header.id === "additionDate") {
+        header.toggleVisibility(false);
+      } else {
+        header.toggleVisibility(true);
+      }
+    });
+  }, [deviceType, table]);
+
   return (
     <TableComponentContainer>
       <TableComponentHeaderContainer>
@@ -85,91 +111,47 @@ function AnimalCardsTable() {
         <StyledTableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <StyledTableTH
-                  key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                  {{
-                    asc: " 🔼",
-                    desc: " 🔽",
-                  }[header.column.getIsSorted() as string] ?? null}
-                </StyledTableTH>
-              ))}
+              {headerGroup.headers.map((header) => {
+                return (
+                  <StyledTableTH
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                    {{
+                      asc: " 🔼",
+                      desc: " 🔽",
+                    }[header.column.getIsSorted() as string] ?? null}
+                  </StyledTableTH>
+                );
+              })}
             </tr>
           ))}
         </StyledTableHeader>
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <StyledTableTR key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <StyledTableTD key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </StyledTableTD>
-              ))}
+              {row.getVisibleCells().map((cell) => {
+                return (
+                  <StyledTableTD key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </StyledTableTD>
+                );
+              })}
             </StyledTableTR>
           ))}
         </tbody>
       </TableContainer>
-      <StyledTableFooterContainer>
-        <StyledTableInputContainer>
-          <Input
-            placeholder="Wyszukaj w całej tabeli..."
-            value={filtering}
-            onChange={(e) => setFiltering(e.target.value)}
-          />
-        </StyledTableInputContainer>
-        <StyledTableFooterButtonsContainer>
-          <StyledTableArrowButton
-            disabled={!table.getCanPreviousPage()}
-            onClick={() => table.previousPage()}>
-            <ArrowLeftIcon />
-          </StyledTableArrowButton>
-          {pagination.pageIndex > 0 && (
-            <StyledTableNumberButton onClick={() => table.setPageIndex(0)}>
-              1
-            </StyledTableNumberButton>
-          )}
-          {table.getCanPreviousPage() && pagination.pageIndex > 1 && (
-            <StyledTableNumberButton
-              disabled={!table.getCanPreviousPage()}
-              onClick={() => table.previousPage()}>
-              {pagination.pageIndex}
-            </StyledTableNumberButton>
-          )}
-          <StyledTableNumberButton active>
-            {pagination.pageIndex + 1}
-          </StyledTableNumberButton>
-          {table.getCanNextPage() &&
-            pagination.pageIndex + 2 < table.getPageCount() && (
-              <StyledTableNumberButton onClick={() => table.nextPage()}>
-                {pagination.pageIndex + 2}
-              </StyledTableNumberButton>
-            )}
-          {pagination.pageIndex + 3 < table.getPageCount() && (
-            <StyledTableNumberButton
-              onClick={() => table.setPageIndex(pagination.pageIndex + 2)}>
-              {pagination.pageIndex + 3}
-            </StyledTableNumberButton>
-          )}
-          {pagination.pageIndex !== table.getPageCount() - 1 && (
-            <StyledTableNumberButton
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-              {table.getPageCount()}
-            </StyledTableNumberButton>
-          )}
-          <StyledTableArrowButton
-            disabled={!table.getCanNextPage()}
-            onClick={() => table.nextPage()}>
-            <ArrowRightIcon />
-          </StyledTableArrowButton>
-        </StyledTableFooterButtonsContainer>
-      </StyledTableFooterContainer>
+      <AnimalCardsTableFooter
+        table={table}
+        pagination={pagination}
+        handleFiltering={handleFiltering}
+        filtering={filtering}
+      />
     </TableComponentContainer>
   );
 }

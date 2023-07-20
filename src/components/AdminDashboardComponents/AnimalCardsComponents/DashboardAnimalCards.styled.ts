@@ -9,6 +9,18 @@ export const StyledDashboardAnimalCardsMain = styled.main`
 
   @media screen and (max-width: 1024px) {
     height: auto;
+    width: calc(100vw - 180px);
+    margin-left: 180px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: calc(100vw - 100px);
+    margin-left: 100px;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: calc(100vw);
+    margin-left: 0;
   }
 `;
 

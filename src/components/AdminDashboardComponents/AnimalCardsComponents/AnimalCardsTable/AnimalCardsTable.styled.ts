@@ -60,6 +60,10 @@ export const TableComponentContainer = styled.div`
 export const TableComponentHeaderContainer = styled.div`
   width: 100%;
   padding: 12px 16px;
+
+  @media screen and (max-width: 1300px) {
+    padding: 12px 4px;
+  }
 `;
 
 export const TableContainer = styled.table`
@@ -77,10 +81,18 @@ export const StyledTableTH = styled.th`
   text-align: left;
   border-top: 1px solid ${getColor("lightGray3")};
   border-bottom: 1px solid ${getColor("lightGray3")};
+
+  @media screen and (max-width: 1300px) {
+    padding: 12px 4px;
+  }
 `;
 
 export const StyledTableTHTextContainer = styled.div`
   padding-right: 30px;
+
+  @media screen and (max-width: 1300px) {
+    padding-right: 0px;
+  }
 `;
 
 export const StyledTableTR = styled.tr`
@@ -94,6 +106,10 @@ export const StyledTableTR = styled.tr`
 export const StyledTableTD = styled.td`
   padding: 12px 16px;
   gap: 12px;
+
+  @media screen and (max-width: 1300px) {
+    padding: 12px 4px;
+  }
 `;
 
 interface DropdownDetailsInterface {
@@ -143,6 +159,9 @@ export const StyledTableFooterContainer = styled.footer`
   justify-content: space-between;
   padding: 10px 16px;
   box-shadow: 0px 1px 0px 0px #e5e9eb inset;
+  @media screen and (max-width: 1300px) {
+    padding: 10px 4px;
+  }
 `;
 
 export const StyledTableFooterButtonsContainer = styled.div`

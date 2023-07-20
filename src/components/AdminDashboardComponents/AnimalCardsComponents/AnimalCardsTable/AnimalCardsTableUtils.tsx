@@ -110,6 +110,7 @@ export const columns = [
     cell: (props) => (
       <Typography variant="UI/UI Text 14 Reg">{props.getValue()}</Typography>
     ),
+    enableHiding: true,
   }),
   columnHelper.accessor("weight", {
     header: () => (
