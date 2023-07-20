@@ -63,6 +63,12 @@ function AnimalCardsTable() {
     setFiltering(value);
   };
 
+
+  const handlePageSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const optionValue = event.target.value;
+    setPagination({ ...pagination, pageSize: +optionValue });
+  };
+
   const table = useReactTable({
     data,
     columns: columnsMemo,
@@ -147,6 +153,8 @@ function AnimalCardsTable() {
         </tbody>
       </TableContainer>
       <AnimalCardsTableFooter
+        itemsPerPage={pagination.pageSize}
+        handlePageSize={handlePageSize}
         table={table}
         pagination={pagination}
         handleFiltering={handleFiltering}

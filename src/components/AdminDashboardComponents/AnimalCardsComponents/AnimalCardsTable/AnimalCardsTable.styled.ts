@@ -205,3 +205,10 @@ export const StyledTableArrowButton = styled.button`
 export const StyledTableInputContainer = styled.div`
   width: 30%;
 `;
+
+
+export const AnimalCardsStyledPageSizeSelect = styled.select`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;

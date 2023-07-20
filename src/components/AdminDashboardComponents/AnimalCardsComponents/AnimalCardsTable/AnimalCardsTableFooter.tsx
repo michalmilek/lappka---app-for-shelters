@@ -10,16 +10,20 @@ import {
   StyledTableArrowButton,
   StyledTableNumberButton,
   StyledTableFooterButtonsContainer,
+  AnimalCardsStyledPageSizeSelect,
 } from "./AnimalCardsTable.styled";
 import Input from "components/SharedComponents/Inputs/Input";
 import { PaginationState, Table } from "@tanstack/react-table";
 import { Animal } from "./AnimalCardsTableUtils";
+import { styled } from "styled-components";
 
 interface TableFooterProps {
   table: Table<Animal>;
   pagination: PaginationState;
   filtering: string;
   handleFiltering: (value: string) => void;
+  handlePageSize: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  itemsPerPage: number;
 }
 
 const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
@@ -27,6 +31,8 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
   pagination,
   filtering,
   handleFiltering,
+  handlePageSize,
+  itemsPerPage,
 }) => {
   return (
     <StyledTableFooterContainer>
@@ -37,6 +43,13 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
           onChange={(e) => handleFiltering(e.target.value)}
         />
       </StyledTableInputContainer>
+      <AnimalCardsStyledPageSizeSelect
+        value={itemsPerPage}
+        onChange={handlePageSize}>
+        <option value={8}>8</option>
+        <option value={10}>10</option>
+        <option value={15}>15</option>
+      </AnimalCardsStyledPageSizeSelect>
       <StyledTableFooterButtonsContainer>
         <StyledTableArrowButton
           disabled={!table.getCanPreviousPage()}

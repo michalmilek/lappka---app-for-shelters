@@ -9,6 +9,10 @@ const AnimalCardsInfoContainer = styled.div`
   gap: 16px;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  @media screen and (max-width: 950px) {
+    width: 100%;
+  }
 `;
 
 const AnimalCardsInfo = () => {
