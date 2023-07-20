@@ -13,6 +13,7 @@ import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
 import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPage";
 import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
+import EmployeesPage from "pages/DashboardPages/EmployeesPage";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,10 @@ function App() {
             <Route
               path={DashboardRoutes.VOLUNTARY}
               element={<VoluntaryPage />}
+            />
+            <Route
+              path={DashboardRoutes.EMPLOYEES}
+              element={<EmployeesPage />}
             />
           </Route>
         </Routes>
