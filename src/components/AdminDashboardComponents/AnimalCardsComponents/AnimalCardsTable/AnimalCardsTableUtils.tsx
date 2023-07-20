@@ -191,7 +191,7 @@ export const defaultData: Animal[] = [
     genre: "Kot",
     sex: "samiec",
     colour: "czarny",
-    weight: "4kg",
+    weight: "5kg",
     sterilization: "Tak",
     visible: "Tak",
   },

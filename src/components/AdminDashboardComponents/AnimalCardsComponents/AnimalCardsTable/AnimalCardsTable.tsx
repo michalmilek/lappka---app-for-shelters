@@ -25,7 +25,12 @@ import {
   StyledDropdownContainer,
   StyledDropdownOption,
   StyledSexContainer,
+  StyledTableArrowButton,
+  StyledTableFooterButtonsContainer,
+  StyledTableFooterContainer,
   StyledTableHeader,
+  StyledTableInputContainer,
+  StyledTableNumberButton,
   StyledTableTD,
   StyledTableTH,
   StyledTableTHTextContainer,
@@ -111,50 +116,60 @@ function AnimalCardsTable() {
           ))}
         </tbody>
       </TableContainer>
-      <div>
-        <button
-          disabled={!table.getCanPreviousPage()}
-          onClick={() => table.previousPage()}>
-          <ArrowLeftIcon />
-        </button>
-        {pagination.pageIndex > 0 && (
-          <button onClick={() => table.setPageIndex(0)}>1</button>
-        )}
-        {table.getCanPreviousPage() && pagination.pageIndex > 1 && (
-          <button
+      <StyledTableFooterContainer>
+        <StyledTableInputContainer>
+          <Input
+            placeholder="Wyszukaj w całej tabeli..."
+            value={filtering}
+            onChange={(e) => setFiltering(e.target.value)}
+          />
+        </StyledTableInputContainer>
+        <StyledTableFooterButtonsContainer>
+          <StyledTableArrowButton
             disabled={!table.getCanPreviousPage()}
             onClick={() => table.previousPage()}>
-            {pagination.pageIndex}
-          </button>
-        )}
-        <span>{pagination.pageIndex + 1}</span>
-        {table.getCanNextPage() &&
-          pagination.pageIndex + 2 < table.getPageCount() && (
-            <button onClick={() => table.nextPage()}>
-              {pagination.pageIndex + 2}
-            </button>
+            <ArrowLeftIcon />
+          </StyledTableArrowButton>
+          {pagination.pageIndex > 0 && (
+            <StyledTableNumberButton onClick={() => table.setPageIndex(0)}>
+              1
+            </StyledTableNumberButton>
           )}
-        {pagination.pageIndex + 3 < table.getPageCount() && (
-          <button onClick={() => table.setPageIndex(pagination.pageIndex + 2)}>
-            {pagination.pageIndex + 3}
-          </button>
-        )}
-        {pagination.pageIndex !== table.getPageCount() - 1 && (
-          <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-            {table.getPageCount()}
-          </button>
-        )}
-        <button
-          disabled={!table.getCanNextPage()}
-          onClick={() => table.nextPage()}>
-          <ArrowRightIcon />
-        </button>
-        <Input
-          placeholder="Wyszukaj w całej tabeli..."
-          value={filtering}
-          onChange={(e) => setFiltering(e.target.value)}
-        />
-      </div>
+          {table.getCanPreviousPage() && pagination.pageIndex > 1 && (
+            <StyledTableNumberButton
+              disabled={!table.getCanPreviousPage()}
+              onClick={() => table.previousPage()}>
+              {pagination.pageIndex}
+            </StyledTableNumberButton>
+          )}
+          <StyledTableNumberButton active>
+            {pagination.pageIndex + 1}
+          </StyledTableNumberButton>
+          {table.getCanNextPage() &&
+            pagination.pageIndex + 2 < table.getPageCount() && (
+              <StyledTableNumberButton onClick={() => table.nextPage()}>
+                {pagination.pageIndex + 2}
+              </StyledTableNumberButton>
+            )}
+          {pagination.pageIndex + 3 < table.getPageCount() && (
+            <StyledTableNumberButton
+              onClick={() => table.setPageIndex(pagination.pageIndex + 2)}>
+              {pagination.pageIndex + 3}
+            </StyledTableNumberButton>
+          )}
+          {pagination.pageIndex !== table.getPageCount() - 1 && (
+            <StyledTableNumberButton
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
+              {table.getPageCount()}
+            </StyledTableNumberButton>
+          )}
+          <StyledTableArrowButton
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}>
+            <ArrowRightIcon />
+          </StyledTableArrowButton>
+        </StyledTableFooterButtonsContainer>
+      </StyledTableFooterContainer>
     </TableComponentContainer>
   );
 }

@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface SexInterface {
@@ -7,6 +7,11 @@ interface SexInterface {
 
 interface DotInterface {
   value: "Tak" | "Nie";
+}
+
+interface PaginationButtonInterface
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  active?: boolean;
 }
 
 export const StyledSexContainer = styled.div<SexInterface>`
@@ -129,4 +134,55 @@ export const StyledDropdownOption = styled.li<DropdownDetailsInterface>`
   &:hover {
     background: ${getColor("lightGray3")};
   }
+`;
+
+export const StyledTableFooterContainer = styled.footer`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 16px;
+  box-shadow: 0px 1px 0px 0px #e5e9eb inset;
+`;
+
+export const StyledTableFooterButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+`;
+
+export const StyledTableNumberButton = styled.button<PaginationButtonInterface>`
+  background: ${({ active }) =>
+    active ? getColor("lightGray3") : getColor("white")};
+  padding: 4px 6px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: ${getColor("darkGray2")};
+  transition: all 0.3s ease-in-out;
+  border: none;
+  cursor: pointer;
+`;
+
+export const StyledTableArrowButton = styled.button`
+  height: 24px;
+  width: 24px;
+  background: ${getColor("white")};
+  border: none;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+
+  & path {
+    stroke: ${getColor("midGray5")};
+    fill: ${getColor("midGray5")};
+    ${({ disabled }) =>
+      disabled &&
+      css`
+        opacity: 0.5;
+      `}
+  }
+`;
+
+export const StyledTableInputContainer = styled.div`
+  width: 30%;
 `;
