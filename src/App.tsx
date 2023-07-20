@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedPage from "components/AdminDashboardComponents/ProtectedPage";
-import MobileMenuContextProvider from "context/MobileMenuContextProvider";
 import { GlobalStyle } from "globalStyles";
 import HomePage from "pages/HomePage";
 import LoginPage from "pages/LoginPage";
@@ -19,52 +18,50 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <MobileMenuContextProvider>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Routes>
+    <QueryClientProvider client={queryClient}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AuthRoutes.LOGIN}
+            element={<LoginPage />}
+          />
+          <Route
+            path={AuthRoutes.REGISTER}
+            element={<RegisterPage />}
+          />
+          <Route
+            path={AuthRoutes.RESETPASSWORD}
+            element={<ResetPasswordPage />}
+          />
+          <Route
+            path={AuthRoutes.RESETPASSWORDTOKEN}
+            element={<ResetPasswordPage />}
+          />
+        </Routes>
+        <Routes>
+          <Route element={<ProtectedPage />}>
             <Route
-              path={AuthRoutes.LOGIN}
-              element={<LoginPage />}
+              path={DashboardRoutes.DASHBOARD}
+              element={<DashboardPage />}
             />
             <Route
-              path={AuthRoutes.REGISTER}
-              element={<RegisterPage />}
+              path={DashboardRoutes.MESSAGES}
+              element={<MessagesPage />}
             />
             <Route
-              path={AuthRoutes.RESETPASSWORD}
-              element={<ResetPasswordPage />}
+              path={DashboardRoutes.ANIMALCARDS}
+              element={<AnimalCardsPage />}
             />
             <Route
-              path={AuthRoutes.RESETPASSWORDTOKEN}
-              element={<ResetPasswordPage />}
+              path={DashboardRoutes.VOLUNTARY}
+              element={<VoluntaryPage />}
             />
-          </Routes>
-          <Routes>
-            <Route element={<ProtectedPage />}>
-              <Route
-                path={DashboardRoutes.DASHBOARD}
-                element={<DashboardPage />}
-              />
-              <Route
-                path={DashboardRoutes.MESSAGES}
-                element={<MessagesPage />}
-              />
-              <Route
-                path={DashboardRoutes.ANIMALCARDS}
-                element={<AnimalCardsPage />}
-              />
-              <Route
-                path={DashboardRoutes.VOLUNTARY}
-                element={<VoluntaryPage />}
-              />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </MobileMenuContextProvider>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

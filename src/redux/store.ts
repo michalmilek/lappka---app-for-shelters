@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import chatReducer from "./chatSlice";
+import mobileMenuReducer from "./mobileMenuSlice";
 
 export const store = configureStore({
   reducer: {
     chat: chatReducer,
+    mobileMenu: mobileMenuReducer,
   },
 });
 
