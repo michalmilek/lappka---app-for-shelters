@@ -7,6 +7,10 @@ export const StyledDashboardVoluntaryMainContent = styled.article`
   height: 100%;
   grid-template-areas: "a a a . .";
   gap: 0;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-areas: "a";
+  }
 `;
 
 export const StyledDashboardVoluntaryMainContentFormsContainer = styled.div`
