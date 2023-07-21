@@ -14,6 +14,7 @@ import MessagesPage from "pages/DashboardPages/MessagesPage";
 import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPage";
 import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
 import EmployeesPage from "pages/DashboardPages/EmployeesPage";
+import Toast from "components/SharedComponents/Toast/Toast";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toast />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

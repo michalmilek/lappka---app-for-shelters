@@ -3,9 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../../SharedComponents/Button/Button";
 import Input from "../../SharedComponents/Inputs/Input";
-import CustomCheckbox, {
-  CheckboxInterface,
-} from "components/SharedComponents/Inputs/CustomCheckbox";
+import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import Divider from "components/SharedComponents/Divider/Divider";
 import {
@@ -21,13 +19,15 @@ import {
 } from "./Login.styled";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
 import useDeviceType from "hooks/useDeviceType";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import useToast from "hooks/useToast";
 
 const LoginForm = () => {
   const deviceType = useDeviceType();
   const navigate = useNavigate();
   const { mutateAsync: loginFn, isSuccess } = useLoginMutation();
+  const { showToast } = useToast();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -49,10 +49,10 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      showToast("Success", "success");
       navigate("/");
     }
-  });
-
+  }, [isSuccess, showToast, navigate]);
   return (
     <StyledLoginForm onSubmit={formik.handleSubmit}>
       <StyledLoginTitleContent>
