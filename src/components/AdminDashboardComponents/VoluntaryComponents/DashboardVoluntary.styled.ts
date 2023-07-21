@@ -1,8 +1,9 @@
 import { styled } from "styled-components";
 
 export const StyledDashboardVoluntaryMainContent = styled.article`
+  margin-left: 256px;
   display: grid;
-  width: 100%;
+  width: calc(100% - 256px);
   gap: 16px;
   height: 100%;
   grid-template-areas: "a a a . .";

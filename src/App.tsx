@@ -15,6 +15,7 @@ import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPage";
 import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
 import EmployeesPage from "pages/DashboardPages/EmployeesPage";
 import Toast from "components/SharedComponents/Toast/Toast";
+import AnimalCardsAddNewCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,10 @@ function App() {
             <Route
               path={DashboardRoutes.ANIMALCARDS}
               element={<AnimalCardsPage />}
+            />
+            <Route
+              path={DashboardRoutes.ANIMALCARDSNEWCARD}
+              element={<AnimalCardsAddNewCardPage />}
             />
             <Route
               path={DashboardRoutes.VOLUNTARY}
