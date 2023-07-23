@@ -149,6 +149,7 @@ export const StyledTextarea = styled.div<TextareaProps>`
 `;
 
 export const TextareaField = styled.textarea<TextareaProps>`
+  font-family: "Inter", sans-serif;
   background-color: ${getColor("white")};
   border-radius: 6px;
   border: 1px solid ${getColor("lightGray1")};

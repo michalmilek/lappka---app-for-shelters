@@ -1,106 +1,29 @@
 import React, { useRef, useState } from "react";
-import styled from "styled-components";
-import { getColor } from "utils/styles/getStyle/getColor";
-import { CloseIcon, PlusIcon } from "../icons/icons";
 import Typography from "../Typography/Typography";
-
-const FullContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const FileInputContainerContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const FileInputContainer = styled.label`
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  position: relative;
-  border: 1px solid #ccc;
-  padding: 8px 0 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  height: 40px;
-  border: 1px solid ${getColor("lightGray1")};
-  border-radius: 6px;
-  background: ${getColor("white")};
-`;
-
-const FileInput = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-`;
-
-const IconContainer = styled.div`
-  height: 40px;
-  width: 40px;
-  background: ${getColor("lightGray1")};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledImgsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`;
-
-const StyledImgPreviewContainer = styled.div`
-  position: relative;
-  width: 56px;
-  height: 72px;
-  object-fit: "cover";
-`;
-
-const StyledPlusIcon = styled(PlusIcon)`
-  cursor: pointer;
-  height: 16px;
-  width: 16px;
-  & path {
-    stroke: ${getColor("midGray2")};
-  }
-`;
-
-const StyledPreviewPhoto = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: "cover";
-  border-radius: 6px;
-`;
-
-const StyledCloseIcon = styled(CloseIcon)`
-  cursor: pointer;
-  position: absolute;
-  top: -5%;
-  right: -5%;
-  z-index: 10;
-  height: 20px;
-  width: 20px;
-  border-radius: 4px;
-  background: ${getColor("white")};
-  box-shadow: 0px 1px 2px 0px #1018280d;
-
-  & path {
-    stroke: ${getColor("midGray2")};
-  }
-`;
-
-interface CustomFileInputProps {
+import ReactCrop, { centerCrop, Crop, makeAspectCrop } from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import Button from "../Button/Button";
+import {
+  FileInput,
+  FileInputContainer,
+  FileInputContainerContent,
+  FullContainer,
+  ModalContentContainer,
+  ModalDiv,
+  ModalFooter,
+  ModalHeader,
+  PlusIconContainer,
+  StyledCloseIcon,
+  StyledImgPreviewContainer,
+  StyledImgsContainer,
+  StyledPlusIcon,
+  StyledPreviewPhoto,
+} from "./CustomFileInput.styled";
+import ImageCrop from "./Crop/ImageCrop";
+export interface CustomFileInputProps {
   label?: string;
   description?: string;
-  onFileChange: (files: FileList | null) => void;
+  onFileChange: (files: FileList | File | null) => void;
 }
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
@@ -111,6 +34,19 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [crop, setCrop] = useState<Crop>();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageNumber, setSelectedImageNumber] = useState<number | null>(
+    null
+  );
+
+  const handleSelectedImageChange = (
+    image: string | null,
+    imageNumber: number | null
+  ) => {
+    setSelectedImage(image);
+    setSelectedImageNumber(imageNumber);
+  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -178,6 +114,75 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     }
   };
 
+  const handleSaveImage = (index: number) => {
+    const image = document.createElement("img");
+    image.src = selectedImage!;
+    const canvas = document.createElement("canvas");
+
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    canvas.width = crop!.width!;
+    canvas.height = crop!.height!;
+
+    const ctx = canvas.getContext("2d")!;
+    ctx.drawImage(
+      image,
+      crop!.x * scaleX,
+      crop!.y * scaleY,
+      crop!.width * scaleX,
+      crop!.height * scaleY,
+      0,
+      0,
+      crop!.width!,
+      crop!.height!
+    );
+
+    canvas.toBlob(
+      (blob) => {
+        const base64String = canvas.toDataURL();
+        const byteString = atob(base64String.split(",")[1]);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uintArray = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+          uintArray[i] = byteString.charCodeAt(i);
+        }
+        const newFile = new File([arrayBuffer], fileNames[index], {
+          type: "image/jpeg",
+        });
+
+        const updatedPreviews = [...filePreviews];
+        updatedPreviews.splice(index, 1, base64String);
+        setFilePreviews(updatedPreviews);
+
+        onFileChange(newFile);
+        setSelectedImage(null);
+        setSelectedImageNumber(null);
+      },
+      "image/jpeg",
+      1
+    );
+  };
+
+  function onImageLoad(e: any) {
+    const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
+
+    const crop = centerCrop(
+      makeAspectCrop(
+        {
+          unit: "%",
+          width: 90,
+        },
+        16 / 9,
+        width,
+        height
+      ),
+      width,
+      height
+    );
+
+    setCrop(crop);
+  }
+
   return (
     <FullContainer>
       <FileInputContainerContent>
@@ -200,9 +205,9 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             tag="span">
             Upload
           </Typography>
-          <IconContainer>
+          <PlusIconContainer>
             <StyledPlusIcon />
-          </IconContainer>
+          </PlusIconContainer>
         </FileInputContainer>
         <Typography
           variant="UI Small/UI Text 12 Reg"
@@ -219,11 +224,24 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                 key={index}
                 src={preview}
                 alt={`Preview ${fileNames[index]}`}
+                onClick={() => {
+                  setSelectedImage(preview);
+                  setSelectedImageNumber(index);
+                }}
               />
               <StyledCloseIcon onClick={() => handleRemoveFile(index)} />
             </StyledImgPreviewContainer>
           ))}
         </StyledImgsContainer>
+      )}
+
+      {selectedImage && (
+        <ImageCrop
+          handleSaveImage={handleSaveImage}
+          handleSelectedImageChange={handleSelectedImageChange}
+          selectedImage={selectedImage}
+          selectedImageNumber={selectedImageNumber}
+        />
       )}
     </FullContainer>
   );

@@ -7,7 +7,6 @@ export const StyledProtectedPageContent = styled.div`
   margin-right: 2px;
   height: 100%;
   background: ${getColor("lightGray5")};
-  overflow-y: hidden;
 
   @media screen and (max-width: 1024px) {
     width: calc(100% - 180px);

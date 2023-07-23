@@ -9,6 +9,7 @@ import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { useFormik } from "formik";
+import useDeviceType from "hooks/useDeviceType";
 import React from "react";
 import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
@@ -29,30 +30,32 @@ const StyledDashboardAddNewCardMainContent = styled.article`
   display: flex;
   width: calc(100% - 256px);
   gap: 16px;
-  height: 100%;
   width: 100%;
   gap: 0;
+  padding: 34px 24px 0;
 `;
 
 const AnimalCardsAddNewCardFormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 34px 24px 4px;
   background: ${getColor("white")};
   border-radius: 8px;
   width: 50%;
-  height: 80%;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 const AnimalCardsAddNewCardFormInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 40px 24px 24px;
+  padding: 40px 24px;
 `;
 
 const AnimalCardsAddNewCardFlexInputContainer = styled.div`
@@ -68,10 +71,12 @@ const AnimalCardsAddNewCardFooter = styled.footer`
   gap: 16px;
   justify-content: flex-end;
   align-items: center;
-  padding: 16px 24px;
+  padding: 12px 24px;
 `;
 
 const AnimalCardsAddNewCardPage = () => {
+  const deviceType = useDeviceType();
+
   const initialValues: AddNewAnimalCardInterface = {
     animalName: "",
     description: "",
@@ -227,10 +232,15 @@ const AnimalCardsAddNewCardPage = () => {
             <Button
               variant="outline"
               type="button"
+              size={deviceType === "desktop" ? "Large" : "Medium"}
               onClick={formik.handleReset}>
               Anuluj
             </Button>
-            <Button type="submit">Zapisz</Button>
+            <Button
+              size={deviceType === "desktop" ? "Large" : "Medium"}
+              type="submit">
+              Zapisz
+            </Button>
           </AnimalCardsAddNewCardFooter>
         </AnimalCardsAddNewCardFormContainer>
       </StyledDashboardAddNewCardMainContent>
