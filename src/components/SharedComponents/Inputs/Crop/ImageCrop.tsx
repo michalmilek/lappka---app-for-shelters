@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactCrop, { centerCrop, makeAspectCrop, Crop } from "react-image-crop";
 import Button from "components/SharedComponents/Button/Button";
 import {
@@ -10,6 +10,8 @@ import {
 import Typography from "components/SharedComponents/Typography/Typography";
 
 interface ImageCropProps {
+  crop?: Crop;
+  handleCrop: (cropValue: Crop) => void;
   selectedImage: string | null;
   handleSelectedImageChange: (
     image: string | null,
@@ -21,12 +23,12 @@ interface ImageCropProps {
 
 const ImageCrop: React.FC<ImageCropProps> = ({
   selectedImage,
+  crop,
+  handleCrop,
   handleSelectedImageChange,
   handleSaveImage,
   selectedImageNumber,
 }) => {
-  const [crop, setCrop] = useState<Crop>();
-
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement, Event>) {
     const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
 
@@ -44,7 +46,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
       height
     );
 
-    setCrop(crop);
+    handleCrop(crop);
   }
 
   return (
@@ -63,7 +65,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
           maxHeight={600}
           maxWidth={600}
           crop={crop}
-          onChange={(newCrop) => setCrop(newCrop)}>
+          onChange={(newCrop) => handleCrop(newCrop)}>
           <img
             onLoad={onImageLoad}
             src={selectedImage || ""}

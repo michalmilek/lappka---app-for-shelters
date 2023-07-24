@@ -11,7 +11,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
-import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPage";
+import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsPage";
 import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
 import EmployeesPage from "pages/DashboardPages/EmployeesPage";
 import Toast from "components/SharedComponents/Toast/Toast";

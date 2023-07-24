@@ -19,6 +19,13 @@ export const StyledProtectedPageNavbar = styled.nav`
   user-select: none;
 `;
 
+
+export const StyledTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+
 export const StyledNavbarButtonContainer = styled.div`
   display: flex;
   align-items: center;

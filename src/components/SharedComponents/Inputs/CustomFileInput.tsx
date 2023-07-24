@@ -1,17 +1,12 @@
 import React, { useRef, useState } from "react";
 import Typography from "../Typography/Typography";
-import ReactCrop, { centerCrop, Crop, makeAspectCrop } from "react-image-crop";
+import { Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import Button from "../Button/Button";
 import {
   FileInput,
   FileInputContainer,
   FileInputContainerContent,
   FullContainer,
-  ModalContentContainer,
-  ModalDiv,
-  ModalFooter,
-  ModalHeader,
   PlusIconContainer,
   StyledCloseIcon,
   StyledImgPreviewContainer,
@@ -39,6 +34,10 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   const [selectedImageNumber, setSelectedImageNumber] = useState<number | null>(
     null
   );
+
+  const handleCrop = (cropValue: Crop) => {
+    setCrop(cropValue);
+  };
 
   const handleSelectedImageChange = (
     image: string | null,
@@ -119,8 +118,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     image.src = selectedImage!;
     const canvas = document.createElement("canvas");
 
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
+    const scaleX = image.naturalWidth / image.width!;
+    const scaleY = image.naturalHeight / image.height!;
     canvas.width = crop!.width!;
     canvas.height = crop!.height!;
 
@@ -129,8 +128,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
       image,
       crop!.x * scaleX,
       crop!.y * scaleY,
-      crop!.width * scaleX,
-      crop!.height * scaleY,
+      crop!.width! * scaleX,
+      crop!.height! * scaleY,
       0,
       0,
       crop!.width!,
@@ -162,26 +161,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
       1
     );
   };
-
-  function onImageLoad(e: any) {
-    const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
-
-    const crop = centerCrop(
-      makeAspectCrop(
-        {
-          unit: "%",
-          width: 90,
-        },
-        16 / 9,
-        width,
-        height
-      ),
-      width,
-      height
-    );
-
-    setCrop(crop);
-  }
 
   return (
     <FullContainer>
@@ -237,6 +216,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
       {selectedImage && (
         <ImageCrop
+          crop={crop}
+          handleCrop={handleCrop}
           handleSaveImage={handleSaveImage}
           handleSelectedImageChange={handleSelectedImageChange}
           selectedImage={selectedImage}
