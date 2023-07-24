@@ -7,7 +7,11 @@ export const StyledCardFormComponent = styled.form`
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
-  width: 100%;
+  width: 60%;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 export const StyledCardHeader = styled.header`
@@ -37,6 +41,8 @@ export const StyledCardImg = styled.img`
   flex: 1 1;
   width: 116px;
   height: 120px;
+
+  max-width: 140px;
   border-radius: 12px;
 `;
 
