@@ -14,4 +14,5 @@ export const DashboardRoutes = {
   ANIMALCARDSCARD: "/dashboard/animal-cards/:id",
   VOLUNTARY: "/dashboard/voluntary",
   EMPLOYEES: "/dashboard/employees",
+  ADDNEWEMPLOYEE: "/dashboard/employees/add-new-employee",
 };

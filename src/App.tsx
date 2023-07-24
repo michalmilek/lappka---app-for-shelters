@@ -12,10 +12,11 @@ import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
 import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsPage";
 import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
-import EmployeesPage from "pages/DashboardPages/EmployeesPage";
+import EmployeesPage from "pages/DashboardPages/EmployeesPages/EmployeesPage";
 import Toast from "components/SharedComponents/Toast/Toast";
 import AnimalCardsAddNewCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
 import AnimalCardsCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsCardPage";
+import AddNewEmployeePage from "pages/DashboardPages/EmployeesPages/AddNewEmployeePage";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,10 @@ function App() {
             <Route
               path={DashboardRoutes.EMPLOYEES}
               element={<EmployeesPage />}
+            />
+            <Route
+              path={DashboardRoutes.ADDNEWEMPLOYEE}
+              element={<AddNewEmployeePage />}
             />
           </Route>
         </Routes>

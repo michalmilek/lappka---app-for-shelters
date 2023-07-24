@@ -5,7 +5,7 @@ export const StyledDashboardEmployeesMainContent = styled.article`
   display: flex;
   padding: 40px 24px;
   width: 100%;
-
+  background: ${getColor("lightGray5")};
   gap: 0;
 `;
 
