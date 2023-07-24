@@ -17,6 +17,8 @@ import Toast from "components/SharedComponents/Toast/Toast";
 import AnimalCardsAddNewCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
 import AnimalCardsCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsCardPage";
 import AddNewEmployeePage from "pages/DashboardPages/EmployeesPages/AddNewEmployeePage";
+import AccountSettings from "pages/DashboardPages/AccountSettingsPage";
+import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
 
 const queryClient = new QueryClient();
 
@@ -76,6 +78,10 @@ function App() {
             <Route
               path={DashboardRoutes.ADDNEWEMPLOYEE}
               element={<AddNewEmployeePage />}
+            />
+            <Route
+              path={DashboardRoutes.ACCOUNTSETTINGS}
+              element={<AccountSettingsPage />}
             />
           </Route>
         </Routes>

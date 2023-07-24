@@ -15,4 +15,5 @@ export const DashboardRoutes = {
   VOLUNTARY: "/dashboard/voluntary",
   EMPLOYEES: "/dashboard/employees",
   ADDNEWEMPLOYEE: "/dashboard/employees/add-new-employee",
+  ACCOUNTSETTINGS: "/dashboard/account-settings",
 };
