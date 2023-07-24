@@ -1,5 +1,6 @@
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import { SVGProps } from "react";
+import { Link } from "react-router-dom";
 import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
@@ -117,4 +118,8 @@ export const StyledUserMenuDropdownItem = styled.li`
   &:hover {
     background: ${getColor("lightGray4")};
   }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
