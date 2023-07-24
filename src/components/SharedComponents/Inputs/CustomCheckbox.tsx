@@ -8,6 +8,7 @@ export interface CheckboxInterface
   extends React.InputHTMLAttributes<HTMLInputElement> {
   color: Color;
   label?: string;
+  handleState?: () => void;
 }
 
 const CustomCheckbox: React.FC<CheckboxInterface> = ({
@@ -15,28 +16,19 @@ const CustomCheckbox: React.FC<CheckboxInterface> = ({
   checked,
   label,
   name,
+  handleState,
   ...rest
 }) => {
-  const [isChecked, setChecked] = useState<boolean>(true);
-
-  const handleCheck = () => {
-    setChecked((prev) => !prev);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("rememberMe", isChecked.toString());
-  }, [isChecked]);
-
   return (
     <CheckboxWrapper
       htmlFor={name}
-      onClick={handleCheck}>
+      onClick={handleState}>
       <Checkmark
         color={color}
-        checked={isChecked}
+        checked={checked}
         name={name}
         {...rest}>
-        {isChecked && <CheckboxMarkIcon />}
+        {checked && <CheckboxMarkIcon />}
       </Checkmark>
       {label && <Typography variant="UI/UI Text 14 Reg">{label}</Typography>}
     </CheckboxWrapper>
