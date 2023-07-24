@@ -33,7 +33,7 @@ const DashboardNavbar = ({
   return (
     <StyledProtectedPageNavbar>
       <StyledTitle>
-        {previousTitle && (
+        {previousTitle && deviceType !== "mobile" && (
           <Typography
             color="midGray2"
             variant="Heading 20 Semi Bold"

@@ -11,6 +11,7 @@ export const DashboardRoutes = {
   MESSAGES: "/dashboard/messages",
   ANIMALCARDS: "/dashboard/animal-cards",
   ANIMALCARDSNEWCARD: "/dashboard/animal-cards/add-new-card",
+  ANIMALCARDSCARD: "/dashboard/animal-cards/:id",
   VOLUNTARY: "/dashboard/voluntary",
   EMPLOYEES: "/dashboard/employees",
 };

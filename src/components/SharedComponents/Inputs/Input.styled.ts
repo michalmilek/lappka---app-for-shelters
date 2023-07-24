@@ -93,6 +93,11 @@ export const InputField = styled.input<InputProps>`
     css`
       padding: 4px 26px 4px 16px;
     `}
+
+
+    &:read-only {
+    border: none !important;
+  }
 `;
 
 export const IconContainer = styled.div<InputProps>`
@@ -189,6 +194,10 @@ export const TextareaField = styled.textarea<TextareaProps>`
     css`
       padding: 4px 8px;
     `}
+
+        &:read-only {
+    border: none !important;
+  }
 `;
 
 //RADIO INPUT
