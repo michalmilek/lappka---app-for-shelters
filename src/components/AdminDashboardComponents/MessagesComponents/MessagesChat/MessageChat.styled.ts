@@ -11,7 +11,7 @@ export const ChatContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   background-color: ${getColor("lightGray5")};
-  height: calc(100% - 56px);
+  height: 100%;
 `;
 
 export const MessageContainer = styled.div<MessageInterface>`

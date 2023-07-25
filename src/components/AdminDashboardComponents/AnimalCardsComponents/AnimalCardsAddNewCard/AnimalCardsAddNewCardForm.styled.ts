@@ -35,6 +35,7 @@ export const AnimalCardsAddNewCardFormInputContainer = styled.div`
 `;
 
 export const AnimalCardsAddNewCardFlexInputContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;

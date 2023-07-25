@@ -17,6 +17,10 @@ export const StyledDashboardVoluntaryMainContentFormsContainer = styled.form`
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const StyledDashboardVoluntaryContent = styled.div`

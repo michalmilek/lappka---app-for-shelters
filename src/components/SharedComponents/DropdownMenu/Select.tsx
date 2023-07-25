@@ -2,25 +2,32 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { CheckIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
+import { getColor } from "utils/styles/getStyle/getColor";
 
 const SelectContainer = styled.div`
   position: relative;
+  background: ${getColor("white")};
+  z-index: 999;
+`;
+
+const SelectDiv = styled.div`
+  z-index: 999;
+  background: ${getColor("white")};
 `;
 
 const OptionList = styled.ul`
-  z-index: 50;
   position: absolute;
-  top: 100%;
-  left: 150%;
-  z-index: 1;
-  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  background: ${getColor("white")};
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   list-style: none;
-  padding: 0;
-  margin: 0;
   width: 171px;
   padding: 4px 0;
+  z-index: 999;
 `;
 
 const OptionItem = styled.li`
@@ -28,9 +35,9 @@ const OptionItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 50;
   padding: 4px 20px;
   cursor: pointer;
+  z-index: 100;
 
   &:hover {
     background-color: #f3f3f3;
@@ -78,7 +85,7 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <SelectContainer>
-      <div onClick={handleDropdownIconClick}>{dropdownIcon}</div>
+      <SelectDiv onClick={handleDropdownIconClick}>{dropdownIcon}</SelectDiv>
       {isDropdownOpen && (
         <OptionList ref={dropdownRef}>
           {options.map((option) => (

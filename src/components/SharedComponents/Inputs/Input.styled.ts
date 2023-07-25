@@ -20,7 +20,6 @@ export const StyledDiv = styled.div`
 `;
 
 export const StyledInput = styled.div<InputProps>`
-  z-index: 5;
   position: relative;
   width: 100%;
 
@@ -44,7 +43,8 @@ export const StyledInput = styled.div<InputProps>`
 `;
 
 export const InputField = styled.input<InputProps>`
-  z-index: 5;
+  position: relative;
+  z-index: 0;
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? getColor(backgroundColor) : getColor("white")};
   border-radius: 6px;
@@ -94,10 +94,13 @@ export const InputField = styled.input<InputProps>`
       padding: 4px 26px 4px 16px;
     `}
 
-
-    &:read-only {
-    border: none !important;
-  }
+    ${({ isSelect }) =>
+    !isSelect &&
+    css`
+      &:read-only {
+        border: none !important;
+      }
+    `}
 `;
 
 export const IconContainer = styled.div<InputProps>`

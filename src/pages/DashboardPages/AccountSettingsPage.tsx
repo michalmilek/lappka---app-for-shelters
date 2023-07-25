@@ -38,6 +38,8 @@ const initialValues = {
   city: "",
   nip: "",
   krs: "",
+  avatar: "",
+  avatarPreview: "",
   fullName: "",
   email: "",
 };

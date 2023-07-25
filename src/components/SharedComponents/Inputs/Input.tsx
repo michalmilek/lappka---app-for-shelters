@@ -9,10 +9,10 @@ import {
 } from "./Input.styled";
 import { EyeIcon, EyeOffIcon } from "../icons/icons";
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputSize?: InputSize;
   icon?: JSX.Element;
+  isSelect?: boolean;
   label?: string;
   error?: string | null;
   backgroundColor?: Color;

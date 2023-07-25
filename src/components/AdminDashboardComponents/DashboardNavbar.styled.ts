@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 export const StyledProtectedPageNavbar = styled.nav`
+  position: relative;
   height: 56px;
   width: 100%;
   display: flex;
@@ -9,7 +10,7 @@ export const StyledProtectedPageNavbar = styled.nav`
   padding: 12px 32px;
   justify-content: space-between;
   background: ${getColor("white")};
-  z-index: 10;
+  z-index: 15;
   box-shadow: 0px 12px 1px 0px #00000003;
 
   box-shadow: 0px 8px 4px 0px #00000005;

@@ -45,6 +45,8 @@ const AnimalCardsAddNewCardForm = ({
         <Input
           inputSize="Large"
           label="Gatunek"
+          readOnly
+          isSelect
           icon={
             <Select
               dropdownIcon={<ArrowDownIcon />}
@@ -61,6 +63,8 @@ const AnimalCardsAddNewCardForm = ({
         />
         <Input
           inputSize="Large"
+          readOnly
+          isSelect
           label="Umaszczenie"
           name="colour"
           icon={
@@ -79,6 +83,8 @@ const AnimalCardsAddNewCardForm = ({
 
         <AnimalCardsAddNewCardFlexInputContainer>
           <Input
+            isSelect
+            readOnly
             inputSize="Large"
             label="Płeć"
             name="sex"
@@ -107,6 +113,8 @@ const AnimalCardsAddNewCardForm = ({
 
         <AnimalCardsAddNewCardFlexInputContainer>
           <Input
+            readOnly
+            isSelect
             inputSize="Large"
             label="Sterylizacja"
             icon={
@@ -124,6 +132,8 @@ const AnimalCardsAddNewCardForm = ({
             onChange={formik.handleChange}
           />
           <Input
+            readOnly
+            isSelect
             inputSize="Large"
             label="Widoczność"
             icon={

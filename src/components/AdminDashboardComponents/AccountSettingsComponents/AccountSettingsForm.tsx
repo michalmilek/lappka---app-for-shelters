@@ -3,7 +3,7 @@ import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { FormikProps } from "formik";
 import { AccountSettingsType } from "pages/DashboardPages/AccountSettingsPage";
-import React from "react";
+import React, { useRef } from "react";
 import {
   AccountSettingsIMG,
   AvatarChangeContainer,
@@ -18,6 +18,19 @@ const AccountSettingsForm = ({
 }: {
   formik: FormikProps<AccountSettingsType>;
 }) => {
+  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      formik.setFieldValue("avatar", file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        formik.setFieldValue("avatarPreview", reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const fileUploadRef = useRef<HTMLInputElement>(null);
   return (
     <>
       <InputsFirstPartContainer>
@@ -107,10 +120,31 @@ const AccountSettingsForm = ({
         </Typography>
         <AvatarChangeContainer>
           <AccountSettingsIMG
-            src="https://styles.redditmedia.com/t5_2z977/styles/communityIcon_krjidju88kd71.png"
+            src={
+              formik.values.avatarPreview ||
+              "https://styles.redditmedia.com/t5_2z977/styles/communityIcon_krjidju88kd71.png"
+            }
             alt=""
           />
-          <Button variant="outline">Edytuj</Button>
+          <Button
+            type="button"
+            onClick={() => {
+              if (fileUploadRef.current) {
+                fileUploadRef.current.click();
+              }
+            }}
+            variant="outline">
+            Edytuj
+          </Button>
+          <input
+            hidden
+            ref={fileUploadRef}
+            id="avatar"
+            name="avatar"
+            type="file"
+            accept="image/*"
+            onChange={handleAvatarChange}
+          />
         </AvatarChangeContainer>
 
         <Input
