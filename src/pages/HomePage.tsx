@@ -1,34 +1,9 @@
-import Input from "../components/SharedComponents/Inputs/Input";
 import React from "react";
-import CustomRadio from "components/SharedComponents/Inputs/CustomRadio";
+import { Navigate } from "react-router-dom";
+import { DashboardRoutes } from "router/router";
 
 const HomePage = () => {
-  const [select, setSelect] = React.useState("optionA");
-  console.log("🚀 ~ select:", select);
-
-  return (
-    <div>
-      <Input />
-      <input
-        type="radio"
-        name="test"
-        value={"optionB"}
-        onChange={(e) => setSelect(e.target.value)}
-      />
-      <input
-        type="radio"
-        name="test"
-        value={"optionB"}
-        onChange={(e) => setSelect(e.target.value)}
-      />
-      <input
-        type="radio"
-        name="test"
-        value={"optionC"}
-        onChange={(e) => setSelect(e.target.value)}
-      />
-    </div>
-  );
+  return <Navigate to={DashboardRoutes.DASHBOARD} />;
 };
 
 export default HomePage;
