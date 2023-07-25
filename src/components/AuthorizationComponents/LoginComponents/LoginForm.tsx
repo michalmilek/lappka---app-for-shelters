@@ -48,10 +48,6 @@ const LoginForm = () => {
     },
   });
 
-  const handleRememberMeChange = () => {
-    setRememberMe(!rememberMe);
-  };
-
   useEffect(() => {
     if (isSuccess) {
       showToast("Success", "success");
@@ -126,7 +122,7 @@ const LoginForm = () => {
             label="Pamiętaj mnie"
             name="rememberMe"
             checked={rememberMe}
-            handleState={handleRememberMeChange}
+            onClick={() => setRememberMe(!rememberMe)}
             color="primary500"
           />
 

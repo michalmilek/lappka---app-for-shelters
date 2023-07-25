@@ -81,10 +81,6 @@ const DashboardAnimalChart = () => {
   const [timeSelect, setTimeSelect] = useState("Month");
   const deviceType = useDeviceType();
 
-  const handleRadioChange = (value: string) => {
-    setTimeSelect(value);
-  };
-
   const formatYAxis = (tickItem: number) => {
     if (tickItem === 0) return tickItem.toString();
     const newItem = tickItem.toString();
@@ -114,21 +110,27 @@ const DashboardAnimalChart = () => {
                 value={"Week"}
                 label="Tydzień"
                 checked={timeSelect === "Week"}
-                handleRadioChange={handleRadioChange}
+                onChange={(e) => {
+                  setTimeSelect(e.target.value);
+                }}
               />
               <CustomRadio
                 name="filterDate"
                 value={"Month"}
                 checked={timeSelect === "Month"}
                 label="Miesiąc"
-                handleRadioChange={handleRadioChange}
+                onChange={(e) => {
+                  setTimeSelect(e.target.value);
+                }}
               />
               <CustomRadio
                 name="filterDate"
                 value={"Year"}
                 label="Rok"
                 checked={timeSelect === "Year"}
-                handleRadioChange={handleRadioChange}
+                onChange={(e) => {
+                  setTimeSelect(e.target.value);
+                }}
               />
             </StyledDashboardChartDropdownContainerList>
           </StyledDashboardChartDropdownContainer>

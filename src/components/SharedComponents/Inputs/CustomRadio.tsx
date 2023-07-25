@@ -3,45 +3,32 @@ import Typography from "../Typography/Typography";
 import { styled } from "styled-components";
 import { RadioMarkIcon } from "../icons/icons";
 import { getColor } from "utils/styles/getStyle/getColor";
-import { Radiomark, RadioWrapper } from "./Input.styled";
+import { RadioInput, Radiomark, RadioWrapper } from "./Input.styled";
 
 export interface RadioInterface
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  handleRadioChange?: (value: string) => void;
 }
-
-
 
 const CustomRadio: React.FC<RadioInterface> = ({
   checked,
   label,
-  handleRadioChange,
-  value,
+  value = "",
   ...rest
 }) => {
   return (
-    <RadioWrapper
-      onClick={() => {
-        if (typeof value === "string" && handleRadioChange)
-          handleRadioChange(value);
-      }}>
+    <RadioWrapper {...rest}>
       <Radiomark
         checked={checked}
         {...rest}>
         {checked && <RadioMarkIcon />}
+        <RadioInput
+          value={value}
+          checked={checked}
+          type="radio"
+          {...rest}
+        />
       </Radiomark>
-      <input
-        readOnly
-        checked={checked}
-        onClick={() => {
-          if (typeof value === "string" && handleRadioChange)
-            handleRadioChange(value);
-        }}
-        type="radio"
-        {...rest}
-        hidden
-      />
       {label && (
         <Typography
           tag="label"

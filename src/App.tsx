@@ -84,6 +84,11 @@ function App() {
               element={<AccountSettingsPage />}
             />
           </Route>
+
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
         </Routes>
       </BrowserRouter>
       <Toast />
