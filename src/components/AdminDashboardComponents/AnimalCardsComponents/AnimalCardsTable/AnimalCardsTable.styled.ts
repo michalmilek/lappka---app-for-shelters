@@ -69,6 +69,7 @@ export const TableComponentHeaderContainer = styled.div`
 export const TableContainer = styled.table`
   width: 100%;
   border-collapse: separate;
+  border-spacing: 0;
   border-bottom: 1px solid ${getColor("lightGray4")};
 `;
 
@@ -117,6 +118,7 @@ interface DropdownDetailsInterface {
 }
 
 export const StyledDropdownContainer = styled.ul`
+  z-index: 20;
   list-style-type: none;
   display: flex;
   flex-direction: column;

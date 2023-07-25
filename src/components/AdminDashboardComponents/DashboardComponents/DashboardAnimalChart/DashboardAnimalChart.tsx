@@ -15,14 +15,12 @@ import { getColor } from "utils/styles/getStyle/getColor";
 import {
   StyledArrowUpIcon,
   StyledDashboardChartContainer,
-  StyledDashboardChartDropdownContainer,
-  StyledDashboardChartDropdownContainerList,
   StyledDashboardChartTitleContainer,
 } from "./DashboardAnimalChart.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { CalendarIcon } from "components/SharedComponents/icons/icons";
-import CustomRadio from "components/SharedComponents/Inputs/CustomRadio";
 import useDeviceType from "hooks/useDeviceType";
+import DashboardChartDropdown from "./DashboardChartDropdown";
 
 const data = [
   {
@@ -88,6 +86,10 @@ const DashboardAnimalChart = () => {
     return newItem2;
   };
 
+  const handleTimeSelectChange = (value: string) => {
+    setTimeSelect(value);
+  };
+
   return (
     <StyledDashboardChartContainer>
       <StyledDashboardChartTitleContainer>
@@ -103,37 +105,10 @@ const DashboardAnimalChart = () => {
           <StyledArrowUpIcon isDropDownActive={isDropDownActive} />
         </Button>
         {isDropDownActive && (
-          <StyledDashboardChartDropdownContainer>
-            <StyledDashboardChartDropdownContainerList>
-              <CustomRadio
-                name="filterDate"
-                value={"Week"}
-                label="Tydzień"
-                checked={timeSelect === "Week"}
-                onChange={(e) => {
-                  setTimeSelect(e.target.value);
-                }}
-              />
-              <CustomRadio
-                name="filterDate"
-                value={"Month"}
-                checked={timeSelect === "Month"}
-                label="Miesiąc"
-                onChange={(e) => {
-                  setTimeSelect(e.target.value);
-                }}
-              />
-              <CustomRadio
-                name="filterDate"
-                value={"Year"}
-                label="Rok"
-                checked={timeSelect === "Year"}
-                onChange={(e) => {
-                  setTimeSelect(e.target.value);
-                }}
-              />
-            </StyledDashboardChartDropdownContainerList>
-          </StyledDashboardChartDropdownContainer>
+          <DashboardChartDropdown
+            timeSelect={timeSelect}
+            handleTimeSelectChange={handleTimeSelectChange}
+          />
         )}
       </StyledDashboardChartTitleContainer>
       <ResponsiveContainer

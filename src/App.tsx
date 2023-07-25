@@ -19,6 +19,7 @@ import AnimalCardsCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCar
 import AddNewEmployeePage from "pages/DashboardPages/EmployeesPages/AddNewEmployeePage";
 import AccountSettings from "pages/DashboardPages/AccountSettingsPage";
 import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
+import HomePage from "pages/HomePage";
 
 const queryClient = new QueryClient();
 
