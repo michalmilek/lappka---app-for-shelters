@@ -194,7 +194,7 @@ export const TextareaField = styled.textarea<TextareaProps>`
 //RADIO INPUT
 //RADIO INPUT
 
-export const RadioWrapper = styled.div`
+export const RadioWrapper = styled.div<RadioInterface>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -207,6 +207,8 @@ export const RadioWrapper = styled.div`
 `;
 
 export const Radiomark = styled.div<RadioInterface>`
+  position: relative;
+
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -216,4 +218,14 @@ export const Radiomark = styled.div<RadioInterface>`
   align-items: center;
   margin-right: 8px;
   transition: all 0.3s ease-in-out;
+`;
+
+export const RadioInput = styled.input`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+
+  z-index: 100;
 `;

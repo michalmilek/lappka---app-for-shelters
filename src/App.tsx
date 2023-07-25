@@ -58,6 +58,11 @@ function App() {
               element={<VoluntaryPage />}
             />
           </Route>
+
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

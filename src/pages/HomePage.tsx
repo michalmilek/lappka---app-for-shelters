@@ -4,37 +4,28 @@ import CustomRadio from "components/SharedComponents/Inputs/CustomRadio";
 
 const HomePage = () => {
   const [select, setSelect] = React.useState("optionA");
+  console.log("🚀 ~ select:", select);
 
-  const handleSelectChange = (event: any) => {
-    const value = event.target.value;
-    setSelect(value);
-  };
   return (
     <div>
       <Input />
-      <CustomRadio
-        label="Test"
-        name="group"
-        value={"test3"}
-        color="primary500"
-        checked={select === "test3"}
-        onChange={handleSelectChange}
+      <input
+        type="radio"
+        name="test"
+        value={"optionB"}
+        onChange={(e) => setSelect(e.target.value)}
       />
-      <CustomRadio
-        label="Test2"
-        name="group"
-        value={"test2"}
-        color="primary500"
-        checked={select === "test2"}
-        onChange={handleSelectChange}
+      <input
+        type="radio"
+        name="test"
+        value={"optionB"}
+        onChange={(e) => setSelect(e.target.value)}
       />
-      <CustomRadio
-        label="Test3"
-        name="group"
-        value={"test"}
-        color="primary500"
-        checked={select === "test"}
-        onChange={handleSelectChange}
+      <input
+        type="radio"
+        name="test"
+        value={"optionC"}
+        onChange={(e) => setSelect(e.target.value)}
       />
     </div>
   );
