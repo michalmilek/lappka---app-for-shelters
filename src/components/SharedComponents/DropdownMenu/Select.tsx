@@ -1,18 +1,56 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { CheckIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { getColor } from "utils/styles/getStyle/getColor";
 
+export type Option = {
+  value: string;
+  label: string;
+};
+
+export interface SelectProps<T extends Option>
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  value: Option["value"];
+  options: T[];
+  handleChange: (value: T) => void;
+  dropdownIcon: React.ReactNode;
+  placeholder?: string;
+  label?: string;
+  error?: string;
+}
+
+const SelectContainerWithLabels = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const SelectContainer = styled.div`
   position: relative;
   background: ${getColor("white")};
   z-index: 999;
+  width: 100%;
 `;
 
-const SelectDiv = styled.div`
+const SelectDiv = styled.div<React.SelectHTMLAttributes<HTMLSelectElement>>`
   z-index: 999;
   background: ${getColor("white")};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid ${getColor("lightGray2")};
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  border-radius: 6px;
+  width: 100%;
+  padding: 8px 8px 8px 12px;
+  outline: none;
+  position: relative;
+  height: 40px;
+  cursor: pointer;
 `;
 
 const OptionList = styled.ul`
@@ -25,7 +63,7 @@ const OptionList = styled.ul`
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   list-style: none;
-  width: 171px;
+  width: 100%;
   padding: 4px 0;
   z-index: 999;
 `;
@@ -44,19 +82,16 @@ const OptionItem = styled.li`
   }
 `;
 
-interface SelectProps {
-  options: string[] | number[];
-  selectedOption: string | number;
-  onSelectOption: Function;
-  dropdownIcon: React.ReactNode;
-}
-
-const Select: React.FC<SelectProps> = ({
+function Select<T extends Option>({
+  label,
+  error,
+  value,
   options,
-  selectedOption,
-  onSelectOption,
+  handleChange,
   dropdownIcon,
-}) => {
+  placeholder = "Wybierz z listy",
+  ...rest
+}: SelectProps<T>) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLUListElement>(null);
@@ -72,7 +107,7 @@ const Select: React.FC<SelectProps> = ({
 
   const handleDropdownIconClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    setIsDropdownOpen(true);
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   useEffect(() => {
@@ -81,32 +116,59 @@ const Select: React.FC<SelectProps> = ({
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  });
+
+  function handleOptionSelect(option: T) {
+    setIsDropdownOpen(false);
+    handleChange(option);
+  }
+
+  const selectedOption = options.find((option) => option.value === value);
 
   return (
-    <SelectContainer>
-      <SelectDiv onClick={handleDropdownIconClick}>{dropdownIcon}</SelectDiv>
-      {isDropdownOpen && (
-        <OptionList ref={dropdownRef}>
-          {options.map((option) => (
-            <OptionItem
-              key={option}
-              onClick={() => {
-                setIsDropdownOpen(false);
-                onSelectOption(option);
-              }}>
-              <Typography
-                color="darkGray2"
-                variant="UI/UI Text 14 Reg">
-                {option}
-              </Typography>
-              {selectedOption === option && <CheckIcon />}
-            </OptionItem>
-          ))}
-        </OptionList>
-      )}
-    </SelectContainer>
+    <SelectContainerWithLabels>
+      <Typography
+        tag="label"
+        color="darkGray2"
+        variant="UI Small/UI Text 13 Med">
+        {label}
+      </Typography>
+      <SelectContainer>
+        <SelectDiv
+          {...rest}
+          onClick={handleDropdownIconClick}>
+          <Typography
+            tag="label"
+            variant="UI/UI Text 14 Reg"
+            color={selectedOption ? "darkGray2" : "midGray4"}>
+            {selectedOption ? selectedOption.label : placeholder}
+          </Typography>
+          {dropdownIcon}
+        </SelectDiv>
+        {isDropdownOpen && (
+          <OptionList ref={dropdownRef}>
+            {options.map((option) => (
+              <OptionItem
+                key={option.value}
+                onClick={() => handleOptionSelect(option)}>
+                <Typography
+                  color="darkGray2"
+                  variant="UI/UI Text 14 Reg">
+                  {option.label}
+                </Typography>
+                {selectedOption?.value === option.value && <CheckIcon />}
+              </OptionItem>
+            ))}
+          </OptionList>
+        )}
+      </SelectContainer>
+      <Typography
+        tag="span"
+        color="error"
+        variant="UI Small/UI Text 13 Med">
+        {error}
+      </Typography>
+    </SelectContainerWithLabels>
   );
-};
-
+}
 export default Select;
