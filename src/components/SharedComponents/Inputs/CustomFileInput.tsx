@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Typography from "../Typography/Typography";
 import { Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -34,6 +34,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   const [selectedImageNumber, setSelectedImageNumber] = useState<number | null>(
     null
   );
+  const [initialFileUpload, setInitialFileUpload] = useState(true);
 
   const handleCrop = (cropValue: Crop) => {
     setCrop(cropValue);
@@ -154,13 +155,34 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         setFilePreviews(updatedPreviews);
 
         onFileChange(newFile);
-        setSelectedImage(null);
-        setSelectedImageNumber(null);
+        if (
+          typeof selectedImageNumber === "number" &&
+          fileNames.length - 1 > selectedImageNumber
+        ) {
+          if (initialFileUpload) {
+            setInitialFileUpload(false);
+          }
+          setSelectedImage(filePreviews[selectedImageNumber + 1]);
+          setSelectedImageNumber(selectedImageNumber + 1);
+        } else if (
+          typeof selectedImageNumber === "number" &&
+          fileNames.length - 1 <= selectedImageNumber
+        ) {
+          setSelectedImage(null);
+          setSelectedImageNumber(null);
+        }
       },
       "image/jpeg",
       1
     );
   };
+
+  useEffect(() => {
+    if (initialFileUpload && filePreviews) {
+      setSelectedImageNumber(0);
+      setSelectedImage(filePreviews[0]);
+    }
+  }, [initialFileUpload, filePreviews]);
 
   return (
     <FullContainer>
