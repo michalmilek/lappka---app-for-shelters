@@ -30,55 +30,53 @@ const Input = ({
 }: InputProps) => {
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
 
-  let isPassword;
-  if (name) {
-    isPassword = /password/i.test(name);
-  }
+const isPassword = type === "password";
 
-  const handleTogglePasswordVisibility = () => {
-    setPasswordVisibility(!passwordVisibility);
-  };
+const handleTogglePasswordVisibility = () => {
+  setPasswordVisibility(!passwordVisibility);
+};
 
-  return (
-    <StyledDiv>
-      {label && (
-        <Typography
-          tag="span"
-          variant="UI Small/UI Text 13 Med"
-          color="darkGray2">
-          {label}
-        </Typography>
-      )}
-      <StyledInput
+return (
+  <StyledDiv>
+    {label && (
+      <Typography
+        tag="span"
+        variant="UI Small/UI Text 13 Med"
+        color="darkGray2">
+        {label}
+      </Typography>
+    )}
+    <StyledInput
+      inputSize={inputSize}
+      {...rest}>
+      <InputField
+        name={name}
         inputSize={inputSize}
-        {...rest}>
-        <InputField
-          name={name}
+        value={value}
+        error={error}
+        type={isPassword ? (!passwordVisibility ? "password" : "text") : type}
+        {...rest}
+      />
+      {isPassword && (
+        <IconContainer
           inputSize={inputSize}
-          value={value}
-          error={error}
-          type={isPassword && !passwordVisibility ? "password" : type}
-          {...rest}
-        />
-        {isPassword && (
-          <IconContainer
-            inputSize={inputSize}
-            onClick={handleTogglePasswordVisibility}>
-            {passwordVisibility ? <EyeOffIcon /> : <EyeIcon />}
-          </IconContainer>
-        )}
-        {icon && <IconContainer inputSize={inputSize}>{icon}</IconContainer>}
-      </StyledInput>
-      {error && (
-        <Typography
-          tag="span"
-          color="error"
-          variant="UI Small/UI Text 12 Reg">
-          {error}
-        </Typography>
+          onClick={handleTogglePasswordVisibility}>
+          {passwordVisibility ? <EyeOffIcon /> : <EyeIcon />}
+        </IconContainer>
       )}
-    </StyledDiv>
-  );
+
+      {icon && <IconContainer inputSize={inputSize}>{icon}</IconContainer>}
+    </StyledInput>
+    {error && (
+      <Typography
+        tag="span"
+        color="error"
+        variant="UI Small/UI Text 12 Reg">
+        {error}
+      </Typography>
+    )}
+  </StyledDiv>
+);
 };
 
 export default Input;

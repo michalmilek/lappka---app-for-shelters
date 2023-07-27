@@ -69,6 +69,11 @@ function App() {
               element={<EmployeesPage />}
             />
           </Route>
+
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
         </Routes>
       </BrowserRouter>
       <Toast />

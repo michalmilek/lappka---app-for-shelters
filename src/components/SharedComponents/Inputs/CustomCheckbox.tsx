@@ -17,26 +17,14 @@ const CustomCheckbox: React.FC<CheckboxInterface> = ({
   name,
   ...rest
 }) => {
-  const [isChecked, setChecked] = useState<boolean>(true);
-
-  const handleCheck = () => {
-    setChecked((prev) => !prev);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("rememberMe", isChecked.toString());
-  }, [isChecked]);
-
   return (
-    <CheckboxWrapper
-      htmlFor={name}
-      onClick={handleCheck}>
+    <CheckboxWrapper htmlFor={name}>
       <Checkmark
         color={color}
-        checked={isChecked}
+        checked={checked}
         name={name}
         {...rest}>
-        {isChecked && <CheckboxMarkIcon />}
+        {checked && <CheckboxMarkIcon />}
       </Checkmark>
       {label && <Typography variant="UI/UI Text 14 Reg">{label}</Typography>}
     </CheckboxWrapper>

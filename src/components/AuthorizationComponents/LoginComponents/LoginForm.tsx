@@ -19,13 +19,14 @@ import {
 } from "./Login.styled";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
 import useDeviceType from "hooks/useDeviceType";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useToast from "hooks/useToast";
 
 const LoginForm = () => {
   const deviceType = useDeviceType();
   const navigate = useNavigate();
+  const [rememberMe, setRememberMe] = useState(false);
   const { mutateAsync: loginFn, isSuccess } = useLoginMutation();
   const { showToast } = useToast();
   const formik = useFormik({
@@ -53,6 +54,15 @@ const LoginForm = () => {
       navigate("/");
     }
   }, [isSuccess, showToast, navigate]);
+
+  useEffect(() => {
+    if (rememberMe) {
+      localStorage.setItem("rememberMe", "true");
+    } else {
+      localStorage.setItem("rememberMe", "false");
+    }
+  }, [rememberMe]);
+
   return (
     <StyledLoginForm onSubmit={formik.handleSubmit}>
       <StyledLoginTitleContent>
@@ -111,6 +121,8 @@ const LoginForm = () => {
           <CustomCheckbox
             label="Pamiętaj mnie"
             name="rememberMe"
+            checked={rememberMe}
+            onClick={() => setRememberMe(!rememberMe)}
             color="primary500"
           />
 
