@@ -1,8 +1,8 @@
 import React from "react";
-import LoginForm from "components/UnprotectedRoutesComponents/LoginComponents/LoginForm";
-import LoginBGPhoto from "components/UnprotectedRoutesComponents/LoginComponents/LoginBGPhoto.png";
-import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
-import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
+import LoginForm from "components/AuthorizationComponents/LoginComponents/LoginForm";
+import LoginBGPhoto from "components/AuthorizationComponents/LoginComponents/LoginBGPhoto.png";
+import LappkaLogo from "components/AuthorizationComponents/LappkaLogo.png";
+import LappkaMobileLogo from "components/AuthorizationComponents/LappkaMobileLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
@@ -10,11 +10,11 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
+} from "components/AuthorizationComponents/UnprotectedRoutes.styled";
 import {
   LoginPageLeftSection,
   LoginPageRightSection,
-} from "components/UnprotectedRoutesComponents/LoginComponents/Login.styled";
+} from "components/AuthorizationComponents/LoginComponents/Login.styled";
 import useDeviceType from "hooks/useDeviceType";
 
 const LoginPage = () => {

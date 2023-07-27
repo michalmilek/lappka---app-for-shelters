@@ -1,14 +1,18 @@
 import { InputSize } from "utils/styles/types/stylesTypes";
 import React from "react";
-import { StyledTextarea, TextareaField } from "./Input.styled";
+import {
+  StyledTextarea,
+  StyledTextAreaContainer,
+  TextareaField,
+} from "./Input.styled";
+import Typography from "../Typography/Typography";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   inputSize?: InputSize;
   value?: string;
   icon?: JSX.Element;
-  label?: JSX.Element;
-  error?: JSX.Element;
+  label?: string;
 }
 
 const Textarea = ({
@@ -16,12 +20,13 @@ const Textarea = ({
   value,
   icon,
   label,
-  error,
   ...rest
 }: TextareaProps) => {
   return (
-    <>
-      {label && label}
+    <StyledTextAreaContainer>
+      {label && (
+        <Typography variant="UI Small/UI Text 13 Med">{label}</Typography>
+      )}
       <StyledTextarea inputSize={inputSize}>
         <TextareaField
           inputSize={inputSize}
@@ -29,8 +34,7 @@ const Textarea = ({
           {...rest}
         />
       </StyledTextarea>
-      {error && { error }}
-    </>
+    </StyledTextAreaContainer>
   );
 };
 

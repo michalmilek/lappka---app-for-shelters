@@ -24,6 +24,13 @@ import { ReactComponent as DashboardIcon } from "./files/DashboardIcon.svg";
 import { ReactComponent as EmployeesIcon } from "./files/EmployeesIcon.svg";
 import { ReactComponent as MessagesIcon } from "./files/MessagesIcon.svg";
 import { ReactComponent as VoluntaryIcon } from "./files/VoluntaryIcon.svg";
+import { ReactComponent as BellIcon } from "./files/BellIcon.svg";
+import { ReactComponent as IdentificationIcon } from "./files/IdentificationIcon.svg";
+import { ReactComponent as CalendarIcon } from "./files/CalendarIcon.svg";
+import { ReactComponent as RadioMarkIcon } from "./files/RadioMarkIcon.svg";
+import { ReactComponent as SendMessageIcon } from "./files/SendMessageIcon.svg";
+import { ReactComponent as MoreIcon } from "./files/MoreIcon.svg";
+import { ReactComponent as CheckIcon } from "./files/CheckIcon.svg";
 
 export {
   AlertIcon,
@@ -52,4 +59,11 @@ export {
   EmployeesIcon,
   MessagesIcon,
   VoluntaryIcon,
+  BellIcon,
+  IdentificationIcon,
+  CalendarIcon,
+  RadioMarkIcon,
+  SendMessageIcon,
+  MoreIcon,
+  CheckIcon,
 };

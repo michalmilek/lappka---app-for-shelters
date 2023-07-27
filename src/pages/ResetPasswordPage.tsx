@@ -2,19 +2,19 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
-import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
-import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
+} from "components/AuthorizationComponents/UnprotectedRoutes.styled";
+import LappkaLogo from "components/AuthorizationComponents/LappkaLogo.png";
+import LappkaMobileLogo from "components/AuthorizationComponents/LappkaMobileLogo.png";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
-import ResetPasswordBGPhoto from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordBGPhoto.png";
+import ResetPasswordBGPhoto from "components/AuthorizationComponents/ResetPasswordComponents/ResetPasswordBGPhoto.png";
 import {
   LeftSectionResetPassword,
   RightSectionResetPassword,
-} from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPassword.styled";
+} from "components/AuthorizationComponents/ResetPasswordComponents/ResetPassword.styled";
 import { useParams } from "react-router-dom";
-import ResetPasswordSendEmailForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSendEmailForm";
-import ResetPasswordSetPasswordForm from "components/UnprotectedRoutesComponents/ResetPasswordComponents/ResetPasswordSetPasswordForm";
+import ResetPasswordSendEmailForm from "components/AuthorizationComponents/ResetPasswordComponents/ResetPasswordSendEmailForm";
+import ResetPasswordSetPasswordForm from "components/AuthorizationComponents/ResetPasswordComponents/ResetPasswordSetPasswordForm";
 import useDeviceType from "hooks/useDeviceType";
 
 const ResetPasswordPage = () => {

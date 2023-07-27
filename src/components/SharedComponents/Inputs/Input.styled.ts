@@ -5,6 +5,7 @@
 import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { CheckboxInterface } from "./CustomCheckbox";
+import { RadioInterface } from "./CustomRadio";
 import { InputProps } from "./Input";
 import { TextareaProps } from "./TextArea";
 
@@ -44,7 +45,8 @@ export const StyledInput = styled.div<InputProps>`
 
 export const InputField = styled.input<InputProps>`
   z-index: 5;
-  background-color: ${getColor("white")};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? getColor(backgroundColor) : getColor("white")};
   border-radius: 6px;
   color: ${getColor("darkGray2")};
   padding-right: 2%;
@@ -136,6 +138,12 @@ export const Checkmark = styled.span<CheckboxInterface>`
 //TEXTAREA
 //TEXTAREA
 
+export const StyledTextAreaContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
 export const StyledTextarea = styled.div<TextareaProps>`
   position: relative;
 `;
@@ -148,7 +156,7 @@ export const TextareaField = styled.textarea<TextareaProps>`
   padding: 8px 12px;
   transition: all 300ms ease-in-out;
   outline: none;
-  height: 100%;
+  height: 80px;
   width: 100%;
 
   &::placeholder {
@@ -180,4 +188,44 @@ export const TextareaField = styled.textarea<TextareaProps>`
     css`
       padding: 4px 8px;
     `}
+`;
+
+//RADIO INPUT
+//RADIO INPUT
+//RADIO INPUT
+
+export const RadioWrapper = styled.div<RadioInterface>`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 4px 0;
+  gap: 8px;
+  cursor: pointer;
+  width: 100%;
+  z-index: 10;
+`;
+
+export const Radiomark = styled.div<RadioInterface>`
+  position: relative;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid ${getColor("midGray5")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+  transition: all 0.3s ease-in-out;
+`;
+
+export const RadioInput = styled.input`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+
+  z-index: 100;
 `;

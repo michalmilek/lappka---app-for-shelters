@@ -1,7 +1,7 @@
 import React from "react";
-import RegisterBGPhoto from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterBGPhoto.png";
-import LappkaLogo from "components/UnprotectedRoutesComponents/LappkaLogo.png";
-import LappkaMobileLogo from "components/UnprotectedRoutesComponents/LappkaMobileLogo.png";
+import RegisterBGPhoto from "components/AuthorizationComponents/RegisterComponents/RegisterBGPhoto.png";
+import LappkaLogo from "components/AuthorizationComponents/LappkaLogo.png";
+import LappkaMobileLogo from "components/AuthorizationComponents/LappkaMobileLogo.png";
 import Button from "components/SharedComponents/Button/Button";
 import { CloseIcon } from "components/SharedComponents/icons/icons";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
@@ -9,12 +9,12 @@ import {
   StyledUnathorizedPage,
   UnathorizedTopContent,
   UnathorizedTopContentButtonContainer,
-} from "components/UnprotectedRoutesComponents/UnprotectedRoutes.styled";
-import RegisterForm from "components/UnprotectedRoutesComponents/RegisterComponents/RegisterForm";
+} from "components/AuthorizationComponents/UnprotectedRoutes.styled";
+import RegisterForm from "components/AuthorizationComponents/RegisterComponents/RegisterForm";
 import {
   LeftSectionRegister,
   RightRegisterSection,
-} from "components/UnprotectedRoutesComponents/RegisterComponents/Register.styled";
+} from "components/AuthorizationComponents/RegisterComponents/Register.styled";
 import useDeviceType from "hooks/useDeviceType";
 
 const RegisterPage = () => {

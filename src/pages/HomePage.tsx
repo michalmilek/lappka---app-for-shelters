@@ -1,12 +1,9 @@
-import Input from "../components/SharedComponents/Inputs/Input";
 import React from "react";
+import { Navigate } from "react-router-dom";
+import { DashboardRoutes } from "router/router";
 
 const HomePage = () => {
-  return (
-    <div>
-      <Input />
-    </div>
-  );
+  return <Navigate to={DashboardRoutes.DASHBOARD} />;
 };
 
 export default HomePage;

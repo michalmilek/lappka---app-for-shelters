@@ -3,9 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "../../SharedComponents/Button/Button";
 import Input from "../../SharedComponents/Inputs/Input";
-import CustomCheckbox, {
-  CheckboxInterface,
-} from "components/SharedComponents/Inputs/CustomCheckbox";
+import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
 import AnchorLink from "components/SharedComponents/Anchor/AnchorLink";
 import Divider from "components/SharedComponents/Divider/Divider";
 import {
@@ -21,12 +19,13 @@ import {
 } from "./Login.styled";
 import { useLoginMutation } from "apiCalls/auth/authHooks";
 import useDeviceType from "hooks/useDeviceType";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 const LoginForm = () => {
   const deviceType = useDeviceType();
   const navigate = useNavigate();
+  const [rememberMe, setRememberMe] = useState(false);
   const { mutateAsync: loginFn, isSuccess } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
@@ -51,7 +50,15 @@ const LoginForm = () => {
     if (isSuccess) {
       navigate("/");
     }
-  });
+  }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (rememberMe) {
+      localStorage.setItem("rememberMe", "true");
+    } else {
+      localStorage.setItem("rememberMe", "false");
+    }
+  }, [rememberMe]);
 
   return (
     <StyledLoginForm onSubmit={formik.handleSubmit}>
@@ -111,6 +118,8 @@ const LoginForm = () => {
           <CustomCheckbox
             label="Pamiętaj mnie"
             name="rememberMe"
+            checked={rememberMe}
+            onClick={() => setRememberMe(!rememberMe)}
             color="primary500"
           />
 

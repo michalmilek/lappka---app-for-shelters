@@ -17,7 +17,7 @@ const RegisterStep1Form = ({
   handleFormValues,
   formValues,
   handleCurrentStep,
-}: HandleStepProps<Shelter>) => {
+}: HandleStepProps) => {
   const deviceType = useDeviceType();
   const formik = useFormik({
     initialValues: {
@@ -52,7 +52,7 @@ const RegisterStep1Form = ({
     }),
     onSubmit: (values) => {
       if (handleFormValues && handleCurrentStep) {
-        handleFormValues(values);
+        handleFormValues({ shelter: values });
         handleCurrentStep(2);
       }
     },
