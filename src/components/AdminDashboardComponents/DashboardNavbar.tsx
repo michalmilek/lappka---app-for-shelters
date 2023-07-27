@@ -10,6 +10,7 @@ import {
   selectIsMobileMenuOpen,
   setMobileMenuOpen,
 } from "redux/mobileMenuSlice";
+import { styled } from "styled-components";
 import {
   StyledNavbarButtonContainer,
   StyledProtectedPageNavbar,
@@ -21,6 +22,10 @@ interface ProtectedNavbarProps {
   title: string;
   Button?: JSX.Element | null;
 }
+
+const StyledBellIcon = styled(BellIcon)`
+  cursor: pointer;
+`;
 
 const DashboardNavbar = ({
   previousTitle,
@@ -44,7 +49,11 @@ const DashboardNavbar = ({
 
         <Typography
           color="darkGray2"
-          variant="Heading 20 Semi Bold"
+          variant={
+            deviceType !== "mobile"
+              ? "Heading 20 Semi Bold"
+              : "UI/UI Text 14 Semi Bold"
+          }
           tag="h2">
           {title}
         </Typography>
@@ -55,7 +64,7 @@ const DashboardNavbar = ({
         />
       )}
       <StyledNavbarButtonContainer>
-        <BellIcon />
+        <StyledBellIcon />
         {Button}
       </StyledNavbarButtonContainer>
     </StyledProtectedPageNavbar>

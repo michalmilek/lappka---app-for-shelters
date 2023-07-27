@@ -15,4 +15,5 @@ export const EmployeesTableComponentContainer = styled.div`
   flex-direction: column;
   background: ${getColor("white")};
   height: auto;
+
 `;

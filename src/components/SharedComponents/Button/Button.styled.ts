@@ -70,6 +70,7 @@ export const ToggleSlider = styled.span`
 //BUTTON
 
 export const ReusableButton = styled.button<ButtonProps>`
+  white-space: nowrap;
   padding: 12px 24px;
   border-radius: 4px;
   font-weight: bold;
@@ -78,26 +79,13 @@ export const ReusableButton = styled.button<ButtonProps>`
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  gap: 6px;
-  width: ${(props) => (props.isFullWidth ? "100%" : "")};
-
-  ${(props) =>
-    props.icon &&
-    props.iconSpacing &&
-    css`
-      gap: ${props.iconSpacing};
-    `}
+  gap: 8px;
+  width: ${(props) => (props.isFullWidth ? "100%" : "auto")};
 
   ${(props) =>
     props.iconPlace === "left" &&
     css`
       flex-direction: row-reverse;
-    `}
-
-  ${(props) =>
-    props.width &&
-    css`
-      width: ${props.width};
     `}
 
   ${(props) =>

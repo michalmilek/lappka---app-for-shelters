@@ -1,10 +1,3 @@
-import {
-  AnimalsCardsIcon,
-  DashboardIcon,
-  EmployeesIcon,
-  MessagesIcon,
-  VoluntaryIcon,
-} from "components/SharedComponents/icons/icons";
 import StyledNavLink from "components/SharedComponents/NavLink/SidebarNavLink";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React, { useRef, useState } from "react";
@@ -28,30 +21,8 @@ import DummyAvatar from "./DummyAvatar.png";
 import { useClickOutside } from "./utils";
 import useDeviceType from "hooks/useDeviceType";
 import { DashboardRoutes } from "router/router";
-
-const firstMenu = [
-  {
-    to: DashboardRoutes.DASHBOARD,
-    icon: <DashboardIcon />,
-    title: "Dashboard",
-  },
-  {
-    to: DashboardRoutes.MESSAGES,
-    icon: <MessagesIcon />,
-    title: "Wiadomości",
-    messagesNumber: 56,
-  },
-  {
-    to: DashboardRoutes.ANIMALCARDS,
-    icon: <AnimalsCardsIcon />,
-    title: "Karty zwierząt",
-  },
-  {
-    to: DashboardRoutes.VOLUNTARY,
-    icon: <VoluntaryIcon />,
-    title: "Wolontariat",
-  },
-];
+import { useEffect } from "react";
+import { menu } from "router/sidebarMenu";
 
 const DashboardSidebar = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
@@ -59,6 +30,13 @@ const DashboardSidebar = () => {
   const deviceType = useDeviceType();
 
   useClickOutside(userMenuDropdownRef, () => setIsDropdownActive(false));
+
+  const pathName = window.location.pathname;
+
+  useEffect(() => {
+    if (pathName) setIsDropdownActive(false);
+  }, [pathName]);
+
   return (
     <StyledSidebar>
       <StyledSidebarTopMenu>
@@ -72,13 +50,13 @@ const DashboardSidebar = () => {
         />
 
         <StyledSidebarList>
-          {firstMenu.map((item, index) => (
+          {menu.firstMenu.elements.map((item, index) => (
             <StyledNavLink
               key={item.title + index}
               to={item.to}
               icon={item.icon}
               text={item.title}
-              end
+              end={item.title !== "Dashboard" ? false : true}
             />
           ))}
         </StyledSidebarList>
@@ -87,17 +65,19 @@ const DashboardSidebar = () => {
             color="midGray3"
             variant="UI Small/UI Text 12 Semi Bold">
             {deviceType === "mobile" || deviceType === "tablet"
-              ? "ORG"
-              : "ORGANIZACJA"}
+              ? menu.secondMenu.title.substring(0, 3)
+              : menu.secondMenu.title}
           </Typography>
         </StyledOrganisationListTitleContainer>
         <StyledOrganisationListContainer>
-          <StyledNavLink
-            text="Pracownicy"
-            to={DashboardRoutes.EMPLOYEES}
-            icon={<EmployeesIcon />}
-            end
-          />
+          {menu.secondMenu.elements.map((item, index) => (
+            <StyledNavLink
+              key={item.title + index}
+              to={item.to}
+              icon={item.icon}
+              text={item.title}
+            />
+          ))}
         </StyledOrganisationListContainer>
       </StyledSidebarTopMenu>
 

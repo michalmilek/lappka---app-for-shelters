@@ -5,7 +5,7 @@ export const StyledProtectedPageContent = styled.div`
   margin-left: 256px;
   width: calc(100% - 256px);
   margin-right: 2px;
-  height: 100%;
+  min-height: 100vh;
   background: ${getColor("lightGray5")};
 
   @media screen and (max-width: 1024px) {

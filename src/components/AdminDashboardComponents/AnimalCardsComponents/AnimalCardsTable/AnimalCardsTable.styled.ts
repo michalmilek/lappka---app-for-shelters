@@ -24,6 +24,10 @@ export const StyledSexContainer = styled.div<SexInterface>`
   align-items: center;
   width: ${({ sex }) => (sex === "samiec" ? "66px" : "81px")};
   height: 24px;
+
+  @media screen and (max-width: 400px) {
+    width: ${({ sex }) => (sex === "samiec" ? "55px" : "70px")};
+  }
 `;
 
 export const DotFlexContainer = styled.div`
@@ -31,6 +35,10 @@ export const DotFlexContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
+
+  @media screen and (max-width: 400px) {
+    gap: 4px;
+  }
 `;
 
 export const Dot = styled.div<DotInterface>`
@@ -39,6 +47,11 @@ export const Dot = styled.div<DotInterface>`
   border-radius: 50%;
   background-color: ${({ value }) =>
     value === "Tak" ? getColor("success") : getColor("red500")};
+
+  @media screen and (max-width: 400px) {
+    height: 6px;
+    width: 6px;
+  }
 `;
 
 export const ActionHeaderContainer = styled.div`

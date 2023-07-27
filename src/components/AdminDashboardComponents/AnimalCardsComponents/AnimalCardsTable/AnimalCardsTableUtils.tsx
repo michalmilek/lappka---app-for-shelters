@@ -1,5 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import Typography from "components/SharedComponents/Typography/Typography";
+import useDeviceType from "hooks/useDeviceType";
 import {
   ActionHeaderContainer,
   Dot,

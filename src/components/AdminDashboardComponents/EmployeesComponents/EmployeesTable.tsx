@@ -10,7 +10,6 @@ import {
   StyledTableTD,
   StyledTableTH,
   StyledTableTR,
-  TableComponentContainer,
   TableComponentHeaderContainer,
   TableContainer,
 } from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";

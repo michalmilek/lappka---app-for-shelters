@@ -80,7 +80,7 @@ export const employeesColumns = [
         </Typography>
       </ActionHeaderContainer>
     ),
-    cell: (props) => <EmployeesComponentActionDropdown />,
+    cell: (_props) => <EmployeesComponentActionDropdown />,
   }),
 ];
 
