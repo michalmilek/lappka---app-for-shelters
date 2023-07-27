@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useRef, useState } from "react";
+import styled, { css } from "styled-components";
 import { CheckIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { getColor } from "utils/styles/getStyle/getColor";
@@ -20,6 +20,11 @@ export interface SelectProps<T extends Option>
   error?: string;
 }
 
+export interface SelectPropsWithoutGeneric
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  error?: string;
+}
+
 const SelectContainerWithLabels = styled.div`
   width: 100%;
   display: flex;
@@ -30,18 +35,26 @@ const SelectContainerWithLabels = styled.div`
 const SelectContainer = styled.div`
   position: relative;
   background: ${getColor("white")};
-  z-index: 999;
+  z-index: 50;
   width: 100%;
 `;
 
-const SelectDiv = styled.div<React.SelectHTMLAttributes<HTMLSelectElement>>`
-  z-index: 999;
+const SelectDiv = styled.div<SelectPropsWithoutGeneric>`
+  cursor: pointer;
+  z-index: 50;
   background: ${getColor("white")};
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  border: 1px solid ${getColor("lightGray2")};
+  ${(props) =>
+    props.error
+      ? css`
+          border: 1px solid ${getColor("error")};
+        `
+      : css`
+          border: 1px solid ${getColor("lightGray1")};
+        `}
   flex-wrap: nowrap;
   white-space: nowrap;
   border-radius: 6px;
@@ -135,6 +148,7 @@ function Select<T extends Option>({
       </Typography>
       <SelectContainer>
         <SelectDiv
+          error={error}
           {...rest}
           onClick={handleDropdownIconClick}>
           <Typography

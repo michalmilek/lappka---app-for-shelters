@@ -69,7 +69,7 @@ const AccountSettingsPage = () => {
         }
       />
       <StyledDashboardEmployeesMainContent>
-        <FormContainer>
+        <FormContainer onSubmit={formik.handleSubmit}>
           <AccountSettingsForm formik={formik} />
           <AddNewEmployeeFormFooter>
             <Button

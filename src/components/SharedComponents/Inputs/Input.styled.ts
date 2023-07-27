@@ -44,7 +44,7 @@ export const StyledInput = styled.div<InputProps>`
 
 export const InputField = styled.input<InputProps>`
   position: relative;
-  z-index: 0;
+  z-index: 50;
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? getColor(backgroundColor) : getColor("white")};
   border-radius: 6px;
@@ -94,13 +94,9 @@ export const InputField = styled.input<InputProps>`
       padding: 4px 26px 4px 16px;
     `}
 
-    ${({ isSelect }) =>
-    !isSelect &&
-    css`
       &:read-only {
-        border: none !important;
-      }
-    `}
+    border: none !important;
+  }
 `;
 
 export const IconContainer = styled.div<InputProps>`
@@ -157,16 +153,25 @@ export const StyledTextarea = styled.div<TextareaProps>`
 `;
 
 export const TextareaField = styled.textarea<TextareaProps>`
+  position: relative;
   font-family: "Inter", sans-serif;
   background-color: ${getColor("white")};
   border-radius: 6px;
-  border: 1px solid ${getColor("lightGray1")};
   color: ${getColor("darkGray2")};
   padding: 8px 12px;
   transition: all 300ms ease-in-out;
   outline: none;
   height: 80px;
   width: 100%;
+  z-index: 50;
+  ${(props) =>
+    props.error
+      ? css`
+          border: 1px solid ${getColor("error")};
+        `
+      : css`
+          border: 1px solid ${getColor("lightGray1")};
+        `}
 
   &::placeholder {
     color: ${getColor("midGray4")};

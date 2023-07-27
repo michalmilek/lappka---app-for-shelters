@@ -18,7 +18,7 @@ export interface AddNewAnimalCardInterface {
     value: "samiec" | "samiczka" | "";
   };
   colour: { label: "Jasny" | "Ciemny" | ""; value: "jasny" | "ciemny" | "" };
-  weight: number;
+  weight: number | undefined;
   uploadFile: File[];
   sterilisation: { label: "Tak" | "Nie" | ""; value: "tak" | "nie" | "" };
   visibility: { label: "Tak" | "Nie" | ""; value: "tak" | "nie" | "" };
@@ -64,7 +64,7 @@ const AnimalCardsAddNewCardPage = () => {
     genre: { label: "", value: "" },
     sex: { label: "", value: "" },
     colour: { label: "", value: "" },
-    weight: 0,
+    weight: undefined,
     uploadFile: [],
     sterilisation: { label: "", value: "" },
     visibility: { label: "", value: "" },

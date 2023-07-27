@@ -8,15 +8,12 @@ import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { FormikProps } from "formik";
 import useDeviceType from "hooks/useDeviceType";
 import { AddNewAnimalCardInterface } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
-import React from "react";
 import {
   AnimalCardsAddNewCardFlexInputContainer,
   AnimalCardsAddNewCardFooter,
   AnimalCardsAddNewCardFormContainer,
   AnimalCardsAddNewCardFormInputContainer,
 } from "./AnimalCardsAddNewCardForm.styled";
-
-
 
 const AnimalCardsAddNewCardForm = ({
   formik,
@@ -41,6 +38,11 @@ const AnimalCardsAddNewCardForm = ({
           onChange={formik.handleChange}
         />
         <Textarea
+          error={
+            formik.errors.description && formik.touched.description
+              ? formik.errors.description
+              : undefined
+          }
           placeholder="Wpisz"
           inputSize="Large"
           label="Opis"
@@ -63,8 +65,8 @@ const AnimalCardsAddNewCardForm = ({
           ]}
           value={formik.values.genre.value}
           handleChange={(option) => {
-            formik.setFieldValue("genre", option);
             formik.setFieldTouched("genre", true);
+            formik.setFieldValue("genre", option);
           }}
         />
         <Select
@@ -81,8 +83,8 @@ const AnimalCardsAddNewCardForm = ({
           ]}
           value={formik.values.colour.value}
           handleChange={(option) => {
-            formik.setFieldValue("colour", option);
             formik.setFieldTouched("colour", true);
+            formik.setFieldValue("colour", option);
           }}
         />
 
@@ -101,8 +103,8 @@ const AnimalCardsAddNewCardForm = ({
             ]}
             value={formik.values.sex.value}
             handleChange={(option) => {
-              formik.setFieldValue("sex", option);
               formik.setFieldTouched("sex", true);
+              formik.setFieldValue("sex", option);
             }}
           />
           <InputNumberWithUnits
@@ -110,6 +112,11 @@ const AnimalCardsAddNewCardForm = ({
             placeholder="Kilogramy"
             name="weight"
             unit="KG"
+            error={
+              formik.errors.weight && formik.touched.weight
+                ? formik.errors.weight
+                : undefined
+            }
             value={formik.values.weight}
             onChange={formik.handleChange}
           />
@@ -130,8 +137,8 @@ const AnimalCardsAddNewCardForm = ({
             ]}
             value={formik.values.sterilisation.value}
             handleChange={(option) => {
-              formik.setFieldValue("sterilisation", option);
               formik.setFieldTouched("sterilisation", true);
+              formik.setFieldValue("sterilisation", option);
             }}
           />
           <Select
@@ -148,8 +155,8 @@ const AnimalCardsAddNewCardForm = ({
             ]}
             value={formik.values.visibility.value}
             handleChange={(option) => {
-              formik.setFieldValue("visibility", option);
               formik.setFieldTouched("visibility", true);
+              formik.setFieldValue("visibility", option);
             }}
           />
         </AnimalCardsAddNewCardFlexInputContainer>
