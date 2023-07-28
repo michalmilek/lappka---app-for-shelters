@@ -11,8 +11,11 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
-import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPage";
+import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsPage";
 import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
+import EmployeesPage from "pages/DashboardPages/EmployeesPage";
+import Toast from "components/SharedComponents/Toast/Toast";
+import AnimalCardsAddNewCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
 
 const queryClient = new QueryClient();
 
@@ -54,8 +57,16 @@ function App() {
               element={<AnimalCardsPage />}
             />
             <Route
+              path={DashboardRoutes.ANIMALCARDSNEWCARD}
+              element={<AnimalCardsAddNewCardPage />}
+            />
+            <Route
               path={DashboardRoutes.VOLUNTARY}
               element={<VoluntaryPage />}
+            />
+            <Route
+              path={DashboardRoutes.EMPLOYEES}
+              element={<EmployeesPage />}
             />
           </Route>
 
@@ -65,6 +76,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      <Toast />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

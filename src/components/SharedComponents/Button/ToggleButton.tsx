@@ -1,3 +1,4 @@
+import { FormikType } from "pages/DashboardPages/VoluntaryPage";
 import React, { ChangeEvent } from "react";
 import Typography from "../Typography/Typography";
 import {
@@ -10,22 +11,21 @@ import {
 interface CheckboxToggleProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  onToggleChange?: (checked: boolean) => void;
+  disabled?: boolean;
+  fieldName?: string; // Dodajemy fieldName, aby wiedzieć, które pole formika aktualizować
+  formik: FormikType;
+  handleChange: () => void;
 }
 
 const ToggleButton = ({
   label,
   disabled,
-  onToggleChange,
+  fieldName,
+  formik,
+  checked,
+  handleChange,
   ...rest
 }: CheckboxToggleProps) => {
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newChecked = event.target.checked;
-    if (onToggleChange) {
-      onToggleChange(newChecked);
-    }
-  };
-
   return (
     <ToggleButtonContainer disabled={disabled}>
       <ToggleContainer disabled={disabled}>
@@ -33,6 +33,7 @@ const ToggleButton = ({
           type="checkbox"
           onChange={handleChange}
           disabled={disabled}
+          checked={checked}
           {...rest}
         />
         <ToggleSlider />
@@ -41,7 +42,7 @@ const ToggleButton = ({
         <Typography
           tag="label"
           variant="UI/UI Text 14 Med"
-          color={disabled ? "lightGray4" : "darkGray2"}>
+          color={checked ? "darkGray2" : "midGray4"}>
           {label}
         </Typography>
       )}

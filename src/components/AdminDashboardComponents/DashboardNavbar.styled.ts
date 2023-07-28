@@ -15,6 +15,15 @@ export const StyledProtectedPageNavbar = styled.nav`
   box-shadow: 0px 8px 4px 0px #00000005;
 
   box-shadow: 0px 4px 1px 0px #00000005;
+
+  user-select: none;
+`;
+
+
+export const StyledTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
 `;
 
 export const StyledNavbarButtonContainer = styled.div`

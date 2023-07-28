@@ -21,12 +21,14 @@ import { useLoginMutation } from "apiCalls/auth/authHooks";
 import useDeviceType from "hooks/useDeviceType";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import useToast from "hooks/useToast";
 
 const LoginForm = () => {
   const deviceType = useDeviceType();
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
   const { mutateAsync: loginFn, isSuccess } = useLoginMutation();
+  const { showToast } = useToast();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -48,9 +50,10 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      showToast("Success", "success");
       navigate("/");
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, showToast, navigate]);
 
   useEffect(() => {
     if (rememberMe) {
