@@ -108,22 +108,24 @@ const DashboardSidebar = () => {
             </Typography>
           </div>
         )}
-        {isDropdownActive && (
-          <StyledUserMenuDropdown ref={userMenuDropdownRef}>
-            <StyledUserMenuDropdownItem>
-              <StyledLink to={DashboardRoutes.ACCOUNTSETTINGS}>
-                <Typography
-                  $color="darkGray1"
-                  $variant="UI/UI Text 14 Reg">
-                  Ustawienia konta
-                </Typography>
-              </StyledLink>
-            </StyledUserMenuDropdownItem>
-            <StyledUserMenuDropdownItem>
-              <Typography $variant="UI/UI Text 14 Reg">Wyloguj się</Typography>
-            </StyledUserMenuDropdownItem>
-          </StyledUserMenuDropdown>
-        )}
+        <StyledUserMenuDropdown
+          className={
+            isDropdownActive ? "dropdown-entering" : "dropdown-exiting"
+          }
+          ref={userMenuDropdownRef}>
+          <StyledUserMenuDropdownItem>
+            <StyledLink to={DashboardRoutes.ACCOUNTSETTINGS}>
+              <Typography
+                $color="darkGray1"
+                $variant="UI/UI Text 14 Reg">
+                Ustawienia konta
+              </Typography>
+            </StyledLink>
+          </StyledUserMenuDropdownItem>
+          <StyledUserMenuDropdownItem>
+            <Typography $variant="UI/UI Text 14 Reg">Wyloguj się</Typography>
+          </StyledUserMenuDropdownItem>
+        </StyledUserMenuDropdown>
       </StyledUserMenu>
     </StyledSidebar>
   );

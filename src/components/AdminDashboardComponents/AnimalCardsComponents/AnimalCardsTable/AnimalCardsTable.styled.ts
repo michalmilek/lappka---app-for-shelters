@@ -1,4 +1,4 @@
-import { css, styled } from "styled-components";
+import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface SexInterface {
@@ -130,6 +130,28 @@ interface DropdownDetailsInterface {
   displayDetails?: boolean;
 }
 
+const fadeInAnimation = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeOutAnimation = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+`;
+
 export const StyledDropdownContainer = styled.ul`
   z-index: 20;
   list-style-type: none;
@@ -151,6 +173,14 @@ export const StyledDropdownContainer = styled.ul`
   box-shadow: 0px 12px 24px 0px #5b68713d;
 
   box-shadow: 0px 0px 1px 0px #1a202452;
+
+  &.fadeIn {
+    animation: ${fadeInAnimation} 0.3s forwards;
+  }
+
+  &.fadeOut {
+    animation: ${fadeOutAnimation} 0.3s forwards;
+  }
 `;
 
 export const StyledDropdownOption = styled.li<DropdownDetailsInterface>`
@@ -220,7 +250,6 @@ export const StyledTableArrowButton = styled.button`
 export const StyledTableInputContainer = styled.div`
   width: 30%;
 `;
-
 
 export const AnimalCardsStyledPageSizeSelect = styled.select`
   padding: 8px;

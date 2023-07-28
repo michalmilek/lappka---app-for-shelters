@@ -90,73 +90,86 @@ const DashboardAnimalChart = () => {
     setTimeSelect(value);
   };
 
-  return (
-    <StyledDashboardChartContainer>
-      <StyledDashboardChartTitleContainer>
-        <Typography $variant="UI/UI Text 16 Semi Bold">
-          Liczba wyświetleń podopiecznych
-        </Typography>
-        <Button
-          onClick={() => setIsDropDownActive((prev) => !prev)}
-          $size="Medium"
-          $variant="outline">
-          <CalendarIcon />
-          Rok
-          <StyledArrowUpIcon $isDropDownActive={isDropDownActive} />
-        </Button>
-        {isDropDownActive && (
+
+    const axisLabelStyle = {
+      fontSize: deviceType !== "mobile" ? "16px" : "12px",
+      fontWeight: 500,
+      fill: "#9AA6AC",
+      lineHeight: "16px",
+      fontFamily: "Inter",
+    };
+
+    return (
+      <StyledDashboardChartContainer>
+        <StyledDashboardChartTitleContainer>
+          <Typography $variant="UI/UI Text 16 Semi Bold">
+            Liczba wyświetleń podopiecznych
+          </Typography>
+          <Button
+            onClick={() => setIsDropDownActive((prev) => !prev)}
+            $size="Medium"
+            $variant="outline">
+            <CalendarIcon />
+            Rok
+            <StyledArrowUpIcon $isDropDownActive={isDropDownActive} />
+          </Button>
+
           <DashboardChartDropdown
+            isDropDownActive={isDropDownActive}
             timeSelect={timeSelect}
             handleTimeSelectChange={handleTimeSelectChange}
           />
-        )}
-      </StyledDashboardChartTitleContainer>
-      <ResponsiveContainer
-        width={"100%"}
-        height={deviceType === "mobile" ? 300 : 350}>
-        <BarChart
-          width={150}
-          height={150}
-          data={data}
-          margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
-          <XAxis dataKey="name" />
-          <YAxis
-            domain={[0, 20000]}
-            tickFormatter={formatYAxis}>
-            <Label
-              value="       Tyś"
-              position="top"
-              offset={30}
-              viewBox={{ x: 50 }}
-              dx={10}
-              dy={0}
+        </StyledDashboardChartTitleContainer>
+        <ResponsiveContainer
+          width={"100%"}
+          height={deviceType === "mobile" ? 300 : 350}>
+          <BarChart
+            width={150}
+            height={150}
+            data={data}
+            margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
+            <XAxis
+              dataKey="name"
+              tick={axisLabelStyle}
             />
-          </YAxis>
-          <Tooltip />
-          <CartesianGrid
-            vertical={false}
-            strokeDasharray="4 4"
-          />
-          <Bar
-            dataKey="views"
-            radius={[4, 4, 0, 0]}>
-            {data.map((_entry, index) => (
-              <Cell
-                onClick={() => setActiveMonth(index)}
-                cursor="pointer"
-                fill={
-                  index === activeMonth
-                    ? getColor("primary500")
-                    : getColor("midGray5")
-                }
-                key={`cell-${index}`}
+            <YAxis
+              domain={[0, 20000]}
+              tickFormatter={formatYAxis}>
+              <Label
+                value="       Tyś"
+                position="top"
+                offset={30}
+                viewBox={{ x: 50 }}
+                dx={10}
+                dy={0}
               />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    </StyledDashboardChartContainer>
-  );
+            </YAxis>
+            <Tooltip />
+            <CartesianGrid
+              vertical={false}
+              strokeDasharray="4 4"
+            />
+            <Bar
+              label={false}
+              dataKey="views"
+              radius={[4, 4, 0, 0]}>
+              {data.map((_entry, index) => (
+                <Cell
+                  onClick={() => setActiveMonth(index)}
+                  cursor="pointer"
+                  fill={
+                    index === activeMonth
+                      ? getColor("primary500")
+                      : getColor("midGray5")
+                  }
+                  key={`cell-${index}`}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </StyledDashboardChartContainer>
+    );
 };
 
 export default DashboardAnimalChart;

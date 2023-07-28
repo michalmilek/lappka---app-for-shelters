@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import { SVGProps } from "react";
 import { Link } from "react-router-dom";
-import { css, styled } from "styled-components";
+import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface ExtendedSVGProps extends SVGProps<SVGSVGElement> {
@@ -130,6 +130,29 @@ export const StyledSidebarArrowDownIcon = styled(
     `}
 `;
 
+const fadeInAnimation = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeOutAnimation = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+`;
+
 export const StyledUserMenuDropdown = styled.ul`
   position: absolute;
   padding: 8px 0;
@@ -144,6 +167,14 @@ export const StyledUserMenuDropdown = styled.ul`
   border-radius: 6px;
   border: 1px solid ${getColor("lightGray5")};
   box-shadow: 0px 12px 24px #5b68713d;
+
+  &.dropdown-entering {
+    animation: ${fadeInAnimation} 0.3s forwards;
+  }
+
+  &.dropdown-exiting {
+    animation: ${fadeOutAnimation} 0.3s forwards;
+  }
 `;
 
 export const StyledUserMenuDropdownItem = styled.li`

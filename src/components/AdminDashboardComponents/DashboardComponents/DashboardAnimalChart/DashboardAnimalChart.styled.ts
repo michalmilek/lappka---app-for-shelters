@@ -49,6 +49,36 @@ export const StyledDashboardChartDropdownContainer = styled.div`
   box-shadow: 0px 12px 24px 0px #5b68713d;
 
   box-shadow: 0px 0px 1px 0px #1a202452;
+  &.dropdown-entering {
+    animation: fadeIn 0.3s forwards;
+  }
+
+  &.dropdown-exiting {
+    animation: fadeOut 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+    }
+  }
 `;
 
 export const StyledDashboardChartDropdownContainerList = styled.ul`

@@ -1,5 +1,7 @@
+import Button from "components/SharedComponents/Button/Button";
 import Select from "components/SharedComponents/DropdownMenu/Select";
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
+import useToast from "hooks/useToast";
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
@@ -17,6 +19,7 @@ const options = [
 
 const HomePage = () => {
   const [selectedOption, setSelectedOption] = React.useState(options[0]);
+  const { showToast } = useToast();
 
   const handleSelectChange = (value: Option["value"]) => {
     const newSelectedOption = options.find((option) => option.value === value);
@@ -25,7 +28,16 @@ const HomePage = () => {
     }
   };
 
-  return <div></div>;
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          showToast("option", "success");
+        }}>
+        testestes
+      </Button>
+    </div>
+  );
 };
 export default HomePage;
 

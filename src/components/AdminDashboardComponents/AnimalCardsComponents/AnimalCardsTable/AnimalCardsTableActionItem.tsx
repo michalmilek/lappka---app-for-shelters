@@ -32,11 +32,9 @@ const AnimalCardsTableActionItem = () => {
     setIsDropdownOpen(true);
   };
 
-  // Dodajemy event listener do dokumentu przy montowaniu komponentu
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 
-    // Usuwamy event listener przy odmontowywaniu komponentu
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -46,7 +44,9 @@ const AnimalCardsTableActionItem = () => {
     <ActionHeaderContainer>
       <StyledMoreIcon onClick={handleMoreIconClick} />
       {isDropdownOpen && (
-        <StyledDropdownContainer ref={dropdownRef}>
+        <StyledDropdownContainer
+          className={isDropdownOpen ? "fadeIn" : "fadeOut"}
+          ref={dropdownRef}>
           <StyledDropdownOption onClick={() => setDetailsOn((prev) => !prev)}>
             <Typography
               $color="darkGray2"

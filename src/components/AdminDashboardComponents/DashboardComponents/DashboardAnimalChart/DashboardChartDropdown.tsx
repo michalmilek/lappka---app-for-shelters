@@ -5,16 +5,19 @@ import {
 } from "./DashboardAnimalChart.styled";
 
 interface DashboardChartDropdownProps {
+  isDropDownActive: boolean;
   timeSelect: string;
   handleTimeSelectChange: (value: string) => void;
 }
 
 const DashboardChartDropdown: React.FC<DashboardChartDropdownProps> = ({
+  isDropDownActive,
   timeSelect,
   handleTimeSelectChange,
 }) => {
   return (
-    <StyledDashboardChartDropdownContainer>
+    <StyledDashboardChartDropdownContainer
+      className={isDropDownActive ? "dropdown-entering" : "dropdown-exiting"}>
       <StyledDashboardChartDropdownContainerList>
         <CustomRadio
           name="filterDate"
