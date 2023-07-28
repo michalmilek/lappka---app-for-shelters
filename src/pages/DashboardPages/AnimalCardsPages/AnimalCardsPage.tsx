@@ -19,8 +19,8 @@ const AnimalCardsPage = () => {
         title="Karty zwierząt"
         Button={
           <Button
-            icon={<StyledPlusIcon />}
-            iconPlace="left"
+            $icon={<StyledPlusIcon />}
+            $iconPlace="left"
             onClick={() => navigate(DashboardRoutes.ANIMALCARDSNEWCARD)}>
             Nowa karta
           </Button>

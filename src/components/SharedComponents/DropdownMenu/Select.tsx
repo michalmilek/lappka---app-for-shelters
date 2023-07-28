@@ -12,17 +12,17 @@ export type Option = {
 export interface SelectProps<T extends Option>
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   value: Option["value"];
-  options: T[];
-  handleChange: (value: T) => void;
-  dropdownIcon: React.ReactNode;
-  placeholder?: string;
-  label?: string;
-  error?: string;
+  $options: T[];
+  $handleChange: (value: T) => void;
+  $dropdownIcon: React.ReactNode;
+  $placeholder?: string;
+  $label?: string;
+  $error?: string;
 }
 
 export interface SelectPropsWithoutGeneric
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  error?: string;
+  $error?: string;
 }
 
 const SelectContainerWithLabels = styled.div`
@@ -48,7 +48,7 @@ const SelectDiv = styled.div<SelectPropsWithoutGeneric>`
   justify-content: space-between;
 
   ${(props) =>
-    props.error
+    props.$error
       ? css`
           border: 1px solid ${getColor("error")};
         `
@@ -96,12 +96,12 @@ const OptionItem = styled.li`
 `;
 
 function Select<T extends Option>({
-  label,
-  error,
+  $label,
+  $error,
   value,
-  options,
-  handleChange,
-  dropdownIcon,
+  $options,
+  $handleChange,
+  $dropdownIcon,
   placeholder = "Wybierz z listy",
   ...rest
 }: SelectProps<T>) {
@@ -133,41 +133,41 @@ function Select<T extends Option>({
 
   function handleOptionSelect(option: T) {
     setIsDropdownOpen(false);
-    handleChange(option);
+    $handleChange(option);
   }
 
-  const selectedOption = options.find((option) => option.value === value);
+  const selectedOption = $options.find((option) => option.value === value);
 
   return (
     <SelectContainerWithLabels>
       <Typography
         tag="label"
-        color="darkGray2"
-        variant="UI Small/UI Text 13 Med">
-        {label}
+        $color="darkGray2"
+        $variant="UI Small/UI Text 13 Med">
+        {$label}
       </Typography>
       <SelectContainer>
         <SelectDiv
-          error={error}
+          $error={$error}
           {...rest}
           onClick={handleDropdownIconClick}>
           <Typography
             tag="label"
-            variant="UI/UI Text 14 Reg"
-            color={selectedOption ? "darkGray2" : "midGray4"}>
+            $variant="UI/UI Text 14 Reg"
+            $color={selectedOption ? "darkGray2" : "midGray4"}>
             {selectedOption ? selectedOption.label : placeholder}
           </Typography>
-          {dropdownIcon}
+          {$dropdownIcon}
         </SelectDiv>
         {isDropdownOpen && (
           <OptionList ref={dropdownRef}>
-            {options.map((option) => (
+            {$options.map((option) => (
               <OptionItem
                 key={option.value}
                 onClick={() => handleOptionSelect(option)}>
                 <Typography
-                  color="darkGray2"
-                  variant="UI/UI Text 14 Reg">
+                  $color="darkGray2"
+                  $variant="UI/UI Text 14 Reg">
                   {option.label}
                 </Typography>
                 {selectedOption?.value === option.value && <CheckIcon />}
@@ -178,9 +178,9 @@ function Select<T extends Option>({
       </SelectContainer>
       <Typography
         tag="span"
-        color="error"
-        variant="UI Small/UI Text 13 Med">
-        {error}
+        $color="error"
+        $variant="UI Small/UI Text 13 Med">
+        {$error}
       </Typography>
     </SelectContainerWithLabels>
   );

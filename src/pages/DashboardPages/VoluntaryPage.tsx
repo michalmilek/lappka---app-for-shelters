@@ -51,16 +51,16 @@ const VoluntaryPage = () => {
             <VoluntaryForm
               fieldName="isDonationActive"
               formik={formik}
-              text="Wpłać darowiznę">
+              $text="Wpłać darowiznę">
               <Input
                 onBlur={formik.handleBlur}
                 placeholder="0000-0000-0000-0000"
-                inputSize="Large"
-                label="Podaj numer konta"
+                $inputSize="Large"
+                $label="Podaj numer konta"
                 value={formik.values.bankAccountNumber}
                 onChange={formik.handleChange}
                 name="bankAccountNumber"
-                error={
+                $error={
                   formik.errors.bankAccountNumber &&
                   formik.touched.bankAccountNumber
                     ? formik.errors.bankAccountNumber
@@ -68,7 +68,7 @@ const VoluntaryPage = () => {
                 }
               />
               <Textarea
-                label="Opis"
+                $label="Opis"
                 value={formik.values.donationDescription}
                 onChange={formik.handleChange}
                 name="donationDescription"
@@ -77,9 +77,9 @@ const VoluntaryPage = () => {
             <VoluntaryForm
               fieldName="isDailyHelpActive"
               formik={formik}
-              text="Codzienna pomoc">
+              $text="Codzienna pomoc">
               <Textarea
-                label="Opis"
+                $label="Opis"
                 value={formik.values.dailyHelpDescription}
                 onChange={formik.handleChange}
                 name="dailyHelpDescription"
@@ -88,9 +88,9 @@ const VoluntaryPage = () => {
             <VoluntaryForm
               fieldName="isTakingDogsOutActive"
               formik={formik}
-              text="Wyprowadzanie psów">
+              $text="Wyprowadzanie psów">
               <Textarea
-                label="Opis"
+                $label="Opis"
                 value={formik.values.takingDogsOutDescription}
                 onChange={formik.handleChange}
                 name="takingDogsOutDescription"

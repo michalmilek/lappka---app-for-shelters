@@ -2,7 +2,7 @@ import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface SexInterface {
-  sex: "samiec" | "samiczka";
+  $sex: "samiec" | "samiczka";
 }
 
 interface DotInterface {
@@ -11,22 +11,22 @@ interface DotInterface {
 
 interface PaginationButtonInterface
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  active?: boolean;
+  $active?: boolean;
 }
 
 export const StyledSexContainer = styled.div<SexInterface>`
-  background: ${({ sex }) =>
-    sex === "samiec" ? getColor("midGray3") : getColor("primary500")};
+  background: ${({ $sex }) =>
+    $sex === "samiec" ? getColor("midGray3") : getColor("primary500")};
   padding: 0 8px;
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${({ sex }) => (sex === "samiec" ? "66px" : "81px")};
+  width: ${({ $sex }) => ($sex === "samiec" ? "66px" : "81px")};
   height: 24px;
 
   @media screen and (max-width: 400px) {
-    width: ${({ sex }) => (sex === "samiec" ? "55px" : "70px")};
+    width: ${({ $sex }) => ($sex === "samiec" ? "55px" : "70px")};
   }
 `;
 
@@ -187,8 +187,8 @@ export const StyledTableFooterButtonsContainer = styled.div`
 `;
 
 export const StyledTableNumberButton = styled.button<PaginationButtonInterface>`
-  background: ${({ active }) =>
-    active ? getColor("lightGray3") : getColor("white")};
+  background: ${({ $active }) =>
+    $active ? getColor("lightGray3") : getColor("white")};
   padding: 4px 6px;
   font-weight: 400;
   font-size: 12px;

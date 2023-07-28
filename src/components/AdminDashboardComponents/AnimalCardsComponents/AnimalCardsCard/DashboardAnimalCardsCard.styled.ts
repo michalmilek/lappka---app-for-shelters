@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
+import { motion } from "framer-motion";
 
 export const StyledCardFormComponent = styled.form`
   border-radius: 8px;
@@ -70,4 +71,5 @@ export const CardButton = styled.button`
   gap: 10px;
   background: transparent;
   border: none;
+  z-index: 50;
 `;

@@ -19,19 +19,19 @@ const DashboardNewestAnimalCardsItem = () => {
       <DashboardNewestAnimalCardsItemContentContainer>
         <Typography
           tag="h4"
-          color="darkGray2"
-          variant="UI/UI Text 16 Semi Bold">
+          $color="darkGray2"
+          $variant="UI/UI Text 16 Semi Bold">
           Ninka
         </Typography>
         <DashboardNewestAnimalCardsItemContentDataContainer>
           <Typography
-            variant="UI/UI Text 14 Reg"
-            color="midGray2">
+            $variant="UI/UI Text 14 Reg"
+            $color="midGray2">
             Kot
           </Typography>
           <Typography
-            variant="UI Small/UI Text 12 Reg"
-            color="midGray2">
+            $variant="UI Small/UI Text 12 Reg"
+            $color="midGray2">
             {new Date().toLocaleDateString("pl-PL")}
           </Typography>
         </DashboardNewestAnimalCardsItemContentDataContainer>

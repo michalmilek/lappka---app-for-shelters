@@ -8,13 +8,11 @@ import {
   MessageBubble,
   MessageContainer,
   MessageInputContainer,
-  StyledSendIconContainer,
-  StyledSendMessageIcon,
 } from "./MessageChat.styled";
 import SendMessage from "./SendMessage.png";
 
 export interface MessageInterface extends React.HTMLAttributes<HTMLDivElement> {
-  isSentByMe?: boolean;
+  $isSentByMe?: boolean;
 }
 
 const MessagesChat = () => {
@@ -32,20 +30,20 @@ const MessagesChat = () => {
         return (
           <MessageContainer
             key={message.id + message.sender + message.timestamp}
-            isSentByMe={isSentByMe}>
+            $isSentByMe={isSentByMe}>
             {message.sender !== currentUser && (
               <Avatar src="https://www.w3schools.com/w3images/avatar6.png" />
             )}
-            <MessageBubble isSentByMe={isSentByMe}>
+            <MessageBubble $isSentByMe={isSentByMe}>
               <Typography
-                variant="UI/UI Text 14 Med"
-                color={isSentByMe ? "white" : "darkGray2"}>
+                $variant="UI/UI Text 14 Med"
+                $color={isSentByMe ? "white" : "darkGray2"}>
                 {message.message}
               </Typography>
               <Typography
                 tag="span"
-                variant="UI Small/UI Text 12 Reg"
-                color="midGray3">
+                $variant="UI Small/UI Text 12 Reg"
+                $color="midGray3">
                 {`${hours}:${minutes}`}
               </Typography>
             </MessageBubble>
@@ -55,7 +53,7 @@ const MessagesChat = () => {
       <MessageInputContainer>
         <Input
           placeholder="Wpisz wiadomość..."
-          backgroundColor="lightGray5"
+          $backgroundColor="lightGray5"
         />
         <img
           src={SendMessage}

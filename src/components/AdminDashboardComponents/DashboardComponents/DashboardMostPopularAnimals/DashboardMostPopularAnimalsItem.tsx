@@ -22,14 +22,14 @@ const DashboardMostPopularAnimalsItem = () => {
         <DashboardMostPopularAnimalsItemInfoContainer>
           <Typography
             tag="h5"
-            variant="UI/UI Text 14 Reg"
-            color="darkGray2">
+            $variant="UI/UI Text 14 Reg"
+            $color="darkGray2">
             Ninka
           </Typography>
           <Typography
             tag="h6"
-            variant="UI Small/UI Text 12 Reg"
-            color="midGray3">
+            $variant="UI Small/UI Text 12 Reg"
+            $color="midGray3">
             Kot
           </Typography>
         </DashboardMostPopularAnimalsItemInfoContainer>
@@ -38,8 +38,8 @@ const DashboardMostPopularAnimalsItem = () => {
         <EyeIcon />
         <Typography
           tag="span"
-          color="darkGray2"
-          variant="UI/UI Text 14 Semi Bold">
+          $color="darkGray2"
+          $variant="UI/UI Text 14 Semi Bold">
           {(Math.round(Math.random() * 4000) / 1000).toFixed(1)} tyś
         </Typography>
       </DashboardMostPopularAnimalsItemInfoContainerStyledViews>

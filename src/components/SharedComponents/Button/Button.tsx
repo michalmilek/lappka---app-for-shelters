@@ -9,33 +9,33 @@ import { ReusableButton } from "./Button.styled";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  width?: string;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  isFullWidth?: boolean;
-  icon?: JSX.Element | null;
-  iconSpacing?: PaddingMarginSize;
-  color?: Color;
-  iconPlace?: "left" | "right";
+  $width?: string;
+  $variant?: ButtonVariant;
+  $size?: ButtonSize;
+  $isFullWidth?: boolean;
+  $icon?: JSX.Element | null;
+  $iconSpacing?: PaddingMarginSize;
+  $color?: Color;
+  $iconPlace?: "left" | "right";
 }
 
 const Button = ({
-  variant = "fill",
-  size = "Medium",
+  $variant = "fill",
+  $size = "Medium",
   children,
-  icon = null,
-  iconSpacing = "2px",
+  $icon = null,
+  $iconSpacing = "2px",
   ...rest
 }: ButtonProps) => {
   return (
     <ReusableButton
-      size={size}
-      variant={variant}
-      iconSpacing={iconSpacing}
-      icon={icon}
+      $size={$size}
+      $variant={$variant}
+      $iconSpacing={$iconSpacing}
+      $icon={$icon}
       {...rest}>
       {children}
-      {icon}
+      {$icon}
     </ReusableButton>
   );
 };

@@ -62,30 +62,30 @@ const RegisterStep1Form = ({
     <form onSubmit={formik.handleSubmit}>
       <StyledRegisterInputStep1Container>
         <Input
-          label="Pełna Nazwa Organizacji"
+          $label="Pełna Nazwa Organizacji"
           type="text"
           id="organizationName"
           name="organizationName"
           placeholder="Wpisz"
-          inputSize="Large"
+          $inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={
+          $error={
             formik.touched.organizationName && formik.errors.organizationName
               ? formik.errors.organizationName
               : null
           }
         />
         <Input
-          label="Ulica"
+          $label="Ulica"
           type="text"
           id="street"
           name="street"
           placeholder="Wpisz"
-          inputSize="Large"
+          $inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={
+          $error={
             formik.touched.street && formik.errors.street
               ? formik.errors.street
               : null
@@ -94,15 +94,15 @@ const RegisterStep1Form = ({
         <StyledRegisterHorizontalInputContainer>
           <StyledRegisterHorizontalInputContainerPostalCode>
             <Input
-              label="Kod pocztowy"
+              $label="Kod pocztowy"
               type="text"
               id="zipCode"
               name="zipCode"
               placeholder="Wpisz"
-              inputSize="Large"
+              $inputSize="Large"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={
+              $error={
                 formik.touched.zipCode && formik.errors.zipCode
                   ? formik.errors.zipCode
                   : null
@@ -110,15 +110,15 @@ const RegisterStep1Form = ({
             />
           </StyledRegisterHorizontalInputContainerPostalCode>
           <Input
-            label="Miasto"
+            $label="Miasto"
             type="text"
             id="city"
             name="city"
             placeholder="Wpisz"
-            inputSize="Large"
+            $inputSize="Large"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
+            $error={
               formik.touched.city && formik.errors.city
                 ? formik.errors.city
                 : null
@@ -126,42 +126,42 @@ const RegisterStep1Form = ({
           />
         </StyledRegisterHorizontalInputContainer>
         <Input
-          label="Numer NIP"
+          $label="Numer NIP"
           type="text"
           id="nip"
           name="nip"
           placeholder="Wpisz"
-          inputSize="Large"
+          $inputSize="Large"
           maxLength={16}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={
+          $error={
             formik.touched.nip && formik.errors.nip ? formik.errors.nip : null
           }
         />
         <Input
-          label="Numer KRS"
+          $label="Numer KRS"
           type="text"
           id="krs"
           name="krs"
           placeholder="Wpisz"
-          inputSize="Large"
+          $inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={
+          $error={
             formik.touched.krs && formik.errors.krs ? formik.errors.krs : null
           }
         />
         <Input
-          label="Numer telefonu"
+          $label="Numer telefonu"
           type="text"
           id="phoneNumber"
           name="phoneNumber"
           placeholder="Wpisz"
-          inputSize="Large"
+          $inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={
+          $error={
             formik.touched.phoneNumber && formik.errors.phoneNumber
               ? formik.errors.phoneNumber
               : null
@@ -169,12 +169,12 @@ const RegisterStep1Form = ({
         />
       </StyledRegisterInputStep1Container>
       <Button
-        icon={<ArrowRightIcon fill="#fff" />}
-        iconSpacing="8px"
-        iconPlace="right"
-        size={deviceType === "desktop" ? "Large" : "Medium"}
-        isFullWidth
-        variant="fill"
+        $icon={<ArrowRightIcon fill="#fff" />}
+        $iconSpacing="8px"
+        $iconPlace="right"
+        $size={deviceType === "desktop" ? "Large" : "Medium"}
+        $isFullWidth
+        $variant="fill"
         type="submit">
         Następny krok
       </Button>

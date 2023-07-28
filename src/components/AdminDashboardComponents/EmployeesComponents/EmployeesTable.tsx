@@ -3,6 +3,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import Button from "components/SharedComponents/Button/Button";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import {
@@ -13,7 +14,10 @@ import {
   TableComponentHeaderContainer,
   TableContainer,
 } from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";
-import { EmployeesTableComponentContainer } from "./DashboardEmployees.styled";
+import {
+  EmployeesTableComponentContainer,
+  EmployeesTableFooter,
+} from "./DashboardEmployees.styled";
 import {
   dummyData,
   Employee,
@@ -34,9 +38,9 @@ const EmployeesTable = () => {
     <EmployeesTableComponentContainer>
       <TableComponentHeaderContainer>
         <Typography
-          variant="UI/UI Text 16 Semi Bold"
+          $variant="UI/UI Text 16 Semi Bold"
           tag="h2"
-          color="darkGray2">
+          $color="darkGray2">
           Lista pracowników
         </Typography>
       </TableComponentHeaderContainer>
@@ -75,6 +79,10 @@ const EmployeesTable = () => {
           ))}
         </tbody>
       </TableContainer>
+      <EmployeesTableFooter>
+        <Button $variant="outline">Test</Button>
+        {/* ADDED TO HAVE STYLING ON THE FOOTER, IN THE FUTURE I WILL REPLACE IT WITH PAGINATION */}
+      </EmployeesTableFooter>
     </EmployeesTableComponentContainer>
   );
 };

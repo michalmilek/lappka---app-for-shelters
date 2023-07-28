@@ -37,7 +37,7 @@ const MessagesFriendList = () => {
         {messages.map((message, index) => (
           <MessagesFriendsListItem
             key={message.name + message.message + index + message.time}
-            active={true}
+            $active={true}
             index={index + 1}
             name={message.name}
             message={message.message}

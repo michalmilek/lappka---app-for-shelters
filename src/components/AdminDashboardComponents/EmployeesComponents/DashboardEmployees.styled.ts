@@ -15,5 +15,14 @@ export const EmployeesTableComponentContainer = styled.div`
   flex-direction: column;
   background: ${getColor("white")};
   height: auto;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px 0px #1018280f;
 
+  box-shadow: 0px 1px 3px 0px #1018281a;
+`;
+
+export const EmployeesTableFooter = styled.footer`
+  border-radius: 6px;
+  padding: 10px 16px;
+  box-shadow: 0px 1px 0px 0px #e5e9eb inset;
 `;

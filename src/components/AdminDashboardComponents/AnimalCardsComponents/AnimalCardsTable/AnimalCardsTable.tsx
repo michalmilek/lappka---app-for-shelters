@@ -107,9 +107,9 @@ function AnimalCardsTable() {
     <TableComponentContainer>
       <TableComponentHeaderContainer>
         <Typography
-          variant="UI/UI Text 16 Semi Bold"
+          $variant="UI/UI Text 16 Semi Bold"
           tag="h2"
-          color="darkGray2">
+          $color="darkGray2">
           Karty zwierząt
         </Typography>
       </TableComponentHeaderContainer>

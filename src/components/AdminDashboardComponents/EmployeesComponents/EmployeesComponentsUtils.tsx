@@ -19,16 +19,16 @@ export const employeesColumns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          variant="UI Small/UI Text 13 Med"
-          color="midGray2">
+          $variant="UI Small/UI Text 13 Med"
+          $color="midGray2">
           Imię i nazwisko
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
       <Typography
-        variant="UI/UI Text 14 Reg"
-        color="darkGray2">
+        $variant="UI/UI Text 14 Reg"
+        $color="darkGray2">
         {props.getValue()}
       </Typography>
     ),
@@ -37,16 +37,16 @@ export const employeesColumns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          variant="UI Small/UI Text 13 Med"
-          color="midGray2">
+          $variant="UI Small/UI Text 13 Med"
+          $color="midGray2">
           Email
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
       <Typography
-        variant="UI/UI Text 14 Reg"
-        color="darkGray2">
+        $variant="UI/UI Text 14 Reg"
+        $color="darkGray2">
         {props.getValue()}
       </Typography>
     ),
@@ -55,16 +55,16 @@ export const employeesColumns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          variant="UI Small/UI Text 13 Med"
-          color="midGray2">
+          $variant="UI Small/UI Text 13 Med"
+          $color="midGray2">
           Data dodania
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
       <Typography
-        variant="UI/UI Text 14 Reg"
-        color="darkGray2">
+        $variant="UI/UI Text 14 Reg"
+        $color="darkGray2">
         {props.getValue()}
       </Typography>
     ),
@@ -74,8 +74,8 @@ export const employeesColumns = [
     header: () => (
       <ActionHeaderContainer>
         <Typography
-          variant="UI Small/UI Text 13 Med"
-          color="midGray2">
+          $variant="UI Small/UI Text 13 Med"
+          $color="midGray2">
           Akcja
         </Typography>
       </ActionHeaderContainer>

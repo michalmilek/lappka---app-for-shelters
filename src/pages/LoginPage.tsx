@@ -29,8 +29,8 @@ const LoginPage = () => {
         <UnathorizedTopContentButtonContainer>
           <AnchorLink to={"/register"}>
             <Button
-              size={deviceType === "desktop" ? `Large` : `Medium`}
-              variant="outline">
+              $size={deviceType === "desktop" ? `Large` : `Medium`}
+              $variant="outline">
               Zarejestruj się
             </Button>
           </AnchorLink>

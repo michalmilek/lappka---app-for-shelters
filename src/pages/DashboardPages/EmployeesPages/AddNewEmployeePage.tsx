@@ -45,14 +45,14 @@ const AddNewEmployeePage = () => {
         <AddNewEmployeeForm>
           <AddNewEmployeeFormText>
             <Typography
-              variant="UI/UI Text 16 Semi Bold"
+              $variant="UI/UI Text 16 Semi Bold"
               tag="h2">
               Dodaj pracownika
             </Typography>
             <Typography
-              variant="UI Small/UI Text 12 Reg"
+              $variant="UI Small/UI Text 12 Reg"
               tag="p"
-              color="midGray1">
+              $color="midGray1">
               Wpisz adres email użytkownika aplikacji Łappka i dodaj go do
               swojej organizacji.
             </Typography>
@@ -64,8 +64,8 @@ const AddNewEmployeePage = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              label="Adres email"
-              error={
+              $label="Adres email"
+              $error={
                 formik.errors.email && formik.touched.email
                   ? formik.errors.email
                   : null
@@ -73,8 +73,8 @@ const AddNewEmployeePage = () => {
             />
           </AddNewEmployeeInputContainer>
           <AddNewEmployeeFormFooter>
-            <Button variant="outline">Anuluj</Button>
-            <Button variant="fill">Dodaj</Button>
+            <Button $variant="outline">Anuluj</Button>
+            <Button $variant="fill">Dodaj</Button>
           </AddNewEmployeeFormFooter>
         </AddNewEmployeeForm>
       </StyledDashboardEmployeesMainContent>

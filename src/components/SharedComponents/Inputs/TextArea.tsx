@@ -9,39 +9,39 @@ import Typography from "../Typography/Typography";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  inputSize?: InputSize;
+  $inputSize?: InputSize;
   value?: string;
-  icon?: JSX.Element;
-  label?: string;
-  error?: string | null;
+  $icon?: JSX.Element;
+  $label?: string;
+  $error?: string | null;
 }
 
 const Textarea = ({
-  inputSize = "Medium",
+  $inputSize = "Medium",
   value,
-  icon,
-  label,
-  error,
+  $icon,
+  $label,
+  $error,
   ...rest
 }: TextareaProps) => {
   return (
     <StyledTextAreaContainer>
-      {label && (
-        <Typography variant="UI Small/UI Text 13 Med">{label}</Typography>
+      {$label && (
+        <Typography $variant="UI Small/UI Text 13 Med">{$label}</Typography>
       )}
-      <StyledTextarea inputSize={inputSize}>
+      <StyledTextarea $inputSize={$inputSize}>
         <TextareaField
-          error={error}
-          inputSize={inputSize}
+          $error={$error}
+          $inputSize={$inputSize}
           value={value}
           {...rest}
         />
       </StyledTextarea>
       <Typography
         tag="span"
-        color="error"
-        variant="UI Small/UI Text 12 Reg">
-        {error}
+        $color="error"
+        $variant="UI Small/UI Text 12 Reg">
+        {$error}
       </Typography>
     </StyledTextAreaContainer>
   );

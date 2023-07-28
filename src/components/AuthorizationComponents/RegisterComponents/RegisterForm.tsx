@@ -76,8 +76,8 @@ const RegisterForm = () => {
         <StyledRegisterTitleContent
           mb={deviceType === "desktop" ? "32px" : "24px"}>
           <Typography
-            color="primary800"
-            variant={
+            $color="primary800"
+            $variant={
               deviceType === "desktop"
                 ? "Heading 30 Semi"
                 : "Heading 24 Semi Bold"
@@ -88,13 +88,13 @@ const RegisterForm = () => {
 
           <Typography
             tag="p"
-            color="midGray2"
-            variant="Running Text / Paragraph 14 Reg">
+            $color="midGray2"
+            $variant="Running Text / Paragraph 14 Reg">
             Wypełnij poniższy formularz i załóż{" "}
             <Typography
               tag="span"
-              color="primary500"
-              variant="UI/UI Text 14 Semi Bold">
+              $color="primary500"
+              $variant="UI/UI Text 14 Semi Bold">
               Konto schroniska
             </Typography>
           </Typography>
@@ -102,8 +102,8 @@ const RegisterForm = () => {
       ) : (
         <StyledRegisterTitleContent mb="24px">
           <Typography
-            color="primary800"
-            variant={
+            $color="primary800"
+            $variant={
               deviceType === "desktop"
                 ? "Heading 30 Semi"
                 : "Heading 24 Semi Bold"
@@ -114,8 +114,8 @@ const RegisterForm = () => {
 
           <Typography
             tag="p"
-            color="midGray2"
-            variant="Running Text / Paragraph 14 Reg">
+            $color="midGray2"
+            $variant="Running Text / Paragraph 14 Reg">
             Proces rejestracji przebiegł pomyślnie. Na Twój adres email została
             wysłana wiadomość z linkiem aktywacyjnym, kliknij w link i przejdź
             do logowania.

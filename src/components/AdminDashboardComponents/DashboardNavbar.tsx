@@ -40,16 +40,16 @@ const DashboardNavbar = ({
       <StyledTitle>
         {previousTitle && deviceType !== "mobile" && (
           <Typography
-            color="midGray2"
-            variant="Heading 20 Semi Bold"
+            $color="midGray2"
+            $variant="Heading 20 Semi Bold"
             tag="h2">
             {previousTitle}
           </Typography>
         )}
 
         <Typography
-          color="darkGray2"
-          variant={
+          $color="darkGray2"
+          $variant={
             deviceType !== "mobile"
               ? "Heading 20 Semi Bold"
               : "UI/UI Text 14 Semi Bold"

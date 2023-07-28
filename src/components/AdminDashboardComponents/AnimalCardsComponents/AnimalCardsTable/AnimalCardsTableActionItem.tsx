@@ -49,16 +49,16 @@ const AnimalCardsTableActionItem = () => {
         <StyledDropdownContainer ref={dropdownRef}>
           <StyledDropdownOption onClick={() => setDetailsOn((prev) => !prev)}>
             <Typography
-              color="darkGray2"
-              variant="UI/UI Text 14 Reg">
+              $color="darkGray2"
+              $variant="UI/UI Text 14 Reg">
               Szczegóły
             </Typography>
             {detailsOn && <CheckIcon />}
           </StyledDropdownOption>
           <StyledDropdownOption>
             <Typography
-              color="darkGray2"
-              variant="UI/UI Text 14 Reg">
+              $color="darkGray2"
+              $variant="UI/UI Text 14 Reg">
               Usuń
             </Typography>
           </StyledDropdownOption>

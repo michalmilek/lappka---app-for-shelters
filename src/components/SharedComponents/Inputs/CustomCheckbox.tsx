@@ -6,27 +6,27 @@ import { CheckboxWrapper, Checkmark } from "./Input.styled";
 
 export interface CheckboxInterface
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  color: Color;
-  label?: string;
+  $color: Color;
+  $label?: string;
 }
 
 const CustomCheckbox: React.FC<CheckboxInterface> = ({
-  color,
+  $color,
   checked,
-  label,
+  $label,
   name,
   ...rest
 }) => {
   return (
     <CheckboxWrapper htmlFor={name}>
       <Checkmark
-        color={color}
+        $color={$color}
         checked={checked}
         name={name}
         {...rest}>
         {checked && <CheckboxMarkIcon />}
       </Checkmark>
-      {label && <Typography variant="UI/UI Text 14 Reg">{label}</Typography>}
+      {$label && <Typography $variant="UI/UI Text 14 Reg">{$label}</Typography>}
     </CheckboxWrapper>
   );
 };

@@ -4,8 +4,8 @@ import { AsideFriendsListItemActive } from "./MessagesFriendsListItem";
 
 export const MessasgesFriendsListItemContainer = styled.li<AsideFriendsListItemActive>`
   width: 100%;
-  background: ${({ active }) =>
-    active ? getColor("primary050") : getColor("white")};
+  background: ${({ $active }) =>
+    $active ? getColor("primary050") : getColor("white")};
 
   padding: 0 12px 0 16px;
   z-index: 100;

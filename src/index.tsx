@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <StyleSheetManager shouldForwardProp={isPropValid}>
+    <StyleSheetManager enableVendorPrefixes>
       <Provider store={store}>
         <App />
       </Provider>

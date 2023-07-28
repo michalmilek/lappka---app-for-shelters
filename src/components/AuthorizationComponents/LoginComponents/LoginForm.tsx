@@ -67,8 +67,8 @@ const LoginForm = () => {
     <StyledLoginForm onSubmit={formik.handleSubmit}>
       <StyledLoginTitleContent>
         <Typography
-          color="primary800"
-          variant={
+          $color="primary800"
+          $variant={
             deviceType === "desktop"
               ? "Heading 30 Semi"
               : "Heading 24 Semi Bold"
@@ -79,15 +79,15 @@ const LoginForm = () => {
 
         <Typography
           tag="p"
-          color="midGray2"
-          variant="Running Text / Paragraph 14 Reg">
+          $color="midGray2"
+          $variant="Running Text / Paragraph 14 Reg">
           Witaj ponownie!
         </Typography>
       </StyledLoginTitleContent>
 
       <StyledLoginInputContainer>
         <Input
-          inputSize="XLarge"
+          $inputSize="XLarge"
           value={formik.values.email}
           type="email"
           id="email"
@@ -95,23 +95,23 @@ const LoginForm = () => {
           placeholder="Adres email"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          label="E-mail"
-          error={
+          $label="E-mail"
+          $error={
             formik.touched.email && formik.errors.email
               ? formik.errors.email
               : null
           }
         />
         <Input
-          label="Hasło"
+          $label="Hasło"
           type="password"
           id="password"
           name="password"
           placeholder="Wpisz"
-          inputSize="XLarge"
+          $inputSize="XLarge"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={
+          $error={
             formik.touched.password && formik.errors.password
               ? formik.errors.password
               : null
@@ -119,19 +119,19 @@ const LoginForm = () => {
         />
         <StyledLoginOptionsContainer>
           <CustomCheckbox
-            label="Pamiętaj mnie"
+            $label="Pamiętaj mnie"
             name="rememberMe"
             checked={rememberMe}
             onClick={() => setRememberMe(!rememberMe)}
-            color="primary500"
+            $color="primary500"
           />
 
           <AnchorLink
-            underline
-            underlineColor="primary500"
-            underlineOpacity={0.2}
-            variant="UI/UI Text 14 Reg"
-            color="primary600"
+            $underline
+            $underlineColor="primary500"
+            $underlineOpacity={0.2}
+            $variant="UI/UI Text 14 Reg"
+            $color="primary600"
             to={"/register"}>
             Zapomniałem hasła
           </AnchorLink>
@@ -139,38 +139,38 @@ const LoginForm = () => {
       </StyledLoginInputContainer>
 
       <Button
-        size={deviceType === "desktop" ? "XLarge" : "Large"}
-        width="100%"
-        variant="fill"
+        $size={deviceType === "desktop" ? "XLarge" : "Large"}
+        $width="100%"
+        $variant="fill"
         type="submit">
         Zaloguj się
       </Button>
       <Divider
-        mt="24px"
-        mb="24px"
-        gapFromLines="8px"
-        color="midGray3"
-        text="Lub zaloguj się przez"
+        $mt="24px"
+        $mb="24px"
+        $gapFromLines="8px"
+        $color="midGray3"
+        $text="Lub zaloguj się przez"
       />
 
       <StyledLoginButtonContainer>
         <Button
-          size={deviceType === "desktop" ? "XLarge" : "Large"}
-          icon={<GoogleLogoIcon />}
-          isFullWidth
-          iconPlace="left"
-          iconSpacing="15px"
-          variant="outline">
+          $size={deviceType === "desktop" ? "XLarge" : "Large"}
+          $icon={<GoogleLogoIcon />}
+          $isFullWidth
+          $iconPlace="left"
+          $iconSpacing="15px"
+          $variant="outline">
           Google
         </Button>
         <Button
-          size={deviceType === "desktop" ? "XLarge" : "Large"}
-          iconSpacing="15px"
-          icon={<FacebookLogoIcon />}
-          isFullWidth
-          iconPlace="left"
-          color="facebook"
-          variant="fill">
+          $size={deviceType === "desktop" ? "XLarge" : "Large"}
+          $iconSpacing="15px"
+          $icon={<FacebookLogoIcon />}
+          $isFullWidth
+          $iconPlace="left"
+          $color="facebook"
+          $variant="fill">
           Facebook
         </Button>
       </StyledLoginButtonContainer>

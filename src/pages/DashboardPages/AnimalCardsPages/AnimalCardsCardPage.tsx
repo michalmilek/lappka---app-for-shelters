@@ -42,8 +42,8 @@ const AnimalCardsCardPage = () => {
               }}>
               <ArrowLeftIcon />{" "}
               <Typography
-                color="midGray1"
-                variant="UI/UI Text 16 Medium Bold">
+                $color="midGray1"
+                $variant="UI/UI Text 16 Medium Bold">
                 Wróć
               </Typography>
             </CardButton>
@@ -54,8 +54,8 @@ const AnimalCardsCardPage = () => {
                 onClick={() => setIsEditOn(true)}>
                 <Typography
                   tag="span"
-                  variant="UI/UI Text 16 Medium Bold"
-                  color="primary600">
+                  $variant="UI/UI Text 16 Medium Bold"
+                  $color="primary600">
                   Edytuj
                 </Typography>
               </CardButton>
@@ -65,11 +65,11 @@ const AnimalCardsCardPage = () => {
           {isEditOn && (
             <StyledCardFooter>
               <Button
-                size={deviceType === "desktop" ? "Large" : "Medium"}
-                variant="outline">
+                $size={deviceType === "desktop" ? "Large" : "Medium"}
+                $variant="outline">
                 Anuluj
               </Button>
-              <Button size={deviceType === "desktop" ? "Large" : "Medium"}>
+              <Button $size={deviceType === "desktop" ? "Large" : "Medium"}>
                 Zapisz
               </Button>
             </StyledCardFooter>

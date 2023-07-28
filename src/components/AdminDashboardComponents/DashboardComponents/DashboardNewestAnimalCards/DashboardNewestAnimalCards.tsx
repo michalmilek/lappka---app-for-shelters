@@ -15,12 +15,12 @@ const DashboardNewestAnimalCards = () => {
       <DashboardNewestAnimalCardsContainerHeader className="flex items-center justify-between py-2 border-b">
         <Typography
           tag="h3"
-          variant="UI/UI Text 16 Semi Bold">
+          $variant="UI/UI Text 16 Semi Bold">
           Najnowsze karty zwierząt
         </Typography>
         <Button
-          variant="outline"
-          size="Medium">
+          $variant="outline"
+          $size="Medium">
           Wszystkie
         </Button>
       </DashboardNewestAnimalCardsContainerHeader>

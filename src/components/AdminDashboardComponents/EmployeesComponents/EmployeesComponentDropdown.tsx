@@ -48,8 +48,8 @@ const EmployeesComponentActionDropdown = () => {
         <StyledDropdownContainer ref={dropdownRef}>
           <StyledDropdownOption>
             <Typography
-              color="darkGray2"
-              variant="UI/UI Text 14 Reg">
+              $color="darkGray2"
+              $variant="UI/UI Text 14 Reg">
               Usuń
             </Typography>
           </StyledDropdownOption>

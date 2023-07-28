@@ -24,19 +24,19 @@ export const StyledInput = styled.div<InputProps>`
   width: 100%;
 
   ${(props) =>
-    props.inputSize === "XLarge" &&
+    props.$inputSize === "XLarge" &&
     css`
       height: 48px;
     `}
 
   ${(props) =>
-    props.inputSize === "Large" &&
+    props.$inputSize === "Large" &&
     css`
       height: 40px;
     `}
 
   ${(props) =>
-    props.inputSize === "Medium" &&
+    props.$inputSize === "Medium" &&
     css`
       height: 32px;
     `}
@@ -45,8 +45,8 @@ export const StyledInput = styled.div<InputProps>`
 export const InputField = styled.input<InputProps>`
   position: relative;
   z-index: 50;
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? getColor(backgroundColor) : getColor("white")};
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor ? getColor($backgroundColor) : getColor("white")};
   border-radius: 6px;
   color: ${getColor("darkGray2")};
   padding-right: 2%;
@@ -56,7 +56,7 @@ export const InputField = styled.input<InputProps>`
   width: 100%;
 
   ${(props) =>
-    props.error
+    props.$error
       ? css`
           border: 1px solid ${getColor("error")};
         `
@@ -77,19 +77,19 @@ export const InputField = styled.input<InputProps>`
   }
 
   ${(props) =>
-    props.inputSize === "XLarge" &&
+    props.$inputSize === "XLarge" &&
     css`
       padding: 12px 26px 12px 16px;
     `}
 
   ${(props) =>
-    props.inputSize === "Large" &&
+    props.$inputSize === "Large" &&
     css`
       padding: 8px 26px 8px 16px;
     `}
 
   ${(props) =>
-    props.inputSize === "Medium" &&
+    props.$inputSize === "Medium" &&
     css`
       padding: 4px 26px 4px 16px;
     `}
@@ -105,9 +105,9 @@ export const IconContainer = styled.div<InputProps>`
   position: absolute;
   top: 50%;
   right: ${(props) => {
-    if (props.inputSize === "XLarge") return "12px";
-    if (props.inputSize === "Large") return "8px";
-    if (props.inputSize === "Medium") return "4px";
+    if (props.$inputSize === "XLarge") return "12px";
+    if (props.$inputSize === "Large") return "8px";
+    if (props.$inputSize === "Medium") return "4px";
     return "0";
   }};
   transform: translateY(-50%);
@@ -135,7 +135,7 @@ export const Checkmark = styled.span<CheckboxInterface>`
   border: ${(props) =>
     props.checked ? "" : `1px solid ${getColor("midGray1")}`};
   background-color: ${(props) =>
-    props.checked ? getColor(props.color) : getColor("white")};
+    props.checked ? getColor(props.$color) : getColor("white")};
 `;
 
 //TEXTAREA
@@ -165,7 +165,7 @@ export const TextareaField = styled.textarea<TextareaProps>`
   width: 100%;
   z-index: 50;
   ${(props) =>
-    props.error
+    props.$error
       ? css`
           border: 1px solid ${getColor("error")};
         `
@@ -186,19 +186,19 @@ export const TextareaField = styled.textarea<TextareaProps>`
   }
 
   ${(props) =>
-    props.inputSize === "XLarge" &&
+    props.$inputSize === "XLarge" &&
     css`
       padding: 12px 16px;
     `}
 
   ${(props) =>
-    props.inputSize === "Large" &&
+    props.$inputSize === "Large" &&
     css`
       padding: 8px 12px;
     `}
 
   ${(props) =>
-    props.inputSize === "Medium" &&
+    props.$inputSize === "Medium" &&
     css`
       padding: 4px 8px;
     `}

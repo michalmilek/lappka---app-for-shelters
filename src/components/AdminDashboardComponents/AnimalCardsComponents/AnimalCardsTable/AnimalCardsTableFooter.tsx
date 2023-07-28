@@ -68,7 +68,7 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
             {pagination.pageIndex}
           </StyledTableNumberButton>
         )}
-        <StyledTableNumberButton active>
+        <StyledTableNumberButton $active>
           {pagination.pageIndex + 1}
         </StyledTableNumberButton>
         {table.getCanNextPage() &&

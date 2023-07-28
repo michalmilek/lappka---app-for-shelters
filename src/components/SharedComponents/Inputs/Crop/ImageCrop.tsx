@@ -54,8 +54,8 @@ const ImageCrop: React.FC<ImageCropProps> = ({
       <ModalContentContainer>
         <ModalHeader>
           <Typography
-            variant="Heading 18 Semi Bold"
-            color="darkGray2">
+            $variant="Heading 18 Semi Bold"
+            $color="darkGray2">
             Edytuj zdjęcie
           </Typography>
         </ModalHeader>
@@ -74,7 +74,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
         </ReactCrop>
         <ModalFooter>
           <Button
-            variant="outline"
+            $variant="outline"
             onClick={() => {
               handleSelectedImageChange(null, null);
             }}>

@@ -5,7 +5,7 @@ import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface ExtendedSVGProps extends SVGProps<SVGSVGElement> {
-  isDropdownActive: boolean;
+  $isDropdownActive: boolean;
 }
 
 export const StyledSidebar = styled.aside`
@@ -22,6 +22,41 @@ export const StyledSidebar = styled.aside`
   height: 100%;
   border-right: 1px solid ${getColor("lightGray3")};
   z-index: 200;
+
+  @media screen and (max-width: 550px) {
+    transform: translateX(-100%);
+    opacity: 0;
+
+    &.sidebar-entering {
+      animation: slideIn 0.3s forwards;
+    }
+
+    &.sidebar-exiting {
+      animation: slideOut 0.3s forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
 
   @media screen and (max-width: 1024px) {
     width: 180px;
@@ -88,8 +123,8 @@ export const StyledSidebarArrowDownIcon = styled(
   width: 16px;
   transition: all 0.3s ease-in-out;
 
-  ${({ isDropdownActive }) =>
-    isDropdownActive &&
+  ${({ $isDropdownActive }) =>
+    $isDropdownActive &&
     css`
       transform: rotate(180deg);
     `}
