@@ -1,8 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import Typography from "../Typography/Typography";
 
+interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  unit?: string;
+  label?: string;
+  error?: string | null;
+}
 const InputFullContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,11 +15,18 @@ const InputFullContainer = styled.div`
   width: 100%;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.div<CustomInputProps>`
   display: flex;
   align-items: center;
   position: relative;
-  border: 1px solid ${getColor("lightGray2")};
+  ${(props) =>
+    props.error
+      ? css`
+          border: 1px solid ${getColor("error")};
+        `
+      : css`
+          border: 1px solid ${getColor("lightGray1")};
+        `}
   border-radius: 6px;
 `;
 
@@ -29,7 +41,12 @@ const InputBox = styled.input`
   font-weight: 400;
   line-height: 24px;
   letter-spacing: -0.6%;
+  border-radius: 8px;
   color: ${getColor("darkGray2")};
+
+  &::placeholder {
+    color: ${getColor("midGray4")};
+  }
 `;
 
 const IconContainer = styled.div`
@@ -43,17 +60,14 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0 8px 8px 0;
 `;
-
-interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  unit?: string;
-  label?: string;
-}
 
 const InputNumberWithUnits: React.FC<CustomInputProps> = ({
   value,
   unit,
   label,
+  error,
   ...rest
 }) => {
   return (
@@ -66,7 +80,7 @@ const InputNumberWithUnits: React.FC<CustomInputProps> = ({
           {label}
         </Typography>
       )}
-      <InputContainer>
+      <InputContainer error={error}>
         <InputBox
           type="number"
           value={value}
@@ -82,6 +96,12 @@ const InputNumberWithUnits: React.FC<CustomInputProps> = ({
           </IconContainer>
         )}
       </InputContainer>
+      <Typography
+        tag="span"
+        color="error"
+        variant="UI Small/UI Text 13 Med">
+        {error}
+      </Typography>
     </InputFullContainer>
   );
 };

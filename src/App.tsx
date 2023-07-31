@@ -2,7 +2,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedPage from "components/AdminDashboardComponents/ProtectedPage";
 import { GlobalStyle } from "globalStyles";
-import HomePage from "pages/HomePage";
 import LoginPage from "pages/LoginPage";
 import DashboardPage from "pages/DashboardPages/DashboardPage";
 import RegisterPage from "pages/RegisterPage";
@@ -13,9 +12,14 @@ import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
 import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsPage";
 import VoluntaryPage from "pages/DashboardPages/VoluntaryPage";
-import EmployeesPage from "pages/DashboardPages/EmployeesPage";
+import EmployeesPage from "pages/DashboardPages/EmployeesPages/EmployeesPage";
 import Toast from "components/SharedComponents/Toast/Toast";
 import AnimalCardsAddNewCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
+import AnimalCardsCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsCardPage";
+import AddNewEmployeePage from "pages/DashboardPages/EmployeesPages/AddNewEmployeePage";
+import AccountSettings from "pages/DashboardPages/AccountSettingsPage";
+import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
+import HomePage from "pages/HomePage";
 
 const queryClient = new QueryClient();
 
@@ -61,12 +65,24 @@ function App() {
               element={<AnimalCardsAddNewCardPage />}
             />
             <Route
+              path={DashboardRoutes.ANIMALCARDSCARD}
+              element={<AnimalCardsCardPage />}
+            />
+            <Route
               path={DashboardRoutes.VOLUNTARY}
               element={<VoluntaryPage />}
             />
             <Route
               path={DashboardRoutes.EMPLOYEES}
               element={<EmployeesPage />}
+            />
+            <Route
+              path={DashboardRoutes.ADDNEWEMPLOYEE}
+              element={<AddNewEmployeePage />}
+            />
+            <Route
+              path={DashboardRoutes.ACCOUNTSETTINGS}
+              element={<AccountSettingsPage />}
             />
           </Route>
 

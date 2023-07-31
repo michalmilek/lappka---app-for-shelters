@@ -10,6 +10,7 @@ export interface RadioInterface
   label?: string;
 }
 
+
 const CustomRadio: React.FC<RadioInterface> = ({
   checked,
   label,

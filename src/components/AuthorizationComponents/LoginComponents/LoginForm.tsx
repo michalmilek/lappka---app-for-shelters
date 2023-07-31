@@ -104,7 +104,7 @@ const LoginForm = () => {
         />
         <Input
           label="Hasło"
-          type="text"
+          type="password"
           id="password"
           name="password"
           placeholder="Wpisz"

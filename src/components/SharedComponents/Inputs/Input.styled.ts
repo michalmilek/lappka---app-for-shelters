@@ -20,7 +20,6 @@ export const StyledDiv = styled.div`
 `;
 
 export const StyledInput = styled.div<InputProps>`
-  z-index: 5;
   position: relative;
   width: 100%;
 
@@ -44,7 +43,8 @@ export const StyledInput = styled.div<InputProps>`
 `;
 
 export const InputField = styled.input<InputProps>`
-  z-index: 5;
+  position: relative;
+  z-index: 50;
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? getColor(backgroundColor) : getColor("white")};
   border-radius: 6px;
@@ -93,6 +93,10 @@ export const InputField = styled.input<InputProps>`
     css`
       padding: 4px 26px 4px 16px;
     `}
+
+      &:read-only {
+    border: none !important;
+  }
 `;
 
 export const IconContainer = styled.div<InputProps>`
@@ -149,16 +153,25 @@ export const StyledTextarea = styled.div<TextareaProps>`
 `;
 
 export const TextareaField = styled.textarea<TextareaProps>`
+  position: relative;
   font-family: "Inter", sans-serif;
   background-color: ${getColor("white")};
   border-radius: 6px;
-  border: 1px solid ${getColor("lightGray1")};
   color: ${getColor("darkGray2")};
   padding: 8px 12px;
   transition: all 300ms ease-in-out;
   outline: none;
   height: 80px;
   width: 100%;
+  z-index: 50;
+  ${(props) =>
+    props.error
+      ? css`
+          border: 1px solid ${getColor("error")};
+        `
+      : css`
+          border: 1px solid ${getColor("lightGray1")};
+        `}
 
   &::placeholder {
     color: ${getColor("midGray4")};
@@ -189,6 +202,10 @@ export const TextareaField = styled.textarea<TextareaProps>`
     css`
       padding: 4px 8px;
     `}
+
+        &:read-only {
+    border: none !important;
+  }
 `;
 
 //RADIO INPUT

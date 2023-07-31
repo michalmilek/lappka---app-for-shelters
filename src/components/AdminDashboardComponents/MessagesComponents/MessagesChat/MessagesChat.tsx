@@ -11,6 +11,7 @@ import {
   StyledSendIconContainer,
   StyledSendMessageIcon,
 } from "./MessageChat.styled";
+import SendMessage from "./SendMessage.png";
 
 export interface MessageInterface extends React.HTMLAttributes<HTMLDivElement> {
   isSentByMe?: boolean;
@@ -56,9 +57,10 @@ const MessagesChat = () => {
           placeholder="Wpisz wiadomość..."
           backgroundColor="lightGray5"
         />
-        <StyledSendIconContainer>
-          <StyledSendMessageIcon />
-        </StyledSendIconContainer>
+        <img
+          src={SendMessage}
+          alt=""
+        />
       </MessageInputContainer>
     </ChatContainer>
   );

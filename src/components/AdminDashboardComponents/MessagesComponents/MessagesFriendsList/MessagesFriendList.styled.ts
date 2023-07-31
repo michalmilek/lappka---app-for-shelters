@@ -7,7 +7,7 @@ export const MessagesFriendListContainer = styled.aside`
   width: 256px;
   background: ${getColor("white")};
   padding-top: 32px;
-  height: calc(100% - 56px);
+  height: 100%;
   border-right: 1px solid ${getColor("lightGray3")};
 
   @media screen and (max-width: 1024px) {

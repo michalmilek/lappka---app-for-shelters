@@ -11,6 +11,7 @@ import React, { useRef, useState } from "react";
 import LappkaLogo from "./LappkaLogo.png";
 import LappkaMobileLogo from "./LappkaMobileLogo.png";
 import {
+  StyledLink,
   StyledOrganisationListContainer,
   StyledOrganisationListTitleContainer,
   StyledSidebar,
@@ -125,11 +126,13 @@ const DashboardSidebar = () => {
         {isDropdownActive && (
           <StyledUserMenuDropdown ref={userMenuDropdownRef}>
             <StyledUserMenuDropdownItem>
-              <Typography
-                color="darkGray1"
-                variant="UI/UI Text 14 Reg">
-                Ustawienia konta
-              </Typography>
+              <StyledLink to={DashboardRoutes.ACCOUNTSETTINGS}>
+                <Typography
+                  color="darkGray1"
+                  variant="UI/UI Text 14 Reg">
+                  Ustawienia konta
+                </Typography>
+              </StyledLink>
             </StyledUserMenuDropdownItem>
             <StyledUserMenuDropdownItem>
               <Typography variant="UI/UI Text 14 Reg">Wyloguj się</Typography>

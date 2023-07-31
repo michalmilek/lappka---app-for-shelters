@@ -8,7 +8,7 @@ export const MessasgesFriendsListItemContainer = styled.li<AsideFriendsListItemA
     active ? getColor("primary050") : getColor("white")};
 
   padding: 0 12px 0 16px;
-  z-index: 10;
+  z-index: 100;
   cursor: pointer;
 
   &:hover {

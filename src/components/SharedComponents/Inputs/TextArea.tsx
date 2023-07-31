@@ -13,6 +13,7 @@ export interface TextareaProps
   value?: string;
   icon?: JSX.Element;
   label?: string;
+  error?: string | null;
 }
 
 const Textarea = ({
@@ -20,6 +21,7 @@ const Textarea = ({
   value,
   icon,
   label,
+  error,
   ...rest
 }: TextareaProps) => {
   return (
@@ -29,11 +31,18 @@ const Textarea = ({
       )}
       <StyledTextarea inputSize={inputSize}>
         <TextareaField
+          error={error}
           inputSize={inputSize}
           value={value}
           {...rest}
         />
       </StyledTextarea>
+      <Typography
+        tag="span"
+        color="error"
+        variant="UI Small/UI Text 12 Reg">
+        {error}
+      </Typography>
     </StyledTextAreaContainer>
   );
 };
