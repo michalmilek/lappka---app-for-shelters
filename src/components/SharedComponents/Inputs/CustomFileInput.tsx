@@ -68,6 +68,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             })
         )
       ).then((previews) => {
+        setInitialFileUpload(true);
         setFilePreviews(previews);
       });
 
@@ -155,7 +156,11 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         setFilePreviews(updatedPreviews);
 
         $onFileChange(newFile);
-        if (
+        if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
+          setInitialFileUpload(false);
+          setSelectedImage(null);
+          setSelectedImageNumber(null);
+        } else if (
           typeof selectedImageNumber === "number" &&
           fileNames.length - 1 > selectedImageNumber
         ) {
@@ -225,10 +230,10 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                 key={index}
                 src={preview}
                 alt={`Preview ${fileNames[index]}`}
-                onClick={() => {
+                /*  onClick={() => {
                   setSelectedImage(preview);
                   setSelectedImageNumber(index);
-                }}
+                }} */
               />
               <StyledCloseIcon onClick={() => handleRemoveFile(index)} />
             </StyledImgPreviewContainer>

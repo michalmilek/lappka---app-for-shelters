@@ -28,8 +28,10 @@ const AccountSettingsForm = ({
         formik.setFieldValue("avatarPreview", reader.result as string);
       };
       reader.readAsDataURL(file);
+      console.log(file);
     }
   };
+
 
   const fileUploadRef = useRef<HTMLInputElement>(null);
   return (
