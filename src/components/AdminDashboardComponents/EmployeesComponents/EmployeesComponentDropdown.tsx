@@ -15,7 +15,7 @@ const StyledMoreIcon = styled(MoreIcon)`
 const EmployeesComponentActionDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const dropdownRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -28,7 +28,7 @@ const EmployeesComponentActionDropdown = () => {
 
   const handleMoreIconClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    setIsDropdownOpen(true);
+    setIsDropdownOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -40,12 +40,11 @@ const EmployeesComponentActionDropdown = () => {
   }, []);
 
   return (
-    <ActionHeaderContainer>
+    <ActionHeaderContainer ref={dropdownRef}>
       <StyledMoreIcon onClick={handleMoreIconClick} />
       {isDropdownOpen && (
         <StyledDropdownContainer
-          className={isDropdownOpen ? "fadeIn" : "fadeOut"}
-          ref={dropdownRef}>
+          className={isDropdownOpen ? "fadeIn" : "fadeOut"}>
           <StyledDropdownOption>
             <Typography
               $color="darkGray2"

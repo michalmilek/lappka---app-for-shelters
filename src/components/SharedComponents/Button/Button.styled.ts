@@ -80,6 +80,7 @@ export const ReusableButton = styled.button<ButtonProps>`
   justify-content: center;
   border-radius: 8px;
   gap: 8px;
+  z-index: 50;
   width: ${(props) => (props.$isFullWidth ? "100%" : "auto")};
 
   ${(props) =>

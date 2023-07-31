@@ -28,11 +28,11 @@ import { selectIsMobileMenuOpen } from "redux/mobileMenuSlice";
 
 const DashboardSidebar = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
-  const userMenuDropdownRef = useRef<HTMLUListElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
   const deviceType = useDeviceType();
   const isOpen = useSelector(selectIsMobileMenuOpen);
 
-  useClickOutside(userMenuDropdownRef, () => setIsDropdownActive(false));
+  useClickOutside(userMenuRef, () => setIsDropdownActive(false));
 
   const pathName = window.location.pathname;
 
@@ -84,7 +84,11 @@ const DashboardSidebar = () => {
         </StyledOrganisationListContainer>
       </StyledSidebarTopMenu>
 
-      <StyledUserMenu onClick={() => setIsDropdownActive(true)}>
+      <StyledUserMenu
+        ref={userMenuRef}
+        onClick={() => {
+          setIsDropdownActive((prev) => !prev);
+        }}>
         <img
           src={DummyAvatar}
           alt="user avatar"
@@ -111,8 +115,7 @@ const DashboardSidebar = () => {
         <StyledUserMenuDropdown
           className={
             isDropdownActive ? "dropdown-entering" : "dropdown-exiting"
-          }
-          ref={userMenuDropdownRef}>
+          }>
           <StyledUserMenuDropdownItem>
             <StyledLink to={DashboardRoutes.ACCOUNTSETTINGS}>
               <Typography

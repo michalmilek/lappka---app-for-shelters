@@ -16,7 +16,7 @@ const AnimalCardsTableActionItem = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [detailsOn, setDetailsOn] = useState(false);
 
-  const dropdownRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -29,7 +29,7 @@ const AnimalCardsTableActionItem = () => {
 
   const handleMoreIconClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    setIsDropdownOpen(true);
+    setIsDropdownOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -41,12 +41,11 @@ const AnimalCardsTableActionItem = () => {
   }, []);
 
   return (
-    <ActionHeaderContainer>
+    <ActionHeaderContainer ref={dropdownRef}>
       <StyledMoreIcon onClick={handleMoreIconClick} />
       {isDropdownOpen && (
         <StyledDropdownContainer
-          className={isDropdownOpen ? "fadeIn" : "fadeOut"}
-          ref={dropdownRef}>
+          className={isDropdownOpen ? "fadeIn" : "fadeOut"}>
           <StyledDropdownOption onClick={() => setDetailsOn((prev) => !prev)}>
             <Typography
               $color="darkGray2"
