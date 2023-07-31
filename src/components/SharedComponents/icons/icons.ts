@@ -32,6 +32,9 @@ import { ReactComponent as SendMessageIcon } from "./files/SendMessageIcon.svg";
 import { ReactComponent as MoreIcon } from "./files/MoreIcon.svg";
 import { ReactComponent as CheckIcon } from "./files/CheckIcon.svg";
 import { ReactComponent as UserRemoveIcon } from "./files/UserRemoveIcon.svg";
+import { ReactComponent as SearchCircleIcon } from "./files/SearchCircleIcon.svg";
+import { ReactComponent as UserCircleIcon } from "./files/UserCircleIcon.svg";
+import { ReactComponent as HeartGreenIcon } from "./files/HeartGreenIcon.svg";
 import { styled } from "styled-components";
 
 export {
@@ -69,6 +72,9 @@ export {
   MoreIcon,
   CheckIcon,
   UserRemoveIcon,
+  SearchCircleIcon,
+  UserCircleIcon,
+  HeartGreenIcon,
 };
 
 export const StyledPlusIcon = styled(PlusIcon)`

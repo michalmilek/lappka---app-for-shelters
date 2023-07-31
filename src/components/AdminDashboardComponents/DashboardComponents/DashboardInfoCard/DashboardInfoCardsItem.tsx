@@ -7,28 +7,37 @@ import {
   StyledDashboardInfoCardIconContainer,
   StyledDashboardInfoCardTextContainer,
 } from "./DashboardInfoCardsItem.styled";
+import Skeleton from "./SkeletonCard";
 
-const DashboardInfoCardsItem = () => {
+interface Props {
+  isLoading: boolean;
+  text: string;
+  icon: JSX.Element;
+  number: number;
+}
+
+const DashboardInfoCardsItem = ({ isLoading, text, icon, number }: Props) => {
+  if (isLoading) {
+    return <Skeleton />;
+  }
+
   return (
-    <StyledDashboardInfoCard
-      as={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}>
+    <StyledDashboardInfoCard>
       <StyledDashboardInfoCardIconContainer>
-        <IdentificationIcon />
+        {icon}
       </StyledDashboardInfoCardIconContainer>
       <StyledDashboardInfoCardTextContainer>
         <Typography
           tag="span"
           variant="UI Small/UI Text 12 Semi Bold"
           color="midGray4">
-          Karty zwierząt
+          {text}
         </Typography>
         <Typography
           tag="h3"
           variant="Heading 30 Semi"
           color="darkGray2">
-          361
+          {number}
         </Typography>
       </StyledDashboardInfoCardTextContainer>
     </StyledDashboardInfoCard>

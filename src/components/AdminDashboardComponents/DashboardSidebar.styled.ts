@@ -116,9 +116,9 @@ export const StyledUserMenuNameContainer = styled.div`
   gap: 6px;
 `;
 
-export const StyledSidebarArrowDownIcon = styled(
-  ArrowDownIcon
-)<ExtendedSVGProps>`
+export const StyledSidebarArrowDownIcon = styled(ArrowDownIcon).withConfig({
+  shouldForwardProp: (prop) => prop !== "isDropdownActive",
+})<ExtendedSVGProps>`
   height: 16px;
   width: 16px;
   transition: all 0.3s ease-in-out;

@@ -22,11 +22,20 @@ const DashboardVoluntary = () => {
       </DashboardVoluntaryTitleContainer>
       <Divider />
       <DashboardVoluntaryItemsContainer>
-        <DashboardVoluntaryItem />
+        <DashboardVoluntaryItem
+          text="Wpłać darowiznę"
+          isOn={true}
+        />
         <Divider />
-        <DashboardVoluntaryItem />
+        <DashboardVoluntaryItem
+          text="Codzienna pomoc"
+          isOn={true}
+        />
         <Divider />
-        <DashboardVoluntaryItem />
+        <DashboardVoluntaryItem
+          text="Wyprowadzanie psów"
+          isOn={true}
+        />
       </DashboardVoluntaryItemsContainer>
     </DashboardVoluntaryContainer>
   );
