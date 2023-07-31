@@ -14,9 +14,9 @@ const DashboardVoluntary = () => {
     <DashboardVoluntaryContainer>
       <DashboardVoluntaryTitleContainer>
         <Typography
-          $variant="Heading 18 Semi Bold"
+          variant="Heading 18 Semi Bold"
           tag="h3"
-          $color="darkGray2">
+          color="darkGray2">
           Wolontariat
         </Typography>
       </DashboardVoluntaryTitleContainer>

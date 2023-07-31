@@ -13,8 +13,8 @@ const DashboardMostPopularAnimals = () => {
     <DashboardMostPopularAnimalsContainer>
       <DashboardMostPopularAnimalsHeadingContainer>
         <Typography
-          $variant="Heading 18 Semi Bold"
-          $color="darkGray2">
+          variant="Heading 18 Semi Bold"
+          color="darkGray2">
           Najpopularniejsze
         </Typography>
       </DashboardMostPopularAnimalsHeadingContainer>

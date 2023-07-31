@@ -62,7 +62,7 @@ const AccountSettingsPage = () => {
         title="Ustawienia konta"
         Button={
           <Button
-            $variant="outline"
+            variant="outline"
             onClick={() => navigate(-1)}>
             Anuluj
           </Button>
@@ -77,10 +77,10 @@ const AccountSettingsPage = () => {
               onClick={() => {
                 navigate(-1);
               }}
-              $variant="outline">
+              variant="outline">
               Anuluj
             </Button>
-            <Button $variant="fill">Dodaj</Button>
+            <Button variant="fill">Dodaj</Button>
           </AddNewEmployeeFormFooter>
         </FormContainer>
       </StyledDashboardEmployeesMainContent>

@@ -20,8 +20,8 @@ export const IsOnIndicator = styled.span<IsOn>`
   height: 8px;
   width: 8px;
   border-radius: 50%;
-  background-color: ${({ $isOn }) =>
-    $isOn ? getColor("success") : getColor("lightGray1")};
+  background-color: ${({ isOn }) =>
+    isOn ? getColor("success") : getColor("lightGray1")};
   transition: all 0.3s ease-in-out;
   animation: pulse 2s infinite;
 

@@ -26,14 +26,14 @@ const StyledVoluntaryInputContainer = styled.div`
 `;
 
 interface VoluntaryFormText {
-  $text: string;
+  text: string;
   children: React.ReactNode;
   formik: FormikType;
   fieldName: string;
 }
 
 const VoluntaryForm = ({
-  $text,
+  text,
   children,
   formik,
   fieldName,
@@ -48,17 +48,17 @@ const VoluntaryForm = ({
     <StyledVoluntaryFormContainer>
       <StyledVoluntaryFormHeader>
         <Typography
-          $variant="UI/UI Text 16 Semi Bold"
-          $color="darkGray2">
-          {$text}
+          variant="UI/UI Text 16 Semi Bold"
+          color="darkGray2">
+          {text}
         </Typography>
 
         <ToggleButton
-          $handleChange={handleToggleChange}
+          handleChange={handleToggleChange}
           $fieldName={fieldName}
           formik={formik}
           checked={fieldValue}
-          $label="Aktywna"
+          label="Aktywna"
         />
       </StyledVoluntaryFormHeader>
       <StyledVoluntaryInputContainer>{children}</StyledVoluntaryInputContainer>

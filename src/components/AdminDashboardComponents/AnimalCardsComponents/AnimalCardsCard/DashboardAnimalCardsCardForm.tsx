@@ -32,52 +32,52 @@ const DashboardAnimalCardsCardForm = ({ isEditOn }: { isEditOn: boolean }) => {
       </StyledCardImgContainer>
 
       <StyledCardInputContainer>
-        <FormRow $label="Imię zwierzaka">
+        <FormRow label="Imię zwierzaka">
           <Input
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
-        <FormRow $label="Opis">
+        <FormRow label="Opis">
           <Textarea
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
-        <FormRow $label="Gatunek">
+        <FormRow label="Gatunek">
           <Input
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
-        <FormRow $label="Umaszczenie">
+        <FormRow label="Umaszczenie">
           <Input
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
-        <FormRow $label="Płeć">
+        <FormRow label="Płeć">
           <Input
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
-        <FormRow $label="Waga">
+        <FormRow label="Waga">
           <Input
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
-        <FormRow $label="Sterylizacja">
+        <FormRow label="Sterylizacja">
           <Input
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
-        <FormRow $label="Widoczność">
+        <FormRow label="Widoczność">
           <Input
             readOnly={!isEditOn}
-            $inputSize="Large"
+            inputSize="Large"
           />
         </FormRow>
       </StyledCardInputContainer>

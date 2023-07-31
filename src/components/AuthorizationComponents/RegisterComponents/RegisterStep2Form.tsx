@@ -77,67 +77,67 @@ const RegisterStep2Form = ({
     <form onSubmit={formik.handleSubmit}>
       <StyledRegisterInputContainer>
         <Input
-          $inputSize={"Large"}
-          $label="Imię"
+          inputSize={"Large"}
+          label="Imię"
           name="firstName"
           value={formik.values.firstName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.firstName && formik.errors.firstName
               ? formik.errors.firstName
               : null
           }
         />
         <Input
-          $inputSize={"Large"}
-          $label="Nazwisko"
+          inputSize={"Large"}
+          label="Nazwisko"
           name="lastName"
           value={formik.values.lastName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.lastName && formik.errors.lastName
               ? formik.errors.lastName
               : null
           }
         />
         <Input
-          $inputSize={"Large"}
-          $label="Adres e-mail"
+          inputSize={"Large"}
+          label="Adres e-mail"
           name="emailAddress"
           value={formik.values.emailAddress}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.emailAddress && formik.errors.emailAddress
               ? formik.errors.emailAddress
               : null
           }
         />
         <Input
-          $inputSize={"Large"}
-          $label="Hasło"
+          inputSize={"Large"}
+          label="Hasło"
           name="password"
           type="password"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.password && formik.errors.password
               ? formik.errors.password
               : null
           }
         />
         <Input
-          $inputSize={"Large"}
-          $label="Powtórz hasło"
+          inputSize={"Large"}
+          label="Powtórz hasło"
           name="confirmPassword"
           type="password"
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.confirmPassword && formik.errors.confirmPassword
               ? formik.errors.confirmPassword
               : null
@@ -146,12 +146,12 @@ const RegisterStep2Form = ({
       </StyledRegisterInputContainer>
       <StyledRegisterButtonContainer>
         <Button
-          $icon={<ArrowLeftIcon fill="#fff" />}
-          $width="30%"
-          $iconSpacing="8px"
-          $iconPlace="left"
-          $size="XLarge"
-          $variant="outline"
+          icon={<ArrowLeftIcon fill="#fff" />}
+          width="30%"
+          iconSpacing="8px"
+          iconPlace="left"
+          size="XLarge"
+          variant="outline"
           type="button"
           onClick={() => {
             if (handleCurrentStep) handleCurrentStep(1);
@@ -159,11 +159,11 @@ const RegisterStep2Form = ({
           Powrót
         </Button>
         <Button
-          $width="70%"
-          $iconSpacing="8px"
-          $iconPlace="right"
-          $size={deviceType === "desktop" ? "XLarge" : "Large"}
-          $variant="fill"
+          width="70%"
+          iconSpacing="8px"
+          iconPlace="right"
+          size={deviceType === "desktop" ? "XLarge" : "Large"}
+          variant="fill"
           type="submit">
           Zarejestruj się
         </Button>

@@ -39,10 +39,10 @@ const StepBar: React.FC<StepBarProps> = ({ steps, currentStep, complete }) => {
             </StepNumberContainer>
             {!(steps.length - 1 === index) && (
               <Typography
-                $position="absolute"
-                $top={"100%"}
-                $left={"0px"}
-                $variant="UI Small/UI Text 12 Reg"
+                position="absolute"
+                top={"100%"}
+                left={"0px"}
+                variant="UI Small/UI Text 12 Reg"
                 tag="p">
                 {step}
               </Typography>

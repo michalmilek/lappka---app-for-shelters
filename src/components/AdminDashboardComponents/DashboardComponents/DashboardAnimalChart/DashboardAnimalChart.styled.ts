@@ -92,14 +92,14 @@ export const StyledDashboardChartDropdownContainerList = styled.ul`
 `;
 
 interface ArrowUpIconInterface extends React.SVGProps<SVGSVGElement> {
-  $isDropDownActive: boolean;
+  isDropdownActive: boolean;
 }
 
 export const StyledArrowUpIcon = styled(ArrowUpIcon)<ArrowUpIconInterface>`
   transition: all 0.3s ease;
 
-  ${({ $isDropDownActive }) =>
-    $isDropDownActive &&
+  ${({ isDropdownActive }) =>
+    isDropdownActive &&
     css`
       transform: rotate(180deg);
     `}

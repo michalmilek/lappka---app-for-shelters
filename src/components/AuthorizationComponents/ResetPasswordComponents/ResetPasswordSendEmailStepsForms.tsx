@@ -42,8 +42,8 @@ export const ResetPasswordSendEmailStep1Form = ({
     <form onSubmit={formik.handleSubmit}>
       <ResetPasswordTitleContent>
         <Typography
-          $color="primary800"
-          $variant={
+          color="primary800"
+          variant={
             deviceType === "desktop"
               ? "Heading 30 Semi"
               : "Heading 24 Semi Bold"
@@ -54,23 +54,23 @@ export const ResetPasswordSendEmailStep1Form = ({
 
         <Typography
           tag="p"
-          $color="midGray2"
-          $variant="Running Text / Paragraph 14 Reg">
+          color="midGray2"
+          variant="Running Text / Paragraph 14 Reg">
           Podaj adres email użyty przy rejestracji.
         </Typography>
       </ResetPasswordTitleContent>
 
       <ResetPasswordInputContainer>
         <Input
-          $label="Email"
+          label="Email"
           type="text"
           id="email"
           name="email"
           placeholder="Wpisz"
-          $inputSize="Large"
+          inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.email && formik.errors.email
               ? formik.errors.email
               : null
@@ -79,8 +79,8 @@ export const ResetPasswordSendEmailStep1Form = ({
       </ResetPasswordInputContainer>
 
       <Button
-        $width={"100%"}
-        $size={deviceType === "desktop" ? "XLarge" : "Large"}>
+        width={"100%"}
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Resetuj hasło
       </Button>
     </form>
@@ -95,8 +95,8 @@ export const ResetPasswordSendEmailStep2Form = () => {
     <form onSubmit={() => navigate("/login")}>
       <ResetPasswordTitleContent>
         <Typography
-          $color="primary800"
-          $variant={
+          color="primary800"
+          variant={
             deviceType === "desktop"
               ? "Heading 30 Semi"
               : "Heading 24 Semi Bold"
@@ -107,15 +107,15 @@ export const ResetPasswordSendEmailStep2Form = () => {
 
         <Typography
           tag="p"
-          $color="midGray2"
-          $variant="Running Text / Paragraph 14 Reg">
+          color="midGray2"
+          variant="Running Text / Paragraph 14 Reg">
           Wysłalismy na adres email link do stworzenia nowego hasła.
         </Typography>
       </ResetPasswordTitleContent>
       <Button
         type="submit"
-        $isFullWidth
-        $size={deviceType === "desktop" ? "XLarge" : "Large"}>
+        isFullWidth
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Zamknij
       </Button>
     </form>

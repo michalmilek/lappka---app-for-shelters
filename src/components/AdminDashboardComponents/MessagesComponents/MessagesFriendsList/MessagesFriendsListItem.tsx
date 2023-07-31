@@ -16,7 +16,7 @@ import {
 
 export interface AsideFriendsListItemActive
   extends React.HTMLAttributes<HTMLLIElement> {
-  $active?: boolean;
+  active?: boolean;
   name?: string;
   message?: string;
   time?: string;
@@ -46,7 +46,7 @@ const MessagesFriendsListItem = ({
   const active = name === activeChatData?.name;
   return (
     <MessasgesFriendsListItemContainer
-      $active={active}
+      active={active}
       onClick={() => {
         if (chatData) dispatch(setActiveChatData(chatData));
       }}>
@@ -58,13 +58,13 @@ const MessagesFriendsListItem = ({
           />
           <MessagesFriendsListItemUserInfoNameAndMessage>
             <Typography
-              $color={active ? "primary700" : "darkGray2"}
+              color={active ? "primary700" : "darkGray2"}
               tag="h4"
-              $variant="UI Small/UI Text 12 Semi Bold">
+              variant="UI Small/UI Text 12 Semi Bold">
               {name}
             </Typography>
             {(deviceType === "desktop" || deviceType === "laptop") && (
-              <Typography $variant="UI Small/UI Text 12 Reg">
+              <Typography variant="UI Small/UI Text 12 Reg">
                 {message && message.length > 20
                   ? message.substring(0, 20) + "..."
                   : message}
@@ -77,13 +77,13 @@ const MessagesFriendsListItem = ({
           <MessagesFriendsListItemMessageInfo>
             <Typography
               tag="h5"
-              $variant="UI Small/UI Text 12 Reg">
+              variant="UI Small/UI Text 12 Reg">
               {time}
             </Typography>
             <Typography
               tag="span"
-              $color={active ? "primary700" : "primary500"}
-              $variant="UI Small/UI Text 12 Semi Bold">
+              color={active ? "primary700" : "primary500"}
+              variant="UI Small/UI Text 12 Semi Bold">
               +{amountOfMessages}
             </Typography>
           </MessagesFriendsListItemMessageInfo>

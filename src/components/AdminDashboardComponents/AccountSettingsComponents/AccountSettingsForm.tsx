@@ -38,7 +38,7 @@ const AccountSettingsForm = ({
     <>
       <InputsFirstPartContainer>
         <Typography
-          $variant="Heading 18 Semi Bold"
+          variant="Heading 18 Semi Bold"
           tag="h2">
           Ustawienia organizacji
         </Typography>
@@ -47,24 +47,24 @@ const AccountSettingsForm = ({
           value={formik.values.organizationName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.errors.organizationName && formik.touched.organizationName
               ? formik.errors.organizationName
               : null
           }
-          $label="Pełna nazwa organizacji"
+          label="Pełna nazwa organizacji"
         />
         <Input
           name="street"
           value={formik.values.street}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.errors.street && formik.touched.street
               ? formik.errors.street
               : null
           }
-          $label="Ulica"
+          label="Ulica"
         />
         <PostalCodeCityContainer>
           <PostalCodeContainer>
@@ -73,12 +73,12 @@ const AccountSettingsForm = ({
               value={formik.values.postalCode}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              $error={
+              error={
                 formik.errors.postalCode && formik.touched.postalCode
                   ? formik.errors.postalCode
                   : null
               }
-              $label="Kod pocztowy"
+              label="Kod pocztowy"
             />
           </PostalCodeContainer>
           <Input
@@ -86,12 +86,12 @@ const AccountSettingsForm = ({
             value={formik.values.city}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            $error={
+            error={
               formik.errors.city && formik.touched.city
                 ? formik.errors.city
                 : null
             }
-            $label="Miasto"
+            label="Miasto"
           />
         </PostalCodeCityContainer>
         <Input
@@ -99,25 +99,25 @@ const AccountSettingsForm = ({
           value={formik.values.nip}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.errors.nip && formik.touched.nip ? formik.errors.nip : null
           }
-          $label="Numer NIP"
+          label="Numer NIP"
         />
         <Input
           name="krs"
           value={formik.values.krs}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.errors.krs && formik.touched.krs ? formik.errors.krs : null
           }
-          $label="Numer KRS"
+          label="Numer KRS"
         />
       </InputsFirstPartContainer>
       <InputsFirstPartContainer>
         <Typography
-          $variant="Heading 18 Semi Bold"
+          variant="Heading 18 Semi Bold"
           tag="h2">
           Ustawienia użytkownika
         </Typography>
@@ -136,7 +136,7 @@ const AccountSettingsForm = ({
                 fileUploadRef.current.click();
               }
             }}
-            $variant="outline">
+            variant="outline">
             Edytuj
           </Button>
           <input
@@ -155,20 +155,20 @@ const AccountSettingsForm = ({
           value={formik.values.fullName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.errors.fullName && formik.touched.fullName
               ? formik.errors.fullName
               : null
           }
-          $label="Imię i nazwisko"
+          label="Imię i nazwisko"
         />
         <Input
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $label="Adres e-mail"
-          $error={
+          label="Adres e-mail"
+          error={
             formik.errors.email && formik.touched.email
               ? formik.errors.email
               : null
@@ -176,9 +176,9 @@ const AccountSettingsForm = ({
         />
         <ButtonContainer>
           <Button
-            $icon={<UserRemoveIcon />}
-            $iconPlace="right"
-            $color="red500">
+            icon={<UserRemoveIcon />}
+            iconPlace="right"
+            color="red500">
             Delete account
           </Button>
           <Button>Zmień hasło</Button>

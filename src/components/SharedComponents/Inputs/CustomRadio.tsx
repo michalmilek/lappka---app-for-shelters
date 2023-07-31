@@ -7,12 +7,12 @@ import { RadioInput, Radiomark, RadioWrapper } from "./Input.styled";
 
 export interface RadioInterface
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  $label?: string;
+  label?: string;
 }
 
 const CustomRadio: React.FC<RadioInterface> = ({
   checked,
-  $label,
+  label,
   value = "",
   ...rest
 }) => {
@@ -29,12 +29,12 @@ const CustomRadio: React.FC<RadioInterface> = ({
           {...rest}
         />
       </Radiomark>
-      {$label && (
+      {label && (
         <Typography
           tag="label"
-          $color="darkGray2"
-          $variant="UI/UI Text 14 Reg">
-          {$label}
+          color="darkGray2"
+          variant="UI/UI Text 14 Reg">
+          {label}
         </Typography>
       )}
     </RadioWrapper>

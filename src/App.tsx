@@ -23,6 +23,23 @@ import HomePage from "pages/HomePage";
 
 const queryClient = new QueryClient();
 
+/* interface Test extends React.InputHTMLAttributes<HTMLInputElement> {
+  fontSize: string;
+}
+
+function addDollarSignToProps<
+  T extends React.InputHTMLAttributes<HTMLInputElement>
+>(props: T): T {
+  const inputProps = { ...props };
+  for (const key in inputProps) {
+    if (!(key in React.InputHTMLAttributes.prototype)) {
+      inputProps[key] = `$${inputProps[key]}`;
+    }
+  }
+  return inputProps;
+}
+
+ */
 function App() {
   return (
     <QueryClientProvider client={queryClient}>

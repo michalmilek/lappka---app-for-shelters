@@ -5,7 +5,7 @@ import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface ExtendedSVGProps extends SVGProps<SVGSVGElement> {
-  $isDropdownActive: boolean;
+  isDropdownActive: boolean;
 }
 
 export const StyledSidebar = styled.aside`
@@ -123,8 +123,8 @@ export const StyledSidebarArrowDownIcon = styled(
   width: 16px;
   transition: all 0.3s ease-in-out;
 
-  ${({ $isDropdownActive }) =>
-    $isDropdownActive &&
+  ${({ isDropdownActive }) =>
+    isDropdownActive &&
     css`
       transform: rotate(180deg);
     `}

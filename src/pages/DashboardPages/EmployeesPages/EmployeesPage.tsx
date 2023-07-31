@@ -16,8 +16,8 @@ const EmployeesPage = () => {
         title="Pracownicy"
         Button={
           <Button
-            $icon={<StyledPlusIcon />}
-            $iconPlace="left"
+            icon={<StyledPlusIcon />}
+            iconPlace="left"
             onClick={() => navigate(DashboardRoutes.ADDNEWEMPLOYEE)}>
             Dodaj pracownika
           </Button>

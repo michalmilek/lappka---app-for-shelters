@@ -52,7 +52,7 @@ export const SelectDiv = styled.div<SelectPropsWithoutGeneric>`
   justify-content: space-between;
 
   ${(props) =>
-    props.$error
+    props.error
       ? css`
           border: 1px solid ${getColor("error")};
         `

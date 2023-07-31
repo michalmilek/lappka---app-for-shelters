@@ -57,16 +57,16 @@ const DashboardSidebar = () => {
             <StyledNavLink
               key={item.title + index}
               to={item.to}
-              $icon={item.icon}
-              $text={item.title}
+              icon={item.icon}
+              text={item.title}
               end={item.title !== "Dashboard" ? false : true}
             />
           ))}
         </StyledSidebarList>
         <StyledOrganisationListTitleContainer>
           <Typography
-            $color="midGray3"
-            $variant="UI Small/UI Text 12 Semi Bold">
+            color="midGray3"
+            variant="UI Small/UI Text 12 Semi Bold">
             {deviceType === "mobile" || deviceType === "tablet"
               ? menu.secondMenu.title.substring(0, 3)
               : menu.secondMenu.title}
@@ -77,8 +77,8 @@ const DashboardSidebar = () => {
             <StyledNavLink
               key={item.title + index}
               to={item.to}
-              $icon={item.icon}
-              $text={item.title}
+              icon={item.icon}
+              text={item.title}
             />
           ))}
         </StyledOrganisationListContainer>
@@ -97,17 +97,15 @@ const DashboardSidebar = () => {
           <div>
             <StyledUserMenuNameContainer>
               <Typography
-                $color="black"
-                $variant="UI/UI Text 14 Med">
+                color="black"
+                variant="UI/UI Text 14 Med">
                 Jan Kowalski
               </Typography>
-              <StyledSidebarArrowDownIcon
-                $isDropdownActive={isDropdownActive}
-              />
+              <StyledSidebarArrowDownIcon isDropdownActive={isDropdownActive} />
             </StyledUserMenuNameContainer>
             <Typography
-              $color="primary600"
-              $variant="UI Small/UI Text 12 Reg">
+              color="primary600"
+              variant="UI Small/UI Text 12 Reg">
               Psiaki Adapciaki z Psiej Wioski
             </Typography>
           </div>
@@ -119,14 +117,14 @@ const DashboardSidebar = () => {
           <StyledUserMenuDropdownItem>
             <StyledLink to={DashboardRoutes.ACCOUNTSETTINGS}>
               <Typography
-                $color="darkGray1"
-                $variant="UI/UI Text 14 Reg">
+                color="darkGray1"
+                variant="UI/UI Text 14 Reg">
                 Ustawienia konta
               </Typography>
             </StyledLink>
           </StyledUserMenuDropdownItem>
           <StyledUserMenuDropdownItem>
-            <Typography $variant="UI/UI Text 14 Reg">Wyloguj się</Typography>
+            <Typography variant="UI/UI Text 14 Reg">Wyloguj się</Typography>
           </StyledUserMenuDropdownItem>
         </StyledUserMenuDropdown>
       </StyledUserMenu>

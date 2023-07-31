@@ -10,20 +10,20 @@ import {
 
 interface CheckboxToggleProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  $label?: string;
+  label?: string;
   disabled?: boolean;
   $fieldName?: string;
   formik: FormikType;
-  $handleChange: () => void;
+  handleChange: () => void;
 }
 
 const ToggleButton = ({
-  $label,
+  label,
   disabled,
   $fieldName,
   formik,
   checked,
-  $handleChange,
+  handleChange,
   ...rest
 }: CheckboxToggleProps) => {
   return (
@@ -31,19 +31,19 @@ const ToggleButton = ({
       <ToggleContainer disabled={disabled}>
         <ToggleInput
           type="checkbox"
-          onChange={$handleChange}
+          onChange={handleChange}
           disabled={disabled}
           checked={checked}
           {...rest}
         />
         <ToggleSlider />
       </ToggleContainer>
-      {$label && (
+      {label && (
         <Typography
           tag="label"
-          $variant="UI/UI Text 14 Med"
-          $color={checked ? "darkGray2" : "midGray4"}>
-          {$label}
+          variant="UI/UI Text 14 Med"
+          color={checked ? "darkGray2" : "midGray4"}>
+          {label}
         </Typography>
       )}
     </ToggleButtonContainer>

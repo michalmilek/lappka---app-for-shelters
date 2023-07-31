@@ -28,16 +28,16 @@ export const columns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Imię zwierzaka
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
       <Typography
-        $variant="UI/UI Text 14 Reg"
-        $color="darkGray2">
+        variant="UI/UI Text 14 Reg"
+        color="darkGray2">
         {props.getValue()}
       </Typography>
     ),
@@ -46,16 +46,16 @@ export const columns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Data dodania
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
       <Typography
-        $variant="UI/UI Text 14 Reg"
-        $color="darkGray2">
+        variant="UI/UI Text 14 Reg"
+        color="darkGray2">
         {props.getValue()}
       </Typography>
     ),
@@ -64,16 +64,16 @@ export const columns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Gatunek
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
       <Typography
-        $variant="UI/UI Text 14 Reg"
-        $color="darkGray2">
+        variant="UI/UI Text 14 Reg"
+        color="darkGray2">
         {props.getValue()}
       </Typography>
     ),
@@ -82,17 +82,17 @@ export const columns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Płeć
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
-      <StyledSexContainer $sex={props.getValue()}>
+      <StyledSexContainer sex={props.getValue()}>
         <Typography
-          $variant="UI/UI Text 14 Semi Bold"
-          $color="white">
+          variant="UI/UI Text 14 Semi Bold"
+          color="white">
           {props.getValue()}
         </Typography>
       </StyledSexContainer>
@@ -102,29 +102,29 @@ export const columns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Umaszczenie
         </Typography>
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
-      <Typography $variant="UI/UI Text 14 Reg">{props.getValue()}</Typography>
+      <Typography variant="UI/UI Text 14 Reg">{props.getValue()}</Typography>
     ),
     enableHiding: true,
   }),
   columnHelper.accessor("weight", {
     header: () => (
       <Typography
-        $variant="UI Small/UI Text 13 Med"
-        $color="midGray2">
+        variant="UI Small/UI Text 13 Med"
+        color="midGray2">
         Waga
       </Typography>
     ),
     cell: (props) => (
       <Typography
-        $variant="UI/UI Text 14 Reg"
-        $color="darkGray2">
+        variant="UI/UI Text 14 Reg"
+        color="darkGray2">
         {props.getValue()}
       </Typography>
     ),
@@ -133,8 +133,8 @@ export const columns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Sterylizacja
         </Typography>
       </StyledTableTHTextContainer>
@@ -143,8 +143,8 @@ export const columns = [
       <DotFlexContainer>
         <Dot value={props.getValue()} />
         <Typography
-          $variant="UI/UI Text 14 Reg"
-          $color="darkGray2">
+          variant="UI/UI Text 14 Reg"
+          color="darkGray2">
           {props.getValue()}
         </Typography>
       </DotFlexContainer>
@@ -154,8 +154,8 @@ export const columns = [
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Widoczny
         </Typography>
       </StyledTableTHTextContainer>
@@ -164,8 +164,8 @@ export const columns = [
       <DotFlexContainer>
         <Dot value={props.getValue()} />
         <Typography
-          $variant="UI/UI Text 14 Reg"
-          $color="darkGray2">
+          variant="UI/UI Text 14 Reg"
+          color="darkGray2">
           {props.getValue()}
         </Typography>
       </DotFlexContainer>
@@ -176,8 +176,8 @@ export const columns = [
     header: () => (
       <ActionHeaderContainer>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="midGray2">
+          variant="UI Small/UI Text 13 Med"
+          color="midGray2">
           Akcja
         </Typography>
       </ActionHeaderContainer>

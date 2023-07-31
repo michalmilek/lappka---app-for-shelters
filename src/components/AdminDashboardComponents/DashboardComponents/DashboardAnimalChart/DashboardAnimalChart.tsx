@@ -102,16 +102,16 @@ const DashboardAnimalChart = () => {
     return (
       <StyledDashboardChartContainer>
         <StyledDashboardChartTitleContainer>
-          <Typography $variant="UI/UI Text 16 Semi Bold">
+          <Typography variant="UI/UI Text 16 Semi Bold">
             Liczba wyświetleń podopiecznych
           </Typography>
           <Button
             onClick={() => setIsDropDownActive((prev) => !prev)}
-            $size="Medium"
-            $variant="outline">
+            size="Medium"
+            variant="outline">
             <CalendarIcon />
             Rok
-            <StyledArrowUpIcon $isDropDownActive={isDropDownActive} />
+            <StyledArrowUpIcon isDropdownActive={isDropDownActive} />
           </Button>
 
           <DashboardChartDropdown

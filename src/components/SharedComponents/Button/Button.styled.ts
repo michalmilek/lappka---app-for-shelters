@@ -81,31 +81,31 @@ export const ReusableButton = styled.button<ButtonProps>`
   border-radius: 8px;
   gap: 8px;
   z-index: 50;
-  width: ${(props) => (props.$isFullWidth ? "100%" : "auto")};
+  width: ${(props) => (props.isFullWidth ? "100%" : "auto")};
 
   ${(props) =>
-    props.$iconPlace === "left" &&
+    props.iconPlace === "left" &&
     css`
       flex-direction: row-reverse;
     `}
 
   ${(props) =>
-    props.$variant === "fill" &&
+    props.variant === "fill" &&
     css`
-      background-color: ${getColor(props.$color || "primary600")};
+      background-color: ${getColor(props.color || "primary600")};
       color: ${getColor("lightGray5")};
       border: none;
       transition: all 400ms ease-in-out;
 
       &:hover {
-        background-color: ${props.$color === "facebook" ||
-        props.$color === "error" ||
-        props.$color === "red500"
-          ? getColor(props.$color)
+        background-color: ${props.color === "facebook" ||
+        props.color === "error" ||
+        props.color === "red500"
+          ? getColor(props.color)
           : getColor("primary700")};
-        ${(props.$color === "facebook" ||
-          props.$color === "error" ||
-          props.$color === "red500") &&
+        ${(props.color === "facebook" ||
+          props.color === "error" ||
+          props.color === "red500") &&
         "filter: brightness(.75);"}
       }
 
@@ -115,9 +115,9 @@ export const ReusableButton = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.$variant === "outline" &&
+    props.variant === "outline" &&
     css`
-      background-color: ${getColor(props.$color || "white")};
+      background-color: ${getColor(props.color || "white")};
       color: ${getColor("darkGray2")};
       border: 1px solid ${getColor("lightGray2")};
       box-shadow: ${getShadow("xs")};
@@ -133,7 +133,7 @@ export const ReusableButton = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.$size === "XLarge" &&
+    props.size === "XLarge" &&
     css`
       font-size: 16px;
       font-weight: 500;
@@ -143,7 +143,7 @@ export const ReusableButton = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.$size === "Large" &&
+    props.size === "Large" &&
     css`
       font-size: 16px;
       font-weight: 500;
@@ -153,7 +153,7 @@ export const ReusableButton = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.$size === "Medium" &&
+    props.size === "Medium" &&
     css`
       font-size: 14px;
       font-weight: 500;

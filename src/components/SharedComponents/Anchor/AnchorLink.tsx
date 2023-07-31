@@ -16,15 +16,15 @@ import {
 import { hexToRGBA } from "utils/styles/getStyle/hexToRGBA";
 
 interface ExtendedLinkProps extends LinkProps {
-  $color?: Color;
-  $fontWeight?: fontWeight;
-  $fontSize?: fontSize;
-  $letterSpacing?: letterSpacing;
-  $lineHeight?: lineHeight;
-  $variant?: TypographyVariant;
-  $underline?: boolean;
-  $underlineColor?: Color;
-  $underlineOpacity?:
+  color?: Color;
+  fontWeight?: fontWeight;
+  fontSize?: fontSize;
+  letterSpacing?: letterSpacing;
+  lineHeight?: lineHeight;
+  variant?: TypographyVariant;
+  underline?: boolean;
+  underlineColor?: Color;
+  underlineOpacity?:
     | 0
     | 0.1
     | 0.2
@@ -41,21 +41,21 @@ interface ExtendedLinkProps extends LinkProps {
 const StyledLink = styled(Link)<ExtendedLinkProps>`
   text-decoration: none;
   ${(props) =>
-    props.$color &&
+    props.color &&
     css`
-      color: ${getColor(props.$color)};
+      color: ${getColor(props.color)};
     `}
 
   ${(props) =>
-    props.$underline &&
-    props.$underlineColor &&
-    props.$underlineOpacity &&
+    props.underline &&
+    props.underlineColor &&
+    props.underlineOpacity &&
     css`
       border-bottom: 1px solid
-        ${hexToRGBA(getColor(props.$underlineColor), props.$underlineOpacity)};
+        ${hexToRGBA(getColor(props.underlineColor), props.underlineOpacity)};
     `}
 
-    ${({ $variant }) => $variant && typographyVariants[$variant]}
+    ${({ variant }) => variant && typographyVariants[variant]}
 `;
 
 const AnchorLink = ({ children, ...rest }: ExtendedLinkProps) => {

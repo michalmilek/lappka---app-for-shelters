@@ -48,8 +48,8 @@ export const ResetPasswordSetPasswordStep1Form = ({
     <form onSubmit={formik.handleSubmit}>
       <ResetPasswordTitleContent>
         <Typography
-          $color="primary800"
-          $variant={
+          color="primary800"
+          variant={
             deviceType === "desktop"
               ? "Heading 30 Semi"
               : "Heading 24 Semi Bold"
@@ -60,38 +60,38 @@ export const ResetPasswordSetPasswordStep1Form = ({
 
         <Typography
           tag="p"
-          $color="midGray2"
-          $variant="Running Text / Paragraph 14 Reg">
+          color="midGray2"
+          variant="Running Text / Paragraph 14 Reg">
           Hasło powinno mieć m.in. 8 znaków.
         </Typography>
       </ResetPasswordTitleContent>
 
       <ResetPasswordInputContainer>
         <Input
-          $label="Hasło"
+          label="Hasło"
           type="password"
           id="password"
           name="password"
           placeholder="Wpisz"
-          $inputSize="Large"
+          inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.password && formik.errors.password
               ? formik.errors.password
               : null
           }
         />
         <Input
-          $label="Potwierdź hasło"
+          label="Potwierdź hasło"
           type="password"
           id="confirmPassword"
           name="confirmPassword"
           placeholder="Wpisz"
-          $inputSize="Large"
+          inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          $error={
+          error={
             formik.touched.confirmPassword && formik.errors.confirmPassword
               ? formik.errors.confirmPassword
               : null
@@ -100,8 +100,8 @@ export const ResetPasswordSetPasswordStep1Form = ({
       </ResetPasswordInputContainer>
 
       <Button
-        $width={"100%"}
-        $size={deviceType === "desktop" ? "XLarge" : "Large"}>
+        width={"100%"}
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Utwórz hasło
       </Button>
     </form>
@@ -115,8 +115,8 @@ export const ResetPasswordSetPasswordStep2Form = () => {
     <form>
       <ResetPasswordTitleContent>
         <Typography
-          $color="primary800"
-          $variant={
+          color="primary800"
+          variant={
             deviceType === "desktop"
               ? "Heading 30 Semi"
               : "Heading 24 Semi Bold"
@@ -127,8 +127,8 @@ export const ResetPasswordSetPasswordStep2Form = () => {
 
         <Typography
           tag="p"
-          $color="midGray2"
-          $variant="Running Text / Paragraph 14 Reg">
+          color="midGray2"
+          variant="Running Text / Paragraph 14 Reg">
           Twoje hasło zostało zresetowane. Możesz już zalogować się do swojego
           konta.
         </Typography>
@@ -136,8 +136,8 @@ export const ResetPasswordSetPasswordStep2Form = () => {
       <Button
         onClick={() => navigate("/login")}
         type="button"
-        $isFullWidth
-        $size={deviceType === "desktop" ? "XLarge" : "Large"}>
+        isFullWidth
+        size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Zaloguj się
       </Button>
     </form>

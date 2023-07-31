@@ -2,7 +2,7 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import styled from "styled-components";
 
 interface FormRowProps {
-  $label: string;
+  label: string;
   children: React.ReactNode;
 }
 
@@ -17,15 +17,15 @@ const HalfWidthField = styled.div`
   flex: 1;
 `;
 
-const FormRow = ({ $label, children }: FormRowProps) => {
+const FormRow = ({ label, children }: FormRowProps) => {
   return (
     <FormRowContainer>
       <HalfWidthField>
         <Typography
-          $variant="UI Small/UI Text 12 Reg"
-          $color="midGray1"
+          variant="UI Small/UI Text 12 Reg"
+          color="midGray1"
           tag="label">
-          {$label}
+          {label}
         </Typography>
       </HalfWidthField>
       <HalfWidthField>{children}</HalfWidthField>

@@ -15,16 +15,17 @@ import {
   StyledPreviewPhoto,
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
+import { createFormDataFromBase64 } from "./Crop/imageUtils";
 export interface CustomFileInputProps {
-  $label?: string;
-  $description?: string;
-  $onFileChange: (files: FileList | File | null) => void;
+  label?: string;
+  description?: string;
+  onFileChange: (files: FileList | File | null) => void;
 }
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
-  $onFileChange,
-  $description = "",
-  $label = "",
+  onFileChange,
+  description = "",
+  label = "",
 }) => {
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
@@ -72,7 +73,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         setFilePreviews(previews);
       });
 
-      $onFileChange(files);
+      onFileChange(files);
     }
   };
 
@@ -82,7 +83,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     }
     setFileNames([]);
     setFilePreviews([]);
-    $onFileChange(null);
+    onFileChange(null);
   };
 
   const handleRemoveFile = (index: number) => {
@@ -111,7 +112,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         dataTransfer.items.add(file);
       });
 
-      $onFileChange(dataTransfer.files);
+      onFileChange(dataTransfer.files);
     }
   };
 
@@ -155,11 +156,12 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         updatedPreviews.splice(index, 1, base64String);
         setFilePreviews(updatedPreviews);
 
-        $onFileChange(newFile);
+        onFileChange(newFile);
         if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
           setInitialFileUpload(false);
           setSelectedImage(null);
           setSelectedImageNumber(null);
+          console.log(createFormDataFromBase64(filePreviews, fileNames));
         } else if (
           typeof selectedImageNumber === "number" &&
           fileNames.length - 1 > selectedImageNumber
@@ -175,6 +177,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         ) {
           setSelectedImage(null);
           setSelectedImageNumber(null);
+          createFormDataFromBase64(filePreviews, fileNames);
         }
       },
       "image/jpeg",
@@ -193,9 +196,9 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     <FullContainer>
       <FileInputContainerContent>
         <Typography
-          $variant="UI Small/UI Text 13 Med"
-          $color="darkGray2">
-          {$label}
+          variant="UI Small/UI Text 13 Med"
+          color="darkGray2">
+          {label}
         </Typography>
         <FileInputContainer>
           <FileInput
@@ -206,8 +209,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           />
 
           <Typography
-            $variant="UI/UI Text 14 Reg"
-            $color="midGray4"
+            variant="UI/UI Text 14 Reg"
+            color="midGray4"
             tag="span">
             Upload
           </Typography>
@@ -216,9 +219,9 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           </PlusIconContainer>
         </FileInputContainer>
         <Typography
-          $variant="UI Small/UI Text 12 Reg"
-          $color="midGray4">
-          {$description}
+          variant="UI Small/UI Text 12 Reg"
+          color="midGray4">
+          {description}
         </Typography>
       </FileInputContainerContent>
 

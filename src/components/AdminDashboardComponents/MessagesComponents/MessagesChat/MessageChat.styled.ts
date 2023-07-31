@@ -20,8 +20,8 @@ export const MessageContainer = styled.div<MessageInterface>`
   gap: 16px;
   align-items: flex-start;
 
-  ${({ $isSentByMe }) =>
-    $isSentByMe
+  ${({ isSentByMe }) =>
+    isSentByMe
       ? css`
           flex-direction: row-reverse;
           align-items: flex-end;
@@ -41,12 +41,12 @@ export const MessageBubble = styled.div<MessageInterface>`
   align-items: flex-start;
   justify-content: center;
   padding: 14px 16px;
-  border-radius: ${({ $isSentByMe }) =>
-    $isSentByMe ? "12px 0px 12px 12px" : "0px 12px 12px 12px"};
-  background-color: ${({ $isSentByMe }) =>
-    $isSentByMe ? getColor("primary500") : getColor("white")};
-  color: ${({ $isSentByMe }) =>
-    $isSentByMe ? getColor("white") : getColor("darkGray3")};
+  border-radius: ${({ isSentByMe }) =>
+    isSentByMe ? "12px 0px 12px 12px" : "0px 12px 12px 12px"};
+  background-color: ${({ isSentByMe }) =>
+    isSentByMe ? getColor("primary500") : getColor("white")};
+  color: ${({ isSentByMe }) =>
+    isSentByMe ? getColor("white") : getColor("darkGray3")};
   max-width: 70%;
 `;
 

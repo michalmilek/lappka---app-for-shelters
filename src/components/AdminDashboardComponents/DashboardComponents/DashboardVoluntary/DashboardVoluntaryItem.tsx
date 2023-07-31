@@ -7,7 +7,7 @@ import {
 import { IsOnIndicator } from "./DashboardVoluntaryItem.styled";
 
 export interface IsOn extends React.HTMLAttributes<HTMLSpanElement> {
-  $isOn: boolean;
+  isOn: boolean;
 }
 
 const DashboardVoluntaryItem = () => {
@@ -15,9 +15,9 @@ const DashboardVoluntaryItem = () => {
     <DashboardVoluntaryItemContainer>
       <Typography tag="h5">Wpłać darowiznę</Typography>
       <DashboardVoluntaryItemStatusContainer>
-        <IsOnIndicator $isOn={true} />
+        <IsOnIndicator isOn={true} />
         <Typography
-          $color="darkGray2"
+          color="darkGray2"
           tag="span">
           Włączone
         </Typography>

@@ -38,9 +38,9 @@ const EmployeesTable = () => {
     <EmployeesTableComponentContainer>
       <TableComponentHeaderContainer>
         <Typography
-          $variant="UI/UI Text 16 Semi Bold"
+          variant="UI/UI Text 16 Semi Bold"
           tag="h2"
-          $color="darkGray2">
+          color="darkGray2">
           Lista pracowników
         </Typography>
       </TableComponentHeaderContainer>
@@ -80,7 +80,7 @@ const EmployeesTable = () => {
         </tbody>
       </TableContainer>
       <EmployeesTableFooter>
-        <Button $variant="outline">Test</Button>
+        <Button variant="outline">Test</Button>
         {/* ADDED TO HAVE STYLING ON THE FOOTER, IN THE FUTURE I WILL REPLACE IT WITH PAGINATION */}
       </EmployeesTableFooter>
     </EmployeesTableComponentContainer>

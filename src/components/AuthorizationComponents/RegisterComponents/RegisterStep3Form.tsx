@@ -10,9 +10,9 @@ const RegisterStep3Form = () => {
   return (
     <Button
       onClick={() => navigate("/login")}
-      $size={deviceType === "desktop" ? "XLarge" : "Large"}
-      $width="100%"
-      $variant="fill"
+      size={deviceType === "desktop" ? "XLarge" : "Large"}
+      width="100%"
+      variant="fill"
       type="button">
       Zaloguj się
     </Button>

@@ -21,68 +21,69 @@ const AnimalCardsAddNewCardForm = ({
   formik: FormikProps<AddNewAnimalCardInterface>;
 }) => {
   const deviceType = useDeviceType();
+
   return (
     <AnimalCardsAddNewCardFormContainer onSubmit={formik.handleSubmit}>
       <AnimalCardsAddNewCardFormInputContainer>
         <Input
-          $error={
+          error={
             formik.errors.animalName && formik.touched.animalName
               ? formik.errors.animalName
               : undefined
           }
           placeholder="Wpisz"
-          $inputSize="Large"
-          $label="Imię zwierzaka"
+          inputSize="Large"
+          label="Imię zwierzaka"
           name="animalName"
           value={formik.values.animalName}
           onChange={formik.handleChange}
         />
         <Textarea
-          $error={
+          error={
             formik.errors.description && formik.touched.description
               ? formik.errors.description
               : undefined
           }
           placeholder="Wpisz"
-          $inputSize="Large"
-          $label="Opis"
+          inputSize="Large"
+          label="Opis"
           aria-placeholder="Wpisz opis zwierzaka"
-          name="$description"
+          name="description"
           value={formik.values.description}
           onChange={formik.handleChange}
         />
         <Select
-          $error={
+          error={
             formik.errors.genre?.value && formik.touched.genre
               ? formik.errors.genre?.value
               : undefined
           }
-          $label="Gatunek"
-          $dropdownIcon={<ArrowDownIcon />}
-          $options={[
+          label="Gatunek"
+          dropdownIcon={<ArrowDownIcon />}
+          options={[
             { value: "pies", label: "Pies" },
             { value: "kot", label: "Kot" },
           ]}
           value={formik.values.genre.value}
-          $handleChange={(option) => {
+          handleChange={(option) => {
             formik.setFieldTouched("genre", true);
             formik.setFieldValue("genre", option);
           }}
         />
         <Select
-          $error={
+          error={
             formik.errors.colour?.value && formik.touched.colour
               ? formik.errors.colour?.value
               : undefined
           }
-          $label="Umaszczenie"
-          $dropdownIcon={<ArrowDownIcon />}
-          $options={[
+          label="Umaszczenie"
+          dropdownIcon={<ArrowDownIcon />}
+          options={[
             { value: "jasny", label: "Jasny" },
             { value: "ciemny", label: "Ciemny" },
           ]}
           value={formik.values.colour.value}
-          $handleChange={(option) => {
+          handleChange={(option) => {
             formik.setFieldTouched("colour", true);
             formik.setFieldValue("colour", option);
           }}
@@ -90,29 +91,29 @@ const AnimalCardsAddNewCardForm = ({
 
         <AnimalCardsAddNewCardFlexInputContainer>
           <Select
-            $error={
+            error={
               formik.errors.sex?.value && formik.touched.sex
                 ? formik.errors.sex?.value
                 : undefined
             }
-            $label="Płeć"
-            $dropdownIcon={<ArrowDownIcon />}
-            $options={[
+            label="Płeć"
+            dropdownIcon={<ArrowDownIcon />}
+            options={[
               { value: "samiec", label: "Samiec" },
               { value: "samiczka", label: "Samiczka" },
             ]}
             value={formik.values.sex.value}
-            $handleChange={(option) => {
+            handleChange={(option) => {
               formik.setFieldTouched("sex", true);
               formik.setFieldValue("sex", option);
             }}
           />
           <InputNumberWithUnits
-            $label="Waga"
+            label="Waga"
             placeholder="Kilogramy"
             name="weight"
-            $unit="KG"
-            $error={
+            unit="KG"
+            error={
               formik.errors.weight && formik.touched.weight
                 ? formik.errors.weight
                 : undefined
@@ -124,58 +125,58 @@ const AnimalCardsAddNewCardForm = ({
 
         <AnimalCardsAddNewCardFlexInputContainer>
           <Select
-            $error={
+            error={
               formik.errors.sterilisation?.value && formik.touched.sterilisation
                 ? formik.errors.sterilisation?.value
                 : undefined
             }
-            $label="Sterylizacja"
-            $dropdownIcon={<ArrowDownIcon />}
-            $options={[
+            label="Sterylizacja"
+            dropdownIcon={<ArrowDownIcon />}
+            options={[
               { value: "tak", label: "Tak" },
               { value: "nie", label: "Nie" },
             ]}
             value={formik.values.sterilisation.value}
-            $handleChange={(option) => {
+            handleChange={(option) => {
               formik.setFieldTouched("sterilisation", true);
               formik.setFieldValue("sterilisation", option);
             }}
           />
           <Select
-            $error={
+            error={
               formik.errors.visibility?.value && formik.touched.visibility
                 ? formik.errors.visibility?.value
                 : undefined
             }
-            $label="Widoczność"
-            $dropdownIcon={<ArrowDownIcon />}
-            $options={[
+            label="Widoczność"
+            dropdownIcon={<ArrowDownIcon />}
+            options={[
               { value: "tak", label: "Tak" },
               { value: "nie", label: "Nie" },
             ]}
             value={formik.values.visibility.value}
-            $handleChange={(option) => {
+            handleChange={(option) => {
               formik.setFieldTouched("visibility", true);
               formik.setFieldValue("visibility", option);
             }}
           />
         </AnimalCardsAddNewCardFlexInputContainer>
         <CustomFileInput
-          $onFileChange={(files) => formik.setFieldValue("uploadFile", files)}
-          $label="Dodaj zdjęcia"
-          $description="Zdjęcia maksymalnie 1MB"
+          onFileChange={(files) => formik.setFieldValue("uploadFile", files)}
+          label="Dodaj zdjęcia"
+          description="Zdjęcia maksymalnie 1MB"
         />
       </AnimalCardsAddNewCardFormInputContainer>
       <AnimalCardsAddNewCardFooter>
         <Button
-          $variant="outline"
+          variant="outline"
           type="button"
-          $size={deviceType === "desktop" ? "Large" : "Medium"}
+          size={deviceType === "desktop" ? "Large" : "Medium"}
           onClick={formik.handleReset}>
           Anuluj
         </Button>
         <Button
-          $size={deviceType === "desktop" ? "Large" : "Medium"}
+          size={deviceType === "desktop" ? "Large" : "Medium"}
           type="submit">
           Zapisz
         </Button>

@@ -92,7 +92,7 @@ const AnimalCardsAddNewCardPage = () => {
         Button={
           <Button
             onClick={() => navigate(-1)}
-            $variant="outline">
+            variant="outline">
             Anuluj
           </Button>
         }

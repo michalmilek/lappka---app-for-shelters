@@ -4,9 +4,9 @@ import { getColor } from "utils/styles/getStyle/getColor";
 import Typography from "../Typography/Typography";
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  $unit?: string;
-  $label?: string;
-  $error?: string | null;
+  unit?: string;
+  label?: string;
+  error?: string | null;
 }
 const InputFullContainer = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const InputContainer = styled.div<CustomInputProps>`
   align-items: center;
   position: relative;
   ${(props) =>
-    props.$error
+    props.error
       ? css`
           border: 1px solid ${getColor("error")};
         `
@@ -65,42 +65,42 @@ const IconContainer = styled.div`
 
 const InputNumberWithUnits: React.FC<CustomInputProps> = ({
   value,
-  $unit,
-  $label,
-  $error,
+  unit,
+  label,
+  error,
   ...rest
 }) => {
   return (
     <InputFullContainer>
-      {$label && (
+      {label && (
         <Typography
           tag="label"
-          $variant="UI Small/UI Text 13 Med"
-          $color="darkGray2">
-          {$label}
+          variant="UI Small/UI Text 13 Med"
+          color="darkGray2">
+          {label}
         </Typography>
       )}
-      <InputContainer $error={$error}>
+      <InputContainer error={error}>
         <InputBox
           type="number"
           value={value}
           {...rest}
         />
-        {$unit && (
+        {unit && (
           <IconContainer>
             <Typography
-              $variant="UI/UI Text 14 Reg"
-              $color="midGray2">
-              {$unit}
+              variant="UI/UI Text 14 Reg"
+              color="midGray2">
+              {unit}
             </Typography>
           </IconContainer>
         )}
       </InputContainer>
       <Typography
         tag="span"
-        $color="error"
-        $variant="UI Small/UI Text 13 Med">
-        {$error}
+        color="error"
+        variant="UI Small/UI Text 13 Med">
+        {error}
       </Typography>
     </InputFullContainer>
   );

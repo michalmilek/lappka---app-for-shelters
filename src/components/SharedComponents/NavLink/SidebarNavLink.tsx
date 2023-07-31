@@ -4,8 +4,8 @@ import styled from "styled-components";
 import useDeviceType from "hooks/useDeviceType";
 
 interface StyledNavLinkProps extends NavLinkProps {
-  $icon: JSX.Element;
-  $text: string;
+  icon: JSX.Element;
+  text: string;
 }
 
 const StyledNavLink = styled(NavLink)`
@@ -73,15 +73,15 @@ export const StyledMessagesNumberSpan = styled.span`
   color: ${getColor("white")};
 `;
 
-const SidebarNavLink = ({ $icon, $text, ...rest }: StyledNavLinkProps) => {
+const SidebarNavLink = ({ icon, text, ...rest }: StyledNavLinkProps) => {
   const deviceType = useDeviceType();
   return (
     <StyledNavLink {...rest}>
       <>
-        {$icon}
-        {deviceType === "desktop" && <>{$text}</>}
+        {icon}
+        {deviceType === "desktop" && <>{text}</>}
       </>
-      {$text === "Wiadomości" && (
+      {text === "Wiadomości" && (
         <StyledMessagesNumberContainer>
           <StyledMessagesNumberSpan>56</StyledMessagesNumberSpan>
         </StyledMessagesNumberContainer>
