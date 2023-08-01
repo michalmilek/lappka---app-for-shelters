@@ -45,7 +45,7 @@ export const columns = [
       <Typography
         variant="UI/UI Text 14 Reg"
         color="darkGray2">
-        {props.getValue()}
+        {new Date(props.getValue()).toLocaleDateString("pl-PL")}
       </Typography>
     ),
   }),

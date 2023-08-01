@@ -1,68 +1,126 @@
-import ToggleButton from "components/SharedComponents/Button/ToggleButton";
+import Button from "components/SharedComponents/Button/Button";
 import Input from "components/SharedComponents/Inputs/Input";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
-import Typography from "components/SharedComponents/Typography/Typography";
-import { FormikType } from "pages/DashboardPages/VoluntaryPage";
 import React from "react";
-import { styled } from "styled-components";
+import {
+  StyledDashboardFooter,
+  StyledDashboardVoluntaryContent,
+  StyledDashboardVoluntaryMainContentFormsContainer,
+} from "../DashboardVoluntary.styled";
+import VoluntaryFormPart from "./VoluntaryFormPart";
+import * as Yup from "yup";
+import { FormikProps, useFormik } from "formik";
+import { ShelterVolunteeringResponse } from "apiCalls/pet/pet";
+import { useUpdateShelterVolunteering } from "apiCalls/pet/petHooks";
+import { useDispatch } from "react-redux";
+import { setLoading } from "redux/loadingSlice";
 
-const StyledVoluntaryFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const StyledVoluntaryFormHeader = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-const StyledVoluntaryInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-interface VoluntaryFormText {
-  text: string;
-  children: React.ReactNode;
-  formik: FormikType;
-  fieldName: string;
+interface Props {
+  data: ShelterVolunteeringResponse;
 }
 
-const VoluntaryForm = ({
-  text,
-  children,
-  formik,
-  fieldName,
-}: VoluntaryFormText) => {
-  const fieldValue = formik.getFieldProps(fieldName).value;
+const validationSchema = Yup.object().shape({
+  bankAccountNumber: Yup.string().matches(
+    /^(\d{2}-?\d{4}-?\d{4}-?\d{4}-?\d{4}-?\d{4}|\d{2}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}|\d{26})$/,
+    "Numer konta musi składać się z 26 cyfr, oddzielonych spacjami, myślnikami lub bez separatorów."
+  ),
+});
 
-  const handleToggleChange = () => {
-    formik.setFieldValue(fieldName, !fieldValue);
-  };
+export type FormikType = FormikProps<ShelterVolunteeringResponse>;
+
+const VoluntaryForm = ({ data }: Props) => {
+  const dispatch = useDispatch();
+  const {
+    isLoading,
+    mutateAsync,
+    data: putData,
+    isError,
+    error,
+    isSuccess,
+  } = useUpdateShelterVolunteering();
+
+  const formik = useFormik({
+    initialValues: data,
+    validationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+      const cleanedBankAccountNumber = values.bankAccountNumber.replace(
+        /[\s-]/g,
+        ""
+      );
+      console.log("🚀 ~ cleanedBankAccountNumber:", cleanedBankAccountNumber);
+
+      mutateAsync({ ...values, bankAccountNumber: cleanedBankAccountNumber });
+    },
+  });
+
+  if (isLoading) {
+    dispatch(setLoading(true));
+  }
+
+  if (isSuccess) {
+    dispatch(setLoading(false));
+  }
 
   return (
-    <StyledVoluntaryFormContainer>
-      <StyledVoluntaryFormHeader>
-        <Typography
-          variant="UI/UI Text 16 Semi Bold"
-          color="darkGray2">
-          {text}
-        </Typography>
-
-        <ToggleButton
-          handleChange={handleToggleChange}
-          $fieldName={fieldName}
-          formik={formik}
-          checked={fieldValue}
-          label="Aktywna"
-        />
-      </StyledVoluntaryFormHeader>
-      <StyledVoluntaryInputContainer>{children}</StyledVoluntaryInputContainer>
-    </StyledVoluntaryFormContainer>
+    <>
+      <StyledDashboardVoluntaryMainContentFormsContainer
+        onSubmit={formik.handleSubmit}>
+        <StyledDashboardVoluntaryContent>
+          <VoluntaryFormPart
+            fieldName="isDonationActive"
+            formik={formik}
+            text="Wpłać darowiznę">
+            <Input
+              onBlur={formik.handleBlur}
+              placeholder="0000-0000-0000-0000"
+              inputSize="Large"
+              label="Podaj numer konta"
+              value={formik.values.bankAccountNumber}
+              onChange={formik.handleChange}
+              name="bankAccountNumber"
+              error={
+                formik.errors.bankAccountNumber &&
+                formik.touched.bankAccountNumber
+                  ? formik.errors.bankAccountNumber
+                  : null
+              }
+            />
+            <Textarea
+              label="Opis"
+              value={formik.values.donationDescription}
+              onChange={formik.handleChange}
+              name="donationDescription"
+            />
+          </VoluntaryFormPart>
+          <VoluntaryFormPart
+            fieldName="isDailyHelpActive"
+            formik={formik}
+            text="Codzienna pomoc">
+            <Textarea
+              label="Opis"
+              value={formik.values.dailyHelpDescription}
+              onChange={formik.handleChange}
+              name="dailyHelpDescription"
+            />
+          </VoluntaryFormPart>
+          <VoluntaryFormPart
+            fieldName="isTakingDogsOutActive"
+            formik={formik}
+            text="Wyprowadzanie psów">
+            <Textarea
+              label="Opis"
+              value={formik.values.takingDogsOutDescription}
+              onChange={formik.handleChange}
+              name="takingDogsOutDescription"
+            />
+          </VoluntaryFormPart>
+        </StyledDashboardVoluntaryContent>
+        <StyledDashboardFooter>
+          <Button type="submit">Zapisz</Button>
+        </StyledDashboardFooter>
+      </StyledDashboardVoluntaryMainContentFormsContainer>
+    </>
   );
 };
 

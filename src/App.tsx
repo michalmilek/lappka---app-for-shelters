@@ -20,6 +20,9 @@ import AddNewEmployeePage from "pages/DashboardPages/EmployeesPages/AddNewEmploy
 import AccountSettings from "pages/DashboardPages/AccountSettingsPage";
 import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
 import HomePage from "pages/HomePage";
+import Loader from "components/SharedComponents/Loader/Loader";
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "redux/loadingSlice";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +50,7 @@ function addDollarSignToProps<
 
  */
 function App() {
+  const isLoading = useSelector(selectIsLoading);
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
@@ -116,6 +120,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <Toast />
+      <Loader isLoading={isLoading} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

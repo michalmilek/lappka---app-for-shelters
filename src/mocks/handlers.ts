@@ -7,6 +7,8 @@ import {
 import {
   getShelterCards,
   getShelterStats,
+  getShelterVolunteering,
+  updateShelterVolunteering,
 } from "./petControllers/petControllers";
 
 export const handlers = [
@@ -16,4 +18,6 @@ export const handlers = [
   resetPasswordSetNewPassword,
   getShelterStats,
   getShelterCards,
+  getShelterVolunteering,
+  updateShelterVolunteering,
 ];

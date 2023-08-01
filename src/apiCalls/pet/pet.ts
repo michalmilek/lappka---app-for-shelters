@@ -37,6 +37,17 @@ export interface ShelterCardsResponse {
   totalItemsCount: number;
 }
 
+
+export interface ShelterVolunteeringResponse {
+  isDonationActive: boolean;
+  bankAccountNumber: string;
+  donationDescription: string;
+  isDailyHelpActive: boolean;
+  dailyHelpDescription: string;
+  isTakingDogsOutActive: boolean;
+  takingDogsOutDescription: string;
+}
+
 export const getShelterStats = async () => {
   try {
     const response = await axiosInstance.get<SheltersStatsResponse>(
@@ -52,6 +63,31 @@ export const getShelterCards = async () => {
   try {
     const response = await axiosInstance.get<ShelterCardsResponse>(
       "/Pet/shelters/cards"
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getShelterVolunteering = async (id: string) => {
+  try {
+    const response = await axiosInstance.get<ShelterVolunteeringResponse>(
+      `/Pet/shelters/volunteering/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateShelterVolunteering = async (
+  data: ShelterVolunteeringResponse
+) => {
+  try {
+    const response = await axiosInstance.put(
+      `/Pet/shelters/volunteering`,
+      data
     );
     return response.data;
   } catch (error) {
