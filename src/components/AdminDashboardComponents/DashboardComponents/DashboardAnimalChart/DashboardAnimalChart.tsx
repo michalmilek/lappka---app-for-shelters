@@ -21,63 +21,30 @@ import Button from "components/SharedComponents/Button/Button";
 import { CalendarIcon } from "components/SharedComponents/icons/icons";
 import useDeviceType from "hooks/useDeviceType";
 import DashboardChartDropdown from "./DashboardChartDropdown";
-
-const data = [
-  {
-    name: "Sty",
-    views: 1500,
-  },
-  {
-    name: "Lut",
-    views: 5500,
-  },
-  {
-    name: "Mar",
-    views: 7000,
-  },
-  {
-    name: "Kwi",
-    views: 5500,
-  },
-  {
-    name: "Maj",
-    views: 3500,
-  },
-  {
-    name: "Cze",
-    views: 11000,
-  },
-  {
-    name: "Lip",
-    views: 15300,
-  },
-  {
-    name: "Sie",
-    views: 16200,
-  },
-  {
-    name: "Wrz",
-    views: 0,
-  },
-  {
-    name: "Paź",
-    views: 0,
-  },
-  {
-    name: "Lis",
-    views: 0,
-  },
-  {
-    name: "Gru",
-    views: 0,
-  },
-];
+import {
+  useShelterCardsArchiveChartData,
+  useShelterCardsArchiveChartDataForMonth,
+} from "apiCalls/pet/petHooks";
 
 const DashboardAnimalChart = () => {
   const [activeMonth, setActiveMonth] = useState<null | number>(null);
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [timeSelect, setTimeSelect] = useState("Month");
   const deviceType = useDeviceType();
+  const {
+    data: chartData,
+    isLoading,
+    isError,
+    error,
+    isSuccess,
+  } = useShelterCardsArchiveChartData();
+  const {
+    data: chartMonthData,
+    isLoading: isLoadingMonth,
+    isError: isErrorMonth,
+    error: errorMonth,
+    isSuccess: isSuccessMonth,
+  } = useShelterCardsArchiveChartDataForMonth();
 
   const formatYAxis = (tickItem: number) => {
     if (tickItem === 0) return tickItem.toString();
@@ -90,14 +57,75 @@ const DashboardAnimalChart = () => {
     setTimeSelect(value);
   };
 
+  const axisLabelStyle = {
+    fontSize: deviceType !== "mobile" ? "16px" : "12px",
+    fontWeight: 500,
+    fill: "#9AA6AC",
+    lineHeight: "16px",
+    fontFamily: "Inter",
+  };
 
-    const axisLabelStyle = {
-      fontSize: deviceType !== "mobile" ? "16px" : "12px",
-      fontWeight: 500,
-      fill: "#9AA6AC",
-      lineHeight: "16px",
-      fontFamily: "Inter",
-    };
+  if (chartMonthData && isSuccessMonth) {
+    const monthData = chartMonthData.map((views, index) => {
+      return {
+        name: index + 1,
+        views: views,
+      };
+    });
+    console.log(monthData);
+  }
+
+  if (chartData && isSuccess) {
+    const yearData = [
+      {
+        name: "Sty",
+        views: chartData[0],
+      },
+      {
+        name: "Lut",
+        views: chartData[1],
+      },
+      {
+        name: "Mar",
+        views: chartData[2],
+      },
+      {
+        name: "Kwi",
+        views: chartData[3],
+      },
+      {
+        name: "Maj",
+        views: chartData[4],
+      },
+      {
+        name: "Cze",
+        views: chartData[5],
+      },
+      {
+        name: "Lip",
+        views: chartData[6],
+      },
+      {
+        name: "Sie",
+        views: chartData[7],
+      },
+      {
+        name: "Wrz",
+        views: chartData[8],
+      },
+      {
+        name: "Paź",
+        views: chartData[9],
+      },
+      {
+        name: "Lis",
+        views: chartData[10],
+      },
+      {
+        name: "Gru",
+        views: chartData[11],
+      },
+    ];
 
     return (
       <StyledDashboardChartContainer>
@@ -126,7 +154,7 @@ const DashboardAnimalChart = () => {
           <BarChart
             width={150}
             height={150}
-            data={data}
+            data={yearData}
             margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
             <XAxis
               dataKey="name"
@@ -153,7 +181,7 @@ const DashboardAnimalChart = () => {
               label={false}
               dataKey="views"
               radius={[4, 4, 0, 0]}>
-              {data.map((_entry, index) => (
+              {chartData.map((_entry, index) => (
                 <Cell
                   onClick={() => setActiveMonth(index)}
                   cursor="pointer"
@@ -170,6 +198,9 @@ const DashboardAnimalChart = () => {
         </ResponsiveContainer>
       </StyledDashboardChartContainer>
     );
+  }
+
+  return null;
 };
 
 export default DashboardAnimalChart;

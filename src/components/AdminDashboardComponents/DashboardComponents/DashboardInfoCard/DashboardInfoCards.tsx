@@ -18,38 +18,34 @@ const DashboardInfoCards = () => {
 
   console.log(data);
 
-  if (isSuccess && data) {
     return (
       <StyledDashboardInfoCardsContainer>
         <DashboardInfoCardsItem
           icon={<IdentificationIcon />}
           isLoading={isLoading}
           text="Karty zwierząt"
-          number={data.cardCount}
+          number={data ? data.cardCount : 0}
         />
         <DashboardInfoCardsItem
           icon={<SearchCircleIcon />}
           isLoading={isLoading}
           text="Szuka właściciela"
-          number={data.toAdoptCount}
+          number={data ? data.toAdoptCount : 0}
         />
         <DashboardInfoCardsItem
           icon={<UserCircleIcon />}
           isLoading={isLoading}
           text="Z właścicielem"
-          number={data.adoptedCount}
+          number={data ? data.adoptedCount : 0}
         />
         <DashboardInfoCardsItem
           icon={<HeartGreenIcon />}
           isLoading={isLoading}
-          text="Wolontariat(ilość osób)"
-          number={data.volunteerCount}
+          text="Wolontariat (ilość osób)"
+          number={data ? data.volunteerCount : 0}
         />
       </StyledDashboardInfoCardsContainer>
     );
-  }
-
-  return null;
 };
 
 export default DashboardInfoCards;

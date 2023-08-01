@@ -5,7 +5,7 @@ import {
   StyledDashboardInfoCardIconContainer,
   StyledDashboardInfoCardTextContainer,
 } from "./DashboardInfoCardsItem.styled";
-import Skeleton from "./SkeletonCard";
+import SkeletonCardItem from "./SkeletonCardItem";
 
 interface Props {
   isLoading: boolean;
@@ -15,8 +15,9 @@ interface Props {
 }
 
 const DashboardInfoCardsItem = ({ isLoading, text, icon, number }: Props) => {
+  console.log(isLoading);
   if (isLoading) {
-    return <Skeleton />;
+    return <SkeletonCardItem />;
   }
 
   return (

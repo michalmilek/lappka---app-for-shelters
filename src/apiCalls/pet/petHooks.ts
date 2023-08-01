@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getShelterCards,
+  getShelterCardsArchiveChartData,
+  getShelterCardsArchiveChartDataForMonth,
   getShelterStats,
   getShelterVolunteering,
   ShelterVolunteeringResponse,
@@ -27,4 +29,16 @@ export const useUpdateShelterVolunteering = () => {
   );
 
   return mutation;
+};
+
+export const useShelterCardsArchiveChartData = () => {
+  return useQuery(["shelterArchiveChartDataYear"], () =>
+    getShelterCardsArchiveChartData()
+  );
+};
+
+export const useShelterCardsArchiveChartDataForMonth = () => {
+  return useQuery(["shelterArchiveChartDataMonth"], () =>
+    getShelterCardsArchiveChartDataForMonth()
+  );
 };

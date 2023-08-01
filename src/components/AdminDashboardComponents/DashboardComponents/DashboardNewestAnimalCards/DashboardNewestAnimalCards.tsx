@@ -10,48 +10,49 @@ import {
   DashboardNewestAnimalCardsContainerHeader,
 } from "./DashboardNewestAnimalCards.styled";
 import DashboardNewestAnimalCardsItem from "./DashboardNewestAnimalCardsItem";
-import SkeletonNewestAnimalCards from "./SkeletonNewestAnimalCards";
+import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAnimalCardsItemContainerSkeleton";
 
 const DashboardNewestAnimalCards = () => {
   const { isLoading, data, isError, error, isSuccess } = useShelterCards();
-
-  if (isLoading) {
-    return <SkeletonNewestAnimalCards />;
-  }
 
   if (isError) {
     console.log(error);
   }
 
-  if (isSuccess && data) {
-    return (
-      <DashboardNewestAnimalCardsContainer>
-        <DashboardNewestAnimalCardsContainerHeader>
-          <Typography
-            tag="h3"
-            variant="UI/UI Text 16 Semi Bold">
-            Najnowsze karty zwierząt
-          </Typography>
-          <Button
-            variant="outline"
-            size="Medium">
-            Wszystkie
-          </Button>
-        </DashboardNewestAnimalCardsContainerHeader>
-        <Divider />
-        <DashboardNewestAnimalCardsContainerContent>
-          {data.items.slice(0, 3).map((item) => (
+  return (
+    <DashboardNewestAnimalCardsContainer>
+      <DashboardNewestAnimalCardsContainerHeader>
+        <Typography
+          tag="h3"
+          variant="UI/UI Text 16 Semi Bold">
+          Najnowsze karty zwierząt
+        </Typography>
+        <Button
+          variant="outline"
+          size="Medium">
+          Wszystkie
+        </Button>
+      </DashboardNewestAnimalCardsContainerHeader>
+      <Divider />
+      <DashboardNewestAnimalCardsContainerContent>
+        {isLoading && (
+          <>
+            <DashboardNewestAnimalCardsItemContainerSkeleton />
+            <DashboardNewestAnimalCardsItemContainerSkeleton />
+            <DashboardNewestAnimalCardsItemContainerSkeleton />
+          </>
+        )}
+        {isSuccess &&
+          data &&
+          data.items.slice(0, 3).map((item) => (
             <DashboardNewestAnimalCardsItem
               key={item.id}
               item={item}
             />
           ))}
-        </DashboardNewestAnimalCardsContainerContent>
-      </DashboardNewestAnimalCardsContainer>
-    );
-  }
-
-  return null;
+      </DashboardNewestAnimalCardsContainerContent>
+    </DashboardNewestAnimalCardsContainer>
+  );
 };
 
 export default DashboardNewestAnimalCards;

@@ -51,7 +51,7 @@ const SkeletonText = styled.div`
   border-radius: 4px;
 `;
 
-const Skeleton = () => (
+const SkeletonCardItem = () => (
   <SkeletonCard>
     <SkeletonIconContainer />
     <SkeletonTextContainer>
@@ -61,4 +61,4 @@ const Skeleton = () => (
   </SkeletonCard>
 );
 
-export default Skeleton;
+export default SkeletonCardItem;

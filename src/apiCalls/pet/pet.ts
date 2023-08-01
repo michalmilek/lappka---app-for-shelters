@@ -94,3 +94,29 @@ export const updateShelterVolunteering = async (
     console.error(error);
   }
 };
+
+
+export const getShelterCardsArchiveChartData = async () => {
+  try {
+    const response = await axiosInstance.get<number[]>(
+      "/Pets/shelters/cards/archive/chart/year"
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch shelter cards archive chart data");
+  }
+};
+
+export const getShelterCardsArchiveChartDataForMonth = async () => {
+  try {
+    const response = await axiosInstance.get<number[]>(
+      "/Pets/shelters/cards/archive/chart/month"
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch shelter cards archive chart data");
+  }
+};
+

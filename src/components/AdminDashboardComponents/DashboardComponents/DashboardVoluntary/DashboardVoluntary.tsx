@@ -1,3 +1,4 @@
+import { useShelterVolunteering } from "apiCalls/pet/petHooks";
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
 import useDeviceType from "hooks/useDeviceType";
@@ -8,37 +9,53 @@ import {
   DashboardVoluntaryTitleContainer,
 } from "./DashboardVoluntary.styled";
 import DashboardVoluntaryItem from "./DashboardVoluntaryItem";
+import SkeletonVoluntary from "./SkeletonVoluntary";
 
 const DashboardVoluntary = () => {
-  return (
-    <DashboardVoluntaryContainer>
-      <DashboardVoluntaryTitleContainer>
-        <Typography
-          variant="Heading 18 Semi Bold"
-          tag="h3"
-          color="darkGray2">
-          Wolontariat
-        </Typography>
-      </DashboardVoluntaryTitleContainer>
-      <Divider />
-      <DashboardVoluntaryItemsContainer>
-        <DashboardVoluntaryItem
-          text="Wpłać darowiznę"
-          isOn={true}
-        />
+  const { data, isLoading, isError, error, isSuccess } =
+    useShelterVolunteering("123");
+
+  if (isError) {
+    console.log(error);
+  }
+
+  if (isLoading) {
+    return <SkeletonVoluntary />;
+  }
+
+  if (data && isSuccess) {
+    return (
+      <DashboardVoluntaryContainer>
+        <DashboardVoluntaryTitleContainer>
+          <Typography
+            variant="Heading 18 Semi Bold"
+            tag="h3"
+            color="darkGray2">
+            Wolontariat
+          </Typography>
+        </DashboardVoluntaryTitleContainer>
         <Divider />
-        <DashboardVoluntaryItem
-          text="Codzienna pomoc"
-          isOn={true}
-        />
-        <Divider />
-        <DashboardVoluntaryItem
-          text="Wyprowadzanie psów"
-          isOn={true}
-        />
-      </DashboardVoluntaryItemsContainer>
-    </DashboardVoluntaryContainer>
-  );
+        <DashboardVoluntaryItemsContainer>
+          <DashboardVoluntaryItem
+            text="Wpłać darowiznę"
+            isOn={data.isDonationActive}
+          />
+          <Divider />
+          <DashboardVoluntaryItem
+            text="Codzienna pomoc"
+            isOn={data.isDailyHelpActive}
+          />
+          <Divider />
+          <DashboardVoluntaryItem
+            text="Wyprowadzanie psów"
+            isOn={data.isTakingDogsOutActive}
+          />
+        </DashboardVoluntaryItemsContainer>
+      </DashboardVoluntaryContainer>
+    );
+  }
+
+  return null;
 };
 
 export default DashboardVoluntary;

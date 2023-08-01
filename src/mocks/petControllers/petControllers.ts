@@ -69,3 +69,51 @@ export const updateShelterVolunteering = rest.put(
     }
   }
 );
+
+
+
+const generateRandomNumberArray = (length: number) => {
+  return Array.from({ length }, () => Math.floor(Math.random() * 10000));
+};
+
+export const getShelterCardsArchiveChartData = rest.get(
+  "/Pets/shelters/cards/archive/chart/year",
+  async (req, res, ctx) => {
+    try {
+      const chartData = generateRandomNumberArray(12);
+
+      return res(ctx.status(200), ctx.json(chartData));
+    } catch (error) {
+      console.error(error);
+      return res(ctx.status(500), ctx.json({ message: "Server error" }));
+    }
+  }
+);
+
+const getDaysInMonth = (year: number, month: number) => {
+  const lastDayOfPreviousMonth = new Date(year, month, 0);
+
+  return lastDayOfPreviousMonth.getDate();
+};
+
+export const getShelterCardsArchiveChartDataForMonth = rest.get(
+  "/Pets/shelters/cards/archive/chart/month",
+  async (req, res, ctx) => {
+    try {
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+      const currentMonth = currentDate.getMonth() + 1;
+
+      const daysInMonth = getDaysInMonth(currentYear, currentMonth);
+      const chartData = Array.from(
+        { length: daysInMonth },
+        (_, index) => index + 1
+      );
+
+      return res(ctx.status(200), ctx.json(chartData));
+    } catch (error) {
+      console.error(error);
+      return res(ctx.status(500), ctx.json({ message: "Server error" }));
+    }
+  }
+);

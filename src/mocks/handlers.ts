@@ -6,6 +6,8 @@ import {
 } from "./authControllers/authControllers";
 import {
   getShelterCards,
+  getShelterCardsArchiveChartData,
+  getShelterCardsArchiveChartDataForMonth,
   getShelterStats,
   getShelterVolunteering,
   updateShelterVolunteering,
@@ -20,4 +22,6 @@ export const handlers = [
   getShelterCards,
   getShelterVolunteering,
   updateShelterVolunteering,
+  getShelterCardsArchiveChartData,
+  getShelterCardsArchiveChartDataForMonth,
 ];

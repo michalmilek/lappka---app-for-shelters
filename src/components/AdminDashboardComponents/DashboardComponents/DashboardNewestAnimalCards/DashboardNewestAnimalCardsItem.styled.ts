@@ -1,6 +1,5 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getColor } from "utils/styles/getStyle/getColor";
-
 export const DashboardNewestAnimalCardsItemContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,30 +17,31 @@ export const DashboardNewestAnimalCardsItemContainer = styled.div`
 `;
 
 export const DashboardNewestAnimalCardsItemImg = styled.img`
-  width: 100%;
+  width: 280px;
   height: 215px;
   object-fit: cover;
 
   @media screen and (max-width: 1700px) {
-    width: 100%;
+    width: 250px;
     height: 180px;
   }
 
   @media screen and (max-width: 1550px) {
-    width: 100%;
+    width: 240px;
     height: 150px;
   }
 
   @media screen and (max-width: 1350px) {
-    width: 100%;
+    width: 180px;
     height: 100px;
   }
 
   @media screen and (max-width: 1024px) {
-    width: 100%;
+    width: 150px;
   }
   @media screen and (max-width: 550px) {
     height: 50px;
+    width: 100%;
   }
 `;
 
@@ -67,4 +67,8 @@ export const DashboardNewestAnimalCardsItemContentDataContainer = styled.div`
   @media screen and (max-width: 550px) {
     flex-direction: column;
   }
+`;
+
+export const ContainerLink = styled(Link)`
+  text-decoration: none;
 `;

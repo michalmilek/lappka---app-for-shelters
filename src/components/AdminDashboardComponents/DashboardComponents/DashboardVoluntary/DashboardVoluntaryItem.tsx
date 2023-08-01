@@ -21,7 +21,7 @@ const DashboardVoluntaryItem = ({ text, isOn }: Props) => {
     <DashboardVoluntaryItemContainer>
       <Typography tag="h5">{text}</Typography>
       <DashboardVoluntaryItemStatusContainer>
-        <IsOnIndicator isOn={true} />
+        <IsOnIndicator isOn={isOn} />
         <Typography
           color="darkGray2"
           tag="span">

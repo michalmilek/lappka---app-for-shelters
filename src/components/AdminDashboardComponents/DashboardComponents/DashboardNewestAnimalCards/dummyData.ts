@@ -9,7 +9,8 @@ export const dummyDataNewestAnimals = {
       breed: "Persian",
       color: "White",
       weight: 5.2,
-      profilePhoto: "https://example.com/fluffy-profile.jpg",
+      profilePhoto:
+        "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
       photos: [
         "https://example.com/fluffy-photo1.jpg",
         "https://example.com/fluffy-photo2.jpg",
@@ -29,7 +30,8 @@ export const dummyDataNewestAnimals = {
       breed: "Persian",
       color: "White",
       weight: 5.2,
-      profilePhoto: "https://example.com/fluffy-profile.jpg",
+      profilePhoto:
+        "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
       photos: [
         "https://example.com/fluffy-photo1.jpg",
         "https://example.com/fluffy-photo2.jpg",
@@ -49,7 +51,8 @@ export const dummyDataNewestAnimals = {
       breed: "Golden Retriever",
       color: "Golden",
       weight: 27.5,
-      profilePhoto: "https://example.com/max-profile.jpg",
+      profilePhoto:
+        "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
       photos: [
         "https://example.com/max-photo1.jpg",
         "https://example.com/max-photo2.jpg",
