@@ -1,5 +1,7 @@
+import { useShelterCards } from "apiCalls/pet/petHooks";
 import AnimalCardsInfo from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsInfo/AnimalCardsInfo";
 import AnimalCardsTable from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable";
+import SkeletonTableComponent from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/SkeletonTableComponent";
 import {
   StyledDashboardAnimalCardsMain,
   StyledDashboardAnimalCardsMainContent,
@@ -7,12 +9,21 @@ import {
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import Button from "components/SharedComponents/Button/Button";
 import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
-import React from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
+import useToast from "hooks/useToast";
 
 const AnimalCardsPage = () => {
   const navigate = useNavigate();
+
+  const { data, isLoading, isError, error, isSuccess } = useShelterCards();
+  const { showToast } = useToast();
+
+  useEffect(() => {
+    if (isError) showToast(error as string, "error");
+  });
+
   return (
     <StyledDashboardAnimalCardsMain>
       <DashboardNavbar
@@ -28,10 +39,13 @@ const AnimalCardsPage = () => {
       />
       <StyledDashboardAnimalCardsMainContent>
         <AnimalCardsInfo />
-        <AnimalCardsTable />
+        {data && isSuccess && <AnimalCardsTable data={data} />}
+        {isLoading && <SkeletonTableComponent />}
       </StyledDashboardAnimalCardsMainContent>
     </StyledDashboardAnimalCardsMain>
   );
 };
 
 export default AnimalCardsPage;
+
+//

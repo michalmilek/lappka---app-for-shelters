@@ -21,7 +21,13 @@ import AccountSettings from "pages/DashboardPages/AccountSettingsPage";
 import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
 import HomePage from "pages/HomePage";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 300000,
+    },
+  },
+});
 
 /* interface Test extends React.InputHTMLAttributes<HTMLInputElement> {
   fontSize: string;

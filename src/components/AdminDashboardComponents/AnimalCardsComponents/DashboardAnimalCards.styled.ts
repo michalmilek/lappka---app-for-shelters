@@ -8,7 +8,6 @@ export const StyledDashboardAnimalCardsMain = styled.main`
   max-width: 100%;
 
   @media screen and (max-width: 1024px) {
-    height: auto;
     width: calc(100vw - 180px);
     margin-left: 180px;
   }
@@ -51,6 +50,8 @@ export const StyledDashboardAnimalCardsMainContent = styled.article`
   @media screen and (max-width: 1024px) {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    justify-content: flex-start;
+    gap: 30px;
+    border: 1px solid #000;
   }
 `;

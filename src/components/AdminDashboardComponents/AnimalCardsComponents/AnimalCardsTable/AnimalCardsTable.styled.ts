@@ -6,7 +6,7 @@ interface SexInterface {
 }
 
 interface DotInterface {
-  value: "Tak" | "Nie";
+  value: boolean;
 }
 
 interface PaginationButtonInterface
@@ -46,7 +46,7 @@ export const Dot = styled.div<DotInterface>`
   width: 8px;
   border-radius: 50%;
   background-color: ${({ value }) =>
-    value === "Tak" ? getColor("success") : getColor("red500")};
+    value ? getColor("success") : getColor("red500")};
 
   @media screen and (max-width: 400px) {
     height: 6px;

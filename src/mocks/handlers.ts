@@ -4,7 +4,10 @@ import {
   resetPasswordSendEmail,
   resetPasswordSetNewPassword,
 } from "./authControllers/authControllers";
-import { getShelterStats } from "./petControllers/petControllers";
+import {
+  getShelterCards,
+  getShelterStats,
+} from "./petControllers/petControllers";
 
 export const handlers = [
   login,
@@ -12,4 +15,5 @@ export const handlers = [
   resetPasswordSendEmail,
   resetPasswordSetNewPassword,
   getShelterStats,
+  getShelterCards,
 ];

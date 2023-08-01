@@ -1,4 +1,9 @@
-import React from "react";
+import { useShelterStats } from "apiCalls/pet/petHooks";
+import {
+  IdentificationIcon,
+  SearchCircleIcon,
+  UserCircleIcon,
+} from "components/SharedComponents/icons/icons";
 import { styled } from "styled-components";
 import AnimalCardsInfoItem from "./AnimalCardsInfoItem";
 
@@ -16,13 +21,38 @@ const AnimalCardsInfoContainer = styled.div`
 `;
 
 const AnimalCardsInfo = () => {
-  return (
-    <AnimalCardsInfoContainer>
-      <AnimalCardsInfoItem />
-      <AnimalCardsInfoItem />
-      <AnimalCardsInfoItem />
-    </AnimalCardsInfoContainer>
-  );
+  const { data, isLoading, isError, error, isSuccess } = useShelterStats();
+
+  if (isError) {
+    console.log(error);
+  }
+
+  if (isSuccess && data) {
+    return (
+      <AnimalCardsInfoContainer>
+        <AnimalCardsInfoItem
+          isLoading={isLoading}
+          icon={<IdentificationIcon />}
+          text="Karty zwierząt"
+          number={data.cardCount}
+        />
+        <AnimalCardsInfoItem
+          isLoading={isLoading}
+          icon={<SearchCircleIcon />}
+          text="Szuka właściciela"
+          number={data.toAdoptCount}
+        />
+        <AnimalCardsInfoItem
+          isLoading={isLoading}
+          icon={<UserCircleIcon />}
+          text="Z właścicielem"
+          number={data.adoptedCount}
+        />
+      </AnimalCardsInfoContainer>
+    );
+  }
+
+  return null;
 };
 
 export default AnimalCardsInfo;
