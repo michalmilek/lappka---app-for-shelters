@@ -9,6 +9,7 @@ import {
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
   getShelterCardsArchiveChartDataForWeek,
+  getShelterCardsCard,
   getShelterStats,
   getShelterVolunteering,
   updateShelterVolunteering,
@@ -26,4 +27,5 @@ export const handlers = [
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
   getShelterCardsArchiveChartDataForWeek,
+  getShelterCardsCard,
 ];

@@ -138,3 +138,38 @@ export const getShelterCardsArchiveChartDataForWeek = rest.get(
     }
   }
 );
+
+const dummyObj = {
+  id: "123",
+  petIdentifier: "string",
+  name: "Maniek",
+  type: "Kot",
+  gender: "Samiec",
+  breed: "Jasny",
+  color: "Inny",
+  weight: 23,
+  profilePhoto:
+    "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
+  photos: [
+    "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
+    "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw10-nZVHjbalT7IURdjN4kzcp7_5i_aNbXmA-I-0&s",
+  ],
+  age: 6,
+  createdAt: Date.now(),
+  isSterilized: true,
+  isVisible: true,
+  description: "Kotek do adopcji",
+};
+
+export const getShelterCardsCard = rest.get(
+  "/Pets/shelters/cards/123",
+  async (req, res, ctx) => {
+    try {
+      return res(ctx.status(200), ctx.json(dummyObj));
+    } catch (error) {
+      console.error(error);
+      return res(ctx.status(500), ctx.json({ message: "Server error" }));
+    }
+  }
+);

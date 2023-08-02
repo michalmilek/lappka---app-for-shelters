@@ -4,6 +4,7 @@ import {
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
   getShelterCardsArchiveChartDataForWeek,
+  getShelterCardsCard,
   getShelterStats,
   getShelterVolunteering,
   ShelterVolunteeringResponse,
@@ -47,5 +48,11 @@ export const useShelterCardsArchiveChartDataForMonth = () => {
 export const useShelterCardsArchiveChartDataForWeek = () => {
   return useQuery(["shelterArchiveChartDataWeek"], () =>
     getShelterCardsArchiveChartDataForWeek()
+  );
+};
+
+export const useShelterCardsCard = (petId: string) => {
+  return useQuery(["shelterCardsCard", petId], () =>
+    getShelterCardsCard(petId)
   );
 };

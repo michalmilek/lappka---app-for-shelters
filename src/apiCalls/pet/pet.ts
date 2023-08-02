@@ -135,3 +135,15 @@ export const getShelterCardsArchiveChartDataForWeek = async () => {
 };
 
 
+export const getShelterCardsCard = async (petId: string) => {
+  try {
+    const response = await axiosInstance.get<Pet>(
+      `/Pets/shelters/cards/${petId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch pet card data");
+  }
+};
+
