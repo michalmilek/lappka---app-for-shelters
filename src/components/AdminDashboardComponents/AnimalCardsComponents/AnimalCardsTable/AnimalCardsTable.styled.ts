@@ -1,4 +1,4 @@
-import { css, styled } from "styled-components";
+import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface SexInterface {
@@ -24,6 +24,10 @@ export const StyledSexContainer = styled.div<SexInterface>`
   align-items: center;
   width: ${({ sex }) => (sex === "samiec" ? "66px" : "81px")};
   height: 24px;
+
+  @media screen and (max-width: 400px) {
+    width: ${({ sex }) => (sex === "samiec" ? "55px" : "70px")};
+  }
 `;
 
 export const DotFlexContainer = styled.div`
@@ -31,6 +35,10 @@ export const DotFlexContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
+
+  @media screen and (max-width: 400px) {
+    gap: 4px;
+  }
 `;
 
 export const Dot = styled.div<DotInterface>`
@@ -39,6 +47,11 @@ export const Dot = styled.div<DotInterface>`
   border-radius: 50%;
   background-color: ${({ value }) =>
     value === "Tak" ? getColor("success") : getColor("red500")};
+
+  @media screen and (max-width: 400px) {
+    height: 6px;
+    width: 6px;
+  }
 `;
 
 export const ActionHeaderContainer = styled.div`
@@ -117,6 +130,28 @@ interface DropdownDetailsInterface {
   displayDetails?: boolean;
 }
 
+const fadeInAnimation = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeOutAnimation = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+`;
+
 export const StyledDropdownContainer = styled.ul`
   z-index: 20;
   list-style-type: none;
@@ -138,6 +173,14 @@ export const StyledDropdownContainer = styled.ul`
   box-shadow: 0px 12px 24px 0px #5b68713d;
 
   box-shadow: 0px 0px 1px 0px #1a202452;
+
+  &.fadeIn {
+    animation: ${fadeInAnimation} 0.3s forwards;
+  }
+
+  &.fadeOut {
+    animation: ${fadeOutAnimation} 0.3s forwards;
+  }
 `;
 
 export const StyledDropdownOption = styled.li<DropdownDetailsInterface>`
@@ -207,7 +250,6 @@ export const StyledTableArrowButton = styled.button`
 export const StyledTableInputContainer = styled.div`
   width: 30%;
 `;
-
 
 export const AnimalCardsStyledPageSizeSelect = styled.select`
   padding: 8px;

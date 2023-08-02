@@ -2,8 +2,10 @@ import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/Anima
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
+import Button from "components/SharedComponents/Button/Button";
 import { useFormik } from "formik";
 import React from "react";
+import { useNavigate } from "react-router";
 import * as Yup from "yup";
 
 export interface AddNewAnimalCardInterface {
@@ -80,11 +82,20 @@ const AnimalCardsAddNewCardPage = () => {
     onSubmit,
   });
 
+  const navigate = useNavigate();
+
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar
         previousTitle="Karty zwierząt / "
         title="Nowa karta"
+        Button={
+          <Button
+            onClick={() => navigate(-1)}
+            variant="outline">
+            Anuluj
+          </Button>
+        }
       />
       <StyledDashboardAddNewCardMainContent>
         <AnimalCardsAddNewCardForm formik={formik} />

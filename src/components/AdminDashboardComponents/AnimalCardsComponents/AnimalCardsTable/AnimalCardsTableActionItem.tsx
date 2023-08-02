@@ -16,7 +16,7 @@ const AnimalCardsTableActionItem = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [detailsOn, setDetailsOn] = useState(false);
 
-  const dropdownRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -29,24 +29,23 @@ const AnimalCardsTableActionItem = () => {
 
   const handleMoreIconClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    setIsDropdownOpen(true);
+    setIsDropdownOpen((prev) => !prev);
   };
 
-  // Dodajemy event listener do dokumentu przy montowaniu komponentu
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 
-    // Usuwamy event listener przy odmontowywaniu komponentu
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
   return (
-    <ActionHeaderContainer>
+    <ActionHeaderContainer ref={dropdownRef}>
       <StyledMoreIcon onClick={handleMoreIconClick} />
       {isDropdownOpen && (
-        <StyledDropdownContainer ref={dropdownRef}>
+        <StyledDropdownContainer
+          className={isDropdownOpen ? "fadeIn" : "fadeOut"}>
           <StyledDropdownOption onClick={() => setDetailsOn((prev) => !prev)}>
             <Typography
               color="darkGray2"

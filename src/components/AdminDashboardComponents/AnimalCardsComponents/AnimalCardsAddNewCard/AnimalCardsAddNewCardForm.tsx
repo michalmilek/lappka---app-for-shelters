@@ -21,6 +21,7 @@ const AnimalCardsAddNewCardForm = ({
   formik: FormikProps<AddNewAnimalCardInterface>;
 }) => {
   const deviceType = useDeviceType();
+
   return (
     <AnimalCardsAddNewCardFormContainer onSubmit={formik.handleSubmit}>
       <AnimalCardsAddNewCardFormInputContainer>

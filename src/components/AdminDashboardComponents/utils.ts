@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 
 export function useClickOutside(
-  ref: React.RefObject<HTMLUListElement>,
+  ref: React.RefObject<HTMLDivElement>,
   callback: () => void
 ) {
   const handleClickOutside = useCallback(

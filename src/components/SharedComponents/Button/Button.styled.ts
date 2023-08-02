@@ -70,6 +70,7 @@ export const ToggleSlider = styled.span`
 //BUTTON
 
 export const ReusableButton = styled.button<ButtonProps>`
+  white-space: nowrap;
   padding: 12px 24px;
   border-radius: 4px;
   font-weight: bold;
@@ -78,26 +79,14 @@ export const ReusableButton = styled.button<ButtonProps>`
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  gap: 6px;
-  width: ${(props) => (props.isFullWidth ? "100%" : "")};
-
-  ${(props) =>
-    props.icon &&
-    props.iconSpacing &&
-    css`
-      gap: ${props.iconSpacing};
-    `}
+  gap: 8px;
+  z-index: 50;
+  width: ${(props) => (props.isFullWidth ? "100%" : "auto")};
 
   ${(props) =>
     props.iconPlace === "left" &&
     css`
       flex-direction: row-reverse;
-    `}
-
-  ${(props) =>
-    props.width &&
-    css`
-      width: ${props.width};
     `}
 
   ${(props) =>
@@ -109,7 +98,15 @@ export const ReusableButton = styled.button<ButtonProps>`
       transition: all 400ms ease-in-out;
 
       &:hover {
-        background-color: ${getColor("primary700")};
+        background-color: ${props.color === "facebook" ||
+        props.color === "error" ||
+        props.color === "red500"
+          ? getColor(props.color)
+          : getColor("primary700")};
+        ${(props.color === "facebook" ||
+          props.color === "error" ||
+          props.color === "red500") &&
+        "filter: brightness(.75);"}
       }
 
       &:disabled {

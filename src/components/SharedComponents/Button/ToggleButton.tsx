@@ -12,7 +12,7 @@ interface CheckboxToggleProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   disabled?: boolean;
-  fieldName?: string; // Dodajemy fieldName, aby wiedzieć, które pole formika aktualizować
+  $fieldName?: string;
   formik: FormikType;
   handleChange: () => void;
 }
@@ -20,7 +20,7 @@ interface CheckboxToggleProps
 const ToggleButton = ({
   label,
   disabled,
-  fieldName,
+  $fieldName,
   formik,
   checked,
   handleChange,

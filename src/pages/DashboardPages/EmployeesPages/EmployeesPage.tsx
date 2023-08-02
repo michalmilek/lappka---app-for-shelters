@@ -3,6 +3,7 @@ import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardCo
 import EmployeesTable from "components/AdminDashboardComponents/EmployeesComponents/EmployeesTable";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
+import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
@@ -14,7 +15,10 @@ const EmployeesPage = () => {
       <DashboardNavbar
         title="Pracownicy"
         Button={
-          <Button onClick={() => navigate(DashboardRoutes.ADDNEWEMPLOYEE)}>
+          <Button
+            icon={<StyledPlusIcon />}
+            iconPlace="left"
+            onClick={() => navigate(DashboardRoutes.ADDNEWEMPLOYEE)}>
             Dodaj pracownika
           </Button>
         }

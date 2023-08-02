@@ -1,4 +1,5 @@
 import Button from "components/SharedComponents/Button/Button";
+import { UserRemoveIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { FormikProps } from "formik";
@@ -27,8 +28,10 @@ const AccountSettingsForm = ({
         formik.setFieldValue("avatarPreview", reader.result as string);
       };
       reader.readAsDataURL(file);
+      console.log(file);
     }
   };
+
 
   const fileUploadRef = useRef<HTMLInputElement>(null);
   return (
@@ -172,7 +175,12 @@ const AccountSettingsForm = ({
           }
         />
         <ButtonContainer>
-          <Button>Delete account</Button>
+          <Button
+            icon={<UserRemoveIcon />}
+            iconPlace="right"
+            color="red500">
+            Delete account
+          </Button>
           <Button>Zmień hasło</Button>
         </ButtonContainer>
       </InputsFirstPartContainer>

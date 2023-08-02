@@ -1,5 +1,6 @@
 import { IdentificationIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
+import { motion } from "framer-motion";
 import React from "react";
 import {
   StyledDashboardInfoCard,
@@ -9,7 +10,10 @@ import {
 
 const DashboardInfoCardsItem = () => {
   return (
-    <StyledDashboardInfoCard>
+    <StyledDashboardInfoCard
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}>
       <StyledDashboardInfoCardIconContainer>
         <IdentificationIcon />
       </StyledDashboardInfoCardIconContainer>

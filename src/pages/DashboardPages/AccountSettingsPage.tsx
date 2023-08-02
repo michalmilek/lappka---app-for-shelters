@@ -64,7 +64,7 @@ const AccountSettingsPage = () => {
           <Button
             variant="outline"
             onClick={() => navigate(-1)}>
-            Dodaj pracownika
+            Anuluj
           </Button>
         }
       />

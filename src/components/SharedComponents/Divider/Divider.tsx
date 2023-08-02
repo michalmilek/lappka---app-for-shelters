@@ -35,11 +35,11 @@ const TextContainer = styled.div<DividerProps>`
 `;
 
 const Divider: React.FC<DividerProps> = ({
-  color,
-  text,
-  gapFromLines,
-  mt,
-  mb,
+  color: color,
+  text: text,
+  gapFromLines: gapFromLines,
+  mt: mt,
+  mb: mb,
 }) => {
   return (
     <DividerWrapper

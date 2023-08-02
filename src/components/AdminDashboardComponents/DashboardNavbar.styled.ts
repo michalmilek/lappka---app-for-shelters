@@ -31,4 +31,12 @@ export const StyledNavbarButtonContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 32px;
+
+  @media screen and (max-width: 1024px) {
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 550px) {
+    gap: 8px;
+  }
 `;

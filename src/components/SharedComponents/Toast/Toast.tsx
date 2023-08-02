@@ -7,11 +7,16 @@ import { getColor } from "utils/styles/getStyle/getColor";
 
 interface ToastProps {
   type: "success" | "error";
+  index?: number;
 }
 
 const ToastContainer = styled.div<ToastProps>`
   position: fixed;
-  top: 0;
+  top: ${({ index }) => (index ? `${index * 32}px` : 0)};
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   left: 50%;
   transform: translateX(-50%);
   padding: 8px 16px;
@@ -34,26 +39,14 @@ const ToastContainer = styled.div<ToastProps>`
 `;
 
 const Toast: React.FC = () => {
-  const dispatch = useDispatch();
   const toasts = useSelector((state: RootState) => state.toasts);
-
-  useEffect(() => {
-    const toastTimer = setInterval(() => {
-      if (toasts.length > 0) {
-        dispatch(removeToast(toasts[0].id));
-      }
-    }, 3000);
-
-    return () => {
-      clearInterval(toastTimer);
-    };
-  }, [toasts, dispatch]);
 
   return (
     <>
-      {toasts.map((toast) => (
+      {toasts.map((toast, index) => (
         <ToastContainer
           key={toast.id}
+          index={index}
           type={toast.type}>
           {toast.message}
         </ToastContainer>

@@ -36,7 +36,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
       makeAspectCrop(
         {
           unit: "%",
-          width: 90,
+          width: 20,
         },
         16 / 9,
         width,
@@ -74,6 +74,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
         </ReactCrop>
         <ModalFooter>
           <Button
+            type="button"
             variant="outline"
             onClick={() => {
               handleSelectedImageChange(null, null);
@@ -81,6 +82,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
             Anuluj
           </Button>
           <Button
+            type="button"
             onClick={() => {
               if (typeof selectedImageNumber === "number") {
                 handleSaveImage(selectedImageNumber);

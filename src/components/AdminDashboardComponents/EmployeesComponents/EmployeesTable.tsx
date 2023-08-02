@@ -3,6 +3,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import Button from "components/SharedComponents/Button/Button";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import {
@@ -10,11 +11,13 @@ import {
   StyledTableTD,
   StyledTableTH,
   StyledTableTR,
-  TableComponentContainer,
   TableComponentHeaderContainer,
   TableContainer,
 } from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";
-import { EmployeesTableComponentContainer } from "./DashboardEmployees.styled";
+import {
+  EmployeesTableComponentContainer,
+  EmployeesTableFooter,
+} from "./DashboardEmployees.styled";
 import {
   dummyData,
   Employee,
@@ -76,6 +79,10 @@ const EmployeesTable = () => {
           ))}
         </tbody>
       </TableContainer>
+      <EmployeesTableFooter>
+        <Button variant="outline">Test</Button>
+        {/* ADDED TO HAVE STYLING ON THE FOOTER, IN THE FUTURE I WILL REPLACE IT WITH PAGINATION */}
+      </EmployeesTableFooter>
     </EmployeesTableComponentContainer>
   );
 };

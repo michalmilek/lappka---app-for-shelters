@@ -15,7 +15,7 @@ const StyledMoreIcon = styled(MoreIcon)`
 const EmployeesComponentActionDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const dropdownRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -28,24 +28,23 @@ const EmployeesComponentActionDropdown = () => {
 
   const handleMoreIconClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    setIsDropdownOpen(true);
+    setIsDropdownOpen((prev) => !prev);
   };
 
-  // Dodajemy event listener do dokumentu przy montowaniu komponentu
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 
-    // Usuwamy event listener przy odmontowywaniu komponentu
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
   return (
-    <ActionHeaderContainer>
+    <ActionHeaderContainer ref={dropdownRef}>
       <StyledMoreIcon onClick={handleMoreIconClick} />
       {isDropdownOpen && (
-        <StyledDropdownContainer ref={dropdownRef}>
+        <StyledDropdownContainer
+          className={isDropdownOpen ? "fadeIn" : "fadeOut"}>
           <StyledDropdownOption>
             <Typography
               color="darkGray2"

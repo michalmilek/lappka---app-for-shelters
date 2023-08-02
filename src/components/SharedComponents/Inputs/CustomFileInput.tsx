@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Typography from "../Typography/Typography";
 import { Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -15,6 +15,7 @@ import {
   StyledPreviewPhoto,
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
+import { createFormDataFromBase64 } from "./Crop/imageUtils";
 export interface CustomFileInputProps {
   label?: string;
   description?: string;
@@ -34,6 +35,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   const [selectedImageNumber, setSelectedImageNumber] = useState<number | null>(
     null
   );
+  const [initialFileUpload, setInitialFileUpload] = useState(true);
 
   const handleCrop = (cropValue: Crop) => {
     setCrop(cropValue);
@@ -67,6 +69,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             })
         )
       ).then((previews) => {
+        setInitialFileUpload(true);
         setFilePreviews(previews);
       });
 
@@ -154,13 +157,40 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         setFilePreviews(updatedPreviews);
 
         onFileChange(newFile);
-        setSelectedImage(null);
-        setSelectedImageNumber(null);
+        if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
+          setInitialFileUpload(false);
+          setSelectedImage(null);
+          setSelectedImageNumber(null);
+          console.log(createFormDataFromBase64(filePreviews, fileNames));
+        } else if (
+          typeof selectedImageNumber === "number" &&
+          fileNames.length - 1 > selectedImageNumber
+        ) {
+          if (initialFileUpload) {
+            setInitialFileUpload(false);
+          }
+          setSelectedImage(filePreviews[selectedImageNumber + 1]);
+          setSelectedImageNumber(selectedImageNumber + 1);
+        } else if (
+          typeof selectedImageNumber === "number" &&
+          fileNames.length - 1 <= selectedImageNumber
+        ) {
+          setSelectedImage(null);
+          setSelectedImageNumber(null);
+          createFormDataFromBase64(filePreviews, fileNames);
+        }
       },
       "image/jpeg",
       1
     );
   };
+
+  useEffect(() => {
+    if (initialFileUpload && filePreviews) {
+      setSelectedImageNumber(0);
+      setSelectedImage(filePreviews[0]);
+    }
+  }, [initialFileUpload, filePreviews]);
 
   return (
     <FullContainer>
@@ -203,10 +233,10 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                 key={index}
                 src={preview}
                 alt={`Preview ${fileNames[index]}`}
-                onClick={() => {
+                /*  onClick={() => {
                   setSelectedImage(preview);
                   setSelectedImageNumber(index);
-                }}
+                }} */
               />
               <StyledCloseIcon onClick={() => handleRemoveFile(index)} />
             </StyledImgPreviewContainer>

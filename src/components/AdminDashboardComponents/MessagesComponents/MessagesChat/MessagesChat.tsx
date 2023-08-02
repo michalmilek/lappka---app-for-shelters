@@ -8,8 +8,6 @@ import {
   MessageBubble,
   MessageContainer,
   MessageInputContainer,
-  StyledSendIconContainer,
-  StyledSendMessageIcon,
 } from "./MessageChat.styled";
 import SendMessage from "./SendMessage.png";
 

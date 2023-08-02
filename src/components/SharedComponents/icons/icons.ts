@@ -31,6 +31,8 @@ import { ReactComponent as RadioMarkIcon } from "./files/RadioMarkIcon.svg";
 import { ReactComponent as SendMessageIcon } from "./files/SendMessageIcon.svg";
 import { ReactComponent as MoreIcon } from "./files/MoreIcon.svg";
 import { ReactComponent as CheckIcon } from "./files/CheckIcon.svg";
+import { ReactComponent as UserRemoveIcon } from "./files/UserRemoveIcon.svg";
+import { styled } from "styled-components";
 
 export {
   AlertIcon,
@@ -66,4 +68,10 @@ export {
   SendMessageIcon,
   MoreIcon,
   CheckIcon,
+  UserRemoveIcon,
 };
+
+export const StyledPlusIcon = styled(PlusIcon)`
+  height: 20px;
+  width: 20px;
+`;

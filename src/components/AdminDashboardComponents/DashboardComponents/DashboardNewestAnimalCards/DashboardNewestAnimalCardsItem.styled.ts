@@ -18,11 +18,16 @@ export const DashboardNewestAnimalCardsItemContainer = styled.div`
 `;
 
 export const DashboardNewestAnimalCardsItemImg = styled.img`
-  width: 228px;
+  width: 100%;
   height: 215px;
   object-fit: cover;
 
-  @media screen and (max-width: 1439px) {
+  @media screen and (max-width: 1700px) {
+    width: 100%;
+    height: 180px;
+  }
+
+  @media screen and (max-width: 1550px) {
     width: 100%;
     height: 150px;
   }

@@ -6,6 +6,7 @@ import {
 } from "components/AdminDashboardComponents/AnimalCardsComponents/DashboardAnimalCards.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import Button from "components/SharedComponents/Button/Button";
+import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
@@ -17,7 +18,10 @@ const AnimalCardsPage = () => {
       <DashboardNavbar
         title="Karty zwierząt"
         Button={
-          <Button onClick={() => navigate(DashboardRoutes.ANIMALCARDSNEWCARD)}>
+          <Button
+            icon={<StyledPlusIcon />}
+            iconPlace="left"
+            onClick={() => navigate(DashboardRoutes.ANIMALCARDSNEWCARD)}>
             Nowa karta
           </Button>
         }
