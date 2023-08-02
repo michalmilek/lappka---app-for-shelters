@@ -61,7 +61,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
       case "Year":
         return [0, 20000];
       case "Week":
-        return [0, 10000];
+        return [0, 1000];
       default:
         return [0, 20000];
     }
