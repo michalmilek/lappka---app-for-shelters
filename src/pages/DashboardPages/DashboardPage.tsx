@@ -1,5 +1,5 @@
 import { StyledDashboardMainContent } from "components/AdminDashboardComponents/DashboardComponents/Dashboard.styled";
-import DashboardAnimalChart from "components/AdminDashboardComponents/DashboardComponents/DashboardAnimalChart/DashboardAnimalChart";
+import DashboardAnimalChartStateHandler from "components/AdminDashboardComponents/DashboardComponents/DashboardAnimalChart/DashboardAnimalChartStateHandler";
 import DashboardInfoCards from "components/AdminDashboardComponents/DashboardComponents/DashboardInfoCard/DashboardInfoCards";
 import DashboardMostPopularAnimals from "components/AdminDashboardComponents/DashboardComponents/DashboardMostPopularAnimals/DashboardMostPopularAnimals";
 import DashboardNewestAnimalCards from "components/AdminDashboardComponents/DashboardComponents/DashboardNewestAnimalCards/DashboardNewestAnimalCards";
@@ -14,7 +14,7 @@ const DashboardPage = () => {
       <ProtectedNavbar title="Dashboard" />
       <StyledDashboardMainContent>
         <DashboardInfoCards />
-        <DashboardAnimalChart />
+        <DashboardAnimalChartStateHandler />
         <DashboardVoluntary />
         <DashboardNewestAnimalCards />
         <DashboardMostPopularAnimals />

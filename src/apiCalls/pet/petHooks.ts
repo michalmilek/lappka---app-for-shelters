@@ -3,6 +3,7 @@ import {
   getShelterCards,
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
+  getShelterCardsArchiveChartDataForWeek,
   getShelterStats,
   getShelterVolunteering,
   ShelterVolunteeringResponse,
@@ -40,5 +41,11 @@ export const useShelterCardsArchiveChartData = () => {
 export const useShelterCardsArchiveChartDataForMonth = () => {
   return useQuery(["shelterArchiveChartDataMonth"], () =>
     getShelterCardsArchiveChartDataForMonth()
+  );
+};
+
+export const useShelterCardsArchiveChartDataForWeek = () => {
+  return useQuery(["shelterArchiveChartDataWeek"], () =>
+    getShelterCardsArchiveChartDataForWeek()
   );
 };

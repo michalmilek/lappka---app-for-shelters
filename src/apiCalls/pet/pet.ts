@@ -120,3 +120,18 @@ export const getShelterCardsArchiveChartDataForMonth = async () => {
   }
 };
 
+
+
+export const getShelterCardsArchiveChartDataForWeek = async () => {
+  try {
+    const response = await axiosInstance.get<number[]>(
+      "/Pets/shelters/cards/archive/chart/week"
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch shelter cards archive chart data");
+  }
+};
+
+

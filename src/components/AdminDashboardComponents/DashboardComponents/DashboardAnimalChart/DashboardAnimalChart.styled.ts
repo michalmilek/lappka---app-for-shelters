@@ -9,6 +9,7 @@ export const StyledDashboardChartContainer = styled.div`
   min-width: 848px;
   max-height: 351px;
   box-shadow: 0px 1px 2px 0px #1018280f;
+  z-index: 900;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 

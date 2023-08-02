@@ -117,3 +117,24 @@ export const getShelterCardsArchiveChartDataForMonth = rest.get(
     }
   }
 );
+
+
+export const getShelterCardsArchiveChartDataForWeek = rest.get(
+  "/Pets/shelters/cards/archive/chart/week",
+  async (req, res, ctx) => {
+    try {
+      const currentDate = new Date();
+      const currentDayOfWeek = currentDate.getDay();
+
+      const chartData = Array.from({ length: 7 }, (_, index) => {
+        const dayOfWeek = (currentDayOfWeek + index) % 7;
+        return dayOfWeek + 1;
+      });
+
+      return res(ctx.status(200), ctx.json(chartData));
+    } catch (error) {
+      console.error(error);
+      return res(ctx.status(500), ctx.json({ message: "Server error" }));
+    }
+  }
+);
