@@ -115,7 +115,7 @@ const DashboardSidebar = () => {
             isDropdownActive ? "dropdown-entering" : "dropdown-exiting"
           }>
           <StyledUserMenuDropdownItem>
-            <StyledLink to={DashboardRoutes.ACCOUNTSETTINGS}>
+            <StyledLink to={DashboardRoutes.accountSettings}>
               <Typography
                 color="darkGray1"
                 variant="UI/UI Text 14 Reg">

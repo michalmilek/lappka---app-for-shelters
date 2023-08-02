@@ -59,58 +59,58 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route
-              path={AuthRoutes.LOGIN}
+              path={AuthRoutes.login}
               element={<LoginPage />}
             />
             <Route
-              path={AuthRoutes.REGISTER}
+              path={AuthRoutes.register}
               element={<RegisterPage />}
             />
             <Route
-              path={AuthRoutes.RESETPASSWORD}
+              path={AuthRoutes.resetPassword}
               element={<ResetPasswordPage />}
             />
             <Route
-              path={AuthRoutes.RESETPASSWORDTOKEN}
+              path={AuthRoutes.resetPasswordToken}
               element={<ResetPasswordPage />}
             />
           </Routes>
           <Routes>
             <Route element={<ProtectedPage />}>
               <Route
-                path={DashboardRoutes.DASHBOARD}
+                path={DashboardRoutes.dashboard}
                 element={<DashboardPage />}
               />
               <Route
-                path={DashboardRoutes.MESSAGES}
+                path={DashboardRoutes.messages}
                 element={<MessagesPage />}
               />
               <Route
-                path={DashboardRoutes.ANIMALCARDS}
+                path={DashboardRoutes.animalCards}
                 element={<AnimalCardsPage />}
               />
               <Route
-                path={DashboardRoutes.ANIMALCARDSNEWCARD}
+                path={DashboardRoutes.animalCardsNewCard}
                 element={<AnimalCardsAddNewCardPage />}
               />
               <Route
-                path={DashboardRoutes.ANIMALCARDSCARD}
+                path={DashboardRoutes.animalCardsCard}
                 element={<AnimalCardsCardPage />}
               />
               <Route
-                path={DashboardRoutes.VOLUNTARY}
+                path={DashboardRoutes.voluntary}
                 element={<VoluntaryPage />}
               />
               <Route
-                path={DashboardRoutes.EMPLOYEES}
+                path={DashboardRoutes.employees}
                 element={<EmployeesPage />}
               />
               <Route
-                path={DashboardRoutes.ADDNEWEMPLOYEE}
+                path={DashboardRoutes.addNewEmployee}
                 element={<AddNewEmployeePage />}
               />
               <Route
-                path={DashboardRoutes.ACCOUNTSETTINGS}
+                path={DashboardRoutes.accountSettings}
                 element={<AccountSettingsPage />}
               />
             </Route>

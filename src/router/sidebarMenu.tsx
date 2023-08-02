@@ -12,23 +12,23 @@ export const menu = {
     title: "",
     elements: [
       {
-        to: DashboardRoutes.DASHBOARD,
+        to: DashboardRoutes.dashboard,
         icon: <DashboardIcon />,
         title: "Dashboard",
       },
       {
-        to: DashboardRoutes.MESSAGES,
+        to: DashboardRoutes.messages,
         icon: <MessagesIcon />,
         title: "Wiadomości",
         messagesNumber: 56,
       },
       {
-        to: DashboardRoutes.ANIMALCARDS,
+        to: DashboardRoutes.animalCards,
         icon: <AnimalsCardsIcon />,
         title: "Karty zwierząt",
       },
       {
-        to: DashboardRoutes.VOLUNTARY,
+        to: DashboardRoutes.voluntary,
         icon: <VoluntaryIcon />,
         title: "Wolontariat",
       },
@@ -38,7 +38,7 @@ export const menu = {
     title: "ORGANIZACJA",
     elements: [
       {
-        to: DashboardRoutes.EMPLOYEES,
+        to: DashboardRoutes.employees,
         icon: <EmployeesIcon />,
         title: "Pracownicy",
       },

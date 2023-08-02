@@ -32,7 +32,7 @@ const AnimalCardsPage = () => {
           <Button
             icon={<StyledPlusIcon />}
             iconPlace="left"
-            onClick={() => navigate(DashboardRoutes.ANIMALCARDSNEWCARD)}>
+            onClick={() => navigate(DashboardRoutes.animalCardsNewCard)}>
             Nowa karta
           </Button>
         }

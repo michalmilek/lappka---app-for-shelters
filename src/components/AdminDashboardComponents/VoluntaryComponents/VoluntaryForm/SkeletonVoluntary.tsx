@@ -16,6 +16,7 @@ const SkeletonStyledDashboardVoluntaryMainContentFormsContainer = styled.form`
   flex-direction: column;
   gap: 16px;
   width: 60%;
+  height: 80vh;
   background: #f0f0f0;
   border-radius: 8px;
   box-shadow: 0px 1px 2px 0px #1018280f;

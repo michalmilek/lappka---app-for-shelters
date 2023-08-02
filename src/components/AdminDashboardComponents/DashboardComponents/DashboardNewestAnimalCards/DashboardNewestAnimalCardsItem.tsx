@@ -16,7 +16,7 @@ interface Props {
 
 const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
   return (
-    <ContainerLink to={DashboardRoutes.ANIMALCARDS + "/" + item.id}>
+    <ContainerLink to={DashboardRoutes.animalCards + "/" + item.id}>
       <DashboardNewestAnimalCardsItemContainer>
         <DashboardNewestAnimalCardsItemImg
           src={item.profilePhoto}
