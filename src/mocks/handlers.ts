@@ -12,6 +12,7 @@ import {
   getShelterCardsCard,
   getShelterStats,
   getShelterVolunteering,
+  postShelterCardsCat,
   updateShelterVolunteering,
 } from "./petControllers/petControllers";
 import { postStoragePicture } from "./storageControllers/storageControllers";
@@ -30,4 +31,5 @@ export const handlers = [
   getShelterCardsArchiveChartDataForWeek,
   getShelterCardsCard,
   postStoragePicture,
+  postShelterCardsCat,
 ];

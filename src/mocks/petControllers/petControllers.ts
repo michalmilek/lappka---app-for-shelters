@@ -173,3 +173,20 @@ export const getShelterCardsCard = rest.get(
     }
   }
 );
+
+
+export const postShelterCardsCat = rest.post(
+  "Pet/shelters/cards/cat",
+  async (req, res, ctx) => {
+    try {
+      const body = await req.json();
+      return res(
+        ctx.status(200),
+        ctx.json({ message: "Kot został dodany.", body })
+      );
+    } catch (error) {
+      console.error(error);
+      return res(ctx.status(500), ctx.json({ message: "Server error" }));
+    }
+  }
+);

@@ -13,13 +13,8 @@ export async function postStoragePicture(file: File) {
     formData.append("file", file);
 
     const response = await axiosInstance.post<string>(
-      `Storage/picture`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
+      `/Storage/picture`,
+      formData
     );
 
     return response.data;

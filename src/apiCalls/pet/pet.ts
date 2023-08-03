@@ -1,4 +1,5 @@
 import axiosInstance from "apiCalls/axiosInstance";
+import { CatBreed, DogBreed } from "./petTypes";
 
 interface SheltersStatsResponse {
   cardCount: number;
@@ -37,7 +38,6 @@ export interface ShelterCardsResponse {
   totalItemsCount: number;
 }
 
-
 export interface ShelterVolunteeringResponse {
   isDonationActive: boolean;
   bankAccountNumber: string;
@@ -46,6 +46,36 @@ export interface ShelterVolunteeringResponse {
   dailyHelpDescription: string;
   isTakingDogsOutActive: boolean;
   takingDogsOutDescription: string;
+}
+
+export interface Dog {
+  name: "string";
+  petIdentifier: "string";
+  profilePhoto: "string";
+  gender: "Male" | "Female" | "Other";
+  description: "string";
+  isVisible: true;
+  months: 0;
+  isSterilized: true;
+  weight: 0;
+  dogColor: string;
+  dogBreed: DogBreed;
+  photos: string[];
+}
+
+export interface Cat {
+  name: string;
+  profilePhoto: string;
+  petIdentifier: string;
+  gender: "Male" | "Female" | "Other";
+  description: string;
+  isVisible: boolean;
+  months: number;
+  isSterilized: boolean;
+  weight: number;
+  catColor: string;
+  catBreed: CatBreed;
+  photos: string[];
 }
 
 export const getShelterStats = async () => {
@@ -95,7 +125,6 @@ export const updateShelterVolunteering = async (
   }
 };
 
-
 export const getShelterCardsArchiveChartData = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
@@ -120,8 +149,6 @@ export const getShelterCardsArchiveChartDataForMonth = async () => {
   }
 };
 
-
-
 export const getShelterCardsArchiveChartDataForWeek = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
@@ -133,7 +160,6 @@ export const getShelterCardsArchiveChartDataForWeek = async () => {
     throw new Error("Failed to fetch shelter cards archive chart data");
   }
 };
-
 
 export const getShelterCardsCard = async (petId: string) => {
   try {
@@ -147,3 +173,11 @@ export const getShelterCardsCard = async (petId: string) => {
   }
 };
 
+export const postShelterCardsCat = async (data: Cat) => {
+  try {
+    const response = await axiosInstance.post("/shelters/cards/cat", data);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};

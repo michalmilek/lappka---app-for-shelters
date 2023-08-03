@@ -24,7 +24,7 @@ interface PetCard {
   weight: number;
   months: number;
   gender: "Male" | "Female" | "Other";
-  photos: string[];
+  photos: string[] | string | File | File[];
   isVisible: boolean;
 }
 

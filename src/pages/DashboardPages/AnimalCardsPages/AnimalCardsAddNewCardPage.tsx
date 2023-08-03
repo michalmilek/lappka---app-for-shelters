@@ -1,25 +1,27 @@
+import { usePostShelterCardsCat } from "apiCalls/pet/petHooks";
+import { usePostStoragePicture } from "apiCalls/storage/storageHooks";
 import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm";
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
 
 export interface AddNewAnimalCardInterface {
-  animalName: string;
+  name: string;
   description: string;
   genre: {
     label: "Pies" | "Kot" | "";
     value: "pies" | "kot" | "";
   };
   sex: {
-    label: "Samiec" | "Samiczka" | "";
-    value: "samiec" | "samiczka" | "";
+    label: "Male" | "Female" | "Other";
+    value: "Male" | "Female" | "Other";
   };
-  colour: { label: "Jasny" | "Ciemny" | ""; value: "jasny" | "ciemny" | "" };
+  color: string;
   weight: number | undefined;
   uploadFile: File[];
   sterilisation: { label: "Tak" | "Nie" | ""; value: "tak" | "nie" | "" };
@@ -61,10 +63,10 @@ const validationSchema = Yup.object().shape({
 
 const AnimalCardsAddNewCardPage = () => {
   const initialValues: AddNewAnimalCardInterface = {
-    animalName: "",
+    name: "",
     description: "",
-    genre: { label: "", value: "" },
-    sex: { label: "", value: "" },
+    type: { label: "", value: "" },
+    gender: { label: "", value: "" },
     colour: { label: "", value: "" },
     weight: undefined,
     uploadFile: [],
@@ -72,8 +74,16 @@ const AnimalCardsAddNewCardPage = () => {
     visibility: { label: "", value: "" },
   };
 
+  const { isLoading, isError, isSuccess, mutate } = usePostStoragePicture();
+  const {
+    mutate: postCatFn,
+    isLoading: isLoadingCat,
+    isError: isErrorCat,
+  } = usePostShelterCardsCat();
+
   const onSubmit = (values: AddNewAnimalCardInterface) => {
     console.log(values);
+    mutate(formik.values.uploadFile[0]);
   };
 
   const formik = useFormik({
@@ -83,6 +93,14 @@ const AnimalCardsAddNewCardPage = () => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      if (formik.values.genre.value === "kot") {
+        postCatFn({ ...formik.values, name });
+      }
+    }
+  });
 
   return (
     <StyledProtectedPageContent>
