@@ -5,7 +5,7 @@ import {
   StyledCardFormComponent,
   StyledCardHeader,
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCard.styled";
-import DashboardAnimalCardsCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCardForm";
+import DashboardAnimalCardsCardStateHandler from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCardStateHandler";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
@@ -63,7 +63,7 @@ const AnimalCardsCardPage = () => {
                 </CardButton>
               )}
             </StyledCardHeader>
-            <DashboardAnimalCardsCardForm
+            <DashboardAnimalCardsCardStateHandler
               id={id}
               isEditOn={isEditOn}
             />

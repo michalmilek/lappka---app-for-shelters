@@ -22,7 +22,7 @@ export const StyledCardHeader = styled.header`
   align-items: center;
 `;
 
-export const StyledCardFormContentContainer = styled.div`
+export const StyledCardFormContentContainer = styled.form`
   padding: 0 24px 24px;
   display: flex;
   flex-direction: column;

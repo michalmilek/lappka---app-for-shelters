@@ -14,6 +14,7 @@ import {
   AnimalCardsAddNewCardFormContainer,
   AnimalCardsAddNewCardFormInputContainer,
 } from "./AnimalCardsAddNewCardForm.styled";
+import { useCallback } from "react";
 
 const AnimalCardsAddNewCardForm = ({
   formik,
@@ -21,6 +22,14 @@ const AnimalCardsAddNewCardForm = ({
   formik: FormikProps<AddNewAnimalCardInterface>;
 }) => {
   const deviceType = useDeviceType();
+
+  const prevFiles = formik.values.uploadFile;
+
+  const handleOnFileChange = (files: File[] | null | File) => {
+    formik.setFieldValue("uploadFile", [...prevFiles, files]);
+  };
+
+  console.log("formik:", formik.values.uploadFile);
 
   return (
     <AnimalCardsAddNewCardFormContainer onSubmit={formik.handleSubmit}>
@@ -162,7 +171,7 @@ const AnimalCardsAddNewCardForm = ({
           />
         </AnimalCardsAddNewCardFlexInputContainer>
         <CustomFileInput
-          onFileChange={(files) => formik.setFieldValue("uploadFile", files)}
+          onFileChange={handleOnFileChange}
           label="Dodaj zdjęcia"
           description="Zdjęcia maksymalnie 1MB"
         />

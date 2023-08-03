@@ -2,7 +2,7 @@ import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 interface SexInterface {
-  sex: "samiec" | "samiczka";
+  sex: "Male" | "Female" | "Other";
 }
 
 interface DotInterface {
@@ -16,17 +16,17 @@ interface PaginationButtonInterface
 
 export const StyledSexContainer = styled.div<SexInterface>`
   background: ${({ sex }) =>
-    sex === "samiec" ? getColor("midGray3") : getColor("primary500")};
+    sex === "Male" ? getColor("midGray3") : getColor("primary500")};
   padding: 0 8px;
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${({ sex }) => (sex === "samiec" ? "66px" : "81px")};
+  width: ${({ sex }) => (sex === "Male" ? "66px" : "81px")};
   height: 24px;
 
   @media screen and (max-width: 400px) {
-    width: ${({ sex }) => (sex === "samiec" ? "55px" : "70px")};
+    width: ${({ sex }) => (sex === "Male" ? "55px" : "70px")};
   }
 `;
 

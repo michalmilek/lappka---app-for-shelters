@@ -16,7 +16,7 @@ export interface Pet {
   petIdentifier: string;
   name: string;
   type: string;
-  gender: "samiec" | "samiczka";
+  gender: "Male" | "Female" | "Other";
   breed: string;
   color: string;
   weight: number;

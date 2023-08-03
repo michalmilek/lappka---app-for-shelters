@@ -15,11 +15,11 @@ import {
   StyledPreviewPhoto,
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
-import { createFormDataFromBase64 } from "./Crop/imageUtils";
+import { dataURLtoFile } from "./Crop/imageUtils";
 export interface CustomFileInputProps {
   label?: string;
   description?: string;
-  onFileChange: (files: FileList | File | null) => void;
+  onFileChange: (files: File[] | null | File) => void;
 }
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
@@ -72,8 +72,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         setInitialFileUpload(true);
         setFilePreviews(previews);
       });
-
-      onFileChange(files);
     }
   };
 
@@ -111,8 +109,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         const file = new File([blob], updatedNames[idx]);
         dataTransfer.items.add(file);
       });
-
-      onFileChange(dataTransfer.files);
     }
   };
 
@@ -161,7 +157,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           setInitialFileUpload(false);
           setSelectedImage(null);
           setSelectedImageNumber(null);
-          console.log(createFormDataFromBase64(filePreviews, fileNames));
         } else if (
           typeof selectedImageNumber === "number" &&
           fileNames.length - 1 > selectedImageNumber
@@ -177,7 +172,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         ) {
           setSelectedImage(null);
           setSelectedImageNumber(null);
-          createFormDataFromBase64(filePreviews, fileNames);
         }
       },
       "image/jpeg",
