@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
+  Animal,
   Cat,
+  Dog,
   getShelterCards,
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
@@ -8,7 +10,11 @@ import {
   getShelterCardsCard,
   getShelterStats,
   getShelterVolunteering,
+  Other,
+  postShelterCardsAnimal,
   postShelterCardsCat,
+  postShelterCardsDog,
+  postShelterCardsOther,
   ShelterVolunteeringResponse,
   updateShelterVolunteering,
 } from "./pet";
@@ -61,6 +67,24 @@ export const useShelterCardsCard = (petId: string) => {
 
 export const usePostShelterCardsCat = () => {
   const mutation = useMutation((data: Cat) => postShelterCardsCat(data));
+
+  return mutation;
+};
+
+export const usePostShelterCardsDog = () => {
+  const mutation = useMutation((data: Dog) => postShelterCardsDog(data));
+
+  return mutation;
+};
+
+export const usePostShelterCardsOther = () => {
+  const mutation = useMutation((data: Other) => postShelterCardsOther(data));
+
+  return mutation;
+};
+
+export const usePostShelterCardsAnimal = () => {
+  const mutation = useMutation((data: Animal) => postShelterCardsAnimal(data));
 
   return mutation;
 };

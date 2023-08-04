@@ -1,4 +1,5 @@
 import { Pet } from "apiCalls/pet/pet";
+import { GenderType, PetBreed } from "apiCalls/pet/petTypes";
 import Select from "components/SharedComponents/DropdownMenu/Select";
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
@@ -15,17 +16,17 @@ import {
 import FormRow from "./DashboardAnimalCardsFormRow";
 
 interface PetCard {
-  petId: string;
-  petIdentifier: string;
   description: string;
   petName: string;
   profilePhoto: string;
   isSterilized: boolean;
   weight: number;
   months: number;
-  gender: "Male" | "Female" | "Other";
+  gender: GenderType;
   photos: string[] | string | File | File[];
   isVisible: boolean;
+  color?: string;
+  breed?: PetBreed;
 }
 
 const DashboardAnimalCardsCardForm = ({
@@ -36,8 +37,6 @@ const DashboardAnimalCardsCardForm = ({
   data: Pet;
 }) => {
   const initialValues = {
-    petIdentifier: data.petIdentifier,
-    petId: data.id,
     description: data.description,
     petName: data.name,
     profilePhoto: data.profilePhoto,
@@ -78,24 +77,34 @@ const DashboardAnimalCardsCardForm = ({
           />
         </FormRow>
         <FormRow label="Opis">
-          <Textarea
-            value={formik.values.description}
-            readOnly={!isEditOn}
-            inputSize="Large"
-          />
+          {!isEditOn ? (
+            <Input
+              value={formik.values.description}
+              readOnly={!isEditOn}
+              inputSize="Large"
+            />
+          ) : (
+            <Textarea
+              value={formik.values.description}
+              readOnly={!isEditOn}
+              inputSize="Large"
+            />
+          )}
         </FormRow>
         <FormRow label="Płeć">
           {!isEditOn ? (
             <Input
               readOnly
               inputSize="Large"
+              value={formik.values.gender}
             />
           ) : (
             <Select
               label=""
               options={[
-                { label: "Samiec", value: "samiec" },
-                { label: "Samiczka", value: "samiczka" },
+                { label: "Samiec", value: "Male" },
+                { label: "Samiczka", value: "Female" },
+                { label: "Inna", value: "Other" },
               ]}
               dropdownIcon={<ArrowDownIcon />}
               value={formik.values.gender}
@@ -136,11 +145,11 @@ const DashboardAnimalCardsCardForm = ({
             <Select
               label=""
               options={[
-                { label: "Tak", value: "tak" },
-                { label: "Nie", value: "nie" },
+                { label: "Tak", value: true },
+                { label: "Nie", value: false },
               ]}
               dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.isSterilized ? "tak" : "nie"}
+              value={formik.values.isSterilized}
               handleChange={() => {}}
             />
           )}
@@ -150,16 +159,17 @@ const DashboardAnimalCardsCardForm = ({
             <Input
               readOnly
               inputSize="Large"
+              value={formik.values.isVisible ? "Tak" : "Nie"}
             />
           ) : (
             <Select
               label=""
               options={[
-                { label: "Tak", value: "tak" },
-                { label: "Nie", value: "nie" },
+                { label: "Tak", value: true },
+                { label: "Nie", value: false },
               ]}
               dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.isVisible ? "tak" : "nie"}
+              value={formik.values.isSterilized ? true : false}
               handleChange={() => {}}
             />
           )}

@@ -1,4 +1,16 @@
-import { usePostShelterCardsCat } from "apiCalls/pet/petHooks";
+import { Animal, Cat, Dog, Other } from "apiCalls/pet/pet";
+import {
+  usePostShelterCardsAnimal,
+  usePostShelterCardsCat,
+  usePostShelterCardsDog,
+  usePostShelterCardsOther,
+} from "apiCalls/pet/petHooks";
+import {
+  GenderType,
+  GenreType,
+  PetBreed,
+  PetBreedLabel,
+} from "apiCalls/pet/petTypes";
 import { usePostStoragePicture } from "apiCalls/storage/storageHooks";
 import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm";
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
@@ -9,81 +21,86 @@ import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
+import { BreedArray } from "./AnimalCardsUtils";
 
 export interface AddNewAnimalCardInterface {
   name: string;
   description: string;
-  genre: {
-    label: "Pies" | "Kot" | "";
-    value: "pies" | "kot" | "";
-  };
-  sex: {
-    label: "Male" | "Female" | "Other";
-    value: "Male" | "Female" | "Other";
-  };
+  type: GenreType | "";
+  gender: GenderType | "";
   color: string;
+  months: number | undefined;
   weight: number | undefined;
-  uploadFile: File[];
-  sterilisation: { label: "Tak" | "Nie" | ""; value: "tak" | "nie" | "" };
-  visibility: { label: "Tak" | "Nie" | ""; value: "tak" | "nie" | "" };
+  breed: PetBreed | "";
+  photos: File[] | string[];
+  profilePhoto: string;
+  isSterilized: boolean | "";
+  isVisible: boolean | "";
 }
 
 const validationSchema = Yup.object().shape({
-  animalName: Yup.string().required("To pole jest wymagane"),
+  name: Yup.string().required("To pole jest wymagane"),
   description: Yup.string().required("To pole jest wymagane"),
-  genre: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["pies", "kot"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
+  type: Yup.string()
+    .oneOf(["Dog", "Cat", "Other"], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  breed: Yup.string().when("type", {
+    is: (type: string) => type === "Dog" || type === "Cat",
+    then: () =>
+      Yup.string()
+        .oneOf(BreedArray, "Nieprawidłowy wybór")
+        .required("To pole jest wymagane"),
   }),
-  sex: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["samiec", "samiczka"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
-  colour: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["jasny", "ciemny"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
+  gender: Yup.string()
+    .oneOf(["Male", "Female", "Other"], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  color: Yup.string().required("To pole jest wymagane"),
+  months: Yup.number()
+    .required("To pole jest wymagane")
+    .positive("Wartość musi być większa od zera"),
   weight: Yup.number()
     .required("To pole jest wymagane")
     .positive("Wartość musi być większa od zera"),
-  sterilisation: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["tak", "nie"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
-  visibility: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["tak", "nie"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
+  isSterilized: Yup.bool()
+    .oneOf([true, false], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  isVisible: Yup.bool()
+    .oneOf([true, false], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
 });
 
 const AnimalCardsAddNewCardPage = () => {
   const initialValues: AddNewAnimalCardInterface = {
     name: "",
     description: "",
-    type: { label: "", value: "" },
-    gender: { label: "", value: "" },
-    colour: { label: "", value: "" },
+    type: "",
+    gender: "",
+    color: "",
+    months: undefined,
     weight: undefined,
-    uploadFile: [],
-    sterilisation: { label: "", value: "" },
-    visibility: { label: "", value: "" },
+    photos: [],
+    isSterilized: "",
+    isVisible: "",
+    profilePhoto: "",
+    breed: "",
   };
 
   const { isLoading, isError, isSuccess, mutate } = usePostStoragePicture();
   const {
-    mutate: postCatFn,
-    isLoading: isLoadingCat,
-    isError: isErrorCat,
-  } = usePostShelterCardsCat();
+    isLoading: isLoadingAnimal,
+    isError: isErrorAnimal,
+    isSuccess: isSuccessAnimal,
+    mutate: postAnimalFn,
+  } = usePostShelterCardsAnimal();
 
-  const onSubmit = (values: AddNewAnimalCardInterface) => {
-    console.log(values);
-    mutate(formik.values.uploadFile[0]);
+  const onSubmit = async (values: AddNewAnimalCardInterface) => {
+    try {
+      console.log(values);
+      //mutate(formik.values.uploadFile[0]);
+      if (isSuccess) {
+        postAnimalFn(values as Animal);
+      }
+    } catch (error) {}
   };
 
   const formik = useFormik({
@@ -93,14 +110,6 @@ const AnimalCardsAddNewCardPage = () => {
   });
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isSuccess) {
-      if (formik.values.genre.value === "kot") {
-        postCatFn({ ...formik.values, name });
-      }
-    }
-  });
 
   return (
     <StyledProtectedPageContent>

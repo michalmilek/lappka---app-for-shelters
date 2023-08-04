@@ -9,28 +9,18 @@ import {
   SelectDiv,
 } from "./Select.styled";
 
-export type Option = {
-  value: string | boolean;
-  label: string;
-};
-
-export interface SelectProps<T extends Option>
+export interface SelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "value"> {
-  value: Option["value"];
-  options: T[];
-  handleChange: (value: T) => void;
+  value: string | boolean;
+  options: Array<{ value: string | boolean; label: string }>;
+  handleChange: (value: string | boolean) => void;
   dropdownIcon: React.ReactNode;
   placeholder?: string;
   label?: string;
   error?: string;
 }
 
-export interface SelectPropsWithoutGeneric
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  error?: string;
-}
-
-function Select<T extends Option>({
+function SelectSecond({
   label,
   error,
   value,
@@ -39,7 +29,7 @@ function Select<T extends Option>({
   dropdownIcon,
   placeholder = "Wybierz z listy",
   ...rest
-}: SelectProps<T>) {
+}: SelectProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const handleClickOutside = (event: MouseEvent) => {
@@ -64,9 +54,9 @@ function Select<T extends Option>({
     };
   });
 
-  function handleOptionSelect(option: T) {
+  function handleOptionSelect(value: string | boolean) {
     setIsDropdownOpen(false);
-    handleChange(option);
+    handleChange(value);
   }
 
   const selectedOption = options.find((option) => option.value === value);
@@ -97,8 +87,8 @@ function Select<T extends Option>({
           ref={dropdownRef}>
           {options.map((option) => (
             <OptionItem
-              key={option.label}
-              onClick={() => handleOptionSelect(option)}>
+              key={option.label + Math.random() * 1000}
+              onClick={() => handleOptionSelect(option.value)}>
               <Typography
                 color="darkGray2"
                 variant="UI/UI Text 14 Reg">
@@ -118,4 +108,5 @@ function Select<T extends Option>({
     </SelectContainerWithLabels>
   );
 }
-export default Select;
+
+export default SelectSecond;

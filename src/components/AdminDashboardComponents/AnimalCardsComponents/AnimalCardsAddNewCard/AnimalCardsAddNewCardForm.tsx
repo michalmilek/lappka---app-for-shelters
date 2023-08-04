@@ -1,5 +1,7 @@
+import { BreedOption } from "apiCalls/pet/petTypes";
 import Button from "components/SharedComponents/Button/Button";
 import Select from "components/SharedComponents/DropdownMenu/Select";
+import SelectSecond from "components/SharedComponents/DropdownMenu/SelectSecond";
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import CustomFileInput from "components/SharedComponents/Inputs/CustomFileInput";
 import Input from "components/SharedComponents/Inputs/Input";
@@ -8,13 +10,13 @@ import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { FormikProps } from "formik";
 import useDeviceType from "hooks/useDeviceType";
 import { AddNewAnimalCardInterface } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
+import { PetsBreeds } from "./AddNewCardUtils";
 import {
   AnimalCardsAddNewCardFlexInputContainer,
   AnimalCardsAddNewCardFooter,
   AnimalCardsAddNewCardFormContainer,
   AnimalCardsAddNewCardFormInputContainer,
 } from "./AnimalCardsAddNewCardForm.styled";
-import { useCallback } from "react";
 
 const AnimalCardsAddNewCardForm = ({
   formik,
@@ -23,28 +25,28 @@ const AnimalCardsAddNewCardForm = ({
 }) => {
   const deviceType = useDeviceType();
 
-  const prevFiles = formik.values.uploadFile;
+  const prevFiles = formik.values.photos;
 
   const handleOnFileChange = (files: File[] | null | File) => {
-    formik.setFieldValue("uploadFile", [...prevFiles, files]);
+    formik.setFieldValue("photos", [...prevFiles, files]);
   };
 
-  console.log("formik:", formik.values.uploadFile);
+  console.log(formik.errors.breed);
 
   return (
     <AnimalCardsAddNewCardFormContainer onSubmit={formik.handleSubmit}>
       <AnimalCardsAddNewCardFormInputContainer>
         <Input
           error={
-            formik.errors.animalName && formik.touched.animalName
-              ? formik.errors.animalName
+            formik.errors.name && formik.touched.name
+              ? formik.errors.name
               : undefined
           }
           placeholder="Wpisz"
           inputSize="Large"
           label="Imię zwierzaka"
-          name="animalName"
-          value={formik.values.animalName}
+          name="name"
+          value={formik.values.name}
           onChange={formik.handleChange}
         />
         <Textarea
@@ -61,60 +63,93 @@ const AnimalCardsAddNewCardForm = ({
           value={formik.values.description}
           onChange={formik.handleChange}
         />
-        <Select
+        <SelectSecond
           error={
-            formik.errors.genre?.value && formik.touched.genre
-              ? formik.errors.genre?.value
+            formik.errors.type && formik.touched.type
+              ? formik.errors.type
               : undefined
           }
           label="Gatunek"
           dropdownIcon={<ArrowDownIcon />}
           options={[
-            { value: "pies", label: "Pies" },
-            { value: "kot", label: "Kot" },
+            { value: "Dog", label: "Pies" },
+            { value: "Cat", label: "Kot" },
+            { value: "Other", label: "Inny" },
           ]}
-          value={formik.values.genre.value}
+          value={formik.values.type}
           handleChange={(option) => {
-            formik.setFieldTouched("genre", true);
-            formik.setFieldValue("genre", option);
+            formik.setFieldTouched("type", true);
+            formik.setFieldValue("type", option);
           }}
         />
-        <Select
-          error={
-            formik.errors.colour?.value && formik.touched.colour
-              ? formik.errors.colour?.value
-              : undefined
-          }
-          label="Umaszczenie"
-          dropdownIcon={<ArrowDownIcon />}
-          options={[
-            { value: "jasny", label: "Jasny" },
-            { value: "ciemny", label: "Ciemny" },
-          ]}
-          value={formik.values.colour.value}
-          handleChange={(option) => {
-            formik.setFieldTouched("colour", true);
-            formik.setFieldValue("colour", option);
-          }}
-        />
+        {(formik.values.type === "Dog" || formik.values.type === "Cat") && (
+          <SelectSecond
+            error={
+              formik.errors.breed && formik.touched.breed
+                ? formik.errors.breed
+                : undefined
+            }
+            label="Rasa"
+            dropdownIcon={<ArrowDownIcon />}
+            options={
+              formik.values.type === "Dog"
+                ? PetsBreeds.dogsBreeds
+                : PetsBreeds.catBreeds
+            }
+            value={formik.values.breed}
+            handleChange={(option) => {
+              formik.setFieldTouched("breed", true);
+              formik.setFieldValue("breed", option);
+            }}
+          />
+        )}
+        <AnimalCardsAddNewCardFlexInputContainer>
+          <Input
+            error={
+              formik.errors.color && formik.touched.color
+                ? formik.errors.color
+                : undefined
+            }
+            placeholder="Wpisz"
+            inputSize="Large"
+            label="Umaszczenie"
+            name="color"
+            value={formik.values.color}
+            onChange={formik.handleChange}
+          />
+          <InputNumberWithUnits
+            label="Wiek"
+            placeholder="Miesiące"
+            name="months"
+            unit="msc"
+            error={
+              formik.errors.months && formik.touched.months
+                ? formik.errors.months
+                : undefined
+            }
+            value={formik.values.months}
+            onChange={formik.handleChange}
+          />
+        </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <Select
+          <SelectSecond
             error={
-              formik.errors.sex?.value && formik.touched.sex
-                ? formik.errors.sex?.value
+              formik.errors.gender && formik.touched.gender
+                ? formik.errors.gender
                 : undefined
             }
             label="Płeć"
             dropdownIcon={<ArrowDownIcon />}
             options={[
-              { value: "samiec", label: "Samiec" },
-              { value: "samiczka", label: "Samiczka" },
+              { value: "Male", label: "Samiec" },
+              { value: "Female", label: "Samiczka" },
+              { value: "Other", label: "Inna" },
             ]}
-            value={formik.values.sex.value}
+            value={formik.values.gender}
             handleChange={(option) => {
-              formik.setFieldTouched("sex", true);
-              formik.setFieldValue("sex", option);
+              formik.setFieldTouched("gender", true);
+              formik.setFieldValue("gender", option);
             }}
           />
           <InputNumberWithUnits
@@ -133,40 +168,40 @@ const AnimalCardsAddNewCardForm = ({
         </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <Select
+          <SelectSecond
             error={
-              formik.errors.sterilisation?.value && formik.touched.sterilisation
-                ? formik.errors.sterilisation?.value
+              formik.errors.isSterilized && formik.touched.isSterilized
+                ? formik.errors.isSterilized
                 : undefined
             }
             label="Sterylizacja"
             dropdownIcon={<ArrowDownIcon />}
             options={[
-              { value: "tak", label: "Tak" },
-              { value: "nie", label: "Nie" },
+              { value: true, label: "Tak" },
+              { value: false, label: "Nie" },
             ]}
-            value={formik.values.sterilisation.value}
+            value={formik.values.isSterilized}
             handleChange={(option) => {
-              formik.setFieldTouched("sterilisation", true);
-              formik.setFieldValue("sterilisation", option);
+              formik.setFieldTouched("isSterilized", true);
+              formik.setFieldValue("isSterilized", option);
             }}
           />
-          <Select
+          <SelectSecond
             error={
-              formik.errors.visibility?.value && formik.touched.visibility
-                ? formik.errors.visibility?.value
+              formik.errors.isVisible && formik.touched.isVisible
+                ? formik.errors.isVisible
                 : undefined
             }
             label="Widoczność"
             dropdownIcon={<ArrowDownIcon />}
             options={[
-              { value: "tak", label: "Tak" },
-              { value: "nie", label: "Nie" },
+              { value: true, label: "Tak" },
+              { value: false, label: "Nie" },
             ]}
-            value={formik.values.visibility.value}
+            value={formik.values.isVisible}
             handleChange={(option) => {
-              formik.setFieldTouched("visibility", true);
-              formik.setFieldValue("visibility", option);
+              formik.setFieldTouched("isVisible", true);
+              formik.setFieldValue("isVisible", option);
             }}
           />
         </AnimalCardsAddNewCardFlexInputContainer>
