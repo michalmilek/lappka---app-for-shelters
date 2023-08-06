@@ -18,6 +18,7 @@ export interface SelectProps
   placeholder?: string;
   label?: string;
   error?: string;
+  zIndex?: number;
 }
 
 function SelectSecond({
@@ -28,6 +29,7 @@ function SelectSecond({
   handleChange,
   dropdownIcon,
   placeholder = "Wybierz z listy",
+  zIndex,
   ...rest
 }: SelectProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -69,7 +71,7 @@ function SelectSecond({
         variant="UI Small/UI Text 13 Med">
         {label}
       </Typography>
-      <SelectContainer>
+      <SelectContainer zIndex={zIndex}>
         <SelectDiv
           error={error}
           {...rest}

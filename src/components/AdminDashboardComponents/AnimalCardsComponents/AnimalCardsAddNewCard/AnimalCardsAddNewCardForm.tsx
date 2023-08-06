@@ -64,6 +64,7 @@ const AnimalCardsAddNewCardForm = ({
           onChange={formik.handleChange}
         />
         <SelectSecond
+          zIndex={1301}
           error={
             formik.errors.type && formik.touched.type
               ? formik.errors.type
@@ -84,6 +85,7 @@ const AnimalCardsAddNewCardForm = ({
         />
         {(formik.values.type === "Dog" || formik.values.type === "Cat") && (
           <SelectSecond
+            zIndex={1300}
             error={
               formik.errors.breed && formik.touched.breed
                 ? formik.errors.breed
@@ -134,6 +136,7 @@ const AnimalCardsAddNewCardForm = ({
 
         <AnimalCardsAddNewCardFlexInputContainer>
           <SelectSecond
+            zIndex={1299}
             error={
               formik.errors.gender && formik.touched.gender
                 ? formik.errors.gender
@@ -169,6 +172,7 @@ const AnimalCardsAddNewCardForm = ({
 
         <AnimalCardsAddNewCardFlexInputContainer>
           <SelectSecond
+            zIndex={1298}
             error={
               formik.errors.isSterilized && formik.touched.isSterilized
                 ? formik.errors.isSterilized
@@ -187,6 +191,7 @@ const AnimalCardsAddNewCardForm = ({
             }}
           />
           <SelectSecond
+            zIndex={1298}
             error={
               formik.errors.isVisible && formik.touched.isVisible
                 ? formik.errors.isVisible

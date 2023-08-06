@@ -85,22 +85,29 @@ const AnimalCardsAddNewCardPage = () => {
     breed: "",
   };
 
-  const { isLoading, isError, isSuccess, mutate } = usePostStoragePicture();
+  const { isLoading, isError, isSuccess, mutate, data, mutateAsync } =
+    usePostStoragePicture();
   const {
     isLoading: isLoadingAnimal,
     isError: isErrorAnimal,
     isSuccess: isSuccessAnimal,
     mutate: postAnimalFn,
+    mutateAsync: postAnimalFnAsync,
   } = usePostShelterCardsAnimal();
 
   const onSubmit = async (values: AddNewAnimalCardInterface) => {
     try {
       console.log(values);
-      //mutate(formik.values.uploadFile[0]);
-      if (isSuccess) {
-        postAnimalFn(values as Animal);
+      if (formik.values.photos[0] instanceof File) {
+        await mutateAsync(formik.values.photos[0]);
+        if (isSuccess) {
+          formik.setFieldValue("photos", data);
+          postAnimalFn(values as Animal);
+        }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik({
