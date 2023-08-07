@@ -22,6 +22,7 @@ const ToastContainer = styled.div<ToastProps>`
   padding: 8px 16px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 500;
 
   ${(props) =>
     props.type === "success" &&

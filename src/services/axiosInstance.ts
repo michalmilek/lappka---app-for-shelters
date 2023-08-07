@@ -1,18 +1,16 @@
 import axios, { AxiosError } from "axios";
 
 
-const isMockEndpointsEnabled = process.env.REACT_APP_mockEndpoints == "true";
+const isMockEndpointsEnabled =
+  (process.env.REACT_APP_mockEndpoints as string) === "true";
+const apiAddress = process.env.REACT_APP_API_BASE_URL as string;
+const mockAddress = process.env.REACT_APP_mockBaseURL as string;
 
-const baseURL = isMockEndpointsEnabled
-  ? process.env.REACT_APP_mockBaseURL
-  : process.env.REACT_APP_API_BASE_URL;
+const baseURL = isMockEndpointsEnabled ? mockAddress : apiAddress;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
   timeout: 5000,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 axiosInstance.interceptors.request.use(

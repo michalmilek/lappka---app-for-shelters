@@ -100,7 +100,7 @@ export const ResetPasswordSetPasswordStep1Form = ({
       </ResetPasswordInputContainer>
 
       <Button
-        width={"100%"}
+        isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Utwórz hasło
       </Button>

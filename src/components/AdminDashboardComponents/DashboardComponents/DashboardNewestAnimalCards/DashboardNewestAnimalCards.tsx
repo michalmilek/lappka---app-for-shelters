@@ -44,9 +44,9 @@ const DashboardNewestAnimalCards = () => {
         )}
         {isSuccess &&
           data &&
-          data.items.slice(0, 3).map((item) => (
+          data.items.slice(0, 3).map((item, index) => (
             <DashboardNewestAnimalCardsItem
-              key={item.id}
+              key={item.id + index}
               item={item}
             />
           ))}

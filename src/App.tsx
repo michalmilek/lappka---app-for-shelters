@@ -34,7 +34,6 @@ const queryClient = new QueryClient({
 
 function App() {
   const wasLoadedInThePast = localStorage.getItem("wasLoadedInThePast");
-  console.log();
   const [isPageLoaded, setIsPageLoaded] = useState(
     wasLoadedInThePast ? true : false
   );

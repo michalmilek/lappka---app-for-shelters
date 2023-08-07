@@ -35,7 +35,6 @@ interface Props {
 export type TimeType = "Month" | "Year" | "Week";
 
 const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
-  console.log("🚀 ~ viewsState:", viewsState);
   const [activeMonth, setActiveMonth] = useState<null | number>(null);
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [timeSelect, setTimeSelect] = useState<TimeType>("Year");
@@ -153,7 +152,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
                     ? getColor("primary500")
                     : getColor("midGray5")
                 }
-                key={`cell-${index}`}
+                key={`cell-${index + Math.random() * 10000}`}
               />
             ))}
           </Bar>

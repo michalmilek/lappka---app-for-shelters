@@ -58,3 +58,10 @@ export const ageConversion = (ageInMonths: number): string => {
     return years + " lat/lata";
   }
 };
+
+
+export const formatPhoneNumber = (phoneNumber: string) => {
+  const digitsOnly = phoneNumber.replace(/\D/g, "");
+
+  return digitsOnly;
+};

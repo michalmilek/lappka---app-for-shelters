@@ -22,12 +22,22 @@ import useDeviceType from "hooks/useDeviceType";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useToast from "hooks/useToast";
+import { useDispatch } from "react-redux";
+import { setLoading } from "redux/loadingSlice";
+import { DashboardRoutes } from "router/router";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
-  const { mutateAsync: loginFn, isSuccess } = useLoginMutation();
+  const {
+    mutate: loginFn,
+    isSuccess,
+    isLoading,
+    isError,
+    error,
+  } = useLoginMutation();
   const { showToast } = useToast();
   const formik = useFormik({
     initialValues: {
@@ -43,17 +53,24 @@ const LoginForm = () => {
         .required('Pole "Hasło" jest wymagane'),
     }),
     onSubmit: (values) => {
-      console.log(values);
       loginFn({ email: values.email, password: values.password });
     },
   });
 
   useEffect(() => {
     if (isSuccess) {
-      showToast("Success", "success");
-      navigate("/");
+      dispatch(setLoading(false));
+      showToast("Logowanie zakońcozne sukcesem", "success");
+      navigate(DashboardRoutes.dashboard);
     }
-  }, [isSuccess, showToast, navigate]);
+    if (isLoading) {
+      dispatch(setLoading(true));
+    }
+    if (isError) {
+      dispatch(setLoading(false));
+      showToast("Błąd", "error");
+    }
+  }, [isSuccess, isLoading, isError, dispatch, error, showToast, navigate]);
 
   useEffect(() => {
     if (rememberMe) {
@@ -127,9 +144,9 @@ const LoginForm = () => {
           />
 
           <AnchorLink
-            underline
-            underlineColor="primary500"
-            underlineOpacity={0.2}
+            $underline
+            $underlineColor="primary500"
+            $underlineOpacity={0.2}
             variant="UI/UI Text 14 Reg"
             color="primary600"
             to={"/register"}>
@@ -140,7 +157,7 @@ const LoginForm = () => {
 
       <Button
         size={deviceType === "desktop" ? "XLarge" : "Large"}
-        width="100%"
+        isFullWidth
         variant="fill"
         type="submit">
         Zaloguj się

@@ -57,11 +57,17 @@ export const login = async (loginData: LoginRequest) => {
   try {
     const response = await axiosInstance.post<LoginResponse>(
       "/Auth/loginWeb",
-      loginData
+      loginData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
     return response.data;
   } catch (error) {
     console.error(error);
+    throw new Error("error");
   }
 };
 
@@ -75,6 +81,7 @@ export const registerShelter = async (registerData: ShelterRegisterRequest) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw new Error("error");
   }
 };
 

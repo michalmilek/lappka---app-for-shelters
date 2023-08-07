@@ -16,8 +16,6 @@ const DashboardInfoCards = () => {
     console.log(error);
   }
 
-  console.log(data);
-
   return (
     <StyledDashboardInfoCardsContainer>
       <DashboardInfoCardsItem
