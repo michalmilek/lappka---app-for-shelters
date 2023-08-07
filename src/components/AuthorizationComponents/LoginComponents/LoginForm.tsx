@@ -17,7 +17,7 @@ import {
   StyledLoginOptionsContainer,
   StyledLoginTitleContent,
 } from "./Login.styled";
-import { useLoginMutation } from "apiCalls/auth/authHooks";
+import { useLoginMutation } from "services/auth/authServices";
 import useDeviceType from "hooks/useDeviceType";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";

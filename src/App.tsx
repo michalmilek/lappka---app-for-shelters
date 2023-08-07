@@ -39,15 +39,18 @@ function App() {
     wasLoadedInThePast ? true : false
   );
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setIsPageLoaded(true);
-      localStorage.setItem("wasLoadedInThePast", "true");
-    }, 3000);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
+  useEffect(() => {
+  const onPageLoad = () => {
+    setIsPageLoaded(true);
+    localStorage.setItem("wasLoadedInThePast", "true");
+  };
+
+  window.addEventListener("load", onPageLoad);
+
+  return () => {
+    window.removeEventListener("load", onPageLoad);
+  };
   }, []);
 
   const isLoading = useSelector(selectIsLoading);

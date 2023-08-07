@@ -9,8 +9,8 @@ import {
   StyledRegisterInputContainer,
 } from "./Register.styled";
 import { useEffect } from "react";
-import { useRegisterShelterMutation } from "apiCalls/auth/authHooks";
-import { ShelterRegisterRequest } from "apiCalls/auth/auth";
+import { useRegisterShelterMutation } from "services/auth/authServices";
+import { ShelterRegisterRequest } from "services/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 
 const RegisterStep2Form = ({

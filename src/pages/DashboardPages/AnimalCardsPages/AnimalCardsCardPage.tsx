@@ -67,18 +67,6 @@ const AnimalCardsCardPage = () => {
               id={id}
               isEditOn={isEditOn}
             />
-            {isEditOn && (
-              <StyledCardFooter>
-                <Button
-                  size={deviceType === "desktop" ? "Large" : "Medium"}
-                  variant="outline">
-                  Anuluj
-                </Button>
-                <Button size={deviceType === "desktop" ? "Large" : "Medium"}>
-                  Zapisz
-                </Button>
-              </StyledCardFooter>
-            )}
           </StyledCardFormComponent>
         </StyledDashboardAddNewCardMainContent>
       </StyledProtectedPageContent>

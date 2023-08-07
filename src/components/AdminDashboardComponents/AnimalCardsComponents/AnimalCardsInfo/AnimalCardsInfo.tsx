@@ -1,4 +1,4 @@
-import { useShelterStats } from "apiCalls/pet/petHooks";
+import { useShelterStats } from "services/pet/petServices";
 import {
   IdentificationIcon,
   SearchCircleIcon,

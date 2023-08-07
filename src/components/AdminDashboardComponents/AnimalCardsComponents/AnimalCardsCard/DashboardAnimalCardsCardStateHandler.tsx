@@ -1,4 +1,4 @@
-import { useShelterCardsCard } from "apiCalls/pet/petHooks";
+import { useShelterCardsCard } from "services/pet/petServices";
 import React from "react";
 import DashboardAnimalCardsCardForm from "./DashboardAnimalCardsCardForm";
 

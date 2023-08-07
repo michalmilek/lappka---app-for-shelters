@@ -1,4 +1,4 @@
-import { LoginRequest } from "apiCalls/auth/auth";
+import { LoginRequest } from "services/auth/auth";
 import { rest } from "msw";
 
 export const login = rest.post("/Auth/loginWeb", async (req, res, ctx) => {

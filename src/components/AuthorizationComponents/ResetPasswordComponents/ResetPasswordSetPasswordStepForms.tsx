@@ -1,4 +1,4 @@
-import { useResetPasswordSetNewPasswordMutation } from "apiCalls/auth/authHooks";
+import { useResetPasswordSetNewPasswordMutation } from "services/auth/authServices";
 import Button from "components/SharedComponents/Button/Button";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";

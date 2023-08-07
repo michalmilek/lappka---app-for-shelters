@@ -1,17 +1,17 @@
-import { Animal, Cat, Dog, Other } from "apiCalls/pet/pet";
+import { Animal, Cat, Dog, Other } from "services/pet/pet";
 import {
   usePostShelterCardsAnimal,
   usePostShelterCardsCat,
   usePostShelterCardsDog,
   usePostShelterCardsOther,
-} from "apiCalls/pet/petHooks";
+} from "services/pet/petServices";
 import {
   GenderType,
   GenreType,
   PetBreed,
   PetBreedLabel,
-} from "apiCalls/pet/petTypes";
-import { usePostStoragePicture } from "apiCalls/storage/storageHooks";
+} from "services/pet/petTypes";
+import { usePostStoragePicture } from "services/storage/storageServices";
 import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm";
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";

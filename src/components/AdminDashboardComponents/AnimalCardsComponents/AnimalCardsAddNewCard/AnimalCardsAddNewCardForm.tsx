@@ -1,4 +1,4 @@
-import { BreedOption } from "apiCalls/pet/petTypes";
+import { BreedOption } from "services/pet/petTypes";
 import Button from "components/SharedComponents/Button/Button";
 import Select from "components/SharedComponents/DropdownMenu/Select";
 import SelectSecond from "components/SharedComponents/DropdownMenu/SelectSecond";

@@ -1,33 +1,74 @@
-import { Pet } from "apiCalls/pet/pet";
-import { GenderType, PetBreed } from "apiCalls/pet/petTypes";
-import Select from "components/SharedComponents/DropdownMenu/Select";
-import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
-import Input from "components/SharedComponents/Inputs/Input";
-import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
-import Textarea from "components/SharedComponents/Inputs/TextArea";
+import { AnimalEdit, Pet } from "services/pet/pet";
+import { GenderType, GenreType, PetBreed } from "services/pet/petTypes";
 import { useFormik } from "formik";
 import React from "react";
 import {
+  StyledCardFooter,
   StyledCardFormContentContainer,
   StyledCardImg,
   StyledCardImgContainer,
   StyledCardInputContainer,
+  StyledCardSingleImgContainer,
 } from "./DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
+import * as Yup from "yup";
+import { BreedArray } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsUtils";
+import { StyledCloseIcon } from "components/SharedComponents/Inputs/CustomFileInput.styled";
+import { useDeleteStorageImage } from "services/storage/storageServices";
+import { useQueryClient } from "@tanstack/react-query";
+import CustomFileInput from "components/SharedComponents/Inputs/CustomFileInput";
+import Button from "components/SharedComponents/Button/Button";
+import useDeviceType from "hooks/useDeviceType";
+import { useNavigate } from "react-router-dom";
+import { usePutShelterCardsAnimal } from "services/pet/petServices";
+import DashboardAnimalCardsCardFields from "./DashboardAnimalCardsCardFields";
 
-interface PetCard {
+export interface PetCard {
+  name: string;
   description: string;
-  petName: string;
-  profilePhoto: string;
-  isSterilized: boolean;
-  weight: number;
+  type: GenreType | "";
+  gender: GenderType | "";
+  color: string;
   months: number;
-  gender: GenderType;
-  photos: string[] | string | File | File[];
-  isVisible: boolean;
-  color?: string;
-  breed?: PetBreed;
+  weight: number;
+  breed: PetBreed | "";
+  photos: string[];
+  profilePhoto: string;
+  isSterilized: boolean | "";
+  isVisible: boolean | "";
+  newPhotos?: File[];
 }
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("To pole jest wymagane"),
+  description: Yup.string().required("To pole jest wymagane"),
+  type: Yup.string()
+    .oneOf(["Dog", "Cat", "Other"], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  breed: Yup.string().when("type", {
+    is: (type: string) => type === "Dog" || type === "Cat",
+    then: () =>
+      Yup.string()
+        .oneOf(BreedArray, "Nieprawidłowy wybór")
+        .required("To pole jest wymagane"),
+  }),
+  gender: Yup.string()
+    .oneOf(["Male", "Female", "Other"], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  color: Yup.string().required("To pole jest wymagane"),
+  months: Yup.number()
+    .required("To pole jest wymagane")
+    .positive("Wartość musi być większa od zera"),
+  weight: Yup.number()
+    .required("To pole jest wymagane")
+    .positive("Wartość musi być większa od zera"),
+  isSterilized: Yup.bool()
+    .oneOf([true, false], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  isVisible: Yup.bool()
+    .oneOf([true, false], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+});
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -36,9 +77,12 @@ const DashboardAnimalCardsCardForm = ({
   isEditOn: boolean;
   data: Pet;
 }) => {
-  const initialValues = {
+  const { mutate } = usePutShelterCardsAnimal();
+  const navigate = useNavigate();
+  const deviceType = useDeviceType();
+  const initialValues: PetCard = {
     description: data.description,
-    petName: data.name,
+    name: data.name,
     profilePhoto: data.profilePhoto,
     photos: data.photos,
     isSterilized: data.isSterilized,
@@ -46,161 +90,114 @@ const DashboardAnimalCardsCardForm = ({
     months: data.age,
     gender: data.gender,
     isVisible: data.isVisible,
+    color: data.color,
+    type: data.type as GenreType,
+    breed: data.breed as PetBreed,
   };
 
-  const handleSubmit = (values: PetCard) => {
-    console.log(values);
+  const handleSubmit = async (values: PetCard) => {
+    try {
+      console.log(values);
+      //await mutateAsync(formik.values.photos[0]);
+      if (isSuccess) {
+        //formik.setFieldValue("photos", [...data, newData]);
+        mutate({
+          petId: data.id,
+          name: formik.values.name,
+          profilePhoto: formik.values.photos[0],
+          gender: formik.values.gender,
+          description: formik.values.description,
+          isVisible: formik.values.isVisible,
+          months: formik.values.months,
+          isSterilized: formik.values.isSterilized,
+          weight: formik.values.weight,
+          photos: formik.values.photos,
+          color: formik.values.color,
+          breed: formik.values.breed,
+        } as AnimalEdit);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik({
     initialValues,
+    validationSchema,
     onSubmit: handleSubmit,
   });
+
+  const queryClient = useQueryClient();
+  const { mutateAsync: deleteImageFn, isSuccess } = useDeleteStorageImage();
 
   return (
     <StyledCardFormContentContainer onSubmit={formik.handleSubmit}>
       <StyledCardImgContainer>
         {data.photos.map((photo, index) => (
-          <StyledCardImg
-            src={photo}
-            alt={`gallery photo nr${index} `}
-          />
+          <StyledCardSingleImgContainer key={photo + index}>
+            <StyledCardImg
+              src={photo}
+              alt={`gallery photo nr${index} `}
+            />
+            {isEditOn && (
+              <StyledCloseIcon
+                onClick={async () => {
+                  try {
+                    await deleteImageFn(photo);
+                    if (isSuccess) {
+                      queryClient.invalidateQueries({
+                        queryKey: ["shelterCardsCard", data.id],
+                      });
+                    }
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
+              />
+            )}
+          </StyledCardSingleImgContainer>
         ))}
       </StyledCardImgContainer>
-
       <StyledCardInputContainer>
-        <FormRow label="Imię zwierzaka">
-          <Input
-            value={formik.values.petName}
-            readOnly={!isEditOn}
-            inputSize="Large"
-          />
-        </FormRow>
-        <FormRow label="Opis">
-          {!isEditOn ? (
-            <Input
-              value={formik.values.description}
-              readOnly={!isEditOn}
-              inputSize="Large"
+        <DashboardAnimalCardsCardFields
+          isEditOn={isEditOn}
+          formik={formik}
+        />
+
+        {isEditOn && (
+          <FormRow label="Dodaj nowe zdjęcia">
+            <CustomFileInput
+              onFileChange={(files: File[] | null | File) => {
+                if (Array.isArray(formik.values.newPhotos)) {
+                  formik.setFieldValue("newPhotos", [
+                    ...formik.values.newPhotos,
+                    files,
+                  ]);
+                }
+              }}
+              description="Zdjęcie maksymalnie 5MB"
             />
-          ) : (
-            <Textarea
-              value={formik.values.description}
-              readOnly={!isEditOn}
-              inputSize="Large"
-            />
-          )}
-        </FormRow>
-        <FormRow label="Płeć">
-          {!isEditOn ? (
-            <Input
-              readOnly
-              inputSize="Large"
-              value={formik.values.gender}
-            />
-          ) : (
-            <Select
-              label=""
-              options={[
-                { label: "Samiec", value: "Male" },
-                { label: "Samiczka", value: "Female" },
-                { label: "Inna", value: "Other" },
-              ]}
-              dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.gender}
-              handleChange={() => {}}
-            />
-          )}
-        </FormRow>
-        <FormRow label="Waga">
-          {!isEditOn ? (
-            <Input
-              readOnly
-              inputSize="Large"
-              value={formik.values.weight + "kg"}
-            />
-          ) : (
-            <InputNumberWithUnits unit="KG" />
-          )}
-        </FormRow>
-        <FormRow label="Wiek">
-          {!isEditOn ? (
-            <Input
-              readOnly
-              inputSize="Large"
-              value={formik.values.weight}
-            />
-          ) : (
-            <InputNumberWithUnits unit="MSC" />
-          )}
-        </FormRow>
-        <FormRow label="Sterylizacja">
-          {!isEditOn ? (
-            <Input
-              readOnly
-              inputSize="Large"
-              value={formik.values.isSterilized ? "Tak" : "Nie"}
-            />
-          ) : (
-            <Select
-              label=""
-              options={[
-                { label: "Tak", value: true },
-                { label: "Nie", value: false },
-              ]}
-              dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.isSterilized}
-              handleChange={() => {}}
-            />
-          )}
-        </FormRow>
-        <FormRow label="Widoczność">
-          {!isEditOn ? (
-            <Input
-              readOnly
-              inputSize="Large"
-              value={formik.values.isVisible ? "Tak" : "Nie"}
-            />
-          ) : (
-            <Select
-              label=""
-              options={[
-                { label: "Tak", value: true },
-                { label: "Nie", value: false },
-              ]}
-              dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.isSterilized ? true : false}
-              handleChange={() => {}}
-            />
-          )}
-        </FormRow>
+          </FormRow>
+        )}
       </StyledCardInputContainer>
+      {isEditOn && (
+        <StyledCardFooter>
+          <Button
+            type="button"
+            onClick={() => navigate(-1)}
+            size={deviceType === "desktop" ? "Large" : "Medium"}
+            variant="outline">
+            Anuluj
+          </Button>
+          <Button
+            onClick={() => {}}
+            size={deviceType === "desktop" ? "Large" : "Medium"}>
+            Zapisz
+          </Button>
+        </StyledCardFooter>
+      )}
     </StyledCardFormContentContainer>
   );
 };
 
 export default DashboardAnimalCardsCardForm;
-
-/* 
-        <FormRow label="Sterylizacja">
-          <Select
-            label=""
-            options={[
-              { label: "Tak", value: "tak" },
-              { label: "Nie", value: "nie" },
-            ]}
-            dropdownIcon={<ArrowDownIcon />}
-            value={"tak"}
-            handleChange={() => {}}
-          />
-        </FormRow>
-        <FormRow label="Widoczność">
-          <Select
-            label=""
-            options={[
-              { label: "Tak", value: "tak" },
-              { label: "Nie", value: "nie" },
-            ]}
-            dropdownIcon={<ArrowDownIcon />}
-            value={"tak"}
-            handleChange={( */

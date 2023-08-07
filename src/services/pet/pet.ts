@@ -1,4 +1,4 @@
-import axiosInstance from "apiCalls/axiosInstance";
+import axiosInstance from "services/axiosInstance";
 import { CatBreed, DogBreed, GenderType, PetBreed } from "./petTypes";
 
 interface SheltersStatsResponse {
@@ -103,6 +103,10 @@ export interface Animal {
   breed?: PetBreed;
 }
 
+export interface AnimalEdit extends Animal {
+  petId: string;
+}
+
 export const getShelterStats = async () => {
   try {
     const response = await axiosInstance.get<SheltersStatsResponse>(
@@ -201,7 +205,7 @@ export const getShelterCardsCard = async (petId: string) => {
 export const postShelterCardsCat = async (data: Cat) => {
   try {
     const response = await axiosInstance.post("/shelters/cards/cat", data);
-    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -210,7 +214,7 @@ export const postShelterCardsCat = async (data: Cat) => {
 export const postShelterCardsDog = async (data: Dog) => {
   try {
     const response = await axiosInstance.post("/shelters/cards/cat", data);
-    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -219,7 +223,7 @@ export const postShelterCardsDog = async (data: Dog) => {
 export const postShelterCardsOther = async (data: Other) => {
   try {
     const response = await axiosInstance.post("/shelters/cards/other", data);
-    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error(error);
   }
@@ -228,10 +232,17 @@ export const postShelterCardsOther = async (data: Other) => {
 export const postShelterCardsAnimal = async (data: Animal) => {
   try {
     const response = await axiosInstance.post("/shelters/cards/animal", data);
-    console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error(error);
   }
 };
 
-
+export const putShelterCardsAnimal = async (data: AnimalEdit) => {
+  try {
+    const response = await axiosInstance.put("/shelters/cards", data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

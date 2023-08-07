@@ -7,7 +7,7 @@ import RegisterStep2Form from "./RegisterStep2Form";
 import RegisterStep1Form from "./RegisterStep1Form";
 import RegisterStep3Form from "./RegisterStep3Form";
 import { StyledRegisterTitleContent } from "./Register.styled";
-import { ShelterRegisterRequest } from "apiCalls/auth/auth";
+import { ShelterRegisterRequest } from "services/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 
 export interface HandleStepProps {

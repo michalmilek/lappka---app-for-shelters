@@ -1,6 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import useToast from "hooks/useToast";
+import { useDispatch } from "react-redux";
+import { setLoading } from "redux/loadingSlice";
 import {
   Animal,
+  AnimalEdit,
   Cat,
   Dog,
   getShelterCards,
@@ -15,6 +19,7 @@ import {
   postShelterCardsCat,
   postShelterCardsDog,
   postShelterCardsOther,
+  putShelterCardsAnimal,
   ShelterVolunteeringResponse,
   updateShelterVolunteering,
 } from "./pet";
@@ -85,6 +90,29 @@ export const usePostShelterCardsOther = () => {
 
 export const usePostShelterCardsAnimal = () => {
   const mutation = useMutation((data: Animal) => postShelterCardsAnimal(data));
+
+  return mutation;
+};
+
+export const usePutShelterCardsAnimal = () => {
+  const dispatch = useDispatch();
+  const { showToast } = useToast();
+  const mutation = useMutation(
+    (data: AnimalEdit) => putShelterCardsAnimal(data),
+    {
+      onSuccess: () => {
+        dispatch(setLoading(false));
+        showToast("Zdjęcie usunięte pomyślnie.", "success");
+      },
+      onMutate: () => {
+        dispatch(setLoading(true));
+      },
+      onError: () => {
+        dispatch(setLoading(true));
+        console.log(mutation.error);
+      },
+    }
+  );
 
   return mutation;
 };

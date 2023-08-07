@@ -1,4 +1,4 @@
-import axiosInstance from "apiCalls/axiosInstance";
+import axiosInstance from "services/axiosInstance";
 import axios from "axios";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -29,3 +29,12 @@ export async function postStoragePicture(file: File) {
     return { error: "An error occurred while making the request" };
   }
 }
+
+export const deleteStorageImage = async (imgId: string) => {
+  try {
+    const response = await axiosInstance.delete(`/Storage/${imgId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

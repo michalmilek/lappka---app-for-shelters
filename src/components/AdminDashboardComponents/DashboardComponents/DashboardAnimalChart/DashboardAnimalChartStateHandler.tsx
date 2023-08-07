@@ -2,7 +2,7 @@ import {
   useShelterCardsArchiveChartData,
   useShelterCardsArchiveChartDataForMonth,
   useShelterCardsArchiveChartDataForWeek,
-} from "apiCalls/pet/petHooks";
+} from "services/pet/petServices";
 import React, { useEffect, useState } from "react";
 import {
   createMonthData,

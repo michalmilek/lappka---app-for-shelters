@@ -1,4 +1,9 @@
-import { PetBreed, PetBreedLabel } from "apiCalls/pet/petTypes";
+import {
+  GenderType,
+  GenreType,
+  PetBreed,
+  PetBreedLabel,
+} from "services/pet/petTypes";
 
 export const petValueBreedToLabel = (value: PetBreed): PetBreedLabel => {
   return breedLabels[value] || "Inna";
@@ -23,4 +28,33 @@ const breedLabels: { [key in PetBreed]: PetBreedLabel } = {
   Dog_Beagle: "Beagle",
   Dog_Husky: "Husky",
   Dog_Collie: "Collie",
+};
+
+export const genderValueToLabel = (value: GenderType): string => {
+  return genderLabels[value] || "Inna";
+};
+
+const genderLabels: { [key in GenderType]: string } = {
+  Other: "Inna",
+  Male: "Samiec",
+  Female: "Samiczka",
+};
+
+export const typeValueToLabel = (value: GenreType): string => {
+  return typeLabels[value] || "Inna";
+};
+
+const typeLabels: { [key in GenreType]: string } = {
+  Other: "Inny",
+  Dog: "Pies",
+  Cat: "Kot",
+};
+
+export const ageConversion = (ageInMonths: number): string => {
+  if (ageInMonths <= 12) {
+    return ageInMonths + " miesięcy";
+  } else {
+    const years: number = Math.floor(ageInMonths / 12);
+    return years + " lat/lata";
+  }
 };

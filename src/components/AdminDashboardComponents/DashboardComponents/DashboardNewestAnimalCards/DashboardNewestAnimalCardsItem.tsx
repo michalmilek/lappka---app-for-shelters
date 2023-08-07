@@ -1,4 +1,4 @@
-import { Pet } from "apiCalls/pet/pet";
+import { Pet } from "services/pet/pet";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import { DashboardRoutes } from "router/router";

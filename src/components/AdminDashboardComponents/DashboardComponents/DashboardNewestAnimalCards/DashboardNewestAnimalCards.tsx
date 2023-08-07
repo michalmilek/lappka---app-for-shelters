@@ -1,5 +1,5 @@
-import { getShelterCards } from "apiCalls/pet/pet";
-import { useShelterCards } from "apiCalls/pet/petHooks";
+import { getShelterCards } from "services/pet/pet";
+import { useShelterCards } from "services/pet/petServices";
 import Button from "components/SharedComponents/Button/Button";
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
