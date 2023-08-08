@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from "components/SharedComponents/Typography/Typography";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -14,11 +13,10 @@ import {
 } from "./AnimalCardsTable.styled";
 import Input from "components/SharedComponents/Inputs/Input";
 import { PaginationState, Table } from "@tanstack/react-table";
-import { Animal } from "./AnimalCardsTableUtils";
-import { styled } from "styled-components";
+import { Pet } from "apiCalls/pet/pet";
 
 interface TableFooterProps {
-  table: Table<Animal>;
+  table: Table<Pet>;
   pagination: PaginationState;
   filtering: string;
   handleFiltering: (value: string) => void;

@@ -3,11 +3,12 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
+import SkeletonAnimalCardsInfoItem from "./SkeletonAnimalCardsInfoItem";
 
 const StyledAnimalCardsInfoItemContainer = styled.div`
   background: ${getColor("white")};
   height: 82px;
-  width: 368px;
+  width: 25.56%;
   padding: 16px;
   display: flex;
   justify-content: flex-start;
@@ -18,8 +19,23 @@ const StyledAnimalCardsInfoItemContainer = styled.div`
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1050px) {
     width: 100%;
+  }
+`;
+
+const StyledAnimalCardsInfoCardIconContainer = styled.div`
+  display: flex;
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: ${getColor("primary050")};
+
+  & path {
+    background: ${getColor("primary050")};
+    stroke: ${getColor("primary500")};
   }
 `;
 
@@ -30,22 +46,35 @@ const StyledAnimalCardsInfoItemTextContainer = styled.div`
   align-items: flex-start;
 `;
 
-const AnimalCardsInfoItem = () => {
+interface Props {
+  text: string;
+  number: number;
+  icon: JSX.Element;
+  isLoading: boolean;
+}
+
+const AnimalCardsInfoItem = ({ text, number, icon, isLoading }: Props) => {
+  if (isLoading) {
+    return <SkeletonAnimalCardsInfoItem />;
+  }
+
   return (
     <StyledAnimalCardsInfoItemContainer>
-      <IdentificationIcon />
+      <StyledAnimalCardsInfoCardIconContainer>
+        {icon}
+      </StyledAnimalCardsInfoCardIconContainer>
       <StyledAnimalCardsInfoItemTextContainer>
         <Typography
           tag="span"
           variant="UI Small/UI Text 12 Semi Bold"
           color="midGray4">
-          Karty zwierząt
+          {text}
         </Typography>
         <Typography
           tag="h3"
           variant="Heading 30 Semi"
           color="darkGray2">
-          361
+          {number}
         </Typography>
       </StyledAnimalCardsInfoItemTextContainer>
     </StyledAnimalCardsInfoItemContainer>

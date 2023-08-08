@@ -1,6 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
+import { Pet } from "apiCalls/pet/pet";
 import Typography from "components/SharedComponents/Typography/Typography";
-import useDeviceType from "hooks/useDeviceType";
 import {
   ActionHeaderContainer,
   Dot,
@@ -10,21 +10,10 @@ import {
 } from "./AnimalCardsTable.styled";
 import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
 
-export interface Animal {
-  animalName: string;
-  additionDate: string;
-  genre: string;
-  sex: "samiec" | "samiczka";
-  colour: string;
-  weight: string;
-  sterilization: "Tak" | "Nie";
-  visible: "Tak" | "Nie";
-}
-
-const columnHelper = createColumnHelper<Animal>();
+const columnHelper = createColumnHelper<Pet>();
 
 export const columns = [
-  columnHelper.accessor("animalName", {
+  columnHelper.accessor("name", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -42,7 +31,7 @@ export const columns = [
       </Typography>
     ),
   }),
-  columnHelper.accessor("additionDate", {
+  columnHelper.accessor("createdAt", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -56,11 +45,11 @@ export const columns = [
       <Typography
         variant="UI/UI Text 14 Reg"
         color="darkGray2">
-        {props.getValue()}
+        {new Date(props.getValue()).toLocaleDateString("pl-PL")}
       </Typography>
     ),
   }),
-  columnHelper.accessor("genre", {
+  columnHelper.accessor("type", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -78,7 +67,7 @@ export const columns = [
       </Typography>
     ),
   }),
-  columnHelper.accessor("sex", {
+  columnHelper.accessor("gender", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -98,7 +87,7 @@ export const columns = [
       </StyledSexContainer>
     ),
   }),
-  columnHelper.accessor("colour", {
+  columnHelper.accessor("breed", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -125,11 +114,11 @@ export const columns = [
       <Typography
         variant="UI/UI Text 14 Reg"
         color="darkGray2">
-        {props.getValue()}
+        {props.getValue() + " kg"}
       </Typography>
     ),
   }),
-  columnHelper.accessor("sterilization", {
+  columnHelper.accessor("isSterilized", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -145,12 +134,12 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Reg"
           color="darkGray2">
-          {props.getValue()}
+          {props.getValue() === true ? "Tak" : "Nie"}
         </Typography>
       </DotFlexContainer>
     ),
   }),
-  columnHelper.accessor("visible", {
+  columnHelper.accessor("isVisible", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -166,7 +155,7 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Reg"
           color="darkGray2">
-          {props.getValue()}
+          {props.getValue() === true ? "Tak" : "Nie"}
         </Typography>
       </DotFlexContainer>
     ),
@@ -182,239 +171,7 @@ export const columns = [
         </Typography>
       </ActionHeaderContainer>
     ),
-    cell: (props) => <AnimalCardsTableActionItem />,
+    cell: (_props) => <AnimalCardsTableActionItem />,
   }),
 ];
 
-export const defaultData: Animal[] = [
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiec",
-    colour: "czarny",
-    weight: "5kg",
-    sterilization: "Tak",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiec",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Nie",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiec",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Tak",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "Kot",
-    additionDate: "2021-07-19",
-    genre: "Kot",
-    sex: "samiczka",
-    colour: "czarny",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-  {
-    animalName: "DDDDD",
-    additionDate: "2021-07-19",
-    genre: "PIES",
-    sex: "samiczka",
-    colour: "biały",
-    weight: "4kg",
-    sterilization: "Nie",
-    visible: "Tak",
-  },
-];

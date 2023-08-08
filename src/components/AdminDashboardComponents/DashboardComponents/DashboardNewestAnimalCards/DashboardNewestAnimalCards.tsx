@@ -1,3 +1,5 @@
+import { getShelterCards } from "apiCalls/pet/pet";
+import { useShelterCards } from "apiCalls/pet/petHooks";
 import Button from "components/SharedComponents/Button/Button";
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
@@ -8,11 +10,18 @@ import {
   DashboardNewestAnimalCardsContainerHeader,
 } from "./DashboardNewestAnimalCards.styled";
 import DashboardNewestAnimalCardsItem from "./DashboardNewestAnimalCardsItem";
+import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAnimalCardsItemContainerSkeleton";
 
 const DashboardNewestAnimalCards = () => {
+  const { isLoading, data, isError, error, isSuccess } = useShelterCards();
+
+  if (isError) {
+    console.log(error);
+  }
+
   return (
-    <DashboardNewestAnimalCardsContainer className="flex flex-col bg-white gap-2 pt-2 py-4 px-6 shadow-lg rounded-lg">
-      <DashboardNewestAnimalCardsContainerHeader className="flex items-center justify-between py-2 border-b">
+    <DashboardNewestAnimalCardsContainer>
+      <DashboardNewestAnimalCardsContainerHeader>
         <Typography
           tag="h3"
           variant="UI/UI Text 16 Semi Bold">
@@ -26,9 +35,21 @@ const DashboardNewestAnimalCards = () => {
       </DashboardNewestAnimalCardsContainerHeader>
       <Divider />
       <DashboardNewestAnimalCardsContainerContent>
-        <DashboardNewestAnimalCardsItem />
-        <DashboardNewestAnimalCardsItem />
-        <DashboardNewestAnimalCardsItem />
+        {isLoading && (
+          <>
+            <DashboardNewestAnimalCardsItemContainerSkeleton />
+            <DashboardNewestAnimalCardsItemContainerSkeleton />
+            <DashboardNewestAnimalCardsItemContainerSkeleton />
+          </>
+        )}
+        {isSuccess &&
+          data &&
+          data.items.slice(0, 3).map((item) => (
+            <DashboardNewestAnimalCardsItem
+              key={item.id}
+              item={item}
+            />
+          ))}
       </DashboardNewestAnimalCardsContainerContent>
     </DashboardNewestAnimalCardsContainer>
   );

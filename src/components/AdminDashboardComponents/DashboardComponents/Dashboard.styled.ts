@@ -36,8 +36,8 @@ export const StyledDashboardMainContent = styled.article`
       "b b b b c"
       "b b b b c"
       "b b b b c"
-      "d d e e"
-      "d d e e";
+      "d d d e e"
+      "d d d e e";
   }
 
   @media screen and (max-width: 1024px) {

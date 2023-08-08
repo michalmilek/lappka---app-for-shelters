@@ -1,34 +1,42 @@
-import { IdentificationIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { motion } from "framer-motion";
 import React from "react";
 import {
   StyledDashboardInfoCard,
   StyledDashboardInfoCardIconContainer,
   StyledDashboardInfoCardTextContainer,
 } from "./DashboardInfoCardsItem.styled";
+import SkeletonCardItem from "./SkeletonCardItem";
 
-const DashboardInfoCardsItem = () => {
+interface Props {
+  isLoading: boolean;
+  text: string;
+  icon: JSX.Element;
+  number: number;
+}
+
+const DashboardInfoCardsItem = ({ isLoading, text, icon, number }: Props) => {
+  console.log(isLoading);
+  if (isLoading) {
+    return <SkeletonCardItem />;
+  }
+
   return (
-    <StyledDashboardInfoCard
-      as={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}>
+    <StyledDashboardInfoCard>
       <StyledDashboardInfoCardIconContainer>
-        <IdentificationIcon />
+        {icon}
       </StyledDashboardInfoCardIconContainer>
       <StyledDashboardInfoCardTextContainer>
         <Typography
           tag="span"
           variant="UI Small/UI Text 12 Semi Bold"
           color="midGray4">
-          Karty zwierząt
+          {text}
         </Typography>
         <Typography
           tag="h3"
           variant="Heading 30 Semi"
           color="darkGray2">
-          361
+          {number}
         </Typography>
       </StyledDashboardInfoCardTextContainer>
     </StyledDashboardInfoCard>

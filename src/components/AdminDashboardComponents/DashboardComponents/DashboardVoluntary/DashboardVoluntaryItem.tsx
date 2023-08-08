@@ -10,16 +10,22 @@ export interface IsOn extends React.HTMLAttributes<HTMLSpanElement> {
   isOn: boolean;
 }
 
-const DashboardVoluntaryItem = () => {
+
+interface Props {
+  text: string;
+  isOn: boolean;
+}
+
+const DashboardVoluntaryItem = ({ text, isOn }: Props) => {
   return (
     <DashboardVoluntaryItemContainer>
-      <Typography tag="h5">Wpłać darowiznę</Typography>
+      <Typography tag="h5">{text}</Typography>
       <DashboardVoluntaryItemStatusContainer>
-        <IsOnIndicator isOn={true} />
+        <IsOnIndicator isOn={isOn} />
         <Typography
           color="darkGray2"
           tag="span">
-          Włączone
+          {isOn ? "Włączone" : "Wyłączone"}
         </Typography>
       </DashboardVoluntaryItemStatusContainer>
     </DashboardVoluntaryItemContainer>

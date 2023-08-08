@@ -95,7 +95,9 @@ interface ArrowUpIconInterface extends React.SVGProps<SVGSVGElement> {
   isDropdownActive: boolean;
 }
 
-export const StyledArrowUpIcon = styled(ArrowUpIcon)<ArrowUpIconInterface>`
+export const StyledArrowUpIcon = styled(ArrowUpIcon).withConfig({
+  shouldForwardProp: (prop) => prop !== "isDropdownActive",
+})<ArrowUpIconInterface>`
   transition: all 0.3s ease;
 
   ${({ isDropdownActive }) =>

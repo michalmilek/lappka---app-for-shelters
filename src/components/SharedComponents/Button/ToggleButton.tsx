@@ -1,4 +1,3 @@
-import { FormikType } from "pages/DashboardPages/VoluntaryPage";
 import React, { ChangeEvent } from "react";
 import Typography from "../Typography/Typography";
 import {
@@ -13,7 +12,6 @@ interface CheckboxToggleProps
   label?: string;
   disabled?: boolean;
   $fieldName?: string;
-  formik: FormikType;
   handleChange: () => void;
 }
 
@@ -21,7 +19,6 @@ const ToggleButton = ({
   label,
   disabled,
   $fieldName,
-  formik,
   checked,
   handleChange,
   ...rest

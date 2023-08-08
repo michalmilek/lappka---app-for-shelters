@@ -11,44 +11,22 @@ import {
   VisibilityState,
 } from "@tanstack/react-table";
 import Typography from "components/SharedComponents/Typography/Typography";
-import styled from "styled-components";
-import { getColor } from "utils/styles/getStyle/getColor";
 import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  CheckIcon,
-  MoreIcon,
-} from "components/SharedComponents/icons/icons";
-import {
-  ActionHeaderContainer,
-  Dot,
-  DotFlexContainer,
-  StyledDropdownContainer,
-  StyledDropdownOption,
-  StyledSexContainer,
-  StyledTableArrowButton,
-  StyledTableFooterButtonsContainer,
-  StyledTableFooterContainer,
   StyledTableHeader,
-  StyledTableInputContainer,
-  StyledTableNumberButton,
   StyledTableTD,
   StyledTableTH,
-  StyledTableTHTextContainer,
   StyledTableTR,
   TableComponentContainer,
   TableComponentHeaderContainer,
   TableContainer,
 } from "./AnimalCardsTable.styled";
-import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
-import { Animal, columns, defaultData } from "./AnimalCardsTableUtils";
-import Input from "components/SharedComponents/Inputs/Input";
+import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
+import { Pet, ShelterCardsResponse } from "apiCalls/pet/pet";
 
-function AnimalCardsTable() {
+function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   const deviceType = useDeviceType();
-  const data = React.useMemo(() => defaultData, []);
   const columnsMemo = React.useMemo(() => columns, []);
 
   const [pagination, setPagination] = useState<PaginationState>({
@@ -63,16 +41,15 @@ function AnimalCardsTable() {
     setFiltering(value);
   };
 
-
   const handlePageSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const optionValue = event.target.value;
     setPagination({ ...pagination, pageSize: +optionValue });
   };
 
   const table = useReactTable({
-    data,
+    data: data.items,
     columns: columnsMemo,
-    getCoreRowModel: getCoreRowModel<Animal>(),
+    getCoreRowModel: getCoreRowModel<Pet>(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

@@ -8,16 +8,12 @@ export const DashboardNewestAnimalCardsContainer = styled.div`
   grid-area: d;
   border-radius: 8px;
   height: 360px;
+  width: 100%;
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 
   @media screen and (max-width: 1350px) {
-    width: 100%;
-    height: auto;
-  }
-
-  @media screen and (max-width: 1024px) {
     width: 100%;
     height: auto;
   }

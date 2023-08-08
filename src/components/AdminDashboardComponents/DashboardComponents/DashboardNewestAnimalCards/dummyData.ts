@@ -1,0 +1,72 @@
+export const dummyDataNewestAnimals = {
+  items: [
+    {
+      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      petIdentifier: "ABC123",
+      name: "Fluffy",
+      type: "CAT",
+      gender: "Male",
+      breed: "Persian",
+      color: "White",
+      weight: 5.2,
+      profilePhoto:
+        "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
+      photos: [
+        "https://example.com/fluffy-photo1.jpg",
+        "https://example.com/fluffy-photo2.jpg",
+      ],
+      age: 2,
+      createdAt: "2023-07-31T21:46:59.855Z",
+      isSterilized: true,
+      isVisible: true,
+      description: "Fluffy is a lovely Persian cat looking for a forever home.",
+    },
+    {
+      id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      petIdentifier: "ABC123",
+      name: "Fluffy",
+      type: "CAT",
+      gender: "Male",
+      breed: "Persian",
+      color: "White",
+      weight: 5.2,
+      profilePhoto:
+        "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
+      photos: [
+        "https://example.com/fluffy-photo1.jpg",
+        "https://example.com/fluffy-photo2.jpg",
+      ],
+      age: 2,
+      createdAt: "2023-07-31T21:46:59.855Z",
+      isSterilized: true,
+      isVisible: true,
+      description: "Fluffy is a lovely Persian cat looking for a forever home.",
+    },
+    {
+      id: "3fa85f64-5717-4562-b3fc-2c963f66afa7",
+      petIdentifier: "XYZ789",
+      name: "Max",
+      type: "DOG",
+      gender: "Male",
+      breed: "Golden Retriever",
+      color: "Golden",
+      weight: 27.5,
+      profilePhoto:
+        "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
+      photos: [
+        "https://example.com/max-photo1.jpg",
+        "https://example.com/max-photo2.jpg",
+      ],
+      age: 3,
+      createdAt: "2023-07-31T22:15:12.123Z",
+      isSterilized: true,
+      isVisible: true,
+      description:
+        "Max is a friendly and playful Golden Retriever looking for an active family.",
+    },
+  ],
+  totalPages: 1,
+  itemFrom: 1,
+  itemsTo: 2,
+  totalItemsCount: 2,
+};

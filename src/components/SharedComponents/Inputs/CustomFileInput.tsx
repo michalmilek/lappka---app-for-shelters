@@ -206,6 +206,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             ref={fileInputRef}
             onChange={handleFileChange}
             multiple
+            accept="image/*"
           />
 
           <Typography
