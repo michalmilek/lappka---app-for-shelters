@@ -16,6 +16,7 @@ import {
   updateShelterVolunteering,
 } from "./petControllers/petControllers";
 import { postStoragePicture } from "./storageControllers/storageControllers";
+import { getUser, patchNewPassword } from "./userControllers/userControllers";
 
 export const handlers = [
   login,
@@ -32,4 +33,6 @@ export const handlers = [
   getShelterCardsCard,
   postStoragePicture,
   postShelterCardsCat,
+  getUser,
+  patchNewPassword,
 ];

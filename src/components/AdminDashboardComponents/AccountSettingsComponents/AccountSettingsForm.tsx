@@ -3,8 +3,17 @@ import { UserRemoveIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { FormikProps } from "formik";
+import useToast from "hooks/useToast";
 import { AccountSettingsType } from "pages/DashboardPages/AccountSettingsPage";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setLoading } from "redux/loadingSlice";
+import { GetUserResponse } from "services/user/user";
+import {
+  useDeleteProfilePicture,
+  useDeleteUser,
+} from "services/user/userServices";
+import { createImgURL } from "utils/appUtils";
 import {
   AccountSettingsIMG,
   AvatarChangeContainer,
@@ -16,9 +25,22 @@ import {
 
 const AccountSettingsForm = ({
   formik,
+  userData,
+  handleModalOpen,
 }: {
   formik: FormikProps<AccountSettingsType>;
+  userData: GetUserResponse;
+  handleModalOpen: () => void;
 }) => {
+  useEffect(() => {
+    if (userData) {
+      formik.setFieldValue("firstName", userData.firstName);
+      formik.setFieldValue("lastName", userData.lastName);
+      formik.setFieldValue("emaik", userData.email);
+      formik.setFieldValue("profilePicture", userData.profilePicture);
+    }
+  }, []);
+
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
@@ -32,8 +54,33 @@ const AccountSettingsForm = ({
     }
   };
 
-
   const fileUploadRef = useRef<HTMLInputElement>(null);
+  const { mutate, isSuccess, isLoading, isError, error } =
+    useDeleteProfilePicture();
+  const {
+    mutate: deleteUserFn,
+    isSuccess: deleteUserIsSuccess,
+    isLoading: deleteUserIsLoading,
+    isError: deleteUserIsError,
+    error: deleteUserError,
+  } = useDeleteUser();
+
+  const dispatch = useDispatch();
+  const { showToast } = useToast();
+  if (isSuccess) {
+    dispatch(setLoading(false));
+    showToast("Zdjęcie usunięte pomyślnie.", "success");
+  }
+
+  if (isLoading) {
+    dispatch(setLoading(true));
+  }
+
+  if (isError) {
+    dispatch(setLoading(true));
+    console.log(error);
+  }
+
   return (
     <>
       <InputsFirstPartContainer>
@@ -122,13 +169,15 @@ const AccountSettingsForm = ({
           Ustawienia użytkownika
         </Typography>
         <AvatarChangeContainer>
-          <AccountSettingsIMG
-            src={
-              formik.values.avatarPreview ||
-              "https://styles.redditmedia.com/t5_2z977/styles/communityIcon_krjidju88kd71.png"
-            }
-            alt=""
-          />
+          {formik.values.profilePicture && (
+            <AccountSettingsIMG
+              src={
+                createImgURL(formik.values.profilePicture) ||
+                "https://styles.redditmedia.com/t5_2z977/styles/communityIcon_krjidju88kd71.png"
+              }
+              alt=""
+            />
+          )}
           <Button
             type="button"
             onClick={() => {
@@ -137,8 +186,26 @@ const AccountSettingsForm = ({
               }
             }}
             variant="outline">
-            Edytuj
+            {formik.values.profilePicture
+              ? "Edytuj"
+              : "Wybierz zdjęcie profilowe"}
           </Button>
+          {formik.values.profilePicture && (
+            <Button
+              type="button"
+              onClick={() => {
+                try {
+                  mutate();
+                  if (isSuccess) formik.setFieldValue("profilePicture", null);
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+              variant="fill"
+              color="error">
+              Usuń zdjęcie profilowe
+            </Button>
+          )}
           <input
             hidden
             ref={fileUploadRef}
@@ -151,16 +218,28 @@ const AccountSettingsForm = ({
         </AvatarChangeContainer>
 
         <Input
-          name="fullName"
-          value={formik.values.fullName}
+          name="firstName"
+          value={formik.values.firstName}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
-            formik.errors.fullName && formik.touched.fullName
-              ? formik.errors.fullName
+            formik.errors.firstName && formik.touched.firstName
+              ? formik.errors.firstName
               : null
           }
-          label="Imię i nazwisko"
+          label="Imię"
+        />
+        <Input
+          name="lastName"
+          value={formik.values.lastName}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={
+            formik.errors.lastName && formik.touched.lastName
+              ? formik.errors.lastName
+              : null
+          }
+          label="Nazwisko"
         />
         <Input
           name="email"
@@ -176,12 +255,18 @@ const AccountSettingsForm = ({
         />
         <ButtonContainer>
           <Button
+            onClick={() => deleteUserFn()}
+            type="button"
             icon={<UserRemoveIcon />}
             iconPlace="right"
             color="red500">
-            Delete account
+            Usuń konto
           </Button>
-          <Button>Zmień hasło</Button>
+          <Button
+            type="button"
+            onClick={handleModalOpen}>
+            Zmień hasło
+          </Button>
         </ButtonContainer>
       </InputsFirstPartContainer>
     </>

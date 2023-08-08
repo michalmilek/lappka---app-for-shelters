@@ -15,9 +15,13 @@ import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAn
 const DashboardNewestAnimalCards = () => {
   const { isLoading, data, isError, error, isSuccess } = useShelterCards();
 
+
+
   if (isError) {
     console.log(error);
+    return null;
   }
+
 
   return (
     <DashboardNewestAnimalCardsContainer>

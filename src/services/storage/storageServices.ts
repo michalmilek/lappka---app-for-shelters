@@ -2,10 +2,10 @@ import { useMutation } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
-import { deleteStorageImage, postStoragePicture } from "./storage";
+import { deleteStorageImage, postStoragePictures } from "./storage";
 
-export function usePostStoragePicture() {
-  const mutation = useMutation((file: File) => postStoragePicture(file));
+export function usePostStoragePictures() {
+  const mutation = useMutation((files: File[]) => postStoragePictures(files));
   return mutation;
 }
 

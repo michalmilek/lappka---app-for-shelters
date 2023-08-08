@@ -11,7 +11,7 @@ import {
   PetBreed,
   PetBreedLabel,
 } from "services/pet/petTypes";
-import { usePostStoragePicture } from "services/storage/storageServices";
+import { usePostStoragePictures } from "services/storage/storageServices";
 import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm";
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
@@ -86,7 +86,7 @@ const AnimalCardsAddNewCardPage = () => {
   };
 
   const { isLoading, isError, isSuccess, mutate, data, mutateAsync } =
-    usePostStoragePicture();
+    usePostStoragePictures();
   const {
     isLoading: isLoadingAnimal,
     isError: isErrorAnimal,
@@ -98,7 +98,7 @@ const AnimalCardsAddNewCardPage = () => {
   const onSubmit = async (values: AddNewAnimalCardInterface) => {
     try {
       console.log(values);
-      if (formik.values.photos[0] instanceof File) {
+      if (formik.values.photos[0] instanceof Array<File>) {
         await mutateAsync(formik.values.photos[0]);
         if (isSuccess) {
           formik.setFieldValue("photos", data);

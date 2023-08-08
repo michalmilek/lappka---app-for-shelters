@@ -65,3 +65,10 @@ export const formatPhoneNumber = (phoneNumber: string) => {
 
   return digitsOnly;
 };
+
+
+export const createImgURL = (file: File | string) => {
+  if (!file) return null;
+  if (typeof file === "string") return file;
+  return URL.createObjectURL(file);
+};
