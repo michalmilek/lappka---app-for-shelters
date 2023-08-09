@@ -52,7 +52,6 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         ) : (
           <SelectSecond
-            zIndex={1305}
             label=""
             options={[
               { label: "Samiec", value: "Male" },
@@ -77,7 +76,6 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         ) : (
           <SelectSecond
-            zIndex={1304}
             label=""
             options={[
               { value: "Dog", label: "Pies" },
@@ -103,7 +101,6 @@ const DashboardAnimalCardsCardFields: React.FC<
             />
           ) : (
             <SelectSecond
-              zIndex={1303}
               label=""
               options={
                 formik.values.type === "Dog"

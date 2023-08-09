@@ -69,10 +69,10 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
     table.getAllLeafColumns().forEach((header) => {
       if (
         deviceType !== "desktop" &&
-        (header.id === "colour" || header.id === "visible")
+        (header.id === "breed" || header.id === "isVisible")
       ) {
         header.toggleVisibility(false);
-      } else if (deviceType === "mobile" && header.id === "additionDate") {
+      } else if (deviceType === "mobile" && header.id === "createdAt") {
         header.toggleVisibility(false);
       } else {
         header.toggleVisibility(true);

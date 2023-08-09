@@ -58,6 +58,10 @@ export const StyledCardInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  &:nth-child(n) {
+    z-index: calc(1200 - n);
+  }
 `;
 
 export const StyledCardFooter = styled.footer`
@@ -88,4 +92,8 @@ export const AnimalCardsCardFlexInputContainer = styled.div`
   gap: 16px;
   width: 100%;
   justify-content: space-between;
+
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+  }
 `;

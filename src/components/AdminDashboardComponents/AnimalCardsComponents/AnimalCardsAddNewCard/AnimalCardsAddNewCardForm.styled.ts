@@ -17,6 +17,7 @@ export const AnimalCardsAddNewCardFormContainer = styled.form`
   background: ${getColor("white")};
   border-radius: 8px;
   width: 50%;
+  position: relative;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 
@@ -24,6 +25,10 @@ export const AnimalCardsAddNewCardFormContainer = styled.form`
 
   @media screen and (max-width: 1200px) {
     width: 100%;
+  }
+
+  &:nth-child(n) {
+    z-index: calc(1200 - n);
   }
 `;
 

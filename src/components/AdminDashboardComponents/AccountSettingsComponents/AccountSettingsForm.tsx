@@ -5,14 +5,11 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import { FormikProps } from "formik";
 import useToast from "hooks/useToast";
 import { AccountSettingsType } from "pages/DashboardPages/AccountSettingsPage";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { GetUserResponse } from "services/user/user";
-import {
-  useDeleteProfilePicture,
-  useDeleteUser,
-} from "services/user/userServices";
+import { useDeleteProfilePicture } from "services/user/userServices";
 import { createImgURL } from "utils/appUtils";
 import {
   AccountSettingsIMG,
@@ -22,6 +19,7 @@ import {
   PostalCodeCityContainer,
   PostalCodeContainer,
 } from "./AccountSettings.styled";
+import AccountSettingsDeleteUser from "./AccountSettingsDeleteUser";
 
 const AccountSettingsForm = ({
   formik,
@@ -32,6 +30,12 @@ const AccountSettingsForm = ({
   userData: GetUserResponse;
   handleModalOpen: () => void;
 }) => {
+  const [deleteUserModal, setDeleteUserModal] = useState(false);
+
+  const handleCloseDeleteUserModal = useCallback(() => {
+    setDeleteUserModal(false);
+  }, [setDeleteUserModal]);
+
   useEffect(() => {
     if (userData) {
       formik.setFieldValue("firstName", userData.firstName);
@@ -55,31 +59,31 @@ const AccountSettingsForm = ({
   };
 
   const fileUploadRef = useRef<HTMLInputElement>(null);
-  const { mutate, isSuccess, isLoading, isError, error } =
-    useDeleteProfilePicture();
   const {
-    mutate: deleteUserFn,
-    isSuccess: deleteUserIsSuccess,
-    isLoading: deleteUserIsLoading,
-    isError: deleteUserIsError,
-    error: deleteUserError,
-  } = useDeleteUser();
+    mutate: deleteProfilePictureFn,
+    isSuccess: deleteProfilePictureIsSuccess,
+    isLoading: deleteProfilePictureIsLoading,
+    isError: deleteProfilePictureIsError,
+    error: deleteProfilePictureError,
+  } = useDeleteProfilePicture();
 
   const dispatch = useDispatch();
   const { showToast } = useToast();
-  if (isSuccess) {
-    dispatch(setLoading(false));
-    showToast("Zdjęcie usunięte pomyślnie.", "success");
-  }
 
-  if (isLoading) {
-    dispatch(setLoading(true));
-  }
+  useEffect(() => {
+    if (deleteProfilePictureIsLoading) {
+      dispatch(setLoading(true));
+    } else {
+      dispatch(setLoading(false));
+    }
+  }, [deleteProfilePictureIsLoading, dispatch]);
 
-  if (isError) {
-    dispatch(setLoading(true));
-    console.log(error);
-  }
+  useEffect(() => {
+    if (deleteProfilePictureIsSuccess) {
+      showToast("Zdjęcie zostało usunięte pomyślnie", "success");
+      formik.setFieldValue("photos", null);
+    }
+  }, [deleteProfilePictureIsSuccess, dispatch, formik, showToast]);
 
   return (
     <>
@@ -195,8 +199,7 @@ const AccountSettingsForm = ({
               type="button"
               onClick={() => {
                 try {
-                  mutate();
-                  if (isSuccess) formik.setFieldValue("profilePicture", null);
+                  deleteProfilePictureFn();
                 } catch (error) {
                   console.log(error);
                 }
@@ -255,7 +258,7 @@ const AccountSettingsForm = ({
         />
         <ButtonContainer>
           <Button
-            onClick={() => deleteUserFn()}
+            onClick={() => setDeleteUserModal(true)}
             type="button"
             icon={<UserRemoveIcon />}
             iconPlace="right"
@@ -269,6 +272,10 @@ const AccountSettingsForm = ({
           </Button>
         </ButtonContainer>
       </InputsFirstPartContainer>
+      <AccountSettingsDeleteUser
+        onClose={handleCloseDeleteUserModal}
+        isOpen={deleteUserModal}
+      />
     </>
   );
 };

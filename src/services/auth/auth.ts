@@ -15,8 +15,8 @@ export interface LoginResponse {
 //REGISTER REQUEST
 
 export interface ShelterRegisterRequest {
-  shelter: Shelter;
-  user: User;
+  shelterRequest: Shelter;
+  userRequest: User;
 }
 
 export interface Shelter {

@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { deleteStorageImage, postStoragePictures } from "./storage";
 
-export function usePostStoragePictures() {
+export const usePostStoragePictures = () => {
   const mutation = useMutation((files: File[]) => postStoragePictures(files));
   return mutation;
-}
+};
 
 export const useDeleteStorageImage = () => {
   const dispatch = useDispatch();

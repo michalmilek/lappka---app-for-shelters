@@ -16,7 +16,7 @@ export async function postStoragePictures(files: File[]) {
     const formData = new FormData();
     files.forEach((file) => formData.append("files", file));
 
-    const response = await axios.post<string[]>(`/Storage`, formData);
+    const response = await axiosInstance.post<string[]>(`/Storage`, formData);
 
     return response.data;
   } catch (error) {

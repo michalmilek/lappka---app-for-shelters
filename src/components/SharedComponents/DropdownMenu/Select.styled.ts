@@ -44,14 +44,14 @@ export const SelectContainerWithLabels = styled.div`
 export const SelectContainer = styled.div<zIndexProps>`
   position: relative;
   background: ${getColor("white")};
-  z-index: ${({ zIndex }) => (zIndex ? zIndex : 1200)};
+  z-index: inherit;
   width: 100%;
 `;
 
 export const SelectDiv = styled.div<SelectPropsWithoutGeneric>`
   cursor: pointer;
   position: relative;
-  z-index: 1200;
+  z-index: inherit;
   background: ${getColor("white")};
   display: flex;
   align-items: center;

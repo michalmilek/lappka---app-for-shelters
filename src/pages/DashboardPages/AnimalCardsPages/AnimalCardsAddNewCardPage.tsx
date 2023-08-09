@@ -11,7 +11,10 @@ import {
   PetBreed,
   PetBreedLabel,
 } from "services/pet/petTypes";
-import { usePostStoragePictures } from "services/storage/storageServices";
+import {
+  useDeleteStorageImage,
+  usePostStoragePictures,
+} from "services/storage/storageServices";
 import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm";
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
@@ -22,6 +25,9 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
 import { BreedArray } from "./AnimalCardsUtils";
+import useToast from "hooks/useToast";
+import { setLoading } from "redux/loadingSlice";
+import { useDispatch } from "react-redux";
 
 export interface AddNewAnimalCardInterface {
   name: string;
@@ -70,6 +76,9 @@ const validationSchema = Yup.object().shape({
 });
 
 const AnimalCardsAddNewCardPage = () => {
+  const { showToast } = useToast();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues: AddNewAnimalCardInterface = {
     name: "",
     description: "",
@@ -85,29 +94,37 @@ const AnimalCardsAddNewCardPage = () => {
     breed: "",
   };
 
-  const { isLoading, isError, isSuccess, mutate, data, mutateAsync } =
-    usePostStoragePictures();
+  const { isLoading, isError, mutate } = usePostStoragePictures();
   const {
     isLoading: isLoadingAnimal,
     isError: isErrorAnimal,
     isSuccess: isSuccessAnimal,
     mutate: postAnimalFn,
-    mutateAsync: postAnimalFnAsync,
   } = usePostShelterCardsAnimal();
 
+  const { mutate: deleteImgFromStorage } = useDeleteStorageImage();
+
   const onSubmit = async (values: AddNewAnimalCardInterface) => {
-    try {
-      console.log(values);
-      if (formik.values.photos[0] instanceof Array<File>) {
-        await mutateAsync(formik.values.photos[0]);
-        if (isSuccess) {
-          formik.setFieldValue("photos", data);
-          postAnimalFn(values as Animal);
-        }
-      }
-    } catch (error) {
-      console.log(error);
+    if (values.photos instanceof Array<File>) {
+      console.log(values.photos);
+
+      mutate(values.photos as File[], {
+        onSuccess: (responseData) => {
+          formik.setFieldValue("photos", responseData);
+          formik.setFieldValue("profilePicture", responseData[0]);
+          postAnimalFn(formik.values as Animal, {
+            onSuccess: () => {
+              showToast(
+                `Karta dla zwierzęcia o imieniu ${formik.values.name} została utworzona`,
+                "success"
+              );
+              navigate("/dashboard");
+            },
+          });
+        },
+      });
     }
+    //deleteImgFromStorage("cafea707-7e13-4280-8b72-b64b76bb88d6");
   };
 
   const formik = useFormik({
@@ -116,7 +133,13 @@ const AnimalCardsAddNewCardPage = () => {
     onSubmit,
   });
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (isLoading && isLoadingAnimal) {
+      dispatch(setLoading(true));
+    } else {
+      dispatch(setLoading(false));
+    }
+  }, [dispatch, isLoading, isLoadingAnimal]);
 
   return (
     <StyledProtectedPageContent>

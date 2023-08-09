@@ -51,19 +51,22 @@ const RegisterStep2Form = ({
         .email("Nieprawidłowy format emaila")
         .required("Pole wymagane"),
       password: Yup.string()
-        .min(6, "Hasło musi mieć co najmniej 6 znaków")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/,
+          "Hasło musi zawierać co najmniej 8 znaków, przynajmniej 1 znak nie alfanumeryczny, 1 cyfrę, 1 wielką literę i 1 małą literę"
+        )
         .required("Pole wymagane"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password")], "Hasła muszą być identyczne")
         .required("Pole wymagane"),
     }),
     onSubmit: (values) => {
-      if (handleFormValues) handleFormValues({ user: values });
+      if (handleFormValues) handleFormValues({ userRequest: values });
     },
   });
 
   useEffect(() => {
-    if (formValues?.shelter && formValues?.user) {
+    if (formValues?.shelterRequest && formValues?.userRequest) {
       console.log(formValues);
       registerFn(formValues as ShelterRegisterRequest);
     }

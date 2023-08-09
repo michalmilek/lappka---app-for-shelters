@@ -29,8 +29,8 @@ const RegisterStep1Form = ({
       nip: "",
       krs: "",
       phoneNumber: "",
-      longitude: 0,
-      latitude: 0,
+      longitude: 14.2,
+      latitude: 50,
     },
     validationSchema: Yup.object().shape({
       organizationName: Yup.string().required(
@@ -41,8 +41,20 @@ const RegisterStep1Form = ({
         .matches(/^\d{2}-\d{3}$/, "Kod pocztowy powinien być w formacie XX-XXX")
         .required('Pole "Kod pocztowy" jest wymagane'),
       city: Yup.string().required('Pole "Miasto" jest wymagane'),
-      nip: Yup.string().required('Pole "Numer NIP" jest wymagane'),
-      krs: Yup.string().required('Pole "Numer KRS" jest wymagane'),
+      nip: Yup.string()
+        .required('Pole "Numer NIP" jest wymagane')
+        .test(
+          "length",
+          'Pole "Numer NIP" musi mieć dokładnie 10 znaków',
+          (val) => val.length === 10
+        ),
+      krs: Yup.string()
+        .required('Pole "Numer KRS" jest wymagane')
+        .test(
+          "length",
+          'Pole "Numer KRS" musi mieć dokładnie 10 znaków',
+          (val) => val.length === 10
+        ),
       phoneNumber: Yup.string()
         .matches(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/, {
           message:
@@ -54,7 +66,7 @@ const RegisterStep1Form = ({
     onSubmit: (values) => {
       if (handleFormValues && handleCurrentStep) {
         handleFormValues({
-          shelter: {
+          shelterRequest: {
             ...values,
             phoneNumber: formatPhoneNumber(values.phoneNumber),
           },

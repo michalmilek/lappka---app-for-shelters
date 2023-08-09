@@ -51,7 +51,6 @@ export const StyledDashboardAnimalCardsMainContent = styled.article`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 30px;
-    border: 1px solid #000;
+    gap: 200px;
   }
 `;
