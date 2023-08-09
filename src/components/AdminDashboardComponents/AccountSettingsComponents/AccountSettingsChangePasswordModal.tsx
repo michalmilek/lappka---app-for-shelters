@@ -87,13 +87,12 @@ const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      mutate(values);
-      /*       if (isSuccess) {
-        showToast("Hasło zostało zmienione pomyślnie", "success");
-        onClose();
-      } */
-      console.log("flaga", isSuccess);
-      formik.resetForm();
+      try {
+        mutate(values);
+        formik.resetForm();
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
