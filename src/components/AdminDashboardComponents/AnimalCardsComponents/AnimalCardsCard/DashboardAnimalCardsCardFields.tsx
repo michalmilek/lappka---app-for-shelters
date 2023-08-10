@@ -7,9 +7,9 @@ import { FormikContextType } from "formik";
 import React from "react";
 import { ageConversion } from "utils/appUtils";
 import { PetsBreeds } from "../AnimalCardsAddNewCard/AddNewCardUtils";
-import { AnimalCardsCardFlexInputContainer } from "./DashboardAnimalCardsCard.styled";
-import { PetCard } from "./DashboardAnimalCardsCardForm";
+import { AnimalCardsCardFlexInputContainer } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
+import { PetCard } from "./utils/DashboardAnimalCardsUtils";
 
 interface DashboardAnimalCardsCardFieldsProps {
   isEditOn: boolean;

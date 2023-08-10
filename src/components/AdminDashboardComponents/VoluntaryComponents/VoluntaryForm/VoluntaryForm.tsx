@@ -10,10 +10,10 @@ import {
 import VoluntaryFormPart from "./VoluntaryFormPart";
 import * as Yup from "yup";
 import { FormikProps, useFormik } from "formik";
-import { ShelterVolunteeringResponse } from "services/pet/pet";
 import { useUpdateShelterVolunteering } from "services/pet/petServices";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import { ShelterVolunteeringResponse } from "services/pet/petTypes";
 
 interface Props {
   data: ShelterVolunteeringResponse;

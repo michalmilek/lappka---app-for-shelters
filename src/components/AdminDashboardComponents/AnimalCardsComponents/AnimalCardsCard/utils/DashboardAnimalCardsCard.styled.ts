@@ -97,3 +97,16 @@ export const AnimalCardsCardFlexInputContainer = styled.div`
     flex-direction: column;
   }
 `;
+
+
+export const AnimalCardsCardBtnsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+`;

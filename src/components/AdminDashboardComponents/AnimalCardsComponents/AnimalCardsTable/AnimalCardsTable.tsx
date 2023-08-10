@@ -23,7 +23,7 @@ import {
 import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
-import { Pet, ShelterCardsResponse } from "services/pet/pet";
+import { Pet, ShelterCardsResponse } from "services/pet/petTypes";
 
 function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   const deviceType = useDeviceType();

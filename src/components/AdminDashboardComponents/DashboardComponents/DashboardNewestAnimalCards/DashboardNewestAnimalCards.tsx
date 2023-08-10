@@ -1,4 +1,3 @@
-import { getShelterCards } from "services/pet/pet";
 import { useShelterCards } from "services/pet/petServices";
 import Button from "components/SharedComponents/Button/Button";
 import Divider from "components/SharedComponents/Divider/Divider";
@@ -15,13 +14,10 @@ import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAn
 const DashboardNewestAnimalCards = () => {
   const { isLoading, data, isError, error, isSuccess } = useShelterCards();
 
-
-
   if (isError) {
     console.log(error);
     return null;
   }
-
 
   return (
     <DashboardNewestAnimalCardsContainer>

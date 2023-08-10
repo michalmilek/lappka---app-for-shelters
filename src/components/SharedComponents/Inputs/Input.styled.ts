@@ -96,6 +96,7 @@ export const InputField = styled.input<InputProps>`
 
       &:read-only {
     border: none !important;
+    padding-right: 0 !important;
   }
 `;
 

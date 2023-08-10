@@ -1,4 +1,3 @@
-import { Animal, Cat, Dog, Other } from "services/pet/pet";
 import {
   usePostShelterCardsAnimal,
   usePostShelterCardsCat,
@@ -6,6 +5,7 @@ import {
   usePostShelterCardsOther,
 } from "services/pet/petServices";
 import {
+  Animal,
   GenderType,
   GenreType,
   PetBreed,
@@ -115,16 +115,16 @@ const AnimalCardsAddNewCardPage = () => {
           postAnimalFn(formik.values as Animal, {
             onSuccess: () => {
               showToast(
-                `Karta dla zwierzęcia o imieniu ${formik.values.name} została utworzona`,
+                `Karta dla zwierzęcia o imieniu ${values.name} została utworzona`,
                 "success"
               );
-              navigate("/dashboard");
+              //navigate("/dashboard");
             },
           });
         },
       });
     }
-    //deleteImgFromStorage("cafea707-7e13-4280-8b72-b64b76bb88d6");
+    //deleteImgFromStorage("26a15980-b2ef-49e1-b27e-86679852cf77");
   };
 
   const formik = useFormik({

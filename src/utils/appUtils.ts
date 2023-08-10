@@ -52,7 +52,7 @@ const typeLabels: { [key in GenreType]: string } = {
 
 export const ageConversion = (ageInMonths: number): string => {
   if (ageInMonths <= 12) {
-    return ageInMonths + " meisiąc/miesięcy";
+    return ageInMonths + " miesiąc/miesięcy";
   } else {
     const years: number = Math.floor(ageInMonths / 12);
     return years + " lat/lata";

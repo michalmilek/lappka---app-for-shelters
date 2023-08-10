@@ -3,6 +3,7 @@ import { StyledDashboardMessagesMainContent } from "components/AdminDashboardCom
 import MessagesChat from "components/AdminDashboardComponents/MessagesComponents/MessagesChat/MessagesChat";
 import MessagesFriendList from "components/AdminDashboardComponents/MessagesComponents/MessagesFriendsList/MessagesFriendList";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
+import useBreadcrumbs from "hooks/useBreadcrumbs";
 import React from "react";
 
 export interface ActiveChatProps {
@@ -11,6 +12,9 @@ export interface ActiveChatProps {
 }
 
 const MessagesPage = () => {
+  const { title, previousTitle } = useBreadcrumbs();
+  console.log("🚀 ~ title:", title);
+
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar title="Wiadomości" />

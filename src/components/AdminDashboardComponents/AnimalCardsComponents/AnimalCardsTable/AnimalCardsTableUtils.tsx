@@ -1,6 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { Pet } from "services/pet/pet";
 import Typography from "components/SharedComponents/Typography/Typography";
+import { Pet } from "services/pet/petTypes";
 import {
   ActionHeaderContainer,
   Dot,
@@ -174,4 +174,3 @@ export const columns = [
     cell: (_props) => <AnimalCardsTableActionItem />,
   }),
 ];
-

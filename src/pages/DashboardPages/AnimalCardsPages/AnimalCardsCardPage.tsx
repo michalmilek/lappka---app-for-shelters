@@ -4,7 +4,7 @@ import {
   StyledCardFooter,
   StyledCardFormComponent,
   StyledCardHeader,
-} from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCard.styled";
+} from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
 import DashboardAnimalCardsCardStateHandler from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCardStateHandler";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";

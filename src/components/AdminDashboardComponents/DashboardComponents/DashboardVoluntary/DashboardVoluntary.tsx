@@ -1,7 +1,6 @@
 import { useShelterVolunteering } from "services/pet/petServices";
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
-import useDeviceType from "hooks/useDeviceType";
 import React from "react";
 import {
   DashboardVoluntaryContainer,

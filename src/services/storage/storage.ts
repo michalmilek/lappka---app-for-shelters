@@ -39,3 +39,13 @@ export const deleteStorageImage = async (imgId: string) => {
     console.error(error);
   }
 };
+
+
+export const deleteStorageImages = async (imgsIds: string[]) => {
+  try {
+    const response = await axiosInstance.delete(`/Storage`, { data: imgsIds });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

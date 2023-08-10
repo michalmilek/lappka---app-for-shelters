@@ -1,20 +1,22 @@
-import { AnimalEdit, Pet } from "services/pet/pet";
-import { GenderType, GenreType, PetBreed } from "services/pet/petTypes";
+import { AnimalEdit, GenreType, Pet, PetBreed } from "services/pet/petTypes";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  AnimalCardsCardBtnsContainer,
   StyledCardFooter,
   StyledCardFormContentContainer,
   StyledCardImg,
   StyledCardImgContainer,
   StyledCardInputContainer,
   StyledCardSingleImgContainer,
-} from "./DashboardAnimalCardsCard.styled";
+} from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
-import * as Yup from "yup";
-import { BreedArray } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsUtils";
 import { StyledCloseIcon } from "components/SharedComponents/Inputs/CustomFileInput.styled";
-import { useDeleteStorageImage } from "services/storage/storageServices";
+import {
+  useDeleteStorageImage,
+  useDeleteStorageImages,
+  usePostStoragePictures,
+} from "services/storage/storageServices";
 import { useQueryClient } from "@tanstack/react-query";
 import CustomFileInput from "components/SharedComponents/Inputs/CustomFileInput";
 import Button from "components/SharedComponents/Button/Button";
@@ -22,53 +24,16 @@ import useDeviceType from "hooks/useDeviceType";
 import { useNavigate } from "react-router-dom";
 import { usePutShelterCardsAnimal } from "services/pet/petServices";
 import DashboardAnimalCardsCardFields from "./DashboardAnimalCardsCardFields";
-
-export interface PetCard {
-  name: string;
-  description: string;
-  type: GenreType | "";
-  gender: GenderType | "";
-  color: string;
-  months: number;
-  weight: number;
-  breed: PetBreed | "";
-  photos: string[];
-  profilePhoto: string;
-  isSterilized: boolean | "";
-  isVisible: boolean | "";
-  newPhotos?: File[];
-}
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required("To pole jest wymagane"),
-  description: Yup.string().required("To pole jest wymagane"),
-  type: Yup.string()
-    .oneOf(["Dog", "Cat", "Other"], "Nieprawidłowy wybór")
-    .required("To pole jest wymagane"),
-  breed: Yup.string().when("type", {
-    is: (type: string) => type === "Dog" || type === "Cat",
-    then: () =>
-      Yup.string()
-        .oneOf(BreedArray, "Nieprawidłowy wybór")
-        .required("To pole jest wymagane"),
-  }),
-  gender: Yup.string()
-    .oneOf(["Male", "Female", "Other"], "Nieprawidłowy wybór")
-    .required("To pole jest wymagane"),
-  color: Yup.string().required("To pole jest wymagane"),
-  months: Yup.number()
-    .required("To pole jest wymagane")
-    .positive("Wartość musi być większa od zera"),
-  weight: Yup.number()
-    .required("To pole jest wymagane")
-    .positive("Wartość musi być większa od zera"),
-  isSterilized: Yup.bool()
-    .oneOf([true, false], "Nieprawidłowy wybór")
-    .required("To pole jest wymagane"),
-  isVisible: Yup.bool()
-    .oneOf([true, false], "Nieprawidłowy wybór")
-    .required("To pole jest wymagane"),
-});
+import useToast from "hooks/useToast";
+import { setLoading } from "redux/loadingSlice";
+import { useDispatch } from "react-redux";
+import Modal from "components/SharedComponents/Modal/Modal";
+import Typography from "components/SharedComponents/Typography/Typography";
+import {
+  AnimalCardsCardValidationSchema,
+  PetCard,
+} from "./utils/DashboardAnimalCardsUtils";
+import AnimalCardsCardActions from "./AnimalCardsCardActions";
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -77,61 +42,85 @@ const DashboardAnimalCardsCardForm = ({
   isEditOn: boolean;
   data: Pet;
 }) => {
-  const { mutate } = usePutShelterCardsAnimal();
+  const { showToast } = useToast();
+  const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
+  const { mutate: deleteStorageImagesFn } = useDeleteStorageImages();
+  const { mutate: deleteImageFn, isLoading: isLoadingDeleteStorageImage } =
+    useDeleteStorageImage();
+  const {
+    mutate: postStoragePicture,
+    isLoading: isLoadingPostStoragePictures,
+  } = usePostStoragePictures();
+  const { mutate: putShelterCardsFn, isLoading: isLoadingPutShelterCards } =
+    usePutShelterCardsAnimal();
   const navigate = useNavigate();
   const deviceType = useDeviceType();
   const initialValues: PetCard = {
-    description: data.description,
-    name: data.name,
-    profilePhoto: data.profilePhoto,
-    photos: data.photos,
-    isSterilized: data.isSterilized,
-    weight: data.weight,
+    ...data,
     months: data.age,
-    gender: data.gender,
-    isVisible: data.isVisible,
-    color: data.color,
     type: data.type as GenreType,
     breed: data.breed as PetBreed,
   };
 
-  const handleSubmit = async (values: PetCard) => {
-    try {
-      console.log(values);
-      //await mutateAsync(formik.values.photos[0]);
-      if (isSuccess) {
-        //formik.setFieldValue("photos", [...data, newData]);
-        mutate({
-          petId: data.id,
-          name: formik.values.name,
-          profilePhoto: formik.values.photos[0],
-          gender: formik.values.gender,
-          description: formik.values.description,
-          isVisible: formik.values.isVisible,
-          months: formik.values.months,
-          isSterilized: formik.values.isSterilized,
-          weight: formik.values.weight,
-          photos: formik.values.photos,
-          color: formik.values.color,
-          breed: formik.values.breed,
-        } as AnimalEdit);
-      }
-    } catch (error) {
-      console.log(error);
+  const handleSubmit = () => {
+    if (formik.values.newPhotos)
+      postStoragePicture(formik.values.newPhotos, {
+        onSuccess: (newData) => {
+          formik.setFieldValue("photos", [...formik.values.photos, newData]);
+          const { newPhotos, ...values } = formik.values;
+          putShelterCardsFn(
+            {
+              ...values,
+              petId: data.id,
+              profilePhoto: data.profilePhoto,
+            } as AnimalEdit,
+            {
+              onSuccess: () => {
+                showToast(
+                  `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
+                  "success"
+                );
+              },
+            }
+          );
+        },
+      });
+    else {
+      const { newPhotos, ...values } = formik.values;
+      putShelterCardsFn({
+        ...values,
+        petId: data.id,
+      } as AnimalEdit);
     }
   };
 
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    validationSchema: AnimalCardsCardValidationSchema,
     onSubmit: handleSubmit,
   });
 
   const queryClient = useQueryClient();
-  const { mutateAsync: deleteImageFn, isSuccess } = useDeleteStorageImage();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (
+      isLoadingDeleteStorageImage ||
+      isLoadingPostStoragePictures ||
+      isLoadingPutShelterCards
+    )
+      dispatch(setLoading(true));
+    else dispatch(setLoading(false));
+  }, [
+    dispatch,
+    isLoadingDeleteStorageImage,
+    isLoadingPostStoragePictures,
+    isLoadingPutShelterCards,
+  ]);
 
   return (
     <StyledCardFormContentContainer onSubmit={formik.handleSubmit}>
+      {!isEditOn && <AnimalCardsCardActions id={data.id} />}
       <StyledCardImgContainer>
         {data.photos.map((photo, index) => (
           <StyledCardSingleImgContainer key={photo + index}>
@@ -141,23 +130,64 @@ const DashboardAnimalCardsCardForm = ({
             />
             {isEditOn && (
               <StyledCloseIcon
-                onClick={async () => {
-                  try {
-                    await deleteImageFn(photo);
-                    if (isSuccess) {
+                onClick={() => {
+                  deleteImageFn(photo, {
+                    onSuccess: () => {
+                      showToast(
+                        `Zdjęcie nr${index + 1} usunięte pomyślnie`,
+                        "success"
+                      );
                       queryClient.invalidateQueries({
                         queryKey: ["shelterCardsCard", data.id],
                       });
-                    }
-                  } catch (error) {
-                    console.log(error);
-                  }
+                    },
+                  });
                 }}
               />
             )}
           </StyledCardSingleImgContainer>
         ))}
       </StyledCardImgContainer>
+      {data.photos && isEditOn && (
+        <>
+          <Button
+            type="button"
+            onClick={() => setIsDeleteAllModalOpen(true)}>
+            Usuń wszystkie zdjęcia
+          </Button>
+          <Modal isOpen={isDeleteAllModalOpen}>
+            <Typography
+              variant="Heading 18 Semi Bold"
+              tag="h3">
+              Czy chcesz usunąć wszystkie zdjęcia z karty?
+            </Typography>
+            <AnimalCardsCardBtnsContainer>
+              <Button
+                isFullWidth
+                variant="outline"
+                onClick={() => setIsDeleteAllModalOpen(false)}
+                type="button">
+                Anuluj
+              </Button>
+              <Button
+                isFullWidth
+                onClick={() => {
+                  deleteStorageImagesFn(data.photos, {
+                    onSuccess: () => {
+                      setIsDeleteAllModalOpen(false);
+                      queryClient.invalidateQueries({
+                        queryKey: ["shelterCardsCard", data.id],
+                      });
+                    },
+                  });
+                }}
+                type="button">
+                Potwierdź
+              </Button>
+            </AnimalCardsCardBtnsContainer>
+          </Modal>
+        </>
+      )}
       <StyledCardInputContainer>
         <DashboardAnimalCardsCardFields
           isEditOn={isEditOn}

@@ -12,6 +12,9 @@ const FormRowContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  @media screen and (max-width: 550px) {
+  }
 `;
 
 const HalfWidthField = styled.div`
