@@ -54,7 +54,7 @@ const validationSchema = Yup.object().shape({
     is: (type: string) => type === "Dog" || type === "Cat",
     then: () =>
       Yup.string()
-        .oneOf(BreedArray, "Nieprawidłowy wybór")
+        .max(15, "Rasa nie może przekraczać 15 liter")
         .required("To pole jest wymagane"),
   }),
   gender: Yup.string()

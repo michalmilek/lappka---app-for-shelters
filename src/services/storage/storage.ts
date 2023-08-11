@@ -49,3 +49,15 @@ export const deleteStorageImages = async (imgsIds: string[]) => {
     console.error(error);
   }
 };
+
+
+export const getStorageImages = async (imgsIds: string[]) => {
+  try {
+    const response = await axiosInstance.get(`/Storage`, {
+      data: imgsIds,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

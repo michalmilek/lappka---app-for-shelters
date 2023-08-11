@@ -81,24 +81,18 @@ const AnimalCardsAddNewCardForm = ({
           }}
         />
         {(formik.values.type === "Dog" || formik.values.type === "Cat") && (
-          <SelectSecond
+          <Input
             error={
               formik.errors.breed && formik.touched.breed
                 ? formik.errors.breed
                 : undefined
             }
             label="Rasa"
-            dropdownIcon={<ArrowDownIcon />}
-            options={
-              formik.values.type === "Dog"
-                ? PetsBreeds.dogsBreeds
-                : PetsBreeds.catBreeds
-            }
+            placeholder="Wpisz"
+            inputSize="Large"
+            name="breed"
             value={formik.values.breed}
-            handleChange={(option) => {
-              formik.setFieldTouched("breed", true);
-              formik.setFieldValue("breed", option);
-            }}
+            onChange={formik.handleChange}
           />
         )}
         <AnimalCardsAddNewCardFlexInputContainer>

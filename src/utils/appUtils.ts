@@ -72,3 +72,19 @@ export const createImgURL = (file: File | string) => {
   if (typeof file === "string") return file;
   return URL.createObjectURL(file);
 };
+
+
+export const formatCardViews = (views: number) => {
+  if (views >= 100000) {
+    const roundedViews = Math.floor(views / 1000);
+    return `${roundedViews} tys.`;
+  } else if (views >= 1000) {
+    const formattedViews = new Intl.NumberFormat("en", {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(views / 1000);
+    return `${formattedViews} tyś`;
+  } else {
+    return views.toString();
+  }
+};

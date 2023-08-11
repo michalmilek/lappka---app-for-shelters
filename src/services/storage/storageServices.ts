@@ -1,10 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import {
   deleteStorageImage,
   deleteStorageImages,
+  getStorageImages,
   postStoragePictures,
 } from "./storage";
 
@@ -52,4 +53,8 @@ export const useDeleteStorageImages = () => {
     }
   );
   return mutation;
+};
+
+export const useStorageImages = (imgsIds: string[], animalId: string) => {
+  return useQuery(["storageImages", animalId], () => getStorageImages(imgsIds));
 };

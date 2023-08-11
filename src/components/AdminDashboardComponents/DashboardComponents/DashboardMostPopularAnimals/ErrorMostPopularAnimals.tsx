@@ -26,7 +26,7 @@ const ErrorContainer = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  color: red;
+  color: ${getColor("darkGray2")};
   font-size: 18px;
   margin: 0;
   padding: 16px;

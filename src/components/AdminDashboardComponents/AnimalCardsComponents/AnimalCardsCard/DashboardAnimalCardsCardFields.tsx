@@ -68,28 +68,20 @@ const DashboardAnimalCardsCardFields: React.FC<
         )}
       </FormRow>
       <FormRow label="Gatunek">
-        {!isEditOn ? (
-          <Input
-            readOnly
-            inputSize="Large"
-            value={formik.values.type}
-          />
-        ) : (
-          <SelectSecond
-            label=""
-            options={[
-              { value: "Dog", label: "Pies" },
-              { value: "Cat", label: "Kot" },
-              { value: "Other", label: "Inny" },
-            ]}
-            dropdownIcon={<ArrowDownIcon />}
-            value={formik.values.type}
-            handleChange={(option) => {
-              formik.setFieldTouched("type", true);
-              formik.setFieldValue("type", option);
-            }}
-          />
-        )}
+        <Input
+          readOnly={!isEditOn}
+          error={
+            formik.errors.breed && formik.touched.breed
+              ? formik.errors.breed
+              : undefined
+          }
+          label="Rasa"
+          placeholder="Wpisz"
+          inputSize="Large"
+          name="breed"
+          value={formik.values.breed}
+          onChange={formik.handleChange}
+        />
       </FormRow>
       {formik.values.type !== "Other" && (
         <FormRow label="Rasa">
