@@ -1,7 +1,6 @@
 import React from "react";
 import { TimeType } from "./DashboardAnimalChart";
 
-
 const getMonthNameByIndex = (index: number) => {
   const monthNames = [
     "Sty",

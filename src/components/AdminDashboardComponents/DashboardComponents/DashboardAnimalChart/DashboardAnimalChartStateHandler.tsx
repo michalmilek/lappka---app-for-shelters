@@ -8,9 +8,10 @@ import {
   createMonthData,
   createWeekData,
   createYearData,
-} from "./ChartDataUtils.ts";
+} from "./ChartDataUtils";
 import DashboardAnimalChart from "./DashboardAnimalChart";
 import { SkeletonChart } from "./SkeletonChart";
+import ErrorChart from "./ErrorChart";
 
 export type ChartData = {
   name: string;
@@ -87,6 +88,10 @@ const DashboardAnimalChartStateHandler = () => {
     if (isLoadingMonth || isLoadingYear || isLoadingWeek) setLoadingState(true);
     else setLoadingState(false);
   }, [isLoadingMonth, isLoadingYear, isLoadingWeek]);
+
+  if (isErrorMonth || isErrorYear || isErrorWeek) {
+    return <ErrorChart />;
+  }
 
   if (isLoadingState) {
     return <SkeletonChart />;

@@ -9,6 +9,7 @@ import {
 } from "./DashboardVoluntary.styled";
 import DashboardVoluntaryItem from "./DashboardVoluntaryItem";
 import SkeletonVoluntary from "./SkeletonVoluntary";
+import ErrorVoluntary from "./ErrorVoluntary";
 
 const DashboardVoluntary = () => {
   const { data, isLoading, isError, error, isSuccess } =
@@ -16,6 +17,7 @@ const DashboardVoluntary = () => {
 
   if (isError) {
     console.log(error);
+    return <ErrorVoluntary />;
   }
 
   if (isLoading) {

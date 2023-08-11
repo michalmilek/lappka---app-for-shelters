@@ -9,6 +9,7 @@ import { StyledProtectedPageContent } from "components/AdminDashboardComponents/
 import React from "react";
 
 const DashboardPage = () => {
+
   return (
     <StyledProtectedPageContent>
       <ProtectedNavbar title="Dashboard" />

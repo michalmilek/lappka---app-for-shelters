@@ -1,7 +1,7 @@
 import Button from "components/SharedComponents/Button/Button";
 import Input from "components/SharedComponents/Inputs/Input";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyledDashboardFooter,
   StyledDashboardVoluntaryContent,
@@ -54,14 +54,10 @@ const VoluntaryForm = ({ data }: Props) => {
     },
   });
 
-  if (isLoading) {
-    dispatch(setLoading(true));
-  }
-
-  if (isSuccess) {
-    dispatch(setLoading(false));
-  }
-
+  useEffect(() => {
+    if (isLoading) dispatch(setLoading(true));
+    else dispatch(setLoading(false));
+  }, [isLoading, dispatch]);
   return (
     <>
       <StyledDashboardVoluntaryMainContentFormsContainer

@@ -12,9 +12,6 @@ export interface ActiveChatProps {
 }
 
 const MessagesPage = () => {
-  const { title, previousTitle } = useBreadcrumbs();
-  console.log("🚀 ~ title:", title);
-
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar title="Wiadomości" />

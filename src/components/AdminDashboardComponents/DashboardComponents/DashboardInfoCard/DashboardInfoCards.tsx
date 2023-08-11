@@ -8,12 +8,15 @@ import {
   SearchCircleIcon,
   UserCircleIcon,
 } from "components/SharedComponents/icons/icons";
+import ErrorCards from "./ErrorCards";
 
 const DashboardInfoCards = () => {
-  const { data, isLoading, isError, error, isSuccess } = useShelterStats();
+  const { data, isLoading, isError, error } = useShelterStats();
 
   if (isError) {
     console.log(error);
+
+    return <ErrorCards />;
   }
 
   return (

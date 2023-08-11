@@ -10,13 +10,14 @@ import {
 } from "./DashboardNewestAnimalCards.styled";
 import DashboardNewestAnimalCardsItem from "./DashboardNewestAnimalCardsItem";
 import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAnimalCardsItemContainerSkeleton";
+import ErrorNewestAnimal from "./ErrorNewestAnimal";
 
 const DashboardNewestAnimalCards = () => {
   const { isLoading, data, isError, error, isSuccess } = useShelterCards();
 
   if (isError) {
     console.log(error);
-    return null;
+    return <ErrorNewestAnimal />;
   }
 
   return (

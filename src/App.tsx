@@ -27,7 +27,7 @@ import PreLoaderModal from "components/SharedComponents/PreLoader/PreLoader";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 300000,
+      retry: 3,
     },
   },
 });
