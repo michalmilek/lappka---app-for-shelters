@@ -6,6 +6,7 @@ export const DashboardNewestAnimalCardsItemContainer = styled.div`
   border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
+  height: 100%;
   transition: all 400ms ease-in-out;
   box-shadow: 0px 1px 2px 0px #1018280f;
 
@@ -31,8 +32,13 @@ export const DashboardNewestAnimalCardsItemImg = styled.img`
     height: 150px;
   }
 
+  @media screen and (max-width: 1480px) {
+    width: 190px;
+    height: 135px;
+  }
+
   @media screen and (max-width: 1350px) {
-    width: 180px;
+    width: 165px;
     height: 100px;
   }
 

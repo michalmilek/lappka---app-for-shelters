@@ -172,13 +172,6 @@ export const CroppedImage = styled.img`
 `;
 
 export const ReactImageCropContainer = styled(ReactCrop)`
-  max-height: 800px;
-
-  @media screen and (max-width: 1440px) {
-    max-height: 700px;
-  }
-
-  @media screen and (max-width: 1024px) {
-    max-height: 600px;
-  }
+  max-height: 80vh;
+  display: flex;
 `;
