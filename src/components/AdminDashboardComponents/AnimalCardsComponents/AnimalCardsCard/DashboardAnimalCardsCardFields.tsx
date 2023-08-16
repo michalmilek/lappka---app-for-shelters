@@ -68,45 +68,44 @@ const DashboardAnimalCardsCardFields: React.FC<
         )}
       </FormRow>
       <FormRow label="Gatunek">
-        <Input
-          readOnly={!isEditOn}
-          error={
-            formik.errors.breed && formik.touched.breed
-              ? formik.errors.breed
-              : undefined
-          }
-          label="Rasa"
-          placeholder="Wpisz"
-          inputSize="Large"
-          name="breed"
-          value={formik.values.breed}
-          onChange={formik.handleChange}
-        />
+        {!isEditOn ? (
+          <Input
+            readOnly
+            error={
+              formik.errors.breed && formik.touched.breed
+                ? formik.errors.breed
+                : undefined
+            }
+            placeholder="Wpisz"
+            inputSize="Large"
+            name="breed"
+            value={formik.values.type}
+            onChange={formik.handleChange}
+          />
+        ) : (
+          <SelectSecond
+            label=""
+            options={[
+              { value: "Dog", label: "Pies" },
+              { value: "Cat", label: "Kot" },
+              { value: "Other", label: "Inny" },
+            ]}
+            dropdownIcon={<ArrowDownIcon />}
+            value={formik.values.type}
+            handleChange={(option) => {
+              formik.setFieldTouched("type", true);
+              formik.setFieldValue("type", option);
+            }}
+          />
+        )}
       </FormRow>
       {formik.values.type !== "Other" && (
         <FormRow label="Rasa">
-          {!isEditOn ? (
-            <Input
-              readOnly
-              inputSize="Large"
-              value={formik.values.breed}
-            />
-          ) : (
-            <SelectSecond
-              label=""
-              options={
-                formik.values.type === "Dog"
-                  ? PetsBreeds.dogsBreeds
-                  : PetsBreeds.catBreeds
-              }
-              dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.breed}
-              handleChange={(option) => {
-                formik.setFieldTouched("breed", true);
-                formik.setFieldValue("breed", option);
-              }}
-            />
-          )}
+          <Input
+            readOnly={!isEditOn}
+            inputSize="Large"
+            value={formik.values.breed}
+          />
         </FormRow>
       )}
       <FormRow label="Waga">

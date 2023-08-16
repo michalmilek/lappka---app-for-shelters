@@ -1,3 +1,4 @@
+import { ReactCrop } from "react-image-crop";
 import styled from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { CloseIcon, PlusIcon } from "../icons/icons";
@@ -60,6 +61,24 @@ export const StyledImgPreviewContainer = styled.div`
   width: 56px;
   height: 72px;
   object-fit: "cover";
+
+  .editBtn {
+    display: none;
+  }
+
+  &:hover {
+    .editBtn {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+      color: ${getColor("red800")};
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
 `;
 
 export const StyledPlusIcon = styled(PlusIcon)`
@@ -76,6 +95,12 @@ export const StyledPreviewPhoto = styled.img`
   height: 100%;
   object-fit: "cover";
   border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export const StyledCloseIcon = styled(CloseIcon)`
@@ -92,6 +117,12 @@ export const StyledCloseIcon = styled(CloseIcon)`
 
   & path {
     stroke: ${getColor("midGray2")};
+  }
+
+  &:hover {
+    .editBtn {
+      display: none;
+    }
   }
 `;
 
@@ -110,8 +141,6 @@ export const ModalDiv = styled.div`
 `;
 
 export const ModalContentContainer = styled.div`
-  max-height: 800px;
-  max-width: 1000px;
   border-radius: 8px;
 
   background: ${getColor("white")};
@@ -136,8 +165,20 @@ export const ModalFooter = styled.footer`
 `;
 
 export const CroppedImage = styled.img`
-  max-height: 1200px;
+  max-height: 800px;
   max-width: 1200px;
   object-fit: cover;
   object-position: center;
+`;
+
+export const ReactImageCropContainer = styled(ReactCrop)`
+  max-height: 800px;
+
+  @media screen and (max-width: 1440px) {
+    max-height: 700px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    max-height: 600px;
+  }
 `;

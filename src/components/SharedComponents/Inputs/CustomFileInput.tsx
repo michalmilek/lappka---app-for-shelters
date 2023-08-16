@@ -16,6 +16,9 @@ import {
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
 import { dataURLtoFile } from "./Crop/imageUtils";
+import { useSelector } from "react-redux";
+import { selectImageHeight, selectImageWidth } from "redux/imageSlice";
+import useDeviceType from "hooks/useDeviceType";
 export interface CustomFileInputProps {
   label?: string;
   description?: string;
@@ -27,6 +30,10 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   description = "",
   label = "",
 }) => {
+  const deviceType = useDeviceType();
+  const largerThanTablet = deviceType !== "tablet" && deviceType !== "mobile";
+  const imgHeight = useSelector(selectImageHeight);
+  const imgWidth = useSelector(selectImageWidth);
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +43,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     null
   );
   const [initialFileUpload, setInitialFileUpload] = useState(true);
+  const [editFileFlag, setEditFileFlag] = useState(false);
 
   const handleCrop = (cropValue: Crop) => {
     setCrop(cropValue);
@@ -70,7 +78,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         )
       ).then((previews) => {
         setInitialFileUpload(true);
-        setFilePreviews(previews);
+        setFilePreviews([...filePreviews, ...previews]);
       });
     }
   };
@@ -113,31 +121,48 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   };
 
   const handleSaveImage = (index: number) => {
+    if (!selectedImage || !crop) {
+      return;
+    }
+
     const image = document.createElement("img");
     image.src = selectedImage!;
     const canvas = document.createElement("canvas");
 
-    const scaleX = image.naturalWidth / image.width!;
-    const scaleY = image.naturalHeight / image.height!;
-    canvas.width = crop!.width!;
-    canvas.height = crop!.height!;
+    const scaleX = image.naturalWidth / imgWidth!;
+    const scaleY = image.naturalHeight / imgHeight!;
 
-    const ctx = canvas.getContext("2d")!;
+    const pixelRatio = window.devicePixelRatio;
+    const transformedWidth = crop.width! * scaleX * pixelRatio;
+    const transformedHeight = crop.height! * scaleY * pixelRatio;
+
+    canvas.width = transformedWidth;
+    canvas.height = transformedHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      return;
+    }
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx.imageSmoothingQuality = "high";
+
     ctx.drawImage(
       image,
-      crop!.x * scaleX,
-      crop!.y * scaleY,
-      crop!.width! * scaleX,
-      crop!.height! * scaleY,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
       0,
       0,
-      crop!.width!,
-      crop!.height!
+      transformedWidth,
+      transformedHeight
     );
 
     canvas.toBlob(
       (blob) => {
-        const base64String = canvas.toDataURL();
+        const base64String = canvas.toDataURL("image/jpeg");
         const byteString = atob(base64String.split(",")[1]);
         const arrayBuffer = new ArrayBuffer(byteString.length);
         const uintArray = new Uint8Array(arrayBuffer);
@@ -157,6 +182,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           setInitialFileUpload(false);
           setSelectedImage(null);
           setSelectedImageNumber(null);
+          setEditFileFlag(true);
         } else if (
           typeof selectedImageNumber === "number" &&
           fileNames.length - 1 > selectedImageNumber
@@ -172,7 +198,180 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         ) {
           setSelectedImage(null);
           setSelectedImageNumber(null);
+          setEditFileFlag(true);
         }
+      },
+      "image/jpeg",
+      1
+    );
+  };
+
+  const handleSaveUncroppedImage = (index: number) => {
+    if (!selectedImage) {
+      return;
+    }
+
+    const image = document.createElement("img");
+    image.src = selectedImage!;
+    const canvas = document.createElement("canvas");
+
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      return;
+    }
+
+    ctx.drawImage(image, 0, 0);
+
+    canvas.toBlob(
+      (blob) => {
+        const base64String = canvas.toDataURL("image/jpeg");
+        const byteString = atob(base64String.split(",")[1]);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uintArray = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+          uintArray[i] = byteString.charCodeAt(i);
+        }
+        const newFile = new File([arrayBuffer], fileNames[index], {
+          type: "image/jpeg",
+        });
+
+        const updatedPreviews = [...filePreviews];
+        updatedPreviews.splice(index, 1, base64String);
+        setFilePreviews(updatedPreviews);
+
+        onFileChange(newFile);
+        if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
+          setInitialFileUpload(false);
+          setSelectedImage(null);
+          setSelectedImageNumber(null);
+          setEditFileFlag(true);
+        } else if (
+          typeof selectedImageNumber === "number" &&
+          fileNames.length - 1 > selectedImageNumber
+        ) {
+          if (initialFileUpload) {
+            setInitialFileUpload(false);
+          }
+          setSelectedImage(filePreviews[selectedImageNumber + 1]);
+          setSelectedImageNumber(selectedImageNumber + 1);
+        } else if (
+          typeof selectedImageNumber === "number" &&
+          fileNames.length - 1 <= selectedImageNumber
+        ) {
+          setSelectedImage(null);
+          setSelectedImageNumber(null);
+          setEditFileFlag(true);
+        }
+      },
+      "image/jpeg",
+      1
+    );
+  };
+
+  const handleSaveEditImage = (index: number) => {
+    if (!selectedImage || !crop) {
+      return;
+    }
+
+    const image = document.createElement("img");
+    image.src = selectedImage!;
+    const canvas = document.createElement("canvas");
+
+    const scaleX = image.naturalWidth / imgWidth!;
+    const scaleY = image.naturalHeight / imgHeight!;
+
+    const pixelRatio = window.devicePixelRatio;
+    const transformedWidth = crop.width! * scaleX * pixelRatio;
+    const transformedHeight = crop.height! * scaleY * pixelRatio;
+
+    canvas.width = transformedWidth;
+    canvas.height = transformedHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      return;
+    }
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx.imageSmoothingQuality = "high";
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      transformedWidth,
+      transformedHeight
+    );
+
+    canvas.toBlob(
+      (blob) => {
+        const base64String = canvas.toDataURL("image/jpeg");
+        const byteString = atob(base64String.split(",")[1]);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uintArray = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+          uintArray[i] = byteString.charCodeAt(i);
+        }
+        const newFile = new File([arrayBuffer], fileNames[index], {
+          type: "image/jpeg",
+        });
+
+        const updatedPreviews = [...filePreviews];
+        updatedPreviews.splice(index, 1, base64String);
+        setFilePreviews(updatedPreviews);
+
+        onFileChange(newFile);
+        setSelectedImage(null);
+        setSelectedImageNumber(null);
+      },
+      "image/jpeg",
+      1
+    );
+  };
+
+  const handleSaveEditUncroppedImage = (index: number) => {
+    if (!selectedImage) {
+      return;
+    }
+
+    const image = document.createElement("img");
+    image.src = selectedImage!;
+    const canvas = document.createElement("canvas");
+
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      return;
+    }
+
+    ctx.drawImage(image, 0, 0);
+
+    canvas.toBlob(
+      (blob) => {
+        const base64String = canvas.toDataURL("image/jpeg");
+        const newFile = new File([blob!], fileNames[index], {
+          type: "image/jpeg",
+        });
+
+        const updatedPreviews = [...filePreviews];
+        updatedPreviews.splice(index, 1, base64String);
+        setFilePreviews(updatedPreviews);
+
+        onFileChange(newFile);
+        setSelectedImage(null);
+        setSelectedImageNumber(null);
       },
       "image/jpeg",
       1
@@ -225,25 +424,43 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           {filePreviews.map((preview, index) => (
             <StyledImgPreviewContainer key={preview + index}>
               <StyledPreviewPhoto
+                title="Edytuj zdjęcie"
                 key={index}
                 src={preview}
                 alt={`Preview ${fileNames[index]}`}
-                /*  onClick={() => {
+                onClick={() => {
                   setSelectedImage(preview);
                   setSelectedImageNumber(index);
-                }} */
+                }}
               />
-              <StyledCloseIcon onClick={() => handleRemoveFile(index)} />
+              {<span className="editBtn">Edytuj</span>}
+              <StyledCloseIcon
+                title="Usuń zdjęcie"
+                onClick={() => handleRemoveFile(index)}
+              />
             </StyledImgPreviewContainer>
           ))}
         </StyledImgsContainer>
       )}
 
-      {selectedImage && (
+      {selectedImage && !editFileFlag && largerThanTablet && (
         <ImageCrop
           crop={crop}
           handleCrop={handleCrop}
           handleSaveImage={handleSaveImage}
+          handleSelectedImageChange={handleSelectedImageChange}
+          selectedImage={selectedImage}
+          selectedImageNumber={selectedImageNumber}
+          handleSaveUncroppedImage={handleSaveUncroppedImage}
+        />
+      )}
+
+      {selectedImage && editFileFlag && largerThanTablet && (
+        <ImageCrop
+          crop={crop}
+          handleCrop={handleCrop}
+          handleSaveImage={handleSaveEditImage}
+          handleSaveUncroppedImage={handleSaveEditUncroppedImage}
           handleSelectedImageChange={handleSelectedImageChange}
           selectedImage={selectedImage}
           selectedImageNumber={selectedImageNumber}
