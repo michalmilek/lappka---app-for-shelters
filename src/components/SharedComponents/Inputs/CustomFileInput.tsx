@@ -77,8 +77,14 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             })
         )
       ).then((previews) => {
-        setInitialFileUpload(true);
         setFilePreviews([...filePreviews, ...previews]);
+        if (filePreviews.length === 0) {
+          setSelectedImage(previews[0]);
+          setSelectedImageNumber(0);
+        } else {
+          setSelectedImage(previews[0]);
+          setSelectedImageNumber(filePreviews.length);
+        }
       });
     }
   };
@@ -120,21 +126,28 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     }
   };
 
-  const handleSaveImage = (index: number) => {
+  const saveImage = (index: number, preserveAspectRatio?: boolean) => {
     if (!selectedImage || !crop) {
       return;
     }
 
     const image = document.createElement("img");
-    image.src = selectedImage!;
+    image.src = selectedImage;
     const canvas = document.createElement("canvas");
 
     const scaleX = image.naturalWidth / imgWidth!;
     const scaleY = image.naturalHeight / imgHeight!;
 
     const pixelRatio = window.devicePixelRatio;
-    const transformedWidth = crop.width! * scaleX * pixelRatio;
-    const transformedHeight = crop.height! * scaleY * pixelRatio;
+    let transformedWidth: number, transformedHeight: number;
+
+    if (preserveAspectRatio) {
+      transformedWidth = crop.width * scaleX * pixelRatio;
+      transformedHeight = crop.height * scaleY * pixelRatio;
+    } else {
+      transformedWidth = image.naturalWidth;
+      transformedHeight = image.naturalHeight;
+    }
 
     canvas.width = transformedWidth;
     canvas.height = transformedHeight;
@@ -148,242 +161,103 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     ctx.imageSmoothingQuality = "high";
 
-    ctx.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      transformedWidth,
-      transformedHeight
-    );
+    if (preserveAspectRatio) {
+      ctx.drawImage(
+        image,
+        crop.x * scaleX,
+        crop.y * scaleY,
+        crop.width * scaleX,
+        crop.height * scaleY,
+        0,
+        0,
+        transformedWidth,
+        transformedHeight
+      );
+    } else {
+      ctx.drawImage(image, 0, 0);
+    }
 
-    canvas.toBlob(
-      (blob) => {
-        const base64String = canvas.toDataURL("image/jpeg");
-        const byteString = atob(base64String.split(",")[1]);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) {
-          uintArray[i] = byteString.charCodeAt(i);
-        }
-        const newFile = new File([arrayBuffer], fileNames[index], {
-          type: "image/jpeg",
-        });
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        return;
+      }
 
-        const updatedPreviews = [...filePreviews];
-        updatedPreviews.splice(index, 1, base64String);
-        setFilePreviews(updatedPreviews);
+      const file = new File([blob], fileNames[index], {
+        type: "image/jpeg",
+      });
 
-        onFileChange(newFile);
-        if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
-          setInitialFileUpload(false);
-          setSelectedImage(null);
-          setSelectedImageNumber(null);
-          setEditFileFlag(true);
-        } else if (
-          typeof selectedImageNumber === "number" &&
-          fileNames.length - 1 > selectedImageNumber
-        ) {
-          if (initialFileUpload) {
-            setInitialFileUpload(false);
-          }
-          setSelectedImage(filePreviews[selectedImageNumber + 1]);
-          setSelectedImageNumber(selectedImageNumber + 1);
-        } else if (
-          typeof selectedImageNumber === "number" &&
-          fileNames.length - 1 <= selectedImageNumber
-        ) {
-          setSelectedImage(null);
-          setSelectedImageNumber(null);
-          setEditFileFlag(true);
-        }
-      },
-      "image/jpeg",
-      1
-    );
+      const updatedPreviews = [...filePreviews];
+      updatedPreviews.splice(index, 1, canvas.toDataURL("image/jpeg"));
+      setFilePreviews(updatedPreviews);
+
+      onFileChange(file);
+    }, "image/jpeg");
+  };
+
+  const handleSaveImage = (index: number) => {
+    saveImage(index, true);
+
+    if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
+      setInitialFileUpload(false);
+      setSelectedImage(null);
+      setSelectedImageNumber(null);
+      setEditFileFlag(true);
+    } else if (
+      typeof selectedImageNumber === "number" &&
+      fileNames.length - 1 > selectedImageNumber
+    ) {
+      if (initialFileUpload) {
+        setInitialFileUpload(false);
+      }
+      setSelectedImage(filePreviews[selectedImageNumber + 1]);
+      setSelectedImageNumber(selectedImageNumber + 1);
+    } else if (
+      typeof selectedImageNumber === "number" &&
+      fileNames.length - 1 <= selectedImageNumber
+    ) {
+      setSelectedImage(null);
+      setSelectedImageNumber(null);
+      setEditFileFlag(true);
+    }
   };
 
   const handleSaveUncroppedImage = (index: number) => {
-    if (!selectedImage) {
-      return;
+    saveImage(index, false);
+    if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
+      setInitialFileUpload(false);
+      setSelectedImage(null);
+      setSelectedImageNumber(null);
+      setEditFileFlag(true);
+    } else if (
+      typeof selectedImageNumber === "number" &&
+      fileNames.length - 1 > selectedImageNumber
+    ) {
+      if (initialFileUpload) {
+        setInitialFileUpload(false);
+      }
+      setSelectedImage(filePreviews[selectedImageNumber + 1]);
+      setSelectedImageNumber(selectedImageNumber + 1);
+    } else if (
+      typeof selectedImageNumber === "number" &&
+      fileNames.length - 1 <= selectedImageNumber
+    ) {
+      setSelectedImage(null);
+      setSelectedImageNumber(null);
+      setEditFileFlag(true);
     }
-
-    const image = document.createElement("img");
-    image.src = selectedImage!;
-    const canvas = document.createElement("canvas");
-
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
-
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-      return;
-    }
-
-    ctx.drawImage(image, 0, 0);
-
-    canvas.toBlob(
-      (blob) => {
-        const base64String = canvas.toDataURL("image/jpeg");
-        const byteString = atob(base64String.split(",")[1]);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) {
-          uintArray[i] = byteString.charCodeAt(i);
-        }
-        const newFile = new File([arrayBuffer], fileNames[index], {
-          type: "image/jpeg",
-        });
-
-        const updatedPreviews = [...filePreviews];
-        updatedPreviews.splice(index, 1, base64String);
-        setFilePreviews(updatedPreviews);
-
-        onFileChange(newFile);
-        if (fileNames.length === 1 && typeof selectedImageNumber === "number") {
-          setInitialFileUpload(false);
-          setSelectedImage(null);
-          setSelectedImageNumber(null);
-          setEditFileFlag(true);
-        } else if (
-          typeof selectedImageNumber === "number" &&
-          fileNames.length - 1 > selectedImageNumber
-        ) {
-          if (initialFileUpload) {
-            setInitialFileUpload(false);
-          }
-          setSelectedImage(filePreviews[selectedImageNumber + 1]);
-          setSelectedImageNumber(selectedImageNumber + 1);
-        } else if (
-          typeof selectedImageNumber === "number" &&
-          fileNames.length - 1 <= selectedImageNumber
-        ) {
-          setSelectedImage(null);
-          setSelectedImageNumber(null);
-          setEditFileFlag(true);
-        }
-      },
-      "image/jpeg",
-      1
-    );
   };
 
   const handleSaveEditImage = (index: number) => {
-    if (!selectedImage || !crop) {
-      return;
-    }
-
-    const image = document.createElement("img");
-    image.src = selectedImage!;
-    const canvas = document.createElement("canvas");
-
-    const scaleX = image.naturalWidth / imgWidth!;
-    const scaleY = image.naturalHeight / imgHeight!;
-
-    const pixelRatio = window.devicePixelRatio;
-    const transformedWidth = crop.width! * scaleX * pixelRatio;
-    const transformedHeight = crop.height! * scaleY * pixelRatio;
-
-    canvas.width = transformedWidth;
-    canvas.height = transformedHeight;
-
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-      return;
-    }
-
-    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = "high";
-
-    ctx.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      transformedWidth,
-      transformedHeight
-    );
-
-    canvas.toBlob(
-      (blob) => {
-        const base64String = canvas.toDataURL("image/jpeg");
-        const byteString = atob(base64String.split(",")[1]);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) {
-          uintArray[i] = byteString.charCodeAt(i);
-        }
-        const newFile = new File([arrayBuffer], fileNames[index], {
-          type: "image/jpeg",
-        });
-
-        const updatedPreviews = [...filePreviews];
-        updatedPreviews.splice(index, 1, base64String);
-        setFilePreviews(updatedPreviews);
-
-        onFileChange(newFile);
-        setSelectedImage(null);
-        setSelectedImageNumber(null);
-      },
-      "image/jpeg",
-      1
-    );
+    saveImage(index, true);
+    setSelectedImage(null);
+    setSelectedImageNumber(null);
   };
 
   const handleSaveEditUncroppedImage = (index: number) => {
-    if (!selectedImage) {
-      return;
-    }
-
-    const image = document.createElement("img");
-    image.src = selectedImage!;
-    const canvas = document.createElement("canvas");
-
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
-
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-      return;
-    }
-
-    ctx.drawImage(image, 0, 0);
-
-    canvas.toBlob(
-      (blob) => {
-        const base64String = canvas.toDataURL("image/jpeg");
-        const newFile = new File([blob!], fileNames[index], {
-          type: "image/jpeg",
-        });
-
-        const updatedPreviews = [...filePreviews];
-        updatedPreviews.splice(index, 1, base64String);
-        setFilePreviews(updatedPreviews);
-
-        onFileChange(newFile);
-        setSelectedImage(null);
-        setSelectedImageNumber(null);
-      },
-      "image/jpeg",
-      1
-    );
+    saveImage(index, false);
+    setSelectedImage(null);
+    setSelectedImageNumber(null);
   };
-
-  useEffect(() => {
-    if (initialFileUpload && filePreviews) {
-      setSelectedImageNumber(0);
-      setSelectedImage(filePreviews[0]);
-    }
-  }, [initialFileUpload, filePreviews]);
 
   return (
     <FullContainer>

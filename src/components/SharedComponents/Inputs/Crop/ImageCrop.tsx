@@ -1,10 +1,5 @@
 import React, { useRef } from "react";
-import ReactCrop, {
-  centerCrop,
-  makeAspectCrop,
-  Crop,
-  PixelCrop,
-} from "react-image-crop";
+import { centerCrop, makeAspectCrop, Crop, PixelCrop } from "react-image-crop";
 import Button from "components/SharedComponents/Button/Button";
 import {
   ModalContentContainer,
@@ -16,7 +11,6 @@ import {
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useDispatch } from "react-redux";
 import { setHeight, setWidth } from "redux/imageSlice";
-import { getColor } from "utils/styles/getStyle/getColor";
 
 interface ImageCropProps {
   crop?: Crop;
@@ -91,7 +85,6 @@ const ImageCrop: React.FC<ImageCropProps> = ({
           crop={crop}
           onChange={(newCrop: PixelCrop) => handleCrop(newCrop)}>
           <img
-            style={{ border: `2px solid ${getColor("facebook")}` }}
             ref={imgRef}
             onLoad={onImageLoad}
             src={selectedImage || ""}
