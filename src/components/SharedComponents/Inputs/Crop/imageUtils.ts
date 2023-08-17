@@ -1,4 +1,4 @@
-export function createFormDataFromBase64(
+/* export function createFormDataFromBase64(
   base64Array: string[],
   fileNames: string[]
 ) {
@@ -8,7 +8,7 @@ export function createFormDataFromBase64(
     formData.append(`file-${index}`, file);
   });
   return formData;
-}
+} */
 
 export function dataURLtoFile(dataURL: string, fileName: string) {
   const arr = dataURL.split(",");

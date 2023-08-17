@@ -22,9 +22,9 @@ interface ExtendedLinkProps extends LinkProps {
   letterSpacing?: letterSpacing;
   lineHeight?: lineHeight;
   variant?: TypographyVariant;
-  underline?: boolean;
-  underlineColor?: Color;
-  underlineOpacity?:
+  $underline?: boolean;
+  $underlineColor?: Color;
+  $underlineOpacity?:
     | 0
     | 0.1
     | 0.2
@@ -47,12 +47,12 @@ const StyledLink = styled(Link)<ExtendedLinkProps>`
     `}
 
   ${(props) =>
-    props.underline &&
-    props.underlineColor &&
-    props.underlineOpacity &&
+    props.$underline &&
+    props.$underlineColor &&
+    props.$underlineOpacity &&
     css`
       border-bottom: 1px solid
-        ${hexToRGBA(getColor(props.underlineColor), props.underlineOpacity)};
+        ${hexToRGBA(getColor(props.$underlineColor), props.$underlineOpacity)};
     `}
 
     ${({ variant }) => variant && typographyVariants[variant]}

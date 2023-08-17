@@ -8,10 +8,15 @@ import {
   getShelterCards,
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
+  getShelterCardsArchiveChartDataForWeek,
+  getShelterCardsCard,
   getShelterStats,
   getShelterVolunteering,
+  postShelterCardsCat,
   updateShelterVolunteering,
 } from "./petControllers/petControllers";
+import { postStoragePicture } from "./storageControllers/storageControllers";
+import { getUser, patchNewPassword } from "./userControllers/userControllers";
 
 export const handlers = [
   login,
@@ -24,4 +29,10 @@ export const handlers = [
   updateShelterVolunteering,
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
+  getShelterCardsArchiveChartDataForWeek,
+  getShelterCardsCard,
+  postStoragePicture,
+  postShelterCardsCat,
+  getUser,
+  patchNewPassword,
 ];

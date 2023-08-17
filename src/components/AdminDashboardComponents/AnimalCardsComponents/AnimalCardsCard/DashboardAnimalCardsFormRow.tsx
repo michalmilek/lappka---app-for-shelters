@@ -11,6 +11,7 @@ const FormRowContainer = styled.div`
   gap: 4px;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
 const HalfWidthField = styled.div`

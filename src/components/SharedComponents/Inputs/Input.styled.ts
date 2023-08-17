@@ -101,7 +101,7 @@ export const InputField = styled.input<InputProps>`
 
 export const IconContainer = styled.div<InputProps>`
   cursor: pointer;
-  z-index: 2;
+  z-index: 1000;
   position: absolute;
   top: 50%;
   right: ${(props) => {

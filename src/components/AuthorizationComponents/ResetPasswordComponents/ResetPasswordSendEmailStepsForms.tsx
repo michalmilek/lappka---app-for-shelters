@@ -9,7 +9,7 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import Input from "components/SharedComponents/Inputs/Input";
 import Button from "components/SharedComponents/Button/Button";
 import { useNavigate } from "react-router-dom";
-import { useResetPasswordSendEmailMutation } from "apiCalls/auth/authHooks";
+import { useResetPasswordSendEmailMutation } from "services/auth/authServices";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
 
@@ -79,7 +79,7 @@ export const ResetPasswordSendEmailStep1Form = ({
       </ResetPasswordInputContainer>
 
       <Button
-        width={"100%"}
+        isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Resetuj hasło
       </Button>

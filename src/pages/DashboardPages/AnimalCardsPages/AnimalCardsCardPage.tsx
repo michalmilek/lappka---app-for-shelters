@@ -5,7 +5,7 @@ import {
   StyledCardFormComponent,
   StyledCardHeader,
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCard.styled";
-import DashboardAnimalCardsCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCardForm";
+import DashboardAnimalCardsCardStateHandler from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCardStateHandler";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
@@ -13,71 +13,66 @@ import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import useDeviceType from "hooks/useDeviceType";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AnimalCardsCardPage = () => {
   const [isEditOn, setIsEditOn] = useState(false);
   const deviceType = useDeviceType();
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  return (
-    <StyledProtectedPageContent>
-      <DashboardNavbar
-        previousTitle="Karty zwierząt / "
-        title="Bella"
-      />
-      <StyledDashboardAddNewCardMainContent>
-        <StyledCardFormComponent>
-          <StyledCardHeader>
-            <CardButton
-              type="button"
-              onClick={() => {
-                if (isEditOn) {
-                  setIsEditOn(false);
-                }
-
-                if (!isEditOn) {
-                  navigate(-1);
-                }
-              }}>
-              <ArrowLeftIcon />{" "}
-              <Typography
-                color="midGray1"
-                variant="UI/UI Text 16 Medium Bold">
-                Wróć
-              </Typography>
-            </CardButton>
-
-            {!isEditOn && (
+  if (id)
+    return (
+      <StyledProtectedPageContent>
+        <DashboardNavbar
+          previousTitle="Karty zwierząt / "
+          title="Bella"
+        />
+        <StyledDashboardAddNewCardMainContent>
+          <StyledCardFormComponent>
+            <StyledCardHeader>
               <CardButton
                 type="button"
-                onClick={() => setIsEditOn(true)}>
+                onClick={() => {
+                  if (isEditOn) {
+                    setIsEditOn(false);
+                  }
+
+                  if (!isEditOn) {
+                    navigate(-1);
+                  }
+                }}>
+                <ArrowLeftIcon />{" "}
                 <Typography
-                  tag="span"
-                  variant="UI/UI Text 16 Medium Bold"
-                  color="primary600">
-                  Edytuj
+                  color="midGray1"
+                  variant="UI/UI Text 16 Medium Bold">
+                  Wróć
                 </Typography>
               </CardButton>
-            )}
-          </StyledCardHeader>
-          <DashboardAnimalCardsCardForm isEditOn={isEditOn} />
-          {isEditOn && (
-            <StyledCardFooter>
-              <Button
-                size={deviceType === "desktop" ? "Large" : "Medium"}
-                variant="outline">
-                Anuluj
-              </Button>
-              <Button size={deviceType === "desktop" ? "Large" : "Medium"}>
-                Zapisz
-              </Button>
-            </StyledCardFooter>
-          )}
-        </StyledCardFormComponent>
-      </StyledDashboardAddNewCardMainContent>
-    </StyledProtectedPageContent>
-  );
+
+              {!isEditOn && (
+                <CardButton
+                  type="button"
+                  onClick={() => setIsEditOn(true)}>
+                  <Typography
+                    tag="span"
+                    variant="UI/UI Text 16 Medium Bold"
+                    color="primary600">
+                    Edytuj
+                  </Typography>
+                </CardButton>
+              )}
+            </StyledCardHeader>
+            <DashboardAnimalCardsCardStateHandler
+              id={id}
+              isEditOn={isEditOn}
+            />
+          </StyledCardFormComponent>
+        </StyledDashboardAddNewCardMainContent>
+      </StyledProtectedPageContent>
+    );
+
+  return null;
 };
 
 export default AnimalCardsCardPage;

@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { Pet } from "apiCalls/pet/pet";
+import { Pet } from "services/pet/pet";
 import Typography from "components/SharedComponents/Typography/Typography";
 import {
   ActionHeaderContainer,

@@ -37,13 +37,15 @@ const SkeletonImg = styled.div`
 
   @media screen and (max-width: 1350px) {
     width: 180px;
+    height: 150px;
   }
 
   @media screen and (max-width: 1024px) {
     width: 150px;
   }
   @media screen and (max-width: 550px) {
-    width: 100%;
+    width: 100px;
+    height: 120px;
   }
 `;
 

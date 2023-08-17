@@ -22,7 +22,7 @@ export const StyledCardHeader = styled.header`
   align-items: center;
 `;
 
-export const StyledCardFormContentContainer = styled.div`
+export const StyledCardFormContentContainer = styled.form`
   padding: 0 24px 24px;
   display: flex;
   flex-direction: column;
@@ -37,12 +37,20 @@ export const StyledCardImgContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const StyledCardImg = styled.img`
+
+export const StyledCardSingleImgContainer = styled.div`
+  position: relative;
   flex: 1 1;
   width: 116px;
   height: 120px;
 
   max-width: 140px;
+  border-radius: 12px;
+`;
+
+export const StyledCardImg = styled.img`
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
 `;
 
@@ -71,4 +79,13 @@ export const CardButton = styled.button`
   background: transparent;
   border: none;
   z-index: 50;
+`;
+
+export const AnimalCardsCardFlexInputContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  justify-content: space-between;
 `;

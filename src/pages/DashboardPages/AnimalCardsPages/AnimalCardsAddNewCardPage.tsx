@@ -1,79 +1,113 @@
+import { Animal, Cat, Dog, Other } from "services/pet/pet";
+import {
+  usePostShelterCardsAnimal,
+  usePostShelterCardsCat,
+  usePostShelterCardsDog,
+  usePostShelterCardsOther,
+} from "services/pet/petServices";
+import {
+  GenderType,
+  GenreType,
+  PetBreed,
+  PetBreedLabel,
+} from "services/pet/petTypes";
+import { usePostStoragePictures } from "services/storage/storageServices";
 import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm";
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
+import { BreedArray } from "./AnimalCardsUtils";
 
 export interface AddNewAnimalCardInterface {
-  animalName: string;
+  name: string;
   description: string;
-  genre: {
-    label: "Pies" | "Kot" | "";
-    value: "pies" | "kot" | "";
-  };
-  sex: {
-    label: "Samiec" | "Samiczka" | "";
-    value: "samiec" | "samiczka" | "";
-  };
-  colour: { label: "Jasny" | "Ciemny" | ""; value: "jasny" | "ciemny" | "" };
+  type: GenreType | "";
+  gender: GenderType | "";
+  color: string;
+  months: number | undefined;
   weight: number | undefined;
-  uploadFile: File[];
-  sterilisation: { label: "Tak" | "Nie" | ""; value: "tak" | "nie" | "" };
-  visibility: { label: "Tak" | "Nie" | ""; value: "tak" | "nie" | "" };
+  breed: PetBreed | "";
+  photos: File[] | string[];
+  profilePhoto: string;
+  isSterilized: boolean | "";
+  isVisible: boolean | "";
 }
 
 const validationSchema = Yup.object().shape({
-  animalName: Yup.string().required("To pole jest wymagane"),
+  name: Yup.string().required("To pole jest wymagane"),
   description: Yup.string().required("To pole jest wymagane"),
-  genre: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["pies", "kot"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
+  type: Yup.string()
+    .oneOf(["Dog", "Cat", "Other"], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  breed: Yup.string().when("type", {
+    is: (type: string) => type === "Dog" || type === "Cat",
+    then: () =>
+      Yup.string()
+        .oneOf(BreedArray, "Nieprawidłowy wybór")
+        .required("To pole jest wymagane"),
   }),
-  sex: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["samiec", "samiczka"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
-  colour: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["jasny", "ciemny"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
+  gender: Yup.string()
+    .oneOf(["Male", "Female", "Other"], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  color: Yup.string().required("To pole jest wymagane"),
+  months: Yup.number()
+    .required("To pole jest wymagane")
+    .positive("Wartość musi być większa od zera"),
   weight: Yup.number()
     .required("To pole jest wymagane")
     .positive("Wartość musi być większa od zera"),
-  sterilisation: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["tak", "nie"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
-  visibility: Yup.object().shape({
-    value: Yup.string()
-      .oneOf(["tak", "nie"], "Nieprawidłowy wybór")
-      .required("To pole jest wymagane"),
-  }),
+  isSterilized: Yup.bool()
+    .oneOf([true, false], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
+  isVisible: Yup.bool()
+    .oneOf([true, false], "Nieprawidłowy wybór")
+    .required("To pole jest wymagane"),
 });
 
 const AnimalCardsAddNewCardPage = () => {
   const initialValues: AddNewAnimalCardInterface = {
-    animalName: "",
+    name: "",
     description: "",
-    genre: { label: "", value: "" },
-    sex: { label: "", value: "" },
-    colour: { label: "", value: "" },
+    type: "",
+    gender: "",
+    color: "",
+    months: undefined,
     weight: undefined,
-    uploadFile: [],
-    sterilisation: { label: "", value: "" },
-    visibility: { label: "", value: "" },
+    photos: [],
+    isSterilized: "",
+    isVisible: "",
+    profilePhoto: "",
+    breed: "",
   };
 
-  const onSubmit = (values: AddNewAnimalCardInterface) => {
-    console.log(values);
+  const { isLoading, isError, isSuccess, mutate, data, mutateAsync } =
+    usePostStoragePictures();
+  const {
+    isLoading: isLoadingAnimal,
+    isError: isErrorAnimal,
+    isSuccess: isSuccessAnimal,
+    mutate: postAnimalFn,
+    mutateAsync: postAnimalFnAsync,
+  } = usePostShelterCardsAnimal();
+
+  const onSubmit = async (values: AddNewAnimalCardInterface) => {
+    try {
+      console.log(values);
+      if (formik.values.photos[0] instanceof Array<File>) {
+        await mutateAsync(formik.values.photos[0]);
+        if (isSuccess) {
+          formik.setFieldValue("photos", data);
+          postAnimalFn(values as Animal);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const formik = useFormik({

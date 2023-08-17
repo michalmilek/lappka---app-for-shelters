@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
+
+
 export const StyledDashboardInfoCard = styled.li`
   height: 82px;
   display: flex;
@@ -10,6 +12,7 @@ export const StyledDashboardInfoCard = styled.li`
   gap: 12px;
   align-items: center;
   min-width: 272px;
+  border-radius: 8px;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 

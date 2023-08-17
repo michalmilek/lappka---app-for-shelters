@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled, { css, keyframes } from "styled-components";
 import { CheckIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { getColor } from "utils/styles/getStyle/getColor";
 import {
   OptionItem,
   OptionList,
@@ -10,15 +8,14 @@ import {
   SelectContainerWithLabels,
   SelectDiv,
 } from "./Select.styled";
-import useToast from "hooks/useToast";
 
 export type Option = {
-  value: string;
+  value: string | boolean;
   label: string;
 };
 
 export interface SelectProps<T extends Option>
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "value"> {
   value: Option["value"];
   options: T[];
   handleChange: (value: T) => void;
@@ -100,7 +97,7 @@ function Select<T extends Option>({
           ref={dropdownRef}>
           {options.map((option) => (
             <OptionItem
-              key={option.value}
+              key={option.label}
               onClick={() => handleOptionSelect(option)}>
               <Typography
                 color="darkGray2"

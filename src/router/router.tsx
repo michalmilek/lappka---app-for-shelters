@@ -1,19 +1,19 @@
 export const AuthRoutes = {
-  LOGIN: "/login",
-  REGISTER: "/register",
-  RESETPASSWORD: "/reset-password",
-  RESETPASSWORDTOKEN: "/reset-password/:token",
-  LANDINGPAGE: "/",
+  login: "/login",
+  register: "/register",
+  resetPassword: "/reset-password",
+  resetPasswordToken: "/reset-password/:token",
+  landingPage: "/",
 };
 
 export const DashboardRoutes = {
-  DASHBOARD: "/dashboard",
-  MESSAGES: "/dashboard/messages",
-  ANIMALCARDS: "/dashboard/animal-cards",
-  ANIMALCARDSNEWCARD: "/dashboard/animal-cards/add-new-card",
-  ANIMALCARDSCARD: "/dashboard/animal-cards/:id",
-  VOLUNTARY: "/dashboard/voluntary",
-  EMPLOYEES: "/dashboard/employees",
-  ADDNEWEMPLOYEE: "/dashboard/employees/add-new-employee",
-  ACCOUNTSETTINGS: "/dashboard/account-settings",
+  dashboard: "/dashboard",
+  messages: "/dashboard/messages",
+  animalCards: "/dashboard/animal-cards",
+  animalCardsNewCard: "/dashboard/animal-cards/add-new-card",
+  animalCardsCard: "/dashboard/animal-cards/:id",
+  voluntary: "/dashboard/voluntary",
+  employees: "/dashboard/employees",
+  addNewEmployee: "/dashboard/employees/add-new-employee",
+  accountSettings: "/dashboard/account-settings",
 };

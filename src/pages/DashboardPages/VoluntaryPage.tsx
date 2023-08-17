@@ -1,4 +1,4 @@
-import { useShelterVolunteering } from "apiCalls/pet/petHooks";
+import { useShelterVolunteering } from "services/pet/petServices";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
 import { StyledDashboardVoluntaryMainContent } from "components/AdminDashboardComponents/VoluntaryComponents/DashboardVoluntary.styled";

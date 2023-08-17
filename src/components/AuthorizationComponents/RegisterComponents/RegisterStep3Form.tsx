@@ -11,7 +11,7 @@ const RegisterStep3Form = () => {
     <Button
       onClick={() => navigate("/login")}
       size={deviceType === "desktop" ? "XLarge" : "Large"}
-      width="100%"
+      isFullWidth
       variant="fill"
       type="button">
       Zaloguj się

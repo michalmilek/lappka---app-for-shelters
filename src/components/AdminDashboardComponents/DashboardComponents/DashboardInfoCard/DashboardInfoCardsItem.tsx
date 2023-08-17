@@ -12,9 +12,16 @@ interface Props {
   text: string;
   icon: JSX.Element;
   number: number;
+  gridArea: string;
 }
 
-const DashboardInfoCardsItem = ({ isLoading, text, icon, number }: Props) => {
+const DashboardInfoCardsItem = ({
+  isLoading,
+  text,
+  icon,
+  number,
+  gridArea,
+}: Props) => {
   console.log(isLoading);
   if (isLoading) {
     return <SkeletonCardItem />;

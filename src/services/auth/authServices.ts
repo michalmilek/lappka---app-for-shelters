@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import {
   login,
   registerShelter,
@@ -17,20 +16,13 @@ export const useLoginMutation = () => {
         localStorage.setItem("refreshToken", refreshToken);
       }
     },
-    onError: (error) => {
-      console.error("Wystąpił błąd podczas logowania", error);
-    },
   });
 
   return loginMutation;
 };
 
 export const useRegisterShelterMutation = () => {
-  const registerShelterMutation = useMutation(registerShelter, {
-    onError: (error) => {
-      console.error("Wystąpił błąd podczas resetu hasła", error);
-    },
-  });
+  const registerShelterMutation = useMutation(registerShelter);
 
   return registerShelterMutation;
 };
@@ -57,6 +49,3 @@ export const useResetPasswordSetNewPasswordMutation = () => {
 
   return resetPasswordSendEmailMutation;
 };
-
-
-

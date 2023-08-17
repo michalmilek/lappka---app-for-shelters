@@ -1,0 +1,26 @@
+export const PetsBreeds = {
+  dogsBreeds: [
+    { value: "Dog_Owczarek_Niemiecki", label: "Owczarek Niemiecki" },
+    { value: "Dog_Labrador", label: "Labrador" },
+    { value: "Dog_Buldog", label: "Buldog" },
+    { value: "Dog_Chihuahua", label: "Chihuahua" },
+    { value: "Dog_Kundelek", label: "Kundelek" },
+    { value: "Dog_Kundelek", label: "Kundelek" },
+    { value: "Dog_Beagle", label: "Beagle" },
+    { value: "Dog_Husky", label: "Husky" },
+    { value: "Dog_Collie", label: "Collie" },
+    { value: "Inna", label: "Inna" },
+  ],
+  catBreeds: [
+    { value: "Inna", label: "Inna" },
+    { value: "Cat_Domowy", label: "Domowy" },
+    { value: "Cat_Perski", label: "Perski" },
+    { value: "Cat_Sfinks", label: "Sfinks" },
+    { value: "Cat_Norweski", label: "Norweski" },
+    { value: "Cat_Bengalski", label: "Bengalski" },
+    { value: "Cat_Syjamski", label: "Syjamski" },
+    { value: "Cat_Ragdoll", label: "Ragdoll" },
+    { value: "Cat_Brytyjski", label: "Brytyjski" },
+    { value: "Cat_Szkocki_Zwislouchy", label: "Szkocki Zwislouchy" },
+  ],
+};

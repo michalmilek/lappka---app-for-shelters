@@ -11,7 +11,8 @@ import {
   StyledRegisterInputStep1Container,
 } from "./Register.styled";
 import useDeviceType from "hooks/useDeviceType";
-import { Shelter } from "apiCalls/auth/auth";
+import { Shelter } from "services/auth/auth";
+import { formatPhoneNumber } from "utils/appUtils";
 
 const RegisterStep1Form = ({
   handleFormValues,
@@ -52,7 +53,12 @@ const RegisterStep1Form = ({
     }),
     onSubmit: (values) => {
       if (handleFormValues && handleCurrentStep) {
-        handleFormValues({ shelter: values });
+        handleFormValues({
+          shelter: {
+            ...values,
+            phoneNumber: formatPhoneNumber(values.phoneNumber),
+          },
+        });
         handleCurrentStep(2);
       }
     },

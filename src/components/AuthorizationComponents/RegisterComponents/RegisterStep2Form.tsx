@@ -9,9 +9,10 @@ import {
   StyledRegisterInputContainer,
 } from "./Register.styled";
 import { useEffect } from "react";
-import { useRegisterShelterMutation } from "apiCalls/auth/authHooks";
-import { ShelterRegisterRequest } from "apiCalls/auth/auth";
+import { useRegisterShelterMutation } from "services/auth/authServices";
+import { ShelterRegisterRequest } from "services/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
+import useToast from "hooks/useToast";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
@@ -19,6 +20,7 @@ const RegisterStep2Form = ({
   formValues,
 }: HandleStepProps) => {
   const deviceType = useDeviceType();
+  const { showToast } = useToast();
   const { mutateAsync: registerFn, isSuccess } = useRegisterShelterMutation();
   const formik = useFormik({
     initialValues: {
@@ -69,9 +71,10 @@ const RegisterStep2Form = ({
 
   useEffect(() => {
     if (isSuccess) {
+      showToast("Schronisko zarejestrowane pomyślnie", "success");
       if (handleCurrentStep) handleCurrentStep(3);
     }
-  }, [isSuccess, handleCurrentStep]);
+  }, [isSuccess, handleCurrentStep, showToast]);
 
   return (
     <form onSubmit={formik.handleSubmit}>

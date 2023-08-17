@@ -1,6 +1,11 @@
+import { number } from "prop-types";
 import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { SelectPropsWithoutGeneric } from "./Select";
+
+interface zIndexProps {
+  zIndex?: number;
+}
 
 export const slideDownAnimationIn = keyframes`
   from {
@@ -36,16 +41,17 @@ export const SelectContainerWithLabels = styled.div`
   gap: 8px;
 `;
 
-export const SelectContainer = styled.div`
+export const SelectContainer = styled.div<zIndexProps>`
   position: relative;
   background: ${getColor("white")};
-  z-index: 50;
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : 1200)};
   width: 100%;
 `;
 
 export const SelectDiv = styled.div<SelectPropsWithoutGeneric>`
   cursor: pointer;
-  z-index: 50;
+  position: relative;
+  z-index: 1200;
   background: ${getColor("white")};
   display: flex;
   align-items: center;
@@ -82,7 +88,6 @@ export const OptionList = styled.ul`
   list-style: none;
   width: 100%;
   padding: 4px 0;
-  z-index: 999;
 
   &.slide-in {
     animation: ${slideDownAnimationIn} 0.3s forwards;
@@ -91,10 +96,7 @@ export const OptionList = styled.ul`
   &.slide-out {
     animation: ${slideDownAnimationOut} 0.3s forwards;
   }
-
-  &.display-none {
-    display: none;
-  }
+  z-index: 1500;
 `;
 
 export const OptionItem = styled.li`
@@ -104,7 +106,7 @@ export const OptionItem = styled.li`
   align-items: center;
   padding: 4px 20px;
   cursor: pointer;
-  z-index: 100;
+  z-index: 1500;
 
   &:hover {
     background-color: #f3f3f3;

@@ -1,4 +1,4 @@
-import { useResetPasswordSetNewPasswordMutation } from "apiCalls/auth/authHooks";
+import { useResetPasswordSetNewPasswordMutation } from "services/auth/authServices";
 import Button from "components/SharedComponents/Button/Button";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
@@ -100,7 +100,7 @@ export const ResetPasswordSetPasswordStep1Form = ({
       </ResetPasswordInputContainer>
 
       <Button
-        width={"100%"}
+        isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Utwórz hasło
       </Button>
