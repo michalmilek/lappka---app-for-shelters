@@ -16,9 +16,10 @@ const VoluntaryPage = () => {
 
   useEffect(() => {
     if (isError) {
+      //console.log(error.message);
       showToast("error", "error");
     }
-  }, [isError, showToast]);
+  }, [isError, showToast, error]);
 
   return (
     <StyledProtectedPageContent>

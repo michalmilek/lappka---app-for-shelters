@@ -3,7 +3,12 @@ import Typography from "../Typography/Typography";
 import { styled } from "styled-components";
 import { RadioMarkIcon } from "../icons/icons";
 import { getColor } from "utils/styles/getStyle/getColor";
-import { RadioInput, Radiomark, RadioWrapper } from "./Input.styled";
+import {
+  RadioInput,
+  RadioLabel,
+  Radiomark,
+  RadioWrapper,
+} from "./Input.styled";
 
 export interface RadioInterface
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -13,6 +18,7 @@ export interface RadioInterface
 const CustomRadio: React.FC<RadioInterface> = ({
   checked,
   label,
+  id,
   value = "",
   ...rest
 }) => {
@@ -26,17 +32,11 @@ const CustomRadio: React.FC<RadioInterface> = ({
           value={value}
           checked={checked}
           type="radio"
+          id={id}
           {...rest}
         />
       </Radiomark>
-      {label && (
-        <Typography
-          tag="label"
-          color="darkGray2"
-          variant="UI/UI Text 14 Reg">
-          {label}
-        </Typography>
-      )}
+      {label && <RadioLabel htmlFor={id}>{label}</RadioLabel>}
     </RadioWrapper>
   );
 };

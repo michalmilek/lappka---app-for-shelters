@@ -10,7 +10,7 @@ import {
   createYearData,
 } from "./ChartDataUtils";
 import DashboardAnimalChart from "./DashboardAnimalChart";
-import { SkeletonChart } from "./SkeletonChart";
+import SkeletonChart from "./SkeletonChart";
 import ErrorChart from "./ErrorChart";
 
 export type ChartData = {

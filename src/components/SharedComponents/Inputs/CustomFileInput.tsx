@@ -15,7 +15,6 @@ import {
   StyledPreviewPhoto,
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
-import { dataURLtoFile } from "./Crop/imageUtils";
 import { useSelector } from "react-redux";
 import { selectImageHeight, selectImageWidth } from "redux/imageSlice";
 import useDeviceType from "hooks/useDeviceType";

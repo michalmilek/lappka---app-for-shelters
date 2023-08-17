@@ -31,12 +31,13 @@ const ErrorMessage = styled.p`
   font-size: 18px;
   margin: 0;
   padding: 16px;
+  text-align: center;
 `;
 
 const ErrorVoluntary = () => {
   return (
     <ErrorContainer>
-      <ErrorMessage>{"Wystąpił błąd."}</ErrorMessage>
+      <ErrorMessage>{"Wystąpił błąd podczas pobierania danych."}</ErrorMessage>
     </ErrorContainer>
   );
 };

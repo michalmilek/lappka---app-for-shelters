@@ -47,7 +47,7 @@ export const StyledDashboardAnimalCardsMainContent = styled.article`
     padding: 12px;
   }
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1050px) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

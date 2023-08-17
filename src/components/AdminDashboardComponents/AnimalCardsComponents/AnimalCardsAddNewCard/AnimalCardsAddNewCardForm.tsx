@@ -207,15 +207,10 @@ const AnimalCardsAddNewCardForm = ({
         <Button
           variant="outline"
           type="button"
-          size={deviceType === "desktop" ? "Large" : "Medium"}
           onClick={formik.handleReset}>
           Anuluj
         </Button>
-        <Button
-          size={deviceType === "desktop" ? "Large" : "Medium"}
-          type="submit">
-          Zapisz
-        </Button>
+        <Button type="submit">Zapisz</Button>
       </AnimalCardsAddNewCardFooter>
     </AnimalCardsAddNewCardFormContainer>
   );

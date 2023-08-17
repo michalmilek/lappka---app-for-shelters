@@ -23,7 +23,7 @@ export const StyledCardHeader = styled.header`
 `;
 
 export const StyledCardFormContentContainer = styled.form`
-  padding: 0 24px 24px;
+  padding: 0 24px;
   display: flex;
   flex-direction: column;
   gap: 32px;

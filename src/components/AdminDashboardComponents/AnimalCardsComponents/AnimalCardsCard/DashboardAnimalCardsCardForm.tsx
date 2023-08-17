@@ -215,15 +215,10 @@ const DashboardAnimalCardsCardForm = ({
           <Button
             type="button"
             onClick={() => navigate(-1)}
-            size={deviceType === "desktop" ? "Large" : "Medium"}
             variant="outline">
             Anuluj
           </Button>
-          <Button
-            onClick={() => {}}
-            size={deviceType === "desktop" ? "Large" : "Medium"}>
-            Zapisz
-          </Button>
+          <Button onClick={() => {}}>Zapisz</Button>
         </StyledCardFooter>
       )}
     </StyledCardFormContentContainer>

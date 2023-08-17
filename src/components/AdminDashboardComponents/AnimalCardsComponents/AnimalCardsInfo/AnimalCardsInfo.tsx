@@ -18,7 +18,7 @@ const AnimalCardsInfoContainer = styled.div`
   flex-wrap: wrap;
   height: 100px;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1050px) {
     width: 100%;
   }
 `;

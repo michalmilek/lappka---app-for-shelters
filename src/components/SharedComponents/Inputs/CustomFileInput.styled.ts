@@ -127,6 +127,7 @@ export const StyledCloseIcon = styled(CloseIcon)`
 `;
 
 export const ModalDiv = styled.div`
+  user-select: none;
   position: fixed;
   top: 0;
   left: 0;
