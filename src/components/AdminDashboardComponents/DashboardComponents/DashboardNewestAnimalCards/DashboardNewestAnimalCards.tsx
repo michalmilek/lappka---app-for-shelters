@@ -7,13 +7,17 @@ import {
   DashboardNewestAnimalCardsContainer,
   DashboardNewestAnimalCardsContainerContent,
   DashboardNewestAnimalCardsContainerHeader,
+  DashboardNewestAnimalCardsEmptyCardsList,
 } from "./DashboardNewestAnimalCards.styled";
 import DashboardNewestAnimalCardsItem from "./DashboardNewestAnimalCardsItem";
 import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAnimalCardsItemContainerSkeleton";
 import ErrorNewestAnimal from "./ErrorNewestAnimal";
+import { DashboardRoutes } from "router/router";
+import { useNavigate } from "react-router-dom";
 
 const DashboardNewestAnimalCards = () => {
   const { isLoading, data, isError, error, isSuccess } = useShelterCards();
+  const navigate = useNavigate();
 
   if (isError) {
     console.log(error);
@@ -45,12 +49,26 @@ const DashboardNewestAnimalCards = () => {
         )}
         {isSuccess &&
           data &&
-          data.items.slice(0, 3).map((item, index) => (
+          data.petInListInShelterDto.slice(0, 3).map((item, index) => (
             <DashboardNewestAnimalCardsItem
               key={item.id + index}
               item={item}
             />
           ))}
+        {isSuccess && data?.petInListInShelterDto.length === 0 && (
+          <DashboardNewestAnimalCardsEmptyCardsList>
+            <Typography
+              tag="p"
+              color="darkGray2"
+              variant="UI/UI Text 16 Medium Bold">
+              Brak kart zwierząt w bazie. Dodaj pierwszą kartę.
+            </Typography>
+            <Button
+              onClick={() => navigate(DashboardRoutes.animalCardsNewCard)}>
+              Dodaj pierwszą kartę
+            </Button>
+          </DashboardNewestAnimalCardsEmptyCardsList>
+        )}
       </DashboardNewestAnimalCardsContainerContent>
     </DashboardNewestAnimalCardsContainer>
   );

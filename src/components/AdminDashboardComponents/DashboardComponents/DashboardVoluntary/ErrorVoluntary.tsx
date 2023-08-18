@@ -24,6 +24,10 @@ const ErrorContainer = styled.div`
   height: 351px;
   box-shadow: 0px 2px 4px 0px #5b687114;
   animation: ${appearAnimation} 0.3s ease-in-out;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const ErrorMessage = styled.p`

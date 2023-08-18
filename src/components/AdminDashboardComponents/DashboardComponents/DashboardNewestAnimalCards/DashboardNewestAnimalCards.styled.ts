@@ -34,3 +34,12 @@ export const DashboardNewestAnimalCardsContainerContent = styled.div`
   flex-wrap: wrap;
   height: 100%;
 `;
+
+
+export const DashboardNewestAnimalCardsEmptyCardsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+`;

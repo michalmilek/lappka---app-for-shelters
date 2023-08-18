@@ -1,5 +1,6 @@
+import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 const appearAnimation = keyframes`
@@ -26,18 +27,15 @@ const ErrorContainer = styled.div`
   animation: ${appearAnimation} 0.3s ease-in-out;
 `;
 
-const ErrorMessage = styled.p`
-  color: ${getColor("darkGray2")};
-  font-size: 18px;
-  margin: 0;
-  padding: 16px;
-  text-align: center;
-`;
-
 const ErrorNewestAnimal = () => {
   return (
     <ErrorContainer>
-      <ErrorMessage>{"Wystąpił błąd podczas pobierania danych."}</ErrorMessage>
+      <Typography
+        tag="p"
+        color="darkGray2"
+        variant="UI/UI Text 16 Medium Bold">
+        {"Wystąpił błąd podczas pobierania danych."}
+      </Typography>
     </ErrorContainer>
   );
 };

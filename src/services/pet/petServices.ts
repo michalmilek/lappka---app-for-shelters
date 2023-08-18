@@ -3,6 +3,7 @@ import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import {
+  getShelter,
   getShelterCards,
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
@@ -29,12 +30,21 @@ import {
   ShelterVolunteeringResponse,
 } from "./petTypes";
 
+export const useGetShelter = () => {
+  return useQuery(["shelter"], getShelter);
+};
+
 export const useShelterStats = () => {
   return useQuery(["shelterStats"], getShelterStats);
 };
 
-export const useShelterCards = () => {
-  return useQuery(["shelterCards"], getShelterCards);
+export const useShelterCards = (
+  pageNumber: number = 1,
+  pageSize: number = 10
+) => {
+  return useQuery(["shelterCards", pageSize, pageNumber], () =>
+    getShelterCards([pageSize, pageNumber])
+  );
 };
 
 export const useShelterVolunteering = (id: string) => {

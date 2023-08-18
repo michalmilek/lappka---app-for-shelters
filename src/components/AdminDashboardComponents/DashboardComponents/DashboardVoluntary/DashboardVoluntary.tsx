@@ -10,10 +10,13 @@ import {
 import DashboardVoluntaryItem from "./DashboardVoluntaryItem";
 import SkeletonVoluntary from "./SkeletonVoluntary";
 import ErrorVoluntary from "./ErrorVoluntary";
+import { useSelector } from "react-redux";
+import { selectShelterId } from "redux/shelterSlice";
 
 const DashboardVoluntary = () => {
+  const shelterId = useSelector(selectShelterId);
   const { data, isLoading, isError, error, isSuccess } =
-    useShelterVolunteering("123");
+    useShelterVolunteering(shelterId);
 
   if (isError) {
     console.log(error);

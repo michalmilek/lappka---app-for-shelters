@@ -56,7 +56,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
   const getChartRange = (type: TimeType): number[] => {
     switch (type) {
       case "Month":
-        return [0, 1000];
+        return [0, 10000];
       case "Year":
         return [0, 20000];
       case "Week":
@@ -126,7 +126,13 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
             domain={getChartRange(timeSelect)}
             tickFormatter={timeSelect === "Year" ? formatYAxis : emptyFn}>
             <Label
-              value={timeSelect === "Year" ? "       Tyś" : "Wyświetleń"}
+              value={
+                timeSelect === "Year"
+                  ? "       Tyś"
+                  : timeSelect === "Month"
+                  ? "Wyśw. w miesiącu"
+                  : "Wyświetleń"
+              }
               position="top"
               offset={30}
               viewBox={{ x: 50 }}

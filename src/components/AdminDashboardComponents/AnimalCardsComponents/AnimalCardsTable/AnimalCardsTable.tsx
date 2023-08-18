@@ -47,7 +47,7 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   };
 
   const table = useReactTable({
-    data: data.items,
+    data: data.petInListInShelterDto,
     columns: columnsMemo,
     getCoreRowModel: getCoreRowModel<Pet>(),
     getPaginationRowModel: getPaginationRowModel(),

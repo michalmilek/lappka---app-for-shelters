@@ -1,9 +1,19 @@
+import { LabelHTMLAttributes } from "react";
 import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
+import { typographyVariants } from "utils/styles/getStyle/getFontStyle";
 import { SelectErrorProps } from "./Select";
 
 interface zIndexProps {
   zIndex?: number;
+}
+
+interface SelectedOptionLabelProps
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
+  selectedOption?: {
+    value: string | boolean;
+    label: string;
+  };
 }
 
 export const slideDownAnimationIn = keyframes`
@@ -73,6 +83,13 @@ export const SelectDiv = styled.div<SelectErrorProps>`
   outline: none;
   position: relative;
   height: 40px;
+  cursor: pointer;
+`;
+
+export const SelectLabel = styled.label<SelectedOptionLabelProps>`
+  ${typographyVariants["UI/UI Text 14 Reg"]};
+  color: ${({ selectedOption }) =>
+    selectedOption ? getColor("darkGray2") : getColor("midGray4")};
   cursor: pointer;
 `;
 
