@@ -1,16 +1,12 @@
-import { BreedOption } from "services/pet/petTypes";
 import Button from "components/SharedComponents/Button/Button";
 import Select from "components/SharedComponents/DropdownMenu/Select";
-import SelectSecond from "components/SharedComponents/DropdownMenu/SelectSecond";
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import CustomFileInput from "components/SharedComponents/Inputs/CustomFileInput";
 import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { FormikProps } from "formik";
-import useDeviceType from "hooks/useDeviceType";
 import { AddNewAnimalCardInterface } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
-import { PetsBreeds } from "./AddNewCardUtils";
 import {
   AnimalCardsAddNewCardFlexInputContainer,
   AnimalCardsAddNewCardFooter,
@@ -23,8 +19,6 @@ const AnimalCardsAddNewCardForm = ({
 }: {
   formik: FormikProps<AddNewAnimalCardInterface>;
 }) => {
-  const deviceType = useDeviceType();
-
   const prevFiles = formik.values.photos;
 
   const handleOnFileChange = (files: File[] | null | File) => {
@@ -61,7 +55,7 @@ const AnimalCardsAddNewCardForm = ({
           value={formik.values.description}
           onChange={formik.handleChange}
         />
-        <SelectSecond
+        <Select
           error={
             formik.errors.type && formik.touched.type
               ? formik.errors.type
@@ -125,7 +119,7 @@ const AnimalCardsAddNewCardForm = ({
         </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <SelectSecond
+          <Select
             error={
               formik.errors.gender && formik.touched.gender
                 ? formik.errors.gender
@@ -160,7 +154,7 @@ const AnimalCardsAddNewCardForm = ({
         </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <SelectSecond
+          <Select
             error={
               formik.errors.isSterilized && formik.touched.isSterilized
                 ? formik.errors.isSterilized
@@ -178,7 +172,7 @@ const AnimalCardsAddNewCardForm = ({
               formik.setFieldValue("isSterilized", option);
             }}
           />
-          <SelectSecond
+          <Select
             error={
               formik.errors.isVisible && formik.touched.isVisible
                 ? formik.errors.isVisible
