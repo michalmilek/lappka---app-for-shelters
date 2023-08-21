@@ -18,8 +18,11 @@ import ImageCrop from "./Crop/ImageCrop";
 import { useSelector } from "react-redux";
 import { selectImageHeight, selectImageWidth } from "redux/imageSlice";
 import useDeviceType from "hooks/useDeviceType";
-import { DndContext } from "@dnd-kit/core";
-import Draggable from "../Draggable";
+import { closestCenter, DndContext } from "@dnd-kit/core";
+import { arrayMove, SortableContext } from "@dnd-kit/sortable";
+import { DragEndEvent } from "@dnd-kit/core/dist/types";
+import { horizontalListSortingStrategy } from "@dnd-kit/sortable";
+import SortableItem from "../SortableItem";
 
 export interface CustomFileInputProps {
   label?: string;
@@ -253,6 +256,20 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     setSelectedImageNumber(null);
   };
 
+  const onDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over) return;
+
+    if (active.id !== over?.id) {
+      setFilePreviews((items) => {
+        const activeIndex = items.indexOf(String(active.id));
+        const overIndex = items.indexOf(String(over.id));
+
+        return arrayMove(items, activeIndex, overIndex);
+      });
+    }
+  };
+
   return (
     <FullContainer>
       <FileInputContainerContent>
@@ -287,33 +304,41 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         </Typography>
       </FileInputContainerContent>
 
-      <DndContext>
-        {filePreviews.length > 0 && (
-          <StyledImgsContainer>
-            {filePreviews.map((preview, index) => (
-              <Draggable key={preview + index}>
-                <StyledImgPreviewContainer key={preview + index}>
-                  <StyledPreviewPhoto
-                    title="Edytuj zdjęcie"
-                    key={index}
-                    src={preview}
-                    alt={`Preview ${fileNames[index]}`}
-                    onClick={() => {
-                      setSelectedImage(preview);
-                      setSelectedImageNumber(index);
-                    }}
-                  />
-                  {<span className="editBtn">Edytuj</span>}
-                  <StyledCloseIcon
-                    title="Usuń zdjęcie"
-                    onClick={() => handleRemoveFile(index)}
-                  />
-                </StyledImgPreviewContainer>
-              </Draggable>
-            ))}
-          </StyledImgsContainer>
-        )}
-      </DndContext>
+      {filePreviews.length > 0 && (
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={onDragEnd}>
+          <SortableContext
+            items={filePreviews}
+            strategy={horizontalListSortingStrategy}>
+            <StyledImgsContainer>
+              {filePreviews.map((preview, index) => (
+                <SortableItem
+                  stringImg={preview}
+                  key={preview + index}>
+                  <StyledImgPreviewContainer key={preview + index}>
+                    <StyledPreviewPhoto
+                      title="Edytuj zdjęcie"
+                      key={index}
+                      src={preview}
+                      alt={`Preview ${fileNames[index]}`}
+                      onClick={() => {
+                        setSelectedImage(preview);
+                        setSelectedImageNumber(index);
+                      }}
+                    />
+                    {<span className="editBtn">Edytuj</span>}
+                    <StyledCloseIcon
+                      title="Usuń zdjęcie"
+                      onClick={() => handleRemoveFile(index)}
+                    />
+                  </StyledImgPreviewContainer>
+                </SortableItem>
+              ))}
+            </StyledImgsContainer>
+          </SortableContext>
+        </DndContext>
+      )}
 
       {selectedImage && !editFileFlag && largerThanTablet && (
         <ImageCrop
