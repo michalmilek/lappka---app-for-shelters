@@ -14,6 +14,7 @@ import {
   postShelterCardsAnimal,
   postShelterCardsArchive,
   postShelterCardsCat,
+  postShelterCardsCreatePet,
   postShelterCardsDog,
   postShelterCardsOther,
   putShelterCardsAnimal,
@@ -23,6 +24,7 @@ import {
 } from "./pet";
 import {
   Animal,
+  AnimalCreatePetInterface,
   AnimalEdit,
   Cat,
   Dog,
@@ -105,6 +107,13 @@ export const usePostShelterCardsOther = () => {
 
 export const usePostShelterCardsAnimal = () => {
   const mutation = useMutation((data: Animal) => postShelterCardsAnimal(data));
+
+  return mutation;
+};
+export const usePostShelterCardsCreatePet = () => {
+  const mutation = useMutation((data: AnimalCreatePetInterface) =>
+    postShelterCardsCreatePet(data)
+  );
 
   return mutation;
 };

@@ -1,11 +1,13 @@
 import {
   usePostShelterCardsAnimal,
   usePostShelterCardsCat,
+  usePostShelterCardsCreatePet,
   usePostShelterCardsDog,
   usePostShelterCardsOther,
 } from "services/pet/petServices";
 import {
   Animal,
+  AnimalCreatePetInterface,
   GenderType,
   GenreType,
   PetBreed,
@@ -60,7 +62,9 @@ const validationSchema = Yup.object().shape({
   gender: Yup.string()
     .oneOf(["Male", "Female", "Other"], "Nieprawidłowy wybór")
     .required("To pole jest wymagane"),
-  color: Yup.string().required("To pole jest wymagane"),
+  color: Yup.string()
+    .required("To pole jest wymagane")
+    .matches(/^[a-zA-Z]+$/, "Pole może zawierać tylko litery"),
   months: Yup.number()
     .required("To pole jest wymagane")
     .positive("Wartość musi być większa od zera"),
@@ -100,31 +104,33 @@ const AnimalCardsAddNewCardPage = () => {
     isError: isErrorAnimal,
     isSuccess: isSuccessAnimal,
     mutate: postAnimalFn,
-  } = usePostShelterCardsAnimal();
+  } = usePostShelterCardsCreatePet();
 
   const { mutate: deleteImgFromStorage } = useDeleteStorageImage();
 
-  const onSubmit = async (values: AddNewAnimalCardInterface) => {
-    if (values.photos instanceof Array<File>) {
-      console.log(values.photos);
+  const onSubmit = async () => {
+    if (formik.values.photos instanceof Array<File>) {
+      console.log(formik.values.photos);
 
-      mutate(values.photos as File[], {
-        onSuccess: (responseData) => {
-          formik.setFieldValue("photos", responseData);
-          formik.setFieldValue("profilePicture", responseData[0]);
-          postAnimalFn(formik.values as Animal, {
-            onSuccess: () => {
-              showToast(
-                `Karta dla zwierzęcia o imieniu ${values.name} została utworzona`,
-                "success"
-              );
-              //navigate("/dashboard");
-            },
-          });
-        },
-      });
+      const values = formik.values;
+
+      try {
+        mutate(formik.values.photos as File[], {
+          onSuccess: (data) => {
+            postAnimalFn({
+              ...values,
+              animalCategory: "Undefined",
+              shelterId: "A6313BAD-5AE9-48B8-BED5-08DB9A61FEEF",
+              photos: data,
+              profilePhoto: data[0],
+            } as any);
+          },
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
-    //deleteImgFromStorage("26a15980-b2ef-49e1-b27e-86679852cf77");
+    //deleteImgFromStorage("64fb0b8e-6143-4117-aa75-ca85aed92c16");
   };
 
   const formik = useFormik({
@@ -140,6 +146,15 @@ const AnimalCardsAddNewCardPage = () => {
       dispatch(setLoading(false));
     }
   }, [dispatch, isLoading, isLoadingAnimal]);
+
+  useEffect(() => {
+    if (isSuccessAnimal) {
+      showToast(
+        `Karta dla zwierzęcia o imieniu ${formik.values.name} została utworzona`,
+        "success"
+      );
+    }
+  }, [formik.values.name, isSuccessAnimal, showToast]);
 
   return (
     <StyledProtectedPageContent>

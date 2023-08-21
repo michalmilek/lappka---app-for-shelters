@@ -1,6 +1,7 @@
 import axiosInstance from "services/axiosInstance";
 import {
   Animal,
+  AnimalCreatePetInterface,
   AnimalEdit,
   Cat,
   Dog,
@@ -124,6 +125,20 @@ export const getShelterCardsCard = async (petId: string) => {
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch pet card data");
+  }
+};
+
+export const postShelterCardsCreatePet = async (
+  data: AnimalCreatePetInterface
+) => {
+  try {
+    const response = await axiosInstance.post(
+      "/shelters/cards/CreatePet",
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
 };
 

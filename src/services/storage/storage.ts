@@ -1,13 +1,13 @@
 import axiosInstance from "services/axiosInstance";
 import axios from "axios";
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const MAX_FILE_SIZE = 15 * 1024 * 1024;
 
 export async function postStoragePictures(files: File[]) {
   try {
     const errors = files
       .filter((file) => file.size > MAX_FILE_SIZE)
-      .map((file) => ({ file, error: "File size exceeds the limit (5MB)." }));
+      .map((file) => ({ file, error: "File size exceeds the limit (15MB)." }));
 
     if (errors.length > 0) {
       return errors;

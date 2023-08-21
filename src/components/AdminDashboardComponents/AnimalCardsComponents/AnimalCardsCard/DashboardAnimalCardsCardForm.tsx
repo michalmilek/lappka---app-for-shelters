@@ -20,7 +20,6 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import CustomFileInput from "components/SharedComponents/Inputs/CustomFileInput";
 import Button from "components/SharedComponents/Button/Button";
-import useDeviceType from "hooks/useDeviceType";
 import { useNavigate } from "react-router-dom";
 import { usePutShelterCardsAnimal } from "services/pet/petServices";
 import DashboardAnimalCardsCardFields from "./DashboardAnimalCardsCardFields";
@@ -54,12 +53,18 @@ const DashboardAnimalCardsCardForm = ({
   const { mutate: putShelterCardsFn, isLoading: isLoadingPutShelterCards } =
     usePutShelterCardsAnimal();
   const navigate = useNavigate();
-  const deviceType = useDeviceType();
   const initialValues: PetCard = {
     ...data,
     months: data.age,
     type: data.type as GenreType,
     breed: data.breed as PetBreed,
+  };
+
+  const handleOnFileDelete = (index: number) => {
+    const photoList = [...formik.values.photos];
+    photoList.splice(index, 1);
+
+    formik.setFieldValue("photos", photoList);
   };
 
   const handleSubmit = () => {
@@ -197,6 +202,7 @@ const DashboardAnimalCardsCardForm = ({
         {isEditOn && (
           <FormRow label="Dodaj nowe zdjęcia">
             <CustomFileInput
+              onFileDelete={handleOnFileDelete}
               onFileChange={(files: File[] | null | File) => {
                 if (Array.isArray(formik.values.newPhotos)) {
                   formik.setFieldValue("newPhotos", [

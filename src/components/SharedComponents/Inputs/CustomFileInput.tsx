@@ -18,16 +18,21 @@ import ImageCrop from "./Crop/ImageCrop";
 import { useSelector } from "react-redux";
 import { selectImageHeight, selectImageWidth } from "redux/imageSlice";
 import useDeviceType from "hooks/useDeviceType";
+import { DndContext } from "@dnd-kit/core";
+import Draggable from "../Draggable";
+
 export interface CustomFileInputProps {
   label?: string;
   description?: string;
   onFileChange: (files: File[] | null | File) => void;
+  onFileDelete: (index: number) => void;
 }
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
   onFileChange,
   description = "",
   label = "",
+  onFileDelete,
 }) => {
   const deviceType = useDeviceType();
   const largerThanTablet = deviceType !== "tablet" && deviceType !== "mobile";
@@ -59,8 +64,16 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      const names = Array.from(files).map((file) => file.name);
-      setFileNames(names);
+      const newFileNames = Array.from(files).map((_file, index) => {
+        let newFileName = `image${index + 1}`;
+        let counter = 1;
+        while (fileNames.includes(newFileName)) {
+          newFileName = `image${index + counter}`;
+          counter++;
+        }
+        return newFileName;
+      });
+      setFileNames([...fileNames, ...newFileNames]);
 
       const fileReaders = Array.from(files).map((file) => {
         const reader = new FileReader();
@@ -88,13 +101,12 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     }
   };
 
-  const handleClearFiles = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-    setFileNames([]);
-    setFilePreviews([]);
-    onFileChange(null);
+  const handleRemoveFilesUpToIndex = (index: number) => {
+    const updatedPreviews = filePreviews.slice(0, index);
+    setFilePreviews(updatedPreviews);
+
+    const updatedNames = fileNames.slice(0, index);
+    setFileNames(updatedNames);
   };
 
   const handleRemoveFile = (index: number) => {
@@ -105,24 +117,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     const updatedNames = [...fileNames];
     updatedNames.splice(index, 1);
     setFileNames(updatedNames);
-
-    if (updatedPreviews.length === 0) {
-      handleClearFiles();
-    } else {
-      const dataTransfer = new DataTransfer();
-      updatedPreviews.forEach((preview, idx) => {
-        const base64String = preview.split(",")[1];
-        const byteString = atob(base64String);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) {
-          uintArray[i] = byteString.charCodeAt(i);
-        }
-        const blob = new Blob([arrayBuffer], { type: "image/jpeg" });
-        const file = new File([blob], updatedNames[idx]);
-        dataTransfer.items.add(file);
-      });
-    }
+    onFileDelete(index);
   };
 
   const saveImage = (index: number, preserveAspectRatio?: boolean) => {
@@ -292,32 +287,37 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         </Typography>
       </FileInputContainerContent>
 
-      {filePreviews.length > 0 && (
-        <StyledImgsContainer>
-          {filePreviews.map((preview, index) => (
-            <StyledImgPreviewContainer key={preview + index}>
-              <StyledPreviewPhoto
-                title="Edytuj zdjęcie"
-                key={index}
-                src={preview}
-                alt={`Preview ${fileNames[index]}`}
-                onClick={() => {
-                  setSelectedImage(preview);
-                  setSelectedImageNumber(index);
-                }}
-              />
-              {<span className="editBtn">Edytuj</span>}
-              <StyledCloseIcon
-                title="Usuń zdjęcie"
-                onClick={() => handleRemoveFile(index)}
-              />
-            </StyledImgPreviewContainer>
-          ))}
-        </StyledImgsContainer>
-      )}
+      <DndContext>
+        {filePreviews.length > 0 && (
+          <StyledImgsContainer>
+            {filePreviews.map((preview, index) => (
+              <Draggable key={preview + index}>
+                <StyledImgPreviewContainer key={preview + index}>
+                  <StyledPreviewPhoto
+                    title="Edytuj zdjęcie"
+                    key={index}
+                    src={preview}
+                    alt={`Preview ${fileNames[index]}`}
+                    onClick={() => {
+                      setSelectedImage(preview);
+                      setSelectedImageNumber(index);
+                    }}
+                  />
+                  {<span className="editBtn">Edytuj</span>}
+                  <StyledCloseIcon
+                    title="Usuń zdjęcie"
+                    onClick={() => handleRemoveFile(index)}
+                  />
+                </StyledImgPreviewContainer>
+              </Draggable>
+            ))}
+          </StyledImgsContainer>
+        )}
+      </DndContext>
 
       {selectedImage && !editFileFlag && largerThanTablet && (
         <ImageCrop
+          handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
           crop={crop}
           handleCrop={handleCrop}
           handleSaveImage={handleSaveImage}
@@ -330,6 +330,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
       {selectedImage && editFileFlag && largerThanTablet && (
         <ImageCrop
+          handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
           crop={crop}
           handleCrop={handleCrop}
           handleSaveImage={handleSaveEditImage}

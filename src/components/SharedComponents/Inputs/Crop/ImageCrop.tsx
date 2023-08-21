@@ -23,11 +23,13 @@ interface ImageCropProps {
   handleSaveImage: (index: number) => void;
   selectedImageNumber: number | null;
   handleSaveUncroppedImage: (index: number) => void;
+  handleRemoveFilesUpToIndex: (index: number) => void;
 }
 
 const ImageCrop: React.FC<ImageCropProps> = ({
   selectedImage,
   crop,
+  handleRemoveFilesUpToIndex,
   handleCrop,
   handleSelectedImageChange,
   handleSaveUncroppedImage,
@@ -96,7 +98,10 @@ const ImageCrop: React.FC<ImageCropProps> = ({
             type="button"
             variant="outline"
             onClick={() => {
-              handleSelectedImageChange(null, null);
+              if (typeof selectedImageNumber === "number") {
+                handleRemoveFilesUpToIndex(selectedImageNumber);
+                handleSelectedImageChange(null, null);
+              }
             }}>
             Anuluj
           </Button>

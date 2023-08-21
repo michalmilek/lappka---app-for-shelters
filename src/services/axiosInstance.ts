@@ -28,24 +28,27 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error: AxiosError) => {
+  async (error) => {
     if (error.response && error.response.status === 401) {
+      const originalRequest = error.config;
+
       const accessToken = localStorage.getItem("accessToken");
       const refreshToken = localStorage.getItem("refreshToken");
+
       if (accessToken && refreshToken) {
         try {
-          const response = await axiosInstance.post("/Auth/useToken", {
+          const refreshResponse = await axiosInstance.post("/Auth/useToken", {
             accessToken,
             refreshToken,
           });
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("refreshToken", response.data.refreshToken);
-        } catch (error: unknown) {
-          //if (axios.isAxiosError(error) && error.response?.status === 400) {
+          localStorage.setItem("accessToken", refreshResponse.data.accessToken);
+
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return axiosInstance(originalRequest);
+        } catch (refreshError) {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-          //}
-          console.error(error);
+          console.error(refreshError);
         }
       }
     }

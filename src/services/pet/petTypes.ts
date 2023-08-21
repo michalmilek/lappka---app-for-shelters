@@ -171,3 +171,20 @@ export interface Animal {
 export interface AnimalEdit extends Animal {
   petId: string;
 }
+
+
+export interface AnimalCreatePetInterface {
+  name: string;
+  gender: GenderType;
+  description: string;
+  isVisible: boolean;
+  months: number;
+  isSterilized: true;
+  weight: number;
+  color: string;
+  animalCategory: GenreType;
+  breed: string;
+  profilePhoto: string;
+  photos: string[];
+  shelterId: string;
+}
