@@ -13,6 +13,7 @@ import {
   StyledImgsContainer,
   StyledPlusIcon,
   StyledPreviewPhoto,
+  StyledSpan,
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
 import { useSelector } from "react-redux";
@@ -23,25 +24,32 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableItem from "../SortableItem";
-
 export interface CustomFileInputProps {
+  isAddNewCard?: boolean;
+  photos: string[] | File[];
   label?: string;
   description?: string;
   onFileChange: (files: File[] | null | File) => void;
   onFileDelete: (index: number) => void;
+  handleIndexFileChangeForm: (files: File[]) => void;
 }
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
+  isAddNewCard,
+  handleIndexFileChangeForm,
   onFileChange,
   description = "",
   label = "",
   onFileDelete,
+  photos,
 }) => {
+  console.log(isAddNewCard);
   const deviceType = useDeviceType();
   const largerThanTablet = deviceType !== "tablet" && deviceType !== "mobile";
   const imgHeight = useSelector(selectImageHeight);
   const imgWidth = useSelector(selectImageWidth);
   const [fileNames, setFileNames] = useState<string[]>([]);
+  console.log("🚀 ~ fileNames:", fileNames);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [crop, setCrop] = useState<Crop>();
@@ -261,11 +269,25 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     if (!over) return;
 
     if (active.id !== over?.id) {
-      setFilePreviews((items) => {
-        const activeIndex = items.indexOf(String(active.id));
-        const overIndex = items.indexOf(String(over.id));
+      setFilePreviews((previews) => {
+        const activeIndex = previews.indexOf(String(active.id));
+        const overIndex = previews.indexOf(String(over.id));
 
-        return arrayMove(items, activeIndex, overIndex);
+        const updatedPreviews = arrayMove(previews, activeIndex, overIndex);
+        const rearrangedPhotos = arrayMove<File>(
+          photos as File[],
+          activeIndex,
+          overIndex
+        );
+        handleIndexFileChangeForm(rearrangedPhotos);
+        setFilePreviews(updatedPreviews);
+
+        setFileNames((names) => {
+          const updatedNames = arrayMove(names, activeIndex, overIndex);
+          return updatedNames;
+        });
+
+        return updatedPreviews;
       });
     }
   };
@@ -316,7 +338,10 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                 <SortableItem
                   stringImg={preview}
                   key={preview + index}>
-                  <StyledImgPreviewContainer key={preview + index}>
+                  <StyledImgPreviewContainer
+                    addNewCard
+                    index={index}
+                    key={preview + index}>
                     <StyledPreviewPhoto
                       title="Edytuj zdjęcie"
                       key={index}
@@ -327,6 +352,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                         setSelectedImageNumber(index);
                       }}
                     />
+                    {index === 0 && <StyledSpan>PROFILOWE</StyledSpan>}
                     {<span className="editBtn">Edytuj</span>}
                     <StyledCloseIcon
                       title="Usuń zdjęcie"

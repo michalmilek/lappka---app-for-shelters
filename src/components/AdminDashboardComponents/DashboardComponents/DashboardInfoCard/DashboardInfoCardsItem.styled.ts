@@ -4,7 +4,7 @@ import { getColor } from "utils/styles/getStyle/getColor";
 
 
 export const StyledDashboardInfoCard = styled.li`
-  height: 82px;
+  height: 10vh;
   display: flex;
   background: ${getColor("white")};
   padding: 16px;

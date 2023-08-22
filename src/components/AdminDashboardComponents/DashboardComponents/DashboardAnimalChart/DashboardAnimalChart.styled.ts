@@ -7,7 +7,7 @@ export const StyledDashboardChartContainer = styled.div`
   grid-area: b;
   background: ${getColor("white")};
   min-width: 848px;
-  max-height: 351px;
+  height: 40vh;
   box-shadow: 0px 1px 2px 0px #1018280f;
   z-index: 900;
 
@@ -33,6 +33,8 @@ export const StyledDashboardChartTitleContainer = styled.div`
   align-items: center;
   padding: 8px 16px;
   position: relative;
+  border-bottom: 1px solid ${getColor("lightGray3")};
+  margin-bottom: 10px;
 `;
 
 export const StyledDashboardChartDropdownContainer = styled.div`

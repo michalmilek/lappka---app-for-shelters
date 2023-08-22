@@ -25,6 +25,8 @@ export const StyledTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  z-index: 400;
+  height: 100%;
 `;
 
 export const StyledNavbarButtonContainer = styled.div`

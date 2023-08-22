@@ -8,7 +8,7 @@ export const DashboardVoluntaryContainer = styled.div`
   grid-area: c;
   border-radius: 6px;
   min-width: 272px;
-  height: 351px;
+  height: 60vh;
 
   box-shadow: 0px 2px 4px 0px #5b687114;
 

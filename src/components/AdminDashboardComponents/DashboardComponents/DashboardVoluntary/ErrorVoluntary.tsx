@@ -21,7 +21,7 @@ const ErrorContainer = styled.div`
   background: ${getColor("white")};
   border-radius: 6px;
   min-width: 272px;
-  height: 351px;
+  height: 40vh;
   box-shadow: 0px 2px 4px 0px #5b687114;
   animation: ${appearAnimation} 0.3s ease-in-out;
 

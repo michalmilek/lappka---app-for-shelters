@@ -8,7 +8,7 @@ export const DashboardMostPopularAnimalsContainer = styled.div`
   border-radius: 8px;
   grid-area: e;
   min-width: 368px;
-  height: 360px;
+  height: 35vh;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 

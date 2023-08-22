@@ -19,7 +19,7 @@ const ErrorContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 10vh;
   grid-area: a;
   background-color: ${getColor("white")};
   border-radius: 8px;

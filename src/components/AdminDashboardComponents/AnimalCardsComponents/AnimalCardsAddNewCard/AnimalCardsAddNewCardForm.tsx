@@ -32,6 +32,10 @@ const AnimalCardsAddNewCardForm = ({
     formik.setFieldValue("photos", photoList);
   };
 
+  const handleIndexFileChangeForm = (files: File[]) => {
+    formik.setFieldValue("photos", files);
+  };
+
   return (
     <AnimalCardsAddNewCardFormContainer onSubmit={formik.handleSubmit}>
       <AnimalCardsAddNewCardFormInputContainer>
@@ -199,6 +203,9 @@ const AnimalCardsAddNewCardForm = ({
           />
         </AnimalCardsAddNewCardFlexInputContainer>
         <CustomFileInput
+          isAddNewCard
+          photos={formik.values.photos}
+          handleIndexFileChangeForm={handleIndexFileChangeForm}
           onFileDelete={handleOnFileDelete}
           onFileChange={handleOnFileChange}
           label="Dodaj zdjęcia"

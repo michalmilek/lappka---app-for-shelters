@@ -1,7 +1,13 @@
 import { ReactCrop } from "react-image-crop";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { CloseIcon, PlusIcon } from "../icons/icons";
+
+interface StyledImgPreviewContainerProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  addNewCard?: boolean;
+  index?: number;
+}
 
 export const FullContainer = styled.div`
   display: flex;
@@ -54,12 +60,13 @@ export const StyledImgsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
 `;
 
-export const StyledImgPreviewContainer = styled.div`
+export const StyledImgPreviewContainer = styled.div<StyledImgPreviewContainerProps>`
   position: relative;
-  width: 56px;
-  height: 72px;
+  width: 100px;
+  height: 100px;
   object-fit: "cover";
 
   .editBtn {
@@ -79,6 +86,14 @@ export const StyledImgPreviewContainer = styled.div`
       font-weight: 700;
     }
   }
+
+  ${({ addNewCard, index }) =>
+    addNewCard &&
+    index === 0 &&
+    css`
+      border: 2px solid ${getColor("darkGray2")};
+      border-radius: 6px;
+    `}
 `;
 
 export const StyledPlusIcon = styled(PlusIcon)`
@@ -101,6 +116,17 @@ export const StyledPreviewPhoto = styled.img`
   &:hover {
     opacity: 0.7;
   }
+`;
+
+export const StyledSpan = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: ${getColor("white")};
+  color: ${getColor("darkGray2")};
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px;
 `;
 
 export const StyledCloseIcon = styled(CloseIcon)`

@@ -119,10 +119,14 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
           data={getChartDataByType(timeSelect)}
           margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
           <XAxis
+            tickLine={false}
+            axisLine={false}
             dataKey="name"
             tick={axisLabelStyle}
           />
           <YAxis
+            tickLine={false}
+            axisLine={false}
             domain={getChartRange(timeSelect)}
             tickFormatter={timeSelect === "Year" ? formatYAxis : emptyFn}>
             <Label
