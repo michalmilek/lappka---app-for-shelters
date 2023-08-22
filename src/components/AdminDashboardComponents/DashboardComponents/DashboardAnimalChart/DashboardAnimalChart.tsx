@@ -25,7 +25,7 @@ import {
   ChartData,
   ViewsStateFilled,
 } from "./DashboardAnimalChartStateHandler";
-import { getChartTypeTimeByType } from "./ChartDataUtils.ts";
+import { getChartTypeTimeByType } from "./ChartDataUtils";
 
 interface Props {
   viewsState: ViewsStateFilled;

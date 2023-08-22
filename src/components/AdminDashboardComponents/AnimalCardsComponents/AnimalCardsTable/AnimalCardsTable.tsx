@@ -23,7 +23,7 @@ import {
 import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
-import { Pet, ShelterCardsResponse } from "services/pet/pet";
+import { Pet, ShelterCardsResponse } from "services/pet/petTypes";
 
 function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   const deviceType = useDeviceType();
@@ -69,10 +69,10 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
     table.getAllLeafColumns().forEach((header) => {
       if (
         deviceType !== "desktop" &&
-        (header.id === "colour" || header.id === "visible")
+        (header.id === "breed" || header.id === "isVisible")
       ) {
         header.toggleVisibility(false);
-      } else if (deviceType === "mobile" && header.id === "additionDate") {
+      } else if (deviceType === "mobile" && header.id === "createdAt") {
         header.toggleVisibility(false);
       } else {
         header.toggleVisibility(true);

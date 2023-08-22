@@ -1,13 +1,18 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
-import { deleteStorageImage, postStoragePictures } from "./storage";
+import {
+  deleteStorageImage,
+  deleteStorageImages,
+  getStorageImages,
+  postStoragePictures,
+} from "./storage";
 
-export function usePostStoragePictures() {
+export const usePostStoragePictures = () => {
   const mutation = useMutation((files: File[]) => postStoragePictures(files));
   return mutation;
-}
+};
 
 export const useDeleteStorageImage = () => {
   const dispatch = useDispatch();
@@ -26,4 +31,30 @@ export const useDeleteStorageImage = () => {
     },
   });
   return mutation;
+};
+
+export const useDeleteStorageImages = () => {
+  const dispatch = useDispatch();
+  const { showToast } = useToast();
+  const mutation = useMutation(
+    (imgsIds: string[]) => deleteStorageImages(imgsIds),
+    {
+      onSuccess: () => {
+        dispatch(setLoading(false));
+        showToast("Zdjęcia usunięte pomyślnie.", "success");
+      },
+      onMutate: () => {
+        dispatch(setLoading(true));
+      },
+      onError: () => {
+        dispatch(setLoading(true));
+        console.log(mutation.error);
+      },
+    }
+  );
+  return mutation;
+};
+
+export const useStorageImages = (imgsIds: string[], animalId: string) => {
+  return useQuery(["storageImages", animalId], () => getStorageImages(imgsIds));
 };

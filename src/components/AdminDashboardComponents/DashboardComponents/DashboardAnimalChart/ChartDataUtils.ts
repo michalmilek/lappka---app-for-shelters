@@ -1,7 +1,6 @@
 import React from "react";
 import { TimeType } from "./DashboardAnimalChart";
 
-
 const getMonthNameByIndex = (index: number) => {
   const monthNames = [
     "Sty",
@@ -96,3 +95,12 @@ export const getChartTypeTimeByType = (type: TimeType): string => {
       return "Rok";
   }
 };
+
+
+  export const errorData = [
+    { name: "A", views: Math.floor(Math.random() * 100) },
+    { name: "B", views: Math.floor(Math.random() * 100) },
+    { name: "C", views: Math.floor(Math.random() * 100) },
+    { name: "D", views: Math.floor(Math.random() * 100) },
+    { name: "E", views: Math.floor(Math.random() * 100) },
+  ];

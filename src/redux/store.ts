@@ -3,6 +3,8 @@ import chatReducer from "./chatSlice";
 import mobileMenuReducer from "./mobileMenuSlice";
 import toastReducer from "./toastSlice";
 import loadingReducer from "./loadingSlice";
+import breadcrumbsReducer from "./breadcrumbsSlice";
+import imageReducer from "./imageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ export const store = configureStore({
     mobileMenu: mobileMenuReducer,
     toasts: toastReducer,
     loading: loadingReducer,
+    breadcrumbs: breadcrumbsReducer,
+    image: imageReducer,
   },
 });
 

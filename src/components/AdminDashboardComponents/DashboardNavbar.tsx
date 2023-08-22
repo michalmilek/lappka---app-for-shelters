@@ -3,6 +3,7 @@ import {
   HamburgerMenuIcon,
 } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
+import useBreadcrumbs from "hooks/useBreadcrumbs";
 import useDeviceType from "hooks/useDeviceType";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,14 +28,11 @@ const StyledBellIcon = styled(BellIcon)`
   cursor: pointer;
 `;
 
-const DashboardNavbar = ({
-  previousTitle,
-  title,
-  Button = null,
-}: ProtectedNavbarProps) => {
+const DashboardNavbar = ({ Button = null }: ProtectedNavbarProps) => {
   const deviceType = useDeviceType();
   const dispatch = useDispatch();
   const IsMobileMenuOpen = useSelector(selectIsMobileMenuOpen);
+  const { previousTitle, title } = useBreadcrumbs();
   return (
     <StyledProtectedPageNavbar>
       <StyledTitle>

@@ -27,6 +27,8 @@ import PreLoaderModal from "components/SharedComponents/PreLoader/PreLoader";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      retry: 3,
+      refetchOnWindowFocus: false,
       staleTime: 300000,
     },
   },

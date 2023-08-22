@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -41,10 +41,10 @@ axiosInstance.interceptors.response.use(
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("refreshToken", response.data.refreshToken);
         } catch (error: unknown) {
-          if (axios.isAxiosError(error) && error.response?.status === 400) {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-          }
+          //if (axios.isAxiosError(error) && error.response?.status === 400) {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          //}
           console.error(error);
         }
       }

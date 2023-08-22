@@ -1,4 +1,4 @@
-import SelectSecond from "components/SharedComponents/DropdownMenu/SelectSecond";
+import Select from "components/SharedComponents/DropdownMenu/Select";
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
@@ -6,10 +6,9 @@ import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { FormikContextType } from "formik";
 import React from "react";
 import { ageConversion } from "utils/appUtils";
-import { PetsBreeds } from "../AnimalCardsAddNewCard/AddNewCardUtils";
-import { AnimalCardsCardFlexInputContainer } from "./DashboardAnimalCardsCard.styled";
-import { PetCard } from "./DashboardAnimalCardsCardForm";
+import { AnimalCardsCardFlexInputContainer } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
+import { PetCard } from "./utils/DashboardAnimalCardsUtils";
 
 interface DashboardAnimalCardsCardFieldsProps {
   isEditOn: boolean;
@@ -51,8 +50,7 @@ const DashboardAnimalCardsCardFields: React.FC<
             value={formik.values.gender}
           />
         ) : (
-          <SelectSecond
-            zIndex={1305}
+          <Select
             label=""
             options={[
               { label: "Samiec", value: "Male" },
@@ -72,12 +70,19 @@ const DashboardAnimalCardsCardFields: React.FC<
         {!isEditOn ? (
           <Input
             readOnly
+            error={
+              formik.errors.breed && formik.touched.breed
+                ? formik.errors.breed
+                : undefined
+            }
+            placeholder="Wpisz"
             inputSize="Large"
+            name="breed"
             value={formik.values.type}
+            onChange={formik.handleChange}
           />
         ) : (
-          <SelectSecond
-            zIndex={1304}
+          <Select
             label=""
             options={[
               { value: "Dog", label: "Pies" },
@@ -95,29 +100,11 @@ const DashboardAnimalCardsCardFields: React.FC<
       </FormRow>
       {formik.values.type !== "Other" && (
         <FormRow label="Rasa">
-          {!isEditOn ? (
-            <Input
-              readOnly
-              inputSize="Large"
-              value={formik.values.breed}
-            />
-          ) : (
-            <SelectSecond
-              zIndex={1303}
-              label=""
-              options={
-                formik.values.type === "Dog"
-                  ? PetsBreeds.dogsBreeds
-                  : PetsBreeds.catBreeds
-              }
-              dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.breed}
-              handleChange={(option) => {
-                formik.setFieldTouched("breed", true);
-                formik.setFieldValue("breed", option);
-              }}
-            />
-          )}
+          <Input
+            readOnly={!isEditOn}
+            inputSize="Large"
+            value={formik.values.breed}
+          />
         </FormRow>
       )}
       <FormRow label="Waga">
@@ -157,7 +144,7 @@ const DashboardAnimalCardsCardFields: React.FC<
               value={formik.values.isSterilized ? "Tak" : "Nie"}
             />
           ) : (
-            <SelectSecond
+            <Select
               label=""
               options={[
                 { label: "Tak", value: true },
@@ -180,7 +167,7 @@ const DashboardAnimalCardsCardFields: React.FC<
               value={formik.values.isVisible ? "Tak" : "Nie"}
             />
           ) : (
-            <SelectSecond
+            <Select
               label=""
               options={[
                 { label: "Tak", value: true },

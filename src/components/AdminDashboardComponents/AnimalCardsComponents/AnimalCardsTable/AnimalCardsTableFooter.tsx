@@ -13,7 +13,7 @@ import {
 } from "./AnimalCardsTable.styled";
 import Input from "components/SharedComponents/Inputs/Input";
 import { PaginationState, Table } from "@tanstack/react-table";
-import { Pet } from "services/pet/pet";
+import { Pet } from "services/pet/petTypes";
 
 interface TableFooterProps {
   table: Table<Pet>;

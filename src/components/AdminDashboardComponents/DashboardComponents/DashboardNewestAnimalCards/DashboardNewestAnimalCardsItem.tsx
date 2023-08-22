@@ -1,7 +1,7 @@
-import { Pet } from "services/pet/pet";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import { DashboardRoutes } from "router/router";
+import { Pet } from "services/pet/petTypes";
 import {
   ContainerLink,
   DashboardNewestAnimalCardsItemContainer,

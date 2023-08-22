@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import useToast from "hooks/useToast";
+import ErrorAnimalCardsTable from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/ErrorAnimalCardsTable";
 
 const AnimalCardsPage = () => {
   const navigate = useNavigate();
@@ -20,9 +21,9 @@ const AnimalCardsPage = () => {
   const { data, isLoading, isError, error, isSuccess } = useShelterCards();
   const { showToast } = useToast();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (isError) showToast(error as string, "error");
-  });
+  }); */
 
   return (
     <StyledDashboardAnimalCardsMain>
@@ -41,6 +42,7 @@ const AnimalCardsPage = () => {
         <AnimalCardsInfo />
         {data && isSuccess && <AnimalCardsTable data={data} />}
         {isLoading && <SkeletonTableComponent />}
+        {isError && <ErrorAnimalCardsTable />}
       </StyledDashboardAnimalCardsMainContent>
     </StyledDashboardAnimalCardsMain>
   );

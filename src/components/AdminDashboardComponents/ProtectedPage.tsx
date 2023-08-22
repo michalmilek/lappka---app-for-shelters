@@ -1,5 +1,5 @@
 import useDeviceType from "hooks/useDeviceType";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { StyledDashboardMain } from "./DashboardComponents/Dashboard.styled";
 import ProtectedSidebar from "./DashboardSidebar";
 
@@ -10,7 +10,7 @@ const ProtectedPage = () => {
   const refreshToken = localStorage.getItem("refreshToken");
 
   if (!accessToken || !refreshToken) {
-    navigate("/login");
+    return <Navigate to={"login"} />;
   }
 
   return (

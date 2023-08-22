@@ -22,6 +22,7 @@ const DashboardChartDropdown: React.FC<DashboardChartDropdownProps> = ({
       <StyledDashboardChartDropdownContainerList>
         <CustomRadio
           name="filterDate"
+          id="Week"
           value={"Week"}
           label="Tydzień"
           checked={timeSelect === "Week"}
@@ -32,6 +33,7 @@ const DashboardChartDropdown: React.FC<DashboardChartDropdownProps> = ({
         <CustomRadio
           name="filterDate"
           value={"Month"}
+          id="Month"
           checked={timeSelect === "Month"}
           label="Miesiąc"
           onChange={(e) => handleTimeSelectChange(e.target.value as TimeType)}
@@ -39,6 +41,7 @@ const DashboardChartDropdown: React.FC<DashboardChartDropdownProps> = ({
         <CustomRadio
           name="filterDate"
           value={"Year"}
+          id="Year"
           label="Rok"
           checked={timeSelect === "Year"}
           onChange={(e) => handleTimeSelectChange(e.target.value as TimeType)}

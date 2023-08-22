@@ -5,11 +5,11 @@ type DeviceType = "mobile" | "tablet" | "laptop" | "desktop";
 function useDeviceType(): DeviceType {
     const [deviceType, setDeviceType] = useState<DeviceType>(() => {
       const width = window.innerWidth;
-      if (width < 550) {
+      if (width <= 550) {
         return "mobile";
-      } else if (width < 768) {
+      } else if (width <= 768) {
         return "tablet";
-      } else if (width < 1024) {
+      } else if (width <= 1024) {
         return "laptop";
       } else {
         return "desktop";
@@ -19,11 +19,11 @@ function useDeviceType(): DeviceType {
     useEffect(() => {
       const handleResize = () => {
         const width = window.innerWidth;
-        if (width < 550) {
+        if (width <= 550) {
           setDeviceType("mobile");
-        } else if (width < 768) {
+        } else if (width <= 768) {
           setDeviceType("tablet");
-        } else if (width < 1024) {
+        } else if (width <= 1024) {
           setDeviceType("laptop");
         } else {
           setDeviceType("desktop");

@@ -1,7 +1,7 @@
 import Button from "components/SharedComponents/Button/Button";
 import Input from "components/SharedComponents/Inputs/Input";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyledDashboardFooter,
   StyledDashboardVoluntaryContent,
@@ -10,10 +10,10 @@ import {
 import VoluntaryFormPart from "./VoluntaryFormPart";
 import * as Yup from "yup";
 import { FormikProps, useFormik } from "formik";
-import { ShelterVolunteeringResponse } from "services/pet/pet";
 import { useUpdateShelterVolunteering } from "services/pet/petServices";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import { ShelterVolunteeringResponse } from "services/pet/petTypes";
 
 interface Props {
   data: ShelterVolunteeringResponse;
@@ -54,14 +54,10 @@ const VoluntaryForm = ({ data }: Props) => {
     },
   });
 
-  if (isLoading) {
-    dispatch(setLoading(true));
-  }
-
-  if (isSuccess) {
-    dispatch(setLoading(false));
-  }
-
+  useEffect(() => {
+    if (isLoading) dispatch(setLoading(true));
+    else dispatch(setLoading(false));
+  }, [isLoading, dispatch]);
   return (
     <>
       <StyledDashboardVoluntaryMainContentFormsContainer

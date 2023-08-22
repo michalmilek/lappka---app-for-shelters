@@ -23,7 +23,7 @@ export const StyledCardHeader = styled.header`
 `;
 
 export const StyledCardFormContentContainer = styled.form`
-  padding: 0 24px 24px;
+  padding: 0 24px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -58,6 +58,10 @@ export const StyledCardInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  &:nth-child(n) {
+    z-index: calc(1200 - n);
+  }
 `;
 
 export const StyledCardFooter = styled.footer`
@@ -88,4 +92,21 @@ export const AnimalCardsCardFlexInputContainer = styled.div`
   gap: 16px;
   width: 100%;
   justify-content: space-between;
+
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+  }
+`;
+
+
+export const AnimalCardsCardBtnsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;

@@ -2,6 +2,7 @@ import { FormContainer } from "components/AdminDashboardComponents/AccountSettin
 import AccountSettingsChangePasswordModal from "components/AdminDashboardComponents/AccountSettingsComponents/AccountSettingsChangePasswordModal";
 import AccountSettingsForm from "components/AdminDashboardComponents/AccountSettingsComponents/AccountSettingsForm";
 import AccountSettingsSkeleton from "components/AdminDashboardComponents/AccountSettingsComponents/AccountSettingsSkeleton";
+import ErrorAccountSettings from "components/AdminDashboardComponents/AccountSettingsComponents/ErrorAccountSettings";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { AddNewEmployeeFormFooter } from "components/AdminDashboardComponents/EmployeesComponents/AddNewEmployee/AddNewEmployee.styled";
 import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardComponents/EmployeesComponents/DashboardEmployees.styled";
@@ -148,7 +149,6 @@ const AccountSettingsPage = () => {
 
   if (userDataIsError) {
     console.log(userDataError);
-    return null;
   }
 
   return (
@@ -164,6 +164,7 @@ const AccountSettingsPage = () => {
         }
       />
       <StyledDashboardEmployeesMainContent>
+        {userDataIsError && <ErrorAccountSettings />}
         {userDataIsLoading && <AccountSettingsSkeleton />}
         {userDataIsSuccess && userData && (
           <FormContainer onSubmit={formik.handleSubmit}>

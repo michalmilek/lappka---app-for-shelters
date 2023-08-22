@@ -4,6 +4,7 @@
 
 import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
+import { typographyVariants } from "utils/styles/getStyle/getFontStyle";
 import { CheckboxInterface } from "./CustomCheckbox";
 import { RadioInterface } from "./CustomRadio";
 import { InputProps } from "./Input";
@@ -96,6 +97,7 @@ export const InputField = styled.input<InputProps>`
 
       &:read-only {
     border: none !important;
+    padding-right: 0 !important;
   }
 `;
 
@@ -219,7 +221,6 @@ export const RadioWrapper = styled.div<RadioInterface>`
   width: 100%;
   padding: 4px 0;
   gap: 8px;
-  cursor: pointer;
   width: 100%;
   z-index: 10;
 `;
@@ -246,4 +247,11 @@ export const RadioInput = styled.input`
   opacity: 0;
 
   z-index: 100;
+  cursor: pointer;
+`;
+
+export const RadioLabel = styled.label`
+  ${typographyVariants["UI/UI Text 14 Reg"]};
+  color: ${getColor("darkGray2")};
+  cursor: pointer;
 `;

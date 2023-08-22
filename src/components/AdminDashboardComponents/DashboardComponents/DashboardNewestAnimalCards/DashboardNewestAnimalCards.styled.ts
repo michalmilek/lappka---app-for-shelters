@@ -7,7 +7,7 @@ export const DashboardNewestAnimalCardsContainer = styled.div`
   background-color: ${getColor("white")};
   grid-area: d;
   border-radius: 8px;
-  height: 360px;
+  height: 100%;
   width: 100%;
   box-shadow: 0px 1px 2px 0px #1018280f;
 
@@ -15,7 +15,6 @@ export const DashboardNewestAnimalCardsContainer = styled.div`
 
   @media screen and (max-width: 1350px) {
     width: 100%;
-    height: auto;
   }
 `;
 

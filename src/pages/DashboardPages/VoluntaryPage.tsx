@@ -6,6 +6,7 @@ import SkeletonVoluntary from "components/AdminDashboardComponents/VoluntaryComp
 import VoluntaryForm from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/VoluntaryForm";
 import useToast from "hooks/useToast";
 import { useEffect } from "react";
+import ErrorVoluntary from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/ErrorVoluntary";
 
 const VoluntaryPage = () => {
   const { data, isLoading, isError, error, isSuccess } =
@@ -13,25 +14,20 @@ const VoluntaryPage = () => {
 
   const { showToast } = useToast();
 
-  /*   useEffect(() => {
-    if (!initialUpdate && data && isSuccess) {
-      setInitialUpdate(true);
-      handleValues();
-    }
-  }, [data, handleValues, initialUpdate, isSuccess]); */
-
   useEffect(() => {
     if (isError) {
+      //console.log(error.message);
       showToast("error", "error");
     }
-  }, [isError, showToast]);
+  }, [isError, showToast, error]);
 
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar title="Wolontariat" />
       <StyledDashboardVoluntaryMainContent>
         {isLoading && <SkeletonVoluntary />}
-        {data && <VoluntaryForm data={data} />}
+        {isSuccess && data && <VoluntaryForm data={data} />}
+        {isError && <ErrorVoluntary />}
       </StyledDashboardVoluntaryMainContent>
     </StyledProtectedPageContent>
   );

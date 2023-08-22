@@ -53,24 +53,29 @@ const LoginForm = () => {
         .required('Pole "Hasło" jest wymagane'),
     }),
     onSubmit: (values) => {
-      loginFn({ email: values.email, password: values.password });
+      loginFn(
+        { email: values.email, password: values.password },
+        {
+          onSuccess: () => {
+            dispatch(setLoading(false));
+            showToast("Logowanie zakońcozne sukcesem", "success");
+            navigate(DashboardRoutes.dashboard);
+          },
+          onError: () => {
+            showToast("Błąd", "error");
+          },
+        }
+      );
     },
   });
 
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(setLoading(false));
-      showToast("Logowanie zakońcozne sukcesem", "success");
-      navigate(DashboardRoutes.dashboard);
-    }
     if (isLoading) {
       dispatch(setLoading(true));
-    }
-    if (isError) {
+    } else {
       dispatch(setLoading(false));
-      showToast("Błąd", "error");
     }
-  }, [isSuccess, isLoading, isError, dispatch, error, showToast, navigate]);
+  }, [dispatch, isLoading]);
 
   useEffect(() => {
     if (rememberMe) {

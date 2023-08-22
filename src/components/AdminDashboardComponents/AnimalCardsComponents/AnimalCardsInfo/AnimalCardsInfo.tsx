@@ -7,6 +7,7 @@ import {
 import { styled } from "styled-components";
 import AnimalCardsInfoItem from "./AnimalCardsInfoItem";
 import SkeletonAnimalCardsInfoItem from "./SkeletonAnimalCardsInfoItem";
+import ErrorAnimalCardsInfo from "./ErrorAnimalCardsInfo";
 
 const AnimalCardsInfoContainer = styled.div`
   grid-area: a;
@@ -17,7 +18,7 @@ const AnimalCardsInfoContainer = styled.div`
   flex-wrap: wrap;
   height: 100px;
 
-  @media screen and (max-width: 950px) {
+  @media screen and (max-width: 1050px) {
     width: 100%;
   }
 `;
@@ -27,6 +28,7 @@ const AnimalCardsInfo = () => {
 
   if (isError) {
     console.log(error);
+    return <ErrorAnimalCardsInfo />;
   }
 
   return (

@@ -1,16 +1,12 @@
-import { BreedOption } from "services/pet/petTypes";
 import Button from "components/SharedComponents/Button/Button";
 import Select from "components/SharedComponents/DropdownMenu/Select";
-import SelectSecond from "components/SharedComponents/DropdownMenu/SelectSecond";
 import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import CustomFileInput from "components/SharedComponents/Inputs/CustomFileInput";
 import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { FormikProps } from "formik";
-import useDeviceType from "hooks/useDeviceType";
 import { AddNewAnimalCardInterface } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
-import { PetsBreeds } from "./AddNewCardUtils";
 import {
   AnimalCardsAddNewCardFlexInputContainer,
   AnimalCardsAddNewCardFooter,
@@ -23,15 +19,11 @@ const AnimalCardsAddNewCardForm = ({
 }: {
   formik: FormikProps<AddNewAnimalCardInterface>;
 }) => {
-  const deviceType = useDeviceType();
-
   const prevFiles = formik.values.photos;
 
   const handleOnFileChange = (files: File[] | null | File) => {
     formik.setFieldValue("photos", [...prevFiles, files]);
   };
-
-  console.log(formik.errors.breed);
 
   return (
     <AnimalCardsAddNewCardFormContainer onSubmit={formik.handleSubmit}>
@@ -63,8 +55,7 @@ const AnimalCardsAddNewCardForm = ({
           value={formik.values.description}
           onChange={formik.handleChange}
         />
-        <SelectSecond
-          zIndex={1301}
+        <Select
           error={
             formik.errors.type && formik.touched.type
               ? formik.errors.type
@@ -84,25 +75,18 @@ const AnimalCardsAddNewCardForm = ({
           }}
         />
         {(formik.values.type === "Dog" || formik.values.type === "Cat") && (
-          <SelectSecond
-            zIndex={1300}
+          <Input
             error={
               formik.errors.breed && formik.touched.breed
                 ? formik.errors.breed
                 : undefined
             }
             label="Rasa"
-            dropdownIcon={<ArrowDownIcon />}
-            options={
-              formik.values.type === "Dog"
-                ? PetsBreeds.dogsBreeds
-                : PetsBreeds.catBreeds
-            }
+            placeholder="Wpisz"
+            inputSize="Large"
+            name="breed"
             value={formik.values.breed}
-            handleChange={(option) => {
-              formik.setFieldTouched("breed", true);
-              formik.setFieldValue("breed", option);
-            }}
+            onChange={formik.handleChange}
           />
         )}
         <AnimalCardsAddNewCardFlexInputContainer>
@@ -135,8 +119,7 @@ const AnimalCardsAddNewCardForm = ({
         </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <SelectSecond
-            zIndex={1299}
+          <Select
             error={
               formik.errors.gender && formik.touched.gender
                 ? formik.errors.gender
@@ -171,8 +154,7 @@ const AnimalCardsAddNewCardForm = ({
         </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <SelectSecond
-            zIndex={1298}
+          <Select
             error={
               formik.errors.isSterilized && formik.touched.isSterilized
                 ? formik.errors.isSterilized
@@ -190,8 +172,7 @@ const AnimalCardsAddNewCardForm = ({
               formik.setFieldValue("isSterilized", option);
             }}
           />
-          <SelectSecond
-            zIndex={1298}
+          <Select
             error={
               formik.errors.isVisible && formik.touched.isVisible
                 ? formik.errors.isVisible
@@ -220,15 +201,10 @@ const AnimalCardsAddNewCardForm = ({
         <Button
           variant="outline"
           type="button"
-          size={deviceType === "desktop" ? "Large" : "Medium"}
           onClick={formik.handleReset}>
           Anuluj
         </Button>
-        <Button
-          size={deviceType === "desktop" ? "Large" : "Medium"}
-          type="submit">
-          Zapisz
-        </Button>
+        <Button type="submit">Zapisz</Button>
       </AnimalCardsAddNewCardFooter>
     </AnimalCardsAddNewCardFormContainer>
   );

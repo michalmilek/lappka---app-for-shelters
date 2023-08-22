@@ -3,10 +3,6 @@ import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import {
-  Animal,
-  AnimalEdit,
-  Cat,
-  Dog,
   getShelterCards,
   getShelterCardsArchiveChartData,
   getShelterCardsArchiveChartDataForMonth,
@@ -14,15 +10,24 @@ import {
   getShelterCardsCard,
   getShelterStats,
   getShelterVolunteering,
-  Other,
   postShelterCardsAnimal,
+  postShelterCardsArchive,
   postShelterCardsCat,
   postShelterCardsDog,
   postShelterCardsOther,
   putShelterCardsAnimal,
-  ShelterVolunteeringResponse,
+  putShelterCardsHide,
+  putShelterCardsPublish,
   updateShelterVolunteering,
 } from "./pet";
+import {
+  Animal,
+  AnimalEdit,
+  Cat,
+  Dog,
+  Other,
+  ShelterVolunteeringResponse,
+} from "./petTypes";
 
 export const useShelterStats = () => {
   return useQuery(["shelterStats"], getShelterStats);
@@ -108,11 +113,33 @@ export const usePutShelterCardsAnimal = () => {
         dispatch(setLoading(true));
       },
       onError: () => {
-        dispatch(setLoading(true));
+        dispatch(setLoading(false));
         console.log(mutation.error);
       },
     }
   );
+
+  return mutation;
+};
+
+export const usePostShelterCardsArchive = () => {
+  const mutation = useMutation((petId: string) =>
+    postShelterCardsArchive(petId)
+  );
+
+  return mutation;
+};
+
+export const usePutShelterCardsPublish = () => {
+  const mutation = useMutation((petId: string) =>
+    putShelterCardsPublish(petId)
+  );
+
+  return mutation;
+};
+
+export const usePutShelterCardsHide = () => {
+  const mutation = useMutation((petId: string) => putShelterCardsHide(petId));
 
   return mutation;
 };

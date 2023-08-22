@@ -1,7 +1,6 @@
-import { number } from "prop-types";
 import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
-import { SelectPropsWithoutGeneric } from "./Select";
+import { SelectErrorProps } from "./Select";
 
 interface zIndexProps {
   zIndex?: number;
@@ -39,19 +38,20 @@ export const SelectContainerWithLabels = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  cursor: pointer;
 `;
 
 export const SelectContainer = styled.div<zIndexProps>`
   position: relative;
   background: ${getColor("white")};
-  z-index: ${({ zIndex }) => (zIndex ? zIndex : 1200)};
+  z-index: inherit;
   width: 100%;
 `;
 
-export const SelectDiv = styled.div<SelectPropsWithoutGeneric>`
+export const SelectDiv = styled.div<SelectErrorProps>`
   cursor: pointer;
   position: relative;
-  z-index: 1200;
+  z-index: inherit;
   background: ${getColor("white")};
   display: flex;
   align-items: center;

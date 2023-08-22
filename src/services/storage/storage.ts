@@ -16,7 +16,7 @@ export async function postStoragePictures(files: File[]) {
     const formData = new FormData();
     files.forEach((file) => formData.append("files", file));
 
-    const response = await axios.post<string[]>(`/Storage`, formData);
+    const response = await axiosInstance.post<string[]>(`/Storage`, formData);
 
     return response.data;
   } catch (error) {
@@ -34,6 +34,28 @@ export async function postStoragePictures(files: File[]) {
 export const deleteStorageImage = async (imgId: string) => {
   try {
     const response = await axiosInstance.delete(`/Storage/${imgId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const deleteStorageImages = async (imgsIds: string[]) => {
+  try {
+    const response = await axiosInstance.delete(`/Storage`, { data: imgsIds });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+export const getStorageImages = async (imgsIds: string[]) => {
+  try {
+    const response = await axiosInstance.get(`/Storage`, {
+      data: imgsIds,
+    });
     return response.data;
   } catch (error) {
     console.error(error);
