@@ -13,6 +13,7 @@ import {
 import useDeviceType from "hooks/useDeviceType";
 import { Shelter } from "services/auth/auth";
 import { formatPhoneNumber } from "utils/appUtils";
+import { RegisterStep1Validation } from "./RegisterUtils";
 
 const RegisterStep1Form = ({
   handleFormValues,
@@ -32,37 +33,7 @@ const RegisterStep1Form = ({
       longitude: 14.2,
       latitude: 50,
     },
-    validationSchema: Yup.object().shape({
-      organizationName: Yup.string().required(
-        'Pole "Pełna Nazwa Organizacji" jest wymagane'
-      ),
-      street: Yup.string().required('Pole "Ulica" jest wymagane'),
-      zipCode: Yup.string()
-        .matches(/^\d{2}-\d{3}$/, "Kod pocztowy powinien być w formacie XX-XXX")
-        .required('Pole "Kod pocztowy" jest wymagane'),
-      city: Yup.string().required('Pole "Miasto" jest wymagane'),
-      nip: Yup.string()
-        .required('Pole "Numer NIP" jest wymagane')
-        .test(
-          "length",
-          'Pole "Numer NIP" musi mieć dokładnie 10 znaków',
-          (val) => val.length === 10
-        ),
-      krs: Yup.string()
-        .required('Pole "Numer KRS" jest wymagane')
-        .test(
-          "length",
-          'Pole "Numer KRS" musi mieć dokładnie 10 znaków',
-          (val) => val.length === 10
-        ),
-      phoneNumber: Yup.string()
-        .matches(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/, {
-          message:
-            "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze",
-          excludeEmptyString: true,
-        })
-        .required('Pole "Numer telefonu" jest wymagane'),
-    }),
+    validationSchema: RegisterStep1Validation,
     onSubmit: (values) => {
       if (handleFormValues && handleCurrentStep) {
         handleFormValues({

@@ -1,9 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import useToast from "hooks/useToast";
 import {
   login,
   registerShelter,
   resetPasswordSendEmail,
   resetPasswordSetNewPassword,
+  ResetPasswordSetNewPasswordRequest,
 } from "./auth";
 
 export const useLoginMutation = () => {
@@ -37,12 +40,33 @@ export const useResetPasswordSendEmailMutation = () => {
   return resetPasswordSendEmailMutation;
 };
 
+interface ResetPasswordSetNewPasswordWithTokenRequest {
+  resetPasswordSetNewPasswordData: ResetPasswordSetNewPasswordRequest;
+  token: string;
+}
+
 export const useResetPasswordSetNewPasswordMutation = () => {
+  const { showToast } = useToast();
   const resetPasswordSendEmailMutation = useMutation(
-    resetPasswordSetNewPassword,
+    (data: ResetPasswordSetNewPasswordWithTokenRequest) => {
+      const {
+        resetPasswordSetNewPasswordData,
+        token,
+      }: {
+        resetPasswordSetNewPasswordData: ResetPasswordSetNewPasswordRequest;
+        token: string;
+      } = data;
+
+      return resetPasswordSetNewPassword(
+        resetPasswordSetNewPasswordData,
+        token
+      );
+    },
     {
-      onError: (error) => {
-        console.error("Wystąpił błąd podczas rejestracji schroniska", error);
+      onError: (error: AxiosError) => {
+        console.log(error);
+        if (error.response?.status === 400)
+          showToast("Podano niewłaściwy token albo token już wygasł.", "error");
       },
     }
   );

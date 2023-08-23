@@ -2,6 +2,7 @@ import { ReactCrop } from "react-image-crop";
 import styled, { css } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { CloseIcon, PlusIcon } from "../icons/icons";
+import { CheckIcon } from "@heroicons/react/20/solid";
 
 interface StyledImgPreviewContainerProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -71,20 +72,23 @@ export const StyledImgPreviewContainer = styled.div<StyledImgPreviewContainerPro
 
   .editBtn {
     display: none;
+    z-index: 1000;
+    height: 30px;
+    width: 30px;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: 700;
+    fill: ${getColor("darkGray2")};
   }
 
-  &:hover {
-    .editBtn {
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      pointer-events: none;
-      color: ${getColor("red800")};
-      transform: translate(-50%, -50%);
-      font-size: 16px;
-      font-weight: 700;
-    }
+  .profilePictureIcon:hover ~ .editBtn,
+  .previewImg:hover ~ .editBtn,
+  .deleteIcon:hover ~ .editBtn {
+    display: block !important;
   }
 
   ${({ addNewCard, index }) =>
@@ -118,8 +122,10 @@ export const StyledPreviewPhoto = styled.img`
   }
 `;
 
-export const StyledSpan = styled.span`
+export const StyledProfileIcon = styled(CheckIcon)`
   position: absolute;
+  height: 20px;
+  width: 20px;
   top: 0;
   left: 0;
   background: ${getColor("white")};
@@ -127,6 +133,7 @@ export const StyledSpan = styled.span`
   font-size: 12px;
   font-weight: 600;
   padding: 2px;
+  cursor: not-allowed;
 `;
 
 export const StyledCloseIcon = styled(CloseIcon)`
@@ -144,13 +151,8 @@ export const StyledCloseIcon = styled(CloseIcon)`
   & path {
     stroke: ${getColor("midGray2")};
   }
-
-  &:hover {
-    .editBtn {
-      display: none;
-    }
-  }
 `;
+
 
 export const ModalDiv = styled.div`
   user-select: none;

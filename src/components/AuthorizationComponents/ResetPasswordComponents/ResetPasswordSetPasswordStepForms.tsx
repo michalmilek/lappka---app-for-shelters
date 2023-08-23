@@ -3,7 +3,7 @@ import Button from "components/SharedComponents/Button/Button";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { ResetPasswordSetPasswordFormProps } from "./ResetPasswordSetPasswordForm";
 import {
@@ -12,13 +12,23 @@ import {
 } from "./ResetPassword.styled";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
+import { AxiosError } from "axios";
+import useToast from "hooks/useToast";
 
 export const ResetPasswordSetPasswordStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordSetPasswordFormProps) => {
+  const { token } = useParams();
+  const { showToast } = useToast();
+
   const deviceType = useDeviceType();
-  const { mutateAsync: resetPasswordSetNewPasswordFn, isSuccess } =
-    useResetPasswordSetNewPasswordMutation();
+  const {
+    mutate: resetPasswordSetNewPasswordFn,
+    error,
+    isError,
+    isSuccess,
+  } = useResetPasswordSetNewPasswordMutation();
+  console.log("🚀 ~ isSuccess:", isSuccess);
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -34,7 +44,12 @@ export const ResetPasswordSetPasswordStep1Form = ({
     }),
     onSubmit: (values) => {
       console.log(values);
-      resetPasswordSetNewPasswordFn(values);
+      if (token) {
+        resetPasswordSetNewPasswordFn({
+          resetPasswordSetNewPasswordData: values,
+          token,
+        });
+      }
     },
   });
 
@@ -100,6 +115,7 @@ export const ResetPasswordSetPasswordStep1Form = ({
       </ResetPasswordInputContainer>
 
       <Button
+        type="submit"
         isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Utwórz hasło

@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { setHeight, setWidth } from "redux/imageSlice";
 
 interface ImageCropProps {
+  editFileFlag?: boolean;
   crop?: Crop;
   handleCrop: (cropValue: Crop) => void;
   selectedImage: string | null;
@@ -35,6 +36,7 @@ const ImageCrop: React.FC<ImageCropProps> = ({
   handleSaveUncroppedImage,
   handleSaveImage,
   selectedImageNumber,
+  editFileFlag,
 }) => {
   const imgRef = useRef<null>(null);
   const dispatch = useDispatch();
@@ -99,7 +101,9 @@ const ImageCrop: React.FC<ImageCropProps> = ({
             variant="outline"
             onClick={() => {
               if (typeof selectedImageNumber === "number") {
-                handleRemoveFilesUpToIndex(selectedImageNumber);
+                if (!editFileFlag) {
+                  handleRemoveFilesUpToIndex(selectedImageNumber);
+                }
                 handleSelectedImageChange(null, null);
               }
             }}>

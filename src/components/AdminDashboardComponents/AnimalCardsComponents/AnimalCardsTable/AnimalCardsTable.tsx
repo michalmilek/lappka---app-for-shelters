@@ -24,14 +24,21 @@ import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
 import { Pet, ShelterCardsResponse } from "services/pet/petTypes";
+import { useDispatch } from "react-redux";
+import { setTablePaginationState } from "redux/tableSlice";
+import { useSearchParams } from "react-router-dom";
 
 function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageIndexFromQueryParams = searchParams.get("pageIndex");
+  const pageSizeFromQueryParams = searchParams.get("pageSize");
+  const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const columnsMemo = React.useMemo(() => columns, []);
 
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
+    pageIndex: pageIndexFromQueryParams ? +pageIndexFromQueryParams : 0,
+    pageSize: pageSizeFromQueryParams ? +pageSizeFromQueryParams : 0,
   });
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");
@@ -79,6 +86,26 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
       }
     });
   }, [deviceType, table]);
+
+  useEffect(() => {
+    dispatch(setTablePaginationState(pagination));
+
+    return () => {
+      dispatch(
+        setTablePaginationState({
+          pageIndex: 0,
+          pageSize: 10,
+        })
+      );
+    };
+  }, [dispatch, pagination]);
+
+  useEffect(() => {
+    setSearchParams({
+      pageIndex: pagination.pageIndex.toString(),
+      pageSize: pagination.pageSize.toString(),
+    });
+  }, [pagination.pageIndex, pagination.pageSize, setSearchParams]);
 
   return (
     <TableComponentContainer>

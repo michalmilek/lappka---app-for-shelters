@@ -99,17 +99,17 @@ export const resetPasswordSendEmail = async (email: string) => {
 
 
 export const resetPasswordSetNewPassword = async (
-  resetPasswordSetNewPasswordData: ResetPasswordSetNewPasswordRequest
+  resetPasswordSetNewPasswordData: ResetPasswordSetNewPasswordRequest,
+  token: string
 ) => {
-  try {
-    const response = await axiosInstance.post(
-      "/Auth/setNewPassword",
-      resetPasswordSetNewPasswordData
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
+  await axiosInstance
+    .post(`/Auth/setPassword/${token}`, resetPasswordSetNewPasswordData)
+    .then((response) => {
+      return response.data;
+    });
 };
+
+
+
 
 

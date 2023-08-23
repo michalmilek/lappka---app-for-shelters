@@ -24,7 +24,7 @@ import { useNavigate } from "react-router";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
-import { DashboardRoutes } from "router/router";
+import { AuthRoutes, DashboardRoutes } from "router/router";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -154,7 +154,7 @@ const LoginForm = () => {
             $underlineOpacity={0.2}
             variant="UI/UI Text 14 Reg"
             color="primary600"
-            to={"/register"}>
+            to={AuthRoutes.resetPassword}>
             Zapomniałem hasła
           </AnchorLink>
         </StyledLoginOptionsContainer>

@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Typography from "../Typography/Typography";
 import { Crop } from "react-image-crop";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import "react-image-crop/dist/ReactCrop.css";
 import {
   FileInput,
@@ -13,7 +14,7 @@ import {
   StyledImgsContainer,
   StyledPlusIcon,
   StyledPreviewPhoto,
-  StyledSpan,
+  StyledProfileIcon,
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
 import { useSelector } from "react-redux";
@@ -24,6 +25,7 @@ import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableItem from "../SortableItem";
+
 export interface CustomFileInputProps {
   isAddNewCard?: boolean;
   photos: string[] | File[];
@@ -343,20 +345,35 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                     index={index}
                     key={preview + index}>
                     <StyledPreviewPhoto
-                      title="Edytuj zdjęcie"
+                      title="Kliknij 2 razy, aby edytować zdjęcie"
                       key={index}
                       src={preview}
                       alt={`Preview ${fileNames[index]}`}
-                      onClick={() => {
+                      className="previewImg"
+                      onDoubleClick={() => {
+                        console.log("test");
                         setSelectedImage(preview);
                         setSelectedImageNumber(index);
                       }}
                     />
-                    {index === 0 && <StyledSpan>PROFILOWE</StyledSpan>}
-                    {<span className="editBtn">Edytuj</span>}
+                    {index === 0 && (
+                      <StyledProfileIcon
+                        className="profilePictureIcon"
+                        title="Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."
+                      />
+                    )}
+
+                    <PencilIcon
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                      className="editBtn"
+                    />
+
                     <StyledCloseIcon
-                      title="Usuń zdjęcie"
-                      onClick={() => handleRemoveFile(index)}
+                      className="deleteIcon"
+                      title="Kliknij 2 razy, aby usunąć zdjęcie"
+                      onDoubleClick={() => handleRemoveFile(index)}
                     />
                   </StyledImgPreviewContainer>
                 </SortableItem>
@@ -368,6 +385,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
       {selectedImage && !editFileFlag && largerThanTablet && (
         <ImageCrop
+          editFileFlag={editFileFlag}
           handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
           crop={crop}
           handleCrop={handleCrop}
@@ -381,6 +399,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
       {selectedImage && editFileFlag && largerThanTablet && (
         <ImageCrop
+          editFileFlag={editFileFlag}
           handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
           crop={crop}
           handleCrop={handleCrop}
