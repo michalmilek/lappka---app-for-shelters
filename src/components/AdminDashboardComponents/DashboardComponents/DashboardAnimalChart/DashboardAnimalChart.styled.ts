@@ -6,7 +6,7 @@ export const StyledDashboardChartContainer = styled.div`
   border-radius: 8px;
   grid-area: b;
   background: ${getColor("white")};
-  min-width: 848px;
+  width: 100%;
   height: 40vh;
   box-shadow: 0px 1px 2px 0px #1018280f;
   z-index: 900;

@@ -21,6 +21,7 @@ export const getShelter = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -32,6 +33,7 @@ export const getShelterStats = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -51,7 +53,7 @@ export const getShelterCards = async (args: [number, number]) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    return undefined;
+    throw error;
   }
 };
 
@@ -63,6 +65,7 @@ export const getShelterVolunteering = async (id: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -77,6 +80,7 @@ export const updateShelterVolunteering = async (
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -88,7 +92,7 @@ export const getShelterCardsArchiveChartData = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch shelter cards archive chart data");
+    throw error;
   }
 };
 
@@ -100,7 +104,7 @@ export const getShelterCardsArchiveChartDataForMonth = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch shelter cards archive chart data");
+    throw error;
   }
 };
 
@@ -112,7 +116,7 @@ export const getShelterCardsArchiveChartDataForWeek = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch shelter cards archive chart data");
+    throw error;
   }
 };
 
@@ -124,7 +128,7 @@ export const getShelterCardsCard = async (petId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch pet card data");
+    throw error;
   }
 };
 
@@ -139,6 +143,7 @@ export const postShelterCardsCreatePet = async (
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -157,6 +162,7 @@ export const postShelterCardsDog = async (data: Dog) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -166,6 +172,7 @@ export const postShelterCardsOther = async (data: Other) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -175,6 +182,7 @@ export const postShelterCardsAnimal = async (data: Animal) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -184,6 +192,7 @@ export const putShelterCardsAnimal = async (data: AnimalEdit) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -195,6 +204,7 @@ export const postShelterCardsArchive = async (petId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -206,6 +216,7 @@ export const putShelterCardsPublish = async (petId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -215,5 +226,6 @@ export const putShelterCardsHide = async (petId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

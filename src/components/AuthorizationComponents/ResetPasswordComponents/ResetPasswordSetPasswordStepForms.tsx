@@ -12,36 +12,23 @@ import {
 } from "./ResetPassword.styled";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
-import { AxiosError } from "axios";
-import useToast from "hooks/useToast";
+import { setPasswordValidation } from "./ResetPasswordUtils";
 
 export const ResetPasswordSetPasswordStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordSetPasswordFormProps) => {
   const { token } = useParams();
-  const { showToast } = useToast();
 
   const deviceType = useDeviceType();
-  const {
-    mutate: resetPasswordSetNewPasswordFn,
-    error,
-    isError,
-    isSuccess,
-  } = useResetPasswordSetNewPasswordMutation();
+  const { mutate: resetPasswordSetNewPasswordFn, isSuccess } =
+    useResetPasswordSetNewPasswordMutation();
   console.log("🚀 ~ isSuccess:", isSuccess);
   const formik = useFormik({
     initialValues: {
       password: "",
       confirmPassword: "",
     },
-    validationSchema: Yup.object().shape({
-      password: Yup.string()
-        .min(6, "Hasło musi mieć co najmniej 6 znaków")
-        .required("Pole wymagane"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Hasła muszą być identyczne")
-        .required("Pole wymagane"),
-    }),
+    validationSchema: setPasswordValidation,
     onSubmit: (values) => {
       console.log(values);
       if (token) {

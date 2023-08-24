@@ -1,6 +1,17 @@
 import axios, { AxiosError } from "axios";
 
 
+
+type CustomErrorObject = {
+  Code: string;
+  Description: string;
+};
+interface CustomErrorData {
+  errors: CustomErrorObject[];
+}
+
+export interface ExtendedAxiosError extends AxiosError<CustomErrorData> {}
+
 const isMockEndpointsEnabled =
   (process.env.REACT_APP_mockEndpoints as string) === "true";
 const apiAddress = process.env.REACT_APP_API_BASE_URL as string;
@@ -43,7 +54,7 @@ axiosInstance.interceptors.response.use(
           });
           localStorage.setItem("accessToken", refreshResponse.data.accessToken);
 
-          await new Promise((resolve) => setTimeout(resolve, 1000));
+          await new Promise((resolve) => setTimeout(resolve, 400));
           return axiosInstance(originalRequest);
         } catch (refreshError) {
           localStorage.removeItem("accessToken");

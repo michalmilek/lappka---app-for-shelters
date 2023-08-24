@@ -27,7 +27,7 @@ export const StyledDashboardMainContent = styled.article`
   align-content: space-between;
   justify-content: space-between;
 
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1450px) {
     padding: 12px;
 
     grid-template-areas:

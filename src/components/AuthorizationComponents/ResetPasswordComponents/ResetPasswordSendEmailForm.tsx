@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import React from "react";
 import { StyledUnathorizedSection } from "../UnprotectedRoutes.styled";
 import {

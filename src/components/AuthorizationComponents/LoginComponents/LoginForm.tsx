@@ -24,48 +24,22 @@ import { useNavigate } from "react-router";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
-import { AuthRoutes, DashboardRoutes } from "router/router";
+import { AuthRoutes } from "router/router";
+import { loginValidation } from "./LoginUtils";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const deviceType = useDeviceType();
-  const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
-  const {
-    mutate: loginFn,
-    isSuccess,
-    isLoading,
-    isError,
-    error,
-  } = useLoginMutation();
-  const { showToast } = useToast();
+  const { mutate: loginFn, isLoading } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    validationSchema: Yup.object().shape({
-      email: Yup.string()
-        .email("Nieprawidłowy format adresu email")
-        .required('Pole "Email" jest wymagane'),
-      password: Yup.string()
-        .min(6, "Hasło musi zawierać co najmniej 6 znaków")
-        .required('Pole "Hasło" jest wymagane'),
-    }),
+    validationSchema: loginValidation,
     onSubmit: (values) => {
-      loginFn(
-        { email: values.email, password: values.password },
-        {
-          onSuccess: () => {
-            dispatch(setLoading(false));
-            showToast("Logowanie zakońcozne sukcesem", "success");
-            navigate(DashboardRoutes.dashboard);
-          },
-          onError: () => {
-            showToast("Błąd", "error");
-          },
-        }
-      );
+      loginFn({ email: values.email, password: values.password });
     },
   });
 

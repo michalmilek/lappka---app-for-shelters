@@ -56,13 +56,11 @@ export const StyledResponsiveContainer = styled(ResponsiveContainer)`
 `;
 
 const ErrorChart = () => {
-  const deviceType = useDeviceType();
-
   return (
     <ErrorContainer>
       <StyledResponsiveContainer
         width={"100%"}
-        height={deviceType === "mobile" ? 300 : 350}>
+        height={"90%"}>
         <BarChart
           width={150}
           height={150}

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
@@ -56,8 +56,16 @@ export const useShelterVolunteering = (id: string) => {
 };
 
 export const useUpdateShelterVolunteering = () => {
-  const mutation = useMutation((data: ShelterVolunteeringResponse) =>
-    updateShelterVolunteering(data)
+  const { showToast } = useToast();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    (data: ShelterVolunteeringResponse) => updateShelterVolunteering(data),
+    {
+      onSuccess: () => {
+        showToast("Dane o wolontariacie pomyślnie zaktualizowane.");
+        queryClient.invalidateQueries(["shelterVolunteering"]);
+      },
+    }
   );
 
   return mutation;
@@ -119,21 +127,17 @@ export const usePostShelterCardsCreatePet = () => {
 };
 
 export const usePutShelterCardsAnimal = () => {
-  const dispatch = useDispatch();
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
   const mutation = useMutation(
     (data: AnimalEdit) => putShelterCardsAnimal(data),
     {
       onSuccess: () => {
-        dispatch(setLoading(false));
-        showToast("Zdjęcie usunięte pomyślnie.", "success");
-      },
-      onMutate: () => {
-        dispatch(setLoading(true));
-      },
-      onError: () => {
-        dispatch(setLoading(false));
-        console.log(mutation.error);
+        showToast(
+          "Karta zwierzęcia została pomyślnei zaktualizowana.",
+          "success"
+        );
+        queryClient.invalidateQueries({ queryKey: ["shelterCardsCard"] });
       },
     }
   );
@@ -142,23 +146,46 @@ export const usePutShelterCardsAnimal = () => {
 };
 
 export const usePostShelterCardsArchive = () => {
-  const mutation = useMutation((petId: string) =>
-    postShelterCardsArchive(petId)
+  const queryClient = useQueryClient();
+  const { showToast } = useToast();
+  const mutation = useMutation(
+    (petId: string) => postShelterCardsArchive(petId),
+    {
+      onSuccess: () => {
+        showToast("Karta została przeniesiona do archiwum", "success");
+        queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
+      },
+    }
   );
 
   return mutation;
 };
 
 export const usePutShelterCardsPublish = () => {
-  const mutation = useMutation((petId: string) =>
-    putShelterCardsPublish(petId)
+  const { showToast } = useToast();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    (petId: string) => putShelterCardsPublish(petId),
+    {
+      onSuccess: () => {
+        showToast("Karta została opublikowana.", "success");
+        queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
+      },
+    }
   );
 
   return mutation;
 };
 
 export const usePutShelterCardsHide = () => {
-  const mutation = useMutation((petId: string) => putShelterCardsHide(petId));
+  const { showToast } = useToast();
+  const queryClient = useQueryClient();
+  const mutation = useMutation((petId: string) => putShelterCardsHide(petId), {
+    onSuccess: () => {
+      showToast("Karta została ukryta.", "success");
+      queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
+    },
+  });
 
   return mutation;
 };

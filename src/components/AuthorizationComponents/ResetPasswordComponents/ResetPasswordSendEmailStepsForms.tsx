@@ -21,7 +21,7 @@ export const ResetPasswordSendEmailStep1Form = ({
   const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const {
-    mutateAsync: resetPasswordSendEmailFn,
+    mutate: resetPasswordSendEmailFn,
     isSuccess,
     isLoading,
   } = useResetPasswordSendEmailMutation();
@@ -33,7 +33,6 @@ export const ResetPasswordSendEmailStep1Form = ({
       email: Yup.string().email().required("Email jest wymagany"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       resetPasswordSendEmailFn(values.email);
     },
   });

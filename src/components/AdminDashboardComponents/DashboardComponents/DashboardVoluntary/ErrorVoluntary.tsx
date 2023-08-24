@@ -1,3 +1,4 @@
+import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
@@ -16,11 +17,12 @@ const appearAnimation = keyframes`
 const ErrorContainer = styled.div`
   grid-area: c;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   background: ${getColor("white")};
   border-radius: 6px;
-  min-width: 272px;
+  width: 272px;
   height: 40vh;
   box-shadow: 0px 2px 4px 0px #5b687114;
   animation: ${appearAnimation} 0.3s ease-in-out;
@@ -30,10 +32,7 @@ const ErrorContainer = styled.div`
   }
 `;
 
-const ErrorMessage = styled.p`
-  color: ${getColor("darkGray2")};
-  font-size: 18px;
-  margin: 0;
+const ErrorMessageContainer = styled.div`
   padding: 16px;
   text-align: center;
 `;
@@ -41,7 +40,14 @@ const ErrorMessage = styled.p`
 const ErrorVoluntary = () => {
   return (
     <ErrorContainer>
-      <ErrorMessage>{"Wystąpił błąd podczas pobierania danych."}</ErrorMessage>
+      <ErrorMessageContainer>
+        <Typography
+          tag="p"
+          color="darkGray2"
+          variant="UI/UI Text 16 Medium Bold">
+          {"Wystąpił błąd podczas pobierania danych."}
+        </Typography>
+      </ErrorMessageContainer>
     </ErrorContainer>
   );
 };
