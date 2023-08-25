@@ -7,10 +7,13 @@ export async function postStoragePictures(files: File[]) {
   try {
     const errors = files
       .filter((file) => file.size > MAX_FILE_SIZE)
-      .map((file) => ({ file, error: "File size exceeds the limit (15MB)." }));
+      .map((file) => ({
+        file,
+        error: "Wielkość jednego z plików przekracza 15MB.",
+      }));
 
     if (errors.length > 0) {
-      return errors;
+      throw errors;
     }
 
     const formData = new FormData();
@@ -20,14 +23,8 @@ export async function postStoragePictures(files: File[]) {
 
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.response) {
-        return [{ error: error.response.data.message || "Server error" }];
-      } else if (error.request) {
-        return [{ error: "No response from the server" }];
-      }
-    }
-    return [{ error: "An error occurred while making the request" }];
+    console.error(error);
+    throw error;
   }
 }
 
@@ -37,9 +34,9 @@ export const deleteStorageImage = async (imgId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
-
 
 export const deleteStorageImages = async (imgsIds: string[]) => {
   try {
@@ -47,9 +44,9 @@ export const deleteStorageImages = async (imgsIds: string[]) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
-
 
 export const getStorageImages = async (imgsIds: string[]) => {
   try {
@@ -59,5 +56,6 @@ export const getStorageImages = async (imgsIds: string[]) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

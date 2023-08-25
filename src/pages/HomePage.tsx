@@ -1,6 +1,7 @@
 import Button from "components/SharedComponents/Button/Button";
 import useToast from "hooks/useToast";
 import React from "react";
+import toastService from "singletons/toastService";
 
 const HomePage = () => {
   const { showToast } = useToast();
@@ -9,7 +10,7 @@ const HomePage = () => {
     <div>
       <Button
         onClick={() => {
-          showToast("option", "success");
+          toastService.showToast("HELLO", "success");
         }}>
         testestes
       </Button>

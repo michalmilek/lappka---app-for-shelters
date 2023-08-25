@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Typography from "../Typography/Typography";
 import { Crop } from "react-image-crop";
 import { PencilIcon } from "@heroicons/react/24/solid";
@@ -20,11 +20,17 @@ import ImageCrop from "./Crop/ImageCrop";
 import { useSelector } from "react-redux";
 import { selectImageHeight, selectImageWidth } from "redux/imageSlice";
 import useDeviceType from "hooks/useDeviceType";
-import { closestCenter, DndContext } from "@dnd-kit/core";
+import {
+  closestCenter,
+  DndContext,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableItem from "../SortableItem";
+import { KeyboardSensor, MouseSensor } from "utils/dndKitUtils/customEvents";
 
 export interface CustomFileInputProps {
   isAddNewCard?: boolean;
@@ -45,7 +51,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   onFileDelete,
   photos,
 }) => {
-  console.log(isAddNewCard);
   const deviceType = useDeviceType();
   const largerThanTablet = deviceType !== "tablet" && deviceType !== "mobile";
   const imgHeight = useSelector(selectImageHeight);
@@ -61,6 +66,15 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   );
   const [initialFileUpload, setInitialFileUpload] = useState(true);
   const [editFileFlag, setEditFileFlag] = useState(false);
+
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor)
+  );
 
   const handleCrop = (cropValue: Crop) => {
     setCrop(cropValue);
@@ -80,12 +94,14 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
       const newFileNames = Array.from(files).map((_file, index) => {
         let newFileName = `image${index + 1}`;
         let counter = 1;
+
         while (fileNames.includes(newFileName)) {
           newFileName = `image${index + counter}`;
           counter++;
         }
         return newFileName;
       });
+
       setFileNames([...fileNames, ...newFileNames]);
 
       const fileReaders = Array.from(files).map((file) => {
@@ -330,6 +346,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
       {filePreviews.length > 0 && (
         <DndContext
+          sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={onDragEnd}>
           <SortableContext
@@ -345,13 +362,12 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                     index={index}
                     key={preview + index}>
                     <StyledPreviewPhoto
-                      title="Kliknij 2 razy, aby edytować zdjęcie"
+                      title="Kliknij, aby edytować zdjęcie"
                       key={index}
                       src={preview}
                       alt={`Preview ${fileNames[index]}`}
                       className="previewImg"
-                      onDoubleClick={() => {
-                        console.log("test");
+                      onClick={() => {
                         setSelectedImage(preview);
                         setSelectedImageNumber(index);
                       }}
@@ -372,8 +388,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
                     <StyledCloseIcon
                       className="deleteIcon"
-                      title="Kliknij 2 razy, aby usunąć zdjęcie"
-                      onDoubleClick={() => handleRemoveFile(index)}
+                      title="Kliknij, aby usunąć zdjęcie"
+                      onClick={() => handleRemoveFile(index)}
                     />
                   </StyledImgPreviewContainer>
                 </SortableItem>

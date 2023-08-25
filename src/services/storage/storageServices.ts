@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import { ExtendedAxiosError } from "services/axiosInstance";
 import {
   deleteStorageImage,
   deleteStorageImages,
@@ -10,7 +11,26 @@ import {
 } from "./storage";
 
 export const usePostStoragePictures = () => {
-  const mutation = useMutation((files: File[]) => postStoragePictures(files));
+  const { showToast } = useToast();
+  const mutation = useMutation((files: File[]) => postStoragePictures(files), {
+    onError: (error: ExtendedAxiosError) => {
+      if (error.status === 400) {
+        showToast(
+          "Któryś z plików przekracza wagę 15MB lub nie jest zdjęciem.",
+          "error"
+        );
+      } else if (error.status === 403)
+        showToast(
+          "Nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem.",
+          "error"
+        );
+      else if (error.status === 500)
+        showToast(
+          "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
+          "error"
+        );
+    },
+  });
   return mutation;
 };
 
@@ -19,16 +39,26 @@ export const useDeleteStorageImage = () => {
   const { showToast } = useToast();
   const mutation = useMutation((imgId: string) => deleteStorageImage(imgId), {
     onSuccess: () => {
-      dispatch(setLoading(false));
       showToast("Zdjęcie usunięte pomyślnie.", "success");
     },
     onMutate: () => {
       dispatch(setLoading(true));
     },
-    onError: () => {
-      dispatch(setLoading(true));
-      console.log(mutation.error);
+    onError: (error: ExtendedAxiosError) => {
+      if (error.status === 404)
+        showToast("Podane zdjęcie nie znajduje się w bazie danych.", "error");
+      else if (error.status === 403)
+        showToast(
+          "Nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem.",
+          "error"
+        );
+      else if (error.status === 500)
+        showToast(
+          "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
+          "error"
+        );
     },
+    onSettled: () => dispatch(setLoading(false)),
   });
   return mutation;
 };
@@ -40,16 +70,29 @@ export const useDeleteStorageImages = () => {
     (imgsIds: string[]) => deleteStorageImages(imgsIds),
     {
       onSuccess: () => {
-        dispatch(setLoading(false));
         showToast("Zdjęcia usunięte pomyślnie.", "success");
       },
       onMutate: () => {
         dispatch(setLoading(true));
       },
-      onError: () => {
-        dispatch(setLoading(true));
-        console.log(mutation.error);
+      onError: (error: ExtendedAxiosError) => {
+        if (error.status === 404)
+          showToast(
+            "Jedno lub więcej zdjęć nie znajduje się w bazie danych.",
+            "error"
+          );
+        else if (error.status === 403)
+          showToast(
+            "Nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem.",
+            "error"
+          );
+        else if (error.status === 500)
+          showToast(
+            "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
+            "error"
+          );
       },
+      onSettled: () => dispatch(setLoading(false)),
     }
   );
   return mutation;

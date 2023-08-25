@@ -1,4 +1,9 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import useToast from "hooks/useToast";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setLoading } from "redux/loadingSlice";
+import { ExtendedAxiosError } from "services/axiosInstance";
 import {
   deleteProfilePicture,
   deleteUser,
@@ -11,7 +16,26 @@ import {
 } from "./user";
 
 export const useDeleteProfilePicture = () => {
-  const mutation = useMutation(() => deleteProfilePicture());
+  const { showToast } = useToast();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(() => deleteProfilePicture(), {
+    onSuccess: () => {
+      showToast("Zdjęcie profilowe zostało usunięte pomyślnie.", "error");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+    onError: (error: ExtendedAxiosError) => {
+      if (error.status === 400)
+        showToast(
+          "Podane zdjęcie zostało już usunięte, albo użytkownik nie posiada zdjęcia profilowego.",
+          "error"
+        );
+      else if (error.status === 500)
+        showToast(
+          "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
+          "error"
+        );
+    },
+  });
   return mutation;
 };
 
@@ -21,13 +45,65 @@ export const useGetUser = () => {
 };
 
 export const usePatchUser = () => {
-  const mutation = useMutation((data: PatchUserRequest) => patchUser(data));
+  const dispatch = useDispatch();
+  const { showToast } = useToast();
+  const mutation = useMutation((data: PatchUserRequest) => patchUser(data), {
+    onSuccess: () => {
+      showToast("Zmienione dane użytkownika zostały zapisane.", "success");
+    },
+    onError: (error: ExtendedAxiosError) => {
+      if (error.status === 400) {
+        showToast(
+          "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie.",
+          "error"
+        );
+      } else if (error.status === 403)
+        showToast(
+          "Przepraszamy, ale nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem, jeśli uważasz, że to błąd.",
+          "error"
+        );
+      else if (error.status === 500)
+        showToast(
+          "Wewnętrzny błąd serwera, spróbuj ponownie później.",
+          "error"
+        );
+    },
+    onMutate: () => {
+      dispatch(setLoading(true));
+    },
+    onSettled: () => {
+      dispatch(setLoading(false));
+    },
+  });
 
   return mutation;
 };
 
 export const useDeleteUser = () => {
-  const mutation = useMutation(() => deleteUser());
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+  const mutation = useMutation(() => deleteUser(), {
+    onSuccess: () => {
+      showToast(
+        "Użytkownik został pomyślnie usunięty. Następuje przeniesienie na stronę logowania."
+      );
+      navigate("/login");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+    },
+    onError: (error: ExtendedAxiosError) => {
+      if (error.status === 400) {
+        showToast(
+          "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie.",
+          "error"
+        );
+      } else if (error.status === 403)
+        showToast(
+          "Przepraszamy, ale nie masz wystarczających uprawnień do usunięcia tego użytkownika. Skontaktuj się z administratorem, jeśli uważasz, że to błąd.",
+          "error"
+        );
+    },
+  });
   return mutation;
 };
 
