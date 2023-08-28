@@ -19,6 +19,12 @@ const mockAddress = process.env.REACT_APP_mockBaseURL as string;
 
 const baseURL = isMockEndpointsEnabled ? mockAddress : apiAddress;
 
+export const mockInstance = axios.create({
+  baseURL: process.env.REACT_APP_mockBaseURL as string,
+  timeout: 5000,
+});
+
+
 const axiosInstance = axios.create({
   baseURL: baseURL,
   timeout: 5000,

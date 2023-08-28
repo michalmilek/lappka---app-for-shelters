@@ -6,7 +6,8 @@ import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { FormikProps } from "formik";
-import { AddNewAnimalCardInterface } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsAddNewCardPage";
+import { useNavigate } from "react-router-dom";
+import { AddNewAnimalCardInterface } from "./AddNewCardUtils";
 import {
   AnimalCardsAddNewCardFlexInputContainer,
   AnimalCardsAddNewCardFooter,
@@ -19,6 +20,7 @@ const AnimalCardsAddNewCardForm = ({
 }: {
   formik: FormikProps<AddNewAnimalCardInterface>;
 }) => {
+  const navigate = useNavigate();
   const prevFiles = formik.values.photos;
 
   const handleOnFileChange = (files: File[] | null | File) => {
@@ -68,8 +70,8 @@ const AnimalCardsAddNewCardForm = ({
         />
         <Select
           error={
-            formik.errors.type && formik.touched.type
-              ? formik.errors.type
+            formik.errors.animalCategory && formik.touched.animalCategory
+              ? formik.errors.animalCategory
               : undefined
           }
           label="Gatunek"
@@ -79,13 +81,14 @@ const AnimalCardsAddNewCardForm = ({
             { value: "Cat", label: "Kot" },
             { value: "Other", label: "Inny" },
           ]}
-          value={formik.values.type}
+          value={formik.values.animalCategory}
           handleChange={(option) => {
-            formik.setFieldTouched("type", true);
-            formik.setFieldValue("type", option);
+            formik.setFieldTouched("animalCategory", true);
+            formik.setFieldValue("animalCategory", option);
           }}
         />
-        {(formik.values.type === "Dog" || formik.values.type === "Cat") && (
+        {(formik.values.animalCategory === "Dog" ||
+          formik.values.animalCategory === "Cat") && (
           <Input
             error={
               formik.errors.breed && formik.touched.breed
@@ -216,7 +219,9 @@ const AnimalCardsAddNewCardForm = ({
         <Button
           variant="outline"
           type="button"
-          onClick={formik.handleReset}>
+          onClick={() => {
+            navigate(-1);
+          }}>
           Anuluj
         </Button>
         <Button type="submit">Zapisz</Button>

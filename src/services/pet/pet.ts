@@ -1,4 +1,5 @@
-import axiosInstance from "services/axiosInstance";
+import axiosInstance, { mockInstance } from "services/axiosInstance";
+import toastService from "singletons/toastService";
 import {
   Animal,
   AnimalCreatePetInterface,
@@ -27,7 +28,7 @@ export const getShelter = async () => {
 
 export const getShelterStats = async () => {
   try {
-    const response = await axiosInstance.get<SheltersStatsResponse>(
+    const response = await mockInstance.get<SheltersStatsResponse>(
       "/Pet/shelters/stats"
     );
     return response.data;
@@ -40,11 +41,10 @@ export const getShelterStats = async () => {
 export const getShelterCards = async (args: [number, number]) => {
   const [pageSize, pageNumber] = args;
   try {
-    const response = await axiosInstance.get<ShelterCardsResponse>(
+    const response = await mockInstance.get<ShelterCardsResponse>(
       `/shelters/cards/petListInShelter`,
       {
         params: {
-          ShelterId: "A6313BAD-5AE9-48B8-BED5-08DB9A61FEEF",
           PageNumber: pageNumber,
           PageSize: pageSize,
         },
@@ -57,10 +57,10 @@ export const getShelterCards = async (args: [number, number]) => {
   }
 };
 
-export const getShelterVolunteering = async (id: string) => {
+export const getShelterVolunteering = async () => {
   try {
-    const response = await axiosInstance.get<ShelterVolunteeringResponse>(
-      `/shelters/volunteering/get/${id}`
+    const response = await mockInstance.get<ShelterVolunteeringResponse>(
+      `/shelters/volunteering`
     );
     return response.data;
   } catch (error) {
@@ -122,9 +122,7 @@ export const getShelterCardsArchiveChartDataForWeek = async () => {
 
 export const getShelterCardsCard = async (petId: string) => {
   try {
-    const response = await axiosInstance.get<Pet>(
-      `/Pets/shelters/cards/${petId}`
-    );
+    const response = await mockInstance.get<Pet>(`/shelters/cards/${petId}`);
     return response.data;
   } catch (error) {
     console.error(error);

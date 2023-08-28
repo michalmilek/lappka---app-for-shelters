@@ -1,7 +1,11 @@
 import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
-export const StyledCardFormComponent = styled.form`
+interface StyledCardFormContainer extends React.ComponentProps<"form"> {
+  isEditOn: boolean;
+}
+
+export const StyledCardFormComponent = styled.div`
   border-radius: 8px;
   background: ${getColor("white")};
   box-shadow: 0px 1px 2px 0px #1018280f;
@@ -22,8 +26,9 @@ export const StyledCardHeader = styled.header`
   align-items: center;
 `;
 
-export const StyledCardFormContentContainer = styled.form`
+export const StyledCardFormContentContainer = styled.form<StyledCardFormContainer>`
   padding: 0 24px;
+  padding-bottom: ${({ isEditOn }) => !isEditOn && "24px"};
   display: flex;
   flex-direction: column;
   gap: 32px;

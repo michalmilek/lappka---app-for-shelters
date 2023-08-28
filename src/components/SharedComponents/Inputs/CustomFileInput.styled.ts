@@ -91,13 +91,13 @@ export const StyledImgPreviewContainer = styled.div<StyledImgPreviewContainerPro
     display: block !important;
   }
 
-  ${({ addNewCard, index }) =>
+  /* ${({ addNewCard, index }) =>
     addNewCard &&
     index === 0 &&
     css`
       border: 2px solid ${getColor("darkGray2")};
       border-radius: 6px;
-    `}
+    `} */
 `;
 
 export const StyledPlusIcon = styled(PlusIcon)`

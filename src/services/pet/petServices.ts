@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import toastService from "singletons/toastService";
 import {
   getShelter,
   getShelterCards,
@@ -49,10 +50,8 @@ export const useShelterCards = (
   );
 };
 
-export const useShelterVolunteering = (id: string) => {
-  return useQuery(["shelterVolunteering", id], () =>
-    getShelterVolunteering(id)
-  );
+export const useShelterVolunteering = () => {
+  return useQuery(["shelterVolunteering"], getShelterVolunteering);
 };
 
 export const useUpdateShelterVolunteering = () => {
@@ -95,32 +94,22 @@ export const useShelterCardsCard = (petId: string) => {
   );
 };
 
-export const usePostShelterCardsCat = () => {
-  const mutation = useMutation((data: Cat) => postShelterCardsCat(data));
-
-  return mutation;
-};
-
-export const usePostShelterCardsDog = () => {
-  const mutation = useMutation((data: Dog) => postShelterCardsDog(data));
-
-  return mutation;
-};
-
-export const usePostShelterCardsOther = () => {
-  const mutation = useMutation((data: Other) => postShelterCardsOther(data));
-
-  return mutation;
-};
-
-export const usePostShelterCardsAnimal = () => {
-  const mutation = useMutation((data: Animal) => postShelterCardsAnimal(data));
-
-  return mutation;
-};
 export const usePostShelterCardsCreatePet = () => {
-  const mutation = useMutation((data: AnimalCreatePetInterface) =>
-    postShelterCardsCreatePet(data)
+  const dispatch = useDispatch();
+  const mutation = useMutation(
+    (data: AnimalCreatePetInterface) => postShelterCardsCreatePet(data),
+    {
+      onError: (error) => {
+        toastService.showToast("Dodawanie zakończone niepowodzeniem", "error");
+        console.log(error);
+      },
+      onMutate: () => {
+        dispatch(setLoading(true));
+      },
+      onSettled: () => {
+        dispatch(setLoading(false));
+      },
+    }
   );
 
   return mutation;

@@ -11,7 +11,10 @@ import {
   StyledCardSingleImgContainer,
 } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
-import { StyledCloseIcon } from "components/SharedComponents/Inputs/CustomFileInput.styled";
+import {
+  StyledCloseIcon,
+  StyledProfileIcon,
+} from "components/SharedComponents/Inputs/CustomFileInput.styled";
 import {
   useDeleteStorageImage,
   useDeleteStorageImages,
@@ -33,6 +36,20 @@ import {
   PetCard,
 } from "./utils/DashboardAnimalCardsUtils";
 import AnimalCardsCardActions from "./AnimalCardsCardActions";
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  horizontalListSortingStrategy,
+  SortableContext,
+} from "@dnd-kit/sortable";
+import { KeyboardSensor, MouseSensor } from "utils/dndKitUtils/customEvents";
+import SortableItem from "components/SharedComponents/SortableItem";
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -61,7 +78,7 @@ const DashboardAnimalCardsCardForm = ({
   };
 
   const handleOnFileDelete = (index: number) => {
-    const photoList = [...formik.values.photos];
+    const photoList = [...photos];
     photoList.splice(index, 1);
 
     formik.setFieldValue("photos", photoList);
@@ -71,7 +88,7 @@ const DashboardAnimalCardsCardForm = ({
     if (formik.values.newPhotos)
       postStoragePicture(formik.values.newPhotos, {
         onSuccess: (newData) => {
-          formik.setFieldValue("photos", [...formik.values.photos, newData]);
+          formik.setFieldValue("photos", [...photos, newData]);
           const { newPhotos, ...values } = formik.values;
           putShelterCardsFn(
             {
@@ -105,8 +122,39 @@ const DashboardAnimalCardsCardForm = ({
     onSubmit: handleSubmit,
   });
 
+  const photos = formik.values.photos;
+  const photosLength = formik.values.photos.length;
+
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+
+  const handleIndexFileChangeForm = (files: File[]) => {
+    formik.setFieldValue("photos", files);
+  };
+
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor)
+  );
+
+  const onDragEnd = (event: DragEndEvent) => {
+    if (isEditOn) {
+      const { active, over } = event;
+      if (!over) return;
+
+      if (active.id !== over?.id) {
+        const activeIndex = photos.indexOf(String(active.id));
+        const overIndex = photos.indexOf(String(over.id));
+
+        const updatedPhotos = arrayMove(photos, activeIndex, overIndex);
+        formik.setFieldValue("photos", updatedPhotos);
+      }
+    }
+  };
 
   useEffect(() => {
     if (
@@ -123,118 +171,139 @@ const DashboardAnimalCardsCardForm = ({
     isLoadingPutShelterCards,
   ]);
 
-    const handleIndexFileChangeForm = (files: File[]) => {
-      formik.setFieldValue("photos", files);
-    };
+  return (
+    <StyledCardFormContentContainer
+      isEditOn={isEditOn}
+      onSubmit={formik.handleSubmit}>
+      {!isEditOn && <AnimalCardsCardActions id={data.id} />}
 
-    return (
-      <StyledCardFormContentContainer onSubmit={formik.handleSubmit}>
-        {!isEditOn && <AnimalCardsCardActions id={data.id} />}
-        <StyledCardImgContainer>
-          {data.photos.map((photo, index) => (
-            <StyledCardSingleImgContainer key={photo + index}>
-              <StyledCardImg
-                src={photo}
-                alt={`gallery photo nr${index} `}
-              />
-              {isEditOn && (
-                <StyledCloseIcon
-                  onClick={() => {
-                    deleteImageFn(photo, {
-                      onSuccess: () => {
-                        showToast(
-                          `Zdjęcie nr${index + 1} usunięte pomyślnie`,
-                          "success"
-                        );
-                        queryClient.invalidateQueries({
-                          queryKey: ["shelterCardsCard", data.id],
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={onDragEnd}>
+        <SortableContext
+          items={photos}
+          strategy={horizontalListSortingStrategy}>
+          <StyledCardImgContainer>
+            {photos.map((photo, index) => (
+              <SortableItem
+                stringImg={photo}
+                key={photo + index}>
+                <StyledCardSingleImgContainer key={photo + index}>
+                  <StyledCardImg
+                    src={photo}
+                    alt={`gallery photo nr${index} `}
+                  />
+                  {isEditOn && (
+                    <StyledCloseIcon
+                      onClick={() => {
+                        deleteImageFn(photo, {
+                          onSuccess: () => {
+                            showToast(
+                              `Zdjęcie nr${index + 1} usunięte pomyślnie`,
+                              "success"
+                            );
+                            queryClient.invalidateQueries({
+                              queryKey: ["shelterCardsCard", data.id],
+                            });
+                          },
                         });
-                      },
-                    });
-                  }}
-                />
-              )}
-            </StyledCardSingleImgContainer>
-          ))}
-        </StyledCardImgContainer>
-        {data.photos && isEditOn && (
-          <>
-            <Button
-              type="button"
-              onClick={() => setIsDeleteAllModalOpen(true)}>
-              Usuń wszystkie zdjęcia
-            </Button>
-            <Modal isOpen={isDeleteAllModalOpen}>
-              <Typography
-                variant="Heading 18 Semi Bold"
-                tag="h3">
-                Czy chcesz usunąć wszystkie zdjęcia z karty?
-              </Typography>
-              <AnimalCardsCardBtnsContainer>
-                <Button
-                  isFullWidth
-                  variant="outline"
-                  onClick={() => setIsDeleteAllModalOpen(false)}
-                  type="button">
-                  Anuluj
-                </Button>
-                <Button
-                  isFullWidth
-                  onClick={() => {
-                    deleteStorageImagesFn(data.photos, {
-                      onSuccess: () => {
-                        setIsDeleteAllModalOpen(false);
-                        queryClient.invalidateQueries({
-                          queryKey: ["shelterCardsCard", data.id],
-                        });
-                      },
-                    });
-                  }}
-                  type="button">
-                  Potwierdź
-                </Button>
-              </AnimalCardsCardBtnsContainer>
-            </Modal>
-          </>
-        )}
-        <StyledCardInputContainer>
-          <DashboardAnimalCardsCardFields
-            isEditOn={isEditOn}
-            formik={formik}
-          />
+                      }}
+                    />
+                  )}
 
-          {isEditOn && (
-            <FormRow label="Dodaj nowe zdjęcia">
-              <CustomFileInput
-                photos={formik.values.photos}
-                handleIndexFileChangeForm={handleIndexFileChangeForm}
-                onFileDelete={handleOnFileDelete}
-                onFileChange={(files: File[] | null | File) => {
-                  if (Array.isArray(formik.values.newPhotos)) {
-                    formik.setFieldValue("newPhotos", [
-                      ...formik.values.newPhotos,
-                      files,
-                    ]);
-                  }
-                }}
-                description="Zdjęcie maksymalnie 5MB"
-              />
-            </FormRow>
+                  {index === 0 && (
+                    <StyledProfileIcon
+                      className="profilePictureIcon"
+                      title="Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."
+                    />
+                  )}
+                </StyledCardSingleImgContainer>
+              </SortableItem>
+            ))}
+          </StyledCardImgContainer>
+          {data.photos && isEditOn && (
+            <>
+              <Button
+                type="button"
+                onClick={() => setIsDeleteAllModalOpen(true)}>
+                Usuń wszystkie zdjęcia
+              </Button>
+              <Modal isOpen={isDeleteAllModalOpen}>
+                <Typography
+                  variant="Heading 18 Semi Bold"
+                  tag="h3">
+                  Czy chcesz usunąć wszystkie zdjęcia z karty?
+                </Typography>
+                <AnimalCardsCardBtnsContainer>
+                  <Button
+                    isFullWidth
+                    variant="outline"
+                    onClick={() => setIsDeleteAllModalOpen(false)}
+                    type="button">
+                    Anuluj
+                  </Button>
+                  <Button
+                    isFullWidth
+                    onClick={() => {
+                      deleteStorageImagesFn(data.photos, {
+                        onSuccess: () => {
+                          setIsDeleteAllModalOpen(false);
+                          queryClient.invalidateQueries({
+                            queryKey: ["shelterCardsCard", data.id],
+                          });
+                        },
+                      });
+                    }}
+                    type="button">
+                    Potwierdź
+                  </Button>
+                </AnimalCardsCardBtnsContainer>
+              </Modal>
+            </>
           )}
-        </StyledCardInputContainer>
+        </SortableContext>
+      </DndContext>
+
+      <StyledCardInputContainer>
+        <DashboardAnimalCardsCardFields
+          isEditOn={isEditOn}
+          formik={formik}
+        />
+
         {isEditOn && (
-          <StyledCardFooter>
-            <Button
-              type="button"
-              onClick={() => navigate(-1)}
-              variant="outline">
-              Anuluj
-            </Button>
-            <Button onClick={() => {}}>Zapisz</Button>
-          </StyledCardFooter>
+          <FormRow label="Dodaj nowe zdjęcia">
+            <CustomFileInput
+              existingFiles={photosLength}
+              photos={photos}
+              handleIndexFileChangeForm={handleIndexFileChangeForm}
+              onFileDelete={handleOnFileDelete}
+              onFileChange={(files: File[] | null | File) => {
+                if (Array.isArray(formik.values.newPhotos)) {
+                  formik.setFieldValue("newPhotos", [
+                    ...formik.values.newPhotos,
+                    files,
+                  ]);
+                }
+              }}
+              description="Zdjęcie maksymalnie 5MB"
+            />
+          </FormRow>
         )}
-      </StyledCardFormContentContainer>
-    );
+      </StyledCardInputContainer>
+      {isEditOn && (
+        <StyledCardFooter>
+          <Button
+            type="button"
+            onClick={() => navigate(-1)}
+            variant="outline">
+            Anuluj
+          </Button>
+          <Button onClick={() => {}}>Zapisz</Button>
+        </StyledCardFooter>
+      )}
+    </StyledCardFormContentContainer>
+  );
 };
 
 export default DashboardAnimalCardsCardForm;

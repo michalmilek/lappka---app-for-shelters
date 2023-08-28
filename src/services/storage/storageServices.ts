@@ -24,11 +24,6 @@ export const usePostStoragePictures = () => {
           "Nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem.",
           "error"
         );
-      else if (error.status === 500)
-        showToast(
-          "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
-          "error"
-        );
     },
   });
   return mutation;
@@ -50,11 +45,6 @@ export const useDeleteStorageImage = () => {
       else if (error.status === 403)
         showToast(
           "Nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem.",
-          "error"
-        );
-      else if (error.status === 500)
-        showToast(
-          "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
           "error"
         );
     },
@@ -84,11 +74,6 @@ export const useDeleteStorageImages = () => {
         else if (error.status === 403)
           showToast(
             "Nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem.",
-            "error"
-          );
-        else if (error.status === 500)
-          showToast(
-            "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
             "error"
           );
       },

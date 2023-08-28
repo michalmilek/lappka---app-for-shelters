@@ -186,5 +186,4 @@ export interface AnimalCreatePetInterface {
   breed: string;
   profilePhoto: string;
   photos: string[];
-  shelterId: string;
 }

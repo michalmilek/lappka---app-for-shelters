@@ -31,8 +31,10 @@ import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableItem from "../SortableItem";
 import { KeyboardSensor, MouseSensor } from "utils/dndKitUtils/customEvents";
+import toastService from "singletons/toastService";
 
 export interface CustomFileInputProps {
+  existingFiles?: number;
   isAddNewCard?: boolean;
   photos: string[] | File[];
   label?: string;
@@ -43,6 +45,7 @@ export interface CustomFileInputProps {
 }
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
+  existingFiles,
   isAddNewCard,
   handleIndexFileChangeForm,
   onFileChange,
@@ -56,7 +59,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   const imgHeight = useSelector(selectImageHeight);
   const imgWidth = useSelector(selectImageWidth);
   const [fileNames, setFileNames] = useState<string[]>([]);
-  console.log("🚀 ~ fileNames:", fileNames);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [crop, setCrop] = useState<Crop>();
@@ -90,7 +92,9 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    if (files) {
+    const filesInput = existingFiles ? existingFiles : 0;
+
+    if (files && files.length + filesInput <= 5) {
       const newFileNames = Array.from(files).map((_file, index) => {
         let newFileName = `image${index + 1}`;
         let counter = 1;
@@ -127,6 +131,11 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           setSelectedImageNumber(filePreviews.length);
         }
       });
+    } else {
+      toastService.showToast(
+        "Zwierzak może posiadać maksymalnie 5 zdjęć.",
+        "error"
+      );
     }
   };
 
@@ -372,7 +381,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
                         setSelectedImageNumber(index);
                       }}
                     />
-                    {index === 0 && (
+                    {index === 0 && isAddNewCard && (
                       <StyledProfileIcon
                         className="profilePictureIcon"
                         title="Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."

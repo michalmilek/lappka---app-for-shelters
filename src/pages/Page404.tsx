@@ -36,6 +36,7 @@ const HomeLink = styled.a`
 function Page404() {
   const [redirectCountdown, setRedirectCountdown] = useState(3);
   const navigate = useNavigate();
+  const hasPrevious = document.referrer !== "";
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
@@ -43,14 +44,18 @@ function Page404() {
     }, 1000);
 
     const redirectTimeout = setTimeout(() => {
-      navigate(-1);
+      if (hasPrevious) {
+        navigate(-1);
+      } else {
+        navigate("/");
+      }
     }, 3000);
 
     return () => {
       clearInterval(countdownInterval);
       clearTimeout(redirectTimeout);
     };
-  }, [navigate]);
+  }, [navigate, hasPrevious]);
 
   return (
     <NotFoundContainer>
