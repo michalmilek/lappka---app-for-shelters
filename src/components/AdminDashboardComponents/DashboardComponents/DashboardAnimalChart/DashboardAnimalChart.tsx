@@ -1,5 +1,5 @@
 import Typography from "components/SharedComponents/Typography/Typography";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -114,8 +114,6 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
         width={"100%"}
         height={"90%"}>
         <BarChart
-          width={150}
-          height={150}
           data={getChartDataByType(timeSelect)}
           margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
           <XAxis

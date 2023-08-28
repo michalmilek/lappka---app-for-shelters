@@ -22,13 +22,12 @@ const DashboardInfoCardsItem = ({
   number,
   gridArea,
 }: Props) => {
-  console.log(isLoading);
   if (isLoading) {
     return <SkeletonCardItem />;
   }
 
   return (
-    <StyledDashboardInfoCard>
+    <StyledDashboardInfoCard gridArea={gridArea}>
       <StyledDashboardInfoCardIconContainer>
         {icon}
       </StyledDashboardInfoCardIconContainer>

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import Typography from "../Typography/Typography";
 import { Crop } from "react-image-crop";
-import { PencilIcon } from "@heroicons/react/24/solid";
 import "react-image-crop/dist/ReactCrop.css";
 import {
   FileInput,
@@ -9,12 +8,8 @@ import {
   FileInputContainerContent,
   FullContainer,
   PlusIconContainer,
-  StyledCloseIcon,
-  StyledImgPreviewContainer,
   StyledImgsContainer,
   StyledPlusIcon,
-  StyledPreviewPhoto,
-  StyledProfileIcon,
 } from "./CustomFileInput.styled";
 import ImageCrop from "./Crop/ImageCrop";
 import { useSelector } from "react-redux";
@@ -29,9 +24,9 @@ import {
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { horizontalListSortingStrategy } from "@dnd-kit/sortable";
-import SortableItem from "../SortableItem";
 import { KeyboardSensor, MouseSensor } from "utils/dndKitUtils/customEvents";
 import toastService from "singletons/toastService";
+import PhotoPreviewNewPhotos from "../DragAndDrop/PhotoPreviewNewPhotos";
 
 export interface CustomFileInputProps {
   existingFiles?: number;
@@ -319,6 +314,11 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     }
   };
 
+  const handlePreviewImage = (preview: string, index: number) => {
+    setSelectedImage(preview);
+    setSelectedImageNumber(index);
+  };
+
   return (
     <FullContainer>
       <FileInputContainerContent>
@@ -363,45 +363,15 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             strategy={horizontalListSortingStrategy}>
             <StyledImgsContainer>
               {filePreviews.map((preview, index) => (
-                <SortableItem
-                  stringImg={preview}
-                  key={preview + index}>
-                  <StyledImgPreviewContainer
-                    addNewCard
-                    index={index}
-                    key={preview + index}>
-                    <StyledPreviewPhoto
-                      title="Kliknij, aby edytować zdjęcie"
-                      key={index}
-                      src={preview}
-                      alt={`Preview ${fileNames[index]}`}
-                      className="previewImg"
-                      onClick={() => {
-                        setSelectedImage(preview);
-                        setSelectedImageNumber(index);
-                      }}
-                    />
-                    {index === 0 && isAddNewCard && (
-                      <StyledProfileIcon
-                        className="profilePictureIcon"
-                        title="Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."
-                      />
-                    )}
-
-                    <PencilIcon
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                      className="editBtn"
-                    />
-
-                    <StyledCloseIcon
-                      className="deleteIcon"
-                      title="Kliknij, aby usunąć zdjęcie"
-                      onClick={() => handleRemoveFile(index)}
-                    />
-                  </StyledImgPreviewContainer>
-                </SortableItem>
+                <PhotoPreviewNewPhotos
+                  fileName={fileNames[index]}
+                  handlePreviewImage={handlePreviewImage}
+                  handleRemoveFile={handleRemoveFile}
+                  index={index}
+                  preview={preview}
+                  isAddNewCard={isAddNewCard}
+                  key={preview + index}
+                />
               ))}
             </StyledImgsContainer>
           </SortableContext>

@@ -49,7 +49,8 @@ import {
   SortableContext,
 } from "@dnd-kit/sortable";
 import { KeyboardSensor, MouseSensor } from "utils/dndKitUtils/customEvents";
-import SortableItem from "components/SharedComponents/SortableItem";
+import SortableItem from "components/SharedComponents/DragAndDrop/SortableItem";
+import PhotoPreviewImage from "components/SharedComponents/DragAndDrop/PhotoPreviewImage";
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -61,8 +62,6 @@ const DashboardAnimalCardsCardForm = ({
   const { showToast } = useToast();
   const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
   const { mutate: deleteStorageImagesFn } = useDeleteStorageImages();
-  const { mutate: deleteImageFn, isLoading: isLoadingDeleteStorageImage } =
-    useDeleteStorageImage();
   const {
     mutate: postStoragePicture,
     isLoading: isLoadingPostStoragePictures,
@@ -157,19 +156,10 @@ const DashboardAnimalCardsCardForm = ({
   };
 
   useEffect(() => {
-    if (
-      isLoadingDeleteStorageImage ||
-      isLoadingPostStoragePictures ||
-      isLoadingPutShelterCards
-    )
+    if (isLoadingPostStoragePictures || isLoadingPutShelterCards)
       dispatch(setLoading(true));
     else dispatch(setLoading(false));
-  }, [
-    dispatch,
-    isLoadingDeleteStorageImage,
-    isLoadingPostStoragePictures,
-    isLoadingPutShelterCards,
-  ]);
+  }, [dispatch, isLoadingPostStoragePictures, isLoadingPutShelterCards]);
 
   return (
     <StyledCardFormContentContainer
@@ -186,40 +176,13 @@ const DashboardAnimalCardsCardForm = ({
           strategy={horizontalListSortingStrategy}>
           <StyledCardImgContainer>
             {photos.map((photo, index) => (
-              <SortableItem
-                stringImg={photo}
-                key={photo + index}>
-                <StyledCardSingleImgContainer key={photo + index}>
-                  <StyledCardImg
-                    src={photo}
-                    alt={`gallery photo nr${index} `}
-                  />
-                  {isEditOn && (
-                    <StyledCloseIcon
-                      onClick={() => {
-                        deleteImageFn(photo, {
-                          onSuccess: () => {
-                            showToast(
-                              `Zdjęcie nr${index + 1} usunięte pomyślnie`,
-                              "success"
-                            );
-                            queryClient.invalidateQueries({
-                              queryKey: ["shelterCardsCard", data.id],
-                            });
-                          },
-                        });
-                      }}
-                    />
-                  )}
-
-                  {index === 0 && (
-                    <StyledProfileIcon
-                      className="profilePictureIcon"
-                      title="Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."
-                    />
-                  )}
-                </StyledCardSingleImgContainer>
-              </SortableItem>
+              <PhotoPreviewImage
+                id={data.id}
+                index={index}
+                key={photo + index}
+                isEditOn={isEditOn}
+                photo={photo}
+              />
             ))}
           </StyledCardImgContainer>
           {data.photos && isEditOn && (

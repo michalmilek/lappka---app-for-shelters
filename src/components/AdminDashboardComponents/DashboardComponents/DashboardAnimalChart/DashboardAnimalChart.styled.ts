@@ -6,28 +6,23 @@ export const StyledDashboardChartContainer = styled.div`
   border-radius: 8px;
   grid-area: b;
   background: ${getColor("white")};
-  width: 100%;
-  height: 40vh;
+  height: 100%;
+  width: 6fr;
   box-shadow: 0px 1px 2px 0px #1018280f;
   z-index: 900;
+  max-height: 400px;
+  max-width: 1200px;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 
-  @media screen and (max-width: 1439px) {
-    max-width: auto;
-    min-width: auto;
-    width: 100%;
-  }
-
   @media screen and (max-width: 1024px) {
-    min-width: auto;
+    height: auto;
     width: 100%;
-    max-width: auto;
   }
 `;
 
 export const StyledDashboardChartTitleContainer = styled.div`
-  width: auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

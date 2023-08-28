@@ -4,8 +4,8 @@ export const StyledDashboardInfoCardsContainer = styled.ul`
   list-style-type: none;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-content: space-between;
   gap: 16px;

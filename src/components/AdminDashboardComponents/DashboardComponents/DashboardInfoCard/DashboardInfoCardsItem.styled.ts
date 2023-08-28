@@ -1,25 +1,30 @@
+import React from "react";
 import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
+interface InfoCardInterface extends React.ComponentProps<"div"> {
+  gridArea: string;
+}
 
-
-export const StyledDashboardInfoCard = styled.li`
-  height: 10vh;
+export const StyledDashboardInfoCard = styled.div<InfoCardInterface>`
+  height: 100%;
   display: flex;
   background: ${getColor("white")};
   padding: 16px;
   justify-content: flex-start;
   gap: 12px;
   align-items: center;
-  min-width: 272px;
+  width: 2fr;
   border-radius: 8px;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 
-  @media screen and (max-width: 1439px) {
-    min-width: 200px;
+  grid-area: ${(props) => props.gridArea};
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
   }
 `;
 
