@@ -16,6 +16,7 @@ import {
   StyledArrowUpIcon,
   StyledDashboardChartContainer,
   StyledDashboardChartTitleContainer,
+  StyledResponsiveContainer,
 } from "./DashboardAnimalChart.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { CalendarIcon } from "components/SharedComponents/icons/icons";
@@ -110,9 +111,9 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
           handleTimeSelectChange={handleTimeSelectChange}
         />
       </StyledDashboardChartTitleContainer>
-      <ResponsiveContainer
-        width={"100%"}
-        height={"90%"}>
+      <StyledResponsiveContainer
+        maxHeight={400}
+        height={"100%"}>
         <BarChart
           data={getChartDataByType(timeSelect)}
           margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
@@ -165,7 +166,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
             ))}
           </Bar>
         </BarChart>
-      </ResponsiveContainer>
+      </StyledResponsiveContainer>
     </StyledDashboardChartContainer>
   );
 };

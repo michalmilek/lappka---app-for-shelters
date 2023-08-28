@@ -1,4 +1,5 @@
 import { ArrowUpIcon } from "components/SharedComponents/icons/icons";
+import { ResponsiveContainer } from "recharts";
 import { css, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
@@ -10,8 +11,6 @@ export const StyledDashboardChartContainer = styled.div`
   width: 6fr;
   box-shadow: 0px 1px 2px 0px #1018280f;
   z-index: 900;
-  max-height: 400px;
-  max-width: 1200px;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 
@@ -87,6 +86,10 @@ export const StyledDashboardChartDropdownContainerList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2px;
+`;
+
+export const StyledResponsiveContainer = styled(ResponsiveContainer)`
+  max-width: 6fr;
 `;
 
 interface ArrowUpIconInterface extends React.SVGProps<SVGSVGElement> {
