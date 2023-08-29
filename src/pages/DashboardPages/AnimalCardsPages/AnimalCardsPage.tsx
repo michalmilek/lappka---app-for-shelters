@@ -17,6 +17,7 @@ import ErrorAnimalCardsTable from "components/AdminDashboardComponents/AnimalCar
 import { PaginationState } from "@tanstack/react-table";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTablePageIndex, selectTablePageSize } from "redux/tableSlice";
+import { ExtendedAxiosError } from "services/axiosInstance";
 
 const AnimalCardsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,40 +26,41 @@ const AnimalCardsPage = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-    const pageIndexFromRedux = useSelector(selectTablePageIndex);
-    const pageSizeFromRedux = useSelector(selectTablePageSize);
+  const pageIndexFromRedux = useSelector(selectTablePageIndex);
+  const pageSizeFromRedux = useSelector(selectTablePageSize);
 
-    const [pageIndex, setPageIndex] = useState(
-      pageIndexFromQueryParams ? pageIndexFromQueryParams : pageIndexFromRedux
-    );
-    const [pageSize, setPageSize] = useState(
-      pageSizeFromQueryParams ? pageSizeFromQueryParams : pageSizeFromRedux
-    );
+  const [pageIndex, setPageIndex] = useState(
+    pageIndexFromQueryParams ? pageIndexFromQueryParams : pageIndexFromRedux
+  );
+  const [pageSize, setPageSize] = useState(
+    pageSizeFromQueryParams ? pageSizeFromQueryParams : pageSizeFromRedux
+  );
 
-    const { data, isLoading, isError, error, isSuccess } = useShelterCards(
-      +pageIndex,
-      +pageSize
-    );
-    const { showToast } = useToast();
+  const { data, isLoading, isError, error, isSuccess } = useShelterCards(
+    +pageIndex,
+    +pageSize
+  );
+  const { showToast } = useToast();
 
-    useEffect(() => {
-      if (isError) {
+  useEffect(() => {
+    if (isError) {
+      if ((error as ExtendedAxiosError).response?.status !== 500)
         showToast("Wystąpił błąd pobierania danych", "error");
-        console.log(error);
-      }
-    }, [error, isError, showToast]);
+      console.log(error);
+    }
+  }, [error, isError, showToast]);
 
-    useEffect(() => {
-      if (pageIndexFromQueryParams) {
-        setPageIndex(pageIndexFromQueryParams);
-      }
-    }, [pageIndexFromQueryParams]);
+  useEffect(() => {
+    if (pageIndexFromQueryParams) {
+      setPageIndex(pageIndexFromQueryParams);
+    }
+  }, [pageIndexFromQueryParams]);
 
-    useEffect(() => {
-      if (pageSizeFromQueryParams) {
-        setPageSize(pageSizeFromQueryParams);
-      }
-    }, [pageSizeFromQueryParams]);
+  useEffect(() => {
+    if (pageSizeFromQueryParams) {
+      setPageSize(pageSizeFromQueryParams);
+    }
+  }, [pageSizeFromQueryParams]);
 
   return (
     <StyledDashboardAnimalCardsMain>

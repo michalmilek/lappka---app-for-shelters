@@ -74,7 +74,7 @@ export const updateShelterVolunteering = async (
 ) => {
   try {
     const response = await axiosInstance.put(
-      `/Pet/shelters/volunteering`,
+      `/shelters/volunteering/update`,
       data
     );
     return response.data;
@@ -87,7 +87,7 @@ export const updateShelterVolunteering = async (
 export const getShelterCardsArchiveChartData = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
-      "/shelters/cards/chart/year/A6313BAD-5AE9-48B8-BED5-08DB9A61FEEF"
+      "/shelters/cards/chart/year"
     );
     return response.data;
   } catch (error) {
@@ -99,7 +99,7 @@ export const getShelterCardsArchiveChartData = async () => {
 export const getShelterCardsArchiveChartDataForMonth = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
-      "/shelters/cards/chart/month/A6313BAD-5AE9-48B8-BED5-08DB9A61FEEF"
+      "/shelters/cards/chart/month"
     );
     return response.data;
   } catch (error) {
@@ -111,7 +111,7 @@ export const getShelterCardsArchiveChartDataForMonth = async () => {
 export const getShelterCardsArchiveChartDataForWeek = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
-      "/shelters/cards/chart/week/A6313BAD-5AE9-48B8-BED5-08DB9A61FEEF"
+      "/shelters/cards/chart/week"
     );
     return response.data;
   } catch (error) {
@@ -122,7 +122,9 @@ export const getShelterCardsArchiveChartDataForWeek = async () => {
 
 export const getShelterCardsCard = async (petId: string) => {
   try {
-    const response = await mockInstance.get<Pet>(`/shelters/cards/${petId}`);
+    const response = await axiosInstance.get<Pet>(
+      `/shelters/cards/get/${petId}`
+    );
     return response.data;
   } catch (error) {
     console.error(error);

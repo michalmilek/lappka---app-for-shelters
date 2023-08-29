@@ -20,11 +20,27 @@ interface Props {
 }
 
 const validationSchema = Yup.object().shape({
-  bankAccountNumber: Yup.string().matches(
-    /^(\d{2}-?\d{4}-?\d{4}-?\d{4}-?\d{4}-?\d{4}|\d{2}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}|\d{26})$/,
-    "Numer konta musi składać się z 26 cyfr, oddzielonych spacjami, myślnikami lub bez separatorów."
-  ),
+  bankAccountNumber: Yup.string()
+    .matches(
+      /^(?:\d{2}-\d{4}-\d{4}-\d{4}-\d{4}-\d{4}-\d{4}|\d{2}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}|\d{26})$/,
+      "Konto bankowe musi mieć 26 cyfer oraz może być oddzielone spacjami lub pauzami."
+    )
+    .test("is-26-digits", "Konto musi mieć 26 cyfer.", (value?: string) => {
+      if (!value) {
+        return false;
+      }
+      const numbers = value.match(/\d/g);
+      if (numbers && numbers.length === 26) {
+        return true;
+      } else {
+        return false;
+      }
+    }),
 });
+
+
+
+
 
 export type FormikType = FormikProps<ShelterVolunteeringResponse>;
 

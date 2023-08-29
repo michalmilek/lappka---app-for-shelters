@@ -4,7 +4,7 @@ import { RootState } from "./store";
 import { PaginationState } from "@tanstack/react-table";
 
 const initialState: PaginationState = {
-  pageIndex: 0,
+  pageIndex: 1,
   pageSize: 10,
 };
 

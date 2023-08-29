@@ -37,7 +37,7 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   const columnsMemo = React.useMemo(() => columns, []);
 
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: pageIndexFromQueryParams ? +pageIndexFromQueryParams : 0,
+    pageIndex: pageIndexFromQueryParams ? +pageIndexFromQueryParams : 1,
     pageSize: pageSizeFromQueryParams ? +pageSizeFromQueryParams : 10,
   });
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -93,7 +93,7 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
     return () => {
       dispatch(
         setTablePaginationState({
-          pageIndex: 0,
+          pageIndex: 1,
           pageSize: 10,
         })
       );
