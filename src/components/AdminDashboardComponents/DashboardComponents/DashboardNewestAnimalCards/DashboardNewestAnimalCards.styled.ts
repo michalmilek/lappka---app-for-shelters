@@ -26,7 +26,8 @@ export const DashboardNewestAnimalCardsContainerHeader = styled.header`
 `;
 
 export const DashboardNewestAnimalCardsContainerContent = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   gap: 18px;
   justify-content: space-evenly;
@@ -35,9 +36,11 @@ export const DashboardNewestAnimalCardsContainerContent = styled.div`
   height: 100%;
 `;
 
-
 export const DashboardNewestAnimalCardsEmptyCardsList = styled.div`
   display: flex;
+  width: 100%;
+  height: 100%;
+  grid-column: 6/1;
   flex-direction: column;
   justify-content: center;
   align-items: center;

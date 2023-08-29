@@ -22,14 +22,11 @@ const ErrorContainer = styled.div`
   justify-content: center;
   background: ${getColor("white")};
   border-radius: 6px;
-  width: 272px;
-  height: 40vh;
+  width: 100%;
   box-shadow: 0px 2px 4px 0px #5b687114;
   animation: ${appearAnimation} 0.3s ease-in-out;
 
-  @media screen and (max-width: 1024px) {
-    width: 100%;
-  }
+  min-height: 15vh;
 `;
 
 const ErrorMessageContainer = styled.div`

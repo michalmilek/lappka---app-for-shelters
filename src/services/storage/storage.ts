@@ -1,4 +1,4 @@
-import axiosInstance from "services/axiosInstance";
+import axiosInstance, { mockInstance } from "services/axiosInstance";
 import axios from "axios";
 
 const MAX_FILE_SIZE = 15 * 1024 * 1024;

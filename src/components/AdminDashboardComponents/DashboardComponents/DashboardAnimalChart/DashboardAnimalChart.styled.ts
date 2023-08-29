@@ -111,7 +111,7 @@ export const StyledResponsiveContainer = styled(ResponsiveContainer)`
   }
 
   @media screen and (max-height: 950px) {
-    max-height: 38vh !important;
+    max-height: 35vh !important;
   }
 
   @media screen and (max-width: 1024px) {

@@ -6,28 +6,25 @@ import {
 } from "components/SharedComponents/icons/icons";
 import { styled } from "styled-components";
 import AnimalCardsInfoItem from "./AnimalCardsInfoItem";
-import SkeletonAnimalCardsInfoItem from "./SkeletonAnimalCardsInfoItem";
 import ErrorAnimalCardsInfo from "./ErrorAnimalCardsInfo";
 
 const AnimalCardsInfoContainer = styled.div`
-  grid-area: a;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   justify-content: space-between;
-  flex-wrap: wrap;
-  height: 100px;
+  width: 100%;
 
-  @media screen and (max-width: 1050px) {
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(1, 1fr);
     width: 100%;
   }
 `;
 
 const AnimalCardsInfo = () => {
-  const { data, isLoading, isError, error, isSuccess } = useShelterStats();
+  const { data, isLoading, isError } = useShelterStats();
 
   if (isError) {
-    console.log(error);
     return <ErrorAnimalCardsInfo />;
   }
 

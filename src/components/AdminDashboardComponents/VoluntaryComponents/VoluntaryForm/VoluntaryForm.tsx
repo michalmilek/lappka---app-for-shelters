@@ -29,35 +29,25 @@ const validationSchema = Yup.object().shape({
 export type FormikType = FormikProps<ShelterVolunteeringResponse>;
 
 const VoluntaryForm = ({ data }: Props) => {
-  const dispatch = useDispatch();
-  const {
-    isLoading,
-    mutateAsync,
-    data: putData,
-    isError,
-    error,
-    isSuccess,
-  } = useUpdateShelterVolunteering();
+  const { mutate: updateShelterVolunteeringFn } =
+    useUpdateShelterVolunteering();
 
   const formik = useFormik({
     initialValues: data,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       const cleanedBankAccountNumber = values.bankAccountNumber.replace(
         /[\s-]/g,
         ""
       );
-      console.log("🚀 ~ cleanedBankAccountNumber:", cleanedBankAccountNumber);
 
-      mutateAsync({ ...values, bankAccountNumber: cleanedBankAccountNumber });
+      updateShelterVolunteeringFn({
+        ...values,
+        bankAccountNumber: cleanedBankAccountNumber,
+      });
     },
   });
 
-  useEffect(() => {
-    if (isLoading) dispatch(setLoading(true));
-    else dispatch(setLoading(false));
-  }, [isLoading, dispatch]);
   return (
     <>
       <StyledDashboardVoluntaryMainContentFormsContainer

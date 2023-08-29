@@ -55,6 +55,7 @@ export const useShelterVolunteering = () => {
 };
 
 export const useUpdateShelterVolunteering = () => {
+  const dispatch = useDispatch();
   const { showToast } = useToast();
   const queryClient = useQueryClient();
   const mutation = useMutation(
@@ -63,6 +64,19 @@ export const useUpdateShelterVolunteering = () => {
       onSuccess: () => {
         showToast("Dane o wolontariacie pomyślnie zaktualizowane.");
         queryClient.invalidateQueries(["shelterVolunteering"]);
+      },
+      onError: (error) => {
+        console.log(error);
+        toastService.showToast(
+          "Wystąpił błąd z aktualizacją danych, skontaktuj się z administratorem.",
+          "error"
+        );
+      },
+      onMutate: () => {
+        dispatch(setLoading(true));
+      },
+      onSettled: () => {
+        dispatch(setLoading(false));
       },
     }
   );

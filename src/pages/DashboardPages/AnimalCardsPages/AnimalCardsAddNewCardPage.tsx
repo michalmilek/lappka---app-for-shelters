@@ -27,7 +27,7 @@ const AnimalCardsAddNewCardPage = () => {
   const { isSuccess: isSuccessAnimal, mutate: postAnimalFn } =
     usePostShelterCardsCreatePet();
 
-  const { mutate: deleteImgFromStorage } = useDeleteStorageImage();
+  //const { mutate: deleteImgFromStorage } = useDeleteStorageImage();
 
   const onSubmit = (values: AddNewAnimalCardInterface) => {
     if (formik.values.photos instanceof Array<File>) {
@@ -37,7 +37,6 @@ const AnimalCardsAddNewCardPage = () => {
         onSuccess: (data) => {
           postAnimalFn({
             ...values,
-            shelterId: "A6313BAD-5AE9-48B8-BED5-08DB9A61FEEF",
             photos: data,
             profilePhoto: data[0],
           } as AnimalCreatePetInterface);

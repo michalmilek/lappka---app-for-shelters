@@ -101,6 +101,15 @@ export const resetPasswordSetNewPassword = async (
 };
 
 
-
+export const revokeToken = async (refreshToken: string) => {
+  try {
+    const response = await axiosInstance.post(`/Auth/revokeToken`, {
+      refreshToken,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 

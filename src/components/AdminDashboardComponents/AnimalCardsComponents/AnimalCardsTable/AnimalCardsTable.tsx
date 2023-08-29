@@ -38,7 +38,7 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
 
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: pageIndexFromQueryParams ? +pageIndexFromQueryParams : 0,
-    pageSize: pageSizeFromQueryParams ? +pageSizeFromQueryParams : 0,
+    pageSize: pageSizeFromQueryParams ? +pageSizeFromQueryParams : 10,
   });
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");

@@ -25,29 +25,40 @@ const AnimalCardsPage = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const pageIndexFromRedux = useSelector(selectTablePageIndex);
-  const pageSizeFromRedux = useSelector(selectTablePageSize);
+    const pageIndexFromRedux = useSelector(selectTablePageIndex);
+    const pageSizeFromRedux = useSelector(selectTablePageSize);
 
-  const pageIndex = pageIndexFromQueryParams
-    ? pageIndexFromQueryParams
-    : pageIndexFromRedux;
+    const [pageIndex, setPageIndex] = useState(
+      pageIndexFromQueryParams ? pageIndexFromQueryParams : pageIndexFromRedux
+    );
+    const [pageSize, setPageSize] = useState(
+      pageSizeFromQueryParams ? pageSizeFromQueryParams : pageSizeFromRedux
+    );
 
-  const pageSize = pageSizeFromQueryParams
-    ? pageSizeFromQueryParams
-    : pageSizeFromRedux;
+    const { data, isLoading, isError, error, isSuccess } = useShelterCards(
+      +pageIndex,
+      +pageSize
+    );
+    const { showToast } = useToast();
 
-  const { data, isLoading, isError, error, isSuccess } = useShelterCards(
-    +pageIndex,
-    +pageSize
-  );
-  const { showToast } = useToast();
+    useEffect(() => {
+      if (isError) {
+        showToast("Wystąpił błąd pobierania danych", "error");
+        console.log(error);
+      }
+    }, [error, isError, showToast]);
 
-  useEffect(() => {
-    if (isError) {
-      showToast("Wystąpił błąd pobierania danych", "error");
-      console.log(error);
-    }
-  }, [error, isError, showToast]);
+    useEffect(() => {
+      if (pageIndexFromQueryParams) {
+        setPageIndex(pageIndexFromQueryParams);
+      }
+    }, [pageIndexFromQueryParams]);
+
+    useEffect(() => {
+      if (pageSizeFromQueryParams) {
+        setPageSize(pageSizeFromQueryParams);
+      }
+    }, [pageSizeFromQueryParams]);
 
   return (
     <StyledDashboardAnimalCardsMain>

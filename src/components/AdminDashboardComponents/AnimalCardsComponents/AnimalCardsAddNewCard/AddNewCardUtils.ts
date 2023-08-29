@@ -65,7 +65,10 @@ export const cardValidationSchema = Yup.object().shape({
     .required("To pole jest wymagane"),
   color: Yup.string()
     .required("To pole jest wymagane")
-    .matches(/^[a-zA-Z]+$/, "Pole może zawierać tylko litery")
+    .matches(
+      /^[^\d!@#$%^&*()\-=_+~`[\]\\/{}|:;'"<>,.?]*$/,
+      "Pole może zawierać tylko litery, spacje i pauzy"
+    )
     .max(50, "Pole 'Opis' może mieć maksymalnie 50 znaków"),
   months: Yup.number()
     .required("To pole jest wymagane")

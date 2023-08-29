@@ -124,7 +124,12 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
           width={400}
           height={300}
           data={getChartDataByType(timeSelect)}
-          margin={{ top: 50, right: 30, bottom: 50, left: desktopChartMargin }}>
+          margin={{
+            top: 50,
+            right: 30,
+            bottom: desktopChartMargin,
+            left: desktopChartMargin,
+          }}>
           <XAxis
             tickLine={false}
             axisLine={false}

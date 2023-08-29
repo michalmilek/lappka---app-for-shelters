@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { InfoCardInterface } from "./DashboardInfoCardsItem.styled";
 
 const loadingAnimation = keyframes`
   from {
@@ -9,20 +10,28 @@ const loadingAnimation = keyframes`
   }
 `;
 
-const SkeletonCard = styled.li`
-  height: 82px;
+const SkeletonCard = styled.li<InfoCardInterface>`
   display: flex;
   background: #e0e0e0;
   padding: 16px;
   justify-content: flex-start;
   gap: 12px;
   align-items: center;
-  min-width: 272px;
+  height: 100%;
+  width: 100%;
+  min-width: 20vw;
   border-radius: 8px;
   animation: ${loadingAnimation} 1s infinite alternate;
 
-  @media screen and (max-width: 1439px) {
-    min-width: 200px;
+  grid-area: ${(props) => props.gridArea};
+
+  @media screen and (max-width: 1800px) {
+    width: 100%;
+    min-width: 15vw;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
   }
 `;
 
@@ -51,8 +60,12 @@ const SkeletonText = styled.div`
   border-radius: 4px;
 `;
 
-const SkeletonCardItem = () => (
-  <SkeletonCard>
+interface Props {
+  gridArea: string;
+}
+
+const SkeletonCardItem = ({ gridArea }: Props) => (
+  <SkeletonCard gridArea={gridArea}>
     <SkeletonIconContainer />
     <SkeletonTextContainer>
       <SkeletonText />

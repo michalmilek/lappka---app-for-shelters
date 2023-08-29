@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
-interface InfoCardInterface extends React.ComponentProps<"div"> {
+export interface InfoCardInterface extends React.ComponentProps<"div"> {
   gridArea: string;
 }
 

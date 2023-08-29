@@ -5,10 +5,12 @@ import {
   StyledDashboardInfoCardIconContainer,
   StyledDashboardInfoCardTextContainer,
 } from "./DashboardInfoCardsItem.styled";
+import ErrorCard from "./ErrorCard";
 import SkeletonCardItem from "./SkeletonCardItem";
 
 interface Props {
   isLoading: boolean;
+  isError: boolean;
   text: string;
   icon: JSX.Element;
   number: number;
@@ -17,13 +19,18 @@ interface Props {
 
 const DashboardInfoCardsItem = ({
   isLoading,
+  isError,
   text,
   icon,
   number,
   gridArea,
 }: Props) => {
   if (isLoading) {
-    return <SkeletonCardItem />;
+    return <SkeletonCardItem gridArea={gridArea} />;
+  }
+
+  if (isError) {
+    return <ErrorCard gridArea={gridArea} />;
   }
 
   return (

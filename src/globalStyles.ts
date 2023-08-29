@@ -18,4 +18,8 @@ export const GlobalStyle = createGlobalStyle`
   .padding {
     padding: 149px 156px 150px;
   }
+
+
+
+
 `;

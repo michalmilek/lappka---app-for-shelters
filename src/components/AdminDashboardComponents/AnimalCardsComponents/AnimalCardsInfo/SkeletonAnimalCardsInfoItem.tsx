@@ -12,7 +12,7 @@ const loadingAnimation = keyframes`
 const SkeletonStyledAnimalCardsInfoItemContainer = styled.div`
   background: #e0e0e0;
   height: 82px;
-  width: 25.56%;
+  width: 100%;
   padding: 16px;
   display: flex;
   justify-content: flex-start;

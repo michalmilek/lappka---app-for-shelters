@@ -2,8 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import useToast from "hooks/useToast";
 import { useNavigate } from "react-router-dom";
+import { setLoading } from "redux/loadingSlice";
+import { store } from "redux/store";
 import { AuthRoutes, DashboardRoutes } from "router/router";
 import { ExtendedAxiosError } from "services/axiosInstance";
+import toastService from "singletons/toastService";
 import {
   login,
   LoginRequest,
@@ -11,9 +14,8 @@ import {
   resetPasswordSendEmail,
   resetPasswordSetNewPassword,
   ResetPasswordSetNewPasswordRequest,
+  revokeToken,
 } from "./auth";
-
-const internalError = "Wewnętrzny błąd serwera. Spróbuj ponownie później.";
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
@@ -42,15 +44,6 @@ export const useLoginMutation = () => {
             "Nie znaleziono użytkownika o podanym danym emailu.",
             "error"
           );
-        } else if (error.response?.status === 500) {
-          showToast(
-            "Wewnętrzny błąd serwera. Proszę spróbować ponownie później.",
-            "error"
-          );
-        } else {
-          if (error.response?.data?.errors[0])
-            showToast(error.response?.data?.errors[0].Description, "success");
-          else showToast("ERROR", "error");
         }
       },
     }
@@ -69,8 +62,7 @@ export const useRegisterShelterMutation = () => {
     },
     onError: (error: ExtendedAxiosError) => {
       console.log(error);
-      if (error.response?.status === 500) showToast(internalError, "error");
-      else if (error.response?.data?.errors[0].Code === "invalid_email") {
+      if (error.response?.data?.errors[0].Code === "invalid_email") {
         showToast(
           "Podany adres email został już wykorzystany w rejestracji.",
           "error"
@@ -90,8 +82,7 @@ export const useResetPasswordSendEmailMutation = () => {
   const resetPasswordSendEmailMutation = useMutation(resetPasswordSendEmail, {
     onError: (error: ExtendedAxiosError) => {
       console.log(error);
-      if (error.response?.status === 500) showToast(internalError, "error");
-      else if (error.response?.data?.errors[0].Code === "invalid_mail") {
+      if (error.response?.data?.errors[0].Code === "invalid_mail") {
         showToast(
           "Użytkownik o podanym emailu nie istnieje w bazie danych.",
           "error"
@@ -140,11 +131,35 @@ export const useResetPasswordSetNewPasswordMutation = () => {
         console.log(error);
         if (error.response?.status === 400)
           showToast("Podano niewłaściwy token albo token już wygasł.", "error");
-        else if (error.response?.status === 500)
-          showToast(internalError, "error");
       },
     }
   );
 
   return resetPasswordSendEmailMutation;
+};
+
+export const useRevokeToken = () => {
+  const navigate = useNavigate();
+  const revokeTokenMutation = useMutation(
+    (refreshToken: string) => {
+      return revokeToken(refreshToken);
+    },
+    {
+      onSuccess: () => {
+        toastService.showToast("Zostałeś pomyślnie wylogowany.");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        navigate(AuthRoutes.login);
+      },
+      onError: (error: ExtendedAxiosError) => {
+        console.log(error);
+        if (error.response?.data.errors[0].Code === "invalid_token")
+          toastService.showToast("Podano niewłaściwy token.", "error");
+      },
+      onMutate: () => store.dispatch(setLoading(true)),
+      onSettled: () => store.dispatch(setLoading(false)),
+    }
+  );
+
+  return revokeTokenMutation;
 };

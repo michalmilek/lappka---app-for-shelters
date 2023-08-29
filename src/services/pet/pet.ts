@@ -17,7 +17,7 @@ import {
 export const getShelter = async () => {
   try {
     const response = await axiosInstance.get<GetShelterRespones>(
-      "/shelters/details/A6313BAD-5AE9-48B8-BED5-08DB9A61FEEF"
+      "/shelters/details"
     );
     return response.data;
   } catch (error) {
@@ -41,7 +41,7 @@ export const getShelterStats = async () => {
 export const getShelterCards = async (args: [number, number]) => {
   const [pageSize, pageNumber] = args;
   try {
-    const response = await mockInstance.get<ShelterCardsResponse>(
+    const response = await axiosInstance.get<ShelterCardsResponse>(
       `/shelters/cards/petListInShelter`,
       {
         params: {
