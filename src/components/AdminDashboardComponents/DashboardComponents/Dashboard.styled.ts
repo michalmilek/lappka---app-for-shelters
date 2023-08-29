@@ -11,7 +11,6 @@ export const StyledDashboardMainContent = styled.article`
   display: grid;
   width: 100%;
   height: 100%;
-  border: 1px solid #000;
   padding: 24px 24px 25px;
   grid-template-areas:
     "el1 el1 el2 el2 el3 el3 el4 el4"

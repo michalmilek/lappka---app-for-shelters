@@ -8,7 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
   Label,
 } from "recharts";
 import { getColor } from "utils/styles/getStyle/getColor";
@@ -26,7 +25,11 @@ import {
   ChartData,
   ViewsStateFilled,
 } from "./DashboardAnimalChartStateHandler";
-import { getChartTypeTimeByType } from "./ChartDataUtils";
+import {
+  cutToFirstLetter,
+  emptyFn,
+  getChartTypeTimeByType,
+} from "./ChartDataUtils";
 
 interface Props {
   viewsState: ViewsStateFilled;
@@ -40,6 +43,13 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [timeSelect, setTimeSelect] = useState<TimeType>("Year");
   const deviceType = useDeviceType();
+
+  const largerThanTablet =
+    deviceType === "desktop" || deviceType === "laptop" ? true : false;
+
+  const condition = !largerThanTablet && timeSelect === "Year";
+
+  const desktopChartMargin = deviceType === "desktop" ? 10 : 0;
 
   const getChartDataByType = (type: TimeType): ChartData[] => {
     switch (type) {
@@ -72,10 +82,6 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
     const newItem = tickItem.toString();
     const newItem2 = newItem.substring(0, newItem.length - 3);
     return newItem2;
-  };
-
-  const emptyFn = (tickItem: number) => {
-    return tickItem.toString();
   };
 
   const handleTimeSelectChange = (value: TimeType) => {
@@ -112,16 +118,19 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
         />
       </StyledDashboardChartTitleContainer>
       <StyledResponsiveContainer
-        maxHeight={400}
-        height={"100%"}>
+        height={"99%"}
+        width={"99%"}>
         <BarChart
+          width={400}
+          height={300}
           data={getChartDataByType(timeSelect)}
-          margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
+          margin={{ top: 50, right: 30, bottom: 50, left: desktopChartMargin }}>
           <XAxis
             tickLine={false}
             axisLine={false}
             dataKey="name"
             tick={axisLabelStyle}
+            tickFormatter={condition ? cutToFirstLetter : emptyFn}
           />
           <YAxis
             tickLine={false}

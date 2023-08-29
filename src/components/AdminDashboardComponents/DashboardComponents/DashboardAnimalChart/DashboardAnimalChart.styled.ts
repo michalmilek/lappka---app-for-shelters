@@ -90,6 +90,33 @@ export const StyledDashboardChartDropdownContainerList = styled.ul`
 
 export const StyledResponsiveContainer = styled(ResponsiveContainer)`
   max-width: 6fr;
+  max-height: 60vh !important;
+
+  width: 100%;
+
+  @media screen and (max-height: 1600px) {
+    max-height: 55vh !important;
+  }
+
+  @media screen and (max-height: 1450px) {
+    max-height: 50vh !important;
+  }
+
+  @media screen and (max-height: 1300px) {
+    max-height: 45vh !important;
+  }
+
+  @media screen and (max-height: 1150px) {
+    max-height: 30vh !important;
+  }
+
+  @media screen and (max-height: 950px) {
+    max-height: 38vh !important;
+  }
+
+  @media screen and (max-width: 1024px) {
+    max-width: 100%;
+  }
 `;
 
 interface ArrowUpIconInterface extends React.SVGProps<SVGSVGElement> {

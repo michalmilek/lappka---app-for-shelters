@@ -14,7 +14,7 @@ export const StyledDashboardInfoCard = styled.div<InfoCardInterface>`
   justify-content: flex-start;
   gap: 12px;
   align-items: center;
-  min-width: 450px;
+  min-width: 20vw;
   width: 100%;
   border-radius: 8px;
 
@@ -24,12 +24,11 @@ export const StyledDashboardInfoCard = styled.div<InfoCardInterface>`
 
   grid-area: ${(props) => props.gridArea};
 
-  @media screen and (max-width: 1700px) {
-    min-width: 272px;
+  @media screen and (max-width: 1800px) {
+    width: 100%;
+    min-width: 15vw;
   }
-  @media screen and (max-width: 1400px) {
-    min-width: 200;
-  }
+
   @media screen and (max-width: 1024px) {
     width: 100%;
   }

@@ -20,6 +20,14 @@ const getMonthNameByIndex = (index: number) => {
   return monthNames[index] || "";
 };
 
+export function cutToFirstLetter(word: string) {
+  return word.substring(0, 1);
+}
+
+export const emptyFn = <T extends { toString(): string }>(tickItem: T) => {
+  return tickItem.toString();
+};
+
 export const createYearData = (data: number[]) => {
   const yearData = Array.from({ length: 12 }, (_, index) => {
     const monthName = getMonthNameByIndex(index);

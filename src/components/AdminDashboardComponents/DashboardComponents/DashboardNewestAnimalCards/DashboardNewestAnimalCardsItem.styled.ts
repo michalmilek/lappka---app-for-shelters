@@ -51,8 +51,8 @@ export const DashboardNewestAnimalCardsItemImg = styled.img`
     width: 150px;
   }
   @media screen and (max-width: 550px) {
-    height: 50px;
-    width: 100%;
+    height: 100px;
+    width: 80px;
   }
 `;
 
