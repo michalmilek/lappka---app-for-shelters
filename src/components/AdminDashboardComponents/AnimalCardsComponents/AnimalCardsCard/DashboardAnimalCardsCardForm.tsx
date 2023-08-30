@@ -2,22 +2,15 @@ import { AnimalEdit, GenreType, Pet, PetBreed } from "services/pet/petTypes";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import {
-  AnimalCardsCardBtnsContainer,
   StyledCardFooter,
   StyledCardFormContentContainer,
-  StyledCardImg,
   StyledCardImgContainer,
   StyledCardInputContainer,
-  StyledCardSingleImgContainer,
 } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
 import {
-  StyledCloseIcon,
-  StyledProfileIcon,
-} from "components/SharedComponents/Inputs/CustomFileInput.styled";
-import {
-  useDeleteStorageImage,
   useDeleteStorageImages,
+  useGetStorageImagesForAnimal,
   usePostStoragePictures,
 } from "services/storage/storageServices";
 import { useQueryClient } from "@tanstack/react-query";
@@ -27,10 +20,6 @@ import { useNavigate } from "react-router-dom";
 import { usePutShelterCardsAnimal } from "services/pet/petServices";
 import DashboardAnimalCardsCardFields from "./DashboardAnimalCardsCardFields";
 import useToast from "hooks/useToast";
-import { setLoading } from "redux/loadingSlice";
-import { useDispatch } from "react-redux";
-import Modal from "components/SharedComponents/Modal/Modal";
-import Typography from "components/SharedComponents/Typography/Typography";
 import {
   AnimalCardsCardValidationSchema,
   PetCard,
@@ -49,8 +38,10 @@ import {
   SortableContext,
 } from "@dnd-kit/sortable";
 import { KeyboardSensor, MouseSensor } from "utils/dndKitUtils/customEvents";
-import SortableItem from "components/SharedComponents/DragAndDrop/SortableItem";
 import PhotoPreviewImage from "components/SharedComponents/DragAndDrop/PhotoPreviewImage";
+import DeleteAllImagesModal from "./DeleteAllImagesModal";
+import ImageSkeleton from "./utils/ImageSkeleton";
+import { ErrorSkeleton } from "./utils/ErrorSkeleton";
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -60,20 +51,25 @@ const DashboardAnimalCardsCardForm = ({
   data: Pet;
 }) => {
   const { showToast } = useToast();
-  const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
-  const { mutate: deleteStorageImagesFn } = useDeleteStorageImages();
   const {
-    mutate: postStoragePicture,
-    isLoading: isLoadingPostStoragePictures,
-  } = usePostStoragePictures();
-  const { mutate: putShelterCardsFn, isLoading: isLoadingPutShelterCards } =
-    usePutShelterCardsAnimal();
+    isSuccess: GetStorageImagesIsSuccess,
+    data: imagesUrls,
+    isLoading: GetStorageImagesIsLoading,
+    isError: GetStorageImagesIsError,
+  } = useGetStorageImagesForAnimal(data.photos, data.id);
+  const [localImageUrls, setLocalImageUrls] = useState<string[]>(
+    imagesUrls || []
+  );
+  const { mutate: deleteStorageImagesFn } = useDeleteStorageImages();
+  const { mutate: postStoragePicture } = usePostStoragePictures();
+  const { mutate: putShelterCardsFn } = usePutShelterCardsAnimal();
   const navigate = useNavigate();
   const initialValues: PetCard = {
     ...data,
     months: data.age,
     type: data.type as GenreType,
     breed: data.breed as PetBreed,
+    newPhotos: [],
   };
 
   const handleOnFileDelete = (index: number) => {
@@ -88,12 +84,13 @@ const DashboardAnimalCardsCardForm = ({
       postStoragePicture(formik.values.newPhotos, {
         onSuccess: (newData) => {
           formik.setFieldValue("photos", [...photos, newData]);
+          queryClient.setQueryData(["shelterCardsCard", data.id], newData);
           const { newPhotos, ...values } = formik.values;
           putShelterCardsFn(
             {
               ...values,
               petId: data.id,
-              profilePhoto: data.profilePhoto,
+              profilePhoto: values.photos[0],
             } as AnimalEdit,
             {
               onSuccess: () => {
@@ -101,6 +98,13 @@ const DashboardAnimalCardsCardForm = ({
                   `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
                   "success"
                 );
+                const newPhotos = data.photos.filter((dataPhoto) => {
+                  return !values.photos.includes(dataPhoto);
+                });
+                deleteStorageImagesFn(newPhotos);
+
+                queryClient.invalidateQueries(["shelterCardsCard", data.id]);
+                queryClient.invalidateQueries(["storageImages", data.id]);
               },
             }
           );
@@ -108,10 +112,27 @@ const DashboardAnimalCardsCardForm = ({
       });
     else {
       const { newPhotos, ...values } = formik.values;
-      putShelterCardsFn({
-        ...values,
-        petId: data.id,
-      } as AnimalEdit);
+      putShelterCardsFn(
+        {
+          ...values,
+          petId: data.id,
+        } as AnimalEdit,
+        {
+          onSuccess: () => {
+            showToast(
+              `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
+              "success"
+            );
+            const newPhotos = data.photos.filter((dataPhoto) => {
+              return !values.photos.includes(dataPhoto);
+            });
+            deleteStorageImagesFn(newPhotos);
+
+            queryClient.invalidateQueries(["shelterCardsCard", data.id]);
+            queryClient.invalidateQueries(["storageImages", data.id]);
+          },
+        }
+      );
     }
   };
 
@@ -122,10 +143,10 @@ const DashboardAnimalCardsCardForm = ({
   });
 
   const photos = formik.values.photos;
-  const photosLength = formik.values.photos.length;
+  const photosLength =
+    formik.values.photos.length + formik.values.newPhotos!.length;
 
   const queryClient = useQueryClient();
-  const dispatch = useDispatch();
 
   const handleIndexFileChangeForm = (files: File[]) => {
     formik.setFieldValue("photos", files);
@@ -155,11 +176,23 @@ const DashboardAnimalCardsCardForm = ({
     }
   };
 
+  const removePhotoAtIndex = (indexToRemove: number) => {
+    const updatedPhotos = formik.values.photos.filter(
+      (_, index) => index !== indexToRemove
+    );
+    const updatedPhotosUrls = localImageUrls.filter(
+      (_, index) => index !== indexToRemove
+    );
+
+    formik.setFieldValue("photos", updatedPhotos);
+    setLocalImageUrls(updatedPhotosUrls);
+  };
+
   useEffect(() => {
-    if (isLoadingPostStoragePictures || isLoadingPutShelterCards)
-      dispatch(setLoading(true));
-    else dispatch(setLoading(false));
-  }, [dispatch, isLoadingPostStoragePictures, isLoadingPutShelterCards]);
+    if (GetStorageImagesIsSuccess) {
+      setLocalImageUrls(imagesUrls);
+    }
+  }, [GetStorageImagesIsSuccess, imagesUrls]);
 
   return (
     <StyledCardFormContentContainer
@@ -167,66 +200,46 @@ const DashboardAnimalCardsCardForm = ({
       onSubmit={formik.handleSubmit}>
       {!isEditOn && <AnimalCardsCardActions id={data.id} />}
 
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={onDragEnd}>
-        <SortableContext
-          items={photos}
-          strategy={horizontalListSortingStrategy}>
-          <StyledCardImgContainer>
-            {photos.map((photo, index) => (
-              <PhotoPreviewImage
-                id={data.id}
-                index={index}
-                key={photo + index}
-                isEditOn={isEditOn}
-                photo={photo}
-              />
-            ))}
-          </StyledCardImgContainer>
-          {data.photos && isEditOn && (
-            <>
-              <Button
-                type="button"
-                onClick={() => setIsDeleteAllModalOpen(true)}>
-                Usuń wszystkie zdjęcia
-              </Button>
-              <Modal isOpen={isDeleteAllModalOpen}>
-                <Typography
-                  variant="Heading 18 Semi Bold"
-                  tag="h3">
-                  Czy chcesz usunąć wszystkie zdjęcia z karty?
-                </Typography>
-                <AnimalCardsCardBtnsContainer>
-                  <Button
-                    isFullWidth
-                    variant="outline"
-                    onClick={() => setIsDeleteAllModalOpen(false)}
-                    type="button">
-                    Anuluj
-                  </Button>
-                  <Button
-                    isFullWidth
-                    onClick={() => {
-                      deleteStorageImagesFn(data.photos, {
-                        onSuccess: () => {
-                          setIsDeleteAllModalOpen(false);
-                          queryClient.invalidateQueries({
-                            queryKey: ["shelterCardsCard", data.id],
-                          });
-                        },
-                      });
-                    }}
-                    type="button">
-                    Potwierdź
-                  </Button>
-                </AnimalCardsCardBtnsContainer>
-              </Modal>
-            </>
-          )}
-        </SortableContext>
-      </DndContext>
+      {GetStorageImagesIsError && (
+        <StyledCardImgContainer>
+          {data.photos.map((photo, index) => (
+            <ErrorSkeleton key={photo + index} />
+          ))}
+        </StyledCardImgContainer>
+      )}
+
+      {GetStorageImagesIsLoading && (
+        <StyledCardImgContainer>
+          {data.photos.map((photo, index) => (
+            <ImageSkeleton key={photo + index} />
+          ))}
+        </StyledCardImgContainer>
+      )}
+
+      {localImageUrls && (
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={onDragEnd}>
+          <SortableContext
+            items={photos}
+            strategy={horizontalListSortingStrategy}>
+            <StyledCardImgContainer>
+              {localImageUrls.map((photo, index) => (
+                <PhotoPreviewImage
+                  removePhotoAtIndex={removePhotoAtIndex}
+                  id={data.id}
+                  index={index}
+                  key={photo + index}
+                  isEditOn={isEditOn}
+                  photo={photo}
+                />
+              ))}
+            </StyledCardImgContainer>
+          </SortableContext>
+        </DndContext>
+      )}
+      {data.photos && isEditOn && <DeleteAllImagesModal id={data.id} />}
 
       <StyledCardInputContainer>
         <DashboardAnimalCardsCardFields
@@ -249,7 +262,7 @@ const DashboardAnimalCardsCardForm = ({
                   ]);
                 }
               }}
-              description="Zdjęcie maksymalnie 5MB"
+              description="Zdjęcie maksymalnie 15MB"
             />
           </FormRow>
         )}
@@ -262,7 +275,7 @@ const DashboardAnimalCardsCardForm = ({
             variant="outline">
             Anuluj
           </Button>
-          <Button onClick={() => {}}>Zapisz</Button>
+          <Button>Zapisz</Button>
         </StyledCardFooter>
       )}
     </StyledCardFormContentContainer>

@@ -1,13 +1,8 @@
-import { useQueryClient } from "@tanstack/react-query";
 import {
   StyledCardImg,
   StyledCardSingleImgContainer,
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setLoading } from "redux/loadingSlice";
-import { useDeleteStorageImage } from "services/storage/storageServices";
-import toastService from "singletons/toastService";
+import React from "react";
 import {
   StyledCloseIcon,
   StyledProfileIcon,
@@ -19,28 +14,16 @@ interface PhotoPreviewInterface {
   photo: string;
   index: number;
   id: string;
+  removePhotoAtIndex: (indexToRemove: number) => void;
 }
 
 const PhotoPreviewImage = ({
+  removePhotoAtIndex,
   isEditOn,
   photo,
   index,
   id,
 }: PhotoPreviewInterface) => {
-  const dispatch = useDispatch();
-  const { mutate: deleteImageFn, isLoading: isLoadingDeleteStorageImage } =
-    useDeleteStorageImage();
-
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    if (isLoadingDeleteStorageImage) {
-      dispatch(setLoading(true));
-    } else {
-      dispatch(setLoading(false));
-    }
-  });
-
   return (
     <SortableItem
       stringImg={photo}
@@ -53,17 +36,7 @@ const PhotoPreviewImage = ({
         {isEditOn && (
           <StyledCloseIcon
             onClick={() => {
-              deleteImageFn(photo, {
-                onSuccess: () => {
-                  toastService.showToast(
-                    `Zdjęcie nr${index + 1} usunięte pomyślnie`,
-                    "success"
-                  );
-                  queryClient.invalidateQueries({
-                    queryKey: ["shelterCardsCard", id],
-                  });
-                },
-              });
+              removePhotoAtIndex(index);
             }}
           />
         )}

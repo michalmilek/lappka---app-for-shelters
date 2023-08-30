@@ -59,8 +59,8 @@ export const getShelterCards = async (args: [number, number]) => {
 
 export const getShelterVolunteering = async () => {
   try {
-    const response = await mockInstance.get<ShelterVolunteeringResponse>(
-      `/shelters/volunteering`
+    const response = await axiosInstance.get<ShelterVolunteeringResponse>(
+      `/shelters/volunteering/GetShelterVolunteering`
     );
     return response.data;
   } catch (error) {

@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import { store } from "redux/store";
 import { ExtendedAxiosError } from "services/axiosInstance";
 import {
   deleteStorageImage,
@@ -24,6 +25,12 @@ export const usePostStoragePictures = () => {
           "Nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem.",
           "error"
         );
+    },
+    onMutate: () => {
+      store.dispatch(setLoading(true));
+    },
+    onSettled: () => {
+      store.dispatch(setLoading(false));
     },
   });
   return mutation;
@@ -83,6 +90,21 @@ export const useDeleteStorageImages = () => {
   return mutation;
 };
 
-export const useStorageImages = (imgsIds: string[], animalId: string) => {
-  return useQuery(["storageImages", animalId], () => getStorageImages(imgsIds));
+export const useGetStorageImagesForAnimal = (
+  imgsIds: string[],
+  animalId: string
+) => {
+  return useQuery(
+    ["storageImages", animalId],
+    () => getStorageImages(imgsIds),
+    {
+      enabled: !!imgsIds,
+    }
+  );
+};
+
+export const useGetStorageImagesForDashboard = (imgsIds: string[]) => {
+  return useQuery(["storageImages", imgsIds], () => getStorageImages(imgsIds), {
+    enabled: !!imgsIds,
+  });
 };

@@ -6,10 +6,8 @@ import DashboardNewestAnimalCards from "components/AdminDashboardComponents/Dash
 import DashboardVoluntary from "components/AdminDashboardComponents/DashboardComponents/DashboardVoluntary/DashboardVoluntary";
 import ProtectedNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
-import React from "react";
 
 const DashboardPage = () => {
-
   return (
     <StyledProtectedPageContent>
       <ProtectedNavbar title="Dashboard" />

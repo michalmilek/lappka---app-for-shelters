@@ -43,7 +43,6 @@ const AnimalCardsAddNewCardPage = () => {
         },
       });
     }
-    //deleteImgFromStorage("64fb0b8e-6143-4117-aa75-ca85aed92c16");
   };
 
   const formik = useFormik({

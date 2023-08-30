@@ -2,7 +2,7 @@ import { useShelterCards } from "services/pet/petServices";
 import Button from "components/SharedComponents/Button/Button";
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
-import React from "react";
+import { useState, useEffect } from "react";
 import {
   DashboardNewestAnimalCardsContainer,
   DashboardNewestAnimalCardsContainerContent,
@@ -14,10 +14,26 @@ import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAn
 import ErrorNewestAnimal from "./ErrorNewestAnimal";
 import { DashboardRoutes } from "router/router";
 import { useNavigate } from "react-router-dom";
+import { useGetStorageImagesForDashboard } from "services/storage/storageServices";
 
 const DashboardNewestAnimalCards = () => {
-  const { isLoading, data, isError, error, isSuccess } = useShelterCards();
+  const { isLoading, data, isError, error, isSuccess } = useShelterCards(1, 3);
+  const [localImageIds, setLocalImageIds] = useState<string[]>([]);
   const navigate = useNavigate();
+  const {
+    isSuccess: GetStorageImagesIsSuccess,
+    data: localImagesUrls,
+    isLoading: GetStorageImagesIsLoading,
+  } = useGetStorageImagesForDashboard(localImageIds);
+
+  useEffect(() => {
+    if (data) {
+      const newLocalImageIds = data.petInListInShelterDto.map(
+        (item) => item.profilePhoto
+      );
+      setLocalImageIds(newLocalImageIds);
+    }
+  }, [data]);
 
   if (isError) {
     console.log(error);
@@ -40,7 +56,7 @@ const DashboardNewestAnimalCards = () => {
       </DashboardNewestAnimalCardsContainerHeader>
       <Divider />
       <DashboardNewestAnimalCardsContainerContent>
-        {isLoading && (
+        {(isLoading || GetStorageImagesIsLoading) && (
           <>
             <DashboardNewestAnimalCardsItemContainerSkeleton />
             <DashboardNewestAnimalCardsItemContainerSkeleton />
@@ -48,11 +64,13 @@ const DashboardNewestAnimalCards = () => {
           </>
         )}
         {isSuccess &&
+          GetStorageImagesIsSuccess &&
           data &&
           data.petInListInShelterDto.slice(0, 3).map((item, index) => (
             <DashboardNewestAnimalCardsItem
               key={item.id + index}
               item={item}
+              img={localImagesUrls[index]}
             />
           ))}
         {isSuccess && data?.petInListInShelterDto.length === 0 && (

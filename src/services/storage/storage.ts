@@ -1,5 +1,6 @@
 import axiosInstance, { mockInstance } from "services/axiosInstance";
 import axios from "axios";
+import { stringify } from "qs";
 
 const MAX_FILE_SIZE = 15 * 1024 * 1024;
 
@@ -50,8 +51,9 @@ export const deleteStorageImages = async (imgsIds: string[]) => {
 
 export const getStorageImages = async (imgsIds: string[]) => {
   try {
-    const response = await axiosInstance.get(`/Storage`, {
-      data: imgsIds,
+    const response = await axiosInstance.get<string[]>(`/Storage`, {
+      params: { ids: imgsIds },
+      paramsSerializer: (params) => stringify(params),
     });
     return response.data;
   } catch (error) {
