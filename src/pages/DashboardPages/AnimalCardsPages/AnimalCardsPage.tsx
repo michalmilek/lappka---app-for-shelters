@@ -14,16 +14,19 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import useToast from "hooks/useToast";
 import ErrorAnimalCardsTable from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/ErrorAnimalCardsTable";
-import { PaginationState } from "@tanstack/react-table";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectTablePageIndex, selectTablePageSize } from "redux/tableSlice";
 import { ExtendedAxiosError } from "services/axiosInstance";
+import { useGetStorageImagesForTable } from "services/storage/storageServices";
+import {
+  PetWithImageUrl,
+  ShelterCardsResponseWithProfilePictureUrl,
+} from "services/pet/petTypes";
 
 const AnimalCardsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
   const pageSizeFromQueryParams = searchParams.get("pageSize");
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const pageIndexFromRedux = useSelector(selectTablePageIndex);
@@ -36,19 +39,45 @@ const AnimalCardsPage = () => {
     pageSizeFromQueryParams ? pageSizeFromQueryParams : pageSizeFromRedux
   );
 
-  const { data, isLoading, isError, error, isSuccess } = useShelterCards(
+  const { data, isLoading, isError, isSuccess } = useShelterCards(
     +pageIndex,
     +pageSize
   );
-  const { showToast } = useToast();
+  const [imageIds, setImageIds] = useState<string[]>([]);
 
   useEffect(() => {
-    if (isError) {
-      if ((error as ExtendedAxiosError).response?.status !== 500)
-        showToast("Wystąpił błąd pobierania danych", "error");
-      console.log(error);
+    if (isSuccess && data) {
+      const profilePhotosArray = data.petInListInShelterDto.map(
+        (pet) => pet.profilePhoto
+      );
+      setImageIds(profilePhotosArray);
     }
-  }, [error, isError, showToast]);
+  }, [data, isSuccess]);
+
+  const { data: imageUrls } = useGetStorageImagesForTable(
+    imageIds,
+    +pageIndex,
+    +pageSize
+  );
+
+  const [dataWithProfilePictureUrl, setDataWithProfilePictureUrl] =
+    useState<ShelterCardsResponseWithProfilePictureUrl | null>(null);
+
+  useEffect(() => {
+    if (imageUrls && data) {
+      const petsWithProfileUrls = data.petInListInShelterDto.map(
+        (pet, index) => ({
+          ...pet,
+          profilePhotoUrl: imageUrls[index],
+        })
+      );
+
+      setDataWithProfilePictureUrl({
+        ...data,
+        petInListInShelterDto: petsWithProfileUrls,
+      });
+    }
+  }, [data, imageUrls]);
 
   useEffect(() => {
     if (pageIndexFromQueryParams) {
@@ -77,7 +106,13 @@ const AnimalCardsPage = () => {
       />
       <StyledDashboardAnimalCardsMainContent>
         <AnimalCardsInfo />
-        {data && isSuccess && <AnimalCardsTable data={data} />}
+        {data &&
+          isSuccess &&
+          dataWithProfilePictureUrl &&
+          dataWithProfilePictureUrl.petInListInShelterDto[0]
+            .profilePhotoUrl && (
+            <AnimalCardsTable data={dataWithProfilePictureUrl} />
+          )}
         {isLoading && <SkeletonTableComponent />}
         {isError && <ErrorAnimalCardsTable />}
       </StyledDashboardAnimalCardsMainContent>
@@ -86,5 +121,3 @@ const AnimalCardsPage = () => {
 };
 
 export default AnimalCardsPage;
-
-//

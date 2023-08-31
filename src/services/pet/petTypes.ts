@@ -187,3 +187,29 @@ export interface AnimalCreatePetInterface {
   profilePhoto: string;
   photos: string[];
 }
+
+
+export interface PetWithImageUrl extends Pet {
+  profilePhotoUrl: string;
+}
+
+export interface ShelterCardsResponseWithProfilePictureUrl
+  extends ShelterCardsResponse {
+  petInListInShelterDto: PetWithImageUrl[];
+}
+
+export interface PutSheltersCardInterface {
+  petId: string;
+  description: string;
+  name: string;
+  gender: GenderType;
+  isSterilized: boolean;
+  weight: number;
+  months: number;
+  profilePhoto: string;
+  photos: string[];
+  isVisible: boolean;
+  category: GenreType;
+  breed: string;
+  marking: string;
+}

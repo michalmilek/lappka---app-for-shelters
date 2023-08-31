@@ -9,6 +9,7 @@ import {
   GetShelterRespones,
   Other,
   Pet,
+  PutSheltersCardInterface,
   ShelterCardsResponse,
   SheltersStatsResponse,
   ShelterVolunteeringResponse,
@@ -186,9 +187,9 @@ export const postShelterCardsAnimal = async (data: Animal) => {
   }
 };
 
-export const putShelterCardsAnimal = async (data: AnimalEdit) => {
+export const putShelterCardsAnimal = async (data: PutSheltersCardInterface) => {
   try {
-    const response = await axiosInstance.put("/shelters/cards", data);
+    const response = await axiosInstance.put("/Shelter/cards/Update", data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -223,6 +224,18 @@ export const putShelterCardsPublish = async (petId: string) => {
 export const putShelterCardsHide = async (petId: string) => {
   try {
     const response = await axiosInstance.put(`/shelters/cards/hide/${petId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const deleteShelterCard = async (petId: string) => {
+  try {
+    const response = await axiosInstance.delete(
+      `/Shelter/cards/delete/${petId}`
+    );
     return response.data;
   } catch (error) {
     console.error(error);

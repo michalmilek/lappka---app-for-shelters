@@ -3,7 +3,7 @@ import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
-import { FormikContextType } from "formik";
+import { FormikContextType, FormikProps } from "formik";
 import React from "react";
 import { ageConversion } from "utils/appUtils";
 import { AnimalCardsCardFlexInputContainer } from "./utils/DashboardAnimalCardsCard.styled";
@@ -12,7 +12,7 @@ import { PetCard } from "./utils/DashboardAnimalCardsUtils";
 
 interface DashboardAnimalCardsCardFieldsProps {
   isEditOn: boolean;
-  formik: FormikContextType<PetCard>;
+  formik: FormikProps<PetCard>;
 }
 
 const DashboardAnimalCardsCardFields: React.FC<
@@ -22,8 +22,11 @@ const DashboardAnimalCardsCardFields: React.FC<
     <>
       <FormRow label="Imię zwierzaka">
         <Input
+          id="name"
+          name="name"
           value={formik.values.name}
           readOnly={!isEditOn}
+          onChange={formik.handleChange}
           inputSize="Large"
         />
       </FormRow>
@@ -36,8 +39,10 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         ) : (
           <Textarea
+            id="description"
+            name="description"
             value={formik.values.description}
-            readOnly={!isEditOn}
+            onChange={formik.handleChange}
             inputSize="Large"
           />
         )}
@@ -101,8 +106,11 @@ const DashboardAnimalCardsCardFields: React.FC<
       {formik.values.type !== "Other" && (
         <FormRow label="Rasa">
           <Input
+            id="breed"
+            name="breed"
             readOnly={!isEditOn}
             inputSize="Large"
+            onChange={formik.handleChange}
             value={formik.values.breed}
           />
         </FormRow>
@@ -116,7 +124,10 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         ) : (
           <InputNumberWithUnits
+            id="weight"
+            name="weight"
             value={formik.values.weight}
+            onChange={formik.handleChange}
             unit="KG"
           />
         )}
@@ -130,7 +141,10 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         ) : (
           <InputNumberWithUnits
+            id="months"
+            name="months"
             value={formik.values.months}
+            onChange={formik.handleChange}
             unit="msc"
           />
         )}

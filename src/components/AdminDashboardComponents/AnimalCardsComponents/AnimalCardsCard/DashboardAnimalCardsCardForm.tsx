@@ -1,4 +1,10 @@
-import { AnimalEdit, GenreType, Pet, PetBreed } from "services/pet/petTypes";
+import {
+  AnimalEdit,
+  GenreType,
+  Pet,
+  PetBreed,
+  PutSheltersCardInterface,
+} from "services/pet/petTypes";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import {
@@ -80,7 +86,7 @@ const DashboardAnimalCardsCardForm = ({
   };
 
   const handleSubmit = () => {
-    if (formik.values.newPhotos)
+    if (formik.values.newPhotos && formik.values.newPhotos.length > 0) {
       postStoragePicture(formik.values.newPhotos, {
         onSuccess: (newData) => {
           formik.setFieldValue("photos", [...photos, newData]);
@@ -88,10 +94,20 @@ const DashboardAnimalCardsCardForm = ({
           const { newPhotos, ...values } = formik.values;
           putShelterCardsFn(
             {
-              ...values,
               petId: data.id,
+              description: values.description,
+              name: values.name,
+              gender: values.gender,
+              isSterilized: values.isSterilized,
+              weight: values.weight,
+              months: values.months,
+              photos: values.photos,
+              isVisible: values.isVisible,
+              category: values.type,
+              breed: values.breed,
+              marking: values.color,
               profilePhoto: values.photos[0],
-            } as AnimalEdit,
+            } as PutSheltersCardInterface,
             {
               onSuccess: () => {
                 showToast(
@@ -110,13 +126,24 @@ const DashboardAnimalCardsCardForm = ({
           );
         },
       });
-    else {
+    } else {
       const { newPhotos, ...values } = formik.values;
       putShelterCardsFn(
         {
-          ...values,
           petId: data.id,
-        } as AnimalEdit,
+          description: values.description,
+          name: values.name,
+          gender: values.gender,
+          isSterilized: values.isSterilized,
+          weight: values.weight,
+          months: values.months,
+          photos: values.photos,
+          isVisible: values.isVisible,
+          category: values.type,
+          breed: values.breed,
+          marking: values.color,
+          profilePhoto: values.photos[0] || values.profilePhoto,
+        } as PutSheltersCardInterface,
         {
           onSuccess: () => {
             showToast(
@@ -144,7 +171,9 @@ const DashboardAnimalCardsCardForm = ({
 
   const photos = formik.values.photos;
   const photosLength =
-    formik.values.photos.length + formik.values.newPhotos!.length;
+    (formik.values.photos
+      ? formik.values.photos.length + formik.values.newPhotos!.length
+      : formik.values.newPhotos!.length) || 0;
 
   const queryClient = useQueryClient();
 

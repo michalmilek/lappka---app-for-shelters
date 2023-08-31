@@ -1,5 +1,6 @@
 import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
+import { hexToRGBA } from "utils/styles/getStyle/hexToRGBA";
 
 interface SexInterface {
   sex: "Male" | "Female" | "Other";
@@ -255,4 +256,17 @@ export const AnimalCardsStyledPageSizeSelect = styled.select`
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+`;
+
+export const StyledTableImgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const StyledTableImg = styled.img`
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  border: 1px solid ${hexToRGBA(getColor("black"), 0.1)};
 `;

@@ -1,19 +1,22 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { Pet } from "services/pet/petTypes";
+import { Pet, PetWithImageUrl } from "services/pet/petTypes";
 import {
   ActionHeaderContainer,
   Dot,
   DotFlexContainer,
   StyledSexContainer,
+  StyledTableImg,
+  StyledTableImgContainer,
   StyledTableTHTextContainer,
 } from "./AnimalCardsTable.styled";
 import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
 
-const columnHelper = createColumnHelper<Pet>();
+const columnHelper = createColumnHelper<PetWithImageUrl>();
 
 export const columns = [
-  columnHelper.accessor("name", {
+  columnHelper.accessor((row) => `${row.name} ${row.profilePhotoUrl}`, {
+    id: "animalName",
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -24,11 +27,14 @@ export const columns = [
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
-      <Typography
-        variant="UI/UI Text 14 Reg"
-        color="darkGray2">
-        {props.getValue()}
-      </Typography>
+      <StyledTableImgContainer>
+        <StyledTableImg src={`${props.row.original.profilePhotoUrl}`} />
+        <Typography
+          variant="UI/UI Text 14 Reg"
+          color="darkGray2">
+          {`${props.row.original.name}`}
+        </Typography>
+      </StyledTableImgContainer>
     ),
   }),
   columnHelper.accessor("createdAt", {

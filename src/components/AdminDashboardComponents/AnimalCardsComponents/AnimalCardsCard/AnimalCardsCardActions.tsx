@@ -6,53 +6,38 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import {
-  usePostShelterCardsArchive,
+  useDeleteShelterCard,
   usePutShelterCardsHide,
   usePutShelterCardsPublish,
 } from "services/pet/petServices";
+import DeleteCardModal from "./modals/DeleteCardModal";
+import MoveToArchiveModal from "./modals/MoveToArchiveModal";
 import { AnimalCardsCardBtnsContainer } from "./utils/DashboardAnimalCardsCard.styled";
 
 const AnimalCardsCardActions = ({ id }: { id: string }) => {
   const { showToast } = useToast();
-  const dispatch = useDispatch();
   const [isMoveToArchiveModalOpen, setIsMoveToArchiveModalOpen] =
     useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleMoveToArchiveModal = (value: boolean) => {
+    setIsMoveToArchiveModalOpen(value);
+  };
+
+  const handleDeleteModalState = (value: boolean) => {
+    setIsDeleteModalOpen(value);
+  };
+
   const queryClient = useQueryClient();
-  const {
-    mutate: PutShelterCardsPublishFn,
-    isLoading: PutShelterCardsPublishIsLoading,
-  } = usePutShelterCardsPublish();
+  const { mutate: PutShelterCardsPublishFn } = usePutShelterCardsPublish();
 
-  const {
-    mutate: PutShelterCardsHideFn,
-    isLoading: PutShelterCardsHideIsLoading,
-  } = usePutShelterCardsHide();
-
-  const {
-    mutate: PostShelterCardsArchiveFn,
-    isLoading: PostShelterCardsArchiveIsLoading,
-  } = usePostShelterCardsArchive();
+  const { mutate: PutShelterCardsHideFn } = usePutShelterCardsHide();
 
   const invalidateQuery = () => {
     queryClient.invalidateQueries({
       queryKey: ["shelterCardsCard", id],
     });
   };
-
-  useEffect(() => {
-    if (
-      PutShelterCardsPublishIsLoading ||
-      PutShelterCardsHideIsLoading ||
-      PostShelterCardsArchiveIsLoading
-    )
-      dispatch(setLoading(true));
-    else dispatch(setLoading(false));
-  }, [
-    PutShelterCardsPublishIsLoading,
-    PutShelterCardsHideIsLoading,
-    PostShelterCardsArchiveIsLoading,
-    dispatch,
-  ]);
 
   return (
     <>
@@ -89,35 +74,24 @@ const AnimalCardsCardActions = ({ id }: { id: string }) => {
           color="error">
           Przenieś do archiwum
         </Button>
+        <Button
+          type="button"
+          onClick={() => setIsDeleteModalOpen(true)}
+          variant="fill"
+          color="red800">
+          Usuń kartę
+        </Button>
       </AnimalCardsCardBtnsContainer>
-      <Modal isOpen={isMoveToArchiveModalOpen}>
-        <AnimalCardsCardBtnsContainer>
-          <Button
-            isFullWidth
-            variant="outline"
-            onClick={() => setIsMoveToArchiveModalOpen(false)}
-            type="button">
-            Anuluj
-          </Button>
-          <Button
-            type="button"
-            isFullWidth
-            onClick={() => {
-              PostShelterCardsArchiveFn(id, {
-                onSuccess: () => {
-                  setIsMoveToArchiveModalOpen(false);
-                  showToast(
-                    "Karta została pomyślnie przesunięta do archiwum",
-                    "success"
-                  );
-                },
-              });
-            }}
-            color="error">
-            Potwierdź
-          </Button>
-        </AnimalCardsCardBtnsContainer>
-      </Modal>
+      <MoveToArchiveModal
+        handleMoveToArchiveModal={handleMoveToArchiveModal}
+        id={id}
+        isMoveToArchiveModalOpen={isMoveToArchiveModalOpen}
+      />
+      <DeleteCardModal
+        handleDeleteModalState={handleDeleteModalState}
+        id={id}
+        isDeleteModalOpen={isDeleteModalOpen}
+      />
     </>
   );
 };

@@ -1,9 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setLoading } from "redux/loadingSlice";
+import { store } from "redux/store";
+import { DashboardRoutes } from "router/router";
+import { ExtendedAxiosError } from "services/axiosInstance";
 import toastService from "singletons/toastService";
 import {
+  deleteShelterCard,
   getShelter,
   getShelterCards,
   getShelterCardsArchiveChartData,
@@ -12,24 +17,17 @@ import {
   getShelterCardsCard,
   getShelterStats,
   getShelterVolunteering,
-  postShelterCardsAnimal,
   postShelterCardsArchive,
-  postShelterCardsCat,
   postShelterCardsCreatePet,
-  postShelterCardsDog,
-  postShelterCardsOther,
   putShelterCardsAnimal,
   putShelterCardsHide,
   putShelterCardsPublish,
   updateShelterVolunteering,
 } from "./pet";
 import {
-  Animal,
   AnimalCreatePetInterface,
   AnimalEdit,
-  Cat,
-  Dog,
-  Other,
+  PutSheltersCardInterface,
   ShelterVolunteeringResponse,
 } from "./petTypes";
 
@@ -133,7 +131,7 @@ export const usePutShelterCardsAnimal = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    (data: AnimalEdit) => putShelterCardsAnimal(data),
+    (data: PutSheltersCardInterface) => putShelterCardsAnimal(data),
     {
       onSuccess: () => {
         showToast(
@@ -187,6 +185,32 @@ export const usePutShelterCardsHide = () => {
     onSuccess: () => {
       showToast("Karta została ukryta.", "success");
       queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
+    },
+  });
+
+  return mutation;
+};
+
+export const useDeleteShelterCard = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const mutation = useMutation((petId: string) => deleteShelterCard(petId), {
+    onSuccess: () => {
+      toastService.showToast("Karta została usunięta.", "success");
+      queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
+      navigate(DashboardRoutes.dashboard);
+    },
+    onMutate: () => {
+      store.dispatch(setLoading(true));
+    },
+    onSettled: () => {
+      store.dispatch(setLoading(false));
+    },
+    onError: (error: ExtendedAxiosError) => {
+      if (error.response?.status === 403)
+        toastService.showToast(
+          "Nie masz uprawnień, aby usunąć kartę. Jeśli uważasz, że to bląd skontaktuj się z administratorem."
+        );
     },
   });
 

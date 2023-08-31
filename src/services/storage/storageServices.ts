@@ -98,13 +98,27 @@ export const useGetStorageImagesForAnimal = (
     ["storageImages", animalId],
     () => getStorageImages(imgsIds),
     {
-      enabled: !!imgsIds,
+      enabled: imgsIds.length > 0,
     }
   );
 };
 
 export const useGetStorageImagesForDashboard = (imgsIds: string[]) => {
   return useQuery(["storageImages", imgsIds], () => getStorageImages(imgsIds), {
-    enabled: !!imgsIds,
+    enabled: imgsIds.length > 0,
   });
+};
+
+export const useGetStorageImagesForTable = (
+  imgsIds: string[],
+  pageNumber: number,
+  pageSize: number
+) => {
+  return useQuery(
+    ["storageImagesProfilePictures", pageNumber, pageSize],
+    () => getStorageImages(imgsIds),
+    {
+      enabled: imgsIds.length > 0,
+    }
+  );
 };

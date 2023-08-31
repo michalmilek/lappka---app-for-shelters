@@ -13,10 +13,10 @@ import {
 } from "./AnimalCardsTable.styled";
 import Input from "components/SharedComponents/Inputs/Input";
 import { PaginationState, Table } from "@tanstack/react-table";
-import { Pet } from "services/pet/petTypes";
+import { PetWithImageUrl } from "services/pet/petTypes";
 
 interface TableFooterProps {
-  table: Table<Pet>;
+  table: Table<PetWithImageUrl>;
   pagination: PaginationState;
   filtering: string;
   handleFiltering: (value: string) => void;
@@ -50,38 +50,38 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
       </AnimalCardsStyledPageSizeSelect>
       <StyledTableFooterButtonsContainer>
         <StyledTableArrowButton
-          disabled={!table.getCanPreviousPage()}
+          disabled={pagination.pageIndex === 1}
           onClick={() => table.previousPage()}>
           <ArrowLeftIcon />
         </StyledTableArrowButton>
-        {pagination.pageIndex > 0 && (
-          <StyledTableNumberButton onClick={() => table.setPageIndex(0)}>
+        {pagination.pageIndex > 1 && (
+          <StyledTableNumberButton onClick={() => table.setPageIndex(1)}>
             1
           </StyledTableNumberButton>
         )}
-        {table.getCanPreviousPage() && pagination.pageIndex > 1 && (
+        {table.getCanPreviousPage() && pagination.pageIndex > 2 && (
           <StyledTableNumberButton
             disabled={!table.getCanPreviousPage()}
             onClick={() => table.previousPage()}>
-            {pagination.pageIndex}
+            {pagination.pageIndex - 1}
           </StyledTableNumberButton>
         )}
         <StyledTableNumberButton active>
-          {pagination.pageIndex + 1}
+          {pagination.pageIndex}
         </StyledTableNumberButton>
         {table.getCanNextPage() &&
-          pagination.pageIndex + 2 < table.getPageCount() && (
+          pagination.pageIndex + 1 < table.getPageCount() && (
             <StyledTableNumberButton onClick={() => table.nextPage()}>
               {pagination.pageIndex + 2}
             </StyledTableNumberButton>
           )}
-        {pagination.pageIndex + 3 < table.getPageCount() && (
+        {pagination.pageIndex + 2 < table.getPageCount() && (
           <StyledTableNumberButton
             onClick={() => table.setPageIndex(pagination.pageIndex + 2)}>
-            {pagination.pageIndex + 3}
+            {pagination.pageIndex + 2}
           </StyledTableNumberButton>
         )}
-        {pagination.pageIndex !== table.getPageCount() - 1 && (
+        {pagination.pageIndex !== table.getPageCount() && (
           <StyledTableNumberButton
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
             {table.getPageCount()}

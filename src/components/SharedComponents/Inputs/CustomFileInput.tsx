@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Typography from "../Typography/Typography";
-import { Crop } from "react-image-crop";
+import { centerCrop, Crop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import {
   FileInput,
@@ -39,6 +39,26 @@ export interface CustomFileInputProps {
   handleIndexFileChangeForm: (files: File[]) => void;
 }
 
+function centerAspectCrop(
+  mediaWidth: number,
+  mediaHeight: number,
+  aspect: number
+) {
+  return centerCrop(
+    makeAspectCrop(
+      {
+        unit: "%",
+        width: 90,
+      },
+      aspect,
+      mediaWidth,
+      mediaHeight
+    ),
+    mediaWidth,
+    mediaHeight
+  );
+}
+
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
   existingFiles,
   isAddNewCard,
@@ -63,6 +83,12 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   );
   const [initialFileUpload, setInitialFileUpload] = useState(true);
   const [editFileFlag, setEditFileFlag] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
+    const { width, height } = e.currentTarget;
+    setCrop(centerAspectCrop(width, height, 16 / 9));
+  }
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -162,8 +188,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     image.src = selectedImage;
     const canvas = document.createElement("canvas");
 
-    const scaleX = image.naturalWidth / imgWidth!;
-    const scaleY = image.naturalHeight / imgHeight!;
+    const scaleX = image.width / imgWidth!;
+    const scaleY = image.height / imgHeight!;
 
     const pixelRatio = window.devicePixelRatio;
     let transformedWidth: number, transformedHeight: number;
@@ -172,8 +198,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
       transformedWidth = crop.width * scaleX * pixelRatio;
       transformedHeight = crop.height * scaleY * pixelRatio;
     } else {
-      transformedWidth = image.naturalWidth;
-      transformedHeight = image.naturalHeight;
+      transformedWidth = image.width;
+      transformedHeight = image.height;
     }
 
     canvas.width = transformedWidth;
@@ -380,6 +406,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
       {selectedImage && !editFileFlag && largerThanTablet && (
         <ImageCrop
+          onImageLoad={onImageLoad}
+          ref={imgRef}
           editFileFlag={editFileFlag}
           handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
           crop={crop}
@@ -394,6 +422,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
 
       {selectedImage && editFileFlag && largerThanTablet && (
         <ImageCrop
+          onImageLoad={onImageLoad}
+          ref={imgRef}
           editFileFlag={editFileFlag}
           handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
           crop={crop}
