@@ -20,7 +20,7 @@ import {
   usePostStoragePictures,
 } from "services/storage/storageServices";
 import { useQueryClient } from "@tanstack/react-query";
-import CustomFileInput from "components/SharedComponents/Inputs/CustomFileInput";
+import CustomFileInput from "components/SharedComponents/FileInput/CustomFileInput";
 import Button from "components/SharedComponents/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { usePutShelterCardsAnimal } from "services/pet/petServices";

@@ -1,6 +1,12 @@
 import React, { useRef, useState } from "react";
 import Typography from "../Typography/Typography";
-import { centerCrop, Crop, makeAspectCrop } from "react-image-crop";
+import {
+  centerCrop,
+  Crop,
+  makeAspectCrop,
+  PercentCrop,
+  PixelCrop,
+} from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import {
   FileInput,
@@ -11,10 +17,6 @@ import {
   StyledImgsContainer,
   StyledPlusIcon,
 } from "./CustomFileInput.styled";
-import ImageCrop from "./Crop/ImageCrop";
-import { useSelector } from "react-redux";
-import { selectImageHeight, selectImageWidth } from "redux/imageSlice";
-import useDeviceType from "hooks/useDeviceType";
 import {
   closestCenter,
   DndContext,
@@ -27,37 +29,10 @@ import { horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import { KeyboardSensor, MouseSensor } from "utils/dndKitUtils/customEvents";
 import toastService from "singletons/toastService";
 import PhotoPreviewNewPhotos from "../DragAndDrop/PhotoPreviewNewPhotos";
-
-export interface CustomFileInputProps {
-  existingFiles?: number;
-  isAddNewCard?: boolean;
-  photos: string[] | File[];
-  label?: string;
-  description?: string;
-  onFileChange: (files: File[] | null | File) => void;
-  onFileDelete: (index: number) => void;
-  handleIndexFileChangeForm: (files: File[]) => void;
-}
-
-function centerAspectCrop(
-  mediaWidth: number,
-  mediaHeight: number,
-  aspect: number
-) {
-  return centerCrop(
-    makeAspectCrop(
-      {
-        unit: "%",
-        width: 90,
-      },
-      aspect,
-      mediaWidth,
-      mediaHeight
-    ),
-    mediaWidth,
-    mediaHeight
-  );
-}
+import { useDebounceEffect } from "hooks/useDebounceEffect";
+import { canvasPreview } from "./Crop/canvasCrop";
+import CropImage, { RefInterface } from "./Crop/CropImage";
+import { centerAspectCrop, CustomFileInputProps } from "./CustomFileInputUtils";
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
   existingFiles,
@@ -69,10 +44,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   onFileDelete,
   photos,
 }) => {
-  const deviceType = useDeviceType();
-  const largerThanTablet = deviceType !== "tablet" && deviceType !== "mobile";
-  const imgHeight = useSelector(selectImageHeight);
-  const imgWidth = useSelector(selectImageWidth);
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -83,7 +54,10 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   );
   const [initialFileUpload, setInitialFileUpload] = useState(true);
   const [editFileFlag, setEditFileFlag] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
+
+  const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
+
+  const childRef = useRef<RefInterface>(null);
 
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     const { width, height } = e.currentTarget;
@@ -99,8 +73,12 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     useSensor(KeyboardSensor)
   );
 
-  const handleCrop = (cropValue: Crop) => {
+  const handleCrop = (cropValue: PercentCrop) => {
     setCrop(cropValue);
+  };
+
+  const handleCompletedCrop = (c: PixelCrop) => {
+    setCompletedCrop(c);
   };
 
   const handleSelectedImageChange = (
@@ -179,72 +157,54 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     onFileDelete(index);
   };
 
-  const saveImage = (index: number, preserveAspectRatio?: boolean) => {
-    if (!selectedImage || !crop) {
-      return;
+  const saveImage = (index: number, cutImg?: boolean) => {
+    if (!childRef.current?.imgRef) {
+      throw new Error("Crop canvas does not exist");
     }
 
-    const image = document.createElement("img");
-    image.src = selectedImage;
-    const canvas = document.createElement("canvas");
+    if (!cutImg) {
+      const imgElement = childRef.current.imgRef;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        const updatedPreviews = [...filePreviews];
+        updatedPreviews.splice(index, 1, base64String);
+        setFilePreviews(updatedPreviews);
 
-    const scaleX = image.width / imgWidth!;
-    const scaleY = image.height / imgHeight!;
+        const file = new File([base64String], fileNames[index], {
+          type: "image/jpeg",
+        });
 
-    const pixelRatio = window.devicePixelRatio;
-    let transformedWidth: number, transformedHeight: number;
-
-    if (preserveAspectRatio) {
-      transformedWidth = crop.width * scaleX * pixelRatio;
-      transformedHeight = crop.height * scaleY * pixelRatio;
+        onFileChange(file);
+      };
+      imgElement.crossOrigin = "anonymous";
     } else {
-      transformedWidth = image.width;
-      transformedHeight = image.height;
-    }
-
-    canvas.width = transformedWidth;
-    canvas.height = transformedHeight;
-
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-      return;
-    }
-
-    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = "high";
-
-    if (preserveAspectRatio) {
-      ctx.drawImage(
-        image,
-        crop.x * scaleX,
-        crop.y * scaleY,
-        crop.width * scaleX,
-        crop.height * scaleY,
-        0,
-        0,
-        transformedWidth,
-        transformedHeight
-      );
-    } else {
-      ctx.drawImage(image, 0, 0);
-    }
-
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        return;
+      const canvasRef = childRef.current?.previewCanvasRef;
+      if (!canvasRef) {
+        throw new Error("Canvas reference does not exist");
       }
 
-      const file = new File([blob], fileNames[index], {
-        type: "image/jpeg",
+      canvasRef.toBlob((blob) => {
+        if (!blob) {
+          throw new Error("Failed to create blob");
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64String = reader.result as string;
+          const updatedPreviews = [...filePreviews];
+          updatedPreviews.splice(index, 1, base64String);
+          setFilePreviews(updatedPreviews);
+
+          const file = new File([blob], fileNames[index], {
+            type: "image/jpeg",
+          });
+
+          onFileChange(file);
+        };
+        reader.readAsDataURL(blob);
       });
-
-      const updatedPreviews = [...filePreviews];
-      updatedPreviews.splice(index, 1, canvas.toDataURL("image/jpeg"));
-      setFilePreviews(updatedPreviews);
-
-      onFileChange(file);
-    }, "image/jpeg");
+    }
   };
 
   const handleSaveImage = (index: number) => {
@@ -345,6 +305,25 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     setSelectedImageNumber(index);
   };
 
+  useDebounceEffect(
+    async () => {
+      if (
+        completedCrop?.width &&
+        completedCrop?.height &&
+        childRef.current?.imgRef &&
+        childRef.current?.previewCanvasRef
+      ) {
+        canvasPreview(
+          childRef.current?.imgRef,
+          childRef.current?.previewCanvasRef,
+          completedCrop
+        );
+      }
+    },
+    100,
+    [completedCrop]
+  );
+
   return (
     <FullContainer>
       <FileInputContainerContent>
@@ -379,6 +358,26 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         </Typography>
       </FileInputContainerContent>
 
+      {selectedImage && (
+        <CropImage
+          handleSaveUncroppedImage={handleSaveUncroppedImage}
+          handleSaveEditUncroppedImage={handleSaveEditUncroppedImage}
+          editFileFlag={editFileFlag}
+          ref={childRef}
+          selectedImageNumber={selectedImageNumber}
+          selectedImage={selectedImage}
+          onImageLoad={onImageLoad}
+          handleSelectedImageChange={handleSelectedImageChange}
+          completedCrop={completedCrop}
+          crop={crop}
+          handleCompletedCrop={handleCompletedCrop}
+          handleCrop={handleCrop}
+          handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
+          handleSaveImage={handleSaveImage}
+          handleSaveEditImage={handleSaveEditImage}
+        />
+      )}
+
       {filePreviews.length > 0 && (
         <DndContext
           sensors={sensors}
@@ -402,38 +401,6 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             </StyledImgsContainer>
           </SortableContext>
         </DndContext>
-      )}
-
-      {selectedImage && !editFileFlag && largerThanTablet && (
-        <ImageCrop
-          onImageLoad={onImageLoad}
-          ref={imgRef}
-          editFileFlag={editFileFlag}
-          handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
-          crop={crop}
-          handleCrop={handleCrop}
-          handleSaveImage={handleSaveImage}
-          handleSelectedImageChange={handleSelectedImageChange}
-          selectedImage={selectedImage}
-          selectedImageNumber={selectedImageNumber}
-          handleSaveUncroppedImage={handleSaveUncroppedImage}
-        />
-      )}
-
-      {selectedImage && editFileFlag && largerThanTablet && (
-        <ImageCrop
-          onImageLoad={onImageLoad}
-          ref={imgRef}
-          editFileFlag={editFileFlag}
-          handleRemoveFilesUpToIndex={handleRemoveFilesUpToIndex}
-          crop={crop}
-          handleCrop={handleCrop}
-          handleSaveImage={handleSaveEditImage}
-          handleSaveUncroppedImage={handleSaveEditUncroppedImage}
-          handleSelectedImageChange={handleSelectedImageChange}
-          selectedImage={selectedImage}
-          selectedImageNumber={selectedImageNumber}
-        />
       )}
     </FullContainer>
   );

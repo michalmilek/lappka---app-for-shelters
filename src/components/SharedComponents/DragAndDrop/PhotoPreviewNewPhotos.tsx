@@ -5,7 +5,7 @@ import {
   StyledImgPreviewContainer,
   StyledPreviewPhoto,
   StyledProfileIcon,
-} from "../Inputs/CustomFileInput.styled";
+} from "../FileInput/CustomFileInput.styled";
 import SortableItem from "./SortableItem";
 
 interface PhotoPreviewInterface {

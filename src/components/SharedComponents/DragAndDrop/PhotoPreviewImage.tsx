@@ -6,7 +6,7 @@ import React from "react";
 import {
   StyledCloseIcon,
   StyledProfileIcon,
-} from "../Inputs/CustomFileInput.styled";
+} from "../FileInput/CustomFileInput.styled";
 import SortableItem from "./SortableItem";
 
 interface PhotoPreviewInterface {
