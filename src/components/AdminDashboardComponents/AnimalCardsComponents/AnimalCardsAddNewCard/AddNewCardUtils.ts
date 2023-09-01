@@ -33,10 +33,10 @@ export interface AddNewAnimalCardInterface {
   description: string;
   animalCategory: GenreType | "";
   gender: GenderType | "";
-  color: string;
+  marking: string;
   months: number | undefined;
   weight: number | undefined;
-  breed: PetBreed | "";
+  species: PetBreed | "";
   photos: File[];
   profilePhoto: string;
   isSterilized: boolean | "";
@@ -53,7 +53,7 @@ export const cardValidationSchema = Yup.object().shape({
   animalCategory: Yup.string()
     .oneOf(["Dog", "Cat", "Other"], "Nieprawidłowy wybór")
     .required("To pole jest wymagane"),
-  breed: Yup.string().when("animalCategory", {
+  species: Yup.string().when("animalCategory", {
     is: (type: string) => type === "Dog" || type === "Cat",
     then: () =>
       Yup.string()
@@ -63,7 +63,7 @@ export const cardValidationSchema = Yup.object().shape({
   gender: Yup.string()
     .oneOf(["Male", "Female", "Other"], "Nieprawidłowy wybór")
     .required("To pole jest wymagane"),
-  color: Yup.string()
+  marking: Yup.string()
     .required("To pole jest wymagane")
     .matches(
       /^[^\d!@#$%^&*()\-=_+~`[\]\\/{}|:;'"<>,.?]*$/,
@@ -89,12 +89,12 @@ export const addNewCardInitialValues: AddNewAnimalCardInterface = {
   description: "",
   animalCategory: "",
   gender: "",
-  color: "",
+  marking: "",
   months: undefined,
   weight: undefined,
   photos: [],
   isSterilized: "",
   isVisible: "",
   profilePhoto: "",
-  breed: "",
+  species: "",
 };

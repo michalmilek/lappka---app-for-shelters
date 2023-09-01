@@ -108,12 +108,23 @@ export const useShelterCardsCard = (petId: string) => {
 
 export const usePostShelterCardsCreatePet = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const mutation = useMutation(
     (data: AnimalCreatePetInterface) => postShelterCardsCreatePet(data),
     {
-      onError: (error) => {
-        toastService.showToast("Dodawanie zakończone niepowodzeniem", "error");
-        console.log(error);
+      onSuccess: () => {
+        navigate(DashboardRoutes.dashboard);
+        queryClient.invalidateQueries(["shelterCards"]);
+      },
+      onError: (error: ExtendedAxiosError) => {
+        if (error.response?.status !== 500) {
+          toastService.showToast(
+            "Dodawanie zakończone niepowodzeniem",
+            "error"
+          );
+          console.log(error);
+        }
       },
       onMutate: () => {
         dispatch(setLoading(true));

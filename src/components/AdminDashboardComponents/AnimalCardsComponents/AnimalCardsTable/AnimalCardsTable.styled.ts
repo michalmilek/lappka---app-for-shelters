@@ -92,6 +92,7 @@ export const StyledTableHeader = styled.thead`
 `;
 
 export const StyledTableTH = styled.th`
+  cursor: pointer;
   padding: 12px 16px;
   text-align: left;
   border-top: 1px solid ${getColor("lightGray3")};
@@ -111,6 +112,7 @@ export const StyledTableTHTextContainer = styled.div`
 `;
 
 export const StyledTableTR = styled.tr`
+  cursor: pointer !important;
   gap: 12px;
   background: ${getColor("white")};
   &:nth-of-type(2n) {

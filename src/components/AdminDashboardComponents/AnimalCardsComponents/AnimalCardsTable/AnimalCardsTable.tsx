@@ -30,13 +30,15 @@ import {
 } from "services/pet/petTypes";
 import { useDispatch } from "react-redux";
 import { setTablePaginationState } from "redux/tableSlice";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { DashboardRoutes } from "router/router";
 
 function AnimalCardsTable({
   data,
 }: {
   data: ShelterCardsResponseWithProfilePictureUrl;
 }) {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
   const pageSizeFromQueryParams = searchParams.get("pageSize");
@@ -157,7 +159,11 @@ function AnimalCardsTable({
         </StyledTableHeader>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <StyledTableTR key={row.id}>
+            <StyledTableTR
+              onClick={() => {
+                navigate(DashboardRoutes.animalCards + `/${row.original.id}`);
+              }}
+              key={row.id}>
               {row.getVisibleCells().map((cell) => {
                 return (
                   <StyledTableTD key={cell.id}>

@@ -8,8 +8,11 @@ import { AccountSettingsType } from "pages/DashboardPages/AccountSettingsPage";
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import { GetShelterRespones } from "services/pet/petTypes";
+import { useGetStorageImagesForUser } from "services/storage/storageServices";
 import { GetUserResponse } from "services/user/user";
 import { useDeleteProfilePicture } from "services/user/userServices";
+import toastService from "singletons/toastService";
 import { createImgURL } from "utils/appUtils";
 import {
   AccountSettingsIMG,
@@ -23,12 +26,14 @@ import AccountSettingsDeleteUser from "./AccountSettingsDeleteUser";
 
 const AccountSettingsForm = ({
   formik,
+  shelterData,
   userData,
   handleModalOpen,
 }: {
   formik: FormikProps<AccountSettingsType>;
   userData: GetUserResponse;
   handleModalOpen: () => void;
+  shelterData: GetShelterRespones;
 }) => {
   const [deleteUserModal, setDeleteUserModal] = useState(false);
 
@@ -36,25 +41,41 @@ const AccountSettingsForm = ({
     setDeleteUserModal(false);
   }, [setDeleteUserModal]);
 
+  const { data: userProfilePicture } = useGetStorageImagesForUser(
+    userData.profilePicture,
+    userData.id
+  );
+
   useEffect(() => {
     if (userData) {
       formik.setFieldValue("firstName", userData.firstName);
       formik.setFieldValue("lastName", userData.lastName);
-      formik.setFieldValue("emaik", userData.email);
+      formik.setFieldValue("email", userData.email);
       formik.setFieldValue("profilePicture", userData.profilePicture);
+      formik.setFieldValue("organizationName", shelterData.organizationName);
+      formik.setFieldValue("street", shelterData.street);
+      formik.setFieldValue("city", shelterData.city);
+      formik.setFieldValue("zipCode", shelterData.zipCode);
+      formik.setFieldValue("krs", shelterData.krs);
+      formik.setFieldValue("nip", shelterData.nip);
     }
   }, []);
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
+
+    const maxSize = 15 * 1024 * 1024;
     if (file) {
-      formik.setFieldValue("avatar", file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        formik.setFieldValue("avatarPreview", reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      console.log(file);
+      if (file.size > maxSize) {
+        toastService.showToast(
+          "Maksymalny dopuszczalny rozmiar pliku to 15mb",
+          "error"
+        );
+      } else {
+        formik.setFieldValue("profilePicture", file);
+      }
+    } else {
+      toastService.showToast("Nastąpił problem z wybraniem pliku", "error");
     }
   };
 
@@ -66,24 +87,6 @@ const AccountSettingsForm = ({
     isError: deleteProfilePictureIsError,
     error: deleteProfilePictureError,
   } = useDeleteProfilePicture();
-
-  const dispatch = useDispatch();
-  const { showToast } = useToast();
-
-  useEffect(() => {
-    if (deleteProfilePictureIsLoading) {
-      dispatch(setLoading(true));
-    } else {
-      dispatch(setLoading(false));
-    }
-  }, [deleteProfilePictureIsLoading, dispatch]);
-
-  useEffect(() => {
-    if (deleteProfilePictureIsSuccess) {
-      showToast("Zdjęcie zostało usunięte pomyślnie", "success");
-      formik.setFieldValue("photos", null);
-    }
-  }, [deleteProfilePictureIsSuccess, dispatch, formik, showToast]);
 
   return (
     <>
@@ -120,13 +123,13 @@ const AccountSettingsForm = ({
         <PostalCodeCityContainer>
           <PostalCodeContainer>
             <Input
-              name="postalCode"
-              value={formik.values.postalCode}
+              name="zipCode"
+              value={formik.values.zipCode}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={
-                formik.errors.postalCode && formik.touched.postalCode
-                  ? formik.errors.postalCode
+                formik.errors.zipCode && formik.touched.zipCode
+                  ? formik.errors.zipCode
                   : null
               }
               label="Kod pocztowy"
@@ -176,10 +179,12 @@ const AccountSettingsForm = ({
           {formik.values.profilePicture && (
             <AccountSettingsIMG
               src={
-                createImgURL(formik.values.profilePicture) ||
-                "https://styles.redditmedia.com/t5_2z977/styles/communityIcon_krjidju88kd71.png"
+                (formik.values.profilePicture &&
+                formik.values.profilePicture instanceof File
+                  ? createImgURL(formik.values.profilePicture as File)
+                  : userProfilePicture) as string
               }
-              alt=""
+              alt={`${userData.firstName + userData.lastName} Profile Picture`}
             />
           )}
           <Button
@@ -198,10 +203,8 @@ const AccountSettingsForm = ({
             <Button
               type="button"
               onClick={() => {
-                try {
+                if (formik.values.profilePicture) {
                   deleteProfilePictureFn();
-                } catch (error) {
-                  console.log(error);
                 }
               }}
               variant="fill"

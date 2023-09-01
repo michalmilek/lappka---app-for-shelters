@@ -181,13 +181,12 @@ export interface AnimalCreatePetInterface {
   months: number;
   isSterilized: true;
   weight: number;
-  color: string;
+  marking: string;
   animalCategory: GenreType;
-  breed: string;
+  species: string;
   profilePhoto: string;
   photos: string[];
 }
-
 
 export interface PetWithImageUrl extends Pet {
   profilePhotoUrl: string;
@@ -198,18 +197,6 @@ export interface ShelterCardsResponseWithProfilePictureUrl
   petInListInShelterDto: PetWithImageUrl[];
 }
 
-export interface PutSheltersCardInterface {
+export interface PutSheltersCardInterface extends AnimalCreatePetInterface {
   petId: string;
-  description: string;
-  name: string;
-  gender: GenderType;
-  isSterilized: boolean;
-  weight: number;
-  months: number;
-  profilePhoto: string;
-  photos: string[];
-  isVisible: boolean;
-  category: GenreType;
-  breed: string;
-  marking: string;
 }
