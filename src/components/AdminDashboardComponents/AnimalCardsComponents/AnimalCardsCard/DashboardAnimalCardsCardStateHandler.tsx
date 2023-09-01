@@ -1,5 +1,5 @@
 import { useShelterCardsCard } from "services/pet/petServices";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import DashboardAnimalCardsCardForm from "./DashboardAnimalCardsCardForm";
 import useBreadcrumbs from "hooks/useBreadcrumbs";
 import AnimalCardsCardSkeleton from "./utils/AnimalCardsCardSkeleton";

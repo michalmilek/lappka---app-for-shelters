@@ -1,7 +1,14 @@
 import { ReactCrop } from "react-image-crop";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { CloseIcon, PlusIcon } from "../icons/icons";
+import { CheckIcon } from "@heroicons/react/20/solid";
+
+interface StyledImgPreviewContainerProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  addNewCard?: boolean;
+  index?: number;
+}
 
 export const FullContainer = styled.div`
   display: flex;
@@ -54,31 +61,43 @@ export const StyledImgsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
 `;
 
-export const StyledImgPreviewContainer = styled.div`
+export const StyledImgPreviewContainer = styled.div<StyledImgPreviewContainerProps>`
   position: relative;
-  width: 56px;
-  height: 72px;
+  width: 100px;
+  height: 100px;
   object-fit: "cover";
 
   .editBtn {
     display: none;
+    z-index: 1000;
+    height: 30px;
+    width: 30px;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: 700;
+    fill: ${getColor("darkGray2")};
   }
 
-  &:hover {
-    .editBtn {
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      pointer-events: none;
-      color: ${getColor("red800")};
-      transform: translate(-50%, -50%);
-      font-size: 16px;
-      font-weight: 700;
-    }
+  .profilePictureIcon:hover ~ .editBtn,
+  .previewImg:hover ~ .editBtn,
+  .deleteIcon:hover ~ .editBtn {
+    display: block !important;
   }
+
+  /* ${({ addNewCard, index }) =>
+    addNewCard &&
+    index === 0 &&
+    css`
+      border: 2px solid ${getColor("darkGray2")};
+      border-radius: 6px;
+    `} */
 `;
 
 export const StyledPlusIcon = styled(PlusIcon)`
@@ -103,6 +122,20 @@ export const StyledPreviewPhoto = styled.img`
   }
 `;
 
+export const StyledProfileIcon = styled(CheckIcon)`
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 0;
+  left: 0;
+  background: ${getColor("white")};
+  color: ${getColor("darkGray2")};
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px;
+  cursor: not-allowed;
+`;
+
 export const StyledCloseIcon = styled(CloseIcon)`
   cursor: pointer;
   position: absolute;
@@ -118,13 +151,8 @@ export const StyledCloseIcon = styled(CloseIcon)`
   & path {
     stroke: ${getColor("midGray2")};
   }
-
-  &:hover {
-    .editBtn {
-      display: none;
-    }
-  }
 `;
+
 
 export const ModalDiv = styled.div`
   user-select: none;

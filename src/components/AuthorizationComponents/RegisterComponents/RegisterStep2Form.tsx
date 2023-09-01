@@ -13,6 +13,9 @@ import { useRegisterShelterMutation } from "services/auth/authServices";
 import { ShelterRegisterRequest } from "services/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 import useToast from "hooks/useToast";
+import { RegisterStep2Validation } from "./RegisterUtils";
+import { useDispatch } from "react-redux";
+import { setLoading } from "redux/loadingSlice";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
@@ -20,8 +23,13 @@ const RegisterStep2Form = ({
   formValues,
 }: HandleStepProps) => {
   const deviceType = useDeviceType();
+  const dispatch = useDispatch();
   const { showToast } = useToast();
-  const { mutateAsync: registerFn, isSuccess } = useRegisterShelterMutation();
+  const {
+    mutate: registerFn,
+    isSuccess,
+    isLoading,
+  } = useRegisterShelterMutation();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -30,36 +38,7 @@ const RegisterStep2Form = ({
       password: "",
       confirmPassword: "",
     },
-    validationSchema: Yup.object().shape({
-      firstName: Yup.string()
-        .matches(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/, {
-          message: "Imię może zawierać tylko litery",
-          excludeEmptyString: true,
-        })
-        .required('Pole "Imię" jest wymagane'),
-      lastName: Yup.string()
-        .matches(
-          /^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+(\s+[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]+)*$/,
-          {
-            message:
-              "Nazwisko może zawierać tylko litery i musi składać się z przynajmniej dwóch wyrazów oddzielonych spacją",
-            excludeEmptyString: true,
-          }
-        )
-        .required('Pole "Nazwisko" jest wymagane'),
-      emailAddress: Yup.string()
-        .email("Nieprawidłowy format emaila")
-        .required("Pole wymagane"),
-      password: Yup.string()
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/,
-          "Hasło musi zawierać co najmniej 8 znaków, przynajmniej 1 znak nie alfanumeryczny, 1 cyfrę, 1 wielką literę i 1 małą literę"
-        )
-        .required("Pole wymagane"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Hasła muszą być identyczne")
-        .required("Pole wymagane"),
-    }),
+    validationSchema: RegisterStep2Validation,
     onSubmit: (values) => {
       if (handleFormValues) handleFormValues({ userRequest: values });
     },
@@ -74,10 +53,17 @@ const RegisterStep2Form = ({
 
   useEffect(() => {
     if (isSuccess) {
-      showToast("Schronisko zarejestrowane pomyślnie", "success");
       if (handleCurrentStep) handleCurrentStep(3);
     }
   }, [isSuccess, handleCurrentStep, showToast]);
+
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setLoading(true));
+    } else {
+      dispatch(setLoading(false));
+    }
+  }, [dispatch, isLoading]);
 
   return (
     <form onSubmit={formik.handleSubmit}>

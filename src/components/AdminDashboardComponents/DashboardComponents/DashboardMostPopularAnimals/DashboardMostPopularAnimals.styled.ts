@@ -7,25 +7,16 @@ export const DashboardMostPopularAnimalsContainer = styled.div`
   background-color: ${getColor("white")};
   border-radius: 8px;
   grid-area: e;
-  min-width: 368px;
-  height: 360px;
+  height: 100%;
+  width: 3fr;
 
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
 
-  @media screen and (max-width: 1440px) {
-    width: 100%;
-  }
-
-  @media screen and (max-width: 1350px) {
-    min-width: auto;
-    height: auto;
-  }
-
   @media screen and (max-width: 1024px) {
-    min-width: auto;
     height: auto;
+    width: 100%;
   }
 `;
 

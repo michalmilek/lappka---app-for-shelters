@@ -24,41 +24,8 @@ const SkeletonImg = styled.div`
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
-  width: 280px;
-  height: 250px;
-
-  @media screen and (max-width: 1700px) {
-    width: 250px;
-    height: 215px;
-  }
-
-  @media screen and (max-width: 1550px) {
-    width: 240px;
-    height: 170px;
-  }
-
-  @media screen and (max-width: 1480px) {
-    width: 190px;
-  }
-
-  @media screen and (max-width: 1350px) {
-    width: 165px;
-    height: 140px;
-  }
-
-  @media screen and (max-width: 1150px) {
-    width: 130px;
-    height: 130px;
-  }
-
-  @media screen and (max-width: 1024px) {
-    width: 150px;
-    height: 140px;
-  }
-  @media screen and (max-width: 550px) {
-    width: 100px;
-    height: 120px;
-  }
+  width: 100%;
+  height: 100%;
 `;
 
 const DashboardNewestAnimalCardsItemContainerSkeleton = () => {

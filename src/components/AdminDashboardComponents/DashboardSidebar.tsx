@@ -25,12 +25,16 @@ import { useEffect } from "react";
 import { menu } from "router/sidebarMenu";
 import { useSelector } from "react-redux";
 import { selectIsMobileMenuOpen } from "redux/mobileMenuSlice";
+import { useRevokeToken } from "services/auth/authServices";
+import { UnstyledButton } from "components/SharedComponents/Button/Button.styled";
 
 const DashboardSidebar = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const deviceType = useDeviceType();
   const isOpen = useSelector(selectIsMobileMenuOpen);
+  const { mutate: revokeTokenFn } = useRevokeToken();
+  const token = localStorage.getItem("refreshToken");
 
   useClickOutside(userMenuRef, () => setIsDropdownActive(false));
 
@@ -124,7 +128,12 @@ const DashboardSidebar = () => {
             </StyledLink>
           </StyledUserMenuDropdownItem>
           <StyledUserMenuDropdownItem>
-            <Typography variant="UI/UI Text 14 Reg">Wyloguj się</Typography>
+            <UnstyledButton
+              onClick={() => {
+                if (token) revokeTokenFn(token);
+              }}>
+              <Typography variant="UI/UI Text 14 Reg">Wyloguj się</Typography>
+            </UnstyledButton>
           </StyledUserMenuDropdownItem>
         </StyledUserMenuDropdown>
       </StyledUserMenu>

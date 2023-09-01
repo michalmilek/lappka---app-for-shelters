@@ -8,7 +8,7 @@ import SkeletonAnimalCardsInfoItem from "./SkeletonAnimalCardsInfoItem";
 const StyledAnimalCardsInfoItemContainer = styled.div`
   background: ${getColor("white")};
   height: 82px;
-  width: 25.56%;
+  width: 100%;
   padding: 16px;
   display: flex;
   justify-content: flex-start;
@@ -18,10 +18,6 @@ const StyledAnimalCardsInfoItemContainer = styled.div`
   box-shadow: 0px 1px 2px 0px #1018280f;
 
   box-shadow: 0px 1px 3px 0px #1018281a;
-
-  @media screen and (max-width: 1050px) {
-    width: 100%;
-  }
 `;
 
 const StyledAnimalCardsInfoCardIconContainer = styled.div`

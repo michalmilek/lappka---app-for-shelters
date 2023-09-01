@@ -39,7 +39,11 @@ const DashboardNavbar = ({ Button = null }: ProtectedNavbarProps) => {
         {previousTitle && deviceType !== "mobile" && (
           <Typography
             color="midGray2"
-            variant="Heading 20 Semi Bold"
+            variant={
+              deviceType !== "tablet"
+                ? "Heading 20 Semi Bold"
+                : "UI/UI Text 14 Semi Bold"
+            }
             tag="h2">
             {previousTitle}
           </Typography>
@@ -48,7 +52,9 @@ const DashboardNavbar = ({ Button = null }: ProtectedNavbarProps) => {
         <Typography
           color="darkGray2"
           variant={
-            deviceType !== "mobile"
+            deviceType === "mobile"
+              ? "UI/UI Text 14 Semi Bold"
+              : deviceType !== "tablet"
               ? "Heading 20 Semi Bold"
               : "UI/UI Text 14 Semi Bold"
           }

@@ -20,6 +20,14 @@ const getMonthNameByIndex = (index: number) => {
   return monthNames[index] || "";
 };
 
+export function cutToFirstLetter(word: string) {
+  return word.substring(0, 1);
+}
+
+export const emptyFn = <T extends { toString(): string }>(tickItem: T) => {
+  return tickItem.toString();
+};
+
 export const createYearData = (data: number[]) => {
   const yearData = Array.from({ length: 12 }, (_, index) => {
     const monthName = getMonthNameByIndex(index);
@@ -34,7 +42,7 @@ export const createYearData = (data: number[]) => {
   return yearData;
 };
 
-const getDayNameByIndexInMonth = (index: number) => {
+/* const getDayNameByIndexInMonth = (index: number) => {
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth();
@@ -45,14 +53,15 @@ const getDayNameByIndexInMonth = (index: number) => {
   );
 
   return dayNames[index - 1] || "";
-};
+}; */
 
 export const createMonthData = (data: number[]) => {
-  const monthData = data.map((_views, index) => {
-    const dayIndex = index + 1;
-    const dayName = getDayNameByIndexInMonth(dayIndex);
-    const views = data[index] || 0;
+  if (data.length !== 7) {
+    throw new Error("Tydzień ma 7 dni...");
+  }
 
+  const monthData = data.map((views, index) => {
+    const dayName = getDayNameByIndex(index);
     return {
       name: dayName,
       views: views,
@@ -70,8 +79,7 @@ const getDayNameByIndex = (index: number) => {
 
 export const createWeekData = (data: number[]) => {
   const weekData = Array.from({ length: 7 }, (_, index) => {
-    const dayIndex = index + 1;
-    const dayName = getDayNameByIndex(dayIndex);
+    const dayName = getDayNameByIndex(index);
     const views = data[index] || 0;
 
     return {

@@ -26,6 +26,9 @@ const DashboardMostPopularAnimals = () => {
         <Divider />
         <DashboardMostPopularAnimalsItem />
         <Divider />
+        <DashboardMostPopularAnimalsItem />
+        <Divider />
+        <DashboardMostPopularAnimalsItem />
       </DashboardMostPopularAnimalsContent>
     </DashboardMostPopularAnimalsContainer>
   );

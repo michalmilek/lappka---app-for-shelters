@@ -1,12 +1,29 @@
 import axios, { AxiosError } from "axios";
 
 
+
+type CustomErrorObject = {
+  Code: string;
+  Description: string;
+};
+interface CustomErrorData {
+  errors: CustomErrorObject[];
+}
+
+export interface ExtendedAxiosError extends AxiosError<CustomErrorData> {}
+
 const isMockEndpointsEnabled =
   (process.env.REACT_APP_mockEndpoints as string) === "true";
 const apiAddress = process.env.REACT_APP_API_BASE_URL as string;
 const mockAddress = process.env.REACT_APP_mockBaseURL as string;
 
 const baseURL = isMockEndpointsEnabled ? mockAddress : apiAddress;
+
+export const mockInstance = axios.create({
+  baseURL: process.env.REACT_APP_mockBaseURL as string,
+  timeout: 5000,
+});
+
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -28,24 +45,27 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error: AxiosError) => {
+  async (error) => {
     if (error.response && error.response.status === 401) {
+      const originalRequest = error.config;
+
       const accessToken = localStorage.getItem("accessToken");
       const refreshToken = localStorage.getItem("refreshToken");
+
       if (accessToken && refreshToken) {
         try {
-          const response = await axiosInstance.post("/Auth/useToken", {
+          const refreshResponse = await axiosInstance.post("/Auth/useToken", {
             accessToken,
             refreshToken,
           });
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("refreshToken", response.data.refreshToken);
-        } catch (error: unknown) {
-          //if (axios.isAxiosError(error) && error.response?.status === 400) {
+          localStorage.setItem("accessToken", refreshResponse.data.accessToken);
+
+          await new Promise((resolve) => setTimeout(resolve, 400));
+          return axiosInstance(originalRequest);
+        } catch (refreshError) {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-          //}
-          console.error(error);
+          console.error(refreshError);
         }
       }
     }

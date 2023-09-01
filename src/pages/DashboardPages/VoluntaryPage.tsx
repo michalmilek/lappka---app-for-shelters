@@ -10,7 +10,7 @@ import ErrorVoluntary from "components/AdminDashboardComponents/VoluntaryCompone
 
 const VoluntaryPage = () => {
   const { data, isLoading, isError, error, isSuccess } =
-    useShelterVolunteering("123");
+    useShelterVolunteering();
 
   const { showToast } = useToast();
 

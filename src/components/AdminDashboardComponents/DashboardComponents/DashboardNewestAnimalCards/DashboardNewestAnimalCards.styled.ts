@@ -8,12 +8,12 @@ export const DashboardNewestAnimalCardsContainer = styled.div`
   grid-area: d;
   border-radius: 8px;
   height: 100%;
-  width: 100%;
+  width: 5fr;
   box-shadow: 0px 1px 2px 0px #1018280f;
-
   box-shadow: 0px 1px 3px 0px #1018281a;
 
-  @media screen and (max-width: 1350px) {
+  @media screen and (max-width: 1024px) {
+    height: auto;
     width: 100%;
   }
 `;
@@ -26,11 +26,23 @@ export const DashboardNewestAnimalCardsContainerHeader = styled.header`
 `;
 
 export const DashboardNewestAnimalCardsContainerContent = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   gap: 18px;
   justify-content: space-evenly;
   padding: 16px;
   flex-wrap: wrap;
   height: 100%;
+`;
+
+export const DashboardNewestAnimalCardsEmptyCardsList = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  grid-column: 6/1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 `;

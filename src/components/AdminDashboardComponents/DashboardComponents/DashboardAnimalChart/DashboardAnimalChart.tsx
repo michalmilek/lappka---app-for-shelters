@@ -1,5 +1,5 @@
 import Typography from "components/SharedComponents/Typography/Typography";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -8,7 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
   Label,
 } from "recharts";
 import { getColor } from "utils/styles/getStyle/getColor";
@@ -16,6 +15,7 @@ import {
   StyledArrowUpIcon,
   StyledDashboardChartContainer,
   StyledDashboardChartTitleContainer,
+  StyledResponsiveContainer,
 } from "./DashboardAnimalChart.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { CalendarIcon } from "components/SharedComponents/icons/icons";
@@ -25,7 +25,11 @@ import {
   ChartData,
   ViewsStateFilled,
 } from "./DashboardAnimalChartStateHandler";
-import { getChartTypeTimeByType } from "./ChartDataUtils";
+import {
+  cutToFirstLetter,
+  emptyFn,
+  getChartTypeTimeByType,
+} from "./ChartDataUtils";
 
 interface Props {
   viewsState: ViewsStateFilled;
@@ -39,6 +43,13 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [timeSelect, setTimeSelect] = useState<TimeType>("Year");
   const deviceType = useDeviceType();
+
+  const largerThanTablet =
+    deviceType === "desktop" || deviceType === "laptop" ? true : false;
+
+  const condition = !largerThanTablet && timeSelect === "Year";
+
+  const desktopChartMargin = deviceType === "desktop" ? 10 : 0;
 
   const getChartDataByType = (type: TimeType): ChartData[] => {
     switch (type) {
@@ -56,7 +67,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
   const getChartRange = (type: TimeType): number[] => {
     switch (type) {
       case "Month":
-        return [0, 1000];
+        return [0, 10000];
       case "Year":
         return [0, 20000];
       case "Week":
@@ -71,10 +82,6 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
     const newItem = tickItem.toString();
     const newItem2 = newItem.substring(0, newItem.length - 3);
     return newItem2;
-  };
-
-  const emptyFn = (tickItem: number) => {
-    return tickItem.toString();
   };
 
   const handleTimeSelectChange = (value: TimeType) => {
@@ -110,23 +117,39 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
           handleTimeSelectChange={handleTimeSelectChange}
         />
       </StyledDashboardChartTitleContainer>
-      <ResponsiveContainer
-        width={"100%"}
-        height={deviceType === "mobile" ? 300 : 350}>
+      <StyledResponsiveContainer
+        height={"99%"}
+        width={"99%"}>
         <BarChart
-          width={150}
-          height={150}
+          width={400}
+          height={300}
           data={getChartDataByType(timeSelect)}
-          margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
+          margin={{
+            top: 50,
+            right: 30,
+            bottom: desktopChartMargin,
+            left: desktopChartMargin,
+          }}>
           <XAxis
+            tickLine={false}
+            axisLine={false}
             dataKey="name"
             tick={axisLabelStyle}
+            tickFormatter={condition ? cutToFirstLetter : emptyFn}
           />
           <YAxis
+            tickLine={false}
+            axisLine={false}
             domain={getChartRange(timeSelect)}
             tickFormatter={timeSelect === "Year" ? formatYAxis : emptyFn}>
             <Label
-              value={timeSelect === "Year" ? "       Tyś" : "Wyświetleń"}
+              value={
+                timeSelect === "Year"
+                  ? "       Tyś"
+                  : timeSelect === "Month"
+                  ? "Wyśw. w miesiącu"
+                  : "Wyświetleń"
+              }
               position="top"
               offset={30}
               viewBox={{ x: 50 }}
@@ -157,7 +180,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
             ))}
           </Bar>
         </BarChart>
-      </ResponsiveContainer>
+      </StyledResponsiveContainer>
     </StyledDashboardChartContainer>
   );
 };

@@ -7,6 +7,7 @@ import {
   SelectContainer,
   SelectContainerWithLabels,
   SelectDiv,
+  SelectLabel,
 } from "./Select.styled";
 
 export interface SelectProps
@@ -67,7 +68,6 @@ function Select({
   }
 
   const selectedOption = options.find((option) => option.value === value);
-
   return (
     <SelectContainerWithLabels>
       <Typography
@@ -81,12 +81,15 @@ function Select({
           error={error}
           {...rest}
           onClick={handleDropdownIconClick}>
-          <Typography
-            tag="label"
-            variant="UI/UI Text 14 Reg"
-            color={selectedOption ? "darkGray2" : "midGray4"}>
+          <SelectLabel
+            title={
+              selectedOption
+                ? "Kliknij, aby wybrać opcję"
+                : "Kliknij, aby zmienić swój wybór"
+            }
+            selectedOption={selectedOption}>
             {selectedOption ? selectedOption.label : placeholder}
-          </Typography>
+          </SelectLabel>
           {dropdownIcon}
         </SelectDiv>
         <OptionList

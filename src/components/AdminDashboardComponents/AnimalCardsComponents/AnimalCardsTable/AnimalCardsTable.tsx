@@ -23,15 +23,30 @@ import {
 import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
-import { Pet, ShelterCardsResponse } from "services/pet/petTypes";
+import {
+  Pet,
+  PetWithImageUrl,
+  ShelterCardsResponseWithProfilePictureUrl,
+} from "services/pet/petTypes";
+import { useDispatch } from "react-redux";
+import { setTablePaginationState } from "redux/tableSlice";
+import { useSearchParams } from "react-router-dom";
 
-function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
+function AnimalCardsTable({
+  data,
+}: {
+  data: ShelterCardsResponseWithProfilePictureUrl;
+}) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const pageIndexFromQueryParams = searchParams.get("pageIndex");
+  const pageSizeFromQueryParams = searchParams.get("pageSize");
+  const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const columnsMemo = React.useMemo(() => columns, []);
 
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
+    pageIndex: pageIndexFromQueryParams ? +pageIndexFromQueryParams : 1,
+    pageSize: pageSizeFromQueryParams ? +pageSizeFromQueryParams : 10,
   });
   const [sorting, setSorting] = useState<SortingState>([]);
   const [filtering, setFiltering] = useState("");
@@ -47,12 +62,14 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   };
 
   const table = useReactTable({
-    data: data.items,
+    data: data.petInListInShelterDto,
     columns: columnsMemo,
-    getCoreRowModel: getCoreRowModel<Pet>(),
+    getCoreRowModel: getCoreRowModel<PetWithImageUrl>(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    manualPagination: true,
+    pageCount: data.totalPages,
     state: {
       sorting: sorting,
       globalFilter: filtering,
@@ -72,13 +89,36 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
         (header.id === "breed" || header.id === "isVisible")
       ) {
         header.toggleVisibility(false);
-      } else if (deviceType === "mobile" && header.id === "createdAt") {
+      } else if (
+        deviceType === "mobile" &&
+        (header.id === "createdAt" || header.id === "gender")
+      ) {
         header.toggleVisibility(false);
       } else {
         header.toggleVisibility(true);
       }
     });
   }, [deviceType, table]);
+
+  useEffect(() => {
+    dispatch(setTablePaginationState(pagination));
+
+    return () => {
+      dispatch(
+        setTablePaginationState({
+          pageIndex: 1,
+          pageSize: 10,
+        })
+      );
+    };
+  }, [dispatch, pagination]);
+
+  useEffect(() => {
+    setSearchParams({
+      pageIndex: pagination.pageIndex.toString(),
+      pageSize: pagination.pageSize.toString(),
+    });
+  }, [pagination.pageIndex, pagination.pageSize, setSearchParams]);
 
   return (
     <TableComponentContainer>

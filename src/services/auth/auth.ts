@@ -53,24 +53,16 @@ export interface ResetPasswordSetNewPasswordRequest {
 
 
 export const login = async (loginData: LoginRequest) => {
-
   try {
     const response = await axiosInstance.post<LoginResponse>(
       "/Auth/loginWeb",
-      loginData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      loginData
     );
     return response.data;
   } catch (error) {
-    console.error(error);
-    throw new Error("error");
+    throw error;
   }
 };
-
 
 export const registerShelter = async (registerData: ShelterRegisterRequest) => {
   try {
@@ -80,35 +72,43 @@ export const registerShelter = async (registerData: ShelterRegisterRequest) => {
     );
     return response.data;
   } catch (error) {
-    console.error(error);
-    throw new Error("error");
+    throw error;
   }
 };
-
 
 export const resetPasswordSendEmail = async (email: string) => {
   try {
-    const response = await axiosInstance.post("/Auth/resetPassword", {
-      email
-    });
+    const response = await axiosInstance.post("/Auth/resetPassword", { email });
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 
-
 export const resetPasswordSetNewPassword = async (
-  resetPasswordSetNewPasswordData: ResetPasswordSetNewPasswordRequest
+  resetPasswordSetNewPasswordData: ResetPasswordSetNewPasswordRequest,
+  token: string
 ) => {
   try {
     const response = await axiosInstance.post(
-      "/Auth/setNewPassword",
+      `/Auth/setPassword/${token}`,
       resetPasswordSetNewPasswordData
     );
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw error;
+  }
+};
+
+
+export const revokeToken = async (refreshToken: string) => {
+  try {
+    const response = await axiosInstance.post(`/Auth/revokeToken`, {
+      refreshToken,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
   }
 };
 

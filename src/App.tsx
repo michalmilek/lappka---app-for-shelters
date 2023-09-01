@@ -1,4 +1,9 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedPage from "components/AdminDashboardComponents/ProtectedPage";
 import { GlobalStyle } from "globalStyles";
@@ -6,8 +11,8 @@ import LoginPage from "pages/LoginPage";
 import DashboardPage from "pages/DashboardPages/DashboardPage";
 import RegisterPage from "pages/RegisterPage";
 import ResetPasswordPage from "pages/ResetPasswordPage";
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthRoutes, DashboardRoutes } from "./router/router";
 import MessagesPage from "pages/DashboardPages/MessagesPage";
 import AnimalCardsPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsPage";
@@ -23,13 +28,36 @@ import Loader from "components/SharedComponents/Loader/Loader";
 import { useSelector } from "react-redux";
 import { selectIsLoading } from "redux/loadingSlice";
 import PreLoaderModal from "components/SharedComponents/PreLoader/PreLoader";
+import { AxiosError } from "axios";
+import Page404 from "pages/Page404";
+import toastService from "singletons/toastService";
 
 const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) => {
+      if ((error as AxiosError).response?.status === 500) {
+        toastService.showToast(
+          "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
+          "error"
+        );
+      }
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      if ((error as AxiosError).response?.status === 500) {
+        toastService.showToast(
+          "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
+          "error"
+        );
+      }
+    },
+  }),
   defaultOptions: {
     queries: {
-      retry: 3,
+      retry: 1,
       refetchOnWindowFocus: false,
-      staleTime: 300000,
+      staleTime: 5000,
     },
   },
 });
@@ -40,18 +68,17 @@ function App() {
     wasLoadedInThePast ? true : false
   );
 
-
   useEffect(() => {
-  const onPageLoad = () => {
-    setIsPageLoaded(true);
-    localStorage.setItem("wasLoadedInThePast", "true");
-  };
+    const onPageLoad = () => {
+      setIsPageLoaded(true);
+      localStorage.setItem("wasLoadedInThePast", "true");
+    };
 
-  window.addEventListener("load", onPageLoad);
+    window.addEventListener("load", onPageLoad);
 
-  return () => {
-    window.removeEventListener("load", onPageLoad);
-  };
+    return () => {
+      window.removeEventListener("load", onPageLoad);
+    };
   }, []);
 
   const isLoading = useSelector(selectIsLoading);
@@ -78,8 +105,6 @@ function App() {
               path={AuthRoutes.resetPasswordToken}
               element={<ResetPasswordPage />}
             />
-          </Routes>
-          <Routes>
             <Route element={<ProtectedPage />}>
               <Route
                 path={DashboardRoutes.dashboard}
@@ -123,6 +148,15 @@ function App() {
               path="/"
               element={<HomePage />}
             />
+            <Route
+              path="/not-found"
+              element={<Page404 />}
+            />
+
+            <Route
+              path="*"
+              element={<Navigate to="/not-found" />}
+            />
           </Routes>
         </BrowserRouter>
         <Toast />
@@ -135,5 +169,3 @@ function App() {
 }
 
 export default App;
-
-

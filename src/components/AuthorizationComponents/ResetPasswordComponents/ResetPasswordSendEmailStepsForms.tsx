@@ -12,13 +12,19 @@ import { useNavigate } from "react-router-dom";
 import { useResetPasswordSendEmailMutation } from "services/auth/authServices";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
+import { useDispatch } from "react-redux";
+import { setLoading } from "redux/loadingSlice";
 
 export const ResetPasswordSendEmailStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordFormProps) => {
+  const dispatch = useDispatch();
   const deviceType = useDeviceType();
-  const { mutateAsync: resetPasswordSendEmailFn, isSuccess } =
-    useResetPasswordSendEmailMutation();
+  const {
+    mutate: resetPasswordSendEmailFn,
+    isSuccess,
+    isLoading,
+  } = useResetPasswordSendEmailMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -27,10 +33,17 @@ export const ResetPasswordSendEmailStep1Form = ({
       email: Yup.string().email().required("Email jest wymagany"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       resetPasswordSendEmailFn(values.email);
     },
   });
+
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setLoading(true));
+    } else {
+      dispatch(setLoading(false));
+    }
+  }, [dispatch, isLoading]);
 
   useEffect(() => {
     if (isSuccess) {

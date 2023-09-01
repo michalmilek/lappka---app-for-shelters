@@ -7,14 +7,14 @@ export const DashboardVoluntaryContainer = styled.div`
   flex-direction: column;
   grid-area: c;
   border-radius: 6px;
-  min-width: 272px;
-  height: 351px;
+  height: 100%;
+  width: 2fr;
 
   box-shadow: 0px 2px 4px 0px #5b687114;
 
   @media screen and (max-width: 1024px) {
-    width: 100%;
     height: auto;
+    width: 100%;
   }
 `;
 

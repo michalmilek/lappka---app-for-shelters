@@ -13,7 +13,7 @@ import ErrorVoluntary from "./ErrorVoluntary";
 
 const DashboardVoluntary = () => {
   const { data, isLoading, isError, error, isSuccess } =
-    useShelterVolunteering("123");
+    useShelterVolunteering();
 
   if (isError) {
     console.log(error);

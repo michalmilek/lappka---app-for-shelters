@@ -3,7 +3,7 @@ import Button from "components/SharedComponents/Button/Button";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { ResetPasswordSetPasswordFormProps } from "./ResetPasswordSetPasswordForm";
 import {
@@ -12,29 +12,31 @@ import {
 } from "./ResetPassword.styled";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
+import { setPasswordValidation } from "./ResetPasswordUtils";
 
 export const ResetPasswordSetPasswordStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordSetPasswordFormProps) => {
+  const { token } = useParams();
+
   const deviceType = useDeviceType();
-  const { mutateAsync: resetPasswordSetNewPasswordFn, isSuccess } =
+  const { mutate: resetPasswordSetNewPasswordFn, isSuccess } =
     useResetPasswordSetNewPasswordMutation();
+  console.log("🚀 ~ isSuccess:", isSuccess);
   const formik = useFormik({
     initialValues: {
       password: "",
       confirmPassword: "",
     },
-    validationSchema: Yup.object().shape({
-      password: Yup.string()
-        .min(6, "Hasło musi mieć co najmniej 6 znaków")
-        .required("Pole wymagane"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Hasła muszą być identyczne")
-        .required("Pole wymagane"),
-    }),
+    validationSchema: setPasswordValidation,
     onSubmit: (values) => {
       console.log(values);
-      resetPasswordSetNewPasswordFn(values);
+      if (token) {
+        resetPasswordSetNewPasswordFn({
+          resetPasswordSetNewPasswordData: values,
+          token,
+        });
+      }
     },
   });
 
@@ -100,6 +102,7 @@ export const ResetPasswordSetPasswordStep1Form = ({
       </ResetPasswordInputContainer>
 
       <Button
+        type="submit"
         isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
         Utwórz hasło

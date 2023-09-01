@@ -7,6 +7,7 @@ export const DashboardNewestAnimalCardsItemContainer = styled.div`
   overflow: hidden;
   cursor: pointer;
   height: 100%;
+  width: 100%;
   transition: all 400ms ease-in-out;
   box-shadow: 0px 1px 2px 0px #1018280f;
 
@@ -18,42 +19,9 @@ export const DashboardNewestAnimalCardsItemContainer = styled.div`
 `;
 
 export const DashboardNewestAnimalCardsItemImg = styled.img`
-  width: 280px;
+  width: 100%;
   height: 215px;
   object-fit: cover;
-
-  @media screen and (max-width: 1700px) {
-    width: 250px;
-    height: 180px;
-  }
-
-  @media screen and (max-width: 1550px) {
-    width: 240px;
-    height: 150px;
-  }
-
-  @media screen and (max-width: 1480px) {
-    width: 190px;
-    height: 135px;
-  }
-
-  @media screen and (max-width: 1350px) {
-    width: 165px;
-    height: 100px;
-  }
-
-  @media screen and (max-width: 1150px) {
-    width: 130px;
-    height: 100px;
-  }
-
-  @media screen and (max-width: 1024px) {
-    width: 150px;
-  }
-  @media screen and (max-width: 550px) {
-    height: 50px;
-    width: 100%;
-  }
 `;
 
 export const DashboardNewestAnimalCardsItemContentContainer = styled.div`

@@ -13,6 +13,7 @@ const InputFullContainer = styled.div`
   flex-direction: column;
   gap: 4px;
   width: 100%;
+  min-width: 50px;
 `;
 
 const InputContainer = styled.div<CustomInputProps>`
@@ -31,7 +32,7 @@ const InputContainer = styled.div<CustomInputProps>`
 `;
 
 const InputBox = styled.input`
-  flex: 1;
+  width: 100%;
   height: 40px;
   padding: 8px 16px;
   font-size: 16px;

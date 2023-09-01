@@ -1,46 +1,72 @@
-import axiosInstance from "services/axiosInstance";
+import axiosInstance, { mockInstance } from "services/axiosInstance";
+import toastService from "singletons/toastService";
 import {
   Animal,
+  AnimalCreatePetInterface,
   AnimalEdit,
   Cat,
   Dog,
+  GetShelterRespones,
   Other,
   Pet,
+  PutSheltersCardInterface,
   ShelterCardsResponse,
   SheltersStatsResponse,
   ShelterVolunteeringResponse,
 } from "./petTypes";
 
+export const getShelter = async () => {
+  try {
+    const response = await axiosInstance.get<GetShelterRespones>(
+      "/shelters/details"
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const getShelterStats = async () => {
   try {
-    const response = await axiosInstance.get<SheltersStatsResponse>(
+    const response = await mockInstance.get<SheltersStatsResponse>(
       "/Pet/shelters/stats"
     );
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
-export const getShelterCards = async () => {
+export const getShelterCards = async (args: [number, number]) => {
+  const [pageSize, pageNumber] = args;
   try {
     const response = await axiosInstance.get<ShelterCardsResponse>(
-      "/Pet/shelters/cards"
+      `/shelters/cards/petListInShelter`,
+      {
+        params: {
+          PageNumber: pageNumber,
+          PageSize: pageSize,
+        },
+      }
     );
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
-export const getShelterVolunteering = async (id: string) => {
+export const getShelterVolunteering = async () => {
   try {
     const response = await axiosInstance.get<ShelterVolunteeringResponse>(
-      `/Pet/shelters/volunteering/${id}`
+      `/shelters/volunteering/GetShelterVolunteering`
     );
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -49,60 +75,76 @@ export const updateShelterVolunteering = async (
 ) => {
   try {
     const response = await axiosInstance.put(
-      `/Pet/shelters/volunteering`,
+      `/shelters/volunteering/update`,
       data
     );
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
 export const getShelterCardsArchiveChartData = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
-      "/Pets/shelters/cards/archive/chart/year"
+      "/shelters/cards/chart/year"
     );
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch shelter cards archive chart data");
+    throw error;
   }
 };
 
 export const getShelterCardsArchiveChartDataForMonth = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
-      "/Pets/shelters/cards/archive/chart/month"
+      "/shelters/cards/chart/month"
     );
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch shelter cards archive chart data");
+    throw error;
   }
 };
 
 export const getShelterCardsArchiveChartDataForWeek = async () => {
   try {
     const response = await axiosInstance.get<number[]>(
-      "/Pets/shelters/cards/archive/chart/week"
+      "/shelters/cards/chart/week"
     );
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch shelter cards archive chart data");
+    throw error;
   }
 };
 
 export const getShelterCardsCard = async (petId: string) => {
   try {
     const response = await axiosInstance.get<Pet>(
-      `/Pets/shelters/cards/${petId}`
+      `/shelters/cards/get/${petId}`
     );
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error("Failed to fetch pet card data");
+    throw error;
+  }
+};
+
+export const postShelterCardsCreatePet = async (
+  data: AnimalCreatePetInterface
+) => {
+  try {
+    const response = await axiosInstance.post(
+      "/shelters/cards/CreatePet",
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };
 
@@ -121,6 +163,7 @@ export const postShelterCardsDog = async (data: Dog) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -130,6 +173,7 @@ export const postShelterCardsOther = async (data: Other) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -139,15 +183,17 @@ export const postShelterCardsAnimal = async (data: Animal) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
-export const putShelterCardsAnimal = async (data: AnimalEdit) => {
+export const putShelterCardsAnimal = async (data: PutSheltersCardInterface) => {
   try {
-    const response = await axiosInstance.put("/shelters/cards", data);
+    const response = await axiosInstance.put("/Shelter/cards/Update", data);
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -159,6 +205,7 @@ export const postShelterCardsArchive = async (petId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -170,6 +217,7 @@ export const putShelterCardsPublish = async (petId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -179,5 +227,18 @@ export const putShelterCardsHide = async (petId: string) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
+  }
+};
+
+export const deleteShelterCard = async (petId: string) => {
+  try {
+    const response = await axiosInstance.delete(
+      `/Shelter/cards/delete/${petId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 };

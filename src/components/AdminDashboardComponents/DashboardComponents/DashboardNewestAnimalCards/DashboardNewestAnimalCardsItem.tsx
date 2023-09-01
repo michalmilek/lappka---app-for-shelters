@@ -12,14 +12,15 @@ import {
 
 interface Props {
   item: Pet;
+  img: string;
 }
 
-const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
+const DashboardNewestAnimalCardsItem = ({ item, img }: Props) => {
   return (
     <ContainerLink to={DashboardRoutes.animalCards + "/" + item.id}>
       <DashboardNewestAnimalCardsItemContainer>
         <DashboardNewestAnimalCardsItemImg
-          src={item.profilePhoto}
+          src={img}
           alt=""
         />
         <DashboardNewestAnimalCardsItemContentContainer>

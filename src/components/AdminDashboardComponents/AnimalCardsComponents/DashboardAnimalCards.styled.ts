@@ -24,33 +24,19 @@ export const StyledDashboardAnimalCardsMain = styled.main`
 `;
 
 export const StyledDashboardAnimalCardsMainContent = styled.article`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: calc(100% - 56px);
   padding: 24px 24px 25px;
   background: ${getColor("lightGray5")};
-  grid-template-areas:
-    "a a a"
-    "b b b"
-    "b b b"
-    "b b b"
-    "b b b"
-    "b b b"
-    "b b b";
 
   gap: 16px;
   align-items: flex-start;
   align-content: space-between;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   @media screen and (max-width: 1350px) {
     padding: 12px;
-  }
-
-  @media screen and (max-width: 1050px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 200px;
   }
 `;

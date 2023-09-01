@@ -34,7 +34,8 @@ export const deleteProfilePicture = async () => {
 /User/picture`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw error;
   }
 };
 
@@ -44,6 +45,7 @@ export const getUser = async () => {
     return response.data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -57,6 +59,7 @@ export const patchUser = async (data: PatchUserRequest) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -66,6 +69,7 @@ export const deleteUser = async () => {
     return response.data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -75,6 +79,7 @@ export const patchUserEmailAddress = async (data: PatchEmailAddressRequest) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -86,5 +91,6 @@ export const patchUserNewPassword = async (
     return response.data;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };

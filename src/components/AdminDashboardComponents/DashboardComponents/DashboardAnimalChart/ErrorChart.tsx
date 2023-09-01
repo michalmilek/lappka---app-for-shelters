@@ -38,6 +38,7 @@ const ErrorContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation: ${appearAnimation} 0.3s ease-in-out;
+  min-height: 40vh;
 `;
 
 const ErrorMessage = styled.p`
@@ -53,16 +54,40 @@ const ErrorMessage = styled.p`
 
 export const StyledResponsiveContainer = styled(ResponsiveContainer)`
   visibility: hidden;
+  max-width: 6fr;
+  max-height: 60vh !important;
+
+  @media screen and (max-height: 1600px) {
+    max-height: 55vh !important;
+  }
+
+  @media screen and (max-height: 1450px) {
+    max-height: 50vh !important;
+  }
+
+  @media screen and (max-height: 1300px) {
+    max-height: 45vh !important;
+  }
+
+  @media screen and (max-height: 1150px) {
+    max-height: 30vh !important;
+  }
+
+  @media screen and (max-height: 950px) {
+    max-height: 35vh !important;
+  }
+
+  @media screen and (max-width: 1024px) {
+    max-width: 100%;
+  }
 `;
 
 const ErrorChart = () => {
-  const deviceType = useDeviceType();
-
   return (
     <ErrorContainer>
       <StyledResponsiveContainer
         width={"100%"}
-        height={deviceType === "mobile" ? 300 : 350}>
+        height={"90%"}>
         <BarChart
           width={150}
           height={150}

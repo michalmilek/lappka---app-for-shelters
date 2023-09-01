@@ -23,7 +23,7 @@ export const getShelterStats = rest.get(
 
 
 export const getShelterCards = rest.get(
-  "/Pet/shelters/cards",
+  "/shelters/cards/petListInShelter",
   async (req, res, ctx) => {
     try {
       return res(ctx.status(200), ctx.json(dummyDataNewestAnimals));
@@ -45,7 +45,7 @@ const dummyDonationData = {
 };
 
 export const getShelterVolunteering = rest.get(
-  "/Pet/shelters/volunteering/123",
+  "/shelters/volunteering",
   async (req, res, ctx) => {
     try {
       return res(ctx.status(200), ctx.json(dummyDonationData));
@@ -69,8 +69,6 @@ export const updateShelterVolunteering = rest.put(
     }
   }
 );
-
-
 
 const generateRandomNumberArray = (length: number) => {
   return Array.from({ length }, () => Math.floor(Math.random() * 10000));
@@ -118,7 +116,6 @@ export const getShelterCardsArchiveChartDataForMonth = rest.get(
   }
 );
 
-
 export const getShelterCardsArchiveChartDataForWeek = rest.get(
   "/Pets/shelters/cards/archive/chart/week",
   async (req, res, ctx) => {
@@ -140,30 +137,29 @@ export const getShelterCardsArchiveChartDataForWeek = rest.get(
 );
 
 const dummyObj = {
-  id: "123",
-  petIdentifier: "string",
-  name: "Maniek",
+  id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  petIdentifier: "ABC123",
+  name: "TEST1",
   type: "Cat",
   gender: "Male",
-  breed: "Inna",
-  color: "Czarny",
-  weight: 23,
+  breed: "Persian",
+  color: "White",
+  weight: 5.2,
   profilePhoto:
     "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
   photos: [
-    "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
-    "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_1280.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw10-nZVHjbalT7IURdjN4kzcp7_5i_aNbXmA-I-0&s",
+    "https://hips.hearstapps.com/hmg-prod/images/domestic-cat-lies-in-a-basket-with-a-knitted-royalty-free-image-1592337336.jpg?crop=0.668xw:1.00xh;0.247xw,0&resize=1200:*",
+    "https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png",
   ],
-  age: 6,
-  createdAt: Date.now(),
+  age: 2,
+  createdAt: "2023-07-31T21:46:59.855Z",
   isSterilized: true,
   isVisible: true,
-  description: "Kotek do adopcji",
+  description: "Animal is a lovely Persian cat looking for a forever home.",
 };
 
 export const getShelterCardsCard = rest.get(
-  "/Pets/shelters/cards/123",
+  "/shelters/cards/3fa85f64-5717-4562-b3fc-2c963f66afa6",
   async (req, res, ctx) => {
     try {
       return res(ctx.status(200), ctx.json(dummyObj));

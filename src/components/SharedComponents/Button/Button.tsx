@@ -7,8 +7,7 @@ import {
 import React from "react";
 import { ReusableButton } from "./Button.styled";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ComponentProps<"button"> {
   width?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;

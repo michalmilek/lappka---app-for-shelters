@@ -5,6 +5,8 @@ import toastReducer from "./toastSlice";
 import loadingReducer from "./loadingSlice";
 import breadcrumbsReducer from "./breadcrumbsSlice";
 import imageReducer from "./imageSlice";
+import shelterReducer from "./shelterSlice";
+import tableReducer from "./tableSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     loading: loadingReducer,
     breadcrumbs: breadcrumbsReducer,
     image: imageReducer,
+    shelter: shelterReducer,
+    table: tableReducer,
   },
 });
 
