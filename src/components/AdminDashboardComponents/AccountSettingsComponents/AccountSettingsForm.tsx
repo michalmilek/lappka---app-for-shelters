@@ -3,11 +3,8 @@ import { UserRemoveIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { FormikProps } from "formik";
-import useToast from "hooks/useToast";
 import { AccountSettingsType } from "pages/DashboardPages/AccountSettingsPage";
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { setLoading } from "redux/loadingSlice";
 import { GetShelterRespones } from "services/pet/petTypes";
 import { useGetStorageImagesForUser } from "services/storage/storageServices";
 import { GetUserResponse } from "services/user/user";
@@ -80,13 +77,6 @@ const AccountSettingsForm = ({
   };
 
   const fileUploadRef = useRef<HTMLInputElement>(null);
-  const {
-    mutate: deleteProfilePictureFn,
-    isSuccess: deleteProfilePictureIsSuccess,
-    isLoading: deleteProfilePictureIsLoading,
-    isError: deleteProfilePictureIsError,
-    error: deleteProfilePictureError,
-  } = useDeleteProfilePicture();
 
   return (
     <>
@@ -203,9 +193,7 @@ const AccountSettingsForm = ({
             <Button
               type="button"
               onClick={() => {
-                if (formik.values.profilePicture) {
-                  deleteProfilePictureFn();
-                }
+                formik.setFieldValue("profilePicture", "");
               }}
               variant="fill"
               color="error">

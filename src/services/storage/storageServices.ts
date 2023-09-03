@@ -68,9 +68,7 @@ export const useDeleteStorageImages = () => {
   const mutation = useMutation(
     (imgsIds: string[]) => deleteStorageImages(imgsIds),
     {
-      onSuccess: () => {
-        showToast("Zdjęcia usunięte pomyślnie.", "success");
-      },
+      onSuccess: () => {},
       onMutate: () => {
         dispatch(setLoading(true));
       },

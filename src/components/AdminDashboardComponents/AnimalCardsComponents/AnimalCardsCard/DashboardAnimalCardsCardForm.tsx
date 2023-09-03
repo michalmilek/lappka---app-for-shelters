@@ -48,6 +48,7 @@ import PhotoPreviewImage from "components/SharedComponents/DragAndDrop/PhotoPrev
 import DeleteAllImagesModal from "./DeleteAllImagesModal";
 import ImageSkeleton from "./utils/ImageSkeleton";
 import { ErrorSkeleton } from "./utils/ErrorSkeleton";
+import toastService from "singletons/toastService";
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -146,7 +147,7 @@ const DashboardAnimalCardsCardForm = ({
         } as PutSheltersCardInterface,
         {
           onSuccess: () => {
-            showToast(
+            toastService.showToast(
               `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
               "success"
             );
@@ -196,11 +197,16 @@ const DashboardAnimalCardsCardForm = ({
       if (!over) return;
 
       if (active.id !== over?.id) {
-        const activeIndex = photos.indexOf(String(active.id));
-        const overIndex = photos.indexOf(String(over.id));
+        setLocalImageUrls((urls) => {
+          const activeIndex = urls.indexOf(String(active.id));
+          const overIndex = urls.indexOf(String(over.id));
 
-        const updatedPhotos = arrayMove(photos, activeIndex, overIndex);
-        formik.setFieldValue("photos", updatedPhotos);
+          const updatedPhotos = arrayMove(photos, activeIndex, overIndex);
+          const updatedUrls = arrayMove(localImageUrls, activeIndex, overIndex);
+          formik.setFieldValue("photos", updatedPhotos);
+
+          return updatedUrls;
+        });
       }
     }
   };
@@ -251,7 +257,7 @@ const DashboardAnimalCardsCardForm = ({
           collisionDetection={closestCenter}
           onDragEnd={onDragEnd}>
           <SortableContext
-            items={photos}
+            items={localImageUrls}
             strategy={horizontalListSortingStrategy}>
             <StyledCardImgContainer>
               {localImageUrls.map((photo, index) => (

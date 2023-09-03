@@ -18,6 +18,7 @@ import {
   usePostStoragePictures,
 } from "services/storage/storageServices";
 import {
+  useDeleteProfilePicture,
   useGetUser,
   usePatchUser,
   usePatchUserEmailAddress,
@@ -31,7 +32,8 @@ const validationSchema = Yup.object().shape({
   city: Yup.string().required("Pole wymagane"),
   nip: Yup.string().required("Pole wymagane"),
   krs: Yup.string().required("Pole wymagane"),
-  fullName: Yup.string().required("Pole wymagane"),
+  firstName: Yup.string().required("Pole wymagane"),
+  lastName: Yup.string().required("Pole wymagane"),
   email: Yup.string()
     .email("Nieprawidłowy adres email")
     .required("Pole wymagane"),
@@ -84,6 +86,7 @@ const AccountSettingsPage = () => {
   const { mutate: patchEmailAddressFn } = usePatchUserEmailAddress();
   const { mutate: patchUserFn } = usePatchUser();
   const { mutate: postStorageImgs } = usePostStoragePictures();
+  const { mutate: deleteProfilePictureFn } = useDeleteProfilePicture();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
@@ -103,12 +106,12 @@ const AccountSettingsPage = () => {
           userData?.profilePicture !== values.profilePicture &&
           values.profilePicture instanceof File
         ) {
+          if (userData?.profilePicture) {
+            deleteProfilePictureFn();
+          }
           postStorageImgs([values.profilePicture], {
             onSuccess: (data) => {
-              if (
-                values.profilePicture &&
-                typeof values.profilePicture === "string"
-              ) {
+              if (data[0]) {
                 patchUserFn({
                   firstName: values.firstName,
                   lastName: values.lastName,
@@ -118,14 +121,26 @@ const AccountSettingsPage = () => {
             },
           });
         } else if (
-          userData?.profilePicture !== values.profilePicture &&
-          values.profilePicture
+          formik.values.profilePicture === "" &&
+          userData?.profilePicture
         ) {
-          patchUserFn({
-            firstName: values.firstName,
-            lastName: values.lastName,
-            profilePicture: values.profilePicture,
+          deleteProfilePictureFn(undefined, {
+            onSuccess: () => {
+              patchUserFn({
+                firstName: values.firstName,
+                lastName: values.lastName,
+                profilePicture: values.profilePicture as string,
+              });
+            },
           });
+        } else {
+          if (userData) {
+            patchUserFn({
+              firstName: values.firstName,
+              lastName: values.lastName,
+              profilePicture: userData?.profilePicture,
+            });
+          }
         }
       }
     },

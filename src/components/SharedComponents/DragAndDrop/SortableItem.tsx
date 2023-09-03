@@ -19,6 +19,7 @@ const SortableItem = ({
 
   return (
     <div
+
       style={style}
       ref={setNodeRef}
       {...attributes}
