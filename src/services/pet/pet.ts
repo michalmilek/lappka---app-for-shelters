@@ -39,15 +39,21 @@ export const getShelterStats = async () => {
   }
 };
 
-export const getShelterCards = async (args: [number, number]) => {
+export const getShelterCards = async (
+  args: [number, number],
+  sortParam: string = "createdAt",
+  asc: string = "false"
+) => {
   const [pageSize, pageNumber] = args;
   try {
     const response = await axiosInstance.get<ShelterCardsResponse>(
       `/shelters/cards/petListInShelter`,
       {
         params: {
-          PageNumber: pageNumber,
-          PageSize: pageSize,
+          pageNumber: pageNumber,
+          pageSize: pageSize,
+          sortParam,
+          asc,
         },
       }
     );

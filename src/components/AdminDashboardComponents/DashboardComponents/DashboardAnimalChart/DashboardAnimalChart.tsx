@@ -118,6 +118,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
         />
       </StyledDashboardChartTitleContainer>
       <StyledResponsiveContainer
+        minHeight={300}
         height={"99%"}
         width={"99%"}>
         <BarChart

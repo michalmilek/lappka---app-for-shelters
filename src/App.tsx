@@ -40,6 +40,10 @@ const queryClient = new QueryClient({
           "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
           "error"
         );
+      } else if((error as AxiosError).response?.status === 403) {
+        toastService.showToast(
+          "Nie masz uprawnień, aby usunąć kartę. Jeśli uważasz, że to bląd skontaktuj się z administratorem."
+        );
       }
     },
   }),
@@ -49,6 +53,10 @@ const queryClient = new QueryClient({
         toastService.showToast(
           "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
           "error"
+        );
+      } else if ((error as AxiosError).response?.status === 403) {
+        toastService.showToast(
+          "Nie masz uprawnień, aby usunąć kartę. Jeśli uważasz, że to bląd skontaktuj się z administratorem."
         );
       }
     },

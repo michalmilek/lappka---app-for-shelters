@@ -12,6 +12,8 @@ interface CustomErrorData {
 
 export interface ExtendedAxiosError extends AxiosError<CustomErrorData> {}
 
+export interface ExtendedAxiosError2 extends AxiosError<CustomErrorObject> {}
+
 const isMockEndpointsEnabled =
   (process.env.REACT_APP_mockEndpoints as string) === "true";
 const apiAddress = process.env.REACT_APP_API_BASE_URL as string;

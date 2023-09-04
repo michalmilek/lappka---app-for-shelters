@@ -41,10 +41,12 @@ export const useShelterStats = () => {
 
 export const useShelterCards = (
   pageNumber: number = 1,
-  pageSize: number = 10
+  pageSize: number = 10,
+  sortParam: string = "createdAt",
+  asc: string = "false"
 ) => {
-  return useQuery(["shelterCards", pageSize, pageNumber], () =>
-    getShelterCards([pageSize, pageNumber])
+  return useQuery(["shelterCards", pageSize, pageNumber, sortParam, asc], () =>
+    getShelterCards([pageSize, pageNumber], sortParam, asc)
   );
 };
 
@@ -113,8 +115,12 @@ export const usePostShelterCardsCreatePet = () => {
   const mutation = useMutation(
     (data: AnimalCreatePetInterface) => postShelterCardsCreatePet(data),
     {
-      onSuccess: () => {
+      onSuccess: (_, payload) => {
         navigate(DashboardRoutes.dashboard);
+        toastService.showToast(
+          `Karta dla zwierzęcia o imieniu "${payload.name}" została utworzona`,
+          "success"
+        );
         queryClient.invalidateQueries(["shelterCards"]);
       },
       onError: (error: ExtendedAxiosError) => {
@@ -146,7 +152,7 @@ export const usePutShelterCardsAnimal = () => {
     {
       onSuccess: () => {
         showToast(
-          "Karta zwierzęcia została pomyślnei zaktualizowana.",
+          "Karta zwierzęcia została pomyślnie zaktualizowana.",
           "success"
         );
         queryClient.invalidateQueries({ queryKey: ["shelterCardsCard"] });
@@ -179,8 +185,8 @@ export const usePutShelterCardsPublish = () => {
   const mutation = useMutation(
     (petId: string) => putShelterCardsPublish(petId),
     {
-      onSuccess: () => {
-        showToast("Karta została opublikowana.", "success");
+      onSuccess: (_, payload) => {
+        showToast(`Karta została opublikowana.`, "success");
         queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
       },
     }

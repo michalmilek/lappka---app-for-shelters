@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { setLoading } from "redux/loadingSlice";
 import { store } from "redux/store";
 import { AuthRoutes, DashboardRoutes } from "router/router";
-import { ExtendedAxiosError } from "services/axiosInstance";
+import {
+  ExtendedAxiosError,
+  ExtendedAxiosError2,
+} from "services/axiosInstance";
 import toastService from "singletons/toastService";
 import {
   login,
@@ -32,15 +35,15 @@ export const useLoginMutation = () => {
         localStorage.setItem("refreshToken", refreshToken);
         navigate(DashboardRoutes.dashboard);
       },
-      onError: (error: ExtendedAxiosError) => {
+      onError: (error: ExtendedAxiosError2) => {
         console.log(error);
-        if (error.response?.data?.errors[0].Code === "invalid_password") {
-          showToast(
+        if (error.response?.data?.Code === "invalid_password") {
+          toastService.showToast(
             "Wprowadzono nieprawidłowe hasło. Spróbuj ponownie",
             "error"
           );
-        } else if (error.response?.data?.errors[0].Code === "invalid_email") {
-          showToast(
+        } else if (error.response?.data?.Code === "invalid_email") {
+          toastService.showToast(
             "Nie znaleziono użytkownika o podanym danym emailu.",
             "error"
           );
@@ -60,16 +63,16 @@ export const useRegisterShelterMutation = () => {
         "Rejestracja zakończona sukcesem. Aktywuj konto przez wiadomość wysłaną na podany email."
       );
     },
-    onError: (error: ExtendedAxiosError) => {
+    onError: (error: ExtendedAxiosError2) => {
       console.log(error);
-      if (error.response?.data?.errors[0].Code === "invalid_email") {
+      if (error.response?.data?.Code === "invalid_email") {
         showToast(
           "Podany adres email został już wykorzystany w rejestracji.",
           "error"
         );
       } else {
-        if (error.response?.data?.errors[0].Code)
-          showToast(error.response?.data?.errors[0].Description, "error");
+        if (error.response?.data?.Code)
+          showToast(error.response?.data?.Description, "error");
       }
     },
   });
@@ -80,16 +83,16 @@ export const useRegisterShelterMutation = () => {
 export const useResetPasswordSendEmailMutation = () => {
   const { showToast } = useToast();
   const resetPasswordSendEmailMutation = useMutation(resetPasswordSendEmail, {
-    onError: (error: ExtendedAxiosError) => {
+    onError: (error: ExtendedAxiosError2) => {
       console.log(error);
-      if (error.response?.data?.errors[0].Code === "invalid_mail") {
+      if (error.response?.data?.Code === "invalid_email") {
         showToast(
           "Użytkownik o podanym emailu nie istnieje w bazie danych.",
           "error"
         );
       } else {
-        if (error.response?.data?.errors[0].Code)
-          showToast(error.response?.data?.errors[0].Description, "error");
+        if (error.response?.data?.Code)
+          showToast(error.response?.data?.Description, "error");
       }
     },
   });
@@ -151,10 +154,16 @@ export const useRevokeToken = () => {
         localStorage.removeItem("refreshToken");
         navigate(AuthRoutes.login);
       },
-      onError: (error: ExtendedAxiosError) => {
+      onError: (error: ExtendedAxiosError2) => {
         console.log(error);
-        if (error.response?.data.errors[0].Code === "invalid_token")
+        if (error.response?.data.Code === "invalid_token")
           toastService.showToast("Podano niewłaściwy token.", "error");
+        else {
+          toastService.showToast(
+            "Wystąpił błąd, skontaktuj się z administratorem strony.",
+            "error"
+          );
+        }
       },
       onMutate: () => store.dispatch(setLoading(true)),
       onSettled: () => store.dispatch(setLoading(false)),

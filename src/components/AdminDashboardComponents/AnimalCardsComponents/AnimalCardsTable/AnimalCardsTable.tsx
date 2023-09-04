@@ -20,7 +20,12 @@ import {
   TableComponentHeaderContainer,
   TableContainer,
 } from "./AnimalCardsTable.styled";
-import { columns } from "./AnimalCardsTableUtils";
+import {
+  columns,
+  ExtendedSearchParams,
+  sortParamFn,
+  sortParams,
+} from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
 import {
@@ -38,11 +43,13 @@ function AnimalCardsTable({
 }: {
   data: ShelterCardsResponseWithProfilePictureUrl;
 }) {
+  console.log("🚀 ~ data:", data);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
   const pageSizeFromQueryParams = searchParams.get("pageSize");
-  const dispatch = useDispatch();
+  const sortParamFromQueryParams = searchParams.get("sortParam");
+  const sortParamOrderFromQueryParams = searchParams.get("asc");
   const deviceType = useDeviceType();
   const columnsMemo = React.useMemo(() => columns, []);
 
@@ -50,7 +57,14 @@ function AnimalCardsTable({
     pageIndex: pageIndexFromQueryParams ? +pageIndexFromQueryParams : 1,
     pageSize: pageSizeFromQueryParams ? +pageSizeFromQueryParams : 10,
   });
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      desc: sortParamOrderFromQueryParams
+        ? Boolean(sortParamOrderFromQueryParams)
+        : false,
+      id: sortParamFromQueryParams ? sortParamFromQueryParams : "createdat",
+    },
+  ]);
   const [filtering, setFiltering] = useState("");
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
@@ -60,7 +74,7 @@ function AnimalCardsTable({
 
   const handlePageSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const optionValue = event.target.value;
-    setPagination({ ...pagination, pageSize: +optionValue });
+    setPagination({ pageIndex: 1, pageSize: +optionValue });
   };
 
   const table = useReactTable({
@@ -71,6 +85,7 @@ function AnimalCardsTable({
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     manualPagination: true,
+    manualSorting: true,
     pageCount: data.totalPages,
     state: {
       sorting: sorting,
@@ -103,24 +118,28 @@ function AnimalCardsTable({
   }, [deviceType, table]);
 
   useEffect(() => {
-    dispatch(setTablePaginationState(pagination));
-
-    return () => {
-      dispatch(
-        setTablePaginationState({
-          pageIndex: 1,
-          pageSize: 10,
-        })
-      );
-    };
-  }, [dispatch, pagination]);
-
-  useEffect(() => {
-    setSearchParams({
+    let updatedSearchParams: ExtendedSearchParams = {
+      ...searchParams,
       pageIndex: pagination.pageIndex.toString(),
       pageSize: pagination.pageSize.toString(),
-    });
-  }, [pagination.pageIndex, pagination.pageSize, setSearchParams]);
+    };
+
+    if (sorting.length > 0) {
+      updatedSearchParams = {
+        ...updatedSearchParams,
+        sortParam: sortParamFn(sorting[0].id).toLowerCase(),
+        asc: String(!sorting[0].desc),
+      };
+    }
+
+    setSearchParams(updatedSearchParams);
+  }, [
+    pagination.pageIndex,
+    pagination.pageSize,
+    sorting,
+    searchParams,
+    setSearchParams,
+  ]);
 
   return (
     <TableComponentContainer>

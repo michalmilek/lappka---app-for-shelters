@@ -34,7 +34,7 @@ export const genderValueToLabel = (value: GenderType): string => {
   return genderLabels[value] || "Inna";
 };
 
-const genderLabels: { [key in GenderType]: string } = {
+export const genderLabels: { [key in GenderType]: string } = {
   Other: "Inna",
   Male: "Samiec",
   Female: "Samiczka",
@@ -44,7 +44,7 @@ export const typeValueToLabel = (value: GenreType): string => {
   return typeLabels[value] || "Inna";
 };
 
-const typeLabels: { [key in GenreType]: string } = {
+export const typeLabels: { [key in GenreType]: string } = {
   Other: "Inny",
   Dog: "Pies",
   Cat: "Kot",
