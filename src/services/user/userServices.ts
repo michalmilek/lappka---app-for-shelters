@@ -19,14 +19,10 @@ export const useDeleteProfilePicture = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
   const mutation = useMutation(() => deleteProfilePicture(), {
-    onSuccess: () => {
-      showToast("Zdjęcie profilowe zostało usunięte pomyślnie.", "error");
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-    },
     onError: (error: ExtendedAxiosError) => {
       if (error.status === 400)
         showToast(
-          "Podane zdjęcie zostało już usunięte, albo użytkownik nie posiada zdjęcia profilowego.",
+          "Podane zdjęcie zostało już usunięte, albo użytkownik nie posiadał zdjęcia profilowego.",
           "error"
         );
       else if (error.status === 500)
@@ -47,9 +43,11 @@ export const useGetUser = () => {
 export const usePatchUser = () => {
   const dispatch = useDispatch();
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
   const mutation = useMutation((data: PatchUserRequest) => patchUser(data), {
     onSuccess: () => {
       showToast("Zmienione dane użytkownika zostały zapisane.", "success");
+      queryClient.invalidateQueries(["user"]);
     },
     onError: (error: ExtendedAxiosError) => {
       if (error.status === 400) {

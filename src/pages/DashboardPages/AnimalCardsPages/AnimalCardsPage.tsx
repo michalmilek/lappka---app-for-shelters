@@ -24,26 +24,35 @@ import {
 } from "services/pet/petTypes";
 
 const AnimalCardsPage = () => {
-  const [searchParams, _setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
   const pageSizeFromQueryParams = searchParams.get("pageSize");
+  const sortParamFromQueryParams = searchParams.get("sortParam");
+  const sortParamOrderFromQueryParams = searchParams.get("asc");
 
   const navigate = useNavigate();
-  const pageIndexFromRedux = useSelector(selectTablePageIndex);
-  const pageSizeFromRedux = useSelector(selectTablePageSize);
 
   const [pageIndex, setPageIndex] = useState(
-    pageIndexFromQueryParams ? pageIndexFromQueryParams : pageIndexFromRedux
+    pageIndexFromQueryParams ? pageIndexFromQueryParams : 1
   );
   const [pageSize, setPageSize] = useState(
-    pageSizeFromQueryParams ? pageSizeFromQueryParams : pageSizeFromRedux
+    pageSizeFromQueryParams ? pageSizeFromQueryParams : 10
+  );
+  const [sortParam, setSortParam] = useState(
+    sortParamFromQueryParams ? sortParamFromQueryParams : "createdat"
+  );
+  const [sortParamOrder, setSortParamOrder] = useState(
+    sortParamOrderFromQueryParams ? sortParamOrderFromQueryParams : "false"
   );
 
   const { data, isLoading, isError, isSuccess } = useShelterCards(
     +pageIndex,
-    +pageSize
+    +pageSize,
+    sortParam,
+    sortParamOrder
   );
   const [imageIds, setImageIds] = useState<string[]>([]);
+  console.log("🚀 ~ data:", data);
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -91,6 +100,18 @@ const AnimalCardsPage = () => {
     }
   }, [pageSizeFromQueryParams]);
 
+  useEffect(() => {
+    if (sortParamFromQueryParams) {
+      setSortParam(sortParamFromQueryParams);
+    }
+  }, [sortParamFromQueryParams]);
+
+  useEffect(() => {
+    if (sortParamOrderFromQueryParams) {
+      setSortParamOrder(sortParamOrderFromQueryParams);
+    }
+  }, [sortParamOrderFromQueryParams]);
+
   return (
     <StyledDashboardAnimalCardsMain>
       <DashboardNavbar
@@ -109,8 +130,8 @@ const AnimalCardsPage = () => {
         {data &&
           isSuccess &&
           dataWithProfilePictureUrl &&
-          dataWithProfilePictureUrl.petInListInShelterDto[0]
-            .profilePhotoUrl && (
+          typeof dataWithProfilePictureUrl.petInListInShelterDto[0]
+            .profilePhotoUrl === "string" && (
             <AnimalCardsTable data={dataWithProfilePictureUrl} />
           )}
         {isLoading && <SkeletonTableComponent />}

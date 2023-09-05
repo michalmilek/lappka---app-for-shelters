@@ -91,30 +91,30 @@ const AnimalCardsAddNewCardForm = ({
           formik.values.animalCategory === "Cat") && (
           <Input
             error={
-              formik.errors.breed && formik.touched.breed
-                ? formik.errors.breed
+              formik.errors.species && formik.touched.species
+                ? formik.errors.species
                 : undefined
             }
             label="Rasa"
             placeholder="Wpisz"
             inputSize="Large"
-            name="breed"
-            value={formik.values.breed}
+            name="species"
+            value={formik.values.species}
             onChange={formik.handleChange}
           />
         )}
         <AnimalCardsAddNewCardFlexInputContainer>
           <Input
             error={
-              formik.errors.color && formik.touched.color
-                ? formik.errors.color
+              formik.errors.marking && formik.touched.marking
+                ? formik.errors.marking
                 : undefined
             }
             placeholder="Wpisz"
             inputSize="Large"
             label="Umaszczenie"
-            name="color"
-            value={formik.values.color}
+            name="marking"
+            value={formik.values.marking}
             onChange={formik.handleChange}
           />
           <InputNumberWithUnits

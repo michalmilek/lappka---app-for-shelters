@@ -44,8 +44,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
   const [timeSelect, setTimeSelect] = useState<TimeType>("Year");
   const deviceType = useDeviceType();
 
-  const largerThanTablet =
-    deviceType === "desktop" || deviceType === "laptop" ? true : false;
+  const largerThanTablet = deviceType === "desktop" || deviceType === "laptop";
 
   const condition = !largerThanTablet && timeSelect === "Year";
 
@@ -118,6 +117,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
         />
       </StyledDashboardChartTitleContainer>
       <StyledResponsiveContainer
+        minHeight={300}
         height={"99%"}
         width={"99%"}>
         <BarChart

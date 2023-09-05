@@ -30,8 +30,7 @@ export interface PatchUserNewPasswordRequest {
 
 export const deleteProfilePicture = async () => {
   try {
-    const response = await axiosInstance.delete(`
-/User/picture`);
+    const response = await axiosInstance.delete(`/User/picture`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -51,11 +50,7 @@ export const getUser = async () => {
 
 export const patchUser = async (data: PatchUserRequest) => {
   try {
-    const response = await axiosInstance.patch(
-      `
-/User`,
-      data
-    );
+    const response = await axiosInstance.patch("/User", data);
     return response.data;
   } catch (error) {
     console.log(error);

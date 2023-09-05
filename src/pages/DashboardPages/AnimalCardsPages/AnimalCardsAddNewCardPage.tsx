@@ -20,14 +20,10 @@ import {
 import { AnimalCreatePetInterface } from "services/pet/petTypes";
 
 const AnimalCardsAddNewCardPage = () => {
-  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const { mutate: postStorageFn } = usePostStoragePictures();
-  const { isSuccess: isSuccessAnimal, mutate: postAnimalFn } =
-    usePostShelterCardsCreatePet();
-
-  //const { mutate: deleteImgFromStorage } = useDeleteStorageImage();
+  const { mutate: postAnimalFn } = usePostShelterCardsCreatePet();
 
   const onSubmit = (values: AddNewAnimalCardInterface) => {
     if (formik.values.photos instanceof Array<File>) {
@@ -50,15 +46,6 @@ const AnimalCardsAddNewCardPage = () => {
     validationSchema: cardValidationSchema,
     onSubmit,
   });
-
-  useEffect(() => {
-    if (isSuccessAnimal) {
-      showToast(
-        `Karta dla zwierzęcia o imieniu ${formik.values.name} została utworzona`,
-        "success"
-      );
-    }
-  }, [formik.values.name, isSuccessAnimal, showToast]);
 
   return (
     <StyledProtectedPageContent>

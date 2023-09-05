@@ -1,6 +1,14 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { Pet, PetWithImageUrl } from "services/pet/petTypes";
+import { Navigate } from "react-router-dom";
+import { DashboardRoutes } from "router/router";
+import {
+  GenderType,
+  GenreType,
+  Pet,
+  PetWithImageUrl,
+} from "services/pet/petTypes";
+import { genderLabels, typeLabels } from "utils/appUtils";
 import {
   ActionHeaderContainer,
   Dot,
@@ -12,11 +20,45 @@ import {
 } from "./AnimalCardsTable.styled";
 import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
 
+export interface ExtendedSearchParams extends URLSearchParams {
+  pageIndex?: string;
+  pageSize?: string;
+  sortParam?: string;
+  asc?: string;
+}
+
+export const sortParams = {
+  name: "name",
+  breed: "species",
+  gender: "gender",
+  weight: "weight",
+  issterilized: "issterilized",
+  createdat: "createdat",
+};
+
+export const sortParamFn = (fieldName: string) => {
+  switch (fieldName) {
+    case "name":
+      return sortParams.name;
+    case "breed":
+      return sortParams.breed;
+    case "gender":
+      return sortParams.gender;
+    case "weight":
+      return sortParams.weight;
+    case "issterilized":
+      return sortParams.issterilized;
+    case "createdat":
+      return sortParams.createdat;
+    default:
+      return fieldName;
+  }
+};
+
 const columnHelper = createColumnHelper<PetWithImageUrl>();
 
 export const columns = [
-  columnHelper.accessor((row) => `${row.name} ${row.profilePhotoUrl}`, {
-    id: "animalName",
+  columnHelper.accessor("name", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -27,7 +69,14 @@ export const columns = [
       </StyledTableTHTextContainer>
     ),
     cell: (props) => (
-      <StyledTableImgContainer>
+      <StyledTableImgContainer
+        onClick={() => {
+          return (
+            <Navigate
+              to={DashboardRoutes.animalCards + `/${props.row.original.id}`}
+            />
+          );
+        }}>
         <StyledTableImg src={`${props.row.original.profilePhotoUrl}`} />
         <Typography
           variant="UI/UI Text 14 Reg"
@@ -69,7 +118,7 @@ export const columns = [
       <Typography
         variant="UI/UI Text 14 Reg"
         color="darkGray2">
-        {props.getValue()}
+        {typeLabels[props.getValue() as GenreType]}
       </Typography>
     ),
   }),
@@ -88,7 +137,7 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Semi Bold"
           color="white">
-          {props.getValue()}
+          {genderLabels[props.getValue() as GenderType]}
         </Typography>
       </StyledSexContainer>
     ),
@@ -99,7 +148,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Umaszczenie
+          Rasa
         </Typography>
       </StyledTableTHTextContainer>
     ),
