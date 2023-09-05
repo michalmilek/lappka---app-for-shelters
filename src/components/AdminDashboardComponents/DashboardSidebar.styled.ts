@@ -21,7 +21,7 @@ export const StyledSidebar = styled.aside`
   width: 256px;
   height: 100%;
   border-right: 1px solid ${getColor("lightGray3")};
-  z-index: 200;
+  z-index: 2000;
 
   @media screen and (max-width: 550px) {
     transform: translateX(-100%);

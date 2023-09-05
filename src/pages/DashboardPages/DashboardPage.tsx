@@ -5,7 +5,7 @@ import DashboardMostPopularAnimals from "components/AdminDashboardComponents/Das
 import DashboardNewestAnimalCards from "components/AdminDashboardComponents/DashboardComponents/DashboardNewestAnimalCards/DashboardNewestAnimalCards";
 import DashboardVoluntary from "components/AdminDashboardComponents/DashboardComponents/DashboardVoluntary/DashboardVoluntary";
 import ProtectedNavbar from "components/AdminDashboardComponents/DashboardNavbar";
-import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
+import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 
 const DashboardPage = () => {
   return (

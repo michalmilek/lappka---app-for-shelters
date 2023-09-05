@@ -52,7 +52,6 @@ const AnimalCardsPage = () => {
     sortParamOrder
   );
   const [imageIds, setImageIds] = useState<string[]>([]);
-  console.log("🚀 ~ data:", data);
 
   useEffect(() => {
     if (isSuccess && data) {

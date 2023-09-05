@@ -1,6 +1,6 @@
 import { useShelterVolunteering } from "services/pet/petServices";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
-import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
+import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import { StyledDashboardVoluntaryMainContent } from "components/AdminDashboardComponents/VoluntaryComponents/DashboardVoluntary.styled";
 import SkeletonVoluntary from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/SkeletonVoluntary";
 import VoluntaryForm from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/VoluntaryForm";

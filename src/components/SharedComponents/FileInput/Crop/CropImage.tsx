@@ -84,6 +84,7 @@ const CropImage = forwardRef<RefInterface, Props>(
               }
               onComplete={(c: PixelCrop) => handleCompletedCrop(c)}>
               <img
+                style={{ minWidth: "400px" }}
                 ref={imgRef}
                 alt="Crop me"
                 src={selectedImage}

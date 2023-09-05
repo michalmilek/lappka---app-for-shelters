@@ -5,7 +5,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ProtectedPage from "components/AdminDashboardComponents/ProtectedPage";
+import ProtectedPage from "components/PagesComponents/ProtectedPage";
 import { GlobalStyle } from "globalStyles";
 import LoginPage from "pages/LoginPage";
 import DashboardPage from "pages/DashboardPages/DashboardPage";
@@ -23,7 +23,6 @@ import AnimalCardsAddNewCardPage from "pages/DashboardPages/AnimalCardsPages/Ani
 import AnimalCardsCardPage from "pages/DashboardPages/AnimalCardsPages/AnimalCardsCardPage";
 import AddNewEmployeePage from "pages/DashboardPages/EmployeesPages/AddNewEmployeePage";
 import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
-import HomePage from "pages/HomePage";
 import Loader from "components/SharedComponents/Loader/Loader";
 import { useSelector } from "react-redux";
 import { selectIsLoading } from "redux/loadingSlice";
@@ -31,6 +30,7 @@ import PreLoaderModal from "components/SharedComponents/PreLoader/PreLoader";
 import { AxiosError } from "axios";
 import Page404 from "pages/Page404";
 import toastService from "singletons/toastService";
+import UnprotectedPage from "components/PagesComponents/UnprotectedPage";
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -40,7 +40,7 @@ const queryClient = new QueryClient({
           "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
           "error"
         );
-      } else if((error as AxiosError).response?.status === 403) {
+      } else if ((error as AxiosError).response?.status === 403) {
         toastService.showToast(
           "Nie masz uprawnień, aby usunąć kartę. Jeśli uważasz, że to bląd skontaktuj się z administratorem."
         );
@@ -97,22 +97,24 @@ function App() {
         <GlobalStyle />
         <BrowserRouter>
           <Routes>
-            <Route
-              path={AuthRoutes.login}
-              element={<LoginPage />}
-            />
-            <Route
-              path={AuthRoutes.register}
-              element={<RegisterPage />}
-            />
-            <Route
-              path={AuthRoutes.resetPassword}
-              element={<ResetPasswordPage />}
-            />
-            <Route
-              path={AuthRoutes.resetPasswordToken}
-              element={<ResetPasswordPage />}
-            />
+            <Route element={<UnprotectedPage />}>
+              <Route
+                path={AuthRoutes.login}
+                element={<LoginPage />}
+              />
+              <Route
+                path={AuthRoutes.register}
+                element={<RegisterPage />}
+              />
+              <Route
+                path={AuthRoutes.resetPassword}
+                element={<ResetPasswordPage />}
+              />
+              <Route
+                path={AuthRoutes.resetPasswordToken}
+                element={<ResetPasswordPage />}
+              />
+            </Route>
             <Route element={<ProtectedPage />}>
               <Route
                 path={DashboardRoutes.dashboard}
@@ -154,7 +156,7 @@ function App() {
 
             <Route
               path="/"
-              element={<HomePage />}
+              element={<Navigate to={DashboardRoutes.dashboard} />}
             />
             <Route
               path="/not-found"

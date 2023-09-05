@@ -1,6 +1,5 @@
 import { useShelterStats } from "services/pet/petServices";
 import React from "react";
-import { StyledDashboardInfoCardsContainer } from "./DashboardInfoCards.styled";
 import DashboardInfoCardsItem from "./DashboardInfoCardsItem";
 import {
   HeartGreenIcon,
@@ -8,8 +7,6 @@ import {
   SearchCircleIcon,
   UserCircleIcon,
 } from "components/SharedComponents/icons/icons";
-import ErrorCards from "./ErrorCard";
-
 const DashboardInfoCards = () => {
   const { data, isLoading, isError } = useShelterStats();
   return (

@@ -28,6 +28,12 @@ export const useLoginMutation = () => {
       return login(data);
     },
     {
+      onMutate: () => {
+        store.dispatch(setLoading(true));
+      },
+      onSettled: () => {
+        store.dispatch(setLoading(false));
+      },
       onSuccess: (data) => {
         const { accessToken, refreshToken } = data;
         showToast("Logowanie zakończone sukcesem.");

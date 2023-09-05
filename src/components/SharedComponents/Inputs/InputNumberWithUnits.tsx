@@ -28,7 +28,7 @@ const InputContainer = styled.div<CustomInputProps>`
       : css`
           border: 1px solid ${getColor("lightGray1")};
         `}
-  border-radius: 6px;
+  border-radius: 6px 12px 12px 6px;
 `;
 
 const InputBox = styled.input`

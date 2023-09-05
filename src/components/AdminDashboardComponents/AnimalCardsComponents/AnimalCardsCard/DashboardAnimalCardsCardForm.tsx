@@ -297,7 +297,7 @@ const DashboardAnimalCardsCardForm = ({
                   ]);
                 }
               }}
-              description="Zdjęcie maksymalnie 15MB"
+              description="Zdjęcie maksymalnie 15MB, a zwierzak może posiadać maksymalnie 5 zdjęć."
             />
           </FormRow>
         )}
