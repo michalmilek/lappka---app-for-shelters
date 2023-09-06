@@ -20,7 +20,7 @@ import {
 
 interface ProtectedNavbarProps {
   previousTitle?: string;
-  title: string;
+  title?: string;
   Button?: JSX.Element | null;
 }
 

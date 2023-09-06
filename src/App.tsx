@@ -89,6 +89,7 @@ function App() {
     };
   }, []);
 
+
   const isLoading = useSelector(selectIsLoading);
 
   if (isPageLoaded)

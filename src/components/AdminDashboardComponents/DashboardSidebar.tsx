@@ -32,6 +32,7 @@ const DashboardSidebar = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const deviceType = useDeviceType();
+  console.log("🚀 ~ deviceType:", deviceType);
   const isOpen = useSelector(selectIsMobileMenuOpen);
   const { mutate: revokeTokenFn } = useRevokeToken();
   const token = localStorage.getItem("refreshToken");

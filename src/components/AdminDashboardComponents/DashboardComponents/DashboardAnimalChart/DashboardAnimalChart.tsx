@@ -48,7 +48,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
 
   const condition = !largerThanTablet && timeSelect === "Year";
 
-  const desktopChartMargin = deviceType === "desktop" ? 10 : 0;
+  const desktopChartMargin = deviceType === "desktop" ? 10 : 15;
 
   const getChartDataByType = (type: TimeType): ChartData[] => {
     switch (type) {
@@ -147,7 +147,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
                 timeSelect === "Year"
                   ? "       Tyś"
                   : timeSelect === "Month"
-                  ? "Wyśw. w miesiącu"
+                  ? `Wyśw. [msc]`
                   : "Wyświetleń"
               }
               position="top"

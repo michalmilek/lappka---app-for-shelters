@@ -7,21 +7,8 @@ import {
   setPreviousTitle,
   setTitle,
 } from "redux/breadcrumbsSlice";
+import { mapEnglishToPolish } from "utils/appUtils";
 
-const mapEnglishToPolish = (englishName: string): string => {
-  const translations: Record<string, string> = {
-    dashboard: "Dashboard",
-    messages: "Wiadomości",
-    "animal-cards": "Karty zwierząt",
-    "add-new-card": "Dodaj nową kartę",
-    voluntary: "Wolontariat",
-    employees: "Pracownicy",
-    "add-new-employee": "Dodaj nowego pracownika",
-    "account-settings": "Ustawienia konta",
-  };
-
-  return translations[englishName] || englishName;
-};
 
 const useBreadcrumbs = () => {
   const location = useLocation();

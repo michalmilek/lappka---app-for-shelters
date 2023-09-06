@@ -24,10 +24,7 @@ const AnimalCardsCardPage = () => {
   if (id)
     return (
       <StyledProtectedPageContent>
-        <DashboardNavbar
-          previousTitle="Karty zwierząt / "
-          title="Bella"
-        />
+        <DashboardNavbar />
         <StyledDashboardAddNewCardMainContent>
           <StyledCardFormComponent>
             <StyledCardHeader>
