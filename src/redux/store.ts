@@ -7,6 +7,7 @@ import breadcrumbsReducer from "./breadcrumbsSlice";
 import imageReducer from "./imageSlice";
 import shelterReducer from "./shelterSlice";
 import tableReducer from "./tableSlice";
+import deleteCardReducer from "./deleteCardSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     image: imageReducer,
     shelter: shelterReducer,
     table: tableReducer,
+    deleteCard: deleteCardReducer,
   },
 });
 

@@ -10,8 +10,8 @@ import {
   usePutShelterCardsHide,
   usePutShelterCardsPublish,
 } from "services/pet/petServices";
-import DeleteCardModal from "./modals/DeleteCardModal";
-import MoveToArchiveModal from "./modals/MoveToArchiveModal";
+import DeleteCardModal from "../../../SharedComponents/Modal/ModalsWithLogic/DeleteCardModal";
+import MoveToArchiveModal from "../../../SharedComponents/Modal/ModalsWithLogic/MoveToArchiveModal";
 import { AnimalCardsCardBtnsContainer } from "./utils/DashboardAnimalCardsCard.styled";
 
 const AnimalCardsCardActions = ({ id }: { id: string }) => {

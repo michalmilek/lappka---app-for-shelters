@@ -3,7 +3,7 @@ import Modal from "components/SharedComponents/Modal/Modal";
 import React from "react";
 import { usePostShelterCardsArchive } from "services/pet/petServices";
 import toastService from "singletons/toastService";
-import { AnimalCardsCardBtnsContainer } from "../utils/DashboardAnimalCardsCard.styled";
+import { AnimalCardsCardBtnsContainer } from "../../../AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
 
 interface Props {
   isMoveToArchiveModalOpen: boolean;

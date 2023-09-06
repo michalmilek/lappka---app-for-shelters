@@ -34,7 +34,6 @@ const DashboardMostPopularAnimals = () => {
   } = useGetStorageImagesForDashboard(localImagesIds);
 
   const [viewsDataWithUrls, setViewsDataWithUrls] = useState<PetWithUrl[]>([]);
-  console.log("🚀 ~ viewsDataWithUrls:", viewsDataWithUrls);
 
   useEffect(() => {
     if (viewsData) {

@@ -226,6 +226,6 @@ export const columns = [
         </Typography>
       </ActionHeaderContainer>
     ),
-    cell: (_props) => <AnimalCardsTableActionItem />,
+    cell: (props) => <AnimalCardsTableActionItem id={props.row.original.id} />,
   }),
 ];

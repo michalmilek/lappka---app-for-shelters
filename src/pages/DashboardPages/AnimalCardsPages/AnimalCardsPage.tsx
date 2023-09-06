@@ -24,7 +24,7 @@ import {
 } from "services/pet/petTypes";
 
 const AnimalCardsPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
   const pageSizeFromQueryParams = searchParams.get("pageSize");
   const sortParamFromQueryParams = searchParams.get("sortParam");
@@ -32,24 +32,11 @@ const AnimalCardsPage = () => {
 
   const navigate = useNavigate();
 
-  const [pageIndex, setPageIndex] = useState(
-    pageIndexFromQueryParams ? pageIndexFromQueryParams : 1
-  );
-  const [pageSize, setPageSize] = useState(
-    pageSizeFromQueryParams ? pageSizeFromQueryParams : 10
-  );
-  const [sortParam, setSortParam] = useState(
-    sortParamFromQueryParams ? sortParamFromQueryParams : "createdat"
-  );
-  const [sortParamOrder, setSortParamOrder] = useState(
-    sortParamOrderFromQueryParams ? sortParamOrderFromQueryParams : "false"
-  );
-
   const { data, isLoading, isError, isSuccess } = useShelterCards(
-    +pageIndex,
-    +pageSize,
-    sortParam,
-    sortParamOrder
+    pageIndexFromQueryParams ? +pageIndexFromQueryParams : 1,
+    pageSizeFromQueryParams ? +pageSizeFromQueryParams : 10,
+    sortParamFromQueryParams ? sortParamFromQueryParams : "createdAt",
+    sortParamOrderFromQueryParams ? sortParamOrderFromQueryParams : "false"
   );
   const [imageIds, setImageIds] = useState<string[]>([]);
 
@@ -64,8 +51,8 @@ const AnimalCardsPage = () => {
 
   const { data: imageUrls } = useGetStorageImagesForTable(
     imageIds,
-    +pageIndex,
-    +pageSize
+    pageIndexFromQueryParams ? +pageIndexFromQueryParams : 1,
+    pageSizeFromQueryParams ? +pageSizeFromQueryParams : 10
   );
 
   const [dataWithProfilePictureUrl, setDataWithProfilePictureUrl] =
@@ -86,30 +73,6 @@ const AnimalCardsPage = () => {
       });
     }
   }, [data, imageUrls]);
-
-  useEffect(() => {
-    if (pageIndexFromQueryParams) {
-      setPageIndex(pageIndexFromQueryParams);
-    }
-  }, [pageIndexFromQueryParams]);
-
-  useEffect(() => {
-    if (pageSizeFromQueryParams) {
-      setPageSize(pageSizeFromQueryParams);
-    }
-  }, [pageSizeFromQueryParams]);
-
-  useEffect(() => {
-    if (sortParamFromQueryParams) {
-      setSortParam(sortParamFromQueryParams);
-    }
-  }, [sortParamFromQueryParams]);
-
-  useEffect(() => {
-    if (sortParamOrderFromQueryParams) {
-      setSortParamOrder(sortParamOrderFromQueryParams);
-    }
-  }, [sortParamOrderFromQueryParams]);
 
   return (
     <StyledDashboardAnimalCardsMain>

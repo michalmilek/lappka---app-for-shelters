@@ -128,6 +128,7 @@ function App() {
               <Route
                 path={DashboardRoutes.animalCards}
                 element={<AnimalCardsPage />}
+                key={"animalCards"}
               />
               <Route
                 path={DashboardRoutes.animalCardsNewCard}

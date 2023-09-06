@@ -115,8 +115,13 @@ export const StyledTableTR = styled.tr`
   cursor: pointer !important;
   gap: 12px;
   background: ${getColor("white")};
+  transition: all 0.3s ease-in-out;
   &:nth-of-type(2n) {
     background: ${getColor("lightGray5")};
+  }
+
+  &:hover {
+    background: ${getColor("lightGray2")};
   }
 `;
 

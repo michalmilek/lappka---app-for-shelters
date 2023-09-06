@@ -33,8 +33,6 @@ import {
   PetWithImageUrl,
   ShelterCardsResponseWithProfilePictureUrl,
 } from "services/pet/petTypes";
-import { useDispatch } from "react-redux";
-import { setTablePaginationState } from "redux/tableSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 
@@ -116,7 +114,7 @@ function AnimalCardsTable({
     });
   }, [deviceType, table]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     let updatedSearchParams: ExtendedSearchParams = {
       ...searchParams,
       pageIndex: pagination.pageIndex.toString(),
@@ -139,69 +137,74 @@ function AnimalCardsTable({
     searchParams,
     setSearchParams,
   ]);
-
+ */
   return (
-    <TableComponentContainer>
-      <TableComponentHeaderContainer>
-        <Typography
-          variant="UI/UI Text 16 Semi Bold"
-          tag="h2"
-          color="darkGray2">
-          Karty zwierząt
-        </Typography>
-      </TableComponentHeaderContainer>
-      <TableContainer>
-        <StyledTableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <StyledTableTH
-                    key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    {{
-                      asc: " 🔼",
-                      desc: " 🔽",
-                    }[header.column.getIsSorted() as string] ?? null}
-                  </StyledTableTH>
-                );
-              })}
-            </tr>
-          ))}
-        </StyledTableHeader>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <StyledTableTR
-              onClick={() => {
-                navigate(DashboardRoutes.animalCards + `/${row.original.id}`);
-              }}
-              key={row.id}>
-              {row.getVisibleCells().map((cell) => {
-                return (
-                  <StyledTableTD key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </StyledTableTD>
-                );
-              })}
-            </StyledTableTR>
-          ))}
-        </tbody>
-      </TableContainer>
-      <AnimalCardsTableFooter
-        itemsPerPage={pagination.pageSize}
-        handlePageSize={handlePageSize}
-        table={table}
-        pagination={pagination}
-        handleFiltering={handleFiltering}
-        filtering={filtering}
-      />
-    </TableComponentContainer>
+    <>
+      <TableComponentContainer>
+        <TableComponentHeaderContainer>
+          <Typography
+            variant="UI/UI Text 16 Semi Bold"
+            tag="h2"
+            color="darkGray2">
+            Karty zwierząt
+          </Typography>
+        </TableComponentHeaderContainer>
+        <TableContainer>
+          <StyledTableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <StyledTableTH
+                      key={header.id}
+                      onClick={header.column.getToggleSortingHandler()}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                      {{
+                        asc: " 🔼",
+                        desc: " 🔽",
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </StyledTableTH>
+                  );
+                })}
+              </tr>
+            ))}
+          </StyledTableHeader>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <StyledTableTR
+                onClick={() => {
+                  navigate(DashboardRoutes.animalCards + `/${row.original.id}`);
+                }}
+                key={row.id}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <StyledTableTD key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </StyledTableTD>
+                  );
+                })}
+              </StyledTableTR>
+            ))}
+          </tbody>
+        </TableContainer>
+        <AnimalCardsTableFooter
+          itemsPerPage={pagination.pageSize}
+          handlePageSize={handlePageSize}
+          table={table}
+          pagination={pagination}
+          handleFiltering={handleFiltering}
+          filtering={filtering}
+        />
+      </TableComponentContainer>
+    </>
   );
 }
 
