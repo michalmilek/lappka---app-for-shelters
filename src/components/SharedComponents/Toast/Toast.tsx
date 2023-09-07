@@ -22,7 +22,7 @@ const ToastContainer = styled.div<ToastProps>`
   padding: 8px 16px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 500;
+  z-index: 2500;
 
   ${(props) =>
     props.type === "success" &&
@@ -37,6 +37,13 @@ const ToastContainer = styled.div<ToastProps>`
       background-color: ${getColor("error")};
       color: #fff;
     `}
+
+
+
+    @media screen and (max-width: 1024px) {
+    padding: 16px 16px;
+    white-space: nowrap;
+  }
 `;
 
 const Toast: React.FC = () => {

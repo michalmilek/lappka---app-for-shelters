@@ -8,29 +8,32 @@ import {
   DashboardMostPopularAnimalsItemInfoContainer,
   DashboardMostPopularAnimalsItemInfoContainerStyledViews,
 } from "./DashboardMostPopularAnimaIstem.styled";
+import { PetWithUrl } from "./DashboardMostPopularAnimals";
 
-const DashboardMostPopularAnimalsItem = () => {
+interface Props {
+  item: PetWithUrl;
+}
+
+const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
   return (
     <DashboardMostPopularAnimalsItemContainer>
-      <DashboardMostPopularAnimalsItemContainerAnimalInfoContainer className="flex items-center gap-4 w-full">
+      <DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>
         <DashboardMostPopularAnimalsItemImage
-          src={
-            "https://media.newyorker.com/photos/62c4511e47222e61f46c2daa/4:3/w_2663,h_1997,c_limit/shouts-animals-watch-baby-hemingway.jpg"
-          }
-          alt=""
+          src={item.img}
+          alt={item.name + "photo"}
         />
         <DashboardMostPopularAnimalsItemInfoContainer>
           <Typography
             tag="h5"
             variant="UI/UI Text 14 Reg"
             color="darkGray2">
-            Ninka
+            {item.name}
           </Typography>
           <Typography
             tag="h6"
             variant="UI Small/UI Text 12 Reg"
             color="midGray3">
-            Kot
+            {item.type}
           </Typography>
         </DashboardMostPopularAnimalsItemInfoContainer>
       </DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>

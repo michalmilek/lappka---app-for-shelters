@@ -20,8 +20,6 @@ import {
 import { useLoginMutation } from "services/auth/authServices";
 import useDeviceType from "hooks/useDeviceType";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import useToast from "hooks/useToast";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { AuthRoutes } from "router/router";
@@ -42,14 +40,6 @@ const LoginForm = () => {
       loginFn({ email: values.email, password: values.password });
     },
   });
-
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(setLoading(true));
-    } else {
-      dispatch(setLoading(false));
-    }
-  }, [dispatch, isLoading]);
 
   useEffect(() => {
     if (rememberMe) {

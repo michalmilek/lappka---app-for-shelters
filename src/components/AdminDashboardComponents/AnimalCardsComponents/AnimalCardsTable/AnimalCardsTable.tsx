@@ -43,7 +43,6 @@ function AnimalCardsTable({
 }: {
   data: ShelterCardsResponseWithProfilePictureUrl;
 }) {
-  console.log("🚀 ~ data:", data);
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
@@ -107,7 +106,7 @@ function AnimalCardsTable({
       ) {
         header.toggleVisibility(false);
       } else if (
-        deviceType === "mobile" &&
+        (deviceType === "mobile" || deviceType === "tablet") &&
         (header.id === "createdAt" || header.id === "gender")
       ) {
         header.toggleVisibility(false);

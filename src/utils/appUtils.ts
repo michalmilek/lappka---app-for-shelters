@@ -88,3 +88,22 @@ export const formatCardViews = (views: number) => {
     return views.toString();
   }
 };
+
+
+export const mapEnglishToPolish = (englishName: string): string => {
+  const translations: Record<string, string> = {
+    dashboard: "Dashboard",
+    messages: "Wiadomości",
+    "animal-cards": "Karty zwierząt",
+    "add-new-card": "Dodaj nową kartę",
+    voluntary: "Wolontariat",
+    employees: "Pracownicy",
+    "add-new-employee": "Dodaj nowego pracownika",
+    "account-settings": "Ustawienia konta",
+    register: "Rejestracja",
+    login: "Login",
+    "reset-password": "Reset hasła",
+  };
+
+  return translations[englishName] || englishName;
+};

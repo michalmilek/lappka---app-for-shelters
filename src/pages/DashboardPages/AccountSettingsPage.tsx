@@ -7,7 +7,7 @@ import ErrorAccountSettings from "components/AdminDashboardComponents/AccountSet
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { AddNewEmployeeFormFooter } from "components/AdminDashboardComponents/EmployeesComponents/AddNewEmployee/AddNewEmployee.styled";
 import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardComponents/EmployeesComponents/DashboardEmployees.styled";
-import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
+import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { useFormik } from "formik";
 import React, { useState, useCallback } from "react";

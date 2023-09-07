@@ -50,7 +50,10 @@ const DashboardNewestAnimalCards = () => {
         </Typography>
         <Button
           variant="outline"
-          size="Medium">
+          size="Medium"
+          onClick={() => {
+            navigate(DashboardRoutes.animalCards);
+          }}>
           Wszystkie
         </Button>
       </DashboardNewestAnimalCardsContainerHeader>

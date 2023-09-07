@@ -212,7 +212,7 @@ const AnimalCardsAddNewCardForm = ({
           onFileDelete={handleOnFileDelete}
           onFileChange={handleOnFileChange}
           label="Dodaj zdjęcia"
-          description="Zdjęcia maksymalnie 1MB"
+          description="Zdjęcie maksymalnie 15MB, a maksymalna ilość zdjęć to 5."
         />
       </AnimalCardsAddNewCardFormInputContainer>
       <AnimalCardsAddNewCardFooter>

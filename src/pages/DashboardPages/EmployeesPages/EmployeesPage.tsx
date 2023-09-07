@@ -1,7 +1,7 @@
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardComponents/EmployeesComponents/DashboardEmployees.styled";
 import EmployeesTable from "components/AdminDashboardComponents/EmployeesComponents/EmployeesTable";
-import { StyledProtectedPageContent } from "components/AdminDashboardComponents/ProtectedPage.styled";
+import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
 import React from "react";
