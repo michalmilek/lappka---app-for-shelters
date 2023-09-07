@@ -20,16 +20,10 @@ import {
   TableComponentHeaderContainer,
   TableContainer,
 } from "./AnimalCardsTable.styled";
-import {
-  columns,
-  ExtendedSearchParams,
-  sortParamFn,
-  sortParams,
-} from "./AnimalCardsTableUtils";
+import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
 import {
-  Pet,
   PetWithImageUrl,
   ShelterCardsResponseWithProfilePictureUrl,
 } from "services/pet/petTypes";
@@ -72,6 +66,10 @@ function AnimalCardsTable({
   const handlePageSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const optionValue = event.target.value;
     setPagination({ pageIndex: 1, pageSize: +optionValue });
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("pageSize", optionValue);
+    newSearchParams.delete("pageIndex");
+    setSearchParams(newSearchParams);
   };
 
   const table = useReactTable({
@@ -114,30 +112,30 @@ function AnimalCardsTable({
     });
   }, [deviceType, table]);
 
-  /*   useEffect(() => {
-    let updatedSearchParams: ExtendedSearchParams = {
-      ...searchParams,
-      pageIndex: pagination.pageIndex.toString(),
-      pageSize: pagination.pageSize.toString(),
-    };
+  const handleSort = (columnId: string) => {
+    const isAsc =
+      columnId === sortParamFromQueryParams
+        ? sortParamOrderFromQueryParams === "true"
+        : true;
 
-    if (sorting.length > 0) {
-      updatedSearchParams = {
-        ...updatedSearchParams,
-        sortParam: sortParamFn(sorting[0].id).toLowerCase(),
-        asc: String(!sorting[0].desc),
-      };
+    if (sortParamOrderFromQueryParams === "true") {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set("sortParam", columnId);
+      newSearchParams.set("asc", "false");
+      setSearchParams(newSearchParams);
+    } else if (sortParamOrderFromQueryParams === "false") {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.delete("sortParam");
+      newSearchParams.delete("asc");
+      setSearchParams(newSearchParams);
+    } else {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set("sortParam", columnId);
+      newSearchParams.set("asc", isAsc.toString());
+      setSearchParams(newSearchParams);
     }
+  };
 
-    setSearchParams(updatedSearchParams);
-  }, [
-    pagination.pageIndex,
-    pagination.pageSize,
-    sorting,
-    searchParams,
-    setSearchParams,
-  ]);
- */
   return (
     <>
       <TableComponentContainer>
@@ -154,20 +152,21 @@ function AnimalCardsTable({
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const isSorted =
+                    header.column.id === sortParamFromQueryParams;
+                  const isAsc = sortParamOrderFromQueryParams === "true";
+
                   return (
                     <StyledTableTH
                       key={header.id}
-                      onClick={header.column.getToggleSortingHandler()}>
+                      onClick={() => handleSort(header.column.id)}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-                      {{
-                        asc: " 🔼",
-                        desc: " 🔽",
-                      }[header.column.getIsSorted() as string] ?? null}
+                      {isSorted && (isAsc ? " 🔼" : " 🔽")}
                     </StyledTableTH>
                   );
                 })}

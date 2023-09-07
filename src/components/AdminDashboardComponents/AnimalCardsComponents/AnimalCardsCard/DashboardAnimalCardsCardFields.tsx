@@ -3,12 +3,13 @@ import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
 import Textarea from "components/SharedComponents/Inputs/TextArea";
-import { FormikContextType, FormikProps } from "formik";
+import { FormikProps } from "formik";
 import React from "react";
-import { ageConversion } from "utils/appUtils";
+import { ageConversion, genderLabels, typeValueToLabel } from "utils/appUtils";
 import { AnimalCardsCardFlexInputContainer } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
 import { PetCard } from "./utils/DashboardAnimalCardsUtils";
+import { GenderType, GenreType } from "services/pet/petTypes";
 
 interface DashboardAnimalCardsCardFieldsProps {
   isEditOn: boolean;
@@ -52,7 +53,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           <Input
             readOnly
             inputSize="Large"
-            value={formik.values.gender}
+            value={genderLabels[formik.values.gender as GenderType]}
           />
         ) : (
           <Select
@@ -83,7 +84,7 @@ const DashboardAnimalCardsCardFields: React.FC<
             placeholder="Wpisz"
             inputSize="Large"
             name="breed"
-            value={formik.values.type}
+            value={typeValueToLabel(formik.values.type as GenreType)}
             onChange={formik.handleChange}
           />
         ) : (

@@ -7,8 +7,8 @@ import { getColor } from "utils/styles/getStyle/getColor";
 import { useDeleteUser } from "services/user/userServices";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
-import useToast from "hooks/useToast";
 import { useNavigate } from "react-router-dom";
+import toastService from "singletons/toastService";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -56,7 +56,6 @@ interface Props {
 const AccountSettingsDeleteUser = ({ isOpen, onClose }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { showToast } = useToast();
   const { mutate, isSuccess, isLoading, isError, error } = useDeleteUser();
 
   useEffect(() => {
@@ -69,13 +68,13 @@ const AccountSettingsDeleteUser = ({ isOpen, onClose }: Props) => {
 
   useEffect(() => {
     if (isSuccess) {
-      showToast("Użytkownik został usunięty pomyślnie", "success");
+      toastService.showToast("Użytkownik został usunięty pomyślnie", "success");
       onClose();
       navigate("/login");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
     }
-  }, [isSuccess, showToast, onClose, navigate]);
+  }, [isSuccess, onClose, navigate]);
 
   return isOpen ? (
     <ModalOverlay>

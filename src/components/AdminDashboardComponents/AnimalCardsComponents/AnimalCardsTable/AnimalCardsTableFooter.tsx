@@ -64,10 +64,6 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
         value={itemsPerPage}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           handlePageSize(e);
-          setSearchParams({
-            ...searchParams,
-            pageSize: String(e.target.value),
-          });
         }}>
         <option value={8}>8</option>
         <option value={10}>10</option>
@@ -76,7 +72,12 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
       <StyledTableFooterButtonsContainer>
         <StyledTableArrowButton
           disabled={pagination.pageIndex === 1}
-          onClick={() => table.previousPage()}>
+          onClick={() => {
+            table.previousPage();
+            const newSearchParams = new URLSearchParams(searchParams);
+            newSearchParams.set("pageIndex", String(pagination.pageIndex - 1));
+            setSearchParams(newSearchParams);
+          }}>
           <ArrowLeftIcon />
         </StyledTableArrowButton>
         {pagination.pageIndex > 1 && (
@@ -84,10 +85,9 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
             onClick={() => {
               table.setPageIndex(1);
               //searchParams.set();
-              setSearchParams({
-                ...searchParams,
-                pageSize: String(1),
-              });
+              const newSearchParams = new URLSearchParams(searchParams);
+              newSearchParams.set("pageIndex", String(1));
+              setSearchParams(newSearchParams);
             }}>
             1
           </StyledTableNumberButton>
@@ -96,10 +96,12 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
           <StyledTableNumberButton
             onClick={() => {
               table.previousPage();
-              setSearchParams({
-                ...searchParams,
-                pageSize: String(pagination.pageIndex - 1),
-              });
+              const newSearchParams = new URLSearchParams(searchParams);
+              newSearchParams.set(
+                "pageIndex",
+                String(pagination.pageIndex - 1)
+              );
+              setSearchParams(newSearchParams);
             }}>
             {pagination.pageIndex - 1}
           </StyledTableNumberButton>
@@ -127,10 +129,12 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
                 ...pagination,
                 pageIndex: pagination.pageIndex + 2,
               });
-              setSearchParams({
-                ...searchParams,
-                pageIndex: String(pagination.pageIndex + 2),
-              });
+              const newSearchParams = new URLSearchParams(searchParams);
+              newSearchParams.set(
+                "pageIndex",
+                String(pagination.pageIndex + 2)
+              );
+              setSearchParams(newSearchParams);
             }}>
             {pagination.pageIndex + 2}
           </StyledTableNumberButton>
@@ -142,8 +146,14 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
                 ...pagination,
                 pageIndex: table.getPageCount(),
               });
+              const newSearchParams = new URLSearchParams(searchParams);
+              newSearchParams.set(
+                "pageIndex",
+                String(pagination.pageIndex + 1)
+              );
+              setSearchParams(newSearchParams);
             }}>
-            {table.getPageCount()}
+            {pagination.pageIndex + 1}
           </StyledTableNumberButton>
         )}
         <StyledTableArrowButton
@@ -153,14 +163,9 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
               ...pagination,
               pageIndex: pagination.pageIndex + 1,
             });
-            setSearchParams((prev) => {
-              return {
-                tags: [
-                  ...prev.getAll("tags"),
-                  String(pagination.pageIndex + 1),
-                ],
-              };
-            });
+            const newSearchParams = new URLSearchParams(searchParams);
+            newSearchParams.set("pageIndex", String(pagination.pageIndex + 1));
+            setSearchParams(newSearchParams);
           }}>
           <ArrowRightIcon />
         </StyledTableArrowButton>

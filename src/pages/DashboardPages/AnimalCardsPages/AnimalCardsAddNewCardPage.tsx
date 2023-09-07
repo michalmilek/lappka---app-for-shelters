@@ -1,17 +1,12 @@
 import { usePostShelterCardsCreatePet } from "services/pet/petServices";
-import {
-  useDeleteStorageImage,
-  usePostStoragePictures,
-} from "services/storage/storageServices";
+import { usePostStoragePictures } from "services/storage/storageServices";
 import AnimalCardsAddNewCardForm from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm";
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { useFormik } from "formik";
-import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import useToast from "hooks/useToast";
 import {
   AddNewAnimalCardInterface,
   addNewCardInitialValues,

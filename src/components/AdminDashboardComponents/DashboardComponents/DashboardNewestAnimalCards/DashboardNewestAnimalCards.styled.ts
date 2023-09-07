@@ -8,6 +8,7 @@ export const DashboardNewestAnimalCardsContainer = styled.div`
   grid-area: d;
   border-radius: 8px;
   height: 100%;
+  min-height: 20vh;
   width: 5fr;
   box-shadow: 0px 1px 2px 0px #1018280f;
   box-shadow: 0px 1px 3px 0px #1018281a;

@@ -12,16 +12,9 @@ import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
-import useToast from "hooks/useToast";
 import ErrorAnimalCardsTable from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/ErrorAnimalCardsTable";
-import { useSelector } from "react-redux";
-import { selectTablePageIndex, selectTablePageSize } from "redux/tableSlice";
-import { ExtendedAxiosError } from "services/axiosInstance";
 import { useGetStorageImagesForTable } from "services/storage/storageServices";
-import {
-  PetWithImageUrl,
-  ShelterCardsResponseWithProfilePictureUrl,
-} from "services/pet/petTypes";
+import { ShelterCardsResponseWithProfilePictureUrl } from "services/pet/petTypes";
 
 const AnimalCardsPage = () => {
   const [searchParams] = useSearchParams();
@@ -75,7 +68,13 @@ const AnimalCardsPage = () => {
   }, [data, imageUrls]);
 
   return (
-    <StyledDashboardAnimalCardsMain>
+    <StyledDashboardAnimalCardsMain
+      key={
+        String(pageIndexFromQueryParams) +
+        pageSizeFromQueryParams +
+        sortParamFromQueryParams +
+        sortParamOrderFromQueryParams
+      }>
       <DashboardNavbar
         title="Karty zwierząt"
         Button={

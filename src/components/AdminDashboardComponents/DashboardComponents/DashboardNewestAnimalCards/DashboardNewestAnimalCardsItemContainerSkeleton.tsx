@@ -14,6 +14,7 @@ const SkeletonImg = styled.div`
   background-image: linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0);
   background-size: 600px 100%;
   animation: ${shimmer} 1.5s infinite;
+  min-height: 20vh;
 
   display: flex;
   flex-direction: column;

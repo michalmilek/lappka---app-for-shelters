@@ -1,5 +1,4 @@
 import Input from "components/SharedComponents/Inputs/Input";
-import * as Yup from "yup";
 import { useFormik } from "formik";
 import { HandleStepProps } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
@@ -12,7 +11,6 @@ import { useEffect } from "react";
 import { useRegisterShelterMutation } from "services/auth/authServices";
 import { ShelterRegisterRequest } from "services/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
-import useToast from "hooks/useToast";
 import { RegisterStep2Validation } from "./RegisterUtils";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
@@ -24,7 +22,6 @@ const RegisterStep2Form = ({
 }: HandleStepProps) => {
   const deviceType = useDeviceType();
   const dispatch = useDispatch();
-  const { showToast } = useToast();
   const {
     mutate: registerFn,
     isSuccess,
@@ -55,7 +52,7 @@ const RegisterStep2Form = ({
     if (isSuccess) {
       if (handleCurrentStep) handleCurrentStep(3);
     }
-  }, [isSuccess, handleCurrentStep, showToast]);
+  }, [isSuccess, handleCurrentStep]);
 
   useEffect(() => {
     if (isLoading) {

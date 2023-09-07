@@ -10,6 +10,7 @@ import {
   DashboardMostPopularAnimalsHeadingContainer,
 } from "./DashboardMostPopularAnimals.styled";
 import DashboardMostPopularAnimalsItem from "./DashboardMostPopularAnimalsItem";
+import SkeletonMostPopularAnimals from "./SkeletonMostPopularAnimals";
 
 export interface PetWithUrl extends Omit<Pet, "isVisible"> {
   img: string;
@@ -61,6 +62,10 @@ const DashboardMostPopularAnimals = () => {
       setViewsDataWithUrls(updatedViewsData as PetWithUrl[]);
     }
   }, [localImagesUrls, viewsData]);
+
+  if (isLoading) {
+    return <SkeletonMostPopularAnimals />;
+  }
 
   return (
     <DashboardMostPopularAnimalsContainer>
