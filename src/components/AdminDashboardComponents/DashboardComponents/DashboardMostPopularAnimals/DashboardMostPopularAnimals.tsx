@@ -28,13 +28,8 @@ const DashboardMostPopularAnimals = () => {
 
   const [localImagesIds, setLocalImagesIds] = useState<string[]>([]);
 
-  const {
-    isSuccess: GetStorageImagesIsSuccess,
-    data: localImagesUrls,
-    isLoading: GetStorageImagesIsLoading,
-  } = useGetStorageImagesForDashboard(localImagesIds);
-
-  const [viewsDataWithUrls, setViewsDataWithUrls] = useState<PetWithUrl[]>([]);
+  const { data: localImagesUrls, isLoading: GetStorageImagesIsLoading } =
+    useGetStorageImagesForDashboard(localImagesIds);
 
   useEffect(() => {
     if (viewsData) {
@@ -46,24 +41,7 @@ const DashboardMostPopularAnimals = () => {
     }
   }, [viewsData]);
 
-  useEffect(() => {
-    if (viewsData && localImagesUrls) {
-      const updatedViewsData = viewsData.petInListInShelterDto.map(
-        (pet, index) => {
-          if (localImagesUrls[index]) {
-            return {
-              ...pet,
-              img: localImagesUrls[index],
-            };
-          }
-          return pet;
-        }
-      );
-      setViewsDataWithUrls(updatedViewsData as PetWithUrl[]);
-    }
-  }, [localImagesUrls, viewsData]);
-
-  if (isLoading) {
+  if (isLoading || GetStorageImagesIsLoading) {
     return <SkeletonMostPopularAnimals />;
   }
 
@@ -78,12 +56,19 @@ const DashboardMostPopularAnimals = () => {
       </DashboardMostPopularAnimalsHeadingContainer>
       <Divider />
       <DashboardMostPopularAnimalsContent>
-        {viewsDataWithUrls.map((item, index) => (
-          <React.Fragment key={item.id + item.name + index}>
-            <DashboardMostPopularAnimalsItem item={item} />
-            {index !== viewsDataWithUrls.length - 1 && <Divider />}
-          </React.Fragment>
-        ))}
+        {viewsData &&
+          localImagesUrls &&
+          viewsData.petInListInShelterDto.map((item, index) => (
+            <React.Fragment key={item.id + item.name + index}>
+              <DashboardMostPopularAnimalsItem
+                img={localImagesUrls[index]}
+                item={item}
+              />
+              {index !== viewsData.petInListInShelterDto.length - 1 && (
+                <Divider />
+              )}
+            </React.Fragment>
+          ))}
       </DashboardMostPopularAnimalsContent>
     </DashboardMostPopularAnimalsContainer>
   );

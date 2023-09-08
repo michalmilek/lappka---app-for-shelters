@@ -1,6 +1,7 @@
 import { EyeIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
+import { Pet } from "services/pet/petTypes";
 import {
   DashboardMostPopularAnimalsItemContainer,
   DashboardMostPopularAnimalsItemContainerAnimalInfoContainer,
@@ -8,18 +9,18 @@ import {
   DashboardMostPopularAnimalsItemInfoContainer,
   DashboardMostPopularAnimalsItemInfoContainerStyledViews,
 } from "./DashboardMostPopularAnimaIstem.styled";
-import { PetWithUrl } from "./DashboardMostPopularAnimals";
 
 interface Props {
-  item: PetWithUrl;
+  item: Pet;
+  img: string;
 }
 
-const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
+const DashboardMostPopularAnimalsItem = ({ item, img }: Props) => {
   return (
     <DashboardMostPopularAnimalsItemContainer>
       <DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>
         <DashboardMostPopularAnimalsItemImage
-          src={item.img}
+          src={img}
           alt={item.name + "photo"}
         />
         <DashboardMostPopularAnimalsItemInfoContainer>
