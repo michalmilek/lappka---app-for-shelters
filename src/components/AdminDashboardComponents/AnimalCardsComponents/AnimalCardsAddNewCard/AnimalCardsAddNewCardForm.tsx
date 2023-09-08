@@ -14,6 +14,7 @@ import {
   AnimalCardsAddNewCardFormContainer,
   AnimalCardsAddNewCardFormInputContainer,
 } from "./AnimalCardsAddNewCardForm.styled";
+import SecondSelect from "components/SharedComponents/DropdownMenu/SecondSelect";
 
 const AnimalCardsAddNewCardForm = ({
   formik,
@@ -68,6 +69,7 @@ const AnimalCardsAddNewCardForm = ({
           value={formik.values.description}
           onChange={formik.handleChange}
         />
+        <SecondSelect />
         <Select
           error={
             formik.errors.animalCategory && formik.touched.animalCategory

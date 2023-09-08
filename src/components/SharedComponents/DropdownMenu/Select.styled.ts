@@ -84,6 +84,14 @@ export const SelectDiv = styled.div<SelectErrorProps>`
   position: relative;
   height: 40px;
   cursor: pointer;
+
+  &:focus {
+    outline: 1px solid rgba(0, 150, 255, 1);
+    -webkit-outline: 1px solid rgba(0, 150, 255, 1);
+    -moz-outline: 1px solid rgba(0, 150, 255, 1);
+    -ms-outline: 1px solid rgba(0, 150, 255, 1);
+    -o-outline: 1px solid rgba(0, 150, 255, 1);
+  }
 `;
 
 export const SelectLabel = styled.label<SelectedOptionLabelProps>`
@@ -127,5 +135,13 @@ export const OptionItem = styled.li`
 
   &:hover {
     background-color: #f3f3f3;
+  }
+
+  &:focus {
+    outline: 1px solid rgba(0, 150, 255, 1);
+    -webkit-outline: 1px solid rgba(0, 150, 255, 1);
+    -moz-outline: 1px solid rgba(0, 150, 255, 1);
+    -ms-outline: 1px solid rgba(0, 150, 255, 1);
+    -o-outline: 1px solid rgba(0, 150, 255, 1);
   }
 `;
