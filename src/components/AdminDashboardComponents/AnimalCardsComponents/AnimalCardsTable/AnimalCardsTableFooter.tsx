@@ -13,11 +13,11 @@ import {
 } from "./AnimalCardsTable.styled";
 import Input from "components/SharedComponents/Inputs/Input";
 import { PaginationState, Table } from "@tanstack/react-table";
-import { PetWithImageUrl } from "services/pet/petTypes";
+import { Pet } from "services/pet/petTypes";
 import { useSearchParams } from "react-router-dom";
 
 interface TableFooterProps {
-  table: Table<PetWithImageUrl>;
+  table: Table<Pet>;
   pagination: PaginationState;
   filtering: string;
   handleFiltering: (value: string) => void;

@@ -1,48 +1,29 @@
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useShelterCards } from "services/pet/petServices";
-import { Pet } from "services/pet/petTypes";
-import { useGetStorageImagesForDashboard } from "services/storage/storageServices";
 import {
   DashboardMostPopularAnimalsContainer,
   DashboardMostPopularAnimalsContent,
   DashboardMostPopularAnimalsHeadingContainer,
 } from "./DashboardMostPopularAnimals.styled";
 import DashboardMostPopularAnimalsItem from "./DashboardMostPopularAnimalsItem";
+import ErrorMostPopularAnimals from "./ErrorMostPopularAnimals";
 import SkeletonMostPopularAnimals from "./SkeletonMostPopularAnimals";
-
-export interface PetWithUrl extends Omit<Pet, "isVisible"> {
-  img: string;
-  isVisible?: boolean;
-}
 
 const DashboardMostPopularAnimals = () => {
   const {
     isLoading,
     data: viewsData,
     isError,
-    error,
-    isSuccess,
   } = useShelterCards(1, 5, "views");
 
-  const [localImagesIds, setLocalImagesIds] = useState<string[]>([]);
-
-  const { data: localImagesUrls, isLoading: GetStorageImagesIsLoading } =
-    useGetStorageImagesForDashboard(localImagesIds);
-
-  useEffect(() => {
-    if (viewsData) {
-      const profilePictures = viewsData?.petInListInShelterDto.map(
-        (pet) => pet.profilePhoto
-      );
-
-      setLocalImagesIds(profilePictures);
-    }
-  }, [viewsData]);
-
-  if (isLoading || GetStorageImagesIsLoading) {
+  if (isLoading) {
     return <SkeletonMostPopularAnimals />;
+  }
+
+  if (isError) {
+    return <ErrorMostPopularAnimals />;
   }
 
   return (
@@ -57,13 +38,9 @@ const DashboardMostPopularAnimals = () => {
       <Divider />
       <DashboardMostPopularAnimalsContent>
         {viewsData &&
-          localImagesUrls &&
           viewsData.petInListInShelterDto.map((item, index) => (
             <React.Fragment key={item.id + item.name + index}>
-              <DashboardMostPopularAnimalsItem
-                img={localImagesUrls[index]}
-                item={item}
-              />
+              <DashboardMostPopularAnimalsItem item={item} />
               {index !== viewsData.petInListInShelterDto.length - 1 && (
                 <Divider />
               )}

@@ -9,12 +9,9 @@ import {
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import Button from "components/SharedComponents/Button/Button";
 import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
-import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import ErrorAnimalCardsTable from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/ErrorAnimalCardsTable";
-import { useGetStorageImagesForTable } from "services/storage/storageServices";
-import { ShelterCardsResponseWithProfilePictureUrl } from "services/pet/petTypes";
 
 const AnimalCardsPage = () => {
   const [searchParams] = useSearchParams();
@@ -31,41 +28,6 @@ const AnimalCardsPage = () => {
     sortParamFromQueryParams ? sortParamFromQueryParams : "createdAt",
     sortParamOrderFromQueryParams ? sortParamOrderFromQueryParams : "false"
   );
-  const [imageIds, setImageIds] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      const profilePhotosArray = data.petInListInShelterDto.map(
-        (pet) => pet.profilePhoto
-      );
-      setImageIds(profilePhotosArray);
-    }
-  }, [data, isSuccess]);
-
-  const { data: imageUrls } = useGetStorageImagesForTable(
-    imageIds,
-    pageIndexFromQueryParams ? +pageIndexFromQueryParams : 1,
-    pageSizeFromQueryParams ? +pageSizeFromQueryParams : 10
-  );
-
-  const [dataWithProfilePictureUrl, setDataWithProfilePictureUrl] =
-    useState<ShelterCardsResponseWithProfilePictureUrl | null>(null);
-
-  useEffect(() => {
-    if (imageUrls && data) {
-      const petsWithProfileUrls = data.petInListInShelterDto.map(
-        (pet, index) => ({
-          ...pet,
-          profilePhotoUrl: imageUrls[index],
-        })
-      );
-
-      setDataWithProfilePictureUrl({
-        ...data,
-        petInListInShelterDto: petsWithProfileUrls,
-      });
-    }
-  }, [data, imageUrls]);
 
   return (
     <StyledDashboardAnimalCardsMain
@@ -88,13 +50,7 @@ const AnimalCardsPage = () => {
       />
       <StyledDashboardAnimalCardsMainContent>
         <AnimalCardsInfo />
-        {data &&
-          isSuccess &&
-          dataWithProfilePictureUrl &&
-          typeof dataWithProfilePictureUrl.petInListInShelterDto[0]
-            .profilePhotoUrl === "string" && (
-            <AnimalCardsTable data={dataWithProfilePictureUrl} />
-          )}
+        {data && isSuccess && <AnimalCardsTable data={data} />}
         {isLoading && <SkeletonTableComponent />}
         {isError && <ErrorAnimalCardsTable />}
       </StyledDashboardAnimalCardsMainContent>

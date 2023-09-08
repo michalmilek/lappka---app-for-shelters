@@ -2,23 +2,18 @@ import { createColumnHelper } from "@tanstack/react-table";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { Navigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
-import {
-  GenderType,
-  GenreType,
-  Pet,
-  PetWithImageUrl,
-} from "services/pet/petTypes";
+import { GenderType, GenreType, Pet } from "services/pet/petTypes";
 import { genderLabels, typeLabels } from "utils/appUtils";
 import {
   ActionHeaderContainer,
   Dot,
   DotFlexContainer,
   StyledSexContainer,
-  StyledTableImg,
   StyledTableImgContainer,
   StyledTableTHTextContainer,
 } from "./AnimalCardsTable.styled";
 import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
+import { TableProfileImage } from "./TableProfileImage";
 
 export interface ExtendedSearchParams extends URLSearchParams {
   pageIndex?: string;
@@ -55,7 +50,7 @@ export const sortParamFn = (fieldName: string) => {
   }
 };
 
-const columnHelper = createColumnHelper<PetWithImageUrl>();
+const columnHelper = createColumnHelper<Pet>();
 
 export const columns = [
   columnHelper.accessor("name", {
@@ -77,7 +72,10 @@ export const columns = [
             />
           );
         }}>
-        <StyledTableImg src={`${props.row.original.profilePhotoUrl}`} />
+        <TableProfileImage
+          imgId={props.row.original.profilePhoto}
+          animalName={props.row.original.name}
+        />
         <Typography
           variant="UI/UI Text 14 Reg"
           color="darkGray2">

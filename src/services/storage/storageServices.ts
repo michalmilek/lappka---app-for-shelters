@@ -150,3 +150,10 @@ export const usePostStoragePicture = () => {
   });
   return mutation;
 };
+
+
+export const useGetStorageImagesForId = (imgId: string) => {
+  return useQuery(["storageImagesProfilePictures", imgId], () =>
+    getStorageImage(imgId)
+  );
+};

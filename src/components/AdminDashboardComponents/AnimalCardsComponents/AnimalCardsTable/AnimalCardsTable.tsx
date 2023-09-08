@@ -23,18 +23,11 @@ import {
 import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
-import {
-  PetWithImageUrl,
-  ShelterCardsResponseWithProfilePictureUrl,
-} from "services/pet/petTypes";
+import { Pet, ShelterCardsResponse } from "services/pet/petTypes";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 
-function AnimalCardsTable({
-  data,
-}: {
-  data: ShelterCardsResponseWithProfilePictureUrl;
-}) {
+function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
@@ -75,7 +68,7 @@ function AnimalCardsTable({
   const table = useReactTable({
     data: data.petInListInShelterDto,
     columns: columnsMemo,
-    getCoreRowModel: getCoreRowModel<PetWithImageUrl>(),
+    getCoreRowModel: getCoreRowModel<Pet>(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
