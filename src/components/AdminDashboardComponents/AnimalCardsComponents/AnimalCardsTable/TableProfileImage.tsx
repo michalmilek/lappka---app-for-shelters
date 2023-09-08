@@ -18,23 +18,24 @@ export const TableProfileImage = ({
     isSuccess,
     isError,
   } = useGetStorageImagesForId(imgId);
+    console.log("🚀 ~ img:", img);
 
-  if (isError) {
-    return <StyledTableImgError />;
-  }
+    if (isError) {
+      return <StyledTableImgError />;
+    }
 
-  if (isLoading) {
+    if (isLoading) {
+      return <StyledTableImgSkeleton />;
+    }
+
+    if (isSuccess && img) {
+      return (
+        <StyledTableImg
+          src={img}
+          alt={animalName + " profile photo"}
+        />
+      );
+    }
+
     return <StyledTableImgSkeleton />;
-  }
-
-  if (isSuccess) {
-    return (
-      <StyledTableImg
-        src={img}
-        alt={animalName + " profile photo"}
-      />
-    );
-  }
-
-  return null;
 };

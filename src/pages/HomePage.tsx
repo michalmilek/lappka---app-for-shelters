@@ -6,4 +6,3 @@ const HomePage = () => {
 };
 export default HomePage;
 
-//<Navigate to={DashboardRoutes.DASHBOARD} />;
