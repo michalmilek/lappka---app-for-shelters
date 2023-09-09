@@ -45,7 +45,6 @@ export const StyledInput = styled.div<InputProps>`
 
 export const InputField = styled.input<InputProps>`
   position: relative;
-  z-index: 50;
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? getColor(backgroundColor) : getColor("white")};
   border-radius: 6px;
@@ -103,7 +102,6 @@ export const InputField = styled.input<InputProps>`
 
 export const IconContainer = styled.div<InputProps>`
   cursor: pointer;
-  z-index: 1000;
   position: absolute;
   top: 50%;
   right: ${(props) => {
@@ -165,7 +163,6 @@ export const TextareaField = styled.textarea<TextareaProps>`
   outline: none;
   height: 80px;
   width: 100%;
-  z-index: 50;
   ${(props) =>
     props.error
       ? css`

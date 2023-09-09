@@ -69,15 +69,13 @@ const AnimalCardsAddNewCardForm = ({
           value={formik.values.description}
           onChange={formik.handleChange}
         />
-        <SecondSelect />
-        <Select
+        <SecondSelect
           error={
             formik.errors.animalCategory && formik.touched.animalCategory
               ? formik.errors.animalCategory
               : undefined
           }
           label="Gatunek"
-          dropdownIcon={<ArrowDownIcon />}
           options={[
             { value: "Dog", label: "Pies" },
             { value: "Cat", label: "Kot" },
@@ -135,20 +133,18 @@ const AnimalCardsAddNewCardForm = ({
         </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <Select
+          <SecondSelect
             error={
               formik.errors.gender && formik.touched.gender
                 ? formik.errors.gender
                 : undefined
             }
             label="Płeć"
-            dropdownIcon={<ArrowDownIcon />}
             options={[
               { value: "Male", label: "Samiec" },
               { value: "Female", label: "Samiczka" },
               { value: "Other", label: "Inna" },
             ]}
-            value={formik.values.gender}
             handleChange={(option) => {
               formik.setFieldTouched("gender", true);
               formik.setFieldValue("gender", option);
@@ -170,37 +166,33 @@ const AnimalCardsAddNewCardForm = ({
         </AnimalCardsAddNewCardFlexInputContainer>
 
         <AnimalCardsAddNewCardFlexInputContainer>
-          <Select
+          <SecondSelect
             error={
               formik.errors.isSterilized && formik.touched.isSterilized
                 ? formik.errors.isSterilized
                 : undefined
             }
             label="Sterylizacja"
-            dropdownIcon={<ArrowDownIcon />}
             options={[
-              { value: true, label: "Tak" },
-              { value: false, label: "Nie" },
+              { value: "true", label: "Tak" },
+              { value: "false", label: "Nie" },
             ]}
-            value={formik.values.isSterilized}
             handleChange={(option) => {
               formik.setFieldTouched("isSterilized", true);
               formik.setFieldValue("isSterilized", option);
             }}
           />
-          <Select
+          <SecondSelect
             error={
               formik.errors.isVisible && formik.touched.isVisible
                 ? formik.errors.isVisible
                 : undefined
             }
             label="Widoczność"
-            dropdownIcon={<ArrowDownIcon />}
             options={[
-              { value: true, label: "Tak" },
-              { value: false, label: "Nie" },
+              { value: "true", label: "Tak" },
+              { value: "false", label: "Nie" },
             ]}
-            value={formik.values.isVisible}
             handleChange={(option) => {
               formik.setFieldTouched("isVisible", true);
               formik.setFieldValue("isVisible", option);
