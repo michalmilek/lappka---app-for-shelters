@@ -20,6 +20,10 @@ export const ToggleContainer = styled.label<{ disabled?: boolean }>`
   width: 40px;
   height: 20px;
   opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
+  }
 `;
 
 export const ToggleInput = styled.input`
@@ -163,14 +167,16 @@ export const ReusableButton = styled.button<ButtonProps>`
     `}
 `;
 
-
-
-
 //UNSTYLED BUTTON
 //UNSTYLED BUTTON
 //UNSTYLED BUTTON
-
 
 export const UnstyledButton = styled.button`
-all: unset;
-`
+  all: unset;
+
+  &:focus-visible {
+    outline: 2px solid black;
+    width: 100%;
+    border-radius: 2px;
+  }
+`;

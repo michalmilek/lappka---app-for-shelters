@@ -10,6 +10,7 @@ import { AnimalCardsCardFlexInputContainer } from "./utils/DashboardAnimalCardsC
 import FormRow from "./DashboardAnimalCardsFormRow";
 import { PetCard } from "./utils/DashboardAnimalCardsUtils";
 import { GenderType, GenreType } from "services/pet/petTypes";
+import SecondSelect from "components/SharedComponents/DropdownMenu/SecondSelect";
 
 interface DashboardAnimalCardsCardFieldsProps {
   isEditOn: boolean;
@@ -56,14 +57,13 @@ const DashboardAnimalCardsCardFields: React.FC<
             value={genderLabels[formik.values.gender as GenderType]}
           />
         ) : (
-          <Select
+          <SecondSelect
             label=""
             options={[
               { label: "Samiec", value: "Male" },
               { label: "Samiczka", value: "Female" },
               { label: "Inna", value: "Other" },
             ]}
-            dropdownIcon={<ArrowDownIcon />}
             value={formik.values.gender}
             handleChange={(option) => {
               formik.setFieldTouched("gender", true);
@@ -88,14 +88,13 @@ const DashboardAnimalCardsCardFields: React.FC<
             onChange={formik.handleChange}
           />
         ) : (
-          <Select
+          <SecondSelect
             label=""
             options={[
               { value: "Dog", label: "Pies" },
               { value: "Cat", label: "Kot" },
               { value: "Other", label: "Inny" },
             ]}
-            dropdownIcon={<ArrowDownIcon />}
             value={formik.values.type}
             handleChange={(option) => {
               formik.setFieldTouched("type", true);
@@ -156,16 +155,15 @@ const DashboardAnimalCardsCardFields: React.FC<
             <Input
               readOnly
               inputSize="Large"
-              value={formik.values.isSterilized ? "Tak" : "Nie"}
+              value={formik.values.isSterilized === "true" ? "Tak" : "Nie"}
             />
           ) : (
-            <Select
+            <SecondSelect
               label=""
               options={[
-                { label: "Tak", value: true },
-                { label: "Nie", value: false },
+                { label: "Tak", value: "true" },
+                { label: "Nie", value: "false" },
               ]}
-              dropdownIcon={<ArrowDownIcon />}
               value={formik.values.isSterilized}
               handleChange={(option) => {
                 formik.setFieldTouched("isSterilized", true);
@@ -179,17 +177,16 @@ const DashboardAnimalCardsCardFields: React.FC<
             <Input
               readOnly
               inputSize="Large"
-              value={formik.values.isVisible ? "Tak" : "Nie"}
+              value={formik.values.isSterilized === "true" ? "Tak" : "Nie"}
             />
           ) : (
-            <Select
+            <SecondSelect
               label=""
               options={[
-                { label: "Tak", value: true },
-                { label: "Nie", value: false },
+                { label: "Tak", value: "true" },
+                { label: "Nie", value: "false" },
               ]}
-              dropdownIcon={<ArrowDownIcon />}
-              value={formik.values.isVisible ? true : false}
+              value={formik.values.isVisible ? "true" : "false"}
               handleChange={(option) => {
                 formik.setFieldTouched("isVisible", true);
                 formik.setFieldValue("isVisible", option);

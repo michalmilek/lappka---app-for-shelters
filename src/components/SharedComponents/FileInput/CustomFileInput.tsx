@@ -324,6 +324,15 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     [completedCrop]
   );
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
+    }
+  };
+
   return (
     <FullContainer>
       <FileInputContainerContent>
@@ -332,8 +341,11 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           color="darkGray2">
           {label}
         </Typography>
-        <FileInputContainer>
+        <FileInputContainer
+          onKeyDown={handleKeyDown}
+          tabIndex={0}>
           <FileInput
+            tabIndex={-1}
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}

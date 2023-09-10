@@ -55,7 +55,7 @@ const VoluntaryFormPart = ({
 
         <ToggleButton
           handleChange={handleToggleChange}
-          $fieldName={fieldName}
+          fieldName={fieldName}
           checked={fieldValue}
           label="Aktywna"
         />

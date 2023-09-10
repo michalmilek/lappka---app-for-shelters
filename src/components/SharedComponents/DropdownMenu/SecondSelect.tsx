@@ -9,7 +9,7 @@ export interface SelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "value"> {
   value?: string;
   options: Array<OptionInterface>;
-  handleChange: (value: string) => void; // Zmienione na przyjmowanie tylko stringa
+  handleChange: (value: string) => void;
   label?: string;
   error?: string;
 }
@@ -51,11 +51,18 @@ const Option = (props: OptionProps<OptionInterface>) => {
   );
 };
 
-const SecondSelect = ({ label, handleChange, error, options }: SelectProps) => {
+const SecondSelect = ({
+  label,
+  handleChange,
+  error,
+  options,
+  value,
+}: SelectProps) => {
   const customStyles: StylesConfig<OptionInterface, false> = {
     control: (baseStyles, _state) => ({
       ...baseStyles,
       cursor: "pointer",
+      height: "40px",
       border: `1px solid ${error ? getColor("error") : getColor("lightGray1")}`,
       fontFamily: "Inter",
       fontSize: "14px",
@@ -63,6 +70,11 @@ const SecondSelect = ({ label, handleChange, error, options }: SelectProps) => {
       lineHeight: "24px",
       letterSpacing: "-0.6%",
       padding: "2px 0 2px 2px",
+      outline: "none",
+
+      "&:focus-visible": {
+        outline: `1px solid ${getColor("focus")}`,
+      },
 
       "&:hover": {
         border: `1px solid ${
@@ -89,6 +101,7 @@ const SecondSelect = ({ label, handleChange, error, options }: SelectProps) => {
         {label}
       </Typography>
       <Select
+        value={value ? options.find((option) => option.value === value) : null}
         onChange={(newValue) => handleChange(newValue!.value)}
         tabSelectsValue
         placeholder="Wybierz z listy"

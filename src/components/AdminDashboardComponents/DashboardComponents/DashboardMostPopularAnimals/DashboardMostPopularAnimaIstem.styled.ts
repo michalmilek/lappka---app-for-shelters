@@ -9,6 +9,7 @@ export const DashboardMostPopularAnimalsItemContainer = styled.div`
   transition: all 0.3s ease;
   padding: 6px 13px 10px 12px;
   width: 100%;
+  z-index: 1;
 
   &:hover {
     background: ${getColor("lightGray1")};

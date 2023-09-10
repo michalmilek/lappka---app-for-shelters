@@ -1,6 +1,8 @@
 import { EyeIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { DashboardRoutes } from "router/router";
 import { Pet } from "services/pet/petTypes";
 import { useGetStorageImagesForId } from "services/storage/storageServices";
 import {
@@ -18,6 +20,7 @@ interface Props {
 }
 
 const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
+  const navigate = useNavigate();
   const {
     data: imgUrl,
     isLoading,
@@ -26,7 +29,16 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
   } = useGetStorageImagesForId(item.profilePhoto);
 
   return (
-    <DashboardMostPopularAnimalsItemContainer>
+    <DashboardMostPopularAnimalsItemContainer
+      role={"link"}
+      onKeyDown={(e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          navigate(DashboardRoutes.animalCards + "/" + item.id);
+        }
+      }}
+      onClick={() => navigate(DashboardRoutes.animalCards + "/" + item.id)}
+      tabIndex={0}>
       <DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>
         {isLoading && <SkeletonMostPopularImg />}
         {isSuccess && (

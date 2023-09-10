@@ -49,12 +49,8 @@ const InputBox = styled.input`
     color: ${getColor("midGray4")};
   }
 
-  &:focus {
-    outline: 1px solid rgba(0, 150, 255, 1);
-    -webkit-outline: 1px solid rgba(0, 150, 255, 1);
-    -moz-outline: 1px solid rgba(0, 150, 255, 1);
-    -ms-outline: 1px solid rgba(0, 150, 255, 1);
-    -o-outline: 1px solid rgba(0, 150, 255, 1);
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
   }
 `;
 

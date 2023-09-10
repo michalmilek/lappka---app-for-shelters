@@ -23,7 +23,9 @@ const CustomRadio: React.FC<RadioInterface> = ({
   ...rest
 }) => {
   return (
-    <RadioWrapper {...rest}>
+    <RadioWrapper
+      tabIndex={0}
+      {...rest}>
       <Radiomark
         checked={checked}
         {...rest}>

@@ -1,6 +1,4 @@
 import Button from "components/SharedComponents/Button/Button";
-import Select from "components/SharedComponents/DropdownMenu/Select";
-import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import CustomFileInput from "components/SharedComponents/FileInput/CustomFileInput";
 import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";

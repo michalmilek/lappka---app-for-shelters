@@ -68,8 +68,8 @@ export const InputField = styled.input<InputProps>`
     color: ${getColor("midGray4")};
   }
 
-  &:focus {
-    border: 1px solid ${getColor("focus")};
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
   }
 
   &:disabled {
@@ -176,8 +176,8 @@ export const TextareaField = styled.textarea<TextareaProps>`
     color: ${getColor("midGray4")};
   }
 
-  &:focus {
-    border: 1px solid ${getColor("focus")};
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
   }
 
   &:disabled {
@@ -220,6 +220,10 @@ export const RadioWrapper = styled.div<RadioInterface>`
   gap: 8px;
   width: 100%;
   z-index: 10;
+
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
+  }
 `;
 
 export const Radiomark = styled.div<RadioInterface>`

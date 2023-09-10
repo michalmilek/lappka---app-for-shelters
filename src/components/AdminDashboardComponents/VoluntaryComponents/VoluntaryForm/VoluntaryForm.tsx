@@ -65,8 +65,6 @@ const VoluntaryForm = ({ data }: Props) => {
     },
   });
 
-  console.log(formik.values);
-
   return (
     <>
       <StyledDashboardVoluntaryMainContentFormsContainer

@@ -13,8 +13,8 @@ export interface PetCard {
   breed: PetBreed | "";
   photos: string[];
   profilePhoto: string;
-  isSterilized: boolean | "";
-  isVisible: boolean | "";
+  isSterilized: string | "";
+  isVisible: string | "";
   newPhotos?: File[];
 }
 
@@ -41,10 +41,10 @@ export const AnimalCardsCardValidationSchema = Yup.object().shape({
   weight: Yup.number()
     .required("To pole jest wymagane")
     .positive("Wartość musi być większa od zera"),
-  isSterilized: Yup.bool()
-    .oneOf([true, false], "Nieprawidłowy wybór")
+  isSterilized: Yup.string()
+    .oneOf(["true", "false"], "Nieprawidłowy wybór")
     .required("To pole jest wymagane"),
-  isVisible: Yup.bool()
-    .oneOf([true, false], "Nieprawidłowy wybór")
+  isVisible: Yup.string()
+    .oneOf(["true", "false"], "Nieprawidłowy wybór")
     .required("To pole jest wymagane"),
 });
