@@ -18,7 +18,6 @@ export const TableProfileImage = ({
     isSuccess,
     isError,
   } = useGetStorageImagesForId(imgId);
-    console.log("🚀 ~ img:", img);
 
     if (isError) {
       return <StyledTableImgError />;

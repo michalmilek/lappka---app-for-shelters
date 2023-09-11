@@ -47,7 +47,7 @@ export const SelectContainerWithLabels = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   cursor: pointer;
 `;
 

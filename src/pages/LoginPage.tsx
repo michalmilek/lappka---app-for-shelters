@@ -16,9 +16,12 @@ import {
   LoginPageRightSection,
 } from "components/AuthorizationComponents/LoginComponents/Login.styled";
 import useDeviceType from "hooks/useDeviceType";
+import { useNavigate } from "react-router-dom";
+import { AuthRoutes } from "router/router";
 
 const LoginPage = () => {
   const deviceType = useDeviceType();
+  const navigate = useNavigate();
   return (
     <StyledUnathorizedPage>
       <UnathorizedTopContent>
@@ -27,15 +30,15 @@ const LoginPage = () => {
           alt="logo"
         />
         <UnathorizedTopContentButtonContainer>
-          <AnchorLink to={"/register"}>
-            <Button
-              size={deviceType === "desktop" ? `Large` : `Medium`}
-              variant="outline">
-              Zarejestruj się
-            </Button>
-          </AnchorLink>
-          <AnchorLink to={"/"}>
+          <Button
+            onClick={() => navigate(AuthRoutes.register)}
+            size={deviceType === "desktop" ? `Large` : `Medium`}
+            variant="outline">
+            Zarejestruj się
+          </Button>
+          <AnchorLink to={AuthRoutes.register}>
             <CloseIcon
+              tabIndex={-1}
               height="24px"
               width="24px"
             />

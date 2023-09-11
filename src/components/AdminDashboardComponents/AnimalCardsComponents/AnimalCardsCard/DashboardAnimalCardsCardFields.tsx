@@ -1,5 +1,3 @@
-import Select from "components/SharedComponents/DropdownMenu/Select";
-import { ArrowDownIcon } from "components/SharedComponents/icons/icons";
 import Input from "components/SharedComponents/Inputs/Input";
 import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumberWithUnits";
 import Textarea from "components/SharedComponents/Inputs/TextArea";

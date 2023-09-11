@@ -1,4 +1,3 @@
-import { BreedArray } from "pages/DashboardPages/AnimalCardsPages/AnimalCardsUtils";
 import { GenderType, GenreType, PetBreed } from "services/pet/petTypes";
 import * as Yup from "yup";
 

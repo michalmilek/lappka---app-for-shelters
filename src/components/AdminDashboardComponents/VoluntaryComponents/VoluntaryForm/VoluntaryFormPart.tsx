@@ -1,6 +1,4 @@
 import ToggleButton from "components/SharedComponents/Button/ToggleButton";
-import Input from "components/SharedComponents/Inputs/Input";
-import Textarea from "components/SharedComponents/Inputs/TextArea";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import { styled } from "styled-components";

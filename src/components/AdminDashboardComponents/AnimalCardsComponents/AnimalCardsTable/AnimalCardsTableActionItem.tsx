@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { MoreIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ActionHeaderContainer,
   StyledDropdownContainer,
