@@ -12,7 +12,7 @@ import {
   addNewCardInitialValues,
   cardValidationSchema,
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AddNewCardUtils";
-import { AnimalCreatePetInterface } from "services/pet/petTypes";
+import { CreatePet } from "services/pet/petTypes";
 
 const AnimalCardsAddNewCardPage = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const AnimalCardsAddNewCardPage = () => {
             isVisible: JSON.parse(values.isSterilized),
             photos: data,
             profilePhoto: data[0],
-          } as AnimalCreatePetInterface);
+          } as CreatePet);
         },
       });
     }

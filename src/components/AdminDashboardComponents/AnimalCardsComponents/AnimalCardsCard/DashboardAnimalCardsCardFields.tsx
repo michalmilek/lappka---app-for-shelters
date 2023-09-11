@@ -75,14 +75,14 @@ const DashboardAnimalCardsCardFields: React.FC<
           <Input
             readOnly
             error={
-              formik.errors.breed && formik.touched.breed
-                ? formik.errors.breed
+              formik.errors.animalCategory && formik.touched.animalCategory
+                ? formik.errors.animalCategory
                 : undefined
             }
             placeholder="Wpisz"
             inputSize="Large"
-            name="breed"
-            value={typeValueToLabel(formik.values.type as GenreType)}
+            name="animalCategory"
+            value={typeValueToLabel(formik.values.animalCategory as GenreType)}
             onChange={formik.handleChange}
           />
         ) : (
@@ -93,23 +93,23 @@ const DashboardAnimalCardsCardFields: React.FC<
               { value: "Cat", label: "Kot" },
               { value: "Other", label: "Inny" },
             ]}
-            value={formik.values.type}
+            value={formik.values.animalCategory}
             handleChange={(option) => {
-              formik.setFieldTouched("type", true);
-              formik.setFieldValue("type", option);
+              formik.setFieldTouched("animalCategory", true);
+              formik.setFieldValue("animalCategory", option);
             }}
           />
         )}
       </FormRow>
-      {formik.values.type !== "Other" && (
+      {formik.values.animalCategory !== "Other" && (
         <FormRow label="Rasa">
           <Input
-            id="breed"
-            name="breed"
+            id="species"
+            name="species"
             readOnly={!isEditOn}
             inputSize="Large"
             onChange={formik.handleChange}
-            value={formik.values.breed}
+            value={formik.values.species}
           />
         </FormRow>
       )}

@@ -1,11 +1,11 @@
 import { InputSize } from "utils/styles/types/stylesTypes";
 import React from "react";
+import Typography from "../Typography/Typography";
 import {
   StyledTextarea,
   StyledTextAreaContainer,
   TextareaField,
-} from "./Input.styled";
-import Typography from "../Typography/Typography";
+} from "./TextArea.styled";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

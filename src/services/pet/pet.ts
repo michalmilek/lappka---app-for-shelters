@@ -1,18 +1,12 @@
 import axiosInstance, { mockInstance } from "services/axiosInstance";
-import toastService from "singletons/toastService";
 import {
-  Animal,
-  AnimalCreatePetInterface,
-  AnimalEdit,
-  Cat,
-  Dog,
+  CreatePet,
   GetShelterRespones,
-  Other,
-  Pet,
-  PutSheltersCardInterface,
+  PetItem,
   ShelterCardsResponse,
   SheltersStatsResponse,
   ShelterVolunteeringResponse,
+  UpdatePet,
 } from "./petTypes";
 
 export const getShelter = async () => {
@@ -129,7 +123,7 @@ export const getShelterCardsArchiveChartDataForWeek = async () => {
 
 export const getShelterCardsCard = async (petId: string) => {
   try {
-    const response = await axiosInstance.get<Pet>(
+    const response = await axiosInstance.get<PetItem>(
       `/shelters/cards/get/${petId}`
     );
     return response.data;
@@ -139,9 +133,7 @@ export const getShelterCardsCard = async (petId: string) => {
   }
 };
 
-export const postShelterCardsCreatePet = async (
-  data: AnimalCreatePetInterface
-) => {
+export const postShelterCardsCreatePet = async (data: CreatePet) => {
   try {
     const response = await axiosInstance.post(
       "/shelters/cards/CreatePet",
@@ -154,36 +146,7 @@ export const postShelterCardsCreatePet = async (
   }
 };
 
-export const postShelterCardsCat = async (data: Cat) => {
-  try {
-    const response = await axiosInstance.post("/shelters/cards/cat", data);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const postShelterCardsDog = async (data: Dog) => {
-  try {
-    const response = await axiosInstance.post("/shelters/cards/cat", data);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
-export const postShelterCardsOther = async (data: Other) => {
-  try {
-    const response = await axiosInstance.post("/shelters/cards/other", data);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
-export const postShelterCardsAnimal = async (data: Animal) => {
+export const postShelterCardsAnimal = async (data: CreatePet) => {
   try {
     const response = await axiosInstance.post("/shelters/cards/animal", data);
     return response.data;
@@ -193,7 +156,7 @@ export const postShelterCardsAnimal = async (data: Animal) => {
   }
 };
 
-export const putShelterCardsAnimal = async (data: PutSheltersCardInterface) => {
+export const putShelterCardsAnimal = async (data: UpdatePet) => {
   try {
     const response = await axiosInstance.put("/Shelter/cards/Update", data);
     return response.data;

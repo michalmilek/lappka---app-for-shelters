@@ -1,5 +1,4 @@
 import Typography from "components/SharedComponents/Typography/Typography";
-import React from "react";
 import { DashboardRoutes } from "router/router";
 import { Pet } from "services/pet/petTypes";
 import { useGetStorageImagesForId } from "services/storage/storageServices";
@@ -47,7 +46,7 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
             <Typography
               variant="UI/UI Text 14 Reg"
               color="midGray2">
-              {item.type}
+              {item.animalCategory}
             </Typography>
             <Typography
               variant="UI Small/UI Text 12 Reg"

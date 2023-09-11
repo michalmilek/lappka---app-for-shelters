@@ -43,7 +43,7 @@ const queryClient = new QueryClient({
         );
       } else if ((error as AxiosError).response?.status === 403) {
         toastService.showToast(
-          "Nie masz uprawnień, aby usunąć kartę. Jeśli uważasz, że to bląd skontaktuj się z administratorem."
+          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.", "error"
         );
       }
     },
@@ -57,7 +57,7 @@ const queryClient = new QueryClient({
         );
       } else if ((error as AxiosError).response?.status === 403) {
         toastService.showToast(
-          "Nie masz uprawnień, aby usunąć kartę. Jeśli uważasz, że to bląd skontaktuj się z administratorem."
+          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.", "error"
         );
       }
     },

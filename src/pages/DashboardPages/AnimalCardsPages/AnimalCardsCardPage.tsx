@@ -1,18 +1,16 @@
 import { StyledDashboardAddNewCardMainContent } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AnimalCardsAddNewCardForm.styled";
 import {
   CardButton,
-  StyledCardFooter,
   StyledCardFormComponent,
   StyledCardHeader,
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
 import DashboardAnimalCardsCardStateHandler from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/DashboardAnimalCardsCardStateHandler";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
-import Button from "components/SharedComponents/Button/Button";
 import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import useDeviceType from "hooks/useDeviceType";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AnimalCardsCardPage = () => {

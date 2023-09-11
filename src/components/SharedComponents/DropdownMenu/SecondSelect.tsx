@@ -68,8 +68,8 @@ const SecondSelect = ({
       fontSize: "14px",
       fontWeight: 400,
       lineHeight: "24px",
-      letterSpacing: "-0.6%",
-      padding: "2px 0 2px 2px",
+      letterSpacing: "-0.6px",
+      padding: "2px 0 2px 4px",
       outline: "none",
 
       "&:focus-visible": {
@@ -89,6 +89,10 @@ const SecondSelect = ({
     indicatorSeparator: (base) => ({
       ...base,
       display: "none",
+    }),
+    placeholder: (base) => ({
+      ...base,
+      color: getColor("midGray4"),
     }),
   };
 

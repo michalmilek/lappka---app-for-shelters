@@ -1,34 +1,4 @@
-import {
-  GenderType,
-  GenreType,
-  PetBreed,
-  PetBreedLabel,
-} from "services/pet/petTypes";
-
-export const petValueBreedToLabel = (value: PetBreed): PetBreedLabel => {
-  return breedLabels[value] || "Inna";
-};
-
-const breedLabels: { [key in PetBreed]: PetBreedLabel } = {
-  Inna: "Inna",
-  Cat_Domowy: "Domowy",
-  Cat_Perski: "Perski",
-  Cat_Sfinks: "Sfinks",
-  Cat_Norweski: "Norweski",
-  Cat_Bengalski: "Bengalski",
-  Cat_Syjamski: "Syjamski",
-  Cat_Ragdoll: "Ragdoll",
-  Cat_Brytyjski: "Brytyjski",
-  Cat_Szkocki_Zwislouchy: "Szkocki Zwislouchy",
-  Dog_Owczarek_Niemiecki: "Owczarek Niemiecki",
-  Dog_Labrador: "Labrador",
-  Dog_Buldog: "Buldog",
-  Dog_Chihuahua: "Chihuahua",
-  Dog_Kundelek: "Kundelek",
-  Dog_Beagle: "Beagle",
-  Dog_Husky: "Husky",
-  Dog_Collie: "Collie",
-};
+import { GenderType, GenreType } from "services/pet/petTypes";
 
 export const genderValueToLabel = (value: GenderType): string => {
   return genderLabels[value] || "Inna";
@@ -59,20 +29,17 @@ export const ageConversion = (ageInMonths: number): string => {
   }
 };
 
-
 export const formatPhoneNumber = (phoneNumber: string) => {
   const digitsOnly = phoneNumber.replace(/\D/g, "");
 
   return digitsOnly;
 };
 
-
 export const createImgURL = (file: File | string) => {
   if (!file) return null;
   if (typeof file === "string") return file;
   return URL.createObjectURL(file);
 };
-
 
 export const formatCardViews = (views: number) => {
   if (views >= 100000) {
@@ -88,7 +55,6 @@ export const formatCardViews = (views: number) => {
     return views.toString();
   }
 };
-
 
 export const mapEnglishToPolish = (englishName: string): string => {
   const translations: Record<string, string> = {
@@ -107,5 +73,3 @@ export const mapEnglishToPolish = (englishName: string): string => {
 
   return translations[englishName] || englishName;
 };
-
-

@@ -102,7 +102,7 @@ export const columns = [
       </Typography>
     ),
   }),
-  columnHelper.accessor("type", {
+  columnHelper.accessor("animalCategory", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography
@@ -140,7 +140,7 @@ export const columns = [
       </StyledSexContainer>
     ),
   }),
-  columnHelper.accessor("breed", {
+  columnHelper.accessor("species", {
     header: () => (
       <StyledTableTHTextContainer>
         <Typography

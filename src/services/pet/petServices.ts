@@ -23,11 +23,7 @@ import {
   putShelterCardsPublish,
   updateShelterVolunteering,
 } from "./pet";
-import {
-  AnimalCreatePetInterface,
-  PutSheltersCardInterface,
-  ShelterVolunteeringResponse,
-} from "./petTypes";
+import { CreatePet, ShelterVolunteeringResponse, UpdatePet } from "./petTypes";
 
 export const useGetShelter = () => {
   return useQuery(["shelter"], getShelter);
@@ -112,7 +108,7 @@ export const usePostShelterCardsCreatePet = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    (data: AnimalCreatePetInterface) => postShelterCardsCreatePet(data),
+    (data: CreatePet) => postShelterCardsCreatePet(data),
     {
       onSuccess: (_, payload) => {
         navigate(DashboardRoutes.dashboard);
@@ -146,7 +142,7 @@ export const usePostShelterCardsCreatePet = () => {
 export const usePutShelterCardsAnimal = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    (data: PutSheltersCardInterface) => putShelterCardsAnimal(data),
+    (data: UpdatePet) => putShelterCardsAnimal(data),
     {
       onSuccess: () => {
         toastService.showToast(

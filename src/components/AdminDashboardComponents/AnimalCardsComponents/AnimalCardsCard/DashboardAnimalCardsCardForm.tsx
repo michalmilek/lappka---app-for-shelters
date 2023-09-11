@@ -1,11 +1,6 @@
-import {
-  GenreType,
-  Pet,
-  PetBreed,
-  PutSheltersCardInterface,
-} from "services/pet/petTypes";
+import { GenreType, PetItem, UpdatePet } from "services/pet/petTypes";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   StyledCardFooter,
   StyledCardFormContentContainer,
@@ -53,7 +48,7 @@ const DashboardAnimalCardsCardForm = ({
   data,
 }: {
   isEditOn: boolean;
-  data: Pet;
+  data: PetItem;
 }) => {
   const {
     isSuccess: GetStorageImagesIsSuccess,
@@ -64,7 +59,6 @@ const DashboardAnimalCardsCardForm = ({
   const [localImageUrls, setLocalImageUrls] = useState<string[]>(
     imagesUrls || []
   );
-  const { mutate: deleteStorageImagesFn } = useDeleteStorageImages();
   const { mutate: postStoragePicture } = usePostStoragePictures();
   const { mutate: putShelterCardsFn } = usePutShelterCardsAnimal();
   const navigate = useNavigate();
@@ -72,9 +66,9 @@ const DashboardAnimalCardsCardForm = ({
     ...data,
     isSterilized: data.isSterilized.toString(),
     isVisible: data.isSterilized.toString(),
-    months: data.age,
-    type: data.type as GenreType,
-    breed: data.breed as PetBreed,
+    months: data.months,
+    animalCategory: data.animalCategory as GenreType,
+    species: data.species,
     newPhotos: [],
   };
 
@@ -89,37 +83,33 @@ const DashboardAnimalCardsCardForm = ({
     if (formik.values.newPhotos && formik.values.newPhotos.length > 0) {
       postStoragePicture(formik.values.newPhotos, {
         onSuccess: (newData) => {
-          formik.setFieldValue("photos", [...photos, newData]);
+          formik.setFieldValue("photos", [...photos, ...newData]);
+          console.log(formik.values.photos);
           const { newPhotos, ...values } = formik.values;
           putShelterCardsFn(
             {
+              ...values,
               petId: data.id,
-              description: values.description,
-              name: values.name,
-              gender: values.gender,
               isSterilized: JSON.parse(values.isSterilized),
-              weight: values.weight,
-              months: values.months,
-              animalCategory: values.type,
               isVisible: JSON.parse(values.isVisible),
-              marking: values.color,
-              species: values.breed,
-              photos: values.photos,
+              photos: [...values.photos, ...newData],
               profilePhoto: values.photos[0] || values.profilePhoto,
-            } as PutSheltersCardInterface,
+            } as UpdatePet,
             {
               onSuccess: () => {
                 toastService.showToast(
                   `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
                   "success"
                 );
-                const newPhotos = data.photos.filter((dataPhoto) => {
-                  return !values.photos.includes(dataPhoto);
-                });
-                deleteStorageImagesFn(newPhotos);
 
-                queryClient.invalidateQueries(["shelterCardsCard", data.id]);
-                queryClient.invalidateQueries(["storageImages", data.id]);
+                formik.setFieldValue("newPhotos", []);
+
+                queryClient.invalidateQueries({
+                  queryKey: ["shelterCardsCard", data.id],
+                });
+                queryClient.invalidateQueries({
+                  queryKey: ["storageImages", data.id],
+                });
               },
             }
           );
@@ -129,30 +119,18 @@ const DashboardAnimalCardsCardForm = ({
       const { newPhotos, ...values } = formik.values;
       putShelterCardsFn(
         {
+          ...values,
           petId: data.id,
-          description: values.description,
-          name: values.name,
-          gender: values.gender,
           isSterilized: JSON.parse(values.isSterilized),
-          weight: values.weight,
-          months: values.months,
-          animalCategory: values.type,
           isVisible: JSON.parse(values.isVisible),
-          marking: values.color,
-          species: values.breed,
-          photos: values.photos,
           profilePhoto: values.photos[0] || values.profilePhoto,
-        } as PutSheltersCardInterface,
+        } as UpdatePet,
         {
           onSuccess: () => {
             toastService.showToast(
               `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
               "success"
             );
-            const newPhotos = data.photos.filter((dataPhoto) => {
-              return !values.photos.includes(dataPhoto);
-            });
-            deleteStorageImagesFn(newPhotos);
 
             queryClient.invalidateQueries(["shelterCardsCard", data.id]);
             queryClient.invalidateQueries(["storageImages", data.id]);
@@ -222,7 +200,7 @@ const DashboardAnimalCardsCardForm = ({
   };
 
   useEffect(() => {
-    if (GetStorageImagesIsSuccess) {
+    if (GetStorageImagesIsSuccess && imagesUrls) {
       setLocalImageUrls(imagesUrls);
     }
   }, [GetStorageImagesIsSuccess, imagesUrls]);

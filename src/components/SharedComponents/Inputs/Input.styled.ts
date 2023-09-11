@@ -8,7 +8,6 @@ import { typographyVariants } from "utils/styles/getStyle/getFontStyle";
 import { CheckboxInterface } from "./CustomCheckbox";
 import { RadioInterface } from "./CustomRadio";
 import { InputProps } from "./Input";
-import { TextareaProps } from "./TextArea";
 
 export const StyledDiv = styled.div`
   display: flex;
@@ -54,6 +53,7 @@ export const InputField = styled.input<InputProps>`
   outline: none;
   height: 100%;
   width: 100%;
+  ${typographyVariants["UI/UI Text 14 Reg"]}
 
   ${(props) =>
     props.error
@@ -138,74 +138,7 @@ export const Checkmark = styled.span<CheckboxInterface>`
     props.checked ? getColor(props.color) : getColor("white")};
 `;
 
-//TEXTAREA
-//TEXTAREA
-//TEXTAREA
 
-export const StyledTextAreaContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-export const StyledTextarea = styled.div<TextareaProps>`
-  position: relative;
-`;
-
-export const TextareaField = styled.textarea<TextareaProps>`
-  position: relative;
-  font-family: "Inter", sans-serif;
-  background-color: ${getColor("white")};
-  border-radius: 6px;
-  color: ${getColor("darkGray2")};
-  padding: 8px 12px;
-  transition: all 300ms ease-in-out;
-  outline: none;
-  height: 80px;
-  width: 100%;
-  ${(props) =>
-    props.error
-      ? css`
-          border: 1px solid ${getColor("error")};
-        `
-      : css`
-          border: 1px solid ${getColor("lightGray1")};
-        `}
-
-  &::placeholder {
-    color: ${getColor("midGray4")};
-  }
-
-  &:focus-visible {
-    outline: 1px solid ${getColor("focus")};
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
-
-  ${(props) =>
-    props.inputSize === "XLarge" &&
-    css`
-      padding: 12px 16px;
-    `}
-
-  ${(props) =>
-    props.inputSize === "Large" &&
-    css`
-      padding: 8px 12px;
-    `}
-
-  ${(props) =>
-    props.inputSize === "Medium" &&
-    css`
-      padding: 4px 8px;
-    `}
-
-        &:read-only {
-    border: none !important;
-  }
-`;
 
 //RADIO INPUT
 //RADIO INPUT

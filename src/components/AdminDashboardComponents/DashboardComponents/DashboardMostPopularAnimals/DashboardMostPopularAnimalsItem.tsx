@@ -59,7 +59,7 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
             tag="h6"
             variant="UI Small/UI Text 12 Reg"
             color="midGray3">
-            {item.type}
+            {item.animalCategory}
           </Typography>
         </DashboardMostPopularAnimalsItemInfoContainer>
       </DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>

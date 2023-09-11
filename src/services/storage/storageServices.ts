@@ -95,7 +95,7 @@ export const useGetStorageImagesForAnimal = (
   animalId: string
 ) => {
   return useQuery(
-    ["storageImages", animalId],
+    ["storageImages", animalId, { imgsIds: imgsIds }],
     () => getStorageImages(imgsIds),
     {
       enabled: imgsIds.length > 0,
