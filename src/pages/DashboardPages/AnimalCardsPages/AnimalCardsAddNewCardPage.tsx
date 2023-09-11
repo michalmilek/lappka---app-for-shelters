@@ -17,7 +17,8 @@ import { CreatePet } from "services/pet/petTypes";
 const AnimalCardsAddNewCardPage = () => {
   const navigate = useNavigate();
 
-  const { mutate: postStorageFn } = usePostStoragePictures();
+  const { mutate: postStorageFn, isSuccess: postStorageIsSuccess } =
+    usePostStoragePictures();
   const { mutate: postAnimalFn } = usePostShelterCardsCreatePet();
 
   const onSubmit = (values: AddNewAnimalCardInterface) => {
@@ -58,7 +59,10 @@ const AnimalCardsAddNewCardPage = () => {
         }
       />
       <StyledDashboardAddNewCardMainContent>
-        <AnimalCardsAddNewCardForm formik={formik} />
+        <AnimalCardsAddNewCardForm
+          postStorageIsSuccess={postStorageIsSuccess}
+          formik={formik}
+        />
       </StyledDashboardAddNewCardMainContent>
     </StyledProtectedPageContent>
   );

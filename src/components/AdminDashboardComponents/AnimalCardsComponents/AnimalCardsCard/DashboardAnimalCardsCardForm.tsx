@@ -56,10 +56,10 @@ const DashboardAnimalCardsCardForm = ({
     isLoading: GetStorageImagesIsLoading,
     isError: GetStorageImagesIsError,
   } = useGetStorageImagesForAnimal(data.photos, data.id);
-  const [localImageUrls, setLocalImageUrls] = useState<string[]>(
-    imagesUrls || []
-  );
-  const { mutate: postStoragePicture } = usePostStoragePictures();
+  const [localImageUrls, setLocalImageUrls] = useState<string[]>([]);
+  console.log("🚀 ~ localImageUrls:", localImageUrls);
+  const { mutate: postStoragePicture, isSuccess: postStorageIsSuccess } =
+    usePostStoragePictures();
   const { mutate: putShelterCardsFn } = usePutShelterCardsAnimal();
   const navigate = useNavigate();
   const initialValues: PetCard = {
@@ -261,6 +261,7 @@ const DashboardAnimalCardsCardForm = ({
         {isEditOn && (
           <FormRow label="Dodaj nowe zdjęcia">
             <CustomFileInput
+              isUploadSuccess={postStorageIsSuccess}
               existingFiles={photosLength}
               photos={photos}
               handleIndexFileChangeForm={handleIndexFileChangeForm}

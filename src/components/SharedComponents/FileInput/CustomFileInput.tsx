@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Typography from "../Typography/Typography";
 import { Crop, PercentCrop, PixelCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -37,6 +37,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   label = "",
   onFileDelete,
   photos,
+  isUploadSuccess,
 }) => {
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
@@ -323,6 +324,13 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (isUploadSuccess) {
+      setFileNames([]);
+      setFilePreviews([]);
+    }
+  }, [isUploadSuccess]);
 
   return (
     <FullContainer>

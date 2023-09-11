@@ -9,6 +9,7 @@ export interface CustomFileInputProps {
   onFileChange: (files: File[] | null | File) => void;
   onFileDelete: (index: number) => void;
   handleIndexFileChangeForm: (files: File[]) => void;
+  isUploadSuccess: boolean;
 }
 
 export function centerAspectCrop(

@@ -16,8 +16,10 @@ import SecondSelect from "components/SharedComponents/DropdownMenu/SecondSelect"
 
 const AnimalCardsAddNewCardForm = ({
   formik,
+  postStorageIsSuccess,
 }: {
   formik: FormikProps<AddNewAnimalCardInterface>;
+  postStorageIsSuccess: boolean;
 }) => {
   const navigate = useNavigate();
   const prevFiles = formik.values.photos;
@@ -198,6 +200,7 @@ const AnimalCardsAddNewCardForm = ({
           />
         </AnimalCardsAddNewCardFlexInputContainer>
         <CustomFileInput
+          isUploadSuccess={postStorageIsSuccess}
           isAddNewCard
           photos={formik.values.photos}
           handleIndexFileChangeForm={handleIndexFileChangeForm}

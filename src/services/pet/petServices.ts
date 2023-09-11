@@ -140,18 +140,8 @@ export const usePostShelterCardsCreatePet = () => {
 };
 
 export const usePutShelterCardsAnimal = () => {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(
-    (data: UpdatePet) => putShelterCardsAnimal(data),
-    {
-      onSuccess: () => {
-        toastService.showToast(
-          "Karta zwierzęcia została pomyślnie zaktualizowana.",
-          "success"
-        );
-        queryClient.invalidateQueries({ queryKey: ["shelterCardsCard"] });
-      },
-    }
+  const mutation = useMutation((data: UpdatePet) =>
+    putShelterCardsAnimal(data)
   );
 
   return mutation;
