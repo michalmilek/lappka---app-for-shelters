@@ -33,8 +33,10 @@ const Button = ({
       iconSpacing={iconSpacing}
       icon={icon}
       {...rest}>
-      {children}
-      {icon}
+      <>
+        {children}
+        {icon}
+      </>
     </ReusableButton>
   );
 };

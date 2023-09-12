@@ -1,0 +1,118 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "messages": "Messages",
+    "animalCards": "Animal Cards",
+    "voluntary": "Voluntary",
+    "employees": "Employees",
+    "organisation": "Organisation"
+  },
+  "shelterStats": {
+    "animalCards": "Animal Cards",
+    "seeksOwner": "Seeks Owner",
+    "withOwner": "With Owner",
+    "volunteering": "Volunteering (number of people)"
+  },
+  "animalChart": {
+    "numberOfMentees": "Number of mentees displayed",
+    "year": "Year",
+    "month": "Month",
+    "week": "Week",
+    "thousands": "k",
+    "viewsInMonth": "Views [mth]",
+    "views": "Views"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "name": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "week": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "voluntary": {
+    "voluntary": "Voluntary",
+    "makeADonation": "Make a donation",
+    "dailyAssistance": "Daily assistance",
+    "walkingTheDogs": "Walking the dogs",
+    "on": "On",
+    "off": "Off",
+    "description": "Description",
+    "enterYourAccountNumber": "Enter your account number"
+  },
+  "animals": {
+    "name": "Name",
+    "species": "Breed",
+    "gender": "Gender",
+    "marking": "Color",
+    "weight": "Weight",
+    "description": "Description",
+    "createdAt": "Created at",
+    "isSterilized": "Is sterilized",
+    "isVisible": "Is visible",
+    "months": "Months",
+    "animalCategory": "Genre",
+    "profilePhoto": "Profile photo",
+    "photos": "Photos",
+    "views": "Wyświetlenia",
+    "action": "Action"
+  },
+  "messages": {
+    "messages": "Messages"
+  },
+  "table": {
+    "lookFor": "Search the entire table",
+    "newCard": "New Card"
+  },
+  "employees": {
+    "employeesList": "listOfEmployees",
+    "name": "Name",
+    "email": "Email",
+    "dateOfAddition": "Date of addition",
+    "action": "Action",
+    "addEmployee": "Add employee"
+  },
+  "organisationSettings": {
+    "organisationSettings": "Organisation settings",
+    "street": "Street",
+    "zipCode": "Zip code",
+    "city": "City",
+    "nip": "NIP number",
+    "krs": "KRS number"
+  },
+  "accountSettings": {
+    "userSettings": "User settings",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "edit": "Edit",
+    "deleteProfilePicture": "Delete profile picture",
+    "deleteAccount": "Delete account",
+    "changePassword": "Change password",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "animalCard": {
+    "edit": "Edit",
+    "return": "Return",
+    "hide": "Hide",
+    "publish": "Publish",
+    "moveToArchive": "Move to archive",
+    "deleteCard": "Delete card"
+  }
+}

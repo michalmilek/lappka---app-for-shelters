@@ -32,6 +32,8 @@ import Page404 from "pages/Page404";
 import toastService from "singletons/toastService";
 import UnprotectedPage from "components/PagesComponents/UnprotectedPage";
 import HomePage from "pages/HomePage";
+import { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -43,7 +45,8 @@ const queryClient = new QueryClient({
         );
       } else if ((error as AxiosError).response?.status === 403) {
         toastService.showToast(
-          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.", "error"
+          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.",
+          "error"
         );
       }
     },
@@ -57,7 +60,8 @@ const queryClient = new QueryClient({
         );
       } else if ((error as AxiosError).response?.status === 403) {
         toastService.showToast(
-          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.", "error"
+          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.",
+          "error"
         );
       }
     },
@@ -72,6 +76,7 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const { t, i18n } = useTranslation();
   const wasLoadedInThePast = localStorage.getItem("wasLoadedInThePast");
   const [isPageLoaded, setIsPageLoaded] = useState(
     wasLoadedInThePast ? true : false
@@ -180,4 +185,13 @@ function App() {
   return <PreLoaderModal />;
 }
 
-export default App;
+
+
+
+export default function WrappedApp() {
+  return (
+    <Suspense fallback="...loading">
+      <App />
+    </Suspense>
+  )
+};

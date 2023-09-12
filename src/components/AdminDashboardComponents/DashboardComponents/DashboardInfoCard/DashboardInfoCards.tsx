@@ -7,15 +7,19 @@ import {
   SearchCircleIcon,
   UserCircleIcon,
 } from "components/SharedComponents/icons/icons";
+import { useTranslation } from "react-i18next";
+
 const DashboardInfoCards = () => {
   const { data, isLoading, isError } = useShelterStats();
+  const { t, i18n } = useTranslation();
+
   return (
     <>
       <DashboardInfoCardsItem
         icon={<IdentificationIcon />}
         isLoading={isLoading}
         isError={isError}
-        text="Karty zwierząt"
+        text={t("shelterStats.animalCards")}
         number={data ? data.cardCount : 0}
         gridArea="el1"
       />
@@ -23,7 +27,7 @@ const DashboardInfoCards = () => {
         icon={<SearchCircleIcon />}
         isLoading={isLoading}
         isError={isError}
-        text="Szuka właściciela"
+        text={t("shelterStats.seeksOwner")}
         number={data ? data.toAdoptCount : 0}
         gridArea="el2"
       />
@@ -31,7 +35,7 @@ const DashboardInfoCards = () => {
         icon={<UserCircleIcon />}
         isLoading={isLoading}
         isError={isError}
-        text="Z właścicielem"
+        text={t("shelterStats.withOwner")}
         number={data ? data.adoptedCount : 0}
         gridArea="el3"
       />
@@ -39,7 +43,7 @@ const DashboardInfoCards = () => {
         icon={<HeartGreenIcon />}
         isLoading={isLoading}
         isError={isError}
-        text="Wolontariat (ilość osób)"
+        text={t("shelterStats.volunteering")}
         number={data ? data.volunteerCount : 0}
         gridArea="el4"
       />

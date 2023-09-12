@@ -6,6 +6,7 @@ import { StyleSheetManager } from "styled-components";
 import { worker } from "./mocks/browser";
 import { Provider } from "react-redux";
 import { store } from "redux/store";
+import "./i18n";
 
 
 worker.start();
