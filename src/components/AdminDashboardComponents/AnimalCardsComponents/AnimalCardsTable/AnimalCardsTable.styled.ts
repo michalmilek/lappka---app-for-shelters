@@ -115,8 +115,13 @@ export const StyledTableTR = styled.tr`
   cursor: pointer !important;
   gap: 12px;
   background: ${getColor("white")};
+  transition: all 0.3s ease-in-out;
   &:nth-of-type(2n) {
     background: ${getColor("lightGray5")};
+  }
+
+  &:hover {
+    background: ${getColor("lightGray2")};
   }
 `;
 
@@ -271,4 +276,36 @@ export const StyledTableImg = styled.img`
   width: 32px;
   border-radius: 50%;
   border: 1px solid ${hexToRGBA(getColor("black"), 0.1)};
+`;
+
+
+const shimmer = keyframes`
+  0% {
+    background-position: -50px 0;
+  }
+  100% {
+    background-position: 50px 0;
+  }
+`;
+
+export const StyledTableImgSkeleton = styled.div`
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 300% 100%;
+  animation: ${shimmer} 1.5s infinite;
+`;
+
+export const StyledTableImgError = styled.div`
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: ${getColor("error")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${getColor("white")};
+  font-size: 12px;
+  font-weight: bold;
 `;

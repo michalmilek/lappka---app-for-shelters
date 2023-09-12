@@ -7,13 +7,13 @@ const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 2300;
 `;
 
 const ModalContainer = styled.div`
@@ -42,7 +42,10 @@ interface Props {
 
 const Modal: React.FC<Props> = ({ isOpen, children }) => {
   return isOpen ? (
-    <ModalOverlay>
+    <ModalOverlay
+      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation();
+      }}>
       <ModalContainer>
         <ModalLogo src={LappkaLogo} />
         {children}

@@ -1,62 +1,49 @@
-import React, { useEffect } from "react";
-import styled, { css } from "styled-components";
+import { XMarkIcon } from "@heroicons/react/20/solid";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { removeToast } from "redux/toastSlice";
 import { getColor } from "utils/styles/getStyle/getColor";
-
-interface ToastProps {
-  type: "success" | "error";
-  index?: number;
-}
-
-const ToastContainer = styled.div<ToastProps>`
-  position: fixed;
-  top: ${({ index }) => (index ? `${index * 32}px` : 0)};
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 8px 16px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 2500;
-
-  ${(props) =>
-    props.type === "success" &&
-    css`
-      background-color: ${getColor("success")};
-      color: #fff;
-    `}
-
-  ${(props) =>
-    props.type === "error" &&
-    css`
-      background-color: ${getColor("error")};
-      color: #fff;
-    `}
-
-
-
-    @media screen and (max-width: 1024px) {
-    padding: 16px 16px;
-    white-space: nowrap;
-  }
-`;
+import {
+  ToastContainer,
+  ToastContent,
+  Message,
+  MessageText,
+  ToastClose,
+  ProgressBar,
+} from "./Toast.styled";
+import { getMessage } from "./toastUtils";
 
 const Toast: React.FC = () => {
+  const dispatch = useDispatch();
   const toasts = useSelector((state: RootState) => state.toasts);
+
+  const handleCloseToast = (id: string) => {
+    dispatch(removeToast(id));
+  };
 
   return (
     <>
       {toasts.map((toast, index) => (
         <ToastContainer
+          toastType={toast.type}
           key={toast.id}
-          index={index}
-          type={toast.type}>
-          {toast.message}
+          index={index}>
+          <ToastContent>
+            <Message>
+              <MessageText className="text-1">
+                {getMessage(toast.type)}
+              </MessageText>
+              <MessageText className="text-2">{toast.message}</MessageText>
+            </Message>
+          </ToastContent>
+          <ToastClose onClick={() => handleCloseToast(toast.id)}>
+            <XMarkIcon
+              height={20}
+              color={getColor("darkGray2")}
+            />
+          </ToastClose>
+          <ProgressBar toastType={toast.type} />
         </ToastContainer>
       ))}
     </>

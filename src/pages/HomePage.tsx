@@ -1,22 +1,8 @@
-import Button from "components/SharedComponents/Button/Button";
-import useToast from "hooks/useToast";
-import React from "react";
-import toastService from "singletons/toastService";
+import { Navigate } from "react-router-dom";
+import { DashboardRoutes } from "router/router";
 
 const HomePage = () => {
-  const { showToast } = useToast();
-
-  return (
-    <div>
-      <Button
-        onClick={() => {
-          toastService.showToast("HELLO", "success");
-        }}>
-        testestes
-      </Button>
-    </div>
-  );
+  return <Navigate to={DashboardRoutes.dashboard} />;
 };
 export default HomePage;
 
-//<Navigate to={DashboardRoutes.DASHBOARD} />;

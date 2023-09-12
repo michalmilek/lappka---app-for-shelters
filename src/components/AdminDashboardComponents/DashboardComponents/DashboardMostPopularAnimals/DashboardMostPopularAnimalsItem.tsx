@@ -1,27 +1,41 @@
 import { EyeIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
+import { Pet } from "services/pet/petTypes";
+import { useGetStorageImagesForId } from "services/storage/storageServices";
 import {
   DashboardMostPopularAnimalsItemContainer,
   DashboardMostPopularAnimalsItemContainerAnimalInfoContainer,
+  DashboardMostPopularAnimalsItemError,
   DashboardMostPopularAnimalsItemImage,
   DashboardMostPopularAnimalsItemInfoContainer,
   DashboardMostPopularAnimalsItemInfoContainerStyledViews,
+  SkeletonMostPopularImg,
 } from "./DashboardMostPopularAnimaIstem.styled";
-import { PetWithUrl } from "./DashboardMostPopularAnimals";
 
 interface Props {
-  item: PetWithUrl;
+  item: Pet;
 }
 
 const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
+  const {
+    data: imgUrl,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useGetStorageImagesForId(item.profilePhoto);
+
   return (
     <DashboardMostPopularAnimalsItemContainer>
       <DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>
-        <DashboardMostPopularAnimalsItemImage
-          src={item.img}
-          alt={item.name + "photo"}
-        />
+        {isLoading && <SkeletonMostPopularImg />}
+        {isSuccess && (
+          <DashboardMostPopularAnimalsItemImage
+            src={imgUrl}
+            alt={item.name + "photo"}
+          />
+        )}
+        {isError && <DashboardMostPopularAnimalsItemError />}
         <DashboardMostPopularAnimalsItemInfoContainer>
           <Typography
             tag="h5"

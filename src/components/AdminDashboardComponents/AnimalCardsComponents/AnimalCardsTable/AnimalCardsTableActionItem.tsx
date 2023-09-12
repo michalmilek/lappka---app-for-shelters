@@ -7,14 +7,31 @@ import {
   StyledDropdownContainer,
   StyledDropdownOption,
 } from "./AnimalCardsTable.styled";
+import { UnstyledButton } from "components/SharedComponents/Button/Button.styled";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDeleteCardId,
+  selectIsDeleteModalOpen,
+  setIsDeleteModalOpen,
+} from "redux/deleteCardSlice";
+import DeleteCardModal from "../../../SharedComponents/Modal/ModalsWithLogic/DeleteCardModal";
+import { useNavigate } from "react-router-dom";
+import { DashboardRoutes } from "router/router";
 
 const StyledMoreIcon = styled(MoreIcon)`
   cursor: pointer;
 `;
 
-const AnimalCardsTableActionItem = () => {
+const AnimalCardsTableActionItem = ({ id }: { id: string }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [detailsOn, setDetailsOn] = useState(false);
+  /*   const [detailsOn, setDetailsOn] = useState(false); */
+  const navigate = useNavigate();
+  const isDeleteModalOpen = useSelector(selectIsDeleteModalOpen);
+  const dispatch = useDispatch();
+
+  const handleIsDeleteModalOpen = (value: boolean) => {
+    dispatch(setIsDeleteModalOpen(value));
+  };
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -41,29 +58,48 @@ const AnimalCardsTableActionItem = () => {
   }, []);
 
   return (
-    <ActionHeaderContainer ref={dropdownRef}>
-      <StyledMoreIcon onClick={handleMoreIconClick} />
-      {isDropdownOpen && (
-        <StyledDropdownContainer
-          className={isDropdownOpen ? "fadeIn" : "fadeOut"}>
-          <StyledDropdownOption onClick={() => setDetailsOn((prev) => !prev)}>
-            <Typography
-              color="darkGray2"
-              variant="UI/UI Text 14 Reg">
-              Szczegóły
-            </Typography>
-            {detailsOn && <CheckIcon />}
-          </StyledDropdownOption>
-          <StyledDropdownOption>
-            <Typography
-              color="darkGray2"
-              variant="UI/UI Text 14 Reg">
-              Usuń
-            </Typography>
-          </StyledDropdownOption>
-        </StyledDropdownContainer>
-      )}
-    </ActionHeaderContainer>
+    <>
+      <ActionHeaderContainer ref={dropdownRef}>
+        <StyledMoreIcon onClick={handleMoreIconClick} />
+        {isDropdownOpen && (
+          <StyledDropdownContainer
+            className={isDropdownOpen ? "fadeIn" : "fadeOut"}>
+            <StyledDropdownOption
+              onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+                navigate(DashboardRoutes.animalCards + "/" + id);
+                e.stopPropagation();
+                //setDetailsOn((prev) => !prev);
+              }}>
+              <Typography
+                color="darkGray2"
+                variant="UI/UI Text 14 Reg">
+                Szczegóły
+              </Typography>
+              {/* {detailsOn && <CheckIcon />} */}
+            </StyledDropdownOption>
+            <StyledDropdownOption
+              onClick={(e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+                e.stopPropagation();
+                dispatch(setIsDeleteModalOpen(true));
+                setIsDropdownOpen(false);
+              }}>
+              <Typography
+                tag="span"
+                color="darkGray2"
+                variant="UI/UI Text 14 Reg">
+                Usuń
+              </Typography>
+            </StyledDropdownOption>
+          </StyledDropdownContainer>
+        )}
+      </ActionHeaderContainer>
+
+      <DeleteCardModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        handleDeleteModalState={handleIsDeleteModalOpen}
+        id={id}
+      />
+    </>
   );
 };
 

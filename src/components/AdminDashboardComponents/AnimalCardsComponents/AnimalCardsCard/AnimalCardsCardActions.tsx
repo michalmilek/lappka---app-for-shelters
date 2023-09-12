@@ -1,21 +1,16 @@
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "components/SharedComponents/Button/Button";
-import Modal from "components/SharedComponents/Modal/Modal";
-import useToast from "hooks/useToast";
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setLoading } from "redux/loadingSlice";
+import React, { useState } from "react";
 import {
-  useDeleteShelterCard,
   usePutShelterCardsHide,
   usePutShelterCardsPublish,
 } from "services/pet/petServices";
-import DeleteCardModal from "./modals/DeleteCardModal";
-import MoveToArchiveModal from "./modals/MoveToArchiveModal";
+import toastService from "singletons/toastService";
+import DeleteCardModal from "../../../SharedComponents/Modal/ModalsWithLogic/DeleteCardModal";
+import MoveToArchiveModal from "../../../SharedComponents/Modal/ModalsWithLogic/MoveToArchiveModal";
 import { AnimalCardsCardBtnsContainer } from "./utils/DashboardAnimalCardsCard.styled";
 
 const AnimalCardsCardActions = ({ id }: { id: string }) => {
-  const { showToast } = useToast();
   const [isMoveToArchiveModalOpen, setIsMoveToArchiveModalOpen] =
     useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -46,7 +41,7 @@ const AnimalCardsCardActions = ({ id }: { id: string }) => {
           onClick={() => {
             PutShelterCardsHideFn(id, {
               onSuccess: () => {
-                showToast("Karta została ukryta", "success");
+                toastService.showToast("Karta została ukryta", "success");
                 invalidateQuery();
               },
             });
@@ -59,7 +54,7 @@ const AnimalCardsCardActions = ({ id }: { id: string }) => {
           onClick={() => {
             PutShelterCardsPublishFn(id, {
               onSuccess: () => {
-                showToast("Karta została opublikowana", "success");
+                toastService.showToast("Karta została opublikowana", "success");
                 invalidateQuery();
               },
             });

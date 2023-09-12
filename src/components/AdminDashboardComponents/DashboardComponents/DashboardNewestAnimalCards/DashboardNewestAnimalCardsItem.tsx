@@ -2,6 +2,7 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import { DashboardRoutes } from "router/router";
 import { Pet } from "services/pet/petTypes";
+import { useGetStorageImagesForId } from "services/storage/storageServices";
 import {
   ContainerLink,
   DashboardNewestAnimalCardsItemContainer,
@@ -9,20 +10,32 @@ import {
   DashboardNewestAnimalCardsItemContentDataContainer,
   DashboardNewestAnimalCardsItemImg,
 } from "./DashboardNewestAnimalCardsItem.styled";
+import { NewestAnimalImgSkeleton } from "./DashboardNewestAnimalCardsItemContainerSkeleton";
+import { DashboardNewestAnimalCardsItemImgError } from "./ErrorNewestAnimal";
 
 interface Props {
   item: Pet;
-  img: string;
 }
 
-const DashboardNewestAnimalCardsItem = ({ item, img }: Props) => {
+const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
+  const {
+    data: img,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useGetStorageImagesForId(item.profilePhoto);
+
   return (
     <ContainerLink to={DashboardRoutes.animalCards + "/" + item.id}>
       <DashboardNewestAnimalCardsItemContainer>
-        <DashboardNewestAnimalCardsItemImg
-          src={img}
-          alt=""
-        />
+        {isError && <DashboardNewestAnimalCardsItemImgError />}
+        {isLoading && <NewestAnimalImgSkeleton />}
+        {isSuccess && (
+          <DashboardNewestAnimalCardsItemImg
+            src={img}
+            alt={item.name + " photo"}
+          />
+        )}
         <DashboardNewestAnimalCardsItemContentContainer>
           <Typography
             tag="h4"

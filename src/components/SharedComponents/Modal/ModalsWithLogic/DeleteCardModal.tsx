@@ -2,7 +2,7 @@ import Button from "components/SharedComponents/Button/Button";
 import Modal from "components/SharedComponents/Modal/Modal";
 import React from "react";
 import { useDeleteShelterCard } from "services/pet/petServices";
-import { AnimalCardsCardBtnsContainer } from "../utils/DashboardAnimalCardsCard.styled";
+import { AnimalCardsCardBtnsContainer } from "../../../AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
 
 interface Props {
   isDeleteModalOpen: boolean;

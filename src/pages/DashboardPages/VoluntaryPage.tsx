@@ -4,22 +4,10 @@ import { StyledProtectedPageContent } from "components/PagesComponents/Protected
 import { StyledDashboardVoluntaryMainContent } from "components/AdminDashboardComponents/VoluntaryComponents/DashboardVoluntary.styled";
 import SkeletonVoluntary from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/SkeletonVoluntary";
 import VoluntaryForm from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/VoluntaryForm";
-import useToast from "hooks/useToast";
-import { useEffect } from "react";
 import ErrorVoluntary from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/ErrorVoluntary";
 
 const VoluntaryPage = () => {
-  const { data, isLoading, isError, error, isSuccess } =
-    useShelterVolunteering();
-
-  const { showToast } = useToast();
-
-  useEffect(() => {
-    if (isError) {
-      //console.log(error.message);
-      showToast("error", "error");
-    }
-  }, [isError, showToast, error]);
+  const { data, isLoading, isError, isSuccess } = useShelterVolunteering();
 
   return (
     <StyledProtectedPageContent>

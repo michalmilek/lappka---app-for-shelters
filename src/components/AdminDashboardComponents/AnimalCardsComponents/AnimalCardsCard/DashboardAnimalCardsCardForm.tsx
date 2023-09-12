@@ -1,5 +1,4 @@
 import {
-  AnimalEdit,
   GenreType,
   Pet,
   PetBreed,
@@ -25,7 +24,6 @@ import Button from "components/SharedComponents/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { usePutShelterCardsAnimal } from "services/pet/petServices";
 import DashboardAnimalCardsCardFields from "./DashboardAnimalCardsCardFields";
-import useToast from "hooks/useToast";
 import {
   AnimalCardsCardValidationSchema,
   PetCard,
@@ -57,7 +55,6 @@ const DashboardAnimalCardsCardForm = ({
   isEditOn: boolean;
   data: Pet;
 }) => {
-  const { showToast } = useToast();
   const {
     isSuccess: GetStorageImagesIsSuccess,
     data: imagesUrls,
@@ -91,7 +88,6 @@ const DashboardAnimalCardsCardForm = ({
       postStoragePicture(formik.values.newPhotos, {
         onSuccess: (newData) => {
           formik.setFieldValue("photos", [...photos, newData]);
-          queryClient.setQueryData(["shelterCardsCard", data.id], newData);
           const { newPhotos, ...values } = formik.values;
           putShelterCardsFn(
             {
@@ -111,7 +107,7 @@ const DashboardAnimalCardsCardForm = ({
             } as PutSheltersCardInterface,
             {
               onSuccess: () => {
-                showToast(
+                toastService.showToast(
                   `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
                   "success"
                 );

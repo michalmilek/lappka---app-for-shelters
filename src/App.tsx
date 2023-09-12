@@ -31,6 +31,7 @@ import { AxiosError } from "axios";
 import Page404 from "pages/Page404";
 import toastService from "singletons/toastService";
 import UnprotectedPage from "components/PagesComponents/UnprotectedPage";
+import HomePage from "pages/HomePage";
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -89,7 +90,6 @@ function App() {
     };
   }, []);
 
-
   const isLoading = useSelector(selectIsLoading);
 
   if (isPageLoaded)
@@ -128,6 +128,7 @@ function App() {
               <Route
                 path={DashboardRoutes.animalCards}
                 element={<AnimalCardsPage />}
+                key={"animalCards"}
               />
               <Route
                 path={DashboardRoutes.animalCardsNewCard}
@@ -157,7 +158,7 @@ function App() {
 
             <Route
               path="/"
-              element={<Navigate to={DashboardRoutes.dashboard} />}
+              element={<HomePage />}
             />
             <Route
               path="/not-found"

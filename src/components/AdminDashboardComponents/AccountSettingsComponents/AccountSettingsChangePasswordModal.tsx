@@ -10,7 +10,7 @@ import { getColor } from "utils/styles/getStyle/getColor";
 import { usePatchUserNewPassword } from "services/user/userServices";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
-import useToast from "hooks/useToast";
+import toastService from "singletons/toastService";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -81,7 +81,6 @@ const validationSchema = Yup.object().shape({
 
 const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
   const dispatch = useDispatch();
-  const { showToast } = useToast();
   const { mutate, isSuccess, isLoading } = usePatchUserNewPassword();
   const formik = useFormik({
     initialValues,
@@ -106,10 +105,10 @@ const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
 
   useEffect(() => {
     if (isSuccess) {
-      showToast("Hasło zostało zmienione pomyślnie", "success");
+      toastService.showToast("Hasło zostało zmienione pomyślnie", "success");
       onClose();
     }
-  }, [isSuccess, showToast, onClose]);
+  }, [isSuccess, onClose]);
 
   return isOpen ? (
     <ModalOverlay>

@@ -27,6 +27,18 @@ const ErrorContainer = styled.div`
   animation: ${appearAnimation} 0.3s ease-in-out;
 `;
 
+export const DashboardNewestAnimalCardsItemImgError = styled.div`
+  width: 100%;
+  height: 215px;
+  background-color: ${getColor("error")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${getColor("white")};
+  font-size: 16px;
+  font-weight: bold;
+`;
+
 const ErrorNewestAnimal = () => {
   return (
     <ErrorContainer>

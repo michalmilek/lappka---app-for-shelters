@@ -51,3 +51,7 @@ export const DashboardNewestAnimalCardsItemContentDataContainer = styled.div`
 export const ContainerLink = styled(Link)`
   text-decoration: none;
 `;
+
+
+
+

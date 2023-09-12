@@ -20,29 +20,14 @@ import {
   TableComponentHeaderContainer,
   TableContainer,
 } from "./AnimalCardsTable.styled";
-import {
-  columns,
-  ExtendedSearchParams,
-  sortParamFn,
-  sortParams,
-} from "./AnimalCardsTableUtils";
+import { columns } from "./AnimalCardsTableUtils";
 import useDeviceType from "hooks/useDeviceType";
 import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
-import {
-  Pet,
-  PetWithImageUrl,
-  ShelterCardsResponseWithProfilePictureUrl,
-} from "services/pet/petTypes";
-import { useDispatch } from "react-redux";
-import { setTablePaginationState } from "redux/tableSlice";
+import { Pet, ShelterCardsResponse } from "services/pet/petTypes";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 
-function AnimalCardsTable({
-  data,
-}: {
-  data: ShelterCardsResponseWithProfilePictureUrl;
-}) {
+function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
@@ -74,12 +59,16 @@ function AnimalCardsTable({
   const handlePageSize = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const optionValue = event.target.value;
     setPagination({ pageIndex: 1, pageSize: +optionValue });
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("pageSize", optionValue);
+    newSearchParams.delete("pageIndex");
+    setSearchParams(newSearchParams);
   };
 
   const table = useReactTable({
     data: data.petInListInShelterDto,
     columns: columnsMemo,
-    getCoreRowModel: getCoreRowModel<PetWithImageUrl>(),
+    getCoreRowModel: getCoreRowModel<Pet>(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -116,92 +105,98 @@ function AnimalCardsTable({
     });
   }, [deviceType, table]);
 
-  useEffect(() => {
-    let updatedSearchParams: ExtendedSearchParams = {
-      ...searchParams,
-      pageIndex: pagination.pageIndex.toString(),
-      pageSize: pagination.pageSize.toString(),
-    };
+  const handleSort = (columnId: string) => {
+    const isAsc =
+      columnId === sortParamFromQueryParams
+        ? sortParamOrderFromQueryParams === "true"
+        : true;
 
-    if (sorting.length > 0) {
-      updatedSearchParams = {
-        ...updatedSearchParams,
-        sortParam: sortParamFn(sorting[0].id).toLowerCase(),
-        asc: String(!sorting[0].desc),
-      };
+    if (sortParamOrderFromQueryParams === "true") {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set("sortParam", columnId);
+      newSearchParams.set("asc", "false");
+      setSearchParams(newSearchParams);
+    } else if (sortParamOrderFromQueryParams === "false") {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.delete("sortParam");
+      newSearchParams.delete("asc");
+      setSearchParams(newSearchParams);
+    } else {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set("sortParam", columnId);
+      newSearchParams.set("asc", isAsc.toString());
+      setSearchParams(newSearchParams);
     }
-
-    setSearchParams(updatedSearchParams);
-  }, [
-    pagination.pageIndex,
-    pagination.pageSize,
-    sorting,
-    searchParams,
-    setSearchParams,
-  ]);
+  };
 
   return (
-    <TableComponentContainer>
-      <TableComponentHeaderContainer>
-        <Typography
-          variant="UI/UI Text 16 Semi Bold"
-          tag="h2"
-          color="darkGray2">
-          Karty zwierząt
-        </Typography>
-      </TableComponentHeaderContainer>
-      <TableContainer>
-        <StyledTableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <StyledTableTH
-                    key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    {{
-                      asc: " 🔼",
-                      desc: " 🔽",
-                    }[header.column.getIsSorted() as string] ?? null}
-                  </StyledTableTH>
-                );
-              })}
-            </tr>
-          ))}
-        </StyledTableHeader>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <StyledTableTR
-              onClick={() => {
-                navigate(DashboardRoutes.animalCards + `/${row.original.id}`);
-              }}
-              key={row.id}>
-              {row.getVisibleCells().map((cell) => {
-                return (
-                  <StyledTableTD key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </StyledTableTD>
-                );
-              })}
-            </StyledTableTR>
-          ))}
-        </tbody>
-      </TableContainer>
-      <AnimalCardsTableFooter
-        itemsPerPage={pagination.pageSize}
-        handlePageSize={handlePageSize}
-        table={table}
-        pagination={pagination}
-        handleFiltering={handleFiltering}
-        filtering={filtering}
-      />
-    </TableComponentContainer>
+    <>
+      <TableComponentContainer>
+        <TableComponentHeaderContainer>
+          <Typography
+            variant="UI/UI Text 16 Semi Bold"
+            tag="h2"
+            color="darkGray2">
+            Karty zwierząt
+          </Typography>
+        </TableComponentHeaderContainer>
+        <TableContainer>
+          <StyledTableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  const isSorted =
+                    header.column.id === sortParamFromQueryParams;
+                  const isAsc = sortParamOrderFromQueryParams === "true";
+
+                  return (
+                    <StyledTableTH
+                      key={header.id}
+                      onClick={() => handleSort(header.column.id)}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                      {isSorted && (isAsc ? " 🔼" : " 🔽")}
+                    </StyledTableTH>
+                  );
+                })}
+              </tr>
+            ))}
+          </StyledTableHeader>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <StyledTableTR
+                onClick={() => {
+                  navigate(DashboardRoutes.animalCards + `/${row.original.id}`);
+                }}
+                key={row.id}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <StyledTableTD key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </StyledTableTD>
+                  );
+                })}
+              </StyledTableTR>
+            ))}
+          </tbody>
+        </TableContainer>
+        <AnimalCardsTableFooter
+          itemsPerPage={pagination.pageSize}
+          handlePageSize={handlePageSize}
+          table={table}
+          pagination={pagination}
+          handleFiltering={handleFiltering}
+          filtering={filtering}
+        />
+      </TableComponentContainer>
+    </>
   );
 }
 
