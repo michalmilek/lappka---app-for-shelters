@@ -1,20 +1,29 @@
+import { t } from "i18next";
 import React from "react";
 import { TimeType } from "./DashboardAnimalChart";
 
+export const cutTo3Letters = (word: string) => {
+  if (word.length <= 3) {
+    return word;
+  } else {
+    return word.slice(0, 3);
+  }
+};
+
 const getMonthNameByIndex = (index: number) => {
   const monthNames = [
-    "Sty",
-    "Lut",
-    "Mar",
-    "Kwi",
-    "Maj",
-    "Cze",
-    "Lip",
-    "Sie",
-    "Wrz",
-    "Paź",
-    "Lis",
-    "Gru",
+    cutTo3Letters(t("months.january")),
+    cutTo3Letters(t("months.february")),
+    cutTo3Letters(t("months.march")),
+    cutTo3Letters(t("months.april")),
+    cutTo3Letters(t("months.may")),
+    cutTo3Letters(t("months.june")),
+    cutTo3Letters(t("months.july")),
+    cutTo3Letters(t("months.august")),
+    cutTo3Letters(t("months.september")),
+    cutTo3Letters(t("months.october")),
+    cutTo3Letters(t("months.november")),
+    cutTo3Letters(t("months.december")),
   ];
 
   return monthNames[index] || "";
@@ -72,7 +81,15 @@ export const createMonthData = (data: number[]) => {
 };
 
 const getDayNameByIndex = (index: number) => {
-  const dayNames = ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Nd"];
+  const dayNames = [
+    cutTo3Letters(t("week.monday")),
+    cutTo3Letters(t("week.tuesday")),
+    cutTo3Letters(t("week.wednesday")),
+    cutTo3Letters(t("week.thursday")),
+    cutTo3Letters(t("week.friday")),
+    cutTo3Letters(t("week.saturday")),
+    cutTo3Letters(t("week.sunday")),
+  ];
 
   return dayNames[index % 7] || "";
 };
@@ -94,21 +111,20 @@ export const createWeekData = (data: number[]) => {
 export const getChartTypeTimeByType = (type: TimeType): string => {
   switch (type) {
     case "Month":
-      return "Miesiąc";
+      return t("animalChart.month");
     case "Year":
-      return "Rok";
+      return t("animalChart.year");
     case "Week":
-      return "Tydzień";
+      return t("animalChart.week");
     default:
-      return "Rok";
+      return t("animalChart.year");
   }
 };
 
-
-  export const errorData = [
-    { name: "A", views: Math.floor(Math.random() * 100) },
-    { name: "B", views: Math.floor(Math.random() * 100) },
-    { name: "C", views: Math.floor(Math.random() * 100) },
-    { name: "D", views: Math.floor(Math.random() * 100) },
-    { name: "E", views: Math.floor(Math.random() * 100) },
-  ];
+export const errorData = [
+  { name: "A", views: Math.floor(Math.random() * 100) },
+  { name: "B", views: Math.floor(Math.random() * 100) },
+  { name: "C", views: Math.floor(Math.random() * 100) },
+  { name: "D", views: Math.floor(Math.random() * 100) },
+  { name: "E", views: Math.floor(Math.random() * 100) },
+];

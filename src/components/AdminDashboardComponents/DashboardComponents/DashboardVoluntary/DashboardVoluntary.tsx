@@ -10,6 +10,7 @@ import {
 import DashboardVoluntaryItem from "./DashboardVoluntaryItem";
 import SkeletonVoluntary from "./SkeletonVoluntary";
 import ErrorVoluntary from "./ErrorVoluntary";
+import { t } from "i18next";
 
 const DashboardVoluntary = () => {
   const { data, isLoading, isError, error, isSuccess } =
@@ -32,23 +33,23 @@ const DashboardVoluntary = () => {
             variant="Heading 18 Semi Bold"
             tag="h3"
             color="darkGray2">
-            Wolontariat
+            {t("voluntary.voluntary")}
           </Typography>
         </DashboardVoluntaryTitleContainer>
         <Divider />
         <DashboardVoluntaryItemsContainer>
           <DashboardVoluntaryItem
-            text="Wpłać darowiznę"
+            text={t("voluntary.makeADonation")}
             isOn={data.isDonationActive}
           />
           <Divider />
           <DashboardVoluntaryItem
-            text="Codzienna pomoc"
+            text={t("voluntary.dailyAssistance")}
             isOn={data.isDailyHelpActive}
           />
           <Divider />
           <DashboardVoluntaryItem
-            text="Wyprowadzanie psów"
+            text={t("voluntary.walkingTheDogs")}
             isOn={data.isTakingDogsOutActive}
           />
         </DashboardVoluntaryItemsContainer>

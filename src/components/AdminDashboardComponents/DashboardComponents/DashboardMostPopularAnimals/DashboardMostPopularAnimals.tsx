@@ -1,5 +1,6 @@
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
+import { t } from "i18next";
 import React from "react";
 import { useShelterCards } from "services/pet/petServices";
 import {
@@ -32,7 +33,7 @@ const DashboardMostPopularAnimals = () => {
         <Typography
           variant="Heading 18 Semi Bold"
           color="darkGray2">
-          Najpopularniejsze
+          {t("mostPopularAnimals.mostPopular")}
         </Typography>
       </DashboardMostPopularAnimalsHeadingContainer>
       <Divider />

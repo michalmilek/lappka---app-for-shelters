@@ -5,11 +5,11 @@ import {
   DashboardVoluntaryItemStatusContainer,
 } from "./DashboardVoluntaryItem.styled";
 import { IsOnIndicator } from "./DashboardVoluntaryItem.styled";
+import { t } from "i18next";
 
 export interface IsOn extends React.HTMLAttributes<HTMLSpanElement> {
   isOn: boolean;
 }
-
 
 interface Props {
   text: string;
@@ -25,7 +25,7 @@ const DashboardVoluntaryItem = ({ text, isOn }: Props) => {
         <Typography
           color="darkGray2"
           tag="span">
-          {isOn ? "Włączone" : "Wyłączone"}
+          {isOn ? t("voluntary.on") : t("voluntary.off")}
         </Typography>
       </DashboardVoluntaryItemStatusContainer>
     </DashboardVoluntaryItemContainer>

@@ -1,5 +1,8 @@
+import { UnstyledButton } from "components/SharedComponents/Button/Button.styled";
 import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux/es/exports";
 import { selectActiveChatData, selectMe } from "redux/chatSlice";
 import {
@@ -16,8 +19,19 @@ export interface MessageInterface extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const MessagesChat = () => {
+  const { t } = useTranslation();
   const currentUser = useSelector(selectMe);
   const activeChatData = useSelector(selectActiveChatData);
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    const loadTranslation = async () => {
+      const translatedTitle = await t("messages.typeYourMessage");
+      console.log(t("messages.typeYourMessage"));
+      setTitle(translatedTitle);
+    };
+    loadTranslation();
+  }, [t]);
 
   return (
     <ChatContainer>
@@ -52,13 +66,17 @@ const MessagesChat = () => {
       })}
       <MessageInputContainer>
         <Input
-          placeholder="Wpisz wiadomość..."
+          placeholder={t("messages.typeYourMessage")}
           backgroundColor="lightGray5"
         />
-        <img
-          src={SendMessage}
-          alt=""
-        />
+        <UnstyledButton
+          title={title}
+          style={{ cursor: "pointer" }}>
+          <img
+            src={SendMessage}
+            alt="send a message btn"
+          />
+        </UnstyledButton>
       </MessageInputContainer>
     </ChatContainer>
   );

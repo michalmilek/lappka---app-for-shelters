@@ -1,5 +1,6 @@
 import ToggleButton from "components/SharedComponents/Button/ToggleButton";
 import Typography from "components/SharedComponents/Typography/Typography";
+import { t } from "i18next";
 import React from "react";
 import { styled } from "styled-components";
 import { FormikType } from "./VoluntaryForm";
@@ -55,7 +56,7 @@ const VoluntaryFormPart = ({
           handleChange={handleToggleChange}
           fieldName={fieldName}
           checked={fieldValue}
-          label="Aktywna"
+          label={t("toggleButton.active")}
         />
       </StyledVoluntaryFormHeader>
       <StyledVoluntaryInputContainer>{children}</StyledVoluntaryInputContainer>

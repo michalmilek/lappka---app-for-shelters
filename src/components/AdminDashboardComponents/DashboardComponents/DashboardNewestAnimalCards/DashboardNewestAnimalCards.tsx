@@ -13,6 +13,7 @@ import DashboardNewestAnimalCardsItemContainerSkeleton from "./DashboardNewestAn
 import ErrorNewestAnimal from "./ErrorNewestAnimal";
 import { DashboardRoutes } from "router/router";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 const DashboardNewestAnimalCards = () => {
   const { isLoading, data, isError, error, isSuccess } = useShelterCards(1, 3);
@@ -29,7 +30,7 @@ const DashboardNewestAnimalCards = () => {
         <Typography
           tag="h3"
           variant="UI/UI Text 16 Semi Bold">
-          Najnowsze karty zwierząt
+          {t("newestAnimals.newestAnimalCards")}
         </Typography>
         <Button
           variant="outline"
@@ -37,7 +38,7 @@ const DashboardNewestAnimalCards = () => {
           onClick={() => {
             navigate(DashboardRoutes.animalCards);
           }}>
-          Wszystkie
+          {t("newestAnimals.allCards")}
         </Button>
       </DashboardNewestAnimalCardsContainerHeader>
       <Divider />
@@ -62,11 +63,11 @@ const DashboardNewestAnimalCards = () => {
               tag="p"
               color="darkGray2"
               variant="UI/UI Text 16 Medium Bold">
-              Brak kart zwierząt w bazie. Dodaj pierwszą kartę.
+              {t("newestAnimals.noAnimalCardsInDatabase")}
             </Typography>
             <Button
               onClick={() => navigate(DashboardRoutes.animalCardsNewCard)}>
-              Dodaj pierwszą kartę
+              {t("newestAnimals.addFirstCard")}
             </Button>
           </DashboardNewestAnimalCardsEmptyCardsList>
         )}

@@ -14,11 +14,11 @@
     "volunteering": "Volunteering (number of people)"
   },
   "animalChart": {
-    "numberOfMentees": "Number of mentees displayed",
+    "numberOfMentees": "Views of mentees displayed",
     "year": "Year",
     "month": "Month",
     "week": "Week",
-    "thousands": "k",
+    "thousands": "K",
     "viewsInMonth": "Views [mth]",
     "views": "Views"
   },
@@ -69,11 +69,13 @@
     "animalCategory": "Genre",
     "profilePhoto": "Profile photo",
     "photos": "Photos",
-    "views": "Wyświetlenia",
+    "views": "Views",
     "action": "Action"
   },
   "messages": {
-    "messages": "Messages"
+    "messages": "Messages",
+    "typeYourMessage": "Type your message",
+    "sendAMessage": "Send a massage"
   },
   "table": {
     "lookFor": "Search the entire table",
@@ -114,5 +116,31 @@
     "publish": "Publish",
     "moveToArchive": "Move to archive",
     "deleteCard": "Delete card"
-  }
+  },
+  "toggleButton": {
+    "active": "Active"
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "newestAnimals": {
+    "newestAnimalCards": "Latest Animal Cards",
+    "allCards": "All cards",
+    "noAnimalCardsInDatabase": "No animal cards in the database. Add the first card.",
+    "addFirstCard": "Add first card"
+  },
+  "genreType": {
+    "Dog": "Dog",
+    "Cat": "Cat",
+    "Other": "Other"
+  },
+  "genderType": {
+    "Male": "Male",
+    "Female": "Female",
+    "Other": "Other"
+  },
+  "mostPopularAnimals": {
+    "mostPopular": "The most popular"
+  },
 }

@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import { FormikProps, useFormik } from "formik";
 import { useUpdateShelterVolunteering } from "services/pet/petServices";
 import { ShelterVolunteeringResponse } from "services/pet/petTypes";
+import { t } from "i18next";
 
 interface Props {
   data: ShelterVolunteeringResponse;
@@ -73,12 +74,12 @@ const VoluntaryForm = ({ data }: Props) => {
           <VoluntaryFormPart
             fieldName="isDonationActive"
             formik={formik}
-            text="Wpłać darowiznę">
+            text={t("voluntary.makeADonation")}>
             <Input
               onBlur={formik.handleBlur}
               placeholder="0000-0000-0000-0000"
               inputSize="Large"
-              label="Podaj numer konta"
+              label={t("voluntary.enterYourAccountNumber")}
               value={formik.values.bankAccountNumber}
               onChange={formik.handleChange}
               name="bankAccountNumber"
@@ -90,7 +91,7 @@ const VoluntaryForm = ({ data }: Props) => {
               }
             />
             <Textarea
-              label="Opis"
+              label={t("voluntary.description")}
               value={formik.values.donationDescription}
               onChange={formik.handleChange}
               name="donationDescription"
@@ -99,9 +100,9 @@ const VoluntaryForm = ({ data }: Props) => {
           <VoluntaryFormPart
             fieldName="isDailyHelpActive"
             formik={formik}
-            text="Codzienna pomoc">
+            text={t("voluntary.dailyAssistance")}>
             <Textarea
-              label="Opis"
+              label={t("voluntary.description")}
               value={formik.values.dailyHelpDescription}
               onChange={formik.handleChange}
               name="dailyHelpDescription"
@@ -110,9 +111,9 @@ const VoluntaryForm = ({ data }: Props) => {
           <VoluntaryFormPart
             fieldName="isTakingDogsOutActive"
             formik={formik}
-            text="Wyprowadzanie psów">
+            text={t("voluntary.walkingTheDogs")}>
             <Textarea
-              label="Opis"
+              label={t("voluntary.description")}
               value={formik.values.takingDogsOutDescription}
               onChange={formik.handleChange}
               name="takingDogsOutDescription"
@@ -120,7 +121,7 @@ const VoluntaryForm = ({ data }: Props) => {
           </VoluntaryFormPart>
         </StyledDashboardVoluntaryContent>
         <StyledDashboardFooter>
-          <Button type="submit">Zapisz</Button>
+          <Button type="submit">{t("buttons.save")}</Button>
         </StyledDashboardFooter>
       </StyledDashboardVoluntaryMainContentFormsContainer>
     </>

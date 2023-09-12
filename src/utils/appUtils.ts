@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { GenderType, GenreType } from "services/pet/petTypes";
 
 export const genderValueToLabel = (value: GenderType): string => {
@@ -5,9 +6,9 @@ export const genderValueToLabel = (value: GenderType): string => {
 };
 
 export const genderLabels: { [key in GenderType]: string } = {
-  Other: "Inna",
-  Male: "Samiec",
-  Female: "Samiczka",
+  Other: t("genderType.other"),
+  Male: t("genderType.male"),
+  Female: t("genderType.female"),
 };
 
 export const typeValueToLabel = (value: GenreType): string => {
@@ -15,9 +16,9 @@ export const typeValueToLabel = (value: GenreType): string => {
 };
 
 export const typeLabels: { [key in GenreType]: string } = {
-  Other: "Inny",
-  Dog: "Pies",
-  Cat: "Kot",
+  Other: t("genreType.Other"),
+  Dog: t("genreType.Dog"),
+  Cat: t("genreType.Cat"),
 };
 
 export const ageConversion = (ageInMonths: number): string => {

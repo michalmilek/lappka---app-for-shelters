@@ -30,6 +30,7 @@ import {
   emptyFn,
   getChartTypeTimeByType,
 } from "./ChartDataUtils";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   viewsState: ViewsStateFilled;
@@ -39,6 +40,7 @@ interface Props {
 export type TimeType = "Month" | "Year" | "Week";
 
 const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
+  const { t, i18n } = useTranslation();
   const [activeMonth, setActiveMonth] = useState<null | number>(null);
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [timeSelect, setTimeSelect] = useState<TimeType>("Year");
@@ -99,7 +101,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
     <StyledDashboardChartContainer>
       <StyledDashboardChartTitleContainer>
         <Typography variant="UI/UI Text 16 Semi Bold">
-          Liczba wyświetleń podopiecznych
+          {t("animalChart.numberOfMentees")}
         </Typography>
         <Button
           onClick={() => setIsDropDownActive((prev) => !prev)}
@@ -145,10 +147,10 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
             <Label
               value={
                 timeSelect === "Year"
-                  ? "       Tyś"
+                  ? t("animalChart.thousands")
                   : timeSelect === "Month"
-                  ? `Wyśw. [msc]`
-                  : "Wyświetleń"
+                  ? t("animalChart.viewsInMonth")
+                  : t("animalChart.views")
               }
               position="top"
               offset={30}

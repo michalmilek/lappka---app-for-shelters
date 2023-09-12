@@ -1,4 +1,5 @@
 import CustomRadio from "components/SharedComponents/Inputs/CustomRadio";
+import { t } from "i18next";
 import { TimeType } from "./DashboardAnimalChart";
 import {
   StyledDashboardChartDropdownContainer,
@@ -24,7 +25,7 @@ const DashboardChartDropdown: React.FC<DashboardChartDropdownProps> = ({
           name="filterDate"
           id="Week"
           value={"Week"}
-          label="Tydzień"
+          label={t("animalChart.week")}
           checked={timeSelect === "Week"}
           onChange={(e) => {
             handleTimeSelectChange(e.target.value as TimeType);
@@ -35,14 +36,14 @@ const DashboardChartDropdown: React.FC<DashboardChartDropdownProps> = ({
           value={"Month"}
           id="Month"
           checked={timeSelect === "Month"}
-          label="Miesiąc"
+          label={t("animalChart.month")}
           onChange={(e) => handleTimeSelectChange(e.target.value as TimeType)}
         />
         <CustomRadio
           name="filterDate"
           value={"Year"}
           id="Year"
-          label="Rok"
+          label={t("animalChart.year")}
           checked={timeSelect === "Year"}
           onChange={(e) => handleTimeSelectChange(e.target.value as TimeType)}
         />
