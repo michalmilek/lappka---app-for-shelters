@@ -176,7 +176,9 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
             {table.getRowModel().rows.map((row) => (
               <StyledTableTR
                 onClick={() => {
-                  navigate(DashboardRoutes.animalCards + `/${row.original.id}`);
+                  navigate(
+                    DashboardRoutes.animalCards + `/${row.original.petId}`
+                  );
                 }}
                 key={row.id}>
                 {row.getVisibleCells().map((cell) => {

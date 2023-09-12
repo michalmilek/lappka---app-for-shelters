@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import { Pet } from "services/pet/petTypes";
 import { useGetStorageImagesForId } from "services/storage/storageServices";
+import { formatCardViews, typeValueToLabel } from "utils/appUtils";
 import {
   DashboardMostPopularAnimalsItemContainer,
   DashboardMostPopularAnimalsItemContainerAnimalInfoContainer,
@@ -34,10 +35,10 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
       onKeyDown={(e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
           e.preventDefault();
-          navigate(DashboardRoutes.animalCards + "/" + item.id);
+          navigate(DashboardRoutes.animalCards + "/" + item.petId);
         }
       }}
-      onClick={() => navigate(DashboardRoutes.animalCards + "/" + item.id)}
+      onClick={() => navigate(DashboardRoutes.animalCards + "/" + item.petId)}
       tabIndex={0}>
       <DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>
         {isLoading && <SkeletonMostPopularImg />}
@@ -59,7 +60,7 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
             tag="h6"
             variant="UI Small/UI Text 12 Reg"
             color="midGray3">
-            {item.animalCategory}
+            {typeValueToLabel(item.animalCategory)}
           </Typography>
         </DashboardMostPopularAnimalsItemInfoContainer>
       </DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>
@@ -69,7 +70,7 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
           tag="span"
           color="darkGray2"
           variant="UI/UI Text 14 Semi Bold">
-          {(Math.round(Math.random() * 4000) / 1000).toFixed(1)} tyś
+          {formatCardViews(item.views)}
         </Typography>
       </DashboardMostPopularAnimalsItemInfoContainerStyledViews>
     </DashboardMostPopularAnimalsItemContainer>

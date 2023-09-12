@@ -68,7 +68,7 @@ export const columns = [
         onClick={() => {
           return (
             <Navigate
-              to={DashboardRoutes.animalCards + `/${props.row.original.id}`}
+              to={DashboardRoutes.animalCards + `/${props.row.original.petId}`}
             />
           );
         }}>
@@ -224,6 +224,8 @@ export const columns = [
         </Typography>
       </ActionHeaderContainer>
     ),
-    cell: (props) => <AnimalCardsTableActionItem id={props.row.original.id} />,
+    cell: (props) => (
+      <AnimalCardsTableActionItem id={props.row.original.petId} />
+    ),
   }),
 ];

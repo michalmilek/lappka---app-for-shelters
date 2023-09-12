@@ -6,7 +6,6 @@ import {
   ShelterCardsResponse,
   SheltersStatsResponse,
   ShelterVolunteeringResponse,
-  UpdatePet,
 } from "./petTypes";
 
 export const getShelter = async () => {
@@ -156,7 +155,7 @@ export const postShelterCardsAnimal = async (data: CreatePet) => {
   }
 };
 
-export const putShelterCardsAnimal = async (data: UpdatePet) => {
+export const putShelterCardsAnimal = async (data: PetItem) => {
   try {
     const response = await axiosInstance.put("/Shelter/cards/Update", data);
     return response.data;

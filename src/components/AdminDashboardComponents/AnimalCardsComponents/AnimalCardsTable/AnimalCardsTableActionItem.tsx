@@ -20,6 +20,10 @@ import { getColor } from "utils/styles/getStyle/getColor";
 const StyledMoreIcon = styled(MoreIcon)`
   cursor: pointer;
 
+  &:focus {
+    outline: none;
+  }
+
   &:focus-visible {
     outline: 1px solid ${getColor("focus")};
   }

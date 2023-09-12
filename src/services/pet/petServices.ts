@@ -23,7 +23,7 @@ import {
   putShelterCardsPublish,
   updateShelterVolunteering,
 } from "./pet";
-import { CreatePet, ShelterVolunteeringResponse, UpdatePet } from "./petTypes";
+import { CreatePet, PetItem, ShelterVolunteeringResponse } from "./petTypes";
 
 export const useGetShelter = () => {
   return useQuery(["shelter"], getShelter);
@@ -140,9 +140,7 @@ export const usePostShelterCardsCreatePet = () => {
 };
 
 export const usePutShelterCardsAnimal = () => {
-  const mutation = useMutation((data: UpdatePet) =>
-    putShelterCardsAnimal(data)
-  );
+  const mutation = useMutation((data: PetItem) => putShelterCardsAnimal(data));
 
   return mutation;
 };

@@ -52,7 +52,7 @@ const DashboardNewestAnimalCards = () => {
         {isSuccess &&
           data.petInListInShelterDto.slice(0, 3).map((item, index) => (
             <DashboardNewestAnimalCardsItem
-              key={item.id + index}
+              key={item.petId + index}
               item={item}
             />
           ))}

@@ -26,7 +26,7 @@ export interface SheltersStatsResponse {
 //SHELTER CARDS
 
 export interface Pet {
-  id: string;
+  petId: string;
   name: string;
   animalCategory: GenreType;
   gender: GenderType;
@@ -40,15 +40,12 @@ export interface Pet {
   isSterilized: boolean;
   isVisible: boolean;
   description: string;
+  views: number;
 }
 
-export interface PetItem extends Omit<Pet, "createdAt"> {}
+export interface PetItem extends Omit<Pet, "createdAt" | "views"> {}
 
-export interface CreatePet extends Omit<Pet, "id" | "createdAt"> {}
-
-export interface UpdatePet extends Omit<Pet, "id" | "createdAt"> {
-  petId: string;
-}
+export interface CreatePet extends Omit<Pet, "petId" | "createdAt" | "views"> {}
 
 export interface ShelterCardsResponse {
   petInListInShelterDto: Pet[];

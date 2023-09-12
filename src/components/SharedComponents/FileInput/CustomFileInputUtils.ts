@@ -31,3 +31,20 @@ export function centerAspectCrop(
     mediaHeight
   );
 }
+
+
+export const base64StringToFile = (
+  base64String: string,
+  fileName: string,
+  mimeType: string
+): File => {
+  const byteCharacters = atob(base64String.split(",")[1]);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], { type: mimeType });
+
+  return new File([blob], fileName, { type: mimeType });
+};

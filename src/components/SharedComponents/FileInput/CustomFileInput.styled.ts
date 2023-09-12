@@ -163,7 +163,7 @@ export const ModalDiv = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1500;
+  z-index: 2500;
   width: 100%;
   height: 100%;
   display: flex;

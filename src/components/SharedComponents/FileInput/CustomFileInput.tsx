@@ -26,7 +26,11 @@ import PhotoPreviewNewPhotos from "../DragAndDrop/PhotoPreviewNewPhotos";
 import { useDebounceEffect } from "hooks/useDebounceEffect";
 import { canvasPreview } from "./Crop/canvasCrop";
 import CropImage, { RefInterface } from "./Crop/CropImage";
-import { centerAspectCrop, CustomFileInputProps } from "./CustomFileInputUtils";
+import {
+  base64StringToFile,
+  centerAspectCrop,
+  CustomFileInputProps,
+} from "./CustomFileInputUtils";
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
   existingFiles,
@@ -170,9 +174,11 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
       updatedPreviews.splice(index, 1, base64String);
       setFilePreviews(updatedPreviews);
 
-      const file = new File([base64String], fileNames[index], {
-        type: "image/jpeg",
-      });
+      const file = base64StringToFile(
+        base64String,
+        fileNames[index],
+        "image/jpeg"
+      );
 
       onFileChange(file);
     } else {

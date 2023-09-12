@@ -2,6 +2,7 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import { DashboardRoutes } from "router/router";
 import { Pet } from "services/pet/petTypes";
 import { useGetStorageImagesForId } from "services/storage/storageServices";
+import { typeValueToLabel } from "utils/appUtils";
 import {
   ContainerLink,
   DashboardNewestAnimalCardsItemContainer,
@@ -25,7 +26,7 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
   } = useGetStorageImagesForId(item.profilePhoto);
 
   return (
-    <ContainerLink to={DashboardRoutes.animalCards + "/" + item.id}>
+    <ContainerLink to={DashboardRoutes.animalCards + "/" + item.petId}>
       <DashboardNewestAnimalCardsItemContainer>
         {isError && <DashboardNewestAnimalCardsItemImgError />}
         {isLoading && <NewestAnimalImgSkeleton />}
@@ -46,7 +47,7 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
             <Typography
               variant="UI/UI Text 14 Reg"
               color="midGray2">
-              {item.animalCategory}
+              {typeValueToLabel(item.animalCategory)}
             </Typography>
             <Typography
               variant="UI Small/UI Text 12 Reg"

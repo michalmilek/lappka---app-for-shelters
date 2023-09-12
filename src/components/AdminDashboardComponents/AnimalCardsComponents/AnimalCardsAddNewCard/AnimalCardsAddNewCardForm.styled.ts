@@ -7,7 +7,7 @@ export const StyledDashboardAddNewCardMainContent = styled.article`
   gap: 16px;
   width: 100%;
   gap: 0;
-  padding: 34px 24px 0;
+  padding: 34px 24px 34px;
   background: ${getColor("lightGray5")};
 `;
 

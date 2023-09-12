@@ -2,8 +2,10 @@ import styled, { keyframes } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 export const DashboardMostPopularAnimalsItemContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 80% 20%;
   align-items: center;
+  position: relative;
   justify-content: space-between;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -19,8 +21,10 @@ export const DashboardMostPopularAnimalsItemContainer = styled.div`
 export const DashboardMostPopularAnimalsItemContainerAnimalInfoContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
+  grid-column: 1;
+  width: 100%;
 `;
 
 export const DashboardMostPopularAnimalsItemImage = styled.img`
@@ -69,6 +73,7 @@ export const DashboardMostPopularAnimalsItemInfoContainer = styled.div`
 export const DashboardMostPopularAnimalsItemInfoContainerStyledViews = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   color: #6b7280;
   white-space: nowrap;
   gap: 4px;

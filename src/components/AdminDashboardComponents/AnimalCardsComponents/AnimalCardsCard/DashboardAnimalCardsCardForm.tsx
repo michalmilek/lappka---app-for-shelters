@@ -1,4 +1,4 @@
-import { GenreType, PetItem, UpdatePet } from "services/pet/petTypes";
+import { GenreType, PetItem } from "services/pet/petTypes";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import {
@@ -9,7 +9,6 @@ import {
 } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
 import {
-  useDeleteStorageImages,
   useGetStorageImagesForAnimal,
   usePostStoragePictures,
 } from "services/storage/storageServices";
@@ -55,7 +54,7 @@ const DashboardAnimalCardsCardForm = ({
     data: imagesUrls,
     isLoading: GetStorageImagesIsLoading,
     isError: GetStorageImagesIsError,
-  } = useGetStorageImagesForAnimal(data.photos, data.id);
+  } = useGetStorageImagesForAnimal(data.photos, data.petId);
   const [localImageUrls, setLocalImageUrls] = useState<string[]>([]);
   console.log("🚀 ~ localImageUrls:", localImageUrls);
   const { mutate: postStoragePicture, isSuccess: postStorageIsSuccess } =
@@ -89,12 +88,11 @@ const DashboardAnimalCardsCardForm = ({
           putShelterCardsFn(
             {
               ...values,
-              petId: data.id,
               isSterilized: JSON.parse(values.isSterilized),
               isVisible: JSON.parse(values.isVisible),
               photos: [...values.photos, ...newData],
               profilePhoto: values.photos[0] || values.profilePhoto,
-            } as UpdatePet,
+            } as PetItem,
             {
               onSuccess: () => {
                 toastService.showToast(
@@ -105,10 +103,10 @@ const DashboardAnimalCardsCardForm = ({
                 formik.setFieldValue("newPhotos", []);
 
                 queryClient.invalidateQueries({
-                  queryKey: ["shelterCardsCard", data.id],
+                  queryKey: ["shelterCardsCard", data.petId],
                 });
                 queryClient.invalidateQueries({
-                  queryKey: ["storageImages", data.id],
+                  queryKey: ["storageImages", data.petId],
                 });
               },
             }
@@ -120,11 +118,10 @@ const DashboardAnimalCardsCardForm = ({
       putShelterCardsFn(
         {
           ...values,
-          petId: data.id,
           isSterilized: JSON.parse(values.isSterilized),
           isVisible: JSON.parse(values.isVisible),
           profilePhoto: values.photos[0] || values.profilePhoto,
-        } as UpdatePet,
+        } as PetItem,
         {
           onSuccess: () => {
             toastService.showToast(
@@ -132,8 +129,8 @@ const DashboardAnimalCardsCardForm = ({
               "success"
             );
 
-            queryClient.invalidateQueries(["shelterCardsCard", data.id]);
-            queryClient.invalidateQueries(["storageImages", data.id]);
+            queryClient.invalidateQueries(["shelterCardsCard", data.petId]);
+            queryClient.invalidateQueries(["storageImages", data.petId]);
           },
         }
       );
@@ -209,7 +206,7 @@ const DashboardAnimalCardsCardForm = ({
     <StyledCardFormContentContainer
       isEditOn={isEditOn}
       onSubmit={formik.handleSubmit}>
-      {!isEditOn && <AnimalCardsCardActions id={data.id} />}
+      {!isEditOn && <AnimalCardsCardActions id={data.petId} />}
 
       {GetStorageImagesIsError && (
         <StyledCardImgContainer>
@@ -239,7 +236,7 @@ const DashboardAnimalCardsCardForm = ({
               {localImageUrls.map((photo, index) => (
                 <PhotoPreviewImage
                   removePhotoAtIndex={removePhotoAtIndex}
-                  id={data.id}
+                  id={data.petId}
                   index={index}
                   key={photo + index}
                   isEditOn={isEditOn}
@@ -250,7 +247,7 @@ const DashboardAnimalCardsCardForm = ({
           </SortableContext>
         </DndContext>
       )}
-      {data.photos && isEditOn && <DeleteAllImagesModal id={data.id} />}
+      {data.photos && isEditOn && <DeleteAllImagesModal id={data.petId} />}
 
       <StyledCardInputContainer>
         <DashboardAnimalCardsCardFields

@@ -39,7 +39,7 @@ const DashboardMostPopularAnimals = () => {
       <DashboardMostPopularAnimalsContent>
         {viewsData &&
           viewsData.petInListInShelterDto.map((item, index) => (
-            <React.Fragment key={item.id + item.name + index}>
+            <React.Fragment key={item.petId + item.name + index}>
               <DashboardMostPopularAnimalsItem item={item} />
               {index !== viewsData.petInListInShelterDto.length - 1 && (
                 <Divider />
