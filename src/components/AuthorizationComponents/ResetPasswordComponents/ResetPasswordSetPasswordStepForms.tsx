@@ -12,16 +12,17 @@ import {
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
 import { setPasswordValidation } from "./ResetPasswordUtils";
+import { useTranslation } from "react-i18next";
 
 export const ResetPasswordSetPasswordStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordSetPasswordFormProps) => {
   const { token } = useParams();
+  const { t } = useTranslation();
 
   const deviceType = useDeviceType();
   const { mutate: resetPasswordSetNewPasswordFn, isSuccess } =
     useResetPasswordSetNewPasswordMutation();
-  console.log("🚀 ~ isSuccess:", isSuccess);
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -56,24 +57,24 @@ export const ResetPasswordSetPasswordStep1Form = ({
               : "Heading 24 Semi Bold"
           }
           tag="h1">
-          Utwórz nowe hasło
+          {t("resetPassword.createANewPassword")}
         </Typography>
 
         <Typography
           tag="p"
           color="midGray2"
           variant="Running Text / Paragraph 14 Reg">
-          Hasło powinno mieć m.in. 8 znaków.
+          {t("resetPassword.min8Letters")}
         </Typography>
       </ResetPasswordTitleContent>
 
       <ResetPasswordInputContainer>
         <Input
-          label="Hasło"
+          label={t("resetPassword.password")}
           type="password"
           id="password"
           name="password"
-          placeholder="Wpisz"
+          placeholder={t("resetPassword.enter")}
           inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -84,11 +85,11 @@ export const ResetPasswordSetPasswordStep1Form = ({
           }
         />
         <Input
-          label="Potwierdź hasło"
+          label={t("resetPassword.confirmPassword")}
           type="password"
           id="confirmPassword"
           name="confirmPassword"
-          placeholder="Wpisz"
+          placeholder={t("resetPassword.enter")}
           inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -104,13 +105,14 @@ export const ResetPasswordSetPasswordStep1Form = ({
         type="submit"
         isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
-        Utwórz hasło
+        {t("resetPassword.createPassword")}
       </Button>
     </form>
   );
 };
 
 export const ResetPasswordSetPasswordStep2Form = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const deviceType = useDeviceType();
   return (
@@ -124,15 +126,14 @@ export const ResetPasswordSetPasswordStep2Form = () => {
               : "Heading 24 Semi Bold"
           }
           tag="h1">
-          Hasło zresetowane pomyślnie
+          {t("resetPassword.pwResetSuccesfully")}
         </Typography>
 
         <Typography
           tag="p"
           color="midGray2"
           variant="Running Text / Paragraph 14 Reg">
-          Twoje hasło zostało zresetowane. Możesz już zalogować się do swojego
-          konta.
+          {t("resetPassword.yourPwHasBeenReset")}
         </Typography>
       </ResetPasswordTitleContent>
       <Button
@@ -140,7 +141,7 @@ export const ResetPasswordSetPasswordStep2Form = () => {
         type="button"
         isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
-        Zaloguj się
+        {t("resetPassword.login")}
       </Button>
     </form>
   );

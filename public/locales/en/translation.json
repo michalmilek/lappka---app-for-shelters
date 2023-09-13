@@ -204,6 +204,176 @@
     "details": "Details",
     "delete": "Delete"
   },
+  "login": {
+    "signIn": "Sign in",
+    "welcomeBack": "Welcome back!",
+    "forgotPassword": "Forgot password",
+    "logInThrough": "Or log in through",
+    "email": "Email address",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "enter": "Enter",
+    "register": "Sign up"
+  },
+  "register": {
+    "login": "Sign in",
+    "registerAShelter": "Register a shelter",
+    "fillOut": "Fill out the form below and set up",
+    "shelterAccount": "Shelter account",
+    "registerCompleted": "The registration process was successful. To your email address has been sent an email with an activation link, click on the link and proceed to log in.",
+    "fullNameOrg": "Full name of the organization",
+    "street": "Street",
+    "zipCode": "Zip code",
+    "city": "City",
+    "nip": "NIP number",
+    "krs": "KRS number",
+    "phoneNumber": "Phone number",
+    "nextStep": "Next step",
+    "enter": "Enter",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "return": "Return",
+    "register": "Sign up",
+    "orgData": "Organization data",
+    "userData": "User data",
+    "summary": "Summary"
+  },
+  "resetPassword": {
+    "forgetPassword": "Did you forget your password?",
+    "enterTheEmail": "Enter the email address used for registration.",
+    "enter": "Enter",
+    "email": "Email",
+    "resetPassword": "Reset password",
+    "thankYou": "Thank you",
+    "weSentAnEmail": "We sent an email with a link to create a new password.",
+    "close": "Close",
+    "createANewPassword": "Create a new password",
+    "min8Letters": "Among other things, the password should have 8 characters.",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "createPassword": "Create a password",
+    "pwResetSuccesfully": "Password reset successfully",
+    "yourPwHasBeenReset": "Your password has been reset. You can now log in to your account.",
+    "login": "Sign in"
+  },
+  "accountSettingsForm": {
+    "validation": {
+      "organizationName": {
+        "required": "Nazwa Organizacji jest wymagana"
+      },
+      "street": {
+        "required": "Ulica jest wymagana"
+      },
+      "zipCode": {
+        "required": "Kod pocztowy jest wymagany"
+      },
+      "city": {
+        "required": "Miasto jest wymagane"
+      },
+      "phoneNumber": {
+        "required": "Numer telefonu jest wymagany",
+        "format": "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze"
+      },
+      "nip": {
+        "required": "NIP jest wymagany"
+      },
+      "krs": {
+        "required": "KRS jest wymagany"
+      },
+      "firstName": {
+        "required": "Imię jest wymagane"
+      },
+      "lastName": {
+        "required": "Nazwisko jest wymagane"
+      },
+      "email": {
+        "required": "Adres email jest wymagany",
+        "invalid": "Nieprawidłowy adres email"
+      }
+    }
+  },
+  "accountSettingsForm": {
+    "validation": {
+      "organizationName": {
+        "required": "Organization Name is required"
+      },
+      "street": {
+        "required": "Street is required"
+      },
+      "zipCode": {
+        "required": "Zip Code is required"
+      },
+      "city": {
+        "required": "City is required"
+      },
+      "phoneNumber": {
+        "required": "Phone Number is required",
+        "format": "Phone Number should consist of 9 digits and may optionally include hyphens or spaces after the third and sixth digits"
+      },
+      "nip": {
+        "required": "NIP is required"
+      },
+      "krs": {
+        "required": "KRS is required"
+      },
+      "firstName": {
+        "required": "First Name is required"
+      },
+      "lastName": {
+        "required": "Last Name is required"
+      },
+      "email": {
+        "required": "Email Address is required",
+        "invalid": "Invalid email address"
+      }
+    }
+  },
+  "addNewCardForm": {
+    "name": {
+      "required": "This field is required",
+      "max": "Field 'Name' can have a maximum of 50 characters"
+    },
+    "description": {
+      "required": "This field is required",
+      "max": "Field 'Description' can have a maximum of 200 characters"
+    },
+    "animalCategory": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    },
+    "species": {
+      "max": "Species can't exceed 15 characters",
+      "required": "This field is required"
+    },
+    "gender": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    },
+    "marking": {
+      "required": "This field is required",
+      "matches": "Field can only contain letters, spaces, and hyphens",
+      "max": "Field 'Marking' can have a maximum of 50 characters"
+    },
+    "months": {
+      "required": "This field is required",
+      "positive": "Value must be greater than zero"
+    },
+    "weight": {
+      "required": "This field is required",
+      "positive": "Value must be greater than zero"
+    },
+    "isSterilized": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    },
+    "isVisible": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    }
+  },
   "errors": {
     "required": "Field is required",
     "max50": "Field can have a maximum of 50 characters",
@@ -211,6 +381,16 @@
     "invalidSelection": "Invalid selection for the animalCategory field.",
     "max15": "Field can have a maximum of 15 characters",
     "lettersSpacesDashes": "Field can only contain letters, spaces, and dashes.",
-    "positive": "Value must be greater than zero"
+    "positive": "Value must be greater than zero",
+    "500": "Internal server error. Try again later.",
+    "403": "You dont have permissions for this operation. If you think this is a blunder contact your administrator.",
+    "pwFormat": "The password must contain at least 8 characters, at least 1 non-alphanumeric character, 1 number, 1 uppercase letter and 1 lowercase letter",
+    "wrongEmailFormat": "Incorrect email address format",
+    "postalCodeFormat": "The postal code should be in XX-XXX format.",
+    "max10": "Field can have a maximum of 10 characters",
+    "phoneNumberFormat": "The phone number should consist of nine digits and may optionally contain hyphens or spaces after the third and sixth digits.",
+    "firstNameFormat": "The name can only contain letters",
+    "lastNameFormat": "The name can only contain letters and must consist of at least two words separated by a space",
+    "confirmPwFormat": "Passwords must be identical"
   }
 }

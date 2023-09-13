@@ -18,8 +18,10 @@ import {
 import useDeviceType from "hooks/useDeviceType";
 import { useNavigate } from "react-router-dom";
 import { AuthRoutes } from "router/router";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
+  const { t } = useTranslation();
   const deviceType = useDeviceType();
   const navigate = useNavigate();
   return (
@@ -34,7 +36,7 @@ const LoginPage = () => {
             onClick={() => navigate(AuthRoutes.register)}
             size={deviceType === "desktop" ? `Large` : `Medium`}
             variant="outline">
-            Zarejestruj się
+            {t("login.register")}
           </Button>
           <AnchorLink to={AuthRoutes.register}>
             <CloseIcon

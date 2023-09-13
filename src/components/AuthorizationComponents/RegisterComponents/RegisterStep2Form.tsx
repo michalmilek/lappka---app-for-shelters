@@ -13,12 +13,14 @@ import useDeviceType from "hooks/useDeviceType";
 import { RegisterStep2Validation } from "./RegisterUtils";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import { useTranslation } from "react-i18next";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
   handleFormValues,
   formValues,
 }: HandleStepProps) => {
+  const { t } = useTranslation();
   const deviceType = useDeviceType();
   const dispatch = useDispatch();
   const {
@@ -76,7 +78,7 @@ const RegisterStep2Form = ({
       <StyledRegisterInputContainer>
         <Input
           inputSize={"Large"}
-          label="Imię"
+          label={t("register.firstName")}
           name="firstName"
           value={formik.values.firstName}
           onChange={formik.handleChange}
@@ -89,7 +91,7 @@ const RegisterStep2Form = ({
         />
         <Input
           inputSize={"Large"}
-          label="Nazwisko"
+          label={t("register.lastName")}
           name="lastName"
           value={formik.values.lastName}
           onChange={formik.handleChange}
@@ -102,7 +104,7 @@ const RegisterStep2Form = ({
         />
         <Input
           inputSize={"Large"}
-          label="Adres e-mail"
+          label={t("register.email")}
           name="emailAddress"
           value={formik.values.emailAddress}
           onChange={formik.handleChange}
@@ -115,7 +117,7 @@ const RegisterStep2Form = ({
         />
         <Input
           inputSize={"Large"}
-          label="Hasło"
+          label={t("register.password")}
           name="password"
           type="password"
           value={formik.values.password}
@@ -129,7 +131,7 @@ const RegisterStep2Form = ({
         />
         <Input
           inputSize={"Large"}
-          label="Powtórz hasło"
+          label={t("register.confirmPassword")}
           name="confirmPassword"
           type="password"
           value={formik.values.confirmPassword}
@@ -156,7 +158,7 @@ const RegisterStep2Form = ({
               handleFormValues({ userRequest: formik.values });
             if (handleCurrentStep) handleCurrentStep(1);
           }}>
-          Powrót
+          {t("register.return")}
         </Button>
         <Button
           width="70%"
@@ -165,7 +167,7 @@ const RegisterStep2Form = ({
           size={deviceType === "desktop" ? "Large" : "Medium"}
           variant="fill"
           type="submit">
-          Zarejestruj się
+          {t("register.register")}
         </Button>
       </StyledRegisterButtonContainer>
     </form>

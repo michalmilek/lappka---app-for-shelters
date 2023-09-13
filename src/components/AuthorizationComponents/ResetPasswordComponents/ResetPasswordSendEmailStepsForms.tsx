@@ -14,10 +14,12 @@ import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
+import { useTranslation } from "react-i18next";
 
 export const ResetPasswordSendEmailStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordFormProps) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const {
@@ -62,24 +64,24 @@ export const ResetPasswordSendEmailStep1Form = ({
               : "Heading 24 Semi Bold"
           }
           tag="h1">
-          Zapomniałeś hasła?
+          {t("resetPassword.forgetPassword")}
         </Typography>
 
         <Typography
           tag="p"
           color="midGray2"
           variant="Running Text / Paragraph 14 Reg">
-          Podaj adres email użyty przy rejestracji.
+          {t("resetPassword.enterTheEmail")}
         </Typography>
       </ResetPasswordTitleContent>
 
       <ResetPasswordInputContainer>
         <Input
-          label="Email"
+          label={t("resetPassword.email")}
           type="text"
           id="email"
           name="email"
-          placeholder="Wpisz"
+          placeholder={t("resetPassword.enter")}
           inputSize="Large"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -94,13 +96,14 @@ export const ResetPasswordSendEmailStep1Form = ({
       <Button
         isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
-        Resetuj hasło
+        {t("resetPassword.resetPassword")}
       </Button>
     </form>
   );
 };
 
 export const ResetPasswordSendEmailStep2Form = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const deviceType = useDeviceType();
 
@@ -115,21 +118,21 @@ export const ResetPasswordSendEmailStep2Form = () => {
               : "Heading 24 Semi Bold"
           }
           tag="h1">
-          Dziękujemy
+          {t("resetPassword.thankYou")}
         </Typography>
 
         <Typography
           tag="p"
           color="midGray2"
           variant="Running Text / Paragraph 14 Reg">
-          Wysłalismy na adres email link do stworzenia nowego hasła.
+          {t("resetPassword.weSentAnEmail")}
         </Typography>
       </ResetPasswordTitleContent>
       <Button
         type="submit"
         isFullWidth
         size={deviceType === "desktop" ? "XLarge" : "Large"}>
-        Zamknij
+        {t("resetPassword.close")}
       </Button>
     </form>
   );

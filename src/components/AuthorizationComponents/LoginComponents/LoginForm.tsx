@@ -24,8 +24,10 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { AuthRoutes } from "router/router";
 import { loginValidation } from "./LoginUtils";
+import { useTranslation } from "react-i18next";
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const [rememberMe, setRememberMe] = useState(false);
@@ -60,14 +62,14 @@ const LoginForm = () => {
               : "Heading 24 Semi Bold"
           }
           tag="h1">
-          Zaloguj się
+          {t("login.signIn")}
         </Typography>
 
         <Typography
           tag="p"
           color="midGray2"
           variant="Running Text / Paragraph 14 Reg">
-          Witaj ponownie!
+          {t("login.welcomeBack")}
         </Typography>
       </StyledLoginTitleContent>
 
@@ -89,7 +91,7 @@ const LoginForm = () => {
           }
         />
         <Input
-          label="Hasło"
+          label={t("login.password")}
           type="password"
           id="password"
           name="password"
@@ -105,7 +107,7 @@ const LoginForm = () => {
         />
         <StyledLoginOptionsContainer>
           <CustomCheckbox
-            label="Pamiętaj mnie"
+            label={t("login.rememberMe")}
             name="rememberMe"
             checked={rememberMe}
             onClick={() => setRememberMe(!rememberMe)}
@@ -119,7 +121,7 @@ const LoginForm = () => {
             variant="UI/UI Text 14 Reg"
             color="primary600"
             to={AuthRoutes.resetPassword}>
-            Zapomniałem hasła
+            {t("login.forgotPassword")}
           </AnchorLink>
         </StyledLoginOptionsContainer>
       </StyledLoginInputContainer>
@@ -129,14 +131,14 @@ const LoginForm = () => {
         isFullWidth
         variant="fill"
         type="submit">
-        Zaloguj się
+        {t("login.signIn")}
       </Button>
       <Divider
         mt="24px"
         mb="24px"
         gapFromLines="8px"
         color="midGray3"
-        text="Lub zaloguj się przez"
+        text={t("login.logInThrough")}
       />
 
       <StyledLoginButtonContainer>

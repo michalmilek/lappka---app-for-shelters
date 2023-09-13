@@ -34,35 +34,24 @@ import UnprotectedPage from "components/PagesComponents/UnprotectedPage";
 import HomePage from "pages/HomePage";
 import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error) => {
       if ((error as AxiosError).response?.status === 500) {
-        toastService.showToast(
-          "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
-          "error"
-        );
+        toastService.showToast(t("errors.500"), "error");
       } else if ((error as AxiosError).response?.status === 403) {
-        toastService.showToast(
-          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.",
-          "error"
-        );
+        toastService.showToast(t("errors.403"), "error");
       }
     },
   }),
   mutationCache: new MutationCache({
     onError: (error) => {
       if ((error as AxiosError).response?.status === 500) {
-        toastService.showToast(
-          "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
-          "error"
-        );
+        toastService.showToast(t("errors.500"), "error");
       } else if ((error as AxiosError).response?.status === 403) {
-        toastService.showToast(
-          "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.",
-          "error"
-        );
+        toastService.showToast(t("errors.403"), "error");
       }
     },
   }),
@@ -76,7 +65,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const { t, i18n } = useTranslation();
   const wasLoadedInThePast = localStorage.getItem("wasLoadedInThePast");
   const [isPageLoaded, setIsPageLoaded] = useState(
     wasLoadedInThePast ? true : false

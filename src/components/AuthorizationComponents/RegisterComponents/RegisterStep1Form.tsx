@@ -12,12 +12,14 @@ import {
 import useDeviceType from "hooks/useDeviceType";
 import { formatPhoneNumber } from "utils/appUtils";
 import { RegisterStep1Validation } from "./RegisterUtils";
+import { useTranslation } from "react-i18next";
 
 const RegisterStep1Form = ({
   handleFormValues,
   formValues,
   handleCurrentStep,
 }: HandleStepProps) => {
+  const { t } = useTranslation();
   const deviceType = useDeviceType();
   const { setValues, ...formik } = useFormik({
     initialValues: {
@@ -55,11 +57,11 @@ const RegisterStep1Form = ({
     <form onSubmit={formik.handleSubmit}>
       <StyledRegisterInputStep1Container>
         <Input
-          label="Pełna Nazwa Organizacji"
+          label={t("register.fullNameOrg")}
           type="text"
           id="organizationName"
           name="organizationName"
-          placeholder="Wpisz"
+          placeholder={t("register.enter")}
           inputSize="Large"
           onChange={formik.handleChange}
           value={formik.values.organizationName}
@@ -71,11 +73,11 @@ const RegisterStep1Form = ({
           }
         />
         <Input
-          label="Ulica"
+          label={t("register.street")}
           type="text"
           id="street"
           name="street"
-          placeholder="Wpisz"
+          placeholder={t("register.enter")}
           inputSize="Large"
           onChange={formik.handleChange}
           value={formik.values.street}
@@ -89,11 +91,11 @@ const RegisterStep1Form = ({
         <StyledRegisterHorizontalInputContainer>
           <StyledRegisterHorizontalInputContainerPostalCode>
             <Input
-              label="Kod pocztowy"
+              label={t("register.zipCode")}
               type="text"
               id="zipCode"
               name="zipCode"
-              placeholder="Wpisz"
+              placeholder={t("register.enter")}
               inputSize="Large"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -106,11 +108,11 @@ const RegisterStep1Form = ({
             />
           </StyledRegisterHorizontalInputContainerPostalCode>
           <Input
-            label="Miasto"
+            label={t("register.city")}
             type="text"
             id="city"
             name="city"
-            placeholder="Wpisz"
+            placeholder={t("register.enter")}
             inputSize="Large"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -123,11 +125,11 @@ const RegisterStep1Form = ({
           />
         </StyledRegisterHorizontalInputContainer>
         <Input
-          label="Numer NIP"
+          label={t("register.nip")}
           type="text"
           id="nip"
           name="nip"
-          placeholder="Wpisz"
+          placeholder={t("register.enter")}
           inputSize="Large"
           maxLength={16}
           onChange={formik.handleChange}
@@ -138,11 +140,11 @@ const RegisterStep1Form = ({
           }
         />
         <Input
-          label="Numer KRS"
+          label={t("register.krs")}
           type="text"
           id="krs"
           name="krs"
-          placeholder="Wpisz"
+          placeholder={t("register.enter")}
           inputSize="Large"
           value={formik.values.krs}
           onChange={formik.handleChange}
@@ -152,11 +154,11 @@ const RegisterStep1Form = ({
           }
         />
         <Input
-          label="Numer telefonu"
+          label={t("register.phoneNumber")}
           type="text"
           id="phoneNumber"
           name="phoneNumber"
-          placeholder="Wpisz"
+          placeholder={t("register.enter")}
           inputSize="Large"
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
@@ -176,7 +178,7 @@ const RegisterStep1Form = ({
         isFullWidth
         variant="fill"
         type="submit">
-        Następny krok
+        {t("register.nextStep")}
       </Button>
     </form>
   );

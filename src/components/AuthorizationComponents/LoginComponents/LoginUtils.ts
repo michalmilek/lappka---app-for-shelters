@@ -1,13 +1,14 @@
 import * as Yup from "yup";
+import { t } from "i18next";
 
 export const loginValidation = Yup.object().shape({
   email: Yup.string()
-    .email("Nieprawidłowy format adresu email")
-    .required('Pole "Email" jest wymagane'),
+    .email(t("errors.wrongEmailFormat"))
+    .required(t("errors.required")),
   password: Yup.string()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/,
-      "Hasło musi zawierać co najmniej 8 znaków, przynajmniej 1 znak nie alfanumeryczny, 1 cyfrę, 1 wielką literę i 1 małą literę"
+      t("errors.pwFormat")
     )
-    .required("Pole 'Hasło' jest wymagane"),
+    .required(t("errors.required")),
 });

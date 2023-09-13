@@ -204,6 +204,140 @@
     "details": "Szczegóły",
     "delete": "Usuń"
   },
+  "login": {
+    "signIn": "Zaloguj się",
+    "welcomeBack": "Witaj ponownie!",
+    "forgotPassword": "Zapomniałem hasła",
+    "logInThrough": "Lub zaloguj się przez",
+    "email": "Adres email",
+    "password": "Hasło",
+    "rememberMe": "Zapamiętaj mnie",
+    "enter": "Wpisz",
+    "register": "Zarejestruj się"
+  },
+  "register": {
+    "login": "Zaloguj się",
+    "registerAShelter": "Zarejestruj schronisko",
+    "fillOut": "Wypełnij poniższy formularz i załóż",
+    "shelterAccount": "Konto schroniska",
+    "registerCompleted": "Proces rejestracji przebiegł pomyślnie. Na Twój adres email została wysłana wiadomość z linkiem aktywacyjnym, kliknij w link i przejdź do logowania.",
+    "fullNameOrg": "Pełna nazwa organizacji",
+    "street": "Ulica",
+    "zipCode": "Kod pocztowy",
+    "city": "Miasto",
+    "nip": "Numer NIP",
+    "krs": "Numer KRS",
+    "phoneNumber": "Numer telefonu",
+    "nextStep": "Następny krok",
+    "enter": "Wpisz",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "Adres email",
+    "password": "Hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "return": "Powrót",
+    "register": "Zarejestruj się",
+    "orgData": "Dane organizacji",
+    "userData": "Dane użytkownika",
+    "summary": "Podsumowanie"
+  },
+  "resetPassword": {
+    "forgetPassword": "Zapomniałeś hasła?",
+    "enterTheEmail": "Podaj adres email użyty przy rejestracji.",
+    "enter": "Wpisz",
+    "email": "Email",
+    "resetPassword": "Resetuj hasło",
+    "thankYou": "Dziękujemy",
+    "weSentAnEmail": "Wysłalismy na adres email link do stworzenia nowego hasła.",
+    "close": "Zamknij",
+    "createANewPassword": "Utwórz nowe hasło",
+    "min8Letters": "Hasło powinno mieć m.in. 8 znaków.",
+    "password": "Hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "createPassword": "Utwórz hasło",
+    "pwResetSuccesfully": "Hasło zresetowane pomyślnie",
+    "yourPwHasBeenReset": "Twoje hasło zostało zresetowane. Możesz już zalogować się do swojego konta.",
+    "login": "Zaloguj się"
+  },
+  "accountSettingsForm": {
+    "validation": {
+      "organizationName": {
+        "required": "Nazwa Organizacji jest wymagana"
+      },
+      "street": {
+        "required": "Ulica jest wymagana"
+      },
+      "zipCode": {
+        "required": "Kod pocztowy jest wymagany"
+      },
+      "city": {
+        "required": "Miasto jest wymagane"
+      },
+      "phoneNumber": {
+        "required": "Numer telefonu jest wymagany",
+        "format": "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze"
+      },
+      "nip": {
+        "required": "NIP jest wymagany"
+      },
+      "krs": {
+        "required": "KRS jest wymagany"
+      },
+      "firstName": {
+        "required": "Imię jest wymagane"
+      },
+      "lastName": {
+        "required": "Nazwisko jest wymagane"
+      },
+      "email": {
+        "required": "Adres email jest wymagany",
+        "invalid": "Nieprawidłowy adres email"
+      }
+    }
+  },
+  "cardForm": {
+    "name": {
+      "required": "To pole jest wymagane",
+      "max": "Pole 'Imię' może mieć maksymalnie 50 znaków"
+    },
+    "description": {
+      "required": "To pole jest wymagane",
+      "max": "Pole 'Opis' może mieć maksymalnie 200 znaków"
+    },
+    "animalCategory": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    },
+    "species": {
+      "max": "Rasa nie może przekraczać 15 liter",
+      "required": "To pole jest wymagane"
+    },
+    "gender": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    },
+    "marking": {
+      "required": "To pole jest wymagane",
+      "matches": "Pole może zawierać tylko litery, spacje i pauzy",
+      "max": "Pole 'Opis' może mieć maksymalnie 50 znaków"
+    },
+    "months": {
+      "required": "To pole jest wymagane",
+      "positive": "Wartość musi być większa od zera"
+    },
+    "weight": {
+      "required": "To pole jest wymagane",
+      "positive": "Wartość musi być większa od zera"
+    },
+    "isSterilized": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    },
+    "isVisible": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    }
+  },
   "errors": {
     "required": "To pole jest wymagane",
     "max50": "Pole może mieć maksymalnie 50 znaków",
@@ -211,6 +345,16 @@
     "invalidSelection": "Nieprawidłowy wybór",
     "max15": "Pole może mieć maksymalnie 15 znaków",
     "lettersSpacesDashes": "Pole może zawierać tylko litery, spacje i pauzy",
-    "positive": "Wartość musi być większa od zera"
+    "positive": "Wartość musi być większa od zera",
+    "500": "Błąd wewnętrzny serwera. Spróbuj ponownie później.",
+    "403": "Nie masz uprawnień do tej operacji. Jeśli uważasz, że to bląd skontaktuj się z administratorem.",
+    "pwFormat": "Hasło musi zawierać co najmniej 8 znaków, przynajmniej 1 znak nie alfanumeryczny, 1 cyfrę, 1 wielką literę i 1 małą literę",
+    "wrongEmailFormat": "Nieprawidłowy format adresu email",
+    "postalCodeFormat": "Kod pocztowy powinien być w formacie XX-XXX",
+    "max10": "Pole może mieć maksymalnie 10 znaków",
+    "phoneNumberFormat": "Numer telefonu powinien składać się z dziewięciu cyfr i może opcjonalnie zawierać myślniki lub spacje po trzeciej i szóstej cyfrze.",
+    "firstNameFormat": "Imię może zawierać tylko litery",
+    "lastNameFormat": "Nazwisko może zawierać tylko litery i musi składać się z przynajmniej dwóch wyrazów oddzielonych spacją",
+    "confirmPwFormat": "Hasła muszą być identyczne"
   }
 }
