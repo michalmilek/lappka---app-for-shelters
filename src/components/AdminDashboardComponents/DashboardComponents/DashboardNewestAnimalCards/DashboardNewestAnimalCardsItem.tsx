@@ -1,4 +1,5 @@
 import Typography from "components/SharedComponents/Typography/Typography";
+import { useTranslation } from "react-i18next";
 import { DashboardRoutes } from "router/router";
 import { Pet } from "services/pet/petTypes";
 import { useGetStorageImagesForId } from "services/storage/storageServices";
@@ -24,6 +25,7 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
     isSuccess,
     isError,
   } = useGetStorageImagesForId(item.profilePhoto);
+  const { t } = useTranslation();
 
   return (
     <ContainerLink to={DashboardRoutes.animalCards + "/" + item.petId}>
@@ -47,7 +49,7 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
             <Typography
               variant="UI/UI Text 14 Reg"
               color="midGray2">
-              {typeValueToLabel(item.animalCategory)}
+              {t(typeValueToLabel(item.animalCategory))}
             </Typography>
             <Typography
               variant="UI Small/UI Text 12 Reg"

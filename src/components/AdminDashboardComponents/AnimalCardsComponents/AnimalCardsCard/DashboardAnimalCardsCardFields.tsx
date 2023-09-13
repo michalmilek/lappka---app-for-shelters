@@ -3,12 +3,18 @@ import InputNumberWithUnits from "components/SharedComponents/Inputs/InputNumber
 import Textarea from "components/SharedComponents/Inputs/TextArea";
 import { FormikProps } from "formik";
 import React from "react";
-import { ageConversion, genderLabels, typeValueToLabel } from "utils/appUtils";
+import {
+  ageConversion,
+  genderLabels,
+  genderValueToLabel,
+  typeValueToLabel,
+} from "utils/appUtils";
 import { AnimalCardsCardFlexInputContainer } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
 import { PetCard } from "./utils/DashboardAnimalCardsUtils";
 import { GenderType, GenreType } from "services/pet/petTypes";
 import SecondSelect from "components/SharedComponents/DropdownMenu/SecondSelect";
+import { useTranslation } from "react-i18next";
 
 interface DashboardAnimalCardsCardFieldsProps {
   isEditOn: boolean;
@@ -18,9 +24,11 @@ interface DashboardAnimalCardsCardFieldsProps {
 const DashboardAnimalCardsCardFields: React.FC<
   DashboardAnimalCardsCardFieldsProps
 > = ({ isEditOn, formik }) => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <FormRow label="Imię zwierzaka">
+      <FormRow label={t("pet.name")}>
         <Input
           id="name"
           name="name"
@@ -30,7 +38,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           inputSize="Large"
         />
       </FormRow>
-      <FormRow label="Opis">
+      <FormRow label={t("pet.description")}>
         {!isEditOn ? (
           <Input
             value={formik.values.description}
@@ -47,20 +55,20 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         )}
       </FormRow>
-      <FormRow label="Płeć">
+      <FormRow label={t("pet.gender")}>
         {!isEditOn ? (
           <Input
             readOnly
             inputSize="Large"
-            value={genderLabels[formik.values.gender as GenderType]}
+            value={t(genderValueToLabel(formik.values.gender as GenderType))}
           />
         ) : (
           <SecondSelect
             label=""
             options={[
-              { label: "Samiec", value: "Male" },
-              { label: "Samiczka", value: "Female" },
-              { label: "Inna", value: "Other" },
+              { label: t("genderType.Male"), value: "Male" },
+              { label: t("genderType.Female"), value: "Female" },
+              { label: t("genderType.Other"), value: "Other" },
             ]}
             value={formik.values.gender}
             handleChange={(option) => {
@@ -70,7 +78,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         )}
       </FormRow>
-      <FormRow label="Gatunek">
+      <FormRow label={t("pet.animalCategory")}>
         {!isEditOn ? (
           <Input
             readOnly
@@ -82,16 +90,18 @@ const DashboardAnimalCardsCardFields: React.FC<
             placeholder="Wpisz"
             inputSize="Large"
             name="animalCategory"
-            value={typeValueToLabel(formik.values.animalCategory as GenreType)}
+            value={t(
+              typeValueToLabel(formik.values.animalCategory as GenreType)
+            )}
             onChange={formik.handleChange}
           />
         ) : (
           <SecondSelect
             label=""
             options={[
-              { value: "Dog", label: "Pies" },
-              { value: "Cat", label: "Kot" },
-              { value: "Other", label: "Inny" },
+              { value: "Dog", label: t("genreType.Dog") },
+              { value: "Cat", label: t("genreType.Cat") },
+              { value: "Other", label: t("genreType.Other") },
             ]}
             value={formik.values.animalCategory}
             handleChange={(option) => {
@@ -102,7 +112,7 @@ const DashboardAnimalCardsCardFields: React.FC<
         )}
       </FormRow>
       {formik.values.animalCategory !== "Other" && (
-        <FormRow label="Rasa">
+        <FormRow label={t("pet.species")}>
           <Input
             id="species"
             name="species"
@@ -113,7 +123,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         </FormRow>
       )}
-      <FormRow label="Waga">
+      <FormRow label={t("pet.weight")}>
         {!isEditOn ? (
           <Input
             readOnly
@@ -130,7 +140,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         )}
       </FormRow>
-      <FormRow label="Wiek">
+      <FormRow label={t("pet.months")}>
         {!isEditOn ? (
           <Input
             readOnly
@@ -148,7 +158,7 @@ const DashboardAnimalCardsCardFields: React.FC<
         )}
       </FormRow>
       <AnimalCardsCardFlexInputContainer>
-        <FormRow label="Sterylizacja">
+        <FormRow label={t("form.sterilisation")}>
           {!isEditOn ? (
             <Input
               readOnly
@@ -159,8 +169,8 @@ const DashboardAnimalCardsCardFields: React.FC<
             <SecondSelect
               label=""
               options={[
-                { label: "Tak", value: "true" },
-                { label: "Nie", value: "false" },
+                { label: t("form.yes"), value: "true" },
+                { label: t("form.no"), value: "false" },
               ]}
               value={formik.values.isSterilized}
               handleChange={(option) => {
@@ -170,7 +180,7 @@ const DashboardAnimalCardsCardFields: React.FC<
             />
           )}
         </FormRow>
-        <FormRow label="Widoczność">
+        <FormRow label={t("form.visible")}>
           {!isEditOn ? (
             <Input
               readOnly
@@ -181,8 +191,8 @@ const DashboardAnimalCardsCardFields: React.FC<
             <SecondSelect
               label=""
               options={[
-                { label: "Tak", value: "true" },
-                { label: "Nie", value: "false" },
+                { label: t("form.yes"), value: "true" },
+                { label: t("form.no"), value: "false" },
               ]}
               value={formik.values.isVisible ? "true" : "false"}
               handleChange={(option) => {

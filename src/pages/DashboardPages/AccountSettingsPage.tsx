@@ -11,8 +11,10 @@ import { StyledProtectedPageContent } from "components/PagesComponents/Protected
 import Button from "components/SharedComponents/Button/Button";
 import { useFormik } from "formik";
 import { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useGetShelter } from "services/pet/petServices";
+import { usePutShelter } from "services/shelter/shelterServices";
 import { usePostStoragePictures } from "services/storage/storageServices";
 import {
   useDeleteProfilePicture,
@@ -63,6 +65,7 @@ export type AccountSettingsType = {
 };
 
 const AccountSettingsPage = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const queryClient = useQueryClient();
 
@@ -83,16 +86,17 @@ const AccountSettingsPage = () => {
   const { mutate: patchEmailAddressFn } = usePatchUserEmailAddress();
   const { mutate: patchUserFn } = usePatchUser();
   const { mutate: postStorageImgs } = usePostStoragePictures();
+  const { mutate: putShelterFn } = usePutShelter();
   const { mutate: deleteProfilePictureFn } = useDeleteProfilePicture();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      if (userData?.email !== values.email) {
-        patchEmailAddressFn({ email: values.email });
-      }
+      if (shelterData?.city !== values.city || shelterData?.krs !== values.krs)
+        if (userData?.email !== values.email) {
+          patchEmailAddressFn({ email: values.email });
+        }
 
       if (
         userData?.lastName !== values.lastName ||
@@ -159,7 +163,7 @@ const AccountSettingsPage = () => {
           <Button
             variant="outline"
             onClick={() => navigate(-1)}>
-            Anuluj
+            {t("buttons.cancel")}
           </Button>
         }
       />
@@ -187,15 +191,12 @@ const AccountSettingsPage = () => {
                     queryClient.invalidateQueries(["user"]);
                   }}
                   variant="outline">
-                  Anuluj
+                  {t("buttons.cancel")}
                 </Button>
                 <Button
-                  onClick={() => {
-                    console.log("test");
-                  }}
                   type="submit"
                   variant="fill">
-                  Zapisz
+                  {t("buttons.save")}
                 </Button>
               </AddNewEmployeeFormFooter>
             </FormContainer>

@@ -1,6 +1,7 @@
 import { EyeIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import { Pet } from "services/pet/petTypes";
@@ -28,6 +29,8 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
     isSuccess,
     isError,
   } = useGetStorageImagesForId(item.profilePhoto);
+
+  const { t } = useTranslation();
 
   return (
     <DashboardMostPopularAnimalsItemContainer
@@ -60,7 +63,7 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
             tag="h6"
             variant="UI Small/UI Text 12 Reg"
             color="midGray3">
-            {typeValueToLabel(item.animalCategory)}
+            {t(typeValueToLabel(item.animalCategory))}
           </Typography>
         </DashboardMostPopularAnimalsItemInfoContainer>
       </DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>

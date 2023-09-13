@@ -6,6 +6,7 @@ import {
 import Button from "components/SharedComponents/Button/Button";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   StyledTableHeader,
   StyledTableTD,
@@ -25,6 +26,7 @@ import {
 } from "./EmployeesComponentsUtils";
 
 const EmployeesTable = () => {
+  const { t } = useTranslation();
   const data = React.useMemo(() => dummyData, []);
   const memoisedColumns = React.useMemo(() => employeesColumns, []);
 
@@ -41,7 +43,7 @@ const EmployeesTable = () => {
           variant="UI/UI Text 16 Semi Bold"
           tag="h2"
           color="darkGray2">
-          Lista pracowników
+          {t("employees.employeesList")}
         </Typography>
       </TableComponentHeaderContainer>
       <TableContainer>

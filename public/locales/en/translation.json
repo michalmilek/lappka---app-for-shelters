@@ -1,11 +1,16 @@
 {
+  "languageChange": {
+    "EN": "Change language to English",
+    "PL": "Change language to Polish"
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "messages": "Messages",
     "animalCards": "Animal Cards",
     "voluntary": "Voluntary",
+    "organisation": "Organisation",
     "employees": "Employees",
-    "organisation": "Organisation"
+    "avatarAlt": "User profile picture"
   },
   "shelterStats": {
     "animalCards": "Animal Cards",
@@ -27,14 +32,15 @@
     "february": "February",
     "march": "March",
     "april": "April",
-    "name": "May",
+    "may": "May",
     "june": "June",
     "july": "July",
     "august": "August",
     "september": "September",
     "october": "October",
     "november": "November",
-    "december": "December"
+    "december": "December",
+    "months": "mth"
   },
   "week": {
     "monday": "Monday",
@@ -55,7 +61,7 @@
     "description": "Description",
     "enterYourAccountNumber": "Enter your account number"
   },
-  "animals": {
+  "pet": {
     "name": "Name",
     "species": "Breed",
     "gender": "Gender",
@@ -63,8 +69,8 @@
     "weight": "Weight",
     "description": "Description",
     "createdAt": "Created at",
-    "isSterilized": "Is sterilized",
-    "isVisible": "Is visible",
+    "isSterilized": "Is Sterilized",
+    "isVisible": "Is Visible",
     "months": "Months",
     "animalCategory": "Genre",
     "profilePhoto": "Profile photo",
@@ -78,19 +84,28 @@
     "sendAMessage": "Send a massage"
   },
   "table": {
-    "lookFor": "Search the entire table",
+    "animalsCards": "Animals cards",
+    "lookFor": "Search the entire table...",
     "newCard": "New Card"
   },
   "employees": {
-    "employeesList": "listOfEmployees",
-    "name": "Name",
+    "employeesList": "List of employees",
+    "name": "Full name",
     "email": "Email",
     "dateOfAddition": "Date of addition",
     "action": "Action",
     "addEmployee": "Add employee"
   },
+  "addEmployee": {
+    "addEmployee": "Add employee",
+    "addEmployeeDesc": "Enter the email address of a Łappka user and add him to your organisation.",
+    "email": "Email address",
+    "cancel": "Cancel",
+    "add": "Add"
+  },
   "organisationSettings": {
     "organisationSettings": "Organisation settings",
+    "organisationName": "Full name of the organisation",
     "street": "Street",
     "zipCode": "Zip code",
     "city": "City",
@@ -98,6 +113,8 @@
     "krs": "KRS number"
   },
   "accountSettings": {
+    "logOut": "Log out",
+    "accountSettings": "Account settings",
     "userSettings": "User settings",
     "firstName": "First name",
     "lastName": "Last name",
@@ -107,7 +124,8 @@
     "deleteAccount": "Delete account",
     "changePassword": "Change password",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "changeProfilePicture": "Change profile picture"
   },
   "animalCard": {
     "edit": "Edit",
@@ -115,14 +133,19 @@
     "hide": "Hide",
     "publish": "Publish",
     "moveToArchive": "Move to archive",
-    "deleteCard": "Delete card"
+    "deleteCard": "Delete card",
+    "deleteAllPhotos": "Delete all photos",
+    "areYouSure": "Do you want to delete all the photos on your card?",
+    "addNewPhotos": "Add new photos",
+    "addNewPhotosDesc": "Photo maximum 15MB and the pet can have a maximum of 5 photos."
   },
   "toggleButton": {
     "active": "Active"
   },
   "buttons": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "confirm": "Confirm"
   },
   "newestAnimals": {
     "newestAnimalCards": "Latest Animal Cards",
@@ -143,4 +166,23 @@
   "mostPopularAnimals": {
     "mostPopular": "The most popular"
   },
+  "addNewCard": {
+    "addPhotos": "Add photos",
+    "addPhotosDesc": "The maximum photo is 15MB and the maximum number of photos is 5."
+  },
+  "form": {
+    "input": "Input",
+    "months": "Months",
+    "kgs": "Kilograms",
+    "sterilisation": "Sterilisation",
+    "visible": "Visibility",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "select": {
+    "placeholder": "Select from the list"
+  },
+  "instructions": {
+    "changeProfilePhoto": "Profile photo, to select another photo drag it to the top."
+  }
 }

@@ -9,6 +9,7 @@ import {
 } from "./utils/DashboardAnimalCardsCard.styled";
 import FormRow from "./DashboardAnimalCardsFormRow";
 import {
+  useDeleteStorageImages,
   useGetStorageImagesForAnimal,
   usePostStoragePictures,
 } from "services/storage/storageServices";
@@ -41,6 +42,7 @@ import DeleteAllImagesModal from "./DeleteAllImagesModal";
 import ImageSkeleton from "./utils/ImageSkeleton";
 import { ErrorSkeleton } from "./utils/ErrorSkeleton";
 import toastService from "singletons/toastService";
+import { useTranslation } from "react-i18next";
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -49,6 +51,7 @@ const DashboardAnimalCardsCardForm = ({
   isEditOn: boolean;
   data: PetItem;
 }) => {
+  const { t } = useTranslation();
   const {
     isSuccess: GetStorageImagesIsSuccess,
     data: imagesUrls,
@@ -56,10 +59,10 @@ const DashboardAnimalCardsCardForm = ({
     isError: GetStorageImagesIsError,
   } = useGetStorageImagesForAnimal(data.photos, data.petId);
   const [localImageUrls, setLocalImageUrls] = useState<string[]>([]);
-  console.log("🚀 ~ localImageUrls:", localImageUrls);
   const { mutate: postStoragePicture, isSuccess: postStorageIsSuccess } =
     usePostStoragePictures();
   const { mutate: putShelterCardsFn } = usePutShelterCardsAnimal();
+  const { mutate: deleteStorageImagesFn } = useDeleteStorageImages();
   const navigate = useNavigate();
   const initialValues: PetCard = {
     ...data,
@@ -83,7 +86,6 @@ const DashboardAnimalCardsCardForm = ({
       postStoragePicture(formik.values.newPhotos, {
         onSuccess: (newData) => {
           formik.setFieldValue("photos", [...photos, ...newData]);
-          console.log(formik.values.photos);
           const { newPhotos, ...values } = formik.values;
           putShelterCardsFn(
             {
@@ -100,13 +102,20 @@ const DashboardAnimalCardsCardForm = ({
                   "success"
                 );
 
-                formik.setFieldValue("newPhotos", []);
-
-                queryClient.invalidateQueries({
-                  queryKey: ["shelterCardsCard", data.petId],
+                const newPhotos = data.photos.filter((dataPhoto) => {
+                  console.log(values.photos);
+                  return ![...values.photos, ...newData].includes(dataPhoto);
                 });
-                queryClient.invalidateQueries({
-                  queryKey: ["storageImages", data.petId],
+                deleteStorageImagesFn(newPhotos, {
+                  onSuccess: () => {
+                    queryClient.invalidateQueries({
+                      queryKey: ["shelterCardsCard", data.petId],
+                    });
+                    queryClient.invalidateQueries({
+                      queryKey: ["storageImages", data.petId],
+                    });
+                    formik.setFieldValue("newPhotos", []);
+                  },
                 });
               },
             }
@@ -129,8 +138,15 @@ const DashboardAnimalCardsCardForm = ({
               "success"
             );
 
-            queryClient.invalidateQueries(["shelterCardsCard", data.petId]);
-            queryClient.invalidateQueries(["storageImages", data.petId]);
+            const newPhotos = data.photos.filter((dataPhoto) => {
+              return !values.photos.includes(dataPhoto);
+            });
+            deleteStorageImagesFn(newPhotos, {
+              onSuccess: () => {
+                queryClient.invalidateQueries(["shelterCardsCard", data.petId]);
+                queryClient.invalidateQueries(["storageImages", data.petId]);
+              },
+            });
           },
         }
       );
@@ -256,7 +272,7 @@ const DashboardAnimalCardsCardForm = ({
         />
 
         {isEditOn && (
-          <FormRow label="Dodaj nowe zdjęcia">
+          <FormRow label={t("animalCard.addNewPhotos")}>
             <CustomFileInput
               isUploadSuccess={postStorageIsSuccess}
               existingFiles={photosLength}
@@ -271,7 +287,7 @@ const DashboardAnimalCardsCardForm = ({
                   ]);
                 }
               }}
-              description="Zdjęcie maksymalnie 15MB, a zwierzak może posiadać maksymalnie 5 zdjęć."
+              description={t("animalCard.addNewPhotosDesc")}
             />
           </FormRow>
         )}

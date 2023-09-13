@@ -3,9 +3,11 @@ import Button from "components/SharedComponents/Button/Button";
 import Modal from "components/SharedComponents/Modal/Modal";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AnimalCardsCardBtnsContainer } from "./utils/DashboardAnimalCardsCard.styled";
 
 const DeleteAllImagesModal = ({ id }: { id: string }) => {
+  const { t } = useTranslation();
   const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
   const queryClient = useQueryClient();
   return (
@@ -13,13 +15,13 @@ const DeleteAllImagesModal = ({ id }: { id: string }) => {
       <Button
         type="button"
         onClick={() => setIsDeleteAllModalOpen(true)}>
-        Usuń wszystkie zdjęcia
+        {t("animalCard.deleteAllPhotos")}
       </Button>
       <Modal isOpen={isDeleteAllModalOpen}>
         <Typography
           variant="Heading 18 Semi Bold"
           tag="h3">
-          Czy chcesz usunąć wszystkie zdjęcia z karty?
+          {t("animalCard.areYouSure")}
         </Typography>
         <AnimalCardsCardBtnsContainer>
           <Button
@@ -27,7 +29,7 @@ const DeleteAllImagesModal = ({ id }: { id: string }) => {
             variant="outline"
             onClick={() => setIsDeleteAllModalOpen(false)}
             type="button">
-            Anuluj
+            {t("buttons.cancel")}
           </Button>
           <Button
             isFullWidth
@@ -36,7 +38,7 @@ const DeleteAllImagesModal = ({ id }: { id: string }) => {
               setIsDeleteAllModalOpen(false);
             }}
             type="button">
-            Potwierdź
+            {t("buttons.confirm")}
           </Button>
         </AnimalCardsCardBtnsContainer>
       </Modal>

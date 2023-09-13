@@ -7,6 +7,7 @@ import {
 import { styled } from "styled-components";
 import AnimalCardsInfoItem from "./AnimalCardsInfoItem";
 import ErrorAnimalCardsInfo from "./ErrorAnimalCardsInfo";
+import { useTranslation } from "react-i18next";
 
 const AnimalCardsInfoContainer = styled.div`
   display: grid;
@@ -23,6 +24,7 @@ const AnimalCardsInfoContainer = styled.div`
 
 const AnimalCardsInfo = () => {
   const { data, isLoading, isError } = useShelterStats();
+  const { t } = useTranslation();
 
   if (isError) {
     return <ErrorAnimalCardsInfo />;
@@ -33,19 +35,19 @@ const AnimalCardsInfo = () => {
       <AnimalCardsInfoItem
         isLoading={isLoading}
         icon={<IdentificationIcon />}
-        text="Karty zwierząt"
+        text={t("shelterStats.animalCards")}
         number={data ? data.cardCount : 0}
       />
       <AnimalCardsInfoItem
         isLoading={isLoading}
         icon={<SearchCircleIcon />}
-        text="Szuka właściciela"
+        text={t("shelterStats.seeksOwner")}
         number={data ? data.toAdoptCount : 0}
       />
       <AnimalCardsInfoItem
         isLoading={isLoading}
         icon={<UserCircleIcon />}
-        text="Z właścicielem"
+        text={t("shelterStats.withOwner")}
         number={data ? data.adoptedCount : 0}
       />
     </AnimalCardsInfoContainer>

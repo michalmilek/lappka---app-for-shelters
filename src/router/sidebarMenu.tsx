@@ -6,7 +6,7 @@ import {
   VoluntaryIcon,
 } from "components/SharedComponents/icons/icons";
 import { DashboardRoutes } from "./router";
-import i18next from "i18next";
+import { t } from "i18next";
 
 export const menu = {
   firstMenu: {
@@ -15,33 +15,33 @@ export const menu = {
       {
         to: DashboardRoutes.dashboard,
         icon: <DashboardIcon />,
-        title: i18next.t("sidebar.dashboard"),
+        title: "sidebar.dashboard",
       },
       {
         to: DashboardRoutes.messages,
         icon: <MessagesIcon />,
-        title: i18next.t("sidebar.messages"),
+        title: "sidebar.messages",
         messagesNumber: 56,
       },
       {
         to: DashboardRoutes.animalCards,
         icon: <AnimalsCardsIcon />,
-        title: i18next.t("sidebar.animalCards"),
+        title: "sidebar.animalCards",
       },
       {
         to: DashboardRoutes.voluntary,
         icon: <VoluntaryIcon />,
-        title: i18next.t("sidebar.voluntary"),
+        title: "sidebar.voluntary",
       },
     ],
   },
   secondMenu: {
-    title: i18next.t("sidebar.organisation"),
+    title: "sidebar.organisation",
     elements: [
       {
         to: DashboardRoutes.employees,
         icon: <EmployeesIcon />,
-        title: i18next.t("sidebar.employees"),
+        title: "sidebar.employees",
       },
     ],
   },

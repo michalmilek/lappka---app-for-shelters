@@ -9,13 +9,13 @@ import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar
 import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import { ArrowLeftIcon } from "components/SharedComponents/icons/icons";
 import Typography from "components/SharedComponents/Typography/Typography";
-import useDeviceType from "hooks/useDeviceType";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const AnimalCardsCardPage = () => {
   const [isEditOn, setIsEditOn] = useState(false);
-  const deviceType = useDeviceType();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -41,7 +41,7 @@ const AnimalCardsCardPage = () => {
                 <Typography
                   color="midGray1"
                   variant="UI/UI Text 16 Medium Bold">
-                  Wróć
+                  {t("animalCard.return")}
                 </Typography>
               </CardButton>
 
@@ -53,7 +53,7 @@ const AnimalCardsCardPage = () => {
                     tag="span"
                     variant="UI/UI Text 16 Medium Bold"
                     color="primary600">
-                    Edytuj
+                    {t("animalCard.edit")}
                   </Typography>
                 </CardButton>
               )}

@@ -3,7 +3,12 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import { Navigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import { GenderType, GenreType, Pet } from "services/pet/petTypes";
-import { genderLabels, typeLabels } from "utils/appUtils";
+import {
+  genderLabels,
+  genderValueToLabel,
+  typeLabels,
+  typeValueToLabel,
+} from "utils/appUtils";
 import {
   ActionHeaderContainer,
   Dot,
@@ -14,6 +19,7 @@ import {
 } from "./AnimalCardsTable.styled";
 import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
 import { TableProfileImage } from "./TableProfileImage";
+import { t } from "i18next";
 
 export interface ExtendedSearchParams extends URLSearchParams {
   pageIndex?: string;
@@ -59,7 +65,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Imię zwierzaka
+          {t("pet.name")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -90,7 +96,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Data dodania
+          {t("pet.createdAt")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -108,7 +114,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Gatunek
+          {t("pet.animalCategory")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -116,7 +122,7 @@ export const columns = [
       <Typography
         variant="UI/UI Text 14 Reg"
         color="darkGray2">
-        {typeLabels[props.getValue() as GenreType]}
+        {t(typeValueToLabel(props.getValue() as GenreType))}
       </Typography>
     ),
   }),
@@ -126,7 +132,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Płeć
+          {t("pet.gender")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -135,7 +141,7 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Semi Bold"
           color="white">
-          {genderLabels[props.getValue() as GenderType]}
+          {t(genderValueToLabel(props.getValue() as GenderType))}
         </Typography>
       </StyledSexContainer>
     ),
@@ -146,7 +152,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Rasa
+          {t("pet.species")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -160,7 +166,7 @@ export const columns = [
       <Typography
         variant="UI Small/UI Text 13 Med"
         color="midGray2">
-        Waga
+        {t("pet.weight")}
       </Typography>
     ),
     cell: (props) => (
@@ -177,7 +183,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Sterylizacja
+          {t("pet.isSterilized")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -187,7 +193,7 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Reg"
           color="darkGray2">
-          {props.getValue() === true ? "Tak" : "Nie"}
+          {props.getValue() === true ? t("form.yes") : t("form.no")}
         </Typography>
       </DotFlexContainer>
     ),
@@ -198,7 +204,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Widoczny
+          {t("pet.isVisible")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -208,7 +214,7 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Reg"
           color="darkGray2">
-          {props.getValue() === true ? "Tak" : "Nie"}
+          {props.getValue() === true ? t("form.yes") : t("form.no")}
         </Typography>
       </DotFlexContainer>
     ),
@@ -220,7 +226,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Akcja
+          {t("pet.action")}
         </Typography>
       </ActionHeaderContainer>
     ),

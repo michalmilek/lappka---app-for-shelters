@@ -15,6 +15,7 @@ import Input from "components/SharedComponents/Inputs/Input";
 import { PaginationState, Table } from "@tanstack/react-table";
 import { Pet } from "services/pet/petTypes";
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface TableFooterProps {
   table: Table<Pet>;
@@ -34,6 +35,7 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
   itemsPerPage,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useTranslation();
 
   const customGetCanNextPage = () => {
     const { pageIndex } = table.getState().pagination;
@@ -55,7 +57,7 @@ const AnimalCardsTableFooter: React.FC<TableFooterProps> = ({
     <StyledTableFooterContainer>
       <StyledTableInputContainer>
         <Input
-          placeholder="Wyszukaj w całej tabeli..."
+          placeholder={t("table.lookFor")}
           value={filtering}
           onChange={(e) => handleFiltering(e.target.value)}
         />

@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "components/SharedComponents/Button/Button";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   usePutShelterCardsHide,
   usePutShelterCardsPublish,
@@ -11,6 +12,7 @@ import MoveToArchiveModal from "../../../SharedComponents/Modal/ModalsWithLogic/
 import { AnimalCardsCardBtnsContainer } from "./utils/DashboardAnimalCardsCard.styled";
 
 const AnimalCardsCardActions = ({ id }: { id: string }) => {
+  const { t } = useTranslation();
   const [isMoveToArchiveModalOpen, setIsMoveToArchiveModalOpen] =
     useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -48,7 +50,7 @@ const AnimalCardsCardActions = ({ id }: { id: string }) => {
           }}
           type="button"
           variant="outline">
-          Ukryj
+          {t("animalCard.hide")}
         </Button>
         <Button
           onClick={() => {
@@ -60,21 +62,21 @@ const AnimalCardsCardActions = ({ id }: { id: string }) => {
             });
           }}
           type="button">
-          Publikuj
+          {t("animalCard.publish")}
         </Button>
         <Button
           type="button"
           onClick={() => setIsMoveToArchiveModalOpen(true)}
           variant="fill"
           color="error">
-          Przenieś do archiwum
+          {t("animalCard.moveToArchive")}
         </Button>
         <Button
           type="button"
           onClick={() => setIsDeleteModalOpen(true)}
           variant="fill"
           color="red800">
-          Usuń kartę
+          {t("animalCard.deleteCard")}
         </Button>
       </AnimalCardsCardBtnsContainer>
       <MoveToArchiveModal

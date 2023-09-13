@@ -5,6 +5,7 @@ import {
   StyledTableTHTextContainer,
 } from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";
 import EmployeesComponentActionDropdown from "./EmployeesComponentDropdown";
+import { t } from "i18next";
 
 export interface Employee {
   fullName: string;
@@ -21,7 +22,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Imię i nazwisko
+          {t("employees.name")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -39,7 +40,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Email
+          {t("employees.email")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -57,7 +58,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Data dodania
+          {t("employees.dateOfAddition")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -76,7 +77,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          Akcja
+          {t("employees.action")}
         </Typography>
       </ActionHeaderContainer>
     ),

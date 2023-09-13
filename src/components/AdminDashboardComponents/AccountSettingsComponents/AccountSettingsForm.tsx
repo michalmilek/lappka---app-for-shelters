@@ -5,6 +5,7 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import { FormikProps } from "formik";
 import { AccountSettingsType } from "pages/DashboardPages/AccountSettingsPage";
 import React, { useRef, useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { GetShelterRespones } from "services/pet/petTypes";
 import { useGetStorageImagesForUser } from "services/storage/storageServices";
 import { GetUserResponse } from "services/user/user";
@@ -32,6 +33,7 @@ const AccountSettingsForm = ({
   handleModalOpen: () => void;
   shelterData: GetShelterRespones;
 }) => {
+  const { t } = useTranslation();
   const [deleteUserModal, setDeleteUserModal] = useState(false);
 
   const handleCloseDeleteUserModal = useCallback(() => {
@@ -56,7 +58,7 @@ const AccountSettingsForm = ({
       formik.setFieldValue("krs", shelterData.krs);
       formik.setFieldValue("nip", shelterData.nip);
     }
-  }, []);
+  }, [shelterData, userData]);
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -84,7 +86,7 @@ const AccountSettingsForm = ({
         <Typography
           variant="Heading 18 Semi Bold"
           tag="h2">
-          Ustawienia organizacji
+          {t("organisationSettings.organisationSettings")}
         </Typography>
         <Input
           name="organizationName"
@@ -96,7 +98,7 @@ const AccountSettingsForm = ({
               ? formik.errors.organizationName
               : null
           }
-          label="Pełna nazwa organizacji"
+          label={t("organisationSettings.organisationName")}
         />
         <Input
           name="street"
@@ -108,7 +110,7 @@ const AccountSettingsForm = ({
               ? formik.errors.street
               : null
           }
-          label="Ulica"
+          label={t("organisationSettings.street")}
         />
         <PostalCodeCityContainer>
           <PostalCodeContainer>
@@ -122,7 +124,7 @@ const AccountSettingsForm = ({
                   ? formik.errors.zipCode
                   : null
               }
-              label="Kod pocztowy"
+              label={t("organisationSettings.zipCode")}
             />
           </PostalCodeContainer>
           <Input
@@ -135,7 +137,7 @@ const AccountSettingsForm = ({
                 ? formik.errors.city
                 : null
             }
-            label="Miasto"
+            label={t("organisationSettings.city")}
           />
         </PostalCodeCityContainer>
         <Input
@@ -146,7 +148,7 @@ const AccountSettingsForm = ({
           error={
             formik.errors.nip && formik.touched.nip ? formik.errors.nip : null
           }
-          label="Numer NIP"
+          label={t("organisationSettings.nip")}
         />
         <Input
           name="krs"
@@ -156,14 +158,14 @@ const AccountSettingsForm = ({
           error={
             formik.errors.krs && formik.touched.krs ? formik.errors.krs : null
           }
-          label="Numer KRS"
+          label={t("organisationSettings.krs")}
         />
       </InputsFirstPartContainer>
       <InputsFirstPartContainer>
         <Typography
           variant="Heading 18 Semi Bold"
           tag="h2">
-          Ustawienia użytkownika
+          {t("accountSettings.accountSettings")}
         </Typography>
         <AvatarChangeContainer>
           {formik.values.profilePicture && (
@@ -186,8 +188,8 @@ const AccountSettingsForm = ({
             }}
             variant="outline">
             {formik.values.profilePicture
-              ? "Edytuj"
-              : "Wybierz zdjęcie profilowe"}
+              ? t("accountSettings.edit")
+              : t("accountSettings.changeProfilePicture")}
           </Button>
           {formik.values.profilePicture && (
             <Button
@@ -197,7 +199,7 @@ const AccountSettingsForm = ({
               }}
               variant="fill"
               color="error">
-              Usuń zdjęcie profilowe
+              {t("accountSettings.deleteProfilePicture")}
             </Button>
           )}
           <input
@@ -221,7 +223,7 @@ const AccountSettingsForm = ({
               ? formik.errors.firstName
               : null
           }
-          label="Imię"
+          label={t("accountSettings.firstName")}
         />
         <Input
           name="lastName"
@@ -233,14 +235,14 @@ const AccountSettingsForm = ({
               ? formik.errors.lastName
               : null
           }
-          label="Nazwisko"
+          label={t("accountSettings.lastName")}
         />
         <Input
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          label="Adres e-mail"
+          label={t("accountSettings.email")}
           error={
             formik.errors.email && formik.touched.email
               ? formik.errors.email
@@ -254,12 +256,12 @@ const AccountSettingsForm = ({
             icon={<UserRemoveIcon />}
             iconPlace="right"
             color="red500">
-            Usuń konto
+            {t("accountSettings.deleteAccount")}
           </Button>
           <Button
             type="button"
             onClick={handleModalOpen}>
-            Zmień hasło
+            {t("accountSettings.changePassword")}
           </Button>
         </ButtonContainer>
       </InputsFirstPartContainer>

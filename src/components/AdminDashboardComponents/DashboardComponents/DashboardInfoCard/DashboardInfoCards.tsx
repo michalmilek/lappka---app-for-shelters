@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 const DashboardInfoCards = () => {
   const { data, isLoading, isError } = useShelterStats();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <>

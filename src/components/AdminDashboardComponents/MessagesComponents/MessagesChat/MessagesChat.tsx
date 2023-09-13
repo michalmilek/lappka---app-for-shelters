@@ -22,16 +22,6 @@ const MessagesChat = () => {
   const { t } = useTranslation();
   const currentUser = useSelector(selectMe);
   const activeChatData = useSelector(selectActiveChatData);
-  const [title, setTitle] = useState("");
-
-  useEffect(() => {
-    const loadTranslation = async () => {
-      const translatedTitle = await t("messages.typeYourMessage");
-      console.log(t("messages.typeYourMessage"));
-      setTitle(translatedTitle);
-    };
-    loadTranslation();
-  }, [t]);
 
   return (
     <ChatContainer>
@@ -70,11 +60,11 @@ const MessagesChat = () => {
           backgroundColor="lightGray5"
         />
         <UnstyledButton
-          title={title}
+          title={t("messages.sendAMessage")}
           style={{ cursor: "pointer" }}>
           <img
             src={SendMessage}
-            alt="send a message btn"
+            alt={`${t("messages.sendAMessage")} btn`}
           />
         </UnstyledButton>
       </MessageInputContainer>

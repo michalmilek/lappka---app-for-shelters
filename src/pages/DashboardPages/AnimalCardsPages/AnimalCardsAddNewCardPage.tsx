@@ -13,10 +13,11 @@ import {
   cardValidationSchema,
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AddNewCardUtils";
 import { CreatePet } from "services/pet/petTypes";
+import { useTranslation } from "react-i18next";
 
 const AnimalCardsAddNewCardPage = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const { mutate: postStorageFn, isSuccess: postStorageIsSuccess } =
     usePostStoragePictures();
   const { mutate: postAnimalFn } = usePostShelterCardsCreatePet();
@@ -54,7 +55,7 @@ const AnimalCardsAddNewCardPage = () => {
           <Button
             onClick={() => navigate(-1)}
             variant="outline">
-            Anuluj
+            {t("buttons.cancel")}
           </Button>
         }
       />

@@ -5,12 +5,14 @@ import { StyledProtectedPageContent } from "components/PagesComponents/Protected
 import Button from "components/SharedComponents/Button/Button";
 import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import { useShelterManagement } from "services/management/managementServices";
 
 const EmployeesPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   //const { data } = useShelterManagement("Shelter");
   return (
     <StyledProtectedPageContent>
@@ -21,7 +23,7 @@ const EmployeesPage = () => {
             icon={<StyledPlusIcon />}
             iconPlace="left"
             onClick={() => navigate(DashboardRoutes.addNewEmployee)}>
-            Dodaj pracownika
+            {t("employees.addEmployee")}
           </Button>
         }
       />

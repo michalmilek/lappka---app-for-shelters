@@ -12,6 +12,7 @@ import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import ErrorAnimalCardsTable from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsTable/ErrorAnimalCardsTable";
+import { useTranslation } from "react-i18next";
 
 const AnimalCardsPage = () => {
   const [searchParams] = useSearchParams();
@@ -19,6 +20,7 @@ const AnimalCardsPage = () => {
   const pageSizeFromQueryParams = searchParams.get("pageSize");
   const sortParamFromQueryParams = searchParams.get("sortParam");
   const sortParamOrderFromQueryParams = searchParams.get("asc");
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -44,7 +46,7 @@ const AnimalCardsPage = () => {
             icon={<StyledPlusIcon />}
             iconPlace="left"
             onClick={() => navigate(DashboardRoutes.animalCardsNewCard)}>
-            Nowa karta
+            {t("table.newCard")}
           </Button>
         }
       />

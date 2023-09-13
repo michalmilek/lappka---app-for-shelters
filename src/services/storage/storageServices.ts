@@ -152,8 +152,12 @@ export const usePostStoragePicture = () => {
 };
 
 
-export const useGetStorageImagesForId = (imgId: string) => {
-  return useQuery(["storageImagesProfilePictures", imgId], () =>
-    getStorageImage(imgId)
+export const useGetStorageImagesForId = (imgId: string | undefined) => {
+  return useQuery(
+    ["storageImagesProfilePictures", imgId],
+    () => getStorageImage(imgId as string),
+    {
+      enabled: !!imgId,
+    }
   );
 };

@@ -13,6 +13,7 @@ import {
   AnimalCardsAddNewCardFormInputContainer,
 } from "./AnimalCardsAddNewCardForm.styled";
 import SecondSelect from "components/SharedComponents/DropdownMenu/SecondSelect";
+import { useTranslation } from "react-i18next";
 
 const AnimalCardsAddNewCardForm = ({
   formik,
@@ -21,6 +22,7 @@ const AnimalCardsAddNewCardForm = ({
   formik: FormikProps<AddNewAnimalCardInterface>;
   postStorageIsSuccess: boolean;
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const prevFiles = formik.values.photos;
 
@@ -48,9 +50,9 @@ const AnimalCardsAddNewCardForm = ({
               ? formik.errors.name
               : undefined
           }
-          placeholder="Wpisz"
+          placeholder={t("form.input")}
           inputSize="Large"
-          label="Imię zwierzaka"
+          label={t("pet.name")}
           name="name"
           value={formik.values.name}
           onChange={formik.handleChange}
@@ -61,7 +63,7 @@ const AnimalCardsAddNewCardForm = ({
               ? formik.errors.description
               : undefined
           }
-          placeholder="Wpisz"
+          placeholder={t("form.input")}
           inputSize="Large"
           label="Opis"
           aria-placeholder="Wpisz opis zwierzaka"
@@ -75,7 +77,7 @@ const AnimalCardsAddNewCardForm = ({
               ? formik.errors.animalCategory
               : undefined
           }
-          label="Gatunek"
+          label={t("pet.animalCategory")}
           options={[
             { value: "Dog", label: "Pies" },
             { value: "Cat", label: "Kot" },
@@ -96,7 +98,7 @@ const AnimalCardsAddNewCardForm = ({
                 : undefined
             }
             label="Rasa"
-            placeholder="Wpisz"
+            placeholder={t("form.input")}
             inputSize="Large"
             name="species"
             value={formik.values.species}
@@ -110,7 +112,7 @@ const AnimalCardsAddNewCardForm = ({
                 ? formik.errors.marking
                 : undefined
             }
-            placeholder="Wpisz"
+            placeholder={t("form.input")}
             inputSize="Large"
             label="Umaszczenie"
             name="marking"
@@ -119,9 +121,9 @@ const AnimalCardsAddNewCardForm = ({
           />
           <InputNumberWithUnits
             label="Wiek"
-            placeholder="Miesiące"
+            placeholder={t("form.months")}
             name="months"
-            unit="msc"
+            unit={t("months.months")}
             error={
               formik.errors.months && formik.touched.months
                 ? formik.errors.months
@@ -139,11 +141,11 @@ const AnimalCardsAddNewCardForm = ({
                 ? formik.errors.gender
                 : undefined
             }
-            label="Płeć"
+            label={t("pet.gender")}
             options={[
-              { value: "Male", label: "Samiec" },
-              { value: "Female", label: "Samiczka" },
-              { value: "Other", label: "Inna" },
+              { value: "Male", label: t("genderType.Male") },
+              { value: "Female", label: t("genderType.Female") },
+              { value: "Other", label: t("genderType.Other") },
             ]}
             handleChange={(option) => {
               formik.setFieldTouched("gender", true);
@@ -151,8 +153,8 @@ const AnimalCardsAddNewCardForm = ({
             }}
           />
           <InputNumberWithUnits
-            label="Waga"
-            placeholder="Kilogramy"
+            label={t("pet.weight")}
+            placeholder={t("form.kgs")}
             name="weight"
             unit="KG"
             error={
@@ -172,10 +174,10 @@ const AnimalCardsAddNewCardForm = ({
                 ? formik.errors.isSterilized
                 : undefined
             }
-            label="Sterylizacja"
+            label={t("form.sterilisation")}
             options={[
-              { value: "true", label: "Tak" },
-              { value: "false", label: "Nie" },
+              { value: "true", label: t("form.yes") },
+              { value: "false", label: t("form.no") },
             ]}
             handleChange={(option) => {
               formik.setFieldTouched("isSterilized", true);
@@ -188,10 +190,10 @@ const AnimalCardsAddNewCardForm = ({
                 ? formik.errors.isVisible
                 : undefined
             }
-            label="Widoczność"
+            label={t("form.visible")}
             options={[
-              { value: "true", label: "Tak" },
-              { value: "false", label: "Nie" },
+              { value: "true", label: t("form.yes") },
+              { value: "false", label: t("form.no") },
             ]}
             handleChange={(option) => {
               formik.setFieldTouched("isVisible", true);
@@ -206,8 +208,8 @@ const AnimalCardsAddNewCardForm = ({
           handleIndexFileChangeForm={handleIndexFileChangeForm}
           onFileDelete={handleOnFileDelete}
           onFileChange={handleOnFileChange}
-          label="Dodaj zdjęcia"
-          description="Zdjęcie maksymalnie 15MB, a maksymalna ilość zdjęć to 5."
+          label={t("addNewCard.addPhotos")}
+          description={t("addNewCard.addPhotosDesc")}
         />
       </AnimalCardsAddNewCardFormInputContainer>
       <AnimalCardsAddNewCardFooter>
@@ -217,9 +219,9 @@ const AnimalCardsAddNewCardForm = ({
           onClick={() => {
             navigate(-1);
           }}>
-          Anuluj
+          {t("buttons.cancel")}
         </Button>
-        <Button type="submit">Zapisz</Button>
+        <Button type="submit">{t("buttons.save")}</Button>
       </AnimalCardsAddNewCardFooter>
     </AnimalCardsAddNewCardFormContainer>
   );

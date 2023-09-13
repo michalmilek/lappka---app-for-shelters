@@ -3,6 +3,7 @@ import {
   StyledCardSingleImgContainer,
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   StyledCloseIcon,
   StyledProfileIcon,
@@ -24,6 +25,8 @@ const PhotoPreviewImage = ({
   index,
   id,
 }: PhotoPreviewInterface) => {
+  const { t } = useTranslation();
+
   return (
     <SortableItem
       stringImg={photo}
@@ -44,7 +47,7 @@ const PhotoPreviewImage = ({
         {index === 0 && (
           <StyledProfileIcon
             className="profilePictureIcon"
-            title="Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."
+            title={t("instructions.changeProfilePhoto")}
           />
         )}
       </StyledCardSingleImgContainer>

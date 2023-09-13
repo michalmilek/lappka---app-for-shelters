@@ -1,11 +1,16 @@
 {
+  "languageChange": {
+    "EN": "Zmień język na angielski",
+    "PL": "Zmień język na polski"
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "messages": "Wiadomości",
     "animalCards": "Karty zwierząt",
     "voluntary": "Wolontariat",
+    "organisation": "Organizacja",
     "employees": "Pracownicy",
-    "organisation": "Organizacja"
+    "avatarAlt": "Zdjęcie profilowe użytkownika"
   },
   "shelterStats": {
     "animalCards": "Karty zwierząt",
@@ -27,14 +32,15 @@
     "february": "Luty",
     "march": "Marzec",
     "april": "Kwiecień",
-    "name": "Maj",
+    "may": "Maj",
     "june": "Czerwiec",
     "july": "Lipiec",
     "august": "Sierpień",
     "september": "Wrzesień",
     "october": "Październik",
     "november": "Listopad",
-    "december": "Grudzień"
+    "december": "Grudzień",
+    "months": "msc"
   },
   "week": {
     "monday": "Poniedziałek",
@@ -55,7 +61,7 @@
     "description": "Opis",
     "enterYourAccountNumber": "Wprowadź numer konta"
   },
-  "animals": {
+  "pet": {
     "name": "Imię zwierzaka",
     "species": "Rasa",
     "gender": "Płeć",
@@ -73,10 +79,13 @@
     "action": "Akcja"
   },
   "messages": {
-    "messages": "Wiadomości"
+    "messages": "Wiadomości",
+    "typeYourMessage": "Wpisz wiadomość...",
+    "sendAMessage": "Wyślij wiadomość"
   },
   "table": {
-    "lookFor": "Wyszukaj w całej tabeli",
+    "animalsCards": "Karty zwierząt",
+    "lookFor": "Wyszukaj w całej tabeli...",
     "newCard": "Nowa karta"
   },
   "employees": {
@@ -87,8 +96,16 @@
     "action": "Akcja",
     "addEmployee": "Dodaj pracownika"
   },
+  "addEmployee": {
+    "addEmployee": "Dodaj pracownika",
+    "addEmployeeDesc": "Wpisz adres email użytkownika aplikacji Łappka i dodaj go do swojej organizacji.",
+    "email": "Adres email",
+    "cancel": "Anuluj",
+    "add": "Dodaj"
+  },
   "organisationSettings": {
     "organisationSettings": "Ustawienia organizacji",
+    "organisationName": "Pełna nazwa organizacji",
     "street": "Ulica",
     "zipCode": "Kod pocztowy",
     "city": "Miasto",
@@ -96,6 +113,8 @@
     "krs": "Numer KRS"
   },
   "accountSettings": {
+    "logOut": "Wyloguj się",
+    "accountSettings": "Ustawienia konta",
     "userSettings": "Ustawienia użytkownika",
     "firstName": "Imię",
     "lastName": "Nazwisko",
@@ -105,7 +124,8 @@
     "deleteAccount": "Usuń konto",
     "changePassword": "Zmień hasło",
     "cancel": "Anuluj",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "changeProfilePicture": "Zmień zdjęcie profilowe"
   },
   "animalCard": {
     "edit": "Edytuj",
@@ -113,6 +133,56 @@
     "hide": "Ukryj",
     "publish": "Publikuj",
     "moveToArchive": "Przenieś do archiwum",
-    "deleteCard": "Usuń kartę"
+    "deleteCard": "Usuń kartę",
+    "deleteAllPhotos": "Usuń wszystkie zdjęcia",
+    "areYouSure": "Czy chcesz usunąć wszystkie zdjęcia z karty?",
+    "addNewPhotos": "Dodaj nowe zdjęcia",
+    "addNewPhotosDesc": "Zdjęcie maksymalnie 15MB, a zwierzak może posiadać maksymalnie 5 zdjęć."
+  },
+  "toggleButton": {
+    "active": "Aktywne"
+  },
+  "buttons": {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź"
+  },
+  "newestAnimals": {
+    "newestAnimalCards": "Najnowsze karty zwierząt",
+    "allCards": "Wszystkie",
+    "noAnimalCardsInDatabase": "Brak zwierząt w bazie danych. Dodaj pierwszą kartę.",
+    "addFirstCard": "Dodaj pierwszą kartę"
+  },
+  "genreType": {
+    "Dog": "Pies",
+    "Cat": "Kot",
+    "Other": "Inny"
+  },
+  "genderType": {
+    "Male": "Samiec",
+    "Female": "Samiczka",
+    "Other": "Inna"
+  },
+  "mostPopularAnimals": {
+    "mostPopular": "Najpopularniejsze"
+  },
+  "addNewCard": {
+    "addPhotos": "Dodaj zdjęcia",
+    "addPhotosDesc": "Zdjęcie maksymalnie 15MB, a maksymalna ilość zdjęć to 5."
+  },
+  "form": {
+    "input": "Wpisz",
+    "months": "Miesiące",
+    "kgs": "Kilogramy",
+    "sterilisation": "Sterylizacja",
+    "visible": "Widoczność",
+    "yes": "Tak",
+    "no": "Nie"
+  },
+  "select": {
+    "placeholder": "Wybierz z listy"
+  },
+  "instructions": {
+    "changeProfilePhoto": "Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."
   }
 }

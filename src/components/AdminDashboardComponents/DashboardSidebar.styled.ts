@@ -3,6 +3,7 @@ import { SVGProps } from "react";
 import { Link } from "react-router-dom";
 import { css, keyframes, styled } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
+import ReactCountryFlag from "react-country-flag";
 
 interface ExtendedSVGProps extends SVGProps<SVGSVGElement> {
   isDropdownActive: boolean;
@@ -188,4 +189,35 @@ export const StyledUserMenuDropdownItem = styled.li`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
+`;
+
+export const StyledFlagContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  .flag {
+    width: 50px !important;
+    height: auto !important;
+    transition: transform 0.2s;
+    background-color: #fff;
+    border: 3px solid ${getColor("darkGray2")};
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+`;
+
+export const UserAvatar = styled.img`
+  height: 42px;
+  width: 42px;
+  border: 1px solid #0000001a;
+  border-radius: 50%;
 `;

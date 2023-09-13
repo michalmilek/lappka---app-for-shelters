@@ -1,6 +1,7 @@
 import Button from "components/SharedComponents/Button/Button";
 import Modal from "components/SharedComponents/Modal/Modal";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useDeleteShelterCard } from "services/pet/petServices";
 import { AnimalCardsCardBtnsContainer } from "../../../AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
 
@@ -16,6 +17,7 @@ const DeleteCardModal = ({
   handleDeleteModalState,
 }: Props) => {
   const { mutate: deleteCardFn } = useDeleteShelterCard();
+  const { t } = useTranslation();
 
   return (
     <Modal isOpen={isDeleteModalOpen}>
@@ -25,7 +27,7 @@ const DeleteCardModal = ({
           variant="outline"
           onClick={() => handleDeleteModalState(false)}
           type="button">
-          Anuluj
+          {t("buttons.save")}
         </Button>
         <Button
           type="button"
@@ -38,7 +40,7 @@ const DeleteCardModal = ({
             });
           }}
           color="red800">
-          Potwierdź
+          {t("buttons.confirm")}
         </Button>
       </AnimalCardsCardBtnsContainer>
     </Modal>

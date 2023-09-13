@@ -1,6 +1,7 @@
 import Button from "components/SharedComponents/Button/Button";
 import Modal from "components/SharedComponents/Modal/Modal";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { usePostShelterCardsArchive } from "services/pet/petServices";
 import toastService from "singletons/toastService";
 import { AnimalCardsCardBtnsContainer } from "../../../AdminDashboardComponents/AnimalCardsComponents/AnimalCardsCard/utils/DashboardAnimalCardsCard.styled";
@@ -17,6 +18,7 @@ const MoveToArchiveModal = ({
   handleMoveToArchiveModal,
 }: Props) => {
   const { mutate: PostShelterCardsArchiveFn } = usePostShelterCardsArchive();
+  const { t } = useTranslation();
   return (
     <Modal isOpen={isMoveToArchiveModalOpen}>
       <AnimalCardsCardBtnsContainer>
@@ -25,7 +27,7 @@ const MoveToArchiveModal = ({
           variant="outline"
           onClick={() => handleMoveToArchiveModal(false)}
           type="button">
-          Anuluj
+          {t("buttons.cancel")}
         </Button>
         <Button
           type="button"
@@ -42,7 +44,7 @@ const MoveToArchiveModal = ({
             });
           }}
           color="error">
-          Potwierdź
+          {t("buttons.confirm")}
         </Button>
       </AnimalCardsCardBtnsContainer>
     </Modal>

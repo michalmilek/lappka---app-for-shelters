@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import Select, { OptionProps, StylesConfig } from "react-select";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { CheckIcon } from "../icons/icons";
@@ -58,6 +59,7 @@ const SecondSelect = ({
   options,
   value,
 }: SelectProps) => {
+  const { t } = useTranslation();
   const customStyles: StylesConfig<OptionInterface, false> = {
     control: (baseStyles, _state) => ({
       ...baseStyles,
@@ -108,7 +110,7 @@ const SecondSelect = ({
         value={value ? options.find((option) => option.value === value) : null}
         onChange={(newValue) => handleChange(newValue!.value)}
         tabSelectsValue
-        placeholder="Wybierz z listy"
+        placeholder={t("select.placeholder")}
         options={options}
         styles={customStyles}
         components={{

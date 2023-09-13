@@ -12,8 +12,8 @@ import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
-
 
 const initialValues = {
   email: "",
@@ -26,6 +26,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddNewEmployeePage = () => {
+  const { t } = useTranslation();
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -47,14 +48,13 @@ const AddNewEmployeePage = () => {
             <Typography
               variant="UI/UI Text 16 Semi Bold"
               tag="h2">
-              Dodaj pracownika
+              {t("addEmployee.addEmployee")}
             </Typography>
             <Typography
               variant="UI Small/UI Text 12 Reg"
               tag="p"
               color="midGray1">
-              Wpisz adres email użytkownika aplikacji Łappka i dodaj go do
-              swojej organizacji.
+              {t("addEmployee.addEmployeeDesc")}
             </Typography>
           </AddNewEmployeeFormText>
           <AddNewEmployeeInputContainer>
@@ -64,7 +64,7 @@ const AddNewEmployeePage = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              label="Adres email"
+              label={t("addEmployee.email")}
               error={
                 formik.errors.email && formik.touched.email
                   ? formik.errors.email
@@ -73,8 +73,8 @@ const AddNewEmployeePage = () => {
             />
           </AddNewEmployeeInputContainer>
           <AddNewEmployeeFormFooter>
-            <Button variant="outline">Anuluj</Button>
-            <Button variant="fill">Dodaj</Button>
+            <Button variant="outline">{t("addEmployee.cancel")}</Button>
+            <Button variant="fill">{t("addEmployee.add")}</Button>
           </AddNewEmployeeFormFooter>
         </AddNewEmployeeForm>
       </StyledDashboardEmployeesMainContent>

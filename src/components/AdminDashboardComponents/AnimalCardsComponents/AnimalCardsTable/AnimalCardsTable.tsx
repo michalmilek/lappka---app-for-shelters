@@ -26,8 +26,10 @@ import AnimalCardsTableFooter from "./AnimalCardsTableFooter";
 import { Pet, ShelterCardsResponse } from "services/pet/petTypes";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
+import { useTranslation } from "react-i18next";
 
 function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const pageIndexFromQueryParams = searchParams.get("pageIndex");
@@ -137,7 +139,7 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
             variant="UI/UI Text 16 Semi Bold"
             tag="h2"
             color="darkGray2">
-            Karty zwierząt
+            {t("table.animalsCards")}
           </Typography>
         </TableComponentHeaderContainer>
         <TableContainer>

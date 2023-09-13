@@ -2,6 +2,7 @@ import { getColor } from "utils/styles/getStyle/getColor";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import styled from "styled-components";
 import useDeviceType from "hooks/useDeviceType";
+import { useTranslation } from "react-i18next";
 
 interface StyledNavLinkProps extends NavLinkProps {
   icon: JSX.Element;
@@ -75,15 +76,16 @@ export const StyledMessagesNumberSpan = styled.span`
 
 const SidebarNavLink = ({ icon, text, ...rest }: StyledNavLinkProps) => {
   const deviceType = useDeviceType();
+  const { t } = useTranslation();
   return (
     <StyledNavLink {...rest}>
       <>
         {icon}
         {deviceType === "desktop" && <>{text}</>}
       </>
-      {text === "Wiadomości" && (
+      {text === t("sidebar.messages") && (
         <StyledMessagesNumberContainer>
-          <StyledMessagesNumberSpan>56</StyledMessagesNumberSpan>
+          <StyledMessagesNumberSpan>{56}</StyledMessagesNumberSpan>
         </StyledMessagesNumberContainer>
       )}
     </StyledNavLink>
