@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { useNavigate } from "react-router-dom";
 import toastService from "singletons/toastService";
+import { useTranslation } from "react-i18next";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -54,6 +55,7 @@ interface Props {
 }
 
 const AccountSettingsDeleteUser = ({ isOpen, onClose }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { mutate, isSuccess, isLoading, isError, error } = useDeleteUser();
@@ -87,7 +89,7 @@ const AccountSettingsDeleteUser = ({ isOpen, onClose }: Props) => {
           variant="Heading 18 Semi Bold"
           color="darkGray2"
           tag="h2">
-          Czy na pewno chcesz usunąć użytkownika?
+          {t("accountSettings.areYouSure")}
         </Typography>
         <ModalBtnsContainer>
           <Button
@@ -96,15 +98,16 @@ const AccountSettingsDeleteUser = ({ isOpen, onClose }: Props) => {
             variant="outline"
             type="button"
             onClick={onClose}>
-            Anuluj
+            {t("buttons.cancel")}
           </Button>
           <Button
             isFullWidth
             size="Large"
             variant="fill"
             type="button"
+            color="error"
             onClick={() => mutate()}>
-            Usuń użytkownika
+            {t("accountSettings.deleteAccount")}
           </Button>
         </ModalBtnsContainer>
       </ModalContainer>

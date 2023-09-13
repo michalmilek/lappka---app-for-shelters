@@ -10,7 +10,14 @@
     "voluntary": "Wolontariat",
     "organisation": "Organizacja",
     "employees": "Pracownicy",
-    "avatarAlt": "Zdjęcie profilowe użytkownika"
+    "avatarAlt": "Zdjęcie profilowe użytkownika",
+    "animal-cards": "Karty zwierząt",
+    "add-new-card": "Dodaj nową kartę",
+    "add-new-employee": "Dodaj nowego pracownika",
+    "account-settings": "Ustawienia konta",
+    "register": "Rejestracja",
+    "login": "Login",
+    "reset-password": "Reset hasła"
   },
   "shelterStats": {
     "animalCards": "Karty zwierząt",
@@ -110,7 +117,9 @@
     "zipCode": "Kod pocztowy",
     "city": "Miasto",
     "nip": "Numer NIP",
-    "krs": "Numer KRS"
+    "krs": "Numer KRS",
+    "phoneNumber": "Numer telefonu",
+    "orgDataHasChanged": "Dane organizacji zostały zmienione pomyślnie."
   },
   "accountSettings": {
     "logOut": "Wyloguj się",
@@ -122,12 +131,18 @@
     "edit": "Edytuj",
     "deleteProfilePicture": "Usuń zdjęcie profilowe",
     "deleteAccount": "Usuń konto",
+    "passwordChange": "Zmiana hasła",
     "changePassword": "Zmień hasło",
     "cancel": "Anuluj",
     "save": "Zapisz",
-    "changeProfilePicture": "Zmień zdjęcie profilowe"
+    "changeProfilePicture": "Zmień zdjęcie profilowe",
+    "oldPassword": "Stare hasło",
+    "newPassword": "Nowe hasło",
+    "confirmNewPassword": "Potwierdź nowe hasło",
+    "areYouSure": "Czy na pewno chcesz usunąć użytkownika?"
   },
   "animalCard": {
+    "card": "karta",
     "edit": "Edytuj",
     "return": "Wróć",
     "hide": "Ukryj",
@@ -184,5 +199,18 @@
   },
   "instructions": {
     "changeProfilePhoto": "Zdjęcie profilowe, aby wybrać inne zdjęcie przeciągnij je na początek."
+  },
+  "actions": {
+    "details": "Szczegóły",
+    "delete": "Usuń"
+  },
+  "errors": {
+    "required": "To pole jest wymagane",
+    "max50": "Pole może mieć maksymalnie 50 znaków",
+    "max200": "Pole może mieć maksymalnie 200 znaków",
+    "invalidSelection": "Nieprawidłowy wybór",
+    "max15": "Pole może mieć maksymalnie 15 znaków",
+    "lettersSpacesDashes": "Pole może zawierać tylko litery, spacje i pauzy",
+    "positive": "Wartość musi być większa od zera"
   }
 }

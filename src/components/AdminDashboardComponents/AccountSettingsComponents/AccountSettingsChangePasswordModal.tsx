@@ -11,6 +11,7 @@ import { usePatchUserNewPassword } from "services/user/userServices";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import toastService from "singletons/toastService";
+import { useTranslation } from "react-i18next";
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -80,6 +81,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { mutate, isSuccess, isLoading } = usePatchUserNewPassword();
   const formik = useFormik({
@@ -121,14 +123,14 @@ const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
           variant="Heading 24 Semi Bold"
           color="darkGray2"
           tag="h2">
-          Zmiana hasła
+          {t("accountSettings.passwordChange")}
         </Typography>
         <ModalForm onSubmit={formik.handleSubmit}>
           <Input
             inputSize="Large"
-            label="Stare hasło:"
+            label={`${t("accountSettings.oldPassword")}:`}
             type="password"
-            placeholder="Stare hasło"
+            placeholder={t("accountSettings.oldPassword")}
             id="currentPassword"
             name="currentPassword"
             onChange={formik.handleChange}
@@ -141,9 +143,9 @@ const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
           />
           <Input
             inputSize="Large"
-            label="Nowe hasło:"
+            label={`${t("accountSettings.newPassword")}:`}
             type="password"
-            placeholder="Nowe hasło"
+            placeholder={t("accountSettings.newPassword")}
             id="newPassword"
             name="newPassword"
             onChange={formik.handleChange}
@@ -156,9 +158,9 @@ const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
           />
           <Input
             inputSize="Large"
-            label="Potwierź nowe hasło:"
+            label={`${t("accountSettings.confirmNewPassword")}:`}
             type="password"
-            placeholder="Potwierdź nowe hasło"
+            placeholder={t("accountSettings.confirmNewPassword")}
             id="confirmNewPassword"
             name="confirmNewPassword"
             onChange={formik.handleChange}
@@ -177,14 +179,14 @@ const AccountSettingsChangePasswordModal = ({ isOpen, onClose }: Props) => {
               variant="outline"
               type="button"
               onClick={onClose}>
-              Anuluj
+              {t("buttons.cancel")}
             </Button>
             <Button
               isFullWidth
               size="Large"
               variant="fill"
               type="submit">
-              Zmień hasło
+              {t("accountSettings.changePassword")}
             </Button>
           </ModalBtnsContainer>
         </ModalForm>

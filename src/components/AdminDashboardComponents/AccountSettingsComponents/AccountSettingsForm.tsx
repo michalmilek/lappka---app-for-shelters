@@ -57,6 +57,7 @@ const AccountSettingsForm = ({
       formik.setFieldValue("zipCode", shelterData.zipCode);
       formik.setFieldValue("krs", shelterData.krs);
       formik.setFieldValue("nip", shelterData.nip);
+      formik.setFieldValue("phoneNumber", shelterData.phoneNumber);
     }
   }, [shelterData, userData]);
 
@@ -111,6 +112,18 @@ const AccountSettingsForm = ({
               : null
           }
           label={t("organisationSettings.street")}
+        />
+        <Input
+          name="phoneNumber"
+          value={formik.values.phoneNumber}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={
+            formik.errors.phoneNumber && formik.touched.phoneNumber
+              ? formik.errors.phoneNumber
+              : null
+          }
+          label={t("organisationSettings.phoneNumber")}
         />
         <PostalCodeCityContainer>
           <PostalCodeContainer>

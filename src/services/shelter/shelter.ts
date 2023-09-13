@@ -1,6 +1,6 @@
 import axiosInstance from "services/axiosInstance";
 
-interface ShelterUpdate {
+export interface ShelterUpdate {
   organizationName: string;
   longitude: number;
   latitude: number;

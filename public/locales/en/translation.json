@@ -10,7 +10,14 @@
     "voluntary": "Voluntary",
     "organisation": "Organisation",
     "employees": "Employees",
-    "avatarAlt": "User profile picture"
+    "avatarAlt": "User profile picture",
+    "animal-cards": "Animal cards",
+    "add-new-card": "Add new card",
+    "add-new-employee": "Add new employee",
+    "account-settings": "Account settings",
+    "register": "Register",
+    "login": "Login",
+    "reset-password": "Reset password"
   },
   "shelterStats": {
     "animalCards": "Animal Cards",
@@ -110,7 +117,9 @@
     "zipCode": "Zip code",
     "city": "City",
     "nip": "NIP number",
-    "krs": "KRS number"
+    "krs": "KRS number",
+    "phoneNumber": "Phone number",
+    "orgDataHasChanged": "Organisation data has changed successfully."
   },
   "accountSettings": {
     "logOut": "Log out",
@@ -122,12 +131,18 @@
     "edit": "Edit",
     "deleteProfilePicture": "Delete profile picture",
     "deleteAccount": "Delete account",
+    "passwordChange": "Password change",
     "changePassword": "Change password",
     "cancel": "Cancel",
     "save": "Save",
-    "changeProfilePicture": "Change profile picture"
+    "changeProfilePicture": "Change profile picture",
+    "oldPassword": "Old password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "areYouSure": "Are you sure you want to delete a user?"
   },
   "animalCard": {
+    "card": "card",
     "edit": "Edit",
     "return": "Return",
     "hide": "Hide",
@@ -184,5 +199,18 @@
   },
   "instructions": {
     "changeProfilePhoto": "Profile photo, to select another photo drag it to the top."
+  },
+  "actions": {
+    "details": "Details",
+    "delete": "Delete"
+  },
+  "errors": {
+    "required": "Field is required",
+    "max50": "Field can have a maximum of 50 characters",
+    "max200": "Field can have a maximum of 200 characters",
+    "invalidSelection": "Invalid selection for the animalCategory field.",
+    "max15": "Field can have a maximum of 15 characters",
+    "lettersSpacesDashes": "Field can only contain letters, spaces, and dashes.",
+    "positive": "Value must be greater than zero"
   }
 }

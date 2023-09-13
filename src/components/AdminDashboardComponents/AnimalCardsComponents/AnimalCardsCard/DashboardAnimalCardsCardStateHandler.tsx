@@ -5,6 +5,7 @@ import useBreadcrumbs from "hooks/useBreadcrumbs";
 import AnimalCardsCardSkeleton from "./utils/AnimalCardsCardSkeleton";
 import AnimalCardsCardError from "./utils/AnimalCardsCardError";
 import useDynamicTitle from "hooks/useDynamicTitle";
+import { useTranslation } from "react-i18next";
 
 const DashboardAnimalCardsCardStateHandler = ({
   isEditOn,
@@ -13,6 +14,7 @@ const DashboardAnimalCardsCardStateHandler = ({
   isEditOn: boolean;
   id: string;
 }) => {
+  const { t } = useTranslation();
   const { isLoading, isError, error, isSuccess, data } =
     useShelterCardsCard(id);
   const { handleDynamicTitle } = useBreadcrumbs();
@@ -22,7 +24,9 @@ const DashboardAnimalCardsCardStateHandler = ({
   useEffect(() => {
     if (isSuccess) {
       handleDynamicTitle(data.name);
-      handleDynamicTitleInBrowserCardName("ŁAPPKA - karta " + data.name);
+      handleDynamicTitleInBrowserCardName(
+        "ŁAPPKA - " + t("animalCard.card") + " " + data.name
+      );
     }
   }, [
     data,

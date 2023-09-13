@@ -14,6 +14,7 @@ import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useGetShelter } from "services/pet/petServices";
+import { ShelterUpdate } from "services/shelter/shelter";
 import { usePutShelter } from "services/shelter/shelterServices";
 import { usePostStoragePictures } from "services/storage/storageServices";
 import {
@@ -22,6 +23,7 @@ import {
   usePatchUser,
   usePatchUserEmailAddress,
 } from "services/user/userServices";
+import { ObjectsComparisionFn, SingleObject } from "utils/appUtils";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
@@ -29,6 +31,13 @@ const validationSchema = Yup.object().shape({
   street: Yup.string().required("Pole wymagane"),
   zipCode: Yup.string().required("Pole wymagane"),
   city: Yup.string().required("Pole wymagane"),
+  phoneNumber: Yup.string()
+    .matches(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/, {
+      message:
+        "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze",
+      excludeEmptyString: true,
+    })
+    .required('Pole "Numer telefonu" jest wymagane'),
   nip: Yup.string().required("Pole wymagane"),
   krs: Yup.string().required("Pole wymagane"),
   firstName: Yup.string().required("Pole wymagane"),
@@ -43,6 +52,7 @@ const initialValues: AccountSettingsType = {
   street: "",
   zipCode: "",
   city: "",
+  phoneNumber: "",
   nip: "",
   krs: "",
   profilePicture: "",
@@ -56,6 +66,7 @@ export type AccountSettingsType = {
   street: string;
   zipCode: string;
   city: string;
+  phoneNumber: string;
   nip: string;
   krs: string;
   profilePicture: File | string | null;
@@ -93,15 +104,40 @@ const AccountSettingsPage = () => {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      if (shelterData?.city !== values.city || shelterData?.krs !== values.krs)
-        if (userData?.email !== values.email) {
-          patchEmailAddressFn({ email: values.email });
-        }
+      if (
+        ObjectsComparisionFn(
+          shelterData as unknown as SingleObject,
+          values as unknown as SingleObject,
+          [
+            "organizationName",
+            "city",
+            "street",
+            "zipCode",
+            "nip",
+            "krs",
+            "phoneNumber",
+          ]
+        )
+      ) {
+        const { firstName, lastName, email, profilePicture, ...formValues } =
+          values;
+        putShelterFn({
+          longitude: shelterData!.longitude,
+          latitude: shelterData!.latitude,
+          ...formValues,
+        } as ShelterUpdate);
+      }
+
+      if (userData?.email !== values.email) {
+        patchEmailAddressFn({ email: values.email });
+      }
 
       if (
-        userData?.lastName !== values.lastName ||
-        userData?.firstName !== values.firstName ||
-        userData?.profilePicture !== values.profilePicture
+        ObjectsComparisionFn(
+          userData as unknown as SingleObject,
+          values as unknown as SingleObject,
+          ["firstName", "lastName", "profilePicture"]
+        )
       ) {
         if (
           userData?.profilePicture !== values.profilePicture &&

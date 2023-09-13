@@ -1,4 +1,5 @@
 import { GenderType, GenreType } from "services/pet/petTypes";
+import { t } from "i18next";
 
 export const genderValueToLabel = (value: GenderType): string => {
   return genderLabels[value] || "genderType.Other";
@@ -58,18 +59,33 @@ export const formatCardViews = (views: number) => {
 
 export const mapEnglishToPolish = (englishName: string): string => {
   const translations: Record<string, string> = {
-    dashboard: "Dashboard",
-    messages: "Wiadomości",
-    "animal-cards": "Karty zwierząt",
-    "add-new-card": "Dodaj nową kartę",
-    voluntary: "Wolontariat",
-    employees: "Pracownicy",
-    "add-new-employee": "Dodaj nowego pracownika",
-    "account-settings": "Ustawienia konta",
-    register: "Rejestracja",
-    login: "Login",
-    "reset-password": "Reset hasła",
+    dashboard: t("sidebar.dashboard"),
+    messages: t("sidebar.messages"),
+    "animal-cards": t("sidebar.animal-cards"),
+    "add-new-card": t("sidebar.add-new-card"),
+    voluntary: t("sidebar.voluntary"),
+    employees: t("sidebar.employees"),
+    "add-new-employee": t("sidebar.add-new-employee"),
+    "account-settings": t("sidebar.account-settings"),
+    register: t("sidebar.register"),
+    login: t("sidebar.login"),
+    "reset-password": t("sidebar.reset-password"),
   };
 
   return translations[englishName] || englishName;
+};
+
+export type SingleObject = Record<string, unknown>;
+
+export const ObjectsComparisionFn = (
+  obj1: SingleObject,
+  obj2: SingleObject,
+  properties: string[]
+) => {
+  for (const prop of properties) {
+    if (obj1[prop] !== obj2[prop]) {
+      return true;
+    }
+  }
+  return false;
 };

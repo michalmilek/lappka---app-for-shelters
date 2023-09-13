@@ -16,6 +16,7 @@ import DeleteCardModal from "../../../SharedComponents/Modal/ModalsWithLogic/Del
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import { getColor } from "utils/styles/getStyle/getColor";
+import { useTranslation } from "react-i18next";
 
 const StyledMoreIcon = styled(MoreIcon)`
   cursor: pointer;
@@ -30,6 +31,7 @@ const StyledMoreIcon = styled(MoreIcon)`
 `;
 
 const AnimalCardsTableActionItem = ({ id }: { id: string }) => {
+  const { t } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [listIndexTarget, setListIndexTarget] = useState(1);
   const navigate = useNavigate();
@@ -128,7 +130,7 @@ const AnimalCardsTableActionItem = ({ id }: { id: string }) => {
               <Typography
                 color="darkGray2"
                 variant="UI/UI Text 14 Reg">
-                Szczegóły
+                {t("actions.details")}
               </Typography>
             </StyledDropdownOption>
             <StyledDropdownOption
@@ -144,7 +146,7 @@ const AnimalCardsTableActionItem = ({ id }: { id: string }) => {
                 tag="span"
                 color="darkGray2"
                 variant="UI/UI Text 14 Reg">
-                Usuń
+                {t("actions.delete")}
               </Typography>
             </StyledDropdownOption>
           </StyledDropdownContainer>

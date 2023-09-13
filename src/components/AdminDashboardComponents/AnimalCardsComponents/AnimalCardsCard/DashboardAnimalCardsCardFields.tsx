@@ -163,7 +163,11 @@ const DashboardAnimalCardsCardFields: React.FC<
             <Input
               readOnly
               inputSize="Large"
-              value={formik.values.isSterilized === "true" ? "Tak" : "Nie"}
+              value={
+                formik.values.isSterilized === "true"
+                  ? t("form.yes")
+                  : t("form.no")
+              }
             />
           ) : (
             <SecondSelect
@@ -185,7 +189,11 @@ const DashboardAnimalCardsCardFields: React.FC<
             <Input
               readOnly
               inputSize="Large"
-              value={formik.values.isSterilized === "true" ? "Tak" : "Nie"}
+              value={
+                formik.values.isSterilized === "true"
+                  ? t("form.yes")
+                  : t("form.no")
+              }
             />
           ) : (
             <SecondSelect

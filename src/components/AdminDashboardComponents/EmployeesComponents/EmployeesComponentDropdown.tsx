@@ -7,6 +7,7 @@ import {
   StyledDropdownContainer,
   StyledDropdownOption,
 } from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";
+import { useTranslation } from "react-i18next";
 
 const StyledMoreIcon = styled(MoreIcon)`
   cursor: pointer;
@@ -14,6 +15,7 @@ const StyledMoreIcon = styled(MoreIcon)`
 
 const EmployeesComponentActionDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { t } = useTranslation();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +51,7 @@ const EmployeesComponentActionDropdown = () => {
             <Typography
               color="darkGray2"
               variant="UI/UI Text 14 Reg">
-              Usuń
+              {t("actions.delete")}
             </Typography>
           </StyledDropdownOption>
         </StyledDropdownContainer>
