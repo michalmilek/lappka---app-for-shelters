@@ -178,8 +178,8 @@ function App() {
 
 export default function WrappedApp() {
   return (
-    <Suspense fallback="...loading">
+    <Suspense fallback={<Loader isLoading={true} />}>
       <App />
     </Suspense>
-  )
+  );
 };

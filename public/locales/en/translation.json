@@ -109,15 +109,6 @@
     "addPhotos": "Add photos",
     "addPhotosDesc": "The maximum photo is 15MB and the maximum number of photos is 5."
   },
-  "form": {
-    "input": "Input",
-    "months": "Months",
-    "kgs": "Kilograms",
-    "sterilisation": "Sterilisation",
-    "visible": "Visibility",
-    "yes": "Yes",
-    "no": "No"
-  },
   "select": {
     "placeholder": "Select from the list"
   },
@@ -145,6 +136,8 @@
     "phoneNumberFormat": "The phone number should consist of nine digits and may optionally contain hyphens or spaces after the third and sixth digits.",
     "firstNameFormat": "The name can only contain letters",
     "lastNameFormat": "The name can only contain letters and must consist of at least two words separated by a space",
-    "confirmPwFormat": "Passwords must be identical"
+    "confirmPwFormat": "Passwords must be identical",
+    "krs10": "The 'KRS' number must have exactly 10 digits",
+    "nip10": "The 'NIP' number must have exactly 10 digits"
   }
 }

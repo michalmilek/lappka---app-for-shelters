@@ -68,5 +68,18 @@
       "oneOf": "Invalid choice",
       "required": "This field is required"
     }
+  },
+  "form": {
+    "input": "Input",
+    "months": "Months",
+    "kgs": "Kilograms",
+    "sterilisation": "Sterilisation",
+    "visible": "Visibility",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "addNewCard": {
+    "addPhotos": "Add photos",
+    "addPhotosDesc": "The maximum photo is 15MB and the maximum number of photos is 5."
   }
 }

@@ -22,7 +22,7 @@ const AnimalCardsAddNewCardForm = ({
   formik: FormikProps<AddNewAnimalCardInterface>;
   postStorageIsSuccess: boolean;
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["animalCards", "translation"]);
   const navigate = useNavigate();
   const prevFiles = formik.values.photos;
 
@@ -67,7 +67,7 @@ const AnimalCardsAddNewCardForm = ({
           inputSize="Large"
           label="Opis"
           aria-placeholder="Wpisz opis zwierzaka"
-          name="description"
+          name={t("pet.description")}
           value={formik.values.description}
           onChange={formik.handleChange}
         />
@@ -123,7 +123,7 @@ const AnimalCardsAddNewCardForm = ({
             label="Wiek"
             placeholder={t("form.months")}
             name="months"
-            unit={t("months.months")}
+            unit={t("translation:months.months")}
             error={
               formik.errors.months && formik.touched.months
                 ? formik.errors.months
@@ -219,9 +219,9 @@ const AnimalCardsAddNewCardForm = ({
           onClick={() => {
             navigate(-1);
           }}>
-          {t("buttons.cancel")}
+          {t("translation:buttons.cancel")}
         </Button>
-        <Button type="submit">{t("buttons.save")}</Button>
+        <Button type="submit">{t("translation:buttons.save")}</Button>
       </AnimalCardsAddNewCardFooter>
     </AnimalCardsAddNewCardFormContainer>
   );

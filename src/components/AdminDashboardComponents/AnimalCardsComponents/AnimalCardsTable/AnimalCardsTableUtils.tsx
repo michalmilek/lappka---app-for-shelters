@@ -65,7 +65,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.name")}
+          {t("animalCards:pet.name")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -96,7 +96,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.createdAt")}
+          {t("animalCards:pet.createdAt")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -114,7 +114,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.animalCategory")}
+          {t("animalCards:pet.animalCategory")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -132,7 +132,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.gender")}
+          {t("animalCards:pet.gender")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -152,7 +152,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.species")}
+          {t("animalCards:pet.species")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -166,7 +166,7 @@ export const columns = [
       <Typography
         variant="UI Small/UI Text 13 Med"
         color="midGray2">
-        {t("pet.weight")}
+        {t("animalCards:pet.weight")}
       </Typography>
     ),
     cell: (props) => (
@@ -183,7 +183,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.isSterilized")}
+          {t("animalCards:pet.isSterilized")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -193,7 +193,9 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Reg"
           color="darkGray2">
-          {props.getValue() === true ? t("form.yes") : t("form.no")}
+          {props.getValue() === true
+            ? t("animalCards:form.yes")
+            : t("animalCards:form.no")}
         </Typography>
       </DotFlexContainer>
     ),
@@ -204,7 +206,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.isVisible")}
+          {t("animalCards:pet.isVisible")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -214,7 +216,9 @@ export const columns = [
         <Typography
           variant="UI/UI Text 14 Reg"
           color="darkGray2">
-          {props.getValue() === true ? t("form.yes") : t("form.no")}
+          {props.getValue() === true
+            ? t("animalCards:form.yes")
+            : t("animalCards:form.no")}
         </Typography>
       </DotFlexContainer>
     ),
@@ -226,7 +230,7 @@ export const columns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("pet.action")}
+          {t("animalCards:pet.action")}
         </Typography>
       </ActionHeaderContainer>
     ),

@@ -68,5 +68,18 @@
       "oneOf": "Nieprawidłowy wybór",
       "required": "To pole jest wymagane"
     }
+  },
+  "form": {
+    "input": "Wpisz",
+    "months": "Miesiące",
+    "kgs": "Kilogramy",
+    "sterilisation": "Sterylizacja",
+    "visible": "Widoczność",
+    "yes": "Tak",
+    "no": "Nie"
+  },
+  "addNewCard": {
+    "addPhotos": "Dodaj zdjęcia",
+    "addPhotosDesc": "Zdjęcie maksymalnie 15MB, a maksymalna ilość zdjęć to 5."
   }
 }

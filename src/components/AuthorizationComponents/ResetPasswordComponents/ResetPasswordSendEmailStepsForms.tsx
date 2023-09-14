@@ -15,6 +15,7 @@ import useDeviceType from "hooks/useDeviceType";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { useTranslation } from "react-i18next";
+import useResetPasswordValidation from "./useResetPasswordValidation";
 
 export const ResetPasswordSendEmailStep1Form = ({
   handleCurrentStep,
@@ -27,13 +28,12 @@ export const ResetPasswordSendEmailStep1Form = ({
     isSuccess,
     isLoading,
   } = useResetPasswordSendEmailMutation();
+  const { sendEmailValidation } = useResetPasswordValidation();
   const formik = useFormik({
     initialValues: {
       email: "",
     },
-    validationSchema: Yup.object().shape({
-      email: Yup.string().email().required("Email jest wymagany"),
-    }),
+    validationSchema: sendEmailValidation,
     onSubmit: (values) => {
       resetPasswordSendEmailFn(values.email);
     },

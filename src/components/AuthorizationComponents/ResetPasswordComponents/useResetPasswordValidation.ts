@@ -5,6 +5,17 @@ import * as Yup from "yup";
 const useResetPasswordValidation = () => {
   const { t } = useTranslation("resetPassword");
 
+
+  const sendEmailValidation = useMemo(
+    () =>
+      Yup.object().shape({
+        email: Yup.string()
+          .email(t("resetPasswordValidation.email.invalid"))
+          .required(t("resetPasswordValidation.email.required")),
+      }),
+    [t]
+  );
+
   const resetPasswordValidation = useMemo(
     () =>
       Yup.object().shape({
@@ -21,7 +32,7 @@ const useResetPasswordValidation = () => {
     [t]
   );
 
-  return { resetPasswordValidation };
+  return { resetPasswordValidation, sendEmailValidation };
 };
 
 export default useResetPasswordValidation;

@@ -24,11 +24,11 @@ interface DashboardAnimalCardsCardFieldsProps {
 const DashboardAnimalCardsCardFields: React.FC<
   DashboardAnimalCardsCardFieldsProps
 > = ({ isEditOn, formik }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["translation", "animalCards"]);
 
   return (
     <>
-      <FormRow label={t("pet.name")}>
+      <FormRow label={t("animalCards:pet.name")}>
         <Input
           id="name"
           name="name"
@@ -38,7 +38,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           inputSize="Large"
         />
       </FormRow>
-      <FormRow label={t("pet.description")}>
+      <FormRow label={t("animalCards:pet.description")}>
         {!isEditOn ? (
           <Input
             value={formik.values.description}
@@ -55,7 +55,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         )}
       </FormRow>
-      <FormRow label={t("pet.gender")}>
+      <FormRow label={t("animalCards:pet.gender")}>
         {!isEditOn ? (
           <Input
             readOnly
@@ -78,7 +78,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         )}
       </FormRow>
-      <FormRow label={t("pet.animalCategory")}>
+      <FormRow label={t("animalCards:pet.animalCategory")}>
         {!isEditOn ? (
           <Input
             readOnly
@@ -112,7 +112,7 @@ const DashboardAnimalCardsCardFields: React.FC<
         )}
       </FormRow>
       {formik.values.animalCategory !== "Other" && (
-        <FormRow label={t("pet.species")}>
+        <FormRow label={t("animalCards:pet.species")}>
           <Input
             id="species"
             name="species"
@@ -123,7 +123,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         </FormRow>
       )}
-      <FormRow label={t("pet.weight")}>
+      <FormRow label={t("animalCards:pet.weight")}>
         {!isEditOn ? (
           <Input
             readOnly
@@ -140,7 +140,7 @@ const DashboardAnimalCardsCardFields: React.FC<
           />
         )}
       </FormRow>
-      <FormRow label={t("pet.months")}>
+      <FormRow label={t("animalCards:pet.months")}>
         {!isEditOn ? (
           <Input
             readOnly
@@ -153,28 +153,28 @@ const DashboardAnimalCardsCardFields: React.FC<
             name="months"
             value={formik.values.months}
             onChange={formik.handleChange}
-            unit="msc"
+            unit={t("months.months")}
           />
         )}
       </FormRow>
       <AnimalCardsCardFlexInputContainer>
-        <FormRow label={t("form.sterilisation")}>
+        <FormRow label={t("animalCards:form.sterilisation")}>
           {!isEditOn ? (
             <Input
               readOnly
               inputSize="Large"
               value={
                 formik.values.isSterilized === "true"
-                  ? t("form.yes")
-                  : t("form.no")
+                  ? t("animalCards:form.yes")
+                  : t("animalCards:form.no")
               }
             />
           ) : (
             <SecondSelect
               label=""
               options={[
-                { label: t("form.yes"), value: "true" },
-                { label: t("form.no"), value: "false" },
+                { label: t("animalCards:form.yes"), value: "true" },
+                { label: t("animalCards:form.no"), value: "false" },
               ]}
               value={formik.values.isSterilized}
               handleChange={(option) => {
@@ -184,23 +184,23 @@ const DashboardAnimalCardsCardFields: React.FC<
             />
           )}
         </FormRow>
-        <FormRow label={t("form.visible")}>
+        <FormRow label={t("animalCards:form.visible")}>
           {!isEditOn ? (
             <Input
               readOnly
               inputSize="Large"
               value={
                 formik.values.isSterilized === "true"
-                  ? t("form.yes")
-                  : t("form.no")
+                  ? t("animalCards:form.yes")
+                  : t("animalCards:form.no")
               }
             />
           ) : (
             <SecondSelect
               label=""
               options={[
-                { label: t("form.yes"), value: "true" },
-                { label: t("form.no"), value: "false" },
+                { label: t("animalCards:form.yes"), value: "true" },
+                { label: t("animalCards:form.no"), value: "false" },
               ]}
               value={formik.values.isVisible ? "true" : "false"}
               handleChange={(option) => {

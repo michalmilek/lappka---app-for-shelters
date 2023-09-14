@@ -7,9 +7,9 @@ const useRegisterValidation = () => {
 
   const steps = useMemo(
     () => [
-      t("register.orgData"),
-      t("register.userData"),
-      t("register.summary"),
+      t("register:register.orgData"),
+      t("register:register.userData"),
+      t("register:register.summary"),
     ],
     [t]
   );
@@ -25,10 +25,10 @@ const useRegisterValidation = () => {
         city: Yup.string().required(t("errors.required")),
         nip: Yup.string()
           .required(t("errors.required"))
-          .test("length", t("errors.max10"), (val) => val.length === 10),
+          .test("length", t("errors.nip10"), (val) => val.length === 10),
         krs: Yup.string()
           .required(t("errors.required"))
-          .test("length", t("errors.krs"), (val) => val.length === 10),
+          .test("length", t("errors.krs10"), (val) => val.length === 10),
         phoneNumber: Yup.string()
           .matches(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/, {
             message: t("errors.phoneNumberFormat"),

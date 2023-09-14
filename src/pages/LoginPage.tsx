@@ -21,7 +21,7 @@ import { AuthRoutes } from "router/router";
 import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("login");
   const deviceType = useDeviceType();
   const navigate = useNavigate();
   return (

@@ -127,19 +127,6 @@
     "Female": "Samiczka",
     "Other": "Inna"
   },
-  "addNewCard": {
-    "addPhotos": "Dodaj zdjęcia",
-    "addPhotosDesc": "Zdjęcie maksymalnie 15MB, a maksymalna ilość zdjęć to 5."
-  },
-  "form": {
-    "input": "Wpisz",
-    "months": "Miesiące",
-    "kgs": "Kilogramy",
-    "sterilisation": "Sterylizacja",
-    "visible": "Widoczność",
-    "yes": "Tak",
-    "no": "Nie"
-  },
   "select": {
     "placeholder": "Wybierz z listy"
   },
@@ -203,6 +190,8 @@
     "phoneNumberFormat": "Numer telefonu powinien składać się z dziewięciu cyfr i może opcjonalnie zawierać myślniki lub spacje po trzeciej i szóstej cyfrze.",
     "firstNameFormat": "Imię może zawierać tylko litery",
     "lastNameFormat": "Nazwisko może zawierać tylko litery i musi składać się z przynajmniej dwóch wyrazów oddzielonych spacją",
-    "confirmPwFormat": "Hasła muszą być identyczne"
+    "confirmPwFormat": "Hasła muszą być identyczne",
+    "krs10": "Numer 'KRS' musi mieć dokładnie 10 cyfr",
+    "nip10": "Numer 'NIP' musi mieć dokładnie 10 cyfr"
   }
 }
