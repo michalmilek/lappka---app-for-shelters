@@ -2,8 +2,10 @@ import React from "react";
 import Button from "components/SharedComponents/Button/Button";
 import { useNavigate } from "react-router-dom";
 import useDeviceType from "hooks/useDeviceType";
+import { useTranslation } from "react-i18next";
 
 const RegisterStep3Form = () => {
+  const { t } = useTranslation("register");
   const navigate = useNavigate();
   const deviceType = useDeviceType();
 
@@ -14,7 +16,7 @@ const RegisterStep3Form = () => {
       isFullWidth
       variant="fill"
       type="button">
-      Zaloguj się
+      {t("register.login")}
     </Button>
   );
 };

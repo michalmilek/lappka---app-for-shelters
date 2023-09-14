@@ -1,0 +1,36 @@
+{
+  "shelterStats": {
+    "animalCards": "Animal Cards",
+    "seeksOwner": "Seeks Owner",
+    "withOwner": "With Owner",
+    "volunteering": "Volunteering (number of people)"
+  },
+  "animalChart": {
+    "numberOfMentees": "Views of mentees displayed",
+    "year": "Year",
+    "month": "Month",
+    "week": "Week",
+    "thousands": "K",
+    "viewsInMonth": "Views [mth]",
+    "views": "Views"
+  },
+  "voluntary": {
+    "voluntary": "Voluntary",
+    "makeADonation": "Make a donation",
+    "dailyAssistance": "Daily assistance",
+    "walkingTheDogs": "Walking the dogs",
+    "on": "On",
+    "off": "Off",
+    "description": "Description",
+    "enterYourAccountNumber": "Enter your account number"
+  },
+  "newestAnimals": {
+    "newestAnimalCards": "Latest Animal Cards",
+    "allCards": "All cards",
+    "noAnimalCardsInDatabase": "No animal cards in the database. Add the first card.",
+    "addFirstCard": "Add first card"
+  },
+  "mostPopularAnimals": {
+    "mostPopular": "The most popular"
+  }
+}

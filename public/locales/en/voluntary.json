@@ -1,0 +1,21 @@
+{
+  "voluntaryValidation": {
+    "bankAccountNumber": {
+      "pattern": "Bank account number must consist of 26 digits and may be separated by spaces or hyphens.",
+      "length": "Bank account number must have 26 digits."
+    }
+  },
+  "voluntary": {
+    "voluntary": "Voluntary",
+    "makeADonation": "Make a donation",
+    "dailyAssistance": "Daily assistance",
+    "walkingTheDogs": "Walking the dogs",
+    "on": "On",
+    "off": "Off",
+    "description": "Description",
+    "enterYourAccountNumber": "Enter your account number"
+  },
+  "buttons": {
+    "save": "Save"
+  }
+}

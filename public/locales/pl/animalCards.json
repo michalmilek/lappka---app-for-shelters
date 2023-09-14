@@ -1,0 +1,72 @@
+{
+  "shelterStats": {
+    "animalCards": "Karty zwierząt",
+    "seeksOwner": "Szuka właściciela",
+    "withOwner": "Z właścicielem"
+  },
+  "pet": {
+    "name": "Imię zwierzaka",
+    "species": "Rasa",
+    "gender": "Płeć",
+    "marking": "Umaszczenie",
+    "weight": "Waga",
+    "description": "Opis",
+    "createdAt": "Data utworzenia",
+    "isSterilized": "Sterylizacja",
+    "isVisible": "Widoczność",
+    "months": "Wiek",
+    "animalCategory": "Gatunek",
+    "profilePhoto": "Zdjęcie profilowe",
+    "photos": "Zdjęcia",
+    "views": "Wyświetlenia",
+    "action": "Akcja"
+  },
+  "table": {
+    "animalsCards": "Karty zwierząt",
+    "lookFor": "Wyszukaj w całej tabeli...",
+    "newCard": "Nowa karta"
+  },
+  "cardFormValidation": {
+    "name": {
+      "required": "To pole jest wymagane",
+      "max": "Pole 'Imię' może mieć maksymalnie 50 znaków"
+    },
+    "description": {
+      "required": "To pole jest wymagane",
+      "max": "Pole 'Opis' może mieć maksymalnie 200 znaków"
+    },
+    "animalCategory": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    },
+    "species": {
+      "max": "Rasa nie może przekraczać 15 liter",
+      "required": "To pole jest wymagane"
+    },
+    "gender": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    },
+    "marking": {
+      "required": "To pole jest wymagane",
+      "matches": "Pole może zawierać tylko litery, spacje i pauzy",
+      "max": "Pole 'Opis' może mieć maksymalnie 50 znaków"
+    },
+    "months": {
+      "required": "To pole jest wymagane",
+      "positive": "Wartość musi być większa od zera"
+    },
+    "weight": {
+      "required": "To pole jest wymagane",
+      "positive": "Wartość musi być większa od zera"
+    },
+    "isSterilized": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    },
+    "isVisible": {
+      "oneOf": "Nieprawidłowy wybór",
+      "required": "To pole jest wymagane"
+    }
+  }
+}

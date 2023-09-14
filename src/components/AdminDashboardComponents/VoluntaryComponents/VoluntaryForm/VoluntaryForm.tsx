@@ -12,45 +12,25 @@ import * as Yup from "yup";
 import { FormikProps, useFormik } from "formik";
 import { useUpdateShelterVolunteering } from "services/pet/petServices";
 import { ShelterVolunteeringResponse } from "services/pet/petTypes";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import useVoluntaryValidation from "./useVoluntaryValidation";
 
 interface Props {
   data: ShelterVolunteeringResponse;
 }
 
-const validationSchema = Yup.object().shape({
-  bankAccountNumber: Yup.string()
-    .nullable()
-    .matches(
-      /^(?:\d{2}-\d{4}-\d{4}-\d{4}-\d{4}-\d{4}-\d{4}|\d{2}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}|\d{26})$/,
-      "Konto bankowe musi mieć 26 cyfer oraz może być oddzielone spacjami lub pauzami."
-    )
-    .test(
-      "is-26-digits",
-      "Konto musi mieć 26 cyfer.",
-      (value?: string | null) => {
-        if (!value) {
-          return true;
-        }
-        const numbers = value.match(/\d/g);
-        if (numbers && numbers.length === 26) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    ),
-});
-
 export type FormikType = FormikProps<ShelterVolunteeringResponse>;
 
 const VoluntaryForm = ({ data }: Props) => {
+  const { t } = useTranslation(["voluntary"]);
+  const { voluntaryValidation } = useVoluntaryValidation();
+
   const { mutate: updateShelterVolunteeringFn } =
     useUpdateShelterVolunteering();
 
   const formik = useFormik({
     initialValues: data,
-    validationSchema,
+    validationSchema: voluntaryValidation,
     onSubmit: (values) => {
       const cleanedBankAccountNumber = values.bankAccountNumber.replace(
         /[\s-]/g,

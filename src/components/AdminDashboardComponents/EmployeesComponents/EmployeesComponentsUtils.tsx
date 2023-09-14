@@ -22,7 +22,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("employees.name")}
+          {t("employees:employees.name")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -40,7 +40,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("employees.email")}
+          {t("employees:employees.email")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -58,7 +58,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("employees.dateOfAddition")}
+          {t("employees:employees.dateOfAddition")}
         </Typography>
       </StyledTableTHTextContainer>
     ),
@@ -77,7 +77,7 @@ export const employeesColumns = [
         <Typography
           variant="UI Small/UI Text 13 Med"
           color="midGray2">
-          {t("employees.action")}
+          {t("employees:employees.action")}
         </Typography>
       </ActionHeaderContainer>
     ),

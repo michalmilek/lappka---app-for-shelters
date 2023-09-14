@@ -1,0 +1,30 @@
+{
+  "register": {
+    "login": "Zaloguj się",
+    "registerAShelter": "Zarejestruj schronisko",
+    "fillOut": "Wypełnij poniższy formularz i załóż",
+    "shelterAccount": "Konto schroniska",
+    "registerCompleted": "Proces rejestracji przebiegł pomyślnie. Na Twój adres email została wysłana wiadomość z linkiem aktywacyjnym, kliknij w link i przejdź do logowania.",
+    "fullNameOrg": "Pełna nazwa organizacji",
+    "street": "Ulica",
+    "zipCode": "Kod pocztowy",
+    "city": "Miasto",
+    "nip": "Numer NIP",
+    "krs": "Numer KRS",
+    "phoneNumber": "Numer telefonu",
+    "nextStep": "Następny krok",
+    "enter": "Wpisz",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "Adres email",
+    "password": "Hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "return": "Powrót",
+    "register": "Zarejestruj się",
+    "orgData": "Dane organizacji",
+    "userData": "Dane użytkownika",
+    "summary": "Podsumowanie",
+    "registerSuccess": "Rejestracja zakończona sukcesem. Aktywuj konto przez wiadomość wysłaną na podany email.",
+    "usedEmail": "Podany adres email został już wykorzystany w rejestracji."
+  }
+}

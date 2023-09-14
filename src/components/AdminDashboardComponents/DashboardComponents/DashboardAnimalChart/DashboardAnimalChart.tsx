@@ -40,7 +40,7 @@ interface Props {
 export type TimeType = "Month" | "Year" | "Week";
 
 const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation("dashboard");
   const [activeMonth, setActiveMonth] = useState<null | number>(null);
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const [timeSelect, setTimeSelect] = useState<TimeType>("Year");

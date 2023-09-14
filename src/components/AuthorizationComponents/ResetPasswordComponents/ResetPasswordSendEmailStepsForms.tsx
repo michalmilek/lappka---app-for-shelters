@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 export const ResetPasswordSendEmailStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordFormProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("resetPassword");
   const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const {
@@ -103,7 +103,7 @@ export const ResetPasswordSendEmailStep1Form = ({
 };
 
 export const ResetPasswordSendEmailStep2Form = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("resetPassword");
   const navigate = useNavigate();
   const deviceType = useDeviceType();
 

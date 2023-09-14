@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("register");
   const deviceType = useDeviceType();
   const navigate = useNavigate();
   return (

@@ -4,6 +4,7 @@ import AccountSettingsChangePasswordModal from "components/AdminDashboardCompone
 import AccountSettingsForm from "components/AdminDashboardComponents/AccountSettingsComponents/AccountSettingsForm";
 import AccountSettingsSkeleton from "components/AdminDashboardComponents/AccountSettingsComponents/AccountSettingsSkeleton";
 import ErrorAccountSettings from "components/AdminDashboardComponents/AccountSettingsComponents/ErrorAccountSettings";
+import useAccountSettingsValidation from "components/AdminDashboardComponents/AccountSettingsComponents/useAccountSettingsValidation";
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { AddNewEmployeeFormFooter } from "components/AdminDashboardComponents/EmployeesComponents/AddNewEmployee/AddNewEmployee.styled";
 import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardComponents/EmployeesComponents/DashboardEmployees.styled";
@@ -24,28 +25,6 @@ import {
   usePatchUserEmailAddress,
 } from "services/user/userServices";
 import { ObjectsComparisionFn, SingleObject } from "utils/appUtils";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object().shape({
-  organizationName: Yup.string().required("Pole wymagane"),
-  street: Yup.string().required("Pole wymagane"),
-  zipCode: Yup.string().required("Pole wymagane"),
-  city: Yup.string().required("Pole wymagane"),
-  phoneNumber: Yup.string()
-    .matches(/^\d{3}[-\s]?\d{3}[-\s]?\d{3}$/, {
-      message:
-        "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze",
-      excludeEmptyString: true,
-    })
-    .required('Pole "Numer telefonu" jest wymagane'),
-  nip: Yup.string().required("Pole wymagane"),
-  krs: Yup.string().required("Pole wymagane"),
-  firstName: Yup.string().required("Pole wymagane"),
-  lastName: Yup.string().required("Pole wymagane"),
-  email: Yup.string()
-    .email("Nieprawidłowy adres email")
-    .required("Pole wymagane"),
-});
 
 const initialValues: AccountSettingsType = {
   organizationName: "",
@@ -77,6 +56,7 @@ export type AccountSettingsType = {
 
 const AccountSettingsPage = () => {
   const { t } = useTranslation();
+  const { accountSettingsValidation } = useAccountSettingsValidation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const queryClient = useQueryClient();
 
@@ -102,7 +82,7 @@ const AccountSettingsPage = () => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    validationSchema: accountSettingsValidation,
     onSubmit: (values) => {
       if (
         ObjectsComparisionFn(

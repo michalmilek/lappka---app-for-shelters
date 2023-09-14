@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import Select, { OptionProps, StylesConfig } from "react-select";
 import { getColor } from "utils/styles/getStyle/getColor";
@@ -60,43 +60,48 @@ const SecondSelect = ({
   value,
 }: SelectProps) => {
   const { t } = useTranslation();
-  const customStyles: StylesConfig<OptionInterface, false> = {
-    control: (baseStyles, _state) => ({
-      ...baseStyles,
-      cursor: "pointer",
-      height: "40px",
-      border: `1px solid ${error ? getColor("error") : getColor("lightGray1")}`,
-      fontFamily: "Inter",
-      fontSize: "14px",
-      fontWeight: 400,
-      lineHeight: "24px",
-      letterSpacing: "-0.6px",
-      padding: "2px 0 2px 4px",
-      outline: "none",
-
-      "&:focus-visible": {
-        outline: `1px solid ${getColor("focus")}`,
-      },
-
-      "&:hover": {
+  const customStyles: StylesConfig<OptionInterface, false> = useMemo(
+    () => ({
+      control: (baseStyles, _state) => ({
+        ...baseStyles,
+        cursor: "pointer",
+        height: "40px",
         border: `1px solid ${
           error ? getColor("error") : getColor("lightGray1")
         }`,
-      },
+        fontFamily: "Inter",
+        fontSize: "14px",
+        fontWeight: 400,
+        lineHeight: "24px",
+        letterSpacing: "-0.6px",
+        padding: "2px 0 2px 4px",
+        outline: "none",
+
+        "&:focus-visible": {
+          outline: `1px solid ${getColor("focus")}`,
+        },
+
+        "&:hover": {
+          border: `1px solid ${
+            error ? getColor("error") : getColor("lightGray1")
+          }`,
+        },
+      }),
+      dropdownIndicator: (base) => ({
+        ...base,
+        color: getColor("midGray1"),
+      }),
+      indicatorSeparator: (base) => ({
+        ...base,
+        display: "none",
+      }),
+      placeholder: (base) => ({
+        ...base,
+        color: getColor("midGray4"),
+      }),
     }),
-    dropdownIndicator: (base) => ({
-      ...base,
-      color: getColor("midGray1"),
-    }),
-    indicatorSeparator: (base) => ({
-      ...base,
-      display: "none",
-    }),
-    placeholder: (base) => ({
-      ...base,
-      color: getColor("midGray4"),
-    }),
-  };
+    [error]
+  );
 
   return (
     <SelectContainerWithLabels>

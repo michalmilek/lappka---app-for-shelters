@@ -1,0 +1,21 @@
+{
+  "voluntaryValidation": {
+    "bankAccountNumber": {
+      "pattern": "Konto bankowe musi mieć 26 cyfer oraz może być oddzielone spacjami lub pauzami.",
+      "length": "Konto musi mieć 26 cyfer."
+    }
+  },
+  "voluntary": {
+    "voluntary": "Wolontariat",
+    "makeADonation": "Wpłać darowiznę",
+    "dailyAssistance": "Codzienna pomoc",
+    "walkingTheDogs": "Wyprowadzanie psów",
+    "on": "Włączone",
+    "off": "Wyłączone",
+    "description": "Opis",
+    "enterYourAccountNumber": "Wprowadź numer konta"
+  },
+  "buttons": {
+    "save": "Zapisz"
+  }
+}

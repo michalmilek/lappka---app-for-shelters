@@ -14,10 +14,12 @@ import {
 } from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/AddNewCardUtils";
 import { CreatePet } from "services/pet/petTypes";
 import { useTranslation } from "react-i18next";
+import useAddNewCardValidation from "components/AdminDashboardComponents/AnimalCardsComponents/AnimalCardsAddNewCard/useAddNewCardValidation";
 
 const AnimalCardsAddNewCardPage = () => {
+  const { addNewCardValidation } = useAddNewCardValidation();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t } = useTranslation(["translation, animalCards"]);
   const { mutate: postStorageFn, isSuccess: postStorageIsSuccess } =
     usePostStoragePictures();
   const { mutate: postAnimalFn } = usePostShelterCardsCreatePet();
@@ -42,7 +44,7 @@ const AnimalCardsAddNewCardPage = () => {
 
   const formik = useFormik({
     initialValues: addNewCardInitialValues,
-    validationSchema: cardValidationSchema,
+    validationSchema: addNewCardValidation,
     onSubmit,
   });
 

@@ -1,6 +1,5 @@
 import Typography from "../../SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import Button from "../../SharedComponents/Button/Button";
 import Input from "../../SharedComponents/Inputs/Input";
 import CustomCheckbox from "components/SharedComponents/Inputs/CustomCheckbox";
@@ -23,11 +22,12 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { AuthRoutes } from "router/router";
-import { loginValidation } from "./LoginUtils";
 import { useTranslation } from "react-i18next";
+import useLoginValidation from "./useLoginValidation";
 
 const LoginForm = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("login");
+  const { loginValidation } = useLoginValidation();
   const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const [rememberMe, setRememberMe] = useState(false);

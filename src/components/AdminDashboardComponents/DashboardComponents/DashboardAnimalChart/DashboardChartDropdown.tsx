@@ -1,5 +1,5 @@
 import CustomRadio from "components/SharedComponents/Inputs/CustomRadio";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import { TimeType } from "./DashboardAnimalChart";
 import {
   StyledDashboardChartDropdownContainer,
@@ -17,6 +17,7 @@ const DashboardChartDropdown: React.FC<DashboardChartDropdownProps> = ({
   timeSelect,
   handleTimeSelectChange,
 }) => {
+  const { t } = useTranslation("dashboard");
   return (
     <StyledDashboardChartDropdownContainer
       className={isDropDownActive ? "dropdown-entering" : "dropdown-exiting"}>

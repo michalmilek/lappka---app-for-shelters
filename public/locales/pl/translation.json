@@ -19,54 +19,29 @@
     "login": "Login",
     "reset-password": "Reset hasła"
   },
-  "shelterStats": {
-    "animalCards": "Karty zwierząt",
-    "seeksOwner": "Szuka właściciela",
-    "withOwner": "Z właścicielem",
-    "volunteering": "Wolontariat (ilość osób)"
-  },
-  "animalChart": {
-    "numberOfMentees": "Liczba wyświetleń podopiecznych",
-    "year": "Rok",
-    "month": "Miesiąc",
-    "week": "Tydzień",
-    "thousands": "Tyś.",
-    "viewsInMonth": "Wyśw. [tyś]",
-    "views": "Wyświetlenia"
-  },
   "months": {
-    "january": "Styczeń",
-    "february": "Luty",
-    "march": "Marzec",
-    "april": "Kwiecień",
-    "may": "Maj",
-    "june": "Czerwiec",
-    "july": "Lipiec",
-    "august": "Sierpień",
-    "september": "Wrzesień",
-    "october": "Październik",
-    "november": "Listopad",
-    "december": "Grudzień",
-    "months": "msc"
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December",
+    "months": "mth"
   },
   "week": {
-    "monday": "Poniedziałek",
-    "tuesday": "Wtorek",
-    "wednesday": "Środa",
-    "thursday": "Czwartek",
-    "friday": "Piątek",
-    "saturday": "Sobota",
-    "sunday": "Niedziela"
-  },
-  "voluntary": {
-    "voluntary": "Wolontariat",
-    "makeADonation": "Wpłać darowiznę",
-    "dailyAssistance": "Codzienna pomoc",
-    "walkingTheDogs": "Wyprowadzanie psów",
-    "on": "Włączone",
-    "off": "Wyłączone",
-    "description": "Opis",
-    "enterYourAccountNumber": "Wprowadź numer konta"
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
   },
   "pet": {
     "name": "Imię zwierzaka",
@@ -85,30 +60,10 @@
     "views": "Wyświetlenia",
     "action": "Akcja"
   },
-  "messages": {
-    "messages": "Wiadomości",
-    "typeYourMessage": "Wpisz wiadomość...",
-    "sendAMessage": "Wyślij wiadomość"
-  },
   "table": {
     "animalsCards": "Karty zwierząt",
     "lookFor": "Wyszukaj w całej tabeli...",
     "newCard": "Nowa karta"
-  },
-  "employees": {
-    "employeesList": "Lista pracowników",
-    "name": "Imię i nazwisko",
-    "email": "Email",
-    "dateOfAddition": "Data dodania",
-    "action": "Akcja",
-    "addEmployee": "Dodaj pracownika"
-  },
-  "addEmployee": {
-    "addEmployee": "Dodaj pracownika",
-    "addEmployeeDesc": "Wpisz adres email użytkownika aplikacji Łappka i dodaj go do swojej organizacji.",
-    "email": "Adres email",
-    "cancel": "Anuluj",
-    "add": "Dodaj"
   },
   "organisationSettings": {
     "organisationSettings": "Ustawienia organizacji",
@@ -162,12 +117,6 @@
     "cancel": "Anuluj",
     "confirm": "Potwierdź"
   },
-  "newestAnimals": {
-    "newestAnimalCards": "Najnowsze karty zwierząt",
-    "allCards": "Wszystkie",
-    "noAnimalCardsInDatabase": "Brak zwierząt w bazie danych. Dodaj pierwszą kartę.",
-    "addFirstCard": "Dodaj pierwszą kartę"
-  },
   "genreType": {
     "Dog": "Pies",
     "Cat": "Kot",
@@ -177,9 +126,6 @@
     "Male": "Samiec",
     "Female": "Samiczka",
     "Other": "Inna"
-  },
-  "mostPopularAnimals": {
-    "mostPopular": "Najpopularniejsze"
   },
   "addNewCard": {
     "addPhotos": "Dodaj zdjęcia",
@@ -203,61 +149,6 @@
   "actions": {
     "details": "Szczegóły",
     "delete": "Usuń"
-  },
-  "login": {
-    "signIn": "Zaloguj się",
-    "welcomeBack": "Witaj ponownie!",
-    "forgotPassword": "Zapomniałem hasła",
-    "logInThrough": "Lub zaloguj się przez",
-    "email": "Adres email",
-    "password": "Hasło",
-    "rememberMe": "Zapamiętaj mnie",
-    "enter": "Wpisz",
-    "register": "Zarejestruj się"
-  },
-  "register": {
-    "login": "Zaloguj się",
-    "registerAShelter": "Zarejestruj schronisko",
-    "fillOut": "Wypełnij poniższy formularz i załóż",
-    "shelterAccount": "Konto schroniska",
-    "registerCompleted": "Proces rejestracji przebiegł pomyślnie. Na Twój adres email została wysłana wiadomość z linkiem aktywacyjnym, kliknij w link i przejdź do logowania.",
-    "fullNameOrg": "Pełna nazwa organizacji",
-    "street": "Ulica",
-    "zipCode": "Kod pocztowy",
-    "city": "Miasto",
-    "nip": "Numer NIP",
-    "krs": "Numer KRS",
-    "phoneNumber": "Numer telefonu",
-    "nextStep": "Następny krok",
-    "enter": "Wpisz",
-    "firstName": "Imię",
-    "lastName": "Nazwisko",
-    "email": "Adres email",
-    "password": "Hasło",
-    "confirmPassword": "Potwierdź hasło",
-    "return": "Powrót",
-    "register": "Zarejestruj się",
-    "orgData": "Dane organizacji",
-    "userData": "Dane użytkownika",
-    "summary": "Podsumowanie"
-  },
-  "resetPassword": {
-    "forgetPassword": "Zapomniałeś hasła?",
-    "enterTheEmail": "Podaj adres email użyty przy rejestracji.",
-    "enter": "Wpisz",
-    "email": "Email",
-    "resetPassword": "Resetuj hasło",
-    "thankYou": "Dziękujemy",
-    "weSentAnEmail": "Wysłalismy na adres email link do stworzenia nowego hasła.",
-    "close": "Zamknij",
-    "createANewPassword": "Utwórz nowe hasło",
-    "min8Letters": "Hasło powinno mieć m.in. 8 znaków.",
-    "password": "Hasło",
-    "confirmPassword": "Potwierdź hasło",
-    "createPassword": "Utwórz hasło",
-    "pwResetSuccesfully": "Hasło zresetowane pomyślnie",
-    "yourPwHasBeenReset": "Twoje hasło zostało zresetowane. Możesz już zalogować się do swojego konta.",
-    "login": "Zaloguj się"
   },
   "accountSettingsForm": {
     "validation": {
@@ -293,49 +184,6 @@
         "required": "Adres email jest wymagany",
         "invalid": "Nieprawidłowy adres email"
       }
-    }
-  },
-  "cardForm": {
-    "name": {
-      "required": "To pole jest wymagane",
-      "max": "Pole 'Imię' może mieć maksymalnie 50 znaków"
-    },
-    "description": {
-      "required": "To pole jest wymagane",
-      "max": "Pole 'Opis' może mieć maksymalnie 200 znaków"
-    },
-    "animalCategory": {
-      "oneOf": "Nieprawidłowy wybór",
-      "required": "To pole jest wymagane"
-    },
-    "species": {
-      "max": "Rasa nie może przekraczać 15 liter",
-      "required": "To pole jest wymagane"
-    },
-    "gender": {
-      "oneOf": "Nieprawidłowy wybór",
-      "required": "To pole jest wymagane"
-    },
-    "marking": {
-      "required": "To pole jest wymagane",
-      "matches": "Pole może zawierać tylko litery, spacje i pauzy",
-      "max": "Pole 'Opis' może mieć maksymalnie 50 znaków"
-    },
-    "months": {
-      "required": "To pole jest wymagane",
-      "positive": "Wartość musi być większa od zera"
-    },
-    "weight": {
-      "required": "To pole jest wymagane",
-      "positive": "Wartość musi być większa od zera"
-    },
-    "isSterilized": {
-      "oneOf": "Nieprawidłowy wybór",
-      "required": "To pole jest wymagane"
-    },
-    "isVisible": {
-      "oneOf": "Nieprawidłowy wybór",
-      "required": "To pole jest wymagane"
     }
   },
   "errors": {

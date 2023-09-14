@@ -10,17 +10,18 @@ import {
 import { useEffect, useRef } from "react";
 import { useRegisterShelterMutation } from "services/auth/authServices";
 import useDeviceType from "hooks/useDeviceType";
-import { RegisterStep2Validation } from "./RegisterUtils";
 import { useDispatch } from "react-redux";
 import { setLoading } from "redux/loadingSlice";
 import { useTranslation } from "react-i18next";
+import useRegisterValidation from "./useRegisterValidation";
 
 const RegisterStep2Form = ({
   handleCurrentStep,
   handleFormValues,
   formValues,
 }: HandleStepProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("register");
+  const { RegisterStep2Validation } = useRegisterValidation();
   const deviceType = useDeviceType();
   const dispatch = useDispatch();
   const {

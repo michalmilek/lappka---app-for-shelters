@@ -43,6 +43,7 @@ import ImageSkeleton from "./utils/ImageSkeleton";
 import { ErrorSkeleton } from "./utils/ErrorSkeleton";
 import toastService from "singletons/toastService";
 import { useTranslation } from "react-i18next";
+import useAnimalCardsValidation from "./utils/useAnimalCardsValidation";
 
 const DashboardAnimalCardsCardForm = ({
   isEditOn,
@@ -51,7 +52,8 @@ const DashboardAnimalCardsCardForm = ({
   isEditOn: boolean;
   data: PetItem;
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("animalCards");
+  const { animalCardsCardValidationSchema } = useAnimalCardsValidation();
   const {
     isSuccess: GetStorageImagesIsSuccess,
     data: imagesUrls,
@@ -155,7 +157,7 @@ const DashboardAnimalCardsCardForm = ({
 
   const formik = useFormik({
     initialValues,
-    validationSchema: AnimalCardsCardValidationSchema,
+    validationSchema: animalCardsCardValidationSchema,
     onSubmit: handleSubmit,
   });
 

@@ -19,7 +19,7 @@ export interface MessageInterface extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const MessagesChat = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("messages");
   const currentUser = useSelector(selectMe);
   const activeChatData = useSelector(selectActiveChatData);
 

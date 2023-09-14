@@ -1,0 +1,72 @@
+{
+  "shelterStats": {
+    "animalCards": "Animal Cards",
+    "seeksOwner": "Seeks Owner",
+    "withOwner": "With Owner"
+  },
+  "table": {
+    "animalsCards": "Animals cards",
+    "lookFor": "Search the entire table...",
+    "newCard": "New Card"
+  },
+  "pet": {
+    "name": "Name",
+    "species": "Breed",
+    "gender": "Gender",
+    "marking": "Color",
+    "weight": "Weight",
+    "description": "Description",
+    "createdAt": "Created at",
+    "isSterilized": "Is Sterilized",
+    "isVisible": "Is Visible",
+    "months": "Months",
+    "animalCategory": "Genre",
+    "profilePhoto": "Profile photo",
+    "photos": "Photos",
+    "views": "Views",
+    "action": "Action"
+  },
+  "cardFormValidation": {
+    "name": {
+      "required": "This field is required",
+      "max": "Field 'Name' can have a maximum of 50 characters"
+    },
+    "description": {
+      "required": "This field is required",
+      "max": "Field 'Description' can have a maximum of 200 characters"
+    },
+    "animalCategory": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    },
+    "species": {
+      "max": "Species can't exceed 15 characters",
+      "required": "This field is required"
+    },
+    "gender": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    },
+    "marking": {
+      "required": "This field is required",
+      "matches": "Field can only contain letters, spaces, and hyphens",
+      "max": "Field 'Marking' can have a maximum of 50 characters"
+    },
+    "months": {
+      "required": "This field is required",
+      "positive": "Value must be greater than zero"
+    },
+    "weight": {
+      "required": "This field is required",
+      "positive": "Value must be greater than zero"
+    },
+    "isSterilized": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    },
+    "isVisible": {
+      "oneOf": "Invalid choice",
+      "required": "This field is required"
+    }
+  }
+}

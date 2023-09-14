@@ -1,0 +1,17 @@
+{
+  "employees": {
+    "employeesList": "List of employees",
+    "name": "Full name",
+    "email": "Email",
+    "dateOfAddition": "Date of addition",
+    "action": "Action",
+    "addEmployee": "Add employee"
+  },
+  "addEmployee": {
+    "addEmployee": "Add employee",
+    "addEmployeeDesc": "Enter the email address of a Łappka user and add him to your organisation.",
+    "email": "Email address",
+    "cancel": "Cancel",
+    "add": "Add"
+  }
+}

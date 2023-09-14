@@ -12,12 +12,11 @@ import { useShelterManagement } from "services/management/managementServices";
 
 const EmployeesPage = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t } = useTranslation("employees");
   //const { data } = useShelterManagement("Shelter");
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar
-        title="Pracownicy"
         Button={
           <Button
             icon={<StyledPlusIcon />}

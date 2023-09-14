@@ -8,6 +8,7 @@ import {
   StyledInput,
 } from "./Input.styled";
 import { EyeIcon, EyeOffIcon } from "../icons/icons";
+import { useTranslation } from "react-i18next";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -29,6 +30,7 @@ const Input = ({
   ...rest
 }: InputProps) => {
   const [passwordVisibility, setPasswordVisibility] = React.useState(false);
+  const { t } = useTranslation();
 
   const isPassword = type === "password";
 

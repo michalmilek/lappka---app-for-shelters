@@ -10,9 +10,10 @@ import {
 import DashboardVoluntaryItem from "./DashboardVoluntaryItem";
 import SkeletonVoluntary from "./SkeletonVoluntary";
 import ErrorVoluntary from "./ErrorVoluntary";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 const DashboardVoluntary = () => {
+  const { t } = useTranslation("dashboard");
   const { data, isLoading, isError, error, isSuccess } =
     useShelterVolunteering();
 

@@ -24,7 +24,7 @@ const AnimalCardsInfoContainer = styled.div`
 
 const AnimalCardsInfo = () => {
   const { data, isLoading, isError } = useShelterStats();
-  const { t } = useTranslation();
+  const { t } = useTranslation("animalCards");
 
   if (isError) {
     return <ErrorAnimalCardsInfo />;

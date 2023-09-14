@@ -5,7 +5,7 @@ import {
   DashboardVoluntaryItemStatusContainer,
 } from "./DashboardVoluntaryItem.styled";
 import { IsOnIndicator } from "./DashboardVoluntaryItem.styled";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 export interface IsOn extends React.HTMLAttributes<HTMLSpanElement> {
   isOn: boolean;
@@ -17,6 +17,7 @@ interface Props {
 }
 
 const DashboardVoluntaryItem = ({ text, isOn }: Props) => {
+  const { t } = useTranslation("dashboard");
   return (
     <DashboardVoluntaryItemContainer>
       <Typography tag="h5">{text}</Typography>

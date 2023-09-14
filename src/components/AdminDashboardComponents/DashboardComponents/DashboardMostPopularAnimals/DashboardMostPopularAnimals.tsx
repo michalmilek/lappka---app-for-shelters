@@ -1,7 +1,7 @@
 import Divider from "components/SharedComponents/Divider/Divider";
 import Typography from "components/SharedComponents/Typography/Typography";
-import { t } from "i18next";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useShelterCards } from "services/pet/petServices";
 import {
   DashboardMostPopularAnimalsContainer,
@@ -18,6 +18,7 @@ const DashboardMostPopularAnimals = () => {
     data: viewsData,
     isError,
   } = useShelterCards(1, 5, "views");
+  const { t } = useTranslation("dashboard");
 
   if (isLoading) {
     return <SkeletonMostPopularAnimals />;

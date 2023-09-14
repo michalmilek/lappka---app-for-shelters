@@ -109,15 +109,16 @@ export const createWeekData = (data: number[]) => {
 };
 
 export const getChartTypeTimeByType = (type: TimeType): string => {
+  
   switch (type) {
     case "Month":
-      return t("animalChart.month");
+      return t("dashboard:animalChart.month");
     case "Year":
-      return t("animalChart.year");
+      return t("dashboard:animalChart.year");
     case "Week":
-      return t("animalChart.week");
+      return t("dashboard:animalChart.week");
     default:
-      return t("animalChart.year");
+      return t("dashboard:animalChart.year");
   }
 };
 

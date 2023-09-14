@@ -1,0 +1,22 @@
+{
+  "accountSettingsValidation": {
+    "validation": {
+      "organizationName": "Pole wymagane",
+      "street": "Pole wymagane",
+      "zipCode": "Pole wymagane",
+      "city": "Pole wymagane",
+      "phoneNumber": {
+        "invalidFormat": "Numer telefonu powinien składać się z 9 cyfr i może zawierać opcjonalnie myślniki lub spacje po trzeciej i szóstej cyfrze",
+        "required": "Pole 'Numer telefonu' jest wymagane"
+      },
+      "nip": "Pole wymagane",
+      "krs": "Pole wymagane",
+      "firstName": "Pole wymagane",
+      "lastName": "Pole wymagane",
+      "email": {
+        "invalidFormat": "Nieprawidłowy adres email",
+        "required": "Pole wymagane"
+      }
+    }
+  }
+}

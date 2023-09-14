@@ -1,0 +1,36 @@
+{
+  "shelterStats": {
+    "animalCards": "Karty zwierząt",
+    "seeksOwner": "Szuka właściciela",
+    "withOwner": "Z właścicielem",
+    "volunteering": "Wolontariat (ilość osób)"
+  },
+  "animalChart": {
+    "numberOfMentees": "Liczba wyświetleń podopiecznych",
+    "year": "Rok",
+    "month": "Miesiąc",
+    "week": "Tydzień",
+    "thousands": "Tyś.",
+    "viewsInMonth": "Wyśw. [tyś]",
+    "views": "Wyświetlenia"
+  },
+  "voluntary": {
+    "voluntary": "Wolontariat",
+    "makeADonation": "Wpłać darowiznę",
+    "dailyAssistance": "Codzienna pomoc",
+    "walkingTheDogs": "Wyprowadzanie psów",
+    "on": "Włączone",
+    "off": "Wyłączone",
+    "description": "Opis",
+    "enterYourAccountNumber": "Wprowadź numer konta"
+  },
+  "newestAnimals": {
+    "newestAnimalCards": "Najnowsze karty zwierząt",
+    "allCards": "Wszystkie",
+    "noAnimalCardsInDatabase": "Brak zwierząt w bazie danych. Dodaj pierwszą kartę.",
+    "addFirstCard": "Dodaj pierwszą kartę"
+  },
+  "mostPopularAnimals": {
+    "mostPopular": "Najpopularniejsze"
+  }
+}

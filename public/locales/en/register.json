@@ -1,0 +1,30 @@
+{
+  "register": {
+    "login": "Sign in",
+    "registerAShelter": "Register a shelter",
+    "fillOut": "Fill out the form below and set up",
+    "shelterAccount": "Shelter account",
+    "registerCompleted": "The registration process was successful. To your email address has been sent an email with an activation link, click on the link and proceed to log in.",
+    "fullNameOrg": "Full name of the organization",
+    "street": "Street",
+    "zipCode": "Zip code",
+    "city": "City",
+    "nip": "NIP number",
+    "krs": "KRS number",
+    "phoneNumber": "Phone number",
+    "nextStep": "Next step",
+    "enter": "Enter",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "return": "Return",
+    "register": "Sign up",
+    "orgData": "Organization data",
+    "userData": "User data",
+    "summary": "Summary",
+    "registerSuccess": "Registration successfully completed. Activate your account via the message sent to the email provided.",
+    "usedEmail": "The user with the specified email was not found."
+  }
+}

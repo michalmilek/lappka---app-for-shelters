@@ -11,15 +11,16 @@ import {
 } from "./Register.styled";
 import useDeviceType from "hooks/useDeviceType";
 import { formatPhoneNumber } from "utils/appUtils";
-import { RegisterStep1Validation } from "./RegisterUtils";
 import { useTranslation } from "react-i18next";
+import useRegisterValidation from "./useRegisterValidation";
 
 const RegisterStep1Form = ({
   handleFormValues,
   formValues,
   handleCurrentStep,
 }: HandleStepProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("register");
+  const { RegisterStep1Validation } = useRegisterValidation();
   const deviceType = useDeviceType();
   const { setValues, ...formik } = useFormik({
     initialValues: {

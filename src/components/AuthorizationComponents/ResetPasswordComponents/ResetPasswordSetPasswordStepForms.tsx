@@ -11,14 +11,15 @@ import {
 } from "./ResetPassword.styled";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
-import { setPasswordValidation } from "./ResetPasswordUtils";
 import { useTranslation } from "react-i18next";
+import useResetPasswordValidation from "./useResetPasswordValidation";
 
 export const ResetPasswordSetPasswordStep1Form = ({
   handleCurrentStep,
 }: ResetPasswordSetPasswordFormProps) => {
   const { token } = useParams();
-  const { t } = useTranslation();
+  const { t } = useTranslation("resetPassword");
+  const { resetPasswordValidation } = useResetPasswordValidation();
 
   const deviceType = useDeviceType();
   const { mutate: resetPasswordSetNewPasswordFn, isSuccess } =
@@ -28,7 +29,7 @@ export const ResetPasswordSetPasswordStep1Form = ({
       password: "",
       confirmPassword: "",
     },
-    validationSchema: setPasswordValidation,
+    validationSchema: resetPasswordValidation,
     onSubmit: (values) => {
       console.log(values);
       if (token) {
@@ -112,7 +113,7 @@ export const ResetPasswordSetPasswordStep1Form = ({
 };
 
 export const ResetPasswordSetPasswordStep2Form = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("resetPassword");
   const navigate = useNavigate();
   const deviceType = useDeviceType();
   return (

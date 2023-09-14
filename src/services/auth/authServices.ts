@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { setLoading } from "redux/loadingSlice";
 import { store } from "redux/store";
@@ -17,6 +18,7 @@ import {
 } from "./auth";
 
 export const useLoginMutation = () => {
+  const { t } = useTranslation("login");
   const navigate = useNavigate();
   const resetPasswordSendEmailMutation = useMutation(
     (data: LoginRequest) => {
@@ -31,7 +33,7 @@ export const useLoginMutation = () => {
       },
       onSuccess: (data) => {
         const { accessToken, refreshToken } = data;
-        toastService.showToast("Logowanie zakończone sukcesem.");
+        toastService.showToast(t("login.loginSuccess"));
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         navigate(DashboardRoutes.dashboard);
@@ -39,15 +41,9 @@ export const useLoginMutation = () => {
       onError: (error: ExtendedAxiosError2) => {
         console.log(error);
         if (error.response?.data?.Code === "invalid_password") {
-          toastService.showToast(
-            "Wprowadzono nieprawidłowe hasło. Spróbuj ponownie",
-            "error"
-          );
+          toastService.showToast(t("login.wrongPassword"), "error");
         } else if (error.response?.data?.Code === "invalid_email") {
-          toastService.showToast(
-            "Nie znaleziono użytkownika o podanym danym emailu.",
-            "error"
-          );
+          toastService.showToast(t("login.userNotFound"), "error");
         }
       },
     }
@@ -57,19 +53,15 @@ export const useLoginMutation = () => {
 };
 
 export const useRegisterShelterMutation = () => {
+  const { t } = useTranslation("register");
   const registerShelterMutation = useMutation(registerShelter, {
     onSuccess: () => {
-      toastService.showToast(
-        "Rejestracja zakończona sukcesem. Aktywuj konto przez wiadomość wysłaną na podany email."
-      );
+      toastService.showToast(t("register.registerSuccess"));
     },
     onError: (error: ExtendedAxiosError2) => {
       console.log(error);
       if (error.response?.data?.Code === "invalid_email") {
-        toastService.showToast(
-          "Podany adres email został już wykorzystany w rejestracji.",
-          "error"
-        );
+        toastService.showToast(t("register.usedEmail"), "error");
       } else {
         if (error.response?.data?.Code)
           toastService.showToast(error.response?.data?.Description, "error");

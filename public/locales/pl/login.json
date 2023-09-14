@@ -1,0 +1,29 @@
+{
+  "login": {
+    "signIn": "Zaloguj się",
+    "welcomeBack": "Witaj ponownie!",
+    "forgotPassword": "Zapomniałem hasła",
+    "logInThrough": "Lub zaloguj się przez",
+    "email": "Adres email",
+    "password": "Hasło",
+    "rememberMe": "Zapamiętaj mnie",
+    "enter": "Wpisz",
+    "register": "Zarejestruj się",
+    "wrongPassword": "Wprowadzono nieprawidłowe hasło. Spróbuj ponownie",
+    "userNotFound": "Nie znaleziono użytkownika o podanym danym emailu.",
+    "loginSuccess": "Logowanie zakończone sukcesem."
+  },
+  "loginValidation": {
+    "email": {
+      "invalidFormat": "Nieprawidłowy adres email",
+      "required": "Pole 'Email' jest wymagane"
+    },
+    "password": {
+      "invalidFormat": "Hasło musi zawierać co najmniej 8 znaków, przynajmniej 1 znak nie alfanumeryczny, 1 cyfrę, 1 wielką literę i 1 małą literę",
+      "required": "Pole 'Hasło' jest wymagane"
+    }
+  },
+  "errors": {
+    "required": "Pole wymagane"
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import Typography from "../Typography/Typography";
@@ -75,6 +76,8 @@ const InputNumberWithUnits: React.FC<CustomInputProps> = ({
   error,
   ...rest
 }) => {
+  const { t } = useTranslation();
+
   return (
     <InputFullContainer>
       {label && (

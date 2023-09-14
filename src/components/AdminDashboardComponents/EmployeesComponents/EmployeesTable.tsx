@@ -26,7 +26,7 @@ import {
 } from "./EmployeesComponentsUtils";
 
 const EmployeesTable = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("employees");
   const data = React.useMemo(() => dummyData, []);
   const memoisedColumns = React.useMemo(() => employeesColumns, []);
 

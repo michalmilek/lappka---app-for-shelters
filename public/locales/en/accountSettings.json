@@ -1,0 +1,22 @@
+{
+  "accountSettingsValidation": {
+    "validation": {
+      "organizationName": "Field required",
+      "street": "Field required",
+      "zipCode": "Field required",
+      "city": "Field required",
+      "phoneNumber": {
+        "invalidFormat": "Phone number should consist of 9 digits and may optionally include hyphens or spaces after the third and sixth digits",
+        "required": "Field 'Phone number' is required"
+      },
+      "nip": "Field required",
+      "krs": "Field required",
+      "firstName": "Field required",
+      "lastName": "Field required",
+      "email": {
+        "invalidFormat": "Invalid email address",
+        "required": "Field required"
+      }
+    }
+  }
+}

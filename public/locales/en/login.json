@@ -1,0 +1,29 @@
+{
+  "login": {
+    "signIn": "Sign in",
+    "welcomeBack": "Welcome back!",
+    "forgotPassword": "Forgot password",
+    "logInThrough": "Or log in through",
+    "email": "Email address",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "enter": "Enter",
+    "register": "Sign up",
+    "wrongPassword": "An incorrect password has been entered. Please try again.",
+    "userNotFound": "The user with the specified email was not found.",
+    "loginSuccess": "Login successful."
+  },
+  "loginValidation": {
+    "email": {
+      "invalidFormat": "Invalid email address",
+      "required": "Field 'Email' required"
+    },
+    "password": {
+      "invalidFormat": "Password must be at least 8 characters long, with at least 1 non-alphanumeric character, 1 digit, 1 uppercase, and 1 lowercase letter",
+      "required": "Field 'Password' is required"
+    }
+  },
+  "errors": {
+    "required": "Field required"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "employees": {
+    "employeesList": "Lista pracowników",
+    "name": "Imię i nazwisko",
+    "email": "Email",
+    "dateOfAddition": "Data dodania",
+    "action": "Akcja",
+    "addEmployee": "Dodaj pracownika"
+  },
+  "addEmployee": {
+    "addEmployee": "Dodaj pracownika",
+    "addEmployeeDesc": "Wpisz adres email użytkownika aplikacji Łappka i dodaj go do swojej organizacji.",
+    "email": "Adres email",
+    "cancel": "Anuluj",
+    "add": "Dodaj"
+  }
+}

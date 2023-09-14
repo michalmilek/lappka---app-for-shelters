@@ -30,7 +30,7 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
     isError,
   } = useGetStorageImagesForId(item.profilePhoto);
 
-  const { t } = useTranslation();
+  const { t } = useTranslation(["translation", "dashboard"]);
 
   return (
     <DashboardMostPopularAnimalsItemContainer

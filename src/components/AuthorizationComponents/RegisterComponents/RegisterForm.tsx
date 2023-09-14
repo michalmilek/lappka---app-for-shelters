@@ -10,7 +10,7 @@ import { StyledRegisterTitleContent } from "./Register.styled";
 import { ShelterRegisterRequest } from "services/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 import { useTranslation } from "react-i18next";
-import { t } from "i18next";
+import useRegisterValidation from "./useRegisterValidation";
 
 export interface HandleStepProps {
   handleCurrentStep?: (step: number) => void;
@@ -18,20 +18,14 @@ export interface HandleStepProps {
   handleFormValues?: (values: Partial<ShelterRegisterRequest>) => void;
 }
 
-const steps = [
-  t("register.orgData"),
-  t("register.userData"),
-  t("register.summary"),
-];
-
 const RegisterForm = () => {
-  const { t } = useTranslation();
+  const { steps } = useRegisterValidation();
+  const { t } = useTranslation("register");
   const deviceType = useDeviceType();
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, _setComplete] = useState(false);
   const [formValues, setFormValues] =
     useState<Partial<ShelterRegisterRequest> | null>(null);
-  console.log("🚀 ~ formValues:", formValues);
 
   const handleCurrentStep = (step: number) => {
     setCurrentStep(step);
