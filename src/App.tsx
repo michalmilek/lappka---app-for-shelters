@@ -26,7 +26,6 @@ import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
 import Loader from "components/SharedComponents/Loader/Loader";
 import { useSelector } from "react-redux";
 import { selectIsLoading } from "redux/loadingSlice";
-import PreLoaderModal from "components/SharedComponents/PreLoader/PreLoader";
 import { AxiosError } from "axios";
 import Page404 from "pages/Page404";
 import toastService from "singletons/toastService";
@@ -72,112 +71,91 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const wasLoadedInThePast = localStorage.getItem("wasLoadedInThePast");
-  const [isPageLoaded, setIsPageLoaded] = useState(
-    wasLoadedInThePast ? true : false
-  );
-
-  useEffect(() => {
-    const onPageLoad = () => {
-      setIsPageLoaded(true);
-      localStorage.setItem("wasLoadedInThePast", "true");
-    };
-
-    window.addEventListener("load", onPageLoad);
-
-    return () => {
-      window.removeEventListener("load", onPageLoad);
-    };
-  }, []);
-
   const isLoading = useSelector(selectIsLoading);
 
-  if (isPageLoaded)
-    return (
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Routes>
-            <Route element={<UnprotectedPage />}>
-              <Route
-                path={AuthRoutes.login}
-                element={<LoginPage />}
-              />
-              <Route
-                path={AuthRoutes.register}
-                element={<RegisterPage />}
-              />
-              <Route
-                path={AuthRoutes.resetPassword}
-                element={<ResetPasswordPage />}
-              />
-              <Route
-                path={AuthRoutes.resetPasswordToken}
-                element={<ResetPasswordPage />}
-              />
-            </Route>
-            <Route element={<ProtectedPage />}>
-              <Route
-                path={DashboardRoutes.dashboard}
-                element={<DashboardPage />}
-              />
-              <Route
-                path={DashboardRoutes.messages}
-                element={<MessagesPage />}
-              />
-              <Route
-                path={DashboardRoutes.animalCards}
-                element={<AnimalCardsPage />}
-                key={"animalCards"}
-              />
-              <Route
-                path={DashboardRoutes.animalCardsNewCard}
-                element={<AnimalCardsAddNewCardPage />}
-              />
-              <Route
-                path={DashboardRoutes.animalCardsCard}
-                element={<AnimalCardsCardPage />}
-              />
-              <Route
-                path={DashboardRoutes.voluntary}
-                element={<VoluntaryPage />}
-              />
-              <Route
-                path={DashboardRoutes.employees}
-                element={<EmployeesPage />}
-              />
-              <Route
-                path={DashboardRoutes.addNewEmployee}
-                element={<AddNewEmployeePage />}
-              />
-              <Route
-                path={DashboardRoutes.accountSettings}
-                element={<AccountSettingsPage />}
-              />
-            </Route>
-
+  return (
+    <QueryClientProvider client={queryClient}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<UnprotectedPage />}>
             <Route
-              path="/"
-              element={<HomePage />}
+              path={AuthRoutes.login}
+              element={<LoginPage />}
             />
             <Route
-              path="/not-found"
-              element={<Page404 />}
+              path={AuthRoutes.register}
+              element={<RegisterPage />}
             />
-
             <Route
-              path="*"
-              element={<Navigate to="/not-found" />}
+              path={AuthRoutes.resetPassword}
+              element={<ResetPasswordPage />}
             />
-          </Routes>
-        </BrowserRouter>
-        <Toast />
-        <Loader isLoading={isLoading} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    );
+            <Route
+              path={AuthRoutes.resetPasswordToken}
+              element={<ResetPasswordPage />}
+            />
+          </Route>
+          <Route element={<ProtectedPage />}>
+            <Route
+              path={DashboardRoutes.dashboard}
+              element={<DashboardPage />}
+            />
+            <Route
+              path={DashboardRoutes.messages}
+              element={<MessagesPage />}
+            />
+            <Route
+              path={DashboardRoutes.animalCards}
+              element={<AnimalCardsPage />}
+              key={"animalCards"}
+            />
+            <Route
+              path={DashboardRoutes.animalCardsNewCard}
+              element={<AnimalCardsAddNewCardPage />}
+            />
+            <Route
+              path={DashboardRoutes.animalCardsCard}
+              element={<AnimalCardsCardPage />}
+            />
+            <Route
+              path={DashboardRoutes.voluntary}
+              element={<VoluntaryPage />}
+            />
+            <Route
+              path={DashboardRoutes.employees}
+              element={<EmployeesPage />}
+            />
+            <Route
+              path={DashboardRoutes.addNewEmployee}
+              element={<AddNewEmployeePage />}
+            />
+            <Route
+              path={DashboardRoutes.accountSettings}
+              element={<AccountSettingsPage />}
+            />
+          </Route>
 
-  return <PreLoaderModal />;
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
+          <Route
+            path="/not-found"
+            element={<Page404 />}
+          />
+
+          <Route
+            path="*"
+            element={<Navigate to="/not-found" />}
+          />
+        </Routes>
+      </BrowserRouter>
+      <Toast />
+      <Loader isLoading={isLoading} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
