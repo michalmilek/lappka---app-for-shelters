@@ -107,3 +107,5 @@ export const mapEnglishToPolish = (englishName: string): string => {
 
   return translations[englishName] || englishName;
 };
+
+

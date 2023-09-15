@@ -98,6 +98,10 @@ export const StyledTableTH = styled.th`
   border-top: 1px solid ${getColor("lightGray3")};
   border-bottom: 1px solid ${getColor("lightGray3")};
 
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
+  }
+
   @media screen and (max-width: 1300px) {
     padding: 12px 4px;
   }
@@ -201,6 +205,10 @@ export const StyledDropdownOption = styled.li<DropdownDetailsInterface>`
   cursor: pointer;
 
   &:hover {
+    background: ${getColor("lightGray3")};
+  }
+
+  &:focus-visible {
     background: ${getColor("lightGray3")};
   }
 `;

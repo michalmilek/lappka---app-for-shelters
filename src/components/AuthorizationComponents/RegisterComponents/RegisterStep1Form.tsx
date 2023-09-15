@@ -1,6 +1,5 @@
-import React from "react";
+import { useEffect } from "react";
 import Input from "components/SharedComponents/Inputs/Input";
-import * as Yup from "yup";
 import { useFormik } from "formik";
 import { HandleStepProps } from "./RegisterForm";
 import Button from "components/SharedComponents/Button/Button";
@@ -11,7 +10,6 @@ import {
   StyledRegisterInputStep1Container,
 } from "./Register.styled";
 import useDeviceType from "hooks/useDeviceType";
-import { Shelter } from "services/auth/auth";
 import { formatPhoneNumber } from "utils/appUtils";
 import { RegisterStep1Validation } from "./RegisterUtils";
 
@@ -21,7 +19,7 @@ const RegisterStep1Form = ({
   handleCurrentStep,
 }: HandleStepProps) => {
   const deviceType = useDeviceType();
-  const formik = useFormik({
+  const { setValues, ...formik } = useFormik({
     initialValues: {
       organizationName: "",
       street: "",
@@ -47,6 +45,12 @@ const RegisterStep1Form = ({
     },
   });
 
+  useEffect(() => {
+    if (formValues?.shelterRequest) {
+      setValues(formValues.shelterRequest);
+    }
+  }, [formValues, setValues]);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <StyledRegisterInputStep1Container>
@@ -58,6 +62,7 @@ const RegisterStep1Form = ({
           placeholder="Wpisz"
           inputSize="Large"
           onChange={formik.handleChange}
+          value={formik.values.organizationName}
           onBlur={formik.handleBlur}
           error={
             formik.touched.organizationName && formik.errors.organizationName
@@ -73,6 +78,7 @@ const RegisterStep1Form = ({
           placeholder="Wpisz"
           inputSize="Large"
           onChange={formik.handleChange}
+          value={formik.values.street}
           onBlur={formik.handleBlur}
           error={
             formik.touched.street && formik.errors.street
@@ -91,6 +97,7 @@ const RegisterStep1Form = ({
               inputSize="Large"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.zipCode}
               error={
                 formik.touched.zipCode && formik.errors.zipCode
                   ? formik.errors.zipCode
@@ -107,6 +114,7 @@ const RegisterStep1Form = ({
             inputSize="Large"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            value={formik.values.city}
             error={
               formik.touched.city && formik.errors.city
                 ? formik.errors.city
@@ -124,6 +132,7 @@ const RegisterStep1Form = ({
           maxLength={16}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          value={formik.values.nip}
           error={
             formik.touched.nip && formik.errors.nip ? formik.errors.nip : null
           }
@@ -135,6 +144,7 @@ const RegisterStep1Form = ({
           name="krs"
           placeholder="Wpisz"
           inputSize="Large"
+          value={formik.values.krs}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={
@@ -148,6 +158,7 @@ const RegisterStep1Form = ({
           name="phoneNumber"
           placeholder="Wpisz"
           inputSize="Large"
+          value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={

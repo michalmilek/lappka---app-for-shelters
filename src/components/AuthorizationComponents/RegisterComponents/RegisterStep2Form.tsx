@@ -7,9 +7,8 @@ import {
   StyledRegisterButtonContainer,
   StyledRegisterInputContainer,
 } from "./Register.styled";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRegisterShelterMutation } from "services/auth/authServices";
-import { ShelterRegisterRequest } from "services/auth/auth";
 import useDeviceType from "hooks/useDeviceType";
 import { RegisterStep2Validation } from "./RegisterUtils";
 import { useDispatch } from "react-redux";
@@ -27,7 +26,8 @@ const RegisterStep2Form = ({
     isSuccess,
     isLoading,
   } = useRegisterShelterMutation();
-  const formik = useFormik({
+  const formikRef = useRef<HTMLFormElement>(null);
+  const { setFieldValue, ...formik } = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -38,15 +38,14 @@ const RegisterStep2Form = ({
     validationSchema: RegisterStep2Validation,
     onSubmit: (values) => {
       if (handleFormValues) handleFormValues({ userRequest: values });
+      if (formik.isValid && formValues?.shelterRequest) {
+        registerFn({
+          shelterRequest: formValues.shelterRequest,
+          userRequest: values,
+        });
+      }
     },
   });
-
-  useEffect(() => {
-    if (formValues?.shelterRequest && formValues?.userRequest) {
-      console.log(formValues);
-      registerFn(formValues as ShelterRegisterRequest);
-    }
-  }, [formValues, registerFn]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -62,8 +61,18 @@ const RegisterStep2Form = ({
     }
   }, [dispatch, isLoading]);
 
+  useEffect(() => {
+    if (formValues?.userRequest) {
+      setFieldValue("firstName", formValues.userRequest.firstName);
+      setFieldValue("lastName", formValues.userRequest.lastName);
+      setFieldValue("emailAddress", formValues.userRequest.emailAddress);
+    }
+  }, [formValues, setFieldValue]);
+
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form
+      ref={formikRef}
+      onSubmit={formik.handleSubmit}>
       <StyledRegisterInputContainer>
         <Input
           inputSize={"Large"}
@@ -139,10 +148,12 @@ const RegisterStep2Form = ({
           width="30%"
           iconSpacing="8px"
           iconPlace="left"
-          size="XLarge"
+          size={deviceType === "desktop" ? "Large" : "Medium"}
           variant="outline"
           type="button"
           onClick={() => {
+            if (handleFormValues)
+              handleFormValues({ userRequest: formik.values });
             if (handleCurrentStep) handleCurrentStep(1);
           }}>
           Powrót
@@ -151,7 +162,7 @@ const RegisterStep2Form = ({
           width="70%"
           iconSpacing="8px"
           iconPlace="right"
-          size={deviceType === "desktop" ? "XLarge" : "Large"}
+          size={deviceType === "desktop" ? "Large" : "Medium"}
           variant="fill"
           type="submit">
           Zarejestruj się

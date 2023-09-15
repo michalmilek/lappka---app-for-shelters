@@ -16,6 +16,7 @@ interface ToastContainerInterface extends React.ComponentProps<"div"> {
 }
 
 export const ToastContainer = styled.div<ToastContainerInterface>`
+  z-index: 2500;
   position: absolute;
   top: ${({ index }) => (index ? `${index * 60}px` : 0)};
   right: 10px;

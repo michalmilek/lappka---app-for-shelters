@@ -1,8 +1,5 @@
 import React from "react";
-import Typography from "../Typography/Typography";
-import { styled } from "styled-components";
 import { RadioMarkIcon } from "../icons/icons";
-import { getColor } from "utils/styles/getStyle/getColor";
 import {
   RadioInput,
   RadioLabel,
@@ -23,7 +20,9 @@ const CustomRadio: React.FC<RadioInterface> = ({
   ...rest
 }) => {
   return (
-    <RadioWrapper {...rest}>
+    <RadioWrapper
+      tabIndex={0}
+      {...rest}>
       <Radiomark
         checked={checked}
         {...rest}>

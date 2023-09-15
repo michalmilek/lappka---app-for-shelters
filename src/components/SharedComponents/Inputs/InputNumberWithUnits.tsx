@@ -28,7 +28,7 @@ const InputContainer = styled.div<CustomInputProps>`
       : css`
           border: 1px solid ${getColor("lightGray1")};
         `}
-  border-radius: 6px 12px 12px 6px;
+  border-radius: 6px 9px 9px 6px;
 `;
 
 const InputBox = styled.input`
@@ -47,6 +47,10 @@ const InputBox = styled.input`
 
   &::placeholder {
     color: ${getColor("midGray4")};
+  }
+
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
   }
 `;
 
@@ -83,6 +87,7 @@ const InputNumberWithUnits: React.FC<CustomInputProps> = ({
       )}
       <InputContainer error={error}>
         <InputBox
+          tabIndex={0}
           type="number"
           value={value}
           {...rest}

@@ -1,12 +1,6 @@
 import React, { useRef, useState } from "react";
 import Typography from "../Typography/Typography";
-import {
-  centerCrop,
-  Crop,
-  makeAspectCrop,
-  PercentCrop,
-  PixelCrop,
-} from "react-image-crop";
+import { Crop, PercentCrop, PixelCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import {
   FileInput,
@@ -162,28 +156,25 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
       throw new Error("Crop canvas does not exist");
     }
 
+    const canvasRef = childRef.current?.previewCanvasRef;
+
+    if (!canvasRef) {
+      throw new Error("Canvas reference does not exist");
+    }
+
     if (!cutImg) {
       const imgElement = childRef.current.imgRef;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64String = reader.result as string;
-        const updatedPreviews = [...filePreviews];
-        updatedPreviews.splice(index, 1, base64String);
-        setFilePreviews(updatedPreviews);
+      const base64String = imgElement.src;
+      const updatedPreviews = [...filePreviews];
+      updatedPreviews.splice(index, 1, base64String);
+      setFilePreviews(updatedPreviews);
 
-        const file = new File([base64String], fileNames[index], {
-          type: "image/jpeg",
-        });
+      const file = new File([base64String], fileNames[index], {
+        type: "image/jpeg",
+      });
 
-        onFileChange(file);
-      };
-      imgElement.crossOrigin = "anonymous";
+      onFileChange(file);
     } else {
-      const canvasRef = childRef.current?.previewCanvasRef;
-      if (!canvasRef) {
-        throw new Error("Canvas reference does not exist");
-      }
-
       canvasRef.toBlob((blob) => {
         if (!blob) {
           throw new Error("Failed to create blob");
@@ -324,6 +315,15 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
     [completedCrop]
   );
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
+    }
+  };
+
   return (
     <FullContainer>
       <FileInputContainerContent>
@@ -332,8 +332,11 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
           color="darkGray2">
           {label}
         </Typography>
-        <FileInputContainer>
+        <FileInputContainer
+          onKeyDown={handleKeyDown}
+          tabIndex={0}>
           <FileInput
+            tabIndex={-1}
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}

@@ -89,7 +89,14 @@ const DashboardSidebar = () => {
       </StyledSidebarTopMenu>
 
       <StyledUserMenu
+        tabIndex={0}
+        role={"button"}
         ref={userMenuRef}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key === "Enter") {
+            setIsDropdownActive((prev) => !prev);
+          }
+        }}
         onClick={() => {
           setIsDropdownActive((prev) => !prev);
         }}>

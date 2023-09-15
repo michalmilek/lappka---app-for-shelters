@@ -151,7 +151,13 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
 
                   return (
                     <StyledTableTH
+                      tabIndex={0}
                       key={header.id}
+                      onKeyPress={(e: React.KeyboardEvent) => {
+                        if (e.key === "Enter") {
+                          handleSort(header.column.id);
+                        }
+                      }}
                       onClick={() => handleSort(header.column.id)}>
                       {header.isPlaceholder
                         ? null

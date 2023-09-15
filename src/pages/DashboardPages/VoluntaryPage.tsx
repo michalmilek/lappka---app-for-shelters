@@ -6,6 +6,7 @@ import SkeletonVoluntary from "components/AdminDashboardComponents/VoluntaryComp
 import VoluntaryForm from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/VoluntaryForm";
 import ErrorVoluntary from "components/AdminDashboardComponents/VoluntaryComponents/VoluntaryForm/ErrorVoluntary";
 
+
 const VoluntaryPage = () => {
   const { data, isLoading, isError, isSuccess } = useShelterVolunteering();
 

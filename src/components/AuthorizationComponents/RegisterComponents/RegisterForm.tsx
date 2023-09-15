@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { StyledUnathorizedSection } from "components/AuthorizationComponents/UnprotectedRoutes.styled";
 import StepsBar from "components/SharedComponents/StepBar/Stepbar";
@@ -24,12 +24,7 @@ const RegisterForm = () => {
   const [complete, _setComplete] = useState(false);
   const [formValues, setFormValues] =
     useState<Partial<ShelterRegisterRequest> | null>(null);
-
-  useEffect(() => {
-    if (currentStep === 1) {
-      setFormValues(null);
-    }
-  }, [currentStep]);
+  console.log("🚀 ~ formValues:", formValues);
 
   const handleCurrentStep = (step: number) => {
     setCurrentStep(step);

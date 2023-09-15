@@ -36,6 +36,10 @@ export const FileInputContainer = styled.label`
   border: 1px solid ${getColor("lightGray1")};
   border-radius: 6px;
   background: ${getColor("white")};
+
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
+  }
 `;
 
 export const FileInput = styled.input`

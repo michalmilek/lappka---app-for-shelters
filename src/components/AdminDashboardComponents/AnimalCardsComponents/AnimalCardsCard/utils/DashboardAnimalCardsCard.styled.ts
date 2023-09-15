@@ -88,6 +88,10 @@ export const CardButton = styled.button`
   background: transparent;
   border: none;
   z-index: 50;
+
+  &:focus-visible {
+    outline: 1px solid ${getColor("focus")};
+  }
 `;
 
 export const AnimalCardsCardFlexInputContainer = styled.div`

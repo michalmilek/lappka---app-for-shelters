@@ -28,6 +28,8 @@ const AnimalCardsAddNewCardPage = () => {
         onSuccess: (data) => {
           postAnimalFn({
             ...values,
+            isSterilized: JSON.parse(values.isSterilized),
+            isVisible: JSON.parse(values.isSterilized),
             photos: data,
             profilePhoto: data[0],
           } as AnimalCreatePetInterface);

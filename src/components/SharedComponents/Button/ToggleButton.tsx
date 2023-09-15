@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import Typography from "../Typography/Typography";
 import {
   ToggleButtonContainer,
@@ -11,22 +11,36 @@ interface CheckboxToggleProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   disabled?: boolean;
-  $fieldName?: string;
+  fieldName?: string;
   handleChange: () => void;
 }
 
 const ToggleButton = ({
   label,
   disabled,
-  $fieldName,
+  fieldName,
   checked,
   handleChange,
   ...rest
 }: CheckboxToggleProps) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (
+      event.key === "Enter" ||
+      event.key === "ArrowLeft" ||
+      event.key === "ArrowRight"
+    ) {
+      handleChange();
+    }
+  };
+
   return (
     <ToggleButtonContainer disabled={disabled}>
-      <ToggleContainer disabled={disabled}>
+      <ToggleContainer
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        disabled={disabled}>
         <ToggleInput
+          tabIndex={-1}
           type="checkbox"
           onChange={handleChange}
           disabled={disabled}

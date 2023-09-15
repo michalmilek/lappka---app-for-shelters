@@ -10,13 +10,10 @@ import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardCo
 import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { useFormik } from "formik";
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetShelter } from "services/pet/petServices";
-import {
-  useGetStorageImagesForUser,
-  usePostStoragePictures,
-} from "services/storage/storageServices";
+import { usePostStoragePictures } from "services/storage/storageServices";
 import {
   useDeleteProfilePicture,
   useGetUser,

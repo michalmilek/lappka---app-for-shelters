@@ -4,7 +4,6 @@ import Input from "components/SharedComponents/Inputs/Input";
 import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
-import * as Yup from "yup";
 import { ResetPasswordSetPasswordFormProps } from "./ResetPasswordSetPasswordForm";
 import {
   ResetPasswordInputContainer,
