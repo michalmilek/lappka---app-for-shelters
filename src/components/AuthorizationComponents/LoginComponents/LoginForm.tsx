@@ -19,8 +19,6 @@ import {
 import { useLoginMutation } from "services/auth/authServices";
 import useDeviceType from "hooks/useDeviceType";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setLoading } from "redux/loadingSlice";
 import { AuthRoutes } from "router/router";
 import { useTranslation } from "react-i18next";
 import useLoginValidation from "./useLoginValidation";
@@ -28,10 +26,9 @@ import useLoginValidation from "./useLoginValidation";
 const LoginForm = () => {
   const { t } = useTranslation("login");
   const { loginValidation } = useLoginValidation();
-  const dispatch = useDispatch();
   const deviceType = useDeviceType();
   const [rememberMe, setRememberMe] = useState(false);
-  const { mutate: loginFn, isLoading } = useLoginMutation();
+  const { mutate: loginFn } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
       email: "",

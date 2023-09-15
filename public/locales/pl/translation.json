@@ -1,7 +1,8 @@
 {
   "languageChange": {
     "EN": "Zmień język na angielski",
-    "PL": "Zmień język na polski"
+    "PL": "Zmień język na polski",
+    "DE": "Zmień język na niemiecki"
   },
   "sidebar": {
     "dashboard": "Dashboard",
@@ -97,7 +98,7 @@
     "areYouSure": "Czy na pewno chcesz usunąć użytkownika?"
   },
   "animalCard": {
-    "card": "karta",
+    "card": "Karta",
     "edit": "Edytuj",
     "return": "Wróć",
     "hide": "Ukryj",
@@ -193,5 +194,14 @@
     "confirmPwFormat": "Hasła muszą być identyczne",
     "krs10": "Numer 'KRS' musi mieć dokładnie 10 cyfr",
     "nip10": "Numer 'NIP' musi mieć dokładnie 10 cyfr"
+  },
+  "utils": {
+    "thousands": "tyś.",
+    "month": "miesiąc",
+    "months": "miesiące",
+    "year": "rok",
+    "years": "lata",
+    "and": "i",
+    "monthsGenitive": "miesięcy"
   }
 }

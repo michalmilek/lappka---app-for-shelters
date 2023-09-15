@@ -1,0 +1,22 @@
+{
+  "accountSettingsValidation": {
+    "validation": {
+      "organizationName": "Feld erforderlich",
+      "street": "Feld erforderlich",
+      "zipCode": "Feld erforderlich",
+      "city": "Feld erforderlich",
+      "phoneNumber": {
+        "invalidFormat": "Die Telefonnummer sollte aus 9 Ziffern bestehen und optional Bindestriche oder Leerzeichen nach der dritten und sechsten Ziffer enthalten",
+        "required": "Feld 'Telefonnummer' ist erforderlich"
+      },
+      "nip": "Feld erforderlich",
+      "krs": "Feld erforderlich",
+      "firstName": "Feld erforderlich",
+      "lastName": "Feld erforderlich",
+      "email": {
+        "invalidFormat": "Ungültige E-Mail-Adresse",
+        "required": "Feld erforderlich"
+      }
+    }
+  }
+}

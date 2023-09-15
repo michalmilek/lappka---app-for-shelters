@@ -70,6 +70,8 @@ function App() {
     wasLoadedInThePast ? true : false
   );
 
+  const { i18n } = useTranslation();
+
   useEffect(() => {
     const onPageLoad = () => {
       setIsPageLoaded(true);
@@ -82,6 +84,18 @@ function App() {
       window.removeEventListener("load", onPageLoad);
     };
   }, []);
+
+  /*   useEffect(() => {
+    const handleLanguageChange = () => {
+      window.location.reload();
+    };
+
+    i18n.on("languageChanged", handleLanguageChange);
+
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
+  }, [i18n]); */
 
   const isLoading = useSelector(selectIsLoading);
 

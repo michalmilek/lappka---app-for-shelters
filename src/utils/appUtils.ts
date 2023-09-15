@@ -21,12 +21,30 @@ export const typeLabels: { [key in GenreType]: string } = {
   Cat: "genreType.Cat",
 };
 
-export const ageConversion = (ageInMonths: number): string => {
-  if (ageInMonths <= 12) {
-    return ageInMonths + " miesiąc/miesięcy";
+export const ageConversion = (ageInMonths: number) => {
+  if (ageInMonths === 1) {
+    return `1 ${t("utils.month")}`;
+  } else if (ageInMonths < 12) {
+    return `${ageInMonths} ${t("utils.months")}`;
   } else {
-    const years: number = Math.floor(ageInMonths / 12);
-    return years + " lat/lata";
+    const years = Math.floor(ageInMonths / 12);
+    const months = ageInMonths % 12;
+
+    if (months === 0) {
+      return `${years} ${years === 1 ? t("utils.year") : t("utils.years")}`;
+    } else if (months === 1) {
+      return `${years} ${
+        years === 1 ? t("utils.year") : t("utils.years")
+      } i 1 ${t("utils.month")}`;
+    } else if (months < 5) {
+      return `${years} ${
+        years === 1 ? t("utils.year") : t("utils.years")
+      } i ${months} ${t("utils.months")}`;
+    } else {
+      return `${years} ${
+        years === 1 ? t("utils.year") : t("utils.years")
+      } i ${months} ${t("utils.monthsGenitive")}`;
+    }
   }
 };
 
@@ -45,13 +63,13 @@ export const createImgURL = (file: File | string) => {
 export const formatCardViews = (views: number) => {
   if (views >= 100000) {
     const roundedViews = Math.floor(views / 1000);
-    return `${roundedViews} tys.`;
+    return `${roundedViews} ${t("utils.thousands")}`;
   } else if (views >= 1000) {
     const formattedViews = new Intl.NumberFormat("en", {
       minimumFractionDigits: 1,
       maximumFractionDigits: 1,
     }).format(views / 1000);
-    return `${formattedViews} tyś`;
+    return `${formattedViews} ${t("utils.thousands")}`;
   } else {
     return views.toString();
   }

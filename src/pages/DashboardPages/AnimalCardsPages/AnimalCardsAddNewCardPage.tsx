@@ -51,13 +51,11 @@ const AnimalCardsAddNewCardPage = () => {
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar
-        previousTitle="Karty zwierząt / "
-        title="Nowa karta"
         Button={
           <Button
             onClick={() => navigate(-1)}
             variant="outline">
-            {t("buttons.cancel")}
+            {t("translation:buttons.cancel")}
           </Button>
         }
       />

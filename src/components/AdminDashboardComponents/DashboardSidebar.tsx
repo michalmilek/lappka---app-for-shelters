@@ -55,7 +55,7 @@ const DashboardSidebar = () => {
     if (pathName) setIsDropdownActive(false);
   }, [pathName]);
 
-  const changeLanguage = (lng: "en" | "pl") => {
+  const changeLanguage = (lng: "en" | "pl" | "de") => {
     i18n.changeLanguage(lng);
   };
 
@@ -125,6 +125,18 @@ const DashboardSidebar = () => {
               title={t("languageChange.PL")}
               aria-label={t("languageChange.PL")}
               countryCode="PL"
+              svg
+            />
+          </UnstyledButton>
+          <UnstyledButton
+            onClick={() => {
+              changeLanguage("de");
+            }}>
+            <ReactCountryFlag
+              className="flag"
+              title={t("languageChange.DE")}
+              aria-label={t("languageChange.DE")}
+              countryCode="DE"
               svg
             />
           </UnstyledButton>

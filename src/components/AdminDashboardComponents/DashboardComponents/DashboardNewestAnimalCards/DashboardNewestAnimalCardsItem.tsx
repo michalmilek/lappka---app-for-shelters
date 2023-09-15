@@ -25,7 +25,7 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
     isSuccess,
     isError,
   } = useGetStorageImagesForId(item.profilePhoto);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <ContainerLink to={DashboardRoutes.animalCards + "/" + item.petId}>
@@ -54,7 +54,9 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
             <Typography
               variant="UI Small/UI Text 12 Reg"
               color="midGray2">
-              {new Date(item.createdAt).toLocaleDateString("pl-PL")}
+              {Intl.DateTimeFormat(i18n.language).format(
+                new Date(item.createdAt)
+              )}
             </Typography>
           </DashboardNewestAnimalCardsItemContentDataContainer>
         </DashboardNewestAnimalCardsItemContentContainer>

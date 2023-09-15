@@ -1,0 +1,154 @@
+{
+  "languageChange": {
+    "EN": "Sprache auf Englisch ändern",
+    "PL": "Sprache auf Polnisch ändern",
+    "DE": "Sprache auf Deutsch ändern",
+    "FR": "Sprache auf Französisch ändern"
+  },
+  "sidebar": {
+    "dashboard": "Armaturenbrett",
+    "messages": "Nachrichten",
+    "animalCards": "Tierkarten",
+    "voluntary": "Freiwillige",
+    "organisation": "Organisation",
+    "employees": "Mitarbeiter",
+    "avatarAlt": "Benutzerprofilbild",
+    "animal-cards": "Tierkarten",
+    "add-new-card": "Neue Karte hinzufügen",
+    "add-new-employee": "Neuen Mitarbeiter hinzufügen",
+    "account-settings": "Kontoeinstellungen",
+    "register": "Registrieren",
+    "login": "Anmelden",
+    "reset-password": "Passwort zurücksetzen"
+  },
+  "months": {
+    "january": "Januar",
+    "february": "Februar",
+    "march": "März",
+    "april": "April",
+    "may": "Mai",
+    "june": "Juni",
+    "july": "Juli",
+    "august": "August",
+    "september": "September",
+    "october": "Oktober",
+    "november": "November",
+    "december": "Dezember",
+    "months": "Monate"
+  },
+  "week": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
+  },
+  "organisationSettings": {
+    "organisationSettings": "Organisationseinstellungen",
+    "organisationName": "Vollständiger Name der Organisation",
+    "street": "Straße",
+    "zipCode": "Postleitzahl",
+    "city": "Stadt",
+    "nip": "NIP-Nummer",
+    "krs": "KRS-Nummer",
+    "phoneNumber": "Telefonnummer",
+    "orgDataHasChanged": "Organisationsdaten wurden erfolgreich geändert."
+  },
+  "accountSettings": {
+    "logOut": "Ausloggen",
+    "accountSettings": "Kontoeinstellungen",
+    "userSettings": "Benutzereinstellungen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail-Adresse",
+    "edit": "Bearbeiten",
+    "deleteProfilePicture": "Profilbild löschen",
+    "deleteAccount": "Konto löschen",
+    "passwordChange": "Passwortänderung",
+    "changePassword": "Passwort ändern",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "changeProfilePicture": "Profilbild ändern",
+    "oldPassword": "Altes Passwort",
+    "newPassword": "Neues Passwort",
+    "confirmNewPassword": "Neues Passwort bestätigen",
+    "areYouSure": "Sind Sie sicher, dass Sie einen Benutzer löschen möchten?"
+  },
+  "animalCard": {
+    "card": "Karte",
+    "edit": "Bearbeiten",
+    "return": "Zurück",
+    "hide": "Verbergen",
+    "publish": "Veröffentlichen",
+    "moveToArchive": "In das Archiv verschieben",
+    "deleteCard": "Karte löschen",
+    "deleteAllPhotos": "Alle Fotos löschen",
+    "areYouSure": "Möchten Sie alle Fotos auf Ihrer Karte löschen?",
+    "addNewPhotos": "Neue Fotos hinzufügen",
+    "addNewPhotosDesc": "Foto maximal 15 MB und das Haustier kann maximal 5 Fotos haben."
+  },
+  "toggleButton": {
+    "active": "Aktiv"
+  },
+  "buttons": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen"
+  },
+  "genreType": {
+    "Dog": "Hund",
+    "Cat": "Katze",
+    "Other": "Andere"
+  },
+  "genderType": {
+    "Male": "Männlich",
+    "Female": "Weiblich",
+    "Other": "Andere"
+  },
+  "addNewCard": {
+    "addPhotos": "Fotos hinzufügen",
+    "addPhotosDesc": "Das maximale Foto beträgt 15 MB und die maximale Anzahl von Fotos beträgt 5."
+  },
+  "select": {
+    "placeholder": "Aus der Liste auswählen"
+  },
+  "instructions": {
+    "changeProfilePhoto": "Profilfoto, um ein anderes Foto auszuwählen, ziehen Sie es nach oben."
+  },
+  "actions": {
+    "details": "Details",
+    "delete": "Löschen"
+  },
+  "errors": {
+    "required": "Feld ist erforderlich",
+    "max50": "Feld kann maximal 50 Zeichen haben",
+    "max200": "Feld kann maximal 200 Zeichen haben",
+    "invalidSelection": "Ungültige Auswahl für das Tierkategorie-Feld.",
+    "max15": "Feld kann maximal 15 Zeichen haben",
+    "lettersSpacesDashes": "Feld darf nur Buchstaben, Leerzeichen und Bindestriche enthalten.",
+    "positive": "Wert muss größer als Null sein",
+    "500": "Interner Serverfehler. Versuchen Sie es später erneut.",
+    "403": "Sie haben keine Berechtigungen für diese Operation. Wenn Sie denken, dass dies ein Fehler ist, kontaktieren Sie Ihren Administrator.",
+    "pwFormat": "Das Passwort muss mindestens 8 Zeichen lang sein, mindestens 1 nicht alphanumerisches Zeichen, 1 Zahl, 1 Großbuchstaben und 1 Kleinbuchstaben enthalten",
+    "wrongEmailFormat": "Falsches E-Mail-Adressformat",
+    "postalCodeFormat": "Die Postleitzahl sollte im Format XX-XXX sein.",
+    "max10": "Feld kann maximal 10 Zeichen haben",
+    "phoneNumberFormat": "Die Telefonnummer sollte aus neun Ziffern bestehen und kann optional Bindestriche oder Leerzeichen nach der dritten und sechsten Ziffer enthalten.",
+    "firstNameFormat": "Der Name darf nur Buchstaben enthalten",
+    "lastNameFormat": "Der Name darf nur Buchstaben enthalten und muss aus mindestens zwei Wörtern bestehen, die durch ein Leerzeichen getrennt sind",
+    "confirmPwFormat": "Passwörter müssen identisch sein",
+    "krs10": "Die 'KRS'-Nummer muss genau 10 Ziffern haben",
+    "nip10": "Die 'NIP'-Nummer muss genau 10 Ziffern haben"
+  },
+  "utils": {
+    "thousands": "Tsd.",
+    "month": "Monat",
+    "months": "Monate",
+    "year": "Jahr",
+    "years": "Jahre",
+    "and": "und",
+    "monthsGenitive": "Monate"
+  }
+}

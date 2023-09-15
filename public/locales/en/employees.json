@@ -13,5 +13,11 @@
     "email": "Email address",
     "cancel": "Cancel",
     "add": "Add"
+  },
+  "addNewEmployeeValidation": {
+    "email": {
+      "string": "Invalid email address",
+      "required": "Email field is required"
+    }
   }
 }

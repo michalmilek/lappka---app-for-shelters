@@ -1,0 +1,23 @@
+{
+  "employees": {
+    "employeesList": "Liste der Mitarbeiter",
+    "name": "Vollständiger Name",
+    "email": "E-Mail",
+    "dateOfAddition": "Hinzufügedatum",
+    "action": "Aktion",
+    "addEmployee": "Mitarbeiter hinzufügen"
+  },
+  "addEmployee": {
+    "addEmployee": "Mitarbeiter hinzufügen",
+    "addEmployeeDesc": "Geben Sie die E-Mail-Adresse eines Łappka-Benutzers ein und fügen Sie ihn Ihrer Organisation hinzu.",
+    "email": "E-Mail-Adresse",
+    "cancel": "Abbrechen",
+    "add": "Hinzufügen"
+  },
+  "addNewEmployeeValidation": {
+    "email": {
+      "string": "Ungültige E-Mail-Adresse",
+      "required": "Das E-Mail-Feld ist erforderlich"
+    }
+  }
+}

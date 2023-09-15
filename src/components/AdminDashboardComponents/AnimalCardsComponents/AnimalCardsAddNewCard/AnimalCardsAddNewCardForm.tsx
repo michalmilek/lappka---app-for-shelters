@@ -65,9 +65,9 @@ const AnimalCardsAddNewCardForm = ({
           }
           placeholder={t("form.input")}
           inputSize="Large"
-          label="Opis"
+          label={t("pet.description")}
           aria-placeholder="Wpisz opis zwierzaka"
-          name={t("pet.description")}
+          name="description"
           value={formik.values.description}
           onChange={formik.handleChange}
         />
@@ -79,9 +79,9 @@ const AnimalCardsAddNewCardForm = ({
           }
           label={t("pet.animalCategory")}
           options={[
-            { value: "Dog", label: "Pies" },
-            { value: "Cat", label: "Kot" },
-            { value: "Other", label: "Inny" },
+            { value: "Dog", label: t("translation:genreType.Dog") },
+            { value: "Cat", label: t("translation:genreType.Cat") },
+            { value: "Other", label: t("translation:genreType.Other") },
           ]}
           value={formik.values.animalCategory}
           handleChange={(option) => {
@@ -114,13 +114,13 @@ const AnimalCardsAddNewCardForm = ({
             }
             placeholder={t("form.input")}
             inputSize="Large"
-            label="Umaszczenie"
+            label={t("pet.marking")}
             name="marking"
             value={formik.values.marking}
             onChange={formik.handleChange}
           />
           <InputNumberWithUnits
-            label="Wiek"
+            label={t("pet.months")}
             placeholder={t("form.months")}
             name="months"
             unit={t("translation:months.months")}
@@ -143,9 +143,9 @@ const AnimalCardsAddNewCardForm = ({
             }
             label={t("pet.gender")}
             options={[
-              { value: "Male", label: t("genderType.Male") },
-              { value: "Female", label: t("genderType.Female") },
-              { value: "Other", label: t("genderType.Other") },
+              { value: "Male", label: t("translation:genderType.Male") },
+              { value: "Female", label: t("translation:genderType.Female") },
+              { value: "Other", label: t("translation:genderType.Other") },
             ]}
             handleChange={(option) => {
               formik.setFieldTouched("gender", true);

@@ -52,7 +52,7 @@ const DashboardAnimalCardsCardForm = ({
   isEditOn: boolean;
   data: PetItem;
 }) => {
-  const { t } = useTranslation("animalCards");
+  const { t } = useTranslation(["animalCards", "translation"]);
   const { animalCardsCardValidationSchema } = useAnimalCardsValidation();
   const {
     isSuccess: GetStorageImagesIsSuccess,
@@ -274,7 +274,7 @@ const DashboardAnimalCardsCardForm = ({
         />
 
         {isEditOn && (
-          <FormRow label={t("animalCard.addNewPhotos")}>
+          <FormRow label={t("translation:animalCard.addNewPhotos")}>
             <CustomFileInput
               isUploadSuccess={postStorageIsSuccess}
               existingFiles={photosLength}
@@ -289,7 +289,7 @@ const DashboardAnimalCardsCardForm = ({
                   ]);
                 }
               }}
-              description={t("animalCard.addNewPhotosDesc")}
+              description={t("translation:animalCard.addNewPhotosDesc")}
             />
           </FormRow>
         )}
@@ -300,9 +300,9 @@ const DashboardAnimalCardsCardForm = ({
             type="button"
             onClick={() => navigate(-1)}
             variant="outline">
-            Anuluj
+            {t("translation:buttons.cancel")}
           </Button>
-          <Button>Zapisz</Button>
+          <Button>{t("translation:buttons.save")}</Button>
         </StyledCardFooter>
       )}
     </StyledCardFormContentContainer>

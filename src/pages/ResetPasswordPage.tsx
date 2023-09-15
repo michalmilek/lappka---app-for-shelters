@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import ResetPasswordSendEmailForm from "components/AuthorizationComponents/ResetPasswordComponents/ResetPasswordSendEmailForm";
 import ResetPasswordSetPasswordForm from "components/AuthorizationComponents/ResetPasswordComponents/ResetPasswordSetPasswordForm";
 import useDeviceType from "hooks/useDeviceType";
+import LngBar from "components/SharedComponents/LngBar/LngBar";
 
 const ResetPasswordPage = () => {
   const deviceType = useDeviceType();
@@ -28,6 +29,7 @@ const ResetPasswordPage = () => {
           alt="logo"
         />
         <UnathorizedTopContentButtonContainer>
+          <LngBar />
           <AnchorLink to={"/"}>
             <CloseIcon
               height="24px"

@@ -1,0 +1,29 @@
+{
+  "login": {
+    "signIn": "Anmelden",
+    "welcomeBack": "Willkommen zurück!",
+    "forgotPassword": "Passwort vergessen",
+    "logInThrough": "Oder melden Sie sich über",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "rememberMe": "Mich erinnern",
+    "enter": "Eingeben",
+    "register": "Registrieren",
+    "wrongPassword": "Ein falsches Passwort wurde eingegeben. Bitte versuchen Sie es erneut.",
+    "userNotFound": "Der Benutzer mit der angegebenen E-Mail-Adresse wurde nicht gefunden.",
+    "loginSuccess": "Anmeldung erfolgreich."
+  },
+  "loginValidation": {
+    "email": {
+      "invalidFormat": "Ungültige E-Mail-Adresse",
+      "required": "Feld 'E-Mail' erforderlich"
+    },
+    "password": {
+      "invalidFormat": "Das Passwort muss mindestens 8 Zeichen lang sein, mit mindestens 1 nicht alphanumerischem Zeichen, 1 Ziffer, 1 Großbuchstaben und 1 Kleinbuchstaben",
+      "required": "Feld 'Passwort' ist erforderlich"
+    }
+  },
+  "errors": {
+    "required": "Feld erforderlich"
+  }
+}

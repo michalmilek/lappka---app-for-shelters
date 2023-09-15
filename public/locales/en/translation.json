@@ -1,7 +1,8 @@
 {
   "languageChange": {
     "EN": "Change language to English",
-    "PL": "Change language to Polish"
+    "PL": "Change language to Polish",
+    "DE": "Change language to German"
   },
   "sidebar": {
     "dashboard": "Dashboard",
@@ -139,5 +140,14 @@
     "confirmPwFormat": "Passwords must be identical",
     "krs10": "The 'KRS' number must have exactly 10 digits",
     "nip10": "The 'NIP' number must have exactly 10 digits"
+  },
+  "utils": {
+    "thousands": "k",
+    "month": "month",
+    "months": "months",
+    "year": "year",
+    "years": "years",
+    "and": "and",
+    "monthsGenitive": "months"
   }
 }

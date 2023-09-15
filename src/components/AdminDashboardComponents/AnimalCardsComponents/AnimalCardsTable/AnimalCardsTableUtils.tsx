@@ -3,12 +3,7 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import { Navigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
 import { GenderType, GenreType, Pet } from "services/pet/petTypes";
-import {
-  genderLabels,
-  genderValueToLabel,
-  typeLabels,
-  typeValueToLabel,
-} from "utils/appUtils";
+import { genderValueToLabel, typeValueToLabel } from "utils/appUtils";
 import {
   ActionHeaderContainer,
   Dot,
@@ -19,7 +14,7 @@ import {
 } from "./AnimalCardsTable.styled";
 import AnimalCardsTableActionItem from "./AnimalCardsTableActionItem";
 import { TableProfileImage } from "./TableProfileImage";
-import { t } from "i18next";
+import i18n, { t } from "i18next";
 
 export interface ExtendedSearchParams extends URLSearchParams {
   pageIndex?: string;
@@ -104,7 +99,7 @@ export const columns = [
       <Typography
         variant="UI/UI Text 14 Reg"
         color="darkGray2">
-        {new Date(props.getValue()).toLocaleDateString("pl-PL")}
+        {Intl.DateTimeFormat(i18n.language).format(new Date(props.getValue()))}
       </Typography>
     ),
   }),

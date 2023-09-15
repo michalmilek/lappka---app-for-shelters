@@ -24,7 +24,11 @@ import {
   usePatchUser,
   usePatchUserEmailAddress,
 } from "services/user/userServices";
-import { ObjectsComparisionFn, SingleObject } from "utils/appUtils";
+import {
+  formatPhoneNumber,
+  ObjectsComparisionFn,
+  SingleObject,
+} from "utils/appUtils";
 
 const initialValues: AccountSettingsType = {
   organizationName: "",
@@ -99,11 +103,18 @@ const AccountSettingsPage = () => {
           ]
         )
       ) {
-        const { firstName, lastName, email, profilePicture, ...formValues } =
-          values;
+        const {
+          firstName,
+          lastName,
+          email,
+          profilePicture,
+          phoneNumber,
+          ...formValues
+        } = values;
         putShelterFn({
           longitude: shelterData!.longitude,
           latitude: shelterData!.latitude,
+          phoneNumber: formatPhoneNumber(phoneNumber),
           ...formValues,
         } as ShelterUpdate);
       }

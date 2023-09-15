@@ -19,6 +19,7 @@ import useDeviceType from "hooks/useDeviceType";
 import { useNavigate } from "react-router-dom";
 import { AuthRoutes } from "router/router";
 import { useTranslation } from "react-i18next";
+import LngBar from "components/SharedComponents/LngBar/LngBar";
 
 const LoginPage = () => {
   const { t } = useTranslation("login");
@@ -32,6 +33,7 @@ const LoginPage = () => {
           alt="logo"
         />
         <UnathorizedTopContentButtonContainer>
+          <LngBar />
           <Button
             onClick={() => navigate(AuthRoutes.register)}
             size={deviceType === "desktop" ? `Large` : `Medium`}

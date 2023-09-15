@@ -5,6 +5,7 @@ import {
   AddNewEmployeeFormText,
   AddNewEmployeeInputContainer,
 } from "components/AdminDashboardComponents/EmployeesComponents/AddNewEmployee/AddNewEmployee.styled";
+import useAddEmployeeValidation from "components/AdminDashboardComponents/EmployeesComponents/AddNewEmployee/useAddEmployeeValidation";
 import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardComponents/EmployeesComponents/DashboardEmployees.styled";
 import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
@@ -13,25 +14,18 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import * as Yup from "yup";
 
 const initialValues = {
   email: "",
 };
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Nieprawidłowy adres email")
-    .required("Pole email jest wymagane"),
-});
-
 const AddNewEmployeePage = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("employees");
+  const { addEmployeeValidation } = useAddEmployeeValidation();
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    validationSchema: addEmployeeValidation,
     onSubmit: (values) => {
-      // Obsługa zdarzenia po przesłaniu formularza
       console.log("Wartości formularza:", values);
     },
   });
@@ -43,7 +37,7 @@ const AddNewEmployeePage = () => {
         title="Nowa karta"
       />
       <StyledDashboardEmployeesMainContent>
-        <AddNewEmployeeForm>
+        <AddNewEmployeeForm onSubmit={formik.handleSubmit}>
           <AddNewEmployeeFormText>
             <Typography
               variant="UI/UI Text 16 Semi Bold"
@@ -73,8 +67,16 @@ const AddNewEmployeePage = () => {
             />
           </AddNewEmployeeInputContainer>
           <AddNewEmployeeFormFooter>
-            <Button variant="outline">{t("addEmployee.cancel")}</Button>
-            <Button variant="fill">{t("addEmployee.add")}</Button>
+            <Button
+              type="button"
+              variant="outline">
+              {t("addEmployee.cancel")}
+            </Button>
+            <Button
+              type="submit"
+              variant="fill">
+              {t("addEmployee.add")}
+            </Button>
           </AddNewEmployeeFormFooter>
         </AddNewEmployeeForm>
       </StyledDashboardEmployeesMainContent>

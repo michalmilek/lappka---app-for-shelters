@@ -1,0 +1,30 @@
+{
+  "register": {
+    "login": "Anmelden",
+    "registerAShelter": "Ein Tierheim registrieren",
+    "fillOut": "Füllen Sie das unten stehende Formular aus und richten Sie ein",
+    "shelterAccount": "Tierheimkonto",
+    "registerCompleted": "Der Registrierungsprozess war erfolgreich. An Ihre E-Mail-Adresse wurde eine E-Mail mit einem Aktivierungslink gesendet. Klicken Sie auf den Link und fahren Sie mit der Anmeldung fort.",
+    "fullNameOrg": "Vollständiger Name der Organisation",
+    "street": "Straße",
+    "zipCode": "Postleitzahl",
+    "city": "Stadt",
+    "nip": "NIP-Nummer",
+    "krs": "KRS-Nummer",
+    "phoneNumber": "Telefonnummer",
+    "nextStep": "Nächster Schritt",
+    "enter": "Eingeben",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "return": "Zurück",
+    "register": "Registrieren",
+    "orgData": "Organisationsdaten",
+    "userData": "Benutzerdaten",
+    "summary": "Zusammenfassung",
+    "registerSuccess": "Registrierung erfolgreich abgeschlossen. Aktivieren Sie Ihr Konto über die Nachricht, die an die angegebene E-Mail-Adresse gesendet wurde.",
+    "usedEmail": "Der Benutzer mit der angegebenen E-Mail-Adresse wurde nicht gefunden."
+  }
+}

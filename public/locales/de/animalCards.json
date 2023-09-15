@@ -1,0 +1,85 @@
+{
+  "shelterStats": {
+    "animalCards": "Tierkarten",
+    "seeksOwner": "Sucht Besitzer",
+    "withOwner": "Mit Besitzer"
+  },
+  "table": {
+    "animalsCards": "Tierkarten",
+    "lookFor": "Durchsuche die gesamte Tabelle...",
+    "newCard": "Neue Karte"
+  },
+  "pet": {
+    "name": "Name",
+    "species": "Rasse",
+    "gender": "Geschlecht",
+    "marking": "Farbe",
+    "weight": "Gewicht",
+    "description": "Beschreibung",
+    "createdAt": "Erstellt am",
+    "isSterilized": "Ist kastriert",
+    "isVisible": "Ist sichtbar",
+    "months": "Alter",
+    "animalCategory": "Genre",
+    "profilePhoto": "Profilfoto",
+    "photos": "Fotos",
+    "views": "Ansichten",
+    "action": "Aktion"
+  },
+  "cardFormValidation": {
+    "name": {
+      "required": "Dieses Feld ist erforderlich",
+      "max": "Das Feld 'Name' kann maximal 50 Zeichen haben"
+    },
+    "description": {
+      "required": "Dieses Feld ist erforderlich",
+      "max": "Das Feld 'Beschreibung' kann maximal 200 Zeichen haben"
+    },
+    "animalCategory": {
+      "oneOf": "Ungültige Auswahl",
+      "required": "Dieses Feld ist erforderlich"
+    },
+    "species": {
+      "max": "Die Art darf 15 Zeichen nicht überschreiten",
+      "required": "Dieses Feld ist erforderlich"
+    },
+    "gender": {
+      "oneOf": "Ungültige Auswahl",
+      "required": "Dieses Feld ist erforderlich"
+    },
+    "marking": {
+      "required": "Dieses Feld ist erforderlich",
+      "matches": "Das Feld darf nur Buchstaben, Leerzeichen und Bindestriche enthalten",
+      "max": "Das Feld 'Farbe' kann maximal 50 Zeichen haben"
+    },
+    "months": {
+      "required": "Dieses Feld ist erforderlich",
+      "positive": "Der Wert muss größer als null sein"
+    },
+    "weight": {
+      "required": "Dieses Feld ist erforderlich",
+      "positive": "Der Wert muss größer als null sein"
+    },
+    "isSterilized": {
+      "oneOf": "Ungültige Auswahl",
+      "required": "Dieses Feld ist erforderlich"
+    },
+    "isVisible": {
+      "oneOf": "Ungültige Auswahl",
+      "required": "Dieses Feld ist erforderlich"
+    }
+  },
+  "form": {
+    "input": "Eingabe",
+    "months": "Monate",
+    "kgs": "Kilogramm",
+    "sterilisation": "Sterilisation",
+    "visible": "Sichtbarkeit",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "addNewCard": {
+    "addPhotos": "Fotos hinzufügen",
+    "addPhotosDesc": "Das maximale Foto beträgt 15MB und die maximale Anzahl von Fotos beträgt 5."
+  }
+}

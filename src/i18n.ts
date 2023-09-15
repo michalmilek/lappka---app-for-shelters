@@ -9,11 +9,13 @@ i18n
   .use(initReactI18next)
   .init({
     debug: true,
-    fallbackLng: ["en", "pl"],
+    fallbackLng: ["en", "pl", "de", "fr"],
     fallbacks: {
       "en-US": "en",
       "en-UK": "en",
       "pl-PL": "pl",
+      "de-DE": "de",
+      "fr-FR": "fr",
     },
     react: {
       transSupportBasicHtmlNodes: true,

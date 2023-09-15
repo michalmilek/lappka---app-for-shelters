@@ -1,0 +1,21 @@
+{
+  "voluntaryValidation": {
+    "bankAccountNumber": {
+      "pattern": "Die Bankkontonummer muss aus 26 Ziffern bestehen und kann durch Leerzeichen oder Bindestriche getrennt sein.",
+      "length": "Die Bankkontonummer muss 26 Ziffern haben."
+    }
+  },
+  "voluntary": {
+    "voluntary": "Freiwillige",
+    "makeADonation": "Spende machen",
+    "dailyAssistance": "Tägliche Hilfe",
+    "walkingTheDogs": "Hunde ausführen",
+    "on": "An",
+    "off": "Aus",
+    "description": "Beschreibung",
+    "enterYourAccountNumber": "Geben Sie Ihre Kontonummer ein"
+  },
+  "buttons": {
+    "save": "Speichern"
+  }
+}
