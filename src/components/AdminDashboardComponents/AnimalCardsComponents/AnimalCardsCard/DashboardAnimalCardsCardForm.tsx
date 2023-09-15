@@ -19,10 +19,7 @@ import Button from "components/SharedComponents/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { usePutShelterCardsAnimal } from "services/pet/petServices";
 import DashboardAnimalCardsCardFields from "./DashboardAnimalCardsCardFields";
-import {
-  AnimalCardsCardValidationSchema,
-  PetCard,
-} from "./utils/DashboardAnimalCardsUtils";
+import { PetCard } from "./utils/DashboardAnimalCardsUtils";
 import AnimalCardsCardActions from "./AnimalCardsCardActions";
 import {
   closestCenter,
@@ -214,6 +211,24 @@ const DashboardAnimalCardsCardForm = ({
     setLocalImageUrls(updatedPhotosUrls);
   };
 
+  const handleOnFileChange = (files: File[] | null | File, index: number) => {
+    const updatedFiles = formik.values.newPhotos
+      ? [...formik.values.newPhotos]
+      : [];
+
+    if (files instanceof File && files) {
+      updatedFiles[index] = files;
+    }
+
+    if (Array.isArray(files) && files.length > 0) {
+      updatedFiles[index] = files[0];
+    }
+
+    formik.setFieldValue("photos", updatedFiles);
+  };
+
+  console.log(formik.values.newPhotos);
+
   useEffect(() => {
     if (GetStorageImagesIsSuccess && imagesUrls) {
       setLocalImageUrls(imagesUrls);
@@ -265,7 +280,9 @@ const DashboardAnimalCardsCardForm = ({
           </SortableContext>
         </DndContext>
       )}
-      {data.photos && isEditOn && <DeleteAllImagesModal id={data.petId} />}
+      {data.photos && data.photos.length > 0 && isEditOn && (
+        <DeleteAllImagesModal id={data.petId} />
+      )}
 
       <StyledCardInputContainer>
         <DashboardAnimalCardsCardFields
@@ -279,16 +296,10 @@ const DashboardAnimalCardsCardForm = ({
               isUploadSuccess={postStorageIsSuccess}
               existingFiles={photosLength}
               photos={photos}
+              isAddNewCard={photos.length === 0}
               handleIndexFileChangeForm={handleIndexFileChangeForm}
               onFileDelete={handleOnFileDelete}
-              onFileChange={(files: File[] | null | File) => {
-                if (Array.isArray(formik.values.newPhotos)) {
-                  formik.setFieldValue("newPhotos", [
-                    ...formik.values.newPhotos,
-                    files,
-                  ]);
-                }
-              }}
+              onFileChange={handleOnFileChange}
               description={t("translation:animalCard.addNewPhotosDesc")}
             />
           </FormRow>

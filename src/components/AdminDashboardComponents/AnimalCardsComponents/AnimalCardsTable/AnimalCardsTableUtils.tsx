@@ -74,7 +74,7 @@ export const columns = [
           );
         }}>
         <TableProfileImage
-          imgId={props.row.original.profilePhoto}
+          imgId={props.row.original.photos[0]}
           animalName={props.row.original.name}
         />
         <Typography

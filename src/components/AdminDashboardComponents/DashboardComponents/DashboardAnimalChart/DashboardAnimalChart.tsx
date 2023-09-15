@@ -31,6 +31,7 @@ import {
   getChartTypeTimeByType,
 } from "./ChartDataUtils";
 import { useTranslation } from "react-i18next";
+import CustomTooltip from "./CustomTooltip";
 
 interface Props {
   viewsState: ViewsStateFilled;
@@ -159,7 +160,7 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
               dy={0}
             />
           </YAxis>
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <CartesianGrid
             vertical={false}
             strokeDasharray="4 4"

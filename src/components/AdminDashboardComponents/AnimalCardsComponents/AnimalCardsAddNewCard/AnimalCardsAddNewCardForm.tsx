@@ -25,9 +25,20 @@ const AnimalCardsAddNewCardForm = ({
   const { t } = useTranslation(["animalCards", "translation"]);
   const navigate = useNavigate();
   const prevFiles = formik.values.photos;
+  console.log(formik.values.photos);
 
-  const handleOnFileChange = (files: File[] | null | File) => {
-    formik.setFieldValue("photos", [...prevFiles, files]);
+  const handleOnFileChange = (files: File[] | null | File, index: number) => {
+    const updatedFiles = [...prevFiles];
+
+    if (files instanceof File && files) {
+      updatedFiles[index] = files;
+    }
+
+    if (Array.isArray(files) && files.length > 0) {
+      updatedFiles[index] = files[0];
+    }
+
+    formik.setFieldValue("photos", updatedFiles);
   };
 
   const handleOnFileDelete = (index: number) => {

@@ -180,7 +180,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         "image/jpeg"
       );
 
-      onFileChange(file);
+      onFileChange(file, index);
     } else {
       canvasRef.toBlob((blob) => {
         if (!blob) {
@@ -198,7 +198,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             type: "image/jpeg",
           });
 
-          onFileChange(file);
+          onFileChange(file, index);
         };
         reader.readAsDataURL(blob);
       });

@@ -19,15 +19,15 @@ export const TableProfileImage = ({
     isError,
   } = useGetStorageImagesForId(imgId);
 
-    if (isError) {
+    if (isError && imgId) {
       return <StyledTableImgError />;
     }
 
-    if (isLoading) {
+    if (isLoading && imgId) {
       return <StyledTableImgSkeleton />;
     }
 
-    if (isSuccess && img) {
+    if (isSuccess && img && imgId) {
       return (
         <StyledTableImg
           src={img}
@@ -36,5 +36,5 @@ export const TableProfileImage = ({
       );
     }
 
-    return <StyledTableImgSkeleton />;
+    return null;
 };

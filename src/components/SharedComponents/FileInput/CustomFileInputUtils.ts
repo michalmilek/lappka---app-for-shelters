@@ -6,7 +6,7 @@ export interface CustomFileInputProps {
   photos: string[] | File[];
   label?: string;
   description?: string;
-  onFileChange: (files: File[] | null | File) => void;
+  onFileChange: (files: File[] | null | File, index: number) => void;
   onFileDelete: (index: number) => void;
   handleIndexFileChangeForm: (files: File[]) => void;
   isUploadSuccess: boolean;

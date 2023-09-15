@@ -13,6 +13,7 @@ import {
 } from "./DashboardNewestAnimalCardsItem.styled";
 import { NewestAnimalImgSkeleton } from "./DashboardNewestAnimalCardsItemContainerSkeleton";
 import { DashboardNewestAnimalCardsItemImgError } from "./ErrorNewestAnimal";
+import PetAvatar from "assets/petAvatar.jpg";
 
 interface Props {
   item: Pet;
@@ -24,19 +25,28 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
     isLoading,
     isSuccess,
     isError,
-  } = useGetStorageImagesForId(item.profilePhoto);
+  } = useGetStorageImagesForId(item.photos[0]);
   const { t, i18n } = useTranslation();
 
   return (
     <ContainerLink to={DashboardRoutes.animalCards + "/" + item.petId}>
       <DashboardNewestAnimalCardsItemContainer>
-        {isError && <DashboardNewestAnimalCardsItemImgError />}
-        {isLoading && <NewestAnimalImgSkeleton />}
-        {isSuccess && (
+        {item.photos.length === 0 ? (
           <DashboardNewestAnimalCardsItemImg
-            src={img}
-            alt={item.name + " photo"}
+            src={PetAvatar}
+            alt="avatarPhoto placehodler"
           />
+        ) : (
+          <>
+            {isError && <DashboardNewestAnimalCardsItemImgError />}
+            {isLoading && <NewestAnimalImgSkeleton />}
+            {isSuccess && (
+              <DashboardNewestAnimalCardsItemImg
+                src={img}
+                alt={item.name + " photo"}
+              />
+            )}
+          </>
         )}
         <DashboardNewestAnimalCardsItemContentContainer>
           <Typography

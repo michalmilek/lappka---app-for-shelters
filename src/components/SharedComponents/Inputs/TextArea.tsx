@@ -40,7 +40,7 @@ const Textarea = ({
       <Typography
         tag="span"
         color="error"
-        variant="UI Small/UI Text 12 Reg">
+        variant="UI Small/UI Text 13 Reg">
         {error}
       </Typography>
     </StyledTextAreaContainer>

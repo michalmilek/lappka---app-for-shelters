@@ -20,7 +20,7 @@ const AnimalCardsPage = () => {
   const pageSizeFromQueryParams = searchParams.get("pageSize");
   const sortParamFromQueryParams = searchParams.get("sortParam");
   const sortParamOrderFromQueryParams = searchParams.get("asc");
-  const { t } = useTranslation();
+  const { t } = useTranslation("animalCards");
 
   const navigate = useNavigate();
 

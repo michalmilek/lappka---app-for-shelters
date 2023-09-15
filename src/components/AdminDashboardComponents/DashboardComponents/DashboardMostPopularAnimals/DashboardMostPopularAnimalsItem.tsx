@@ -16,6 +16,7 @@ import {
   DashboardMostPopularAnimalsItemInfoContainerStyledViews,
   SkeletonMostPopularImg,
 } from "./DashboardMostPopularAnimaIstem.styled";
+import PetAvatar from "assets/petAvatar.jpg";
 
 interface Props {
   item: Pet;
@@ -28,7 +29,7 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
     isLoading,
     isSuccess,
     isError,
-  } = useGetStorageImagesForId(item.profilePhoto);
+  } = useGetStorageImagesForId(item.photos[0]);
 
   const { t } = useTranslation(["translation", "dashboard"]);
 
@@ -44,14 +45,23 @@ const DashboardMostPopularAnimalsItem = ({ item }: Props) => {
       onClick={() => navigate(DashboardRoutes.animalCards + "/" + item.petId)}
       tabIndex={0}>
       <DashboardMostPopularAnimalsItemContainerAnimalInfoContainer>
-        {isLoading && <SkeletonMostPopularImg />}
-        {isSuccess && (
+        {item.photos.length === 0 ? (
           <DashboardMostPopularAnimalsItemImage
-            src={imgUrl}
-            alt={item.name + "photo"}
+            src={PetAvatar}
+            alt={item.name + " photo"}
           />
+        ) : (
+          <>
+            {isLoading && <SkeletonMostPopularImg />}
+            {isSuccess && (
+              <DashboardMostPopularAnimalsItemImage
+                src={imgUrl}
+                alt={item.name + "photo"}
+              />
+            )}
+            {isError && <DashboardMostPopularAnimalsItemError />}
+          </>
         )}
-        {isError && <DashboardMostPopularAnimalsItemError />}
         <DashboardMostPopularAnimalsItemInfoContainer>
           <Typography
             tag="h5"

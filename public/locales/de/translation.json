@@ -141,7 +141,7 @@
     "confirmPwFormat": "Passwörter müssen identisch sein",
     "krs10": "Die 'KRS'-Nummer muss genau 10 Ziffern haben",
     "nip10": "Die 'NIP'-Nummer muss genau 10 Ziffern haben",
-    "errorDuringDownload": "Wystąpił błąd podczas pobierania danych."
+    "errorDuringDownload": "Beim Herunterladen der Daten ist ein Fehler aufgetreten."
   },
   "utils": {
     "thousands": "Tsd.",
