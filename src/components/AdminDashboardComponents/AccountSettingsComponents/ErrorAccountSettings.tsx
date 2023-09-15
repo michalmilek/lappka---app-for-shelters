@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled, { keyframes, css } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
@@ -38,9 +39,10 @@ const ErrorMessage = styled.p`
 `;
 
 const ErrorAccountSettings = () => {
+  const { t } = useTranslation();
   return (
     <ErrorContainer>
-      <ErrorMessage>{"Wystąpił błąd."}</ErrorMessage>
+      <ErrorMessage>{t("errors.errorDuringDownload")}</ErrorMessage>
     </ErrorContainer>
   );
 };

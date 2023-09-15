@@ -1,5 +1,6 @@
 import useDeviceType from "hooks/useDeviceType";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Bar,
   BarChart,
@@ -83,6 +84,7 @@ export const StyledResponsiveContainer = styled(ResponsiveContainer)`
 `;
 
 const ErrorChart = () => {
+  const { t } = useTranslation();
   return (
     <ErrorContainer>
       <StyledResponsiveContainer
@@ -117,7 +119,7 @@ const ErrorChart = () => {
           />
         </BarChart>
       </StyledResponsiveContainer>
-      <ErrorMessage>{"Wystąpił błąd podczas pobierania danych."}</ErrorMessage>
+      <ErrorMessage>{t("errors.errorDuringDownload")}</ErrorMessage>
     </ErrorContainer>
   );
 };

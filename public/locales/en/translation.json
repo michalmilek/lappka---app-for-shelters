@@ -139,7 +139,8 @@
     "lastNameFormat": "The name can only contain letters and must consist of at least two words separated by a space",
     "confirmPwFormat": "Passwords must be identical",
     "krs10": "The 'KRS' number must have exactly 10 digits",
-    "nip10": "The 'NIP' number must have exactly 10 digits"
+    "nip10": "The 'NIP' number must have exactly 10 digits",
+    "errorDuringDownload": "An error occurred during data download."
   },
   "utils": {
     "thousands": "k",

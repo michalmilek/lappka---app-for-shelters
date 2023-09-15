@@ -193,7 +193,8 @@
     "lastNameFormat": "Nazwisko może zawierać tylko litery i musi składać się z przynajmniej dwóch wyrazów oddzielonych spacją",
     "confirmPwFormat": "Hasła muszą być identyczne",
     "krs10": "Numer 'KRS' musi mieć dokładnie 10 cyfr",
-    "nip10": "Numer 'NIP' musi mieć dokładnie 10 cyfr"
+    "nip10": "Numer 'NIP' musi mieć dokładnie 10 cyfr",
+    "errorDuringDownload": "Wystąpił błąd podczas pobierania danych."
   },
   "utils": {
     "thousands": "tyś.",

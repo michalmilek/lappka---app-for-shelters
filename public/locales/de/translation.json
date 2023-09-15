@@ -140,7 +140,8 @@
     "lastNameFormat": "Der Name darf nur Buchstaben enthalten und muss aus mindestens zwei Wörtern bestehen, die durch ein Leerzeichen getrennt sind",
     "confirmPwFormat": "Passwörter müssen identisch sein",
     "krs10": "Die 'KRS'-Nummer muss genau 10 Ziffern haben",
-    "nip10": "Die 'NIP'-Nummer muss genau 10 Ziffern haben"
+    "nip10": "Die 'NIP'-Nummer muss genau 10 Ziffern haben",
+    "errorDuringDownload": "Wystąpił błąd podczas pobierania danych."
   },
   "utils": {
     "thousands": "Tsd.",

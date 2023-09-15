@@ -1,5 +1,6 @@
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled, { keyframes } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
@@ -35,6 +36,7 @@ const ErrorMessageContainer = styled.div`
 `;
 
 const ErrorVoluntary = () => {
+  const { t } = useTranslation();
   return (
     <ErrorContainer>
       <ErrorMessageContainer>
@@ -42,7 +44,7 @@ const ErrorVoluntary = () => {
           tag="p"
           color="darkGray2"
           variant="UI/UI Text 16 Medium Bold">
-          {"Wystąpił błąd podczas pobierania danych."}
+          {t("errors.errorDuringDownload")}
         </Typography>
       </ErrorMessageContainer>
     </ErrorContainer>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled, { keyframes, css } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
@@ -26,16 +27,17 @@ const ErrorContainer = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  color: red;
+  color: ${getColor("darkGray2")};
   font-size: 18px;
   margin: 0;
   padding: 16px;
 `;
 
 const AnimalCardsCardError = () => {
+  const { t } = useTranslation();
   return (
     <ErrorContainer>
-      <ErrorMessage>{"Wystąpił błąd."}</ErrorMessage>
+      <ErrorMessage>{t("errors.errorDuringDownload")}</ErrorMessage>
     </ErrorContainer>
   );
 };

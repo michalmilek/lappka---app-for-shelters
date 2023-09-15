@@ -1,4 +1,5 @@
 import Typography from "components/SharedComponents/Typography/Typography";
+import { useTranslation } from "react-i18next";
 import styled, { keyframes } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 import { InfoCardInterface } from "./DashboardInfoCardsItem.styled";
@@ -46,15 +47,19 @@ interface Props {
   gridArea: string;
 }
 
-const ErrorCard = ({ gridArea }: Props) => (
-  <StyledErrorCard gridArea={gridArea}>
-    <Typography
-      tag="p"
-      color="darkGray2"
-      variant="UI/UI Text 16 Medium Bold">
-      {"Wystąpił błąd podczas pobierania danych."}
-    </Typography>
-  </StyledErrorCard>
-);
+const ErrorCard = ({ gridArea }: Props) => {
+  const { t } = useTranslation();
+
+  return (
+    <StyledErrorCard gridArea={gridArea}>
+      <Typography
+        tag="p"
+        color="darkGray2"
+        variant="UI/UI Text 16 Medium Bold">
+        {t("errors.errorDuringDownload")}
+      </Typography>
+    </StyledErrorCard>
+  );
+};
 
 export default ErrorCard;

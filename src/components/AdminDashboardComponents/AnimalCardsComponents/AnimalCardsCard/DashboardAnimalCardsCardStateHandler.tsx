@@ -33,6 +33,7 @@ const DashboardAnimalCardsCardStateHandler = ({
     isSuccess,
     handleDynamicTitle,
     handleDynamicTitleInBrowserCardName,
+    t,
   ]);
 
   if (isError) {

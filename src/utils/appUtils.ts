@@ -35,15 +35,15 @@ export const ageConversion = (ageInMonths: number) => {
     } else if (months === 1) {
       return `${years} ${
         years === 1 ? t("utils.year") : t("utils.years")
-      } i 1 ${t("utils.month")}`;
+      } 1 ${t("utils.month")}`;
     } else if (months < 5) {
       return `${years} ${
         years === 1 ? t("utils.year") : t("utils.years")
-      } i ${months} ${t("utils.months")}`;
+      } ${months} ${t("utils.months")}`;
     } else {
       return `${years} ${
         years === 1 ? t("utils.year") : t("utils.years")
-      } i ${months} ${t("utils.monthsGenitive")}`;
+      } ${months} ${t("utils.monthsGenitive")}`;
     }
   }
 };

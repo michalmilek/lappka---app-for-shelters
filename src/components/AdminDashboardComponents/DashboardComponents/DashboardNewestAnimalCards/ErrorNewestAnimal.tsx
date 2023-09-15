@@ -1,5 +1,6 @@
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled, { keyframes } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
@@ -40,13 +41,14 @@ export const DashboardNewestAnimalCardsItemImgError = styled.div`
 `;
 
 const ErrorNewestAnimal = () => {
+  const { t } = useTranslation();
   return (
     <ErrorContainer>
       <Typography
         tag="p"
         color="darkGray2"
         variant="UI/UI Text 16 Medium Bold">
-        {"Wystąpił błąd podczas pobierania danych."}
+        {t("errors.errorDuringDownload")}
       </Typography>
     </ErrorContainer>
   );
