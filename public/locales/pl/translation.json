@@ -203,5 +203,9 @@
     "years": "lata",
     "and": "i",
     "monthsGenitive": "miesięcy"
+  },
+  "toast": {
+    "success": "Sukces!",
+    "error": "Błąd!"
   }
 }

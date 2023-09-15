@@ -149,5 +149,9 @@
     "years": "years",
     "and": "and",
     "monthsGenitive": "months"
+  },
+  "toast": {
+    "success": "Success!",
+    "error": "Error!"
   }
 }

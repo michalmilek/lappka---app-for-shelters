@@ -1,5 +1,6 @@
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { removeToast } from "redux/toastSlice";
@@ -12,11 +13,14 @@ import {
   ToastClose,
   ProgressBar,
 } from "./Toast.styled";
-import { getMessage } from "./toastUtils";
+import useToastUtils from "./useToastUtils";
 
 const Toast: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const toasts = useSelector((state: RootState) => state.toasts);
+
+  const { getMessage } = useToastUtils();
 
   const handleCloseToast = (id: string) => {
     dispatch(removeToast(id));
