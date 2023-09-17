@@ -1,0 +1,12 @@
+{
+  "success": {
+    "postStoragePictures": "Zdjęcia pomyślnie dodane.",
+    "deleteStorageImage": "Zdjęcie pomyślnie usunięte.",
+    "deleteStorageImages": "Zdjęcia pomyślnie usunięte."
+  },
+  "error": {
+    "postStoragePictures": "Któryś z plików przekracza wagę 15MB lub nie jest zdjęciem.",
+    "deleteStorageImage": "Podane zdjęcie nie znajduje się w bazie danych.",
+    "deleteStorageImages": "Jedno lub więcej zdjęć nie znajduje się w bazie danych."
+  }
+}

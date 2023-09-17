@@ -24,10 +24,9 @@ const AnimalCardsAddNewCardForm = ({
 }) => {
   const { t } = useTranslation(["animalCards", "translation"]);
   const navigate = useNavigate();
-  const prevFiles = formik.values.photos;
-  console.log(formik.values.photos);
 
   const handleOnFileChange = (files: File[] | null | File, index: number) => {
+    const prevFiles = formik.values.photos;
     const updatedFiles = [...prevFiles];
 
     if (files instanceof File && files) {
@@ -108,7 +107,7 @@ const AnimalCardsAddNewCardForm = ({
                 ? formik.errors.species
                 : undefined
             }
-            label="Rasa"
+            label={t("pet.species")}
             placeholder={t("form.input")}
             inputSize="Large"
             name="species"
@@ -158,6 +157,7 @@ const AnimalCardsAddNewCardForm = ({
               { value: "Female", label: t("translation:genderType.Female") },
               { value: "Other", label: t("translation:genderType.Other") },
             ]}
+            value={formik.values.gender}
             handleChange={(option) => {
               formik.setFieldTouched("gender", true);
               formik.setFieldValue("gender", option);
@@ -190,6 +190,7 @@ const AnimalCardsAddNewCardForm = ({
               { value: "true", label: t("form.yes") },
               { value: "false", label: t("form.no") },
             ]}
+            value={formik.values.isSterilized}
             handleChange={(option) => {
               formik.setFieldTouched("isSterilized", true);
               formik.setFieldValue("isSterilized", option);
@@ -206,6 +207,7 @@ const AnimalCardsAddNewCardForm = ({
               { value: "true", label: t("form.yes") },
               { value: "false", label: t("form.no") },
             ]}
+            value={formik.values.isVisible}
             handleChange={(option) => {
               formik.setFieldTouched("isVisible", true);
               formik.setFieldValue("isVisible", option);

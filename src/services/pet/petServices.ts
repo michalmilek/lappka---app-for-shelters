@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLoading } from "redux/loadingSlice";
@@ -49,15 +50,14 @@ export const useShelterVolunteering = () => {
 };
 
 export const useUpdateShelterVolunteering = () => {
+  const { t } = useTranslation("voluntary");
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     (data: ShelterVolunteeringResponse) => updateShelterVolunteering(data),
     {
       onSuccess: () => {
-        toastService.showToast(
-          "Dane o wolontariacie pomyślnie zaktualizowane."
-        );
+        toastService.showToast(t("voluntaryPromises.updateSuccess"));
         queryClient.invalidateQueries(["shelterVolunteering"]);
       },
       onError: (error) => {
@@ -104,6 +104,7 @@ export const useShelterCardsCard = (petId: string) => {
 };
 
 export const usePostShelterCardsCreatePet = () => {
+  const { t } = useTranslation("animalCards");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -111,19 +112,18 @@ export const usePostShelterCardsCreatePet = () => {
     (data: CreatePet) => postShelterCardsCreatePet(data),
     {
       onSuccess: (_, payload) => {
+        const animalName = payload.name;
+
         navigate(DashboardRoutes.dashboard);
         toastService.showToast(
-          `Karta dla zwierzęcia o imieniu "${payload.name}" została utworzona`,
+          t("addNewCardPromises.success", { animalName }),
           "success"
         );
         queryClient.invalidateQueries(["shelterCards"]);
       },
       onError: (error: ExtendedAxiosError) => {
         if (error.response?.status !== 500) {
-          toastService.showToast(
-            "Dodawanie zakończone niepowodzeniem",
-            "error"
-          );
+          toastService.showToast(t("addNewCardPromises.error"), "error");
           console.log(error);
         }
       },
@@ -146,15 +146,13 @@ export const usePutShelterCardsAnimal = () => {
 };
 
 export const usePostShelterCardsArchive = () => {
+  const { t } = useTranslation("animalCards");
   const queryClient = useQueryClient();
   const mutation = useMutation(
     (petId: string) => postShelterCardsArchive(petId),
     {
       onSuccess: () => {
-        toastService.showToast(
-          "Karta została przeniesiona do archiwum",
-          "success"
-        );
+        toastService.showToast(t("cardsToArchive.success"), "success");
         queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
       },
     }
@@ -164,12 +162,13 @@ export const usePostShelterCardsArchive = () => {
 };
 
 export const usePutShelterCardsPublish = () => {
+  const { t } = useTranslation("animalCards");
   const queryClient = useQueryClient();
   const mutation = useMutation(
     (petId: string) => putShelterCardsPublish(petId),
     {
       onSuccess: (_, payload) => {
-        toastService.showToast(`Karta została opublikowana.`, "success");
+        toastService.showToast(t("cardsPublish.success"), "success");
         queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
       },
     }
@@ -179,10 +178,11 @@ export const usePutShelterCardsPublish = () => {
 };
 
 export const usePutShelterCardsHide = () => {
+  const { t } = useTranslation("animalCards");
   const queryClient = useQueryClient();
   const mutation = useMutation((petId: string) => putShelterCardsHide(petId), {
     onSuccess: () => {
-      toastService.showToast("Karta została ukryta.", "success");
+      toastService.showToast(t("cardsHide.success"), "success");
       queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
     },
   });
@@ -191,11 +191,12 @@ export const usePutShelterCardsHide = () => {
 };
 
 export const useDeleteShelterCard = () => {
+  const { t } = useTranslation("animalCards");
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const mutation = useMutation((petId: string) => deleteShelterCard(petId), {
     onSuccess: () => {
-      toastService.showToast("Karta została usunięta.", "success");
+      toastService.showToast(t("deleteCard.success"), "success");
       queryClient.invalidateQueries({ queryKey: ["shelterCards"] });
       navigate(DashboardRoutes.dashboard);
     },
@@ -204,12 +205,6 @@ export const useDeleteShelterCard = () => {
     },
     onSettled: () => {
       store.dispatch(setLoading(false));
-    },
-    onError: (error: ExtendedAxiosError) => {
-      if (error.response?.status === 403)
-        toastService.showToast(
-          "Nie masz uprawnień, aby usunąć kartę. Jeśli uważasz, że to bląd skontaktuj się z administratorem."
-        );
     },
   });
 

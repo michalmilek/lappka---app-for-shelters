@@ -1,0 +1,6 @@
+{
+  "404": "404 - Page not found",
+  "redirect": "Redirecting to the previous page in {{redirectCountdown}} seconds...",
+  "dontWannaWait?": "If you don't want to wait, click here to go to the main page.",
+  "orMainSite": "Or here to go back to the previous page."
+}

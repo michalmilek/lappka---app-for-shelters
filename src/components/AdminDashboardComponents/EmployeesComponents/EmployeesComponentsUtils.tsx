@@ -6,6 +6,7 @@ import {
 } from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";
 import EmployeesComponentActionDropdown from "./EmployeesComponentDropdown";
 import { t } from "i18next";
+import i18n from "i18n";
 
 export interface Employee {
   fullName: string;
@@ -66,7 +67,7 @@ export const employeesColumns = [
       <Typography
         variant="UI/UI Text 14 Reg"
         color="darkGray2">
-        {props.getValue()}
+        {Intl.DateTimeFormat(i18n.language).format(new Date(props.getValue()))}
       </Typography>
     ),
   }),

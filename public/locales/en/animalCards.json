@@ -81,5 +81,24 @@
   "addNewCard": {
     "addPhotos": "Add photos",
     "addPhotosDesc": "The maximum photo is 15MB and the maximum number of photos is 5."
+  },
+  "cardPromises": {
+    "cardUpdateSuccess": "The card of the animal named {{animalName}} has been updated."
+  },
+  "addNewCardPromises": {
+    "success": "A card for a pet named {{animalName}} has been created",
+    "error": "Adding failed."
+  },
+  "cardsToArchive": {
+    "success": "The card has been moved to the archive."
+  },
+  "cardsPublish": {
+    "success": "The card has been published."
+  },
+  "cardsHide": {
+    "success": "The card has been hidden."
+  },
+  "deleteCard": {
+    "success": "The card was successfully deleted."
   }
 }

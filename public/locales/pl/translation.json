@@ -116,7 +116,8 @@
   "buttons": {
     "save": "Zapisz",
     "cancel": "Anuluj",
-    "confirm": "Potwierdź"
+    "confirm": "Potwierdź",
+    "saveWithoutCutting": "Zapisz(bez przycinania)"
   },
   "genreType": {
     "Dog": "Pies",
@@ -194,7 +195,8 @@
     "confirmPwFormat": "Hasła muszą być identyczne",
     "krs10": "Numer 'KRS' musi mieć dokładnie 10 cyfr",
     "nip10": "Numer 'NIP' musi mieć dokładnie 10 cyfr",
-    "errorDuringDownload": "Wystąpił błąd podczas pobierania danych."
+    "errorDuringDownload": "Wystąpił błąd podczas pobierania danych.",
+    "petMaxPhotos": "Zwierzak może posiadać maksymalnie 5 zdjęć."
   },
   "utils": {
     "thousands": "tyś.",
@@ -208,5 +210,6 @@
   "toast": {
     "success": "Sukces!",
     "error": "Błąd!"
-  }
+  },
+  "editPhoto": "Edytuj zdjęcie"
 }

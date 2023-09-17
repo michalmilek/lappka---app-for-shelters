@@ -1,0 +1,12 @@
+{
+  "success": {
+    "postStoragePictures": "Pictures successfully added.",
+    "deleteStorageImage": "Photo successfully deleted.",
+    "deleteStorageImages": "Photos successfully deleted."
+  },
+  "error": {
+    "postStoragePictures": "Any file exceeds 15MB or is not a photo.",
+    "deleteStorageImage": "The specified image is not in the database.",
+    "deleteStorageImages": "One or more images are not in the database."
+  }
+}

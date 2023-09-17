@@ -94,7 +94,8 @@
   "buttons": {
     "save": "Save",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "saveWithoutCutting": "Save(without cutting)"
   },
   "genreType": {
     "Dog": "Dog",
@@ -140,7 +141,8 @@
     "confirmPwFormat": "Passwords must be identical",
     "krs10": "The 'KRS' number must have exactly 10 digits",
     "nip10": "The 'NIP' number must have exactly 10 digits",
-    "errorDuringDownload": "An error occurred during data download."
+    "errorDuringDownload": "An error occurred during data download.",
+    "petMaxPhotos": "A pet can have a maximum of 5 photos."
   },
   "utils": {
     "thousands": "k",
@@ -154,5 +156,6 @@
   "toast": {
     "success": "Success!",
     "error": "Error!"
-  }
+  },
+  "editPhoto": "Edit photo"
 }

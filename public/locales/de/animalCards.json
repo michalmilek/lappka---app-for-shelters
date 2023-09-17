@@ -81,5 +81,24 @@
   "addNewCard": {
     "addPhotos": "Fotos hinzufügen",
     "addPhotosDesc": "Das maximale Foto beträgt 15MB und die maximale Anzahl von Fotos beträgt 5."
+  },
+  "cardPromises": {
+    "cardUpdateSuccess": "Die Karte des Tieres namens {{animalName}} wurde aktualisiert."
+  },
+  "addNewCardPromises": {
+    "success": "Es wurde eine Karte für ein Haustier namens {{animalName}} erstellt",
+    "error": "Hinzufügen fehlgeschlagen"
+  },
+  "cardsToArchive": {
+    "success": "Die Karte wurde in das Archiv verschoben."
+  },
+  "cardsPublish": {
+    "success": "Die Karte wurde veröffentlicht."
+  },
+  "cardsHide": {
+    "success": "Die Karte wurde versteckt."
+  },
+  "deleteCard": {
+    "success": "Die Karte wurde erfolgreich gelöscht."
   }
 }

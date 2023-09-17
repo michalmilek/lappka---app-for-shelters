@@ -1,0 +1,16 @@
+{
+  "success": {
+    "deleteProfilePicture": "Profilbild wurde erfolgreich gelöscht.",
+    "patchUser": "Geänderte Benutzerdaten wurden gespeichert.",
+    "deleteUser": "Benutzer wurde erfolgreich gelöscht. Weiterleitung zur Anmeldeseite.",
+    "patchUserEmailAddress": "Die E-Mail-Adresse des Benutzers wurde aktualisiert.",
+    "patchUserNewPassword": "Das Passwort des Benutzers wurde aktualisiert."
+  },
+  "error": {
+    "deleteProfilePicture": "Das angegebene Bild wurde bereits gelöscht oder der Benutzer hatte kein Profilbild.",
+    "patchUser": "Entschuldigung, aber die Anfrage ist ungültig. Bitte überprüfen Sie die übermittelten Daten und versuchen Sie es erneut.",
+    "deleteUser": "Entschuldigung, aber die Anfrage ist ungültig. Bitte überprüfen Sie die übermittelten Daten und versuchen Sie es erneut.",
+    "patchUserEmailAddress": "Entschuldigung, aber die Anfrage ist ungültig. Bitte überprüfen Sie die übermittelten Daten und versuchen Sie es erneut.",
+    "patchUserNewPassword": "Entschuldigung, aber die Anfrage ist ungültig. Bitte überprüfen Sie die übermittelten Daten und versuchen Sie es erneut."
+  }
+}

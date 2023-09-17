@@ -11,7 +11,6 @@ export interface PetCard {
   weight: number;
   species: string;
   photos: string[];
-  profilePhoto: string;
   isSterilized: string;
   isVisible: string;
   newPhotos?: File[];

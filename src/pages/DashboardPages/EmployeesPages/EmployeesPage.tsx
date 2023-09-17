@@ -8,12 +8,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { DashboardRoutes } from "router/router";
-import { useShelterManagement } from "services/management/managementServices";
+import {
+  useGetWorkers,
+  useShelterManagement,
+} from "services/management/managementServices";
 
 const EmployeesPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation("employees");
-  //const { data } = useShelterManagement("Shelter");
+  const { data: workersData, isSuccess } = useGetWorkers();
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar
@@ -27,7 +30,9 @@ const EmployeesPage = () => {
         }
       />
       <StyledDashboardEmployeesMainContent>
-        <EmployeesTable />
+        {isSuccess && workersData && (
+          <EmployeesTable workersData={workersData} />
+        )}
       </StyledDashboardEmployeesMainContent>
     </StyledProtectedPageContent>
   );

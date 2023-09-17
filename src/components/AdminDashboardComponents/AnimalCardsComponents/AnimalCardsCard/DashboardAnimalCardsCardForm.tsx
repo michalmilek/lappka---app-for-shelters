@@ -92,12 +92,14 @@ const DashboardAnimalCardsCardForm = ({
               isSterilized: JSON.parse(values.isSterilized),
               isVisible: JSON.parse(values.isVisible),
               photos: [...values.photos, ...newData],
-              profilePhoto: values.photos[0] || values.profilePhoto,
             } as PetItem,
             {
               onSuccess: () => {
+
+                const animalName = formik.values.name
+
                 toastService.showToast(
-                  `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
+                  t("cardPromises.cardUpdateSuccess", { animalName }),
                   "success"
                 );
 
@@ -128,14 +130,11 @@ const DashboardAnimalCardsCardForm = ({
           ...values,
           isSterilized: JSON.parse(values.isSterilized),
           isVisible: JSON.parse(values.isVisible),
-          profilePhoto: values.photos[0] || values.profilePhoto,
         } as PetItem,
         {
           onSuccess: () => {
-            toastService.showToast(
-              `Karta zwierzęcia o imieniu ${formik.values.name} została zaktualizowana`,
-              "success"
-            );
+            const animalName = formik.values.name
+            toastService.showToast(t("cardPromises.cardUpdateSuccess", {animalName}), "success");
 
             const newPhotos = data.photos.filter((dataPhoto) => {
               return !values.photos.includes(dataPhoto);

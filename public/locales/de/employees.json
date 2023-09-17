@@ -19,5 +19,12 @@
       "string": "Ungültige E-Mail-Adresse",
       "required": "Das E-Mail-Feld ist erforderlich"
     }
+  },
+  "addNewEmployeePromises": {
+    "success": "An die E-Mail Adresse: {{email}} wurde ein Link zur Registrierung gesendet.",
+    "emailExists": "Der Mitarbeiter mit der angegebenen E-Mail-Adresse existiert bereits."
+  },
+  "deleteEmployeePromises": {
+    "success": "Der Mitarbeiter mit der Adresse emaiL: {{email}} wurde gelöscht."
   }
 }

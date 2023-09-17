@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LappkaLogo from "assets/LappkaLogo.png";
 import { getColor } from "utils/styles/getStyle/getColor";
+import { useTranslation } from "react-i18next";
 
 const NotFoundContainer = styled.div`
   display: flex;
@@ -37,6 +38,7 @@ function Page404() {
   const [redirectCountdown, setRedirectCountdown] = useState(3);
   const navigate = useNavigate();
   const hasPrevious = document.referrer !== "";
+  const { t } = useTranslation("page404");
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
@@ -63,16 +65,10 @@ function Page404() {
         src={LappkaLogo}
         alt={"Łappka logo"}
       />
-      <NotFoundHeading>404 - Strona nie znaleziona</NotFoundHeading>
-      <RedirectText>
-        Przenoszenie na poprzednią stronę za {redirectCountdown} sekundy...
-      </RedirectText>
-      <HomeLink onClick={() => navigate("/")}>
-        Jeśli nie chcesz czekać, kliknij tutaj, aby przejść na stronę główną.
-      </HomeLink>
-      <HomeLink onClick={() => navigate(-1)}>
-        Lub tutaj, aby przejść na poprzednią stronę.
-      </HomeLink>
+      <NotFoundHeading>{t("404")}</NotFoundHeading>
+      <RedirectText>{t("redirect", { redirectCountdown })} </RedirectText>
+      <HomeLink onClick={() => navigate("/")}>{t("dontWannaWait?")}</HomeLink>
+      <HomeLink onClick={() => navigate(-1)}>{t("orMainSite")}</HomeLink>
     </NotFoundContainer>
   );
 }

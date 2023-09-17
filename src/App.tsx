@@ -65,8 +65,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const { i18n } = useTranslation();
-
   const isLoading = useSelector(selectIsLoading);
 
   return (

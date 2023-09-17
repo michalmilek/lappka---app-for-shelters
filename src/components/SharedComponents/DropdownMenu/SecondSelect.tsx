@@ -113,7 +113,9 @@ const SecondSelect = ({
       </Typography>
       <Select
         value={value ? options.find((option) => option.value === value) : null}
-        onChange={(newValue) => handleChange(newValue!.value)}
+        onChange={(newValue) => {
+          if (newValue) handleChange(newValue.value);
+        }}
         tabSelectsValue
         placeholder={t("select.placeholder")}
         options={options}

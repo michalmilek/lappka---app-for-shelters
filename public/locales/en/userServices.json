@@ -1,0 +1,16 @@
+{
+  "success": {
+    "deleteProfilePicture": "Profile picture has been successfully deleted.",
+    "patchUser": "Changed user data has been saved.",
+    "deleteUser": "User has been successfully deleted. Redirecting to the login page.",
+    "patchUserEmailAddress": "User's email address has been updated.",
+    "patchUserNewPassword": "User's password has been updated."
+  },
+  "error": {
+    "deleteProfilePicture": "The specified picture has already been deleted or the user did not have a profile picture.",
+    "patchUser": "Sorry, but the request is invalid. Please check the submitted data and try again.",
+    "deleteUser": "Sorry, but the request is invalid. Please check the submitted data and try again.",
+    "patchUserEmailAddress": "Sorry, but the request is invalid. Please check the submitted data and try again.",
+    "patchUserNewPassword": "Sorry, but the request is invalid. Please check the submitted data and try again."
+  }
+}

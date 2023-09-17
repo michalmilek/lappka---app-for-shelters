@@ -17,5 +17,9 @@
   },
   "buttons": {
     "save": "Speichern"
+  },
+  "voluntaryPromises": {
+    "updateSuccess": "Freiwilligendaten erfolgreich aktualisiert.",
+    "updateFailed": "Bei der Datenaktualisierung ist ein Fehler aufgetreten. Bitte wenden Sie sich an Ihren Administrator."
   }
 }

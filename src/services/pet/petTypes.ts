@@ -33,7 +33,6 @@ export interface Pet {
   species: string;
   marking: string;
   weight: number;
-  profilePhoto: string;
   photos: string[];
   months: number;
   createdAt: string;

@@ -6,6 +6,7 @@ import {
 } from "../../../utils/styles/types/stylesTypes";
 import React from "react";
 import { ReusableButton } from "./Button.styled";
+import useDeviceType from "hooks/useDeviceType";
 
 export interface ButtonProps extends React.ComponentProps<"button"> {
   width?: string;
@@ -26,6 +27,8 @@ const Button = ({
   iconSpacing = "2px",
   ...rest
 }: ButtonProps) => {
+  const deviceType = useDeviceType();
+
   return (
     <ReusableButton
       size={size}
@@ -35,7 +38,7 @@ const Button = ({
       {...rest}>
       <>
         {children}
-        {icon}
+        {deviceType !== "mobile" && icon}
       </>
     </ReusableButton>
   );

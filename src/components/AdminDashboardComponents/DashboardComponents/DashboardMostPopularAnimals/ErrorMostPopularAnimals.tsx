@@ -17,9 +17,12 @@ const appearAnimation = keyframes`
 
 const ErrorContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   background-color: ${getColor("white")};
   border-radius: 8px;
+  padding: 10px;
   grid-area: e;
   height: 100%;
   min-height: 35vh;

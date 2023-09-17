@@ -19,5 +19,12 @@
       "string": "Nieprawidłowy adres email",
       "required": "Pole email jest wymagane"
     }
+  },
+  "addNewEmployeePromises": {
+    "success": "Na adres email: {{email}} został wysłany link do rejestracji.",
+    "emailExists": "Pracownik z podanym adresem email już istnieje."
+  },
+  "deleteEmployeePromises": {
+    "success": "Pracownik o adresie emaiL: {{email}} został usunięty."
   }
 }

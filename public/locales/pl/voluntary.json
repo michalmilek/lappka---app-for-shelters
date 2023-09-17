@@ -17,5 +17,9 @@
   },
   "buttons": {
     "save": "Zapisz"
+  },
+  "voluntaryPromises": {
+    "updateSuccess": "Dane o wolontariacie pomyślnie zaktualizowane.",
+    "updateFailed": "Wystąpił błąd z aktualizacją danych, skontaktuj się z administratorem."
   }
 }

@@ -19,5 +19,12 @@
       "string": "Invalid email address",
       "required": "Email field is required"
     }
+  },
+  "addNewEmployeePromises": {
+    "success": "To the email address: {{email}} a link to register has been sent.",
+    "emailExists": "The employee with the specified email address already exists."
+  },
+  "deleteEmployeePromises": {
+    "success": "The employee with address emaiL: {{email}} has been deleted."
   }
 }

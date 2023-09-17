@@ -7,6 +7,7 @@ import Button from "components/SharedComponents/Button/Button";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { WorkerInterface } from "services/management/managementTypes";
 import {
   StyledTableHeader,
   StyledTableTD,
@@ -19,22 +20,34 @@ import {
   EmployeesTableComponentContainer,
   EmployeesTableFooter,
 } from "./DashboardEmployees.styled";
-import {
-  dummyData,
-  Employee,
-  employeesColumns,
-} from "./EmployeesComponentsUtils";
+import { Employee, employeesColumns } from "./EmployeesComponentsUtils";
+import { useEffect } from "react";
+import useDeviceType from "hooks/useDeviceType";
 
-const EmployeesTable = () => {
+const EmployeesTable = ({
+  workersData,
+}: {
+  workersData: WorkerInterface[];
+}) => {
+  const deviceType = useDeviceType();
   const { t } = useTranslation("employees");
-  const data = React.useMemo(() => dummyData, []);
   const memoisedColumns = React.useMemo(() => employeesColumns, []);
 
   const table = useReactTable({
-    data,
+    data: workersData,
     columns: memoisedColumns,
     getCoreRowModel: getCoreRowModel<Employee>(),
   });
+
+  useEffect(() => {
+    table.getAllLeafColumns().forEach((header) => {
+      if (deviceType === "mobile" && header.id === "additionDate") {
+        header.toggleVisibility(false);
+      } else {
+        header.toggleVisibility(true);
+      }
+    });
+  }, [deviceType, table]);
 
   return (
     <EmployeesTableComponentContainer>

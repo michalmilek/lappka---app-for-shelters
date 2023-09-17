@@ -1,3 +1,4 @@
+import Typography from "components/SharedComponents/Typography/Typography";
 import useDeviceType from "hooks/useDeviceType";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -42,12 +43,13 @@ const ErrorContainer = styled.div`
   min-height: 40vh;
 `;
 
-const ErrorMessage = styled.p`
+const ErrorMessage = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: ${getColor("darkGray2")};
+  text-align: center;
   font-size: 18px;
   margin: 0;
   padding: 16px;
@@ -119,7 +121,14 @@ const ErrorChart = () => {
           />
         </BarChart>
       </StyledResponsiveContainer>
-      <ErrorMessage>{t("errors.errorDuringDownload")}</ErrorMessage>
+      <ErrorMessage>
+        <Typography
+          tag="p"
+          color="darkGray2"
+          variant="UI/UI Text 16 Medium Bold">
+          {t("errors.errorDuringDownload")}
+        </Typography>
+      </ErrorMessage>
     </ErrorContainer>
   );
 };

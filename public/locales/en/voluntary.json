@@ -17,5 +17,9 @@
   },
   "buttons": {
     "save": "Save"
+  },
+  "voluntaryPromises": {
+    "updateSuccess": "Voluntary data successfully updated.",
+    "updateFailed": "There was an error with the data update, please contact your administrator."
   }
 }

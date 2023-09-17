@@ -31,6 +31,7 @@ import {
   centerAspectCrop,
   CustomFileInputProps,
 } from "./CustomFileInputUtils";
+import { useTranslation } from "react-i18next";
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
   existingFiles,
@@ -43,6 +44,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   photos,
   isUploadSuccess,
 }) => {
+  const { t } = useTranslation();
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [filePreviews, setFilePreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -130,10 +132,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         }
       });
     } else {
-      toastService.showToast(
-        "Zwierzak może posiadać maksymalnie 5 zdjęć.",
-        "error"
-      );
+      toastService.showToast(t("errors.petMaxPhotos"), "error");
     }
   };
 
@@ -203,6 +202,8 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         reader.readAsDataURL(blob);
       });
     }
+    setCompletedCrop(undefined);
+    setCrop(undefined);
   };
 
   const handleSaveImage = (index: number) => {

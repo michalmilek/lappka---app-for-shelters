@@ -14,19 +14,23 @@ import Typography from "components/SharedComponents/Typography/Typography";
 import { useFormik } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import useAddWorker from "services/management/managementServices";
 
 const initialValues = {
   email: "",
 };
 
 const AddNewEmployeePage = () => {
+  const navigate = useNavigate();
   const { t } = useTranslation("employees");
   const { addEmployeeValidation } = useAddEmployeeValidation();
+  const { mutate: addNewEmployeeFn } = useAddWorker();
   const formik = useFormik({
     initialValues,
     validationSchema: addEmployeeValidation,
     onSubmit: (values) => {
-      console.log("Wartości formularza:", values);
+      addNewEmployeeFn(values.email);
     },
   });
 
@@ -68,6 +72,7 @@ const AddNewEmployeePage = () => {
           </AddNewEmployeeInputContainer>
           <AddNewEmployeeFormFooter>
             <Button
+              onClick={() => navigate(-1)}
               type="button"
               variant="outline">
               {t("addEmployee.cancel")}

@@ -95,7 +95,8 @@
   "buttons": {
     "save": "Speichern",
     "cancel": "Abbrechen",
-    "confirm": "Bestätigen"
+    "confirm": "Bestätigen",
+    "saveWithoutCutting": "Speichern(ohne Schneiden)"
   },
   "genreType": {
     "Dog": "Hund",
@@ -141,7 +142,8 @@
     "confirmPwFormat": "Passwörter müssen identisch sein",
     "krs10": "Die 'KRS'-Nummer muss genau 10 Ziffern haben",
     "nip10": "Die 'NIP'-Nummer muss genau 10 Ziffern haben",
-    "errorDuringDownload": "Beim Herunterladen der Daten ist ein Fehler aufgetreten."
+    "errorDuringDownload": "Beim Herunterladen der Daten ist ein Fehler aufgetreten.",
+    "petMaxPhotos": "Ein Haustier kann maximal fünf Fotos haben."
   },
   "utils": {
     "thousands": "Tsd.",
@@ -155,5 +157,6 @@
   "toast": {
     "success": "Erfolg!",
     "error": "Fehler!"
-  }
+  },
+  "editPhoto": "Foto bearbeiten"
 }

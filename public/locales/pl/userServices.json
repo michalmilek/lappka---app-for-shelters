@@ -1,0 +1,16 @@
+{
+  "success": {
+    "deleteProfilePicture": "Zdjęcie profilowe zostało pomyślnie usunięte.",
+    "patchUser": "Zmienione dane użytkownika zostały zapisane.",
+    "deleteUser": "Użytkownik został pomyślnie usunięty. Następuje przeniesienie na stronę logowania.",
+    "patchUserEmailAddress": "Adres e-mail użytkownika został zaktualizowany.",
+    "patchUserNewPassword": "Hasło użytkownika zostało zaktualizowane."
+  },
+  "error": {
+    "deleteProfilePicture": "Podane zdjęcie zostało już usunięte, albo użytkownik nie posiadał zdjęcia profilowego.",
+    "patchUser": "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie.",
+    "deleteUser": "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie.",
+    "patchUserEmailAddress": "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie.",
+    "patchUserNewPassword": "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie."
+  }
+}

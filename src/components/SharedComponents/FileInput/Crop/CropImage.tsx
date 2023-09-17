@@ -1,6 +1,7 @@
 import Button from "components/SharedComponents/Button/Button";
 import Typography from "components/SharedComponents/Typography/Typography";
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Crop, PercentCrop, PixelCrop } from "react-image-crop";
 import {
   ModalContentContainer,
@@ -57,6 +58,7 @@ const CropImage = forwardRef<RefInterface, Props>(
     },
     ref
   ) => {
+    const { t } = useTranslation();
     const imgRef = useRef<HTMLImageElement | null>(null);
     const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -72,7 +74,7 @@ const CropImage = forwardRef<RefInterface, Props>(
             <Typography
               variant="Heading 18 Semi Bold"
               color="darkGray2">
-              Edytuj zdjęcie
+              {t("editPhoto")}
             </Typography>
           </ModalHeader>
 
@@ -120,7 +122,7 @@ const CropImage = forwardRef<RefInterface, Props>(
                   handleSelectedImageChange(null, null);
                 }
               }}>
-              Anuluj
+              {t("buttons.cancel")}
             </Button>
             <Button
               type="button"
@@ -131,7 +133,7 @@ const CropImage = forwardRef<RefInterface, Props>(
                   } else handleSaveImage(selectedImageNumber);
                 }
               }}>
-              Zapisz
+              {t("buttons.save")}
             </Button>
             <Button
               type="button"
@@ -142,7 +144,7 @@ const CropImage = forwardRef<RefInterface, Props>(
                   } else handleSaveUncroppedImage(selectedImageNumber);
                 }
               }}>
-              Zapisz (bez przycinania)
+              {t("buttons.saveWithoutCutting")}
             </Button>
           </ModalFooter>
         </ModalContentContainer>

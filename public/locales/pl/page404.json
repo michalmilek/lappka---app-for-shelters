@@ -1,0 +1,6 @@
+{
+  "404": "404 - Strona nie znaleziona",
+  "redirect": "Przenoszenie na poprzednią stronę za {{redirectCountdown}} sekundy...",
+  "dontWannaWait?": "Jeśli nie chcesz czekać, kliknij tutaj, aby przejść na stronę główną.",
+  "orMainSite": "Lub tutaj, aby przejść na poprzednią stronę."
+}

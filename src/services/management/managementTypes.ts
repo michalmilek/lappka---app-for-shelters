@@ -17,3 +17,10 @@ export type Role =
   | "User"
   | "Shelter"
   | "Worker";
+
+
+  export interface WorkerInterface {
+    fullName: string;
+    email: string;
+    additionDate: string;
+  }

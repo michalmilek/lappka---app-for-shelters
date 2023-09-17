@@ -81,5 +81,24 @@
   "addNewCard": {
     "addPhotos": "Dodaj zdjęcia",
     "addPhotosDesc": "Zdjęcie maksymalnie 15MB, a maksymalna ilość zdjęć to 5."
+  },
+  "cardPromises": {
+    "cardUpdateSuccess": "Karta zwierzęcia o imieniu {{animalName}} została zaktualizowana"
+  },
+  "addNewCardPromises": {
+    "success": "Karta dla zwierzęcia o imieniu {{animalName}} została utworzona",
+    "error": "Dodawanie zakończone niepowodzeniem"
+  },
+  "cardsToArchive": {
+    "success": "Karta została przeniesiona do archiwum."
+  },
+  "cardsPublish": {
+    "success": "Karta zostałą opublikowana."
+  },
+  "cardsHide": {
+    "success": "Karta zostałą ukryta."
+  },
+  "deleteCard": {
+    "success": "Karta została pomyślnie usunięta."
   }
 }

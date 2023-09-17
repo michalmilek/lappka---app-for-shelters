@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLoading } from "redux/loadingSlice";
@@ -16,18 +17,11 @@ import {
 } from "./user";
 
 export const useDeleteProfilePicture = () => {
+  const { t } = useTranslation("userServices");
   const mutation = useMutation(() => deleteProfilePicture(), {
     onError: (error: ExtendedAxiosError) => {
       if (error.status === 400)
-        toastService.showToast(
-          "Podane zdjęcie zostało już usunięte, albo użytkownik nie posiadał zdjęcia profilowego.",
-          "error"
-        );
-      else if (error.status === 500)
-        toastService.showToast(
-          "Wewnętrzny błąd serwera. Spróbuj ponownie później.",
-          "error"
-        );
+        toastService.showToast(t("error.deleteProfilePicture"), "error");
     },
   });
   return mutation;
@@ -39,32 +33,18 @@ export const useGetUser = () => {
 };
 
 export const usePatchUser = () => {
+  const { t } = useTranslation("userServices");
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const mutation = useMutation((data: PatchUserRequest) => patchUser(data), {
     onSuccess: () => {
-      toastService.showToast(
-        "Zmienione dane użytkownika zostały zapisane.",
-        "success"
-      );
+      toastService.showToast(t("success.patchUser"), "success");
       queryClient.invalidateQueries(["user"]);
     },
     onError: (error: ExtendedAxiosError) => {
       if (error.status === 400) {
-        toastService.showToast(
-          "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie.",
-          "error"
-        );
-      } else if (error.status === 403)
-        toastService.showToast(
-          "Przepraszamy, ale nie masz wystarczających uprawnień do wykonania tej akcji. Skontaktuj się z administratorem, jeśli uważasz, że to błąd.",
-          "error"
-        );
-      else if (error.status === 500)
-        toastService.showToast(
-          "Wewnętrzny błąd serwera, spróbuj ponownie później.",
-          "error"
-        );
+        toastService.showToast(t("error.patchUser"), "error");
+      }
     },
     onMutate: () => {
       dispatch(setLoading(true));
@@ -78,27 +58,19 @@ export const usePatchUser = () => {
 };
 
 export const useDeleteUser = () => {
+  const { t } = useTranslation("userServices");
   const navigate = useNavigate();
   const mutation = useMutation(() => deleteUser(), {
     onSuccess: () => {
-      toastService.showToast(
-        "Użytkownik został pomyślnie usunięty. Następuje przeniesienie na stronę logowania."
-      );
+      toastService.showToast(t("success.deleteUser"), "success");
       navigate("/login");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
     },
     onError: (error: ExtendedAxiosError) => {
       if (error.status === 400) {
-        toastService.showToast(
-          "Przepraszamy, ale żądanie jest nieprawidłowe. Proszę sprawdź przesłane dane i spróbuj ponownie.",
-          "error"
-        );
-      } else if (error.status === 403)
-        toastService.showToast(
-          "Przepraszamy, ale nie masz wystarczających uprawnień do usunięcia tego użytkownika. Skontaktuj się z administratorem, jeśli uważasz, że to błąd.",
-          "error"
-        );
+        toastService.showToast(t("error.deleteUser"), "error");
+      }
     },
   });
   return mutation;
