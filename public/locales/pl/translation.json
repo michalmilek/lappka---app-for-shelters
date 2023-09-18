@@ -211,5 +211,7 @@
     "success": "Sukces!",
     "error": "Błąd!"
   },
-  "editPhoto": "Edytuj zdjęcie"
+  "editPhoto": "Edytuj zdjęcie",
+  "errNetwork": "Serwer jest obecnie wyłączony. Spróbuj ponownie później.",
+  "loginTokenExpired": "Token logowania już wygasł. Zaloguj się ponownie."
 }
