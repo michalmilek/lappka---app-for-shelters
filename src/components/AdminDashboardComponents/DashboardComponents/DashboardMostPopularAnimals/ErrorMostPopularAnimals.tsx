@@ -29,6 +29,10 @@ const ErrorContainer = styled.div`
   width: 3fr;
   box-shadow: 0px 1px 2px 0px #1018280f;
   animation: ${appearAnimation} 0.3s ease-in-out;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const ErrorMostPopularAnimals = () => {

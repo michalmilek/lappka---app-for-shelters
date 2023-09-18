@@ -26,6 +26,10 @@ const ErrorContainer = styled.div`
   width: 100%;
   box-shadow: 0px 1px 2px 0px #1018280f;
   animation: ${appearAnimation} 0.3s ease-in-out;
+
+  @media screen and (max-width: 1024px) {
+    min-height: 35vh;
+  }
 `;
 
 export const DashboardNewestAnimalCardsItemImgError = styled.div`
