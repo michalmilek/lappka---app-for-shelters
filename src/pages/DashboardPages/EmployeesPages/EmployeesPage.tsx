@@ -1,6 +1,8 @@
 import DashboardNavbar from "components/AdminDashboardComponents/DashboardNavbar";
 import { StyledDashboardEmployeesMainContent } from "components/AdminDashboardComponents/EmployeesComponents/DashboardEmployees.styled";
 import EmployeesTable from "components/AdminDashboardComponents/EmployeesComponents/EmployeesTable";
+import ErrorEmployeesTable from "components/AdminDashboardComponents/EmployeesComponents/ErrorEmployeesTable";
+import SkeletonEmployeesTable from "components/AdminDashboardComponents/EmployeesComponents/SkeletonEmployeesTable";
 import { StyledProtectedPageContent } from "components/PagesComponents/ProtectedPage.styled";
 import Button from "components/SharedComponents/Button/Button";
 import { StyledPlusIcon } from "components/SharedComponents/icons/icons";
@@ -16,7 +18,7 @@ import {
 const EmployeesPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation("employees");
-  const { data: workersData, isSuccess } = useGetWorkers();
+  const { data: workersData, isSuccess, isLoading, isError } = useGetWorkers();
   return (
     <StyledProtectedPageContent>
       <DashboardNavbar
@@ -30,6 +32,8 @@ const EmployeesPage = () => {
         }
       />
       <StyledDashboardEmployeesMainContent>
+        {isError && <ErrorEmployeesTable />}
+        {isLoading && <SkeletonEmployeesTable />}
         {isSuccess && workersData && (
           <EmployeesTable workersData={workersData} />
         )}

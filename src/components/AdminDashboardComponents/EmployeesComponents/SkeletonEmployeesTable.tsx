@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const loadingAnimation = keyframes`
   from {
@@ -12,6 +12,7 @@ const loadingAnimation = keyframes`
 `;
 
 const SkeletonTableComponentContainer = styled.div`
+  grid-area: b;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -53,14 +54,6 @@ const SkeletonTableTH = styled.th`
   }
 `;
 
-const SkeletonTableTHTextContainer = styled.div`
-  padding-right: 30px;
-
-  @media screen and (max-width: 1300px) {
-    padding-right: 0px;
-  }
-`;
-
 const SkeletonTableTR = styled.tr`
   gap: 12px;
   background: #f0f0f0;
@@ -75,51 +68,6 @@ const SkeletonTableTD = styled.td`
 
   @media screen and (max-width: 1300px) {
     padding: 12px 4px;
-  }
-`;
-
-const SkeletonDropdownContainer = styled.ul`
-  z-index: 20;
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 171px;
-  height: 90px;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 8px 0;
-  border-radius: 6px;
-  gap: 2px;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-
-  box-shadow: 0px 12px 24px 0px #5b68713d;
-
-  box-shadow: 0px 0px 1px 0px #1a202452;
-
-  &.fadeIn {
-    animation: ${loadingAnimation} 0.3s forwards;
-  }
-
-  &.fadeOut {
-    animation: ${loadingAnimation} 0.3s forwards;
-  }
-`;
-
-const SkeletonDropdownOption = styled.li`
-  width: 100%;
-  padding: 4px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-
-  &:hover {
-    background: #f0f0f0;
   }
 `;
 
@@ -142,47 +90,11 @@ const SkeletonTableFooterButtonsContainer = styled.div`
   padding: 4px 6px;
 `;
 
-const SkeletonTableNumberButton = styled.button`
-  background: #f0f0f0;
-  padding: 4px 6px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  color: #333;
-  transition: all 0.3s ease-in-out;
-  border: none;
-  cursor: pointer;
-`;
-
-const SkeletonTableArrowButton = styled.button`
-  height: 24px;
-  width: 24px;
-  background: #fff;
-  border: none;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-
-  & path {
-    stroke: #ccc;
-    fill: #ccc;
-    ${({ disabled }) =>
-      disabled &&
-      css`
-        opacity: 0.5;
-      `}
-  }
-`;
-
 const SkeletonTableInputContainer = styled.div`
   width: 30%;
 `;
 
-const SkeletonAnimalCardsPageSizeSelect = styled.select`
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const SkeletonTableComponent = () => (
+const SkeletonEmployeesTable = () => (
   <SkeletonTableComponentContainer>
     <SkeletonTableComponentHeaderContainer />
     <SkeletonTableContainer>
@@ -205,4 +117,4 @@ const SkeletonTableComponent = () => (
   </SkeletonTableComponentContainer>
 );
 
-export default SkeletonTableComponent;
+export default SkeletonEmployeesTable;

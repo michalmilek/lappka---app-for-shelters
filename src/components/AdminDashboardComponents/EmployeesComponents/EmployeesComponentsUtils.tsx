@@ -82,7 +82,9 @@ export const employeesColumns = [
         </Typography>
       </ActionHeaderContainer>
     ),
-    cell: (_props) => <EmployeesComponentActionDropdown />,
+    cell: (props) => (
+      <EmployeesComponentActionDropdown email={props.row.original.email} />
+    ),
   }),
 ];
 
