@@ -26,6 +26,9 @@ const DashboardAnimalCardsCardFields: React.FC<
 > = ({ isEditOn, formik }) => {
   const { t } = useTranslation(["translation", "animalCards"]);
 
+
+  console.log("test", formik.values.newPhotos);
+
   return (
     <>
       <FormRow label={t("animalCards:pet.name")}>
@@ -39,21 +42,14 @@ const DashboardAnimalCardsCardFields: React.FC<
         />
       </FormRow>
       <FormRow label={t("animalCards:pet.description")}>
-        {!isEditOn ? (
-          <Input
-            value={formik.values.description}
-            readOnly={!isEditOn}
-            inputSize="Large"
-          />
-        ) : (
-          <Textarea
-            id="description"
-            name="description"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            inputSize="Large"
-          />
-        )}
+        <Textarea
+          id="description"
+          name="description"
+          value={formik.values.description}
+          onChange={formik.handleChange}
+          readOnly={!isEditOn}
+          inputSize="Large"
+        />
       </FormRow>
       <FormRow label={t("animalCards:pet.gender")}>
         {!isEditOn ? (

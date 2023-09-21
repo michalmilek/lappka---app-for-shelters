@@ -12,7 +12,9 @@ import {
   DashboardNewestAnimalCardsItemImg,
 } from "./DashboardNewestAnimalCardsItem.styled";
 import { NewestAnimalImgSkeleton } from "./DashboardNewestAnimalCardsItemContainerSkeleton";
-import { DashboardNewestAnimalCardsItemImgError } from "./ErrorNewestAnimal";
+import ErrorNewestAnimal, {
+  DashboardNewestAnimalCardsItemImgError,
+} from "./ErrorNewestAnimal";
 import PetAvatar from "assets/petAvatar.jpg";
 
 interface Props {
@@ -38,7 +40,7 @@ const DashboardNewestAnimalCardsItem = ({ item }: Props) => {
           />
         ) : (
           <>
-            {isError && <DashboardNewestAnimalCardsItemImgError />}
+            {isError && <ErrorNewestAnimal />}
             {isLoading && <NewestAnimalImgSkeleton />}
             {isSuccess && (
               <DashboardNewestAnimalCardsItemImg

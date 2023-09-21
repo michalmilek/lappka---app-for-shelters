@@ -61,20 +61,24 @@ export const createImgURL = (file: File | string) => {
 };
 
 export const formatCardViews = (views: number) => {
-  if (views >= 100000) {
-    const roundedViews = Math.floor(views / 1000);
-    return `${roundedViews} ${t("utils.thousands")}`;
-  } else if (views >= 1000) {
-    const formattedViews = new Intl.NumberFormat("en", {
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
-    }).format(views / 1000);
-    return `${formattedViews} ${t("utils.thousands")}`;
+  if (views) {
+    if (views >= 100000) {
+      const roundedViews = Math.floor(views / 1000);
+      return `${roundedViews} ${t("utils.thousands")}`;
+    } else if (views >= 1000) {
+      const formattedViews = new Intl.NumberFormat("en", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }).format(views / 1000);
+      return `${formattedViews} ${t("utils.thousands")}`;
+    } else {
+      return views.toString();
+    }
   } else {
-    return views.toString();
+    return "";
   }
 };
-
+  
 export const mapEnglishToPolish = (englishName: string): string => {
   const translations: Record<string, string> = {
     dashboard: t("sidebar.dashboard"),

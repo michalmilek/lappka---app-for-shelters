@@ -6,7 +6,7 @@ export const postStoragePicture = rest.post(
   "/Storage",
   async (req, res, ctx) => {
     try {
-      const body = await req.text();
+      const body = await req.json();
       const formData = new URLSearchParams(body);
       const files = formData.getAll("file");
 
@@ -41,7 +41,7 @@ export const postStoragePicture = rest.post(
 
 export const getStoragePicture = rest.get("/Storage", async (req, res, ctx) => {
   try {
-    const ids = await req.json();
+    const ids = req.url.searchParams.getAll("ids[0]");
 
     if (!ids || ids.length === 0) {
       return res(
@@ -50,14 +50,7 @@ export const getStoragePicture = rest.get("/Storage", async (req, res, ctx) => {
       );
     }
 
-    const urls: string[] = [];
-
-    for (let i = 0; i < ids.length; i++) {
-      const randomImageUrl = `https://picsum.photos/300/30${i}`;
-      urls.push(randomImageUrl);
-    }
-
-    return res(ctx.status(200), ctx.json({ urls }));
+    return res(ctx.status(200), ctx.json(ids));
   } catch (error) {
     console.error(error);
     return res(ctx.status(500), ctx.json({ message: "Server error" }));

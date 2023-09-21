@@ -70,5 +70,6 @@ export const TextareaField = styled.textarea<TextareaProps>`
 
         &:read-only {
     border: none !important;
+    resize: none;
   }
 `;

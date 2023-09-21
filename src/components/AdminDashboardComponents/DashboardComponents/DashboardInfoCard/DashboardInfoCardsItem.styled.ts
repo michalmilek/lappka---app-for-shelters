@@ -41,6 +41,7 @@ export const StyledDashboardInfoCardIconContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  flex-shrink: 0;
   background: ${getColor("primary050")};
 
   & path {
