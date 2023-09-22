@@ -21,7 +21,7 @@ const isMockEndpointsEnabled =
 const apiAddress = process.env.REACT_APP_API_BASE_URL as string;
 const mockAddress = process.env.REACT_APP_mockBaseURL as string;
 
-const baseURL = !isMockEndpointsEnabled ? mockAddress : apiAddress;
+const baseURL = isMockEndpointsEnabled ? mockAddress : apiAddress;
 
 export const mockInstance = axios.create({
   baseURL: process.env.REACT_APP_mockBaseURL as string,
