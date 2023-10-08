@@ -85,3 +85,24 @@ export const deleteWorker = rest.delete(
     }
   }
 );
+
+
+const mockShelterData = {
+  id: "1",
+  organizationName: "Przykładowa Organizacja",
+  longitude: 19.123456,
+  latitude: 52.987654,
+  city: "Warszawa",
+  street: "Przykładowa 123",
+  zipCode: "00-000",
+  nip: "1234567890",
+  krs: "0987654321",
+  phoneNumber: "123-456-789",
+};
+
+export const getShelterDetails = rest.get(
+  "/shelters/details",
+  (req, res, ctx) => {
+    return res(ctx.json(mockShelterData));
+  }
+);

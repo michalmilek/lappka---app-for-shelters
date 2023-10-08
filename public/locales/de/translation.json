@@ -34,7 +34,7 @@
     "october": "Oktober",
     "november": "November",
     "december": "Dezember",
-    "months": "Monate"
+    "months": "Mon"
   },
   "week": {
     "monday": "Montag",
@@ -158,5 +158,7 @@
     "success": "Erfolg!",
     "error": "Fehler!"
   },
-  "editPhoto": "Foto bearbeiten"
+  "editPhoto": "Foto bearbeiten",
+  "errNetwork": "Der Server ist derzeit deaktiviert. Bitte versuchen Sie es später erneut.",
+  "loginTokenExpired": "Das Login-Token ist bereits abgelaufen. Bitte melden Sie sich erneut an."
 }

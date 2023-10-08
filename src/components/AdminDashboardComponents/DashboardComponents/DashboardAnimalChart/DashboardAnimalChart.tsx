@@ -160,7 +160,10 @@ const DashboardAnimalChart = ({ viewsState, isLoading }: Props) => {
               dy={0}
             />
           </YAxis>
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            cursor={false}
+            content={<CustomTooltip />}
+          />
           <CartesianGrid
             vertical={false}
             strokeDasharray="4 4"

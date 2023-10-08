@@ -26,14 +26,12 @@ import AccountSettingsPage from "pages/DashboardPages/AccountSettingsPage";
 import Loader from "components/SharedComponents/Loader/Loader";
 import { useSelector } from "react-redux";
 import { selectIsLoading } from "redux/loadingSlice";
-import PreLoaderModal from "components/SharedComponents/PreLoader/PreLoader";
 import { AxiosError } from "axios";
 import Page404 from "pages/Page404";
 import toastService from "singletons/toastService";
 import UnprotectedPage from "components/PagesComponents/UnprotectedPage";
 import HomePage from "pages/HomePage";
 import { Suspense } from "react";
-import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 
 const queryClient = new QueryClient({

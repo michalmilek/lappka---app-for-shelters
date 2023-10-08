@@ -8,14 +8,16 @@ import {
   StyledDropdownOption,
 } from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";
 import { useTranslation } from "react-i18next";
+import { useDeleteWorker } from "services/management/managementServices";
 
 const StyledMoreIcon = styled(MoreIcon)`
   cursor: pointer;
 `;
 
-const EmployeesComponentActionDropdown = () => {
+const EmployeesComponentActionDropdown = ({ email }: { email: string }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { t } = useTranslation();
+  const { mutate: deleteUserFn } = useDeleteWorker();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +49,11 @@ const EmployeesComponentActionDropdown = () => {
       {isDropdownOpen && (
         <StyledDropdownContainer
           className={isDropdownOpen ? "fadeIn" : "fadeOut"}>
-          <StyledDropdownOption>
+          <StyledDropdownOption
+            onClick={() => {
+              deleteUserFn(email);
+              setIsDropdownOpen(false);
+            }}>
             <Typography
               color="darkGray2"
               variant="UI/UI Text 14 Reg">

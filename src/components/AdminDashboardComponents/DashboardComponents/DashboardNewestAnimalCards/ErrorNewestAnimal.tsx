@@ -15,7 +15,7 @@ const appearAnimation = keyframes`
   }
 `;
 
-const ErrorContainer = styled.div`
+/* const ErrorContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,11 @@ const ErrorContainer = styled.div`
   width: 100%;
   box-shadow: 0px 1px 2px 0px #1018280f;
   animation: ${appearAnimation} 0.3s ease-in-out;
-`;
+
+  @media screen and (max-width: 1024px) {
+    min-height: 35vh;
+  }
+`; */
 
 export const DashboardNewestAnimalCardsItemImgError = styled.div`
   width: 100%;
@@ -38,19 +42,21 @@ export const DashboardNewestAnimalCardsItemImgError = styled.div`
   color: ${getColor("white")};
   font-size: 16px;
   font-weight: bold;
+  animation: ${appearAnimation} 0.3s ease-in-out;
+  text-align: center;
 `;
 
 const ErrorNewestAnimal = () => {
   const { t } = useTranslation();
   return (
-    <ErrorContainer>
+    <DashboardNewestAnimalCardsItemImgError>
       <Typography
         tag="p"
-        color="darkGray2"
+        color="white"
         variant="UI/UI Text 16 Medium Bold">
         {t("errors.errorDuringDownload")}
       </Typography>
-    </ErrorContainer>
+    </DashboardNewestAnimalCardsItemImgError>
   );
 };
 

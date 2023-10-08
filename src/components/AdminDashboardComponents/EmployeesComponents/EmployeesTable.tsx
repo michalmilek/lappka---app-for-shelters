@@ -9,20 +9,20 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { WorkerInterface } from "services/management/managementTypes";
 import {
-  StyledTableHeader,
-  StyledTableTD,
-  StyledTableTH,
-  StyledTableTR,
-  TableComponentHeaderContainer,
-  TableContainer,
-} from "../AnimalCardsComponents/AnimalCardsTable/AnimalCardsTable.styled";
-import {
   EmployeesTableComponentContainer,
   EmployeesTableFooter,
 } from "./DashboardEmployees.styled";
 import { Employee, employeesColumns } from "./EmployeesComponentsUtils";
 import { useEffect } from "react";
 import useDeviceType from "hooks/useDeviceType";
+import {
+  EmployeesStyledTableHeader,
+  EmployeesStyledTableTD,
+  EmployeesStyledTableTH,
+  EmployeesStyledTableTR,
+  EmployeesTableComponentHeaderContainer,
+  EmployeesTableContainer,
+} from "./EmployeesTable.styled";
 
 const EmployeesTable = ({
   workersData,
@@ -51,21 +51,21 @@ const EmployeesTable = ({
 
   return (
     <EmployeesTableComponentContainer>
-      <TableComponentHeaderContainer>
+      <EmployeesTableComponentHeaderContainer>
         <Typography
           variant="UI/UI Text 16 Semi Bold"
           tag="h2"
           color="darkGray2">
           {t("employees.employeesList")}
         </Typography>
-      </TableComponentHeaderContainer>
-      <TableContainer>
-        <StyledTableHeader>
+      </EmployeesTableComponentHeaderContainer>
+      <EmployeesTableContainer>
+        <EmployeesStyledTableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <StyledTableTH
+                  <EmployeesStyledTableTH
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}>
                     {header.isPlaceholder
@@ -74,26 +74,26 @@ const EmployeesTable = ({
                           header.column.columnDef.header,
                           header.getContext()
                         )}
-                  </StyledTableTH>
+                  </EmployeesStyledTableTH>
                 );
               })}
             </tr>
           ))}
-        </StyledTableHeader>
+        </EmployeesStyledTableHeader>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <StyledTableTR key={row.id}>
+            <EmployeesStyledTableTR key={row.id}>
               {row.getVisibleCells().map((cell) => {
                 return (
-                  <StyledTableTD key={cell.id}>
+                  <EmployeesStyledTableTD key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </StyledTableTD>
+                  </EmployeesStyledTableTD>
                 );
               })}
-            </StyledTableTR>
+            </EmployeesStyledTableTR>
           ))}
         </tbody>
-      </TableContainer>
+      </EmployeesTableContainer>
       <EmployeesTableFooter>
         <Button variant="outline">Test</Button>
         {/* ADDED TO HAVE STYLING ON THE FOOTER, IN THE FUTURE I WILL REPLACE IT WITH PAGINATION */}

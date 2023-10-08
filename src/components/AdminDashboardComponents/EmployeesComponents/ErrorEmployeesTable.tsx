@@ -1,7 +1,6 @@
-import Typography from "components/SharedComponents/Typography/Typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { getColor } from "utils/styles/getStyle/getColor";
 
 const appearAnimation = keyframes`
@@ -17,36 +16,30 @@ const appearAnimation = keyframes`
 
 const ErrorContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  width: 100%;
+  justify-content: center;
+  height: 500px;
   background-color: ${getColor("white")};
   border-radius: 8px;
-  padding: 10px;
-  grid-area: e;
-  height: 100%;
-  min-height: 35vh;
-  width: 3fr;
   box-shadow: 0px 1px 2px 0px #1018280f;
   animation: ${appearAnimation} 0.3s ease-in-out;
-
-  @media screen and (max-width: 1024px) {
-    width: 100%;
-  }
 `;
 
-const ErrorMostPopularAnimals = () => {
+const ErrorMessage = styled.p`
+  color: ${getColor("darkGray2")};
+  font-size: 18px;
+  margin: 0;
+  padding: 16px;
+`;
+
+const ErrorEmployeesTable = () => {
   const { t } = useTranslation();
   return (
     <ErrorContainer>
-      <Typography
-        tag="p"
-        color="darkGray2"
-        variant="UI/UI Text 16 Medium Bold">
-        {t("errors.errorDuringDownload")}
-      </Typography>
+      <ErrorMessage>{t("errors.errorDuringDownload")}</ErrorMessage>
     </ErrorContainer>
   );
 };
 
-export default ErrorMostPopularAnimals;
+export default ErrorEmployeesTable;

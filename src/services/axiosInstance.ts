@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
-
-
+import { t } from "i18next";
+import { useNavigate } from "react-router-dom";
+import { AuthRoutes } from "router/router";
+import toastService from "singletons/toastService";
 
 type CustomErrorObject = {
   Code: string;
@@ -25,7 +27,6 @@ export const mockInstance = axios.create({
   baseURL: process.env.REACT_APP_mockBaseURL as string,
   timeout: 5000,
 });
-
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -67,9 +68,24 @@ axiosInstance.interceptors.response.use(
         } catch (refreshError) {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
+          toastService.showToast(t("loginTokenExpired"), "error");
+          setTimeout(() => {
+            if (window.location.pathname !== "/login") {
+              window.location.href = "/";
+            }
+          }, 3000);
           console.error(refreshError);
         }
       }
+    } else if (error.code === "ERR_NETWORK") {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      toastService.showToast(t("errNetwork"), "error");
+      setTimeout(() => {
+        if (window.location.pathname !== "/login") {
+          window.location.href = "/";
+        }
+      }, 3000);
     }
     return Promise.reject(error);
   }

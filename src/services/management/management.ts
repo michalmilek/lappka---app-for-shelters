@@ -35,7 +35,9 @@ export const getWorkers = async () => {
 
 export const addWorker = async (email: string) => {
   try {
-    const response = await mockInstance.post(`/Management/addWorker`, email);
+    const response = await mockInstance.post(`/Management/addWorker`, {
+      email,
+    });
     return response.data;
   } catch (error) {
     throw error;

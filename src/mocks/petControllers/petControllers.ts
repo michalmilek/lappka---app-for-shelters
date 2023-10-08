@@ -36,7 +36,7 @@ export const getShelterCards = rest.get(
 
 const dummyDonationData = {
   isDonationActive: true,
-  bankAccountNumber: "0000-0000-0000-0000",
+  bankAccountNumber: "00000000000000000000000000",
   donationDescription: "Donate to support our shelter animals!",
   isDailyHelpActive: true,
   dailyHelpDescription: "We appreciate any daily help for our lovely pets!",
@@ -45,7 +45,7 @@ const dummyDonationData = {
 };
 
 export const getShelterVolunteering = rest.get(
-  "/shelters/volunteering",
+  "/shelters/volunteering/GetShelterVolunteering",
   async (req, res, ctx) => {
     try {
       return res(ctx.status(200), ctx.json(dummyDonationData));
@@ -57,7 +57,7 @@ export const getShelterVolunteering = rest.get(
 );
 
 export const updateShelterVolunteering = rest.put(
-  "/Pet/shelters/volunteering",
+  "/shelters/volunteering/update",
   async (req, res, ctx) => {
     try {
       const updatedData = await req.json();
@@ -75,7 +75,7 @@ const generateRandomNumberArray = (length: number) => {
 };
 
 export const getShelterCardsArchiveChartData = rest.get(
-  "/Pets/shelters/cards/archive/chart/year",
+  "/shelters/cards/chart/year",
   async (req, res, ctx) => {
     try {
       const chartData = generateRandomNumberArray(12);
@@ -95,7 +95,7 @@ const getDaysInMonth = (year: number, month: number) => {
 };
 
 export const getShelterCardsArchiveChartDataForMonth = rest.get(
-  "/Pets/shelters/cards/archive/chart/month",
+  "/shelters/cards/chart/month",
   async (req, res, ctx) => {
     try {
       const currentDate = new Date();
@@ -108,7 +108,10 @@ export const getShelterCardsArchiveChartDataForMonth = rest.get(
         (_, index) => index + 1
       );
 
-      return res(ctx.status(200), ctx.json(chartData));
+      return res(
+        ctx.status(200),
+        ctx.json([523, 123, 234, 532, 421, 321, 160])
+      );
     } catch (error) {
       console.error(error);
       return res(ctx.status(500), ctx.json({ message: "Server error" }));
@@ -117,18 +120,18 @@ export const getShelterCardsArchiveChartDataForMonth = rest.get(
 );
 
 export const getShelterCardsArchiveChartDataForWeek = rest.get(
-  "/Pets/shelters/cards/archive/chart/week",
+  "/shelters/cards/chart/week",
   async (req, res, ctx) => {
     try {
-      const currentDate = new Date();
+      /*       const currentDate = new Date();
       const currentDayOfWeek = currentDate.getDay();
 
       const chartData = Array.from({ length: 7 }, (_, index) => {
         const dayOfWeek = (currentDayOfWeek + index) % 7;
         return dayOfWeek + 1;
-      });
+      }); */
 
-      return res(ctx.status(200), ctx.json(chartData));
+      return res(ctx.status(200), ctx.json([14, 16, 45, 35, 32, 90, 160]));
     } catch (error) {
       console.error(error);
       return res(ctx.status(500), ctx.json({ message: "Server error" }));
@@ -137,21 +140,18 @@ export const getShelterCardsArchiveChartDataForWeek = rest.get(
 );
 
 const dummyObj = {
-  id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  petIdentifier: "ABC123",
+  petId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
   name: "TEST1",
-  type: "Cat",
+  animalCategory: "Cat",
   gender: "Male",
-  breed: "Persian",
-  color: "White",
+  species: "Persian",
+  marking: "White",
   weight: 5.2,
-  profilePhoto:
-    "https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg",
   photos: [
     "https://hips.hearstapps.com/hmg-prod/images/domestic-cat-lies-in-a-basket-with-a-knitted-royalty-free-image-1592337336.jpg?crop=0.668xw:1.00xh;0.247xw,0&resize=1200:*",
     "https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png",
   ],
-  age: 2,
+  months: 42,
   createdAt: "2023-07-31T21:46:59.855Z",
   isSterilized: true,
   isVisible: true,
@@ -159,7 +159,7 @@ const dummyObj = {
 };
 
 export const getShelterCardsCard = rest.get(
-  "/shelters/cards/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "/shelters/cards/get/:id",
   async (req, res, ctx) => {
     try {
       return res(ctx.status(200), ctx.json(dummyObj));
@@ -170,19 +170,15 @@ export const getShelterCardsCard = rest.get(
   }
 );
 
-
-export const postShelterCardsCat = rest.post(
-  "Pet/shelters/cards/cat",
+export const putShelterCardsAnimal = rest.put(
+  "/Shelter/cards/Update",
   async (req, res, ctx) => {
-    try {
-      const body = await req.json();
-      return res(
-        ctx.status(200),
-        ctx.json({ message: "Kot został dodany.", body })
-      );
-    } catch (error) {
-      console.error(error);
-      return res(ctx.status(500), ctx.json({ message: "Server error" }));
+    const data = await req.json();
+
+    if (!data) {
+      return res(ctx.status(404), ctx.json({ success: false }));
     }
+
+    return res(ctx.status(200), ctx.json({ success: true }));
   }
 );

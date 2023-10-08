@@ -21,28 +21,28 @@
     "reset-password": "Reset hasła"
   },
   "months": {
-    "january": "January",
-    "february": "February",
-    "march": "March",
-    "april": "April",
-    "may": "May",
-    "june": "June",
-    "july": "July",
-    "august": "August",
-    "september": "September",
-    "october": "October",
-    "november": "November",
-    "december": "December",
-    "months": "mth"
+    "january": "Styczeń",
+    "february": "Luty",
+    "march": "Marzec",
+    "april": "Kwiecień",
+    "may": "Maj",
+    "june": "Czerwiec",
+    "july": "Lipiec",
+    "august": "Sierpień",
+    "september": "Wrzesień",
+    "october": "Październik",
+    "november": "Listopad",
+    "december": "Grudzień",
+    "months": "msc"
   },
   "week": {
-    "monday": "Monday",
-    "tuesday": "Tuesday",
-    "wednesday": "Wednesday",
-    "thursday": "Thursday",
-    "friday": "Friday",
-    "saturday": "Saturday",
-    "sunday": "Sunday"
+    "monday": "Poniedziałek",
+    "tuesday": "Wtorek",
+    "wednesday": "Środa",
+    "thursday": "Czwartek",
+    "friday": "Piątek",
+    "saturday": "Sobota",
+    "sunday": "Niedziela"
   },
   "pet": {
     "name": "Imię zwierzaka",
@@ -211,5 +211,7 @@
     "success": "Sukces!",
     "error": "Błąd!"
   },
-  "editPhoto": "Edytuj zdjęcie"
+  "editPhoto": "Edytuj zdjęcie",
+  "errNetwork": "Serwer jest obecnie wyłączony. Spróbuj ponownie później.",
+  "loginTokenExpired": "Token logowania już wygasł. Zaloguj się ponownie."
 }

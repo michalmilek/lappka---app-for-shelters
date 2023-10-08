@@ -10,12 +10,13 @@ i18n
   .init({
     debug: false,
     fallbackLng: ["en", "pl", "de", "fr"],
+    debug: true,
+    fallbackLng: ["en", "pl", "de"],
     fallbacks: {
       "en-US": "en",
       "en-UK": "en",
       "pl-PL": "pl",
       "de-DE": "de",
-      "fr-FR": "fr",
     },
     react: {
       transSupportBasicHtmlNodes: true,

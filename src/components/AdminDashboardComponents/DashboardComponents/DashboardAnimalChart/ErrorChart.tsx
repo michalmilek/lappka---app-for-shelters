@@ -90,11 +90,12 @@ const ErrorChart = () => {
   return (
     <ErrorContainer>
       <StyledResponsiveContainer
-        width={"100%"}
-        height={"90%"}>
+        minHeight={300}
+        height={"99%"}
+        width={"99%"}>
         <BarChart
-          width={150}
-          height={150}
+          width={400}
+          height={300}
           data={errorData}
           margin={{ top: 50, right: 30, bottom: 50, left: 30 }}>
           <XAxis dataKey="name" />

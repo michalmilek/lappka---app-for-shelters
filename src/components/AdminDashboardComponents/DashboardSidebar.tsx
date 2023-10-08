@@ -34,26 +34,27 @@ import ReactCountryFlag from "react-country-flag";
 import { useGetUser } from "services/user/userServices";
 import { useGetShelter } from "services/pet/petServices";
 import { useGetStorageImagesForId } from "services/storage/storageServices";
+import UserMenu from "./UserMenu";
+import UserMenuSkeleton from "./UserMenuSkeleton";
+import UserMenuError from "./UserMenuError";
 
 const DashboardSidebar = () => {
   const { t, i18n } = useTranslation();
-  const [isDropdownActive, setIsDropdownActive] = useState(false);
-  const userMenuRef = useRef<HTMLDivElement>(null);
   const deviceType = useDeviceType();
   const isOpen = useSelector(selectIsMobileMenuOpen);
-  const { mutate: revokeTokenFn } = useRevokeToken();
-  const token = localStorage.getItem("refreshToken");
-  const { data: userData } = useGetUser();
-  const { data: shelterData } = useGetShelter();
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    isError: isUserError,
+    isSuccess: isUserSuccess,
+  } = useGetUser();
+  const {
+    data: shelterData,
+    isLoading: isShelterLoading,
+    isError: isShelterError,
+    isSuccess: isShelterSuccess,
+  } = useGetShelter();
   const { data: userImg } = useGetStorageImagesForId(userData?.profilePicture);
-
-  useClickOutside(userMenuRef, () => setIsDropdownActive(false));
-
-  const pathName = window.location.pathname;
-
-  useEffect(() => {
-    if (pathName) setIsDropdownActive(false);
-  }, [pathName]);
 
   const changeLanguage = (lng: "en" | "pl" | "de") => {
     i18n.changeLanguage(lng);
@@ -142,67 +143,15 @@ const DashboardSidebar = () => {
           </UnstyledButton>
         </StyledFlagContainer>
       </StyledSidebarTopMenu>
-
-      <StyledUserMenu
-        tabIndex={0}
-        role={"button"}
-        ref={userMenuRef}
-        onKeyDown={(e: React.KeyboardEvent) => {
-          if (e.key === "Enter") {
-            setIsDropdownActive((prev) => !prev);
-          }
-        }}
-        onClick={() => {
-          setIsDropdownActive((prev) => !prev);
-        }}>
-        <UserAvatar
-          src={userImg}
-          alt={t("sidebar.avatarAlt")}
+      {(isUserError || isShelterError) && <UserMenuError />}
+      {(isUserLoading || isShelterLoading) && <UserMenuSkeleton />}
+      {isUserSuccess && isShelterSuccess && (
+        <UserMenu
+          userData={userData}
+          shelterData={shelterData}
+          userImg={userImg}
         />
-        {(deviceType === "laptop" || deviceType === "desktop") && (
-          <div>
-            <StyledUserMenuNameContainer>
-              <Typography
-                color="black"
-                variant="UI/UI Text 14 Med">
-                {userData?.firstName + " " + userData?.lastName}
-              </Typography>
-              <StyledSidebarArrowDownIcon isDropdownActive={isDropdownActive} />
-            </StyledUserMenuNameContainer>
-            <Typography
-              color="primary600"
-              variant="UI Small/UI Text 12 Reg">
-              {shelterData?.organizationName}
-            </Typography>
-          </div>
-        )}
-        <StyledUserMenuDropdown
-          className={
-            isDropdownActive ? "dropdown-entering" : "dropdown-exiting"
-          }>
-          <StyledUserMenuDropdownItem>
-            <StyledLink to={DashboardRoutes.accountSettings}>
-              <Typography
-                color="darkGray1"
-                variant="UI/UI Text 14 Reg">
-                {t("accountSettings.accountSettings")}
-              </Typography>
-            </StyledLink>
-          </StyledUserMenuDropdownItem>
-          <StyledUserMenuDropdownItem>
-            <UnstyledButton
-              onClick={() => {
-                if (token) revokeTokenFn(token);
-              }}>
-              <Typography
-                color="darkGray1"
-                variant="UI/UI Text 14 Reg">
-                {t("accountSettings.logOut")}
-              </Typography>
-            </UnstyledButton>
-          </StyledUserMenuDropdownItem>
-        </StyledUserMenuDropdown>
-      </StyledUserMenu>
+      )}
     </StyledSidebar>
   );
 };

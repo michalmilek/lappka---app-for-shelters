@@ -4,7 +4,7 @@ import { rest } from "msw";
 export const login = rest.post("/Auth/loginWeb", async (req, res, ctx) => {
   const { email, password } = (await req.json()) as LoginRequest;
 
-  if (email === "test@test.com" && password === "test123") {
+  if (email === "test@test.com" && password === "Test123!") {
     const responseBody = {
       accessToken: "token",
       refreshToken: "refresh_token",

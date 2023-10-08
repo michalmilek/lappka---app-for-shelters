@@ -157,5 +157,7 @@
     "success": "Success!",
     "error": "Error!"
   },
-  "editPhoto": "Edit photo"
+  "editPhoto": "Edit photo",
+  "errNetwork": "The server is currently disabled. Please try again later.",
+  "loginTokenExpired": "The login token has already expired. Please login again."
 }
