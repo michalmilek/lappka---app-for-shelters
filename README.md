@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# ŁAPPKA APPLICATION
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+A project built on apprenticeships. Includes the ability to add, remove, edit pets. Displays the entire list of pets as an array, which is sortable. It also includes a volunteer module and the ability to edit photos when uploading.
+
 
 ## Available Scripts
 
