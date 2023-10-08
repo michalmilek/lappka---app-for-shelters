@@ -93,12 +93,16 @@ function AnimalCardsTable({ data }: { data: ShelterCardsResponse }) {
     table.getAllLeafColumns().forEach((header) => {
       if (
         deviceType !== "desktop" &&
-        (header.id === "breed" || header.id === "isVisible")
+        (header.id === "species" || header.id === "isVisible")
       ) {
         header.toggleVisibility(false);
       } else if (
         (deviceType === "mobile" || deviceType === "tablet") &&
-        (header.id === "createdAt" || header.id === "gender")
+        (header.id === "createdAt" ||
+          header.id === "gender" ||
+          header.id === "species" ||
+          header.id === "isVisible" ||
+          header.id === "isSterilized")
       ) {
         header.toggleVisibility(false);
       } else {

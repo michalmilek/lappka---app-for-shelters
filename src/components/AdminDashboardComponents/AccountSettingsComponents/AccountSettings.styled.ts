@@ -48,6 +48,11 @@ export const PostalCodeCityContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+
+  @media screen and (max-width: 550px) {
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 
 export const PostalCodeContainer = styled.div`

@@ -16,6 +16,9 @@ export const DashboardNewestAnimalCardsItemContainer = styled.div`
   &:hover {
     transform: scale(1.05);
   }
+
+  @media screen and (max-width: 550px) {
+  }
 `;
 
 export const DashboardNewestAnimalCardsItemImg = styled.img`

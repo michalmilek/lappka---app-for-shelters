@@ -35,6 +35,10 @@ export const DashboardNewestAnimalCardsContainerContent = styled.div`
   padding: 16px;
   flex-wrap: wrap;
   height: 100%;
+
+  @media screen and (max-width: 550px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const DashboardNewestAnimalCardsEmptyCardsList = styled.div`

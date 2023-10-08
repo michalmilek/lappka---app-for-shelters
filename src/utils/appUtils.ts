@@ -107,3 +107,13 @@ export const ObjectsComparisionFn = (
   }
   return false;
 };
+
+
+
+export const truncateString = (str: string) => {
+  if (str.length > 11) {
+    return str.slice(0, 11) + "...";
+  } else {
+    return str;
+  }
+};

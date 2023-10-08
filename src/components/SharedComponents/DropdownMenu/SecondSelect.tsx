@@ -5,6 +5,8 @@ import { getColor } from "utils/styles/getStyle/getColor";
 import { CheckIcon } from "../icons/icons";
 import Typography from "../Typography/Typography";
 import { SelectContainerWithLabels } from "./Select.styled";
+import useDeviceType from "hooks/useDeviceType";
+import { truncateString } from "utils/appUtils";
 
 export interface SelectProps
   extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "value"> {
@@ -59,6 +61,7 @@ const SecondSelect = ({
   options,
   value,
 }: SelectProps) => {
+  const deviceType = useDeviceType();
   const { t } = useTranslation();
   const customStyles: StylesConfig<OptionInterface, false> = useMemo(
     () => ({
@@ -114,10 +117,14 @@ const SecondSelect = ({
       <Select
         value={value ? options.find((option) => option.value === value) : null}
         onChange={(newValue) => {
-          if (newValue) handleChange(newValue.value);
+          if (newValue) handleChange((newValue as OptionInterface).value);
         }}
         tabSelectsValue
-        placeholder={t("select.placeholder")}
+        placeholder={
+          deviceType === "mobile"
+            ? truncateString(t("select.placeholder"))
+            : t("select.placeholder")
+        }
         options={options}
         styles={customStyles}
         components={{
