@@ -2,7 +2,7 @@
 
 
 
-A project built on apprenticeships. Includes the ability to add, remove, edit pets. Displays the entire list of pets as an array, which is sortable. It also includes a volunteer module and the ability to edit photos when uploading.
+A project built on apprenticeships. Includes the ability to add, remove, edit pets. Displays the entire list of pets as an table, which is sortable. It also includes a volunteer module and the ability to edit photos when uploading.
 
 
 ## Used libraries
